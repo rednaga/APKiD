@@ -52,7 +52,7 @@ rule liapp
     $b = "LIAPPClient.sc"
 
   condition:
-    any in ($a, $b)
+    any of ($a, $b)
 }
 
 rule app_fortify
@@ -67,7 +67,7 @@ rule app_fortify
     $a
 }
 
-rule name
+rule nqshield
 {
   meta:
     description = "Packed with NQ Shield"
@@ -78,11 +78,11 @@ rule name
     $c = "nqshell"
 
   condition:
-    any in ($a, $b, $c)
+    any of ($a, $b, $c)
 }
 
 
-rule name
+rule tencent
 {
   meta:
     description = "Packed with Tencent"
