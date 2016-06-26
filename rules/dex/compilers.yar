@@ -1,29 +1,16 @@
 import "dex"
 
-rule apkfuscator
-{
-  meta:
-    description = "Obfuscated with Apkfuscator"
-    author = "Caleb Fenton <calebjfenton@gmail.com>"
-    last_modified = "2016-06-24"
-
-  condition:
-    false
-}
-
 rule dexlib1
 {
   meta:
     description = "Compiled with Dexlib 1.x"
-    author = "Caleb Fenton <calebjfenton@gmail.com>"
-    last_modified = "2016-06-24"
 
   condition:
     /*
      * DEX format requires string IDs to be sorted according to the data at their offsets but the actual
      * ordering of the string pool is undefined. Dexlib (smali/apktool) 1.x sorts strings by class and
      * proximity. DX sorts strings in the same order as the string table.
-     */  
+     */
     for any i in (0..dex.header.string_ids_size - 1) : (dex.string_ids[i].offset + dex.string_ids[i].item_size + 1 != dex.string_ids[i + 1].offset)
 }
 
@@ -31,8 +18,6 @@ rule dexlib2
 {
   meta:
     description = "Compiled with Dexlib 2.x"
-    author = "Caleb Fenton <calebjfenton@gmail.com>"
-    last_modified = "2016-06-24"
 
   condition:
     /*
@@ -45,8 +30,6 @@ rule dexlib2beta
 {
   meta:
     description = "Compiled with Dexlib 2.x Beta"
-    author = "Caleb Fenton <calebjfenton@gmail.com>"
-    last_modified = "2016-06-24"
 
   condition:
     /*
@@ -64,8 +47,6 @@ rule dx
 {
   meta:
     description = "Compiled with dx"
-    author = "Caleb Fenton <calebjfenton@gmail.com>"
-    last_modified = "2016-06-24"
 
   condition:
     /*
@@ -74,16 +55,14 @@ rule dx
      */
     not dexlib1 and
     (dex.map_list.map_items[7].type == 0x1002 or // TYPE_ANNOTATION_SET_REF_LIST
-    dex.map_list.map_items[7].type == 0x1003 or // TYPE_ANNOTATION_SET_ITEM
+    dex.map_list.map_items[7].type == 0x1003 or  // TYPE_ANNOTATION_SET_ITEM
     dex.map_list.map_items[7].type == 0x2001)    // TYPE_CODE_ITEM
 }
 
 rule dexmerge
 {
   meta:
-    description = "Modified by dxmerge"
-    author = "Caleb Fenton <calebjfenton@gmail.com>"
-    last_modified = "2016-06-24"
+    description = "Compiled with dxmerge"
 
   condition:
     /*
