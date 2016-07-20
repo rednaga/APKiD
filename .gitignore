@@ -1,2 +1,16 @@
+# general things to ignore
+build/
 dist/
-src/apkid.egg-info
+*.egg-info/
+*.egg
+*.py[cod]
+__pycache__/
+*.so
+*~
+
+# tox and pytest
+.tox
+.cache
+
+# precompiled rules included in dist but not source
+apkid/rules/rules.yarc
