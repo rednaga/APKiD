@@ -6,8 +6,8 @@ rule dexguard {
 
   strings:
     $opcodes = {
-      00 06 00 01 00 03 00 00 00 00 00 00 00 // code_item
-      [20-65]                                // start of method(Ljava/lang/String;)Ljava/lang/Class;
+      00 06 00 01 00 03 00 00 00 00 00 00 00
+      [20-65]
       0c 01
       12 12
       23 22 ?? ??

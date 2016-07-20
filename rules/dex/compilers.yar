@@ -40,7 +40,6 @@ rule dexlib2beta
      */
     dexlib2 and
     for any i in (0..dex.header.class_defs_size) : (dex.class_defs[i].interfaces_off > 0 and uint32(dex.class_defs[i].interfaces_off) == 0)
-
 }
 
 rule dx
