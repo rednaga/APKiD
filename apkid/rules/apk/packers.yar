@@ -116,7 +116,7 @@ rule unknown_packer_lib {
     $post_jar = { 2E 6A 61 72 00 77 00 6A 61 76 61 2F 75 74 69 6C 2F 4D 61 70 00 67 65 74 49 6E 74 00 }
 
   condition:
-    //apk and 
+    //apk and
     ($pre_jar and $jar_data and $post_jar)
 }
 

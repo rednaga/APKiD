@@ -18,7 +18,7 @@ def package_files(directory):
 
 version = '0.9.0'
 install_requires = [
-  'yara-python-rednaga==3.4.0',
+  'yara-python==3.4.0'
 ]
 
 setup(
@@ -34,13 +34,14 @@ setup(
   author='RedNaga',
   author_email='rednaga@protonmail.com',
 
-  license='Apache License 2.0',
+  license='Dual ',
 
   classifiers=[
     'Development Status :: 4 - Beta',
     'Environment :: Console',
     'Intended Audience :: Science/Research',
-    'License :: OSI Approved :: Apache Software License',
+    'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+    'License :: Other/Proprietary License',
     'Natural Language :: English',
     'Programming Language :: Python :: 2.7',
     'Topic :: Security',
@@ -52,7 +53,7 @@ setup(
   packages=find_packages('src', exclude=['docs', 'tests']),
   install_requires=install_requires,
   dependency_links = [
-    'https://github.com/rednaga/yara-python/zipball/master#egg=yara-python-rednaga-3.4.0'
+    'https://github.com/rednaga/yara-python/zipball/master#egg=python-3.4.0'
   ],
   extras_require={
     'dev': ['pypandoc'],
