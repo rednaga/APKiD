@@ -1,37 +1,76 @@
-rule apkprotect
-{
+private rule apk {
+  meta:
+    description = "Resembles an simple APK that is likely not corrupt"
+
+  strings:
+    $zip_head = "PK"
+    $manifest = "AndroidManifest.xml"
+
+  condition:
+    $zip_head at 0 and $manifest and #manifest >= 2
+}
+
+private rule signed_apk {
+  meta:
+    description = "Resembles an simple APK that is signed and likely not corrupt"
+
+  strings:
+    $meta_inf = "META-INF/"
+    $rsa = ".RSA"
+    $dsa = ".DSA"
+
+  condition:
+    apk and for all of ($meta_inf*) : ( $rsa or $dsa in (@ + 9..@ + 9 + 100))
+}
+
+private rule unsigned_apk {
+  meta:
+    description = "Resembles an simple APK that is unsigned and likely not corrupt"
+
+  condition:
+    apk and not signed_apk
+}
+
+rule apkprotect {
   meta:
     description = "Packed with APKProtect"
 
   strings:
-    $a = "apkprotect.com/"
-    $b = "libAPKProtect.so"
-    $c = "libbaiduprotect.so"
+    $key = "apkprotect.com/key.dat"
+    $dir = "apkprotect.com/"
+    $lib = "libAPKProtect.so"
 
   condition:
-    any of ($a, $b, $c)
+    apk and ($key or $dir or $lib)
 }
 
-rule bangcle
-{
+rule bangcle {
   meta:
     description = "Packed with Bangcle"
 
   strings:
-    $a = "libsecexe.so"
-    $b = "libapkprotect2.so"
-    $c = "assets/bangcleplugin/container.dex"
-    $d = "bangcleclasses.jar"
-    $e = "libsecexe.so"
-    $f = "bangcle_classes.jar"
-    $g = "libsecmain"
+    $main_lib = "libsecexe.so"
+    $second_lib = "libsecmain.so"
+    $container = "assets/bangcleplugin/container.dex"
+    $encrypted_jar = "bangcleclasses.jar"
+    $encrypted_jar2 = "bangcle_classes.jar"
+
 
   condition:
-    any of ($a, $b, $c, $d, $e, $f, $g)
+    apk and any of ($main_lib, $second_lib, $container, $encrypted_jar, $encrypted_jar2)
 }
 
-rule qihoo360
-{
+rule kiro {
+
+  strings:
+    $kiro_lib = "libkiroro.so"
+    $sbox = "assets/sbox"
+
+  condition:
+    apk and $kiro_lib and $sbox
+}
+
+rule qihoo360 {
   meta:
     description = "Packed with Qihoo 360"
 
@@ -39,116 +78,166 @@ rule qihoo360
     $a = "libprotectClass.so"
 
   condition:
-    $a
+    apk and $a
+    and not kiro
 }
 
-rule liapp
-{
+rule jiangu {
+  meta:
+    description = "Packed with Jiangu"
+
+  strings:
+    // These contain a trick function "youAreFooled"
+    $main_lib = "libjiagu.so"
+    $art_lib = "libjiagu_art.so"
+
+  condition:
+    apk and ($main_lib or $art_lib)
+}
+
+rule unknown_packer {
+  meta:
+    description = "Packed with an unknown packer"
+
+  strings:
+    $qdbh = "assets/qdbh"
+
+  condition:
+    apk and $qdbh
+}
+
+rule unknown_packer_lib {
+  meta:
+    description = "Packed with an unknown packer"
+
+  strings:
+    $pre_jar = { 00 6F 6E 43 72 65 61 74 65 00 28 29 56 00 63 6F 6D 2F 76 }
+    $jar_data = { 2E 6A 61 72 00 2F 64 61 74 61 2F 64 61 74 61 2F 00 2F }
+    $post_jar = { 2E 6A 61 72 00 77 00 6A 61 76 61 2F 75 74 69 6C 2F 4D 61 70 00 67 65 74 49 6E 74 00 }
+
+  condition:
+    //apk and 
+    ($pre_jar and $jar_data and $post_jar)
+}
+
+rule unicom_loader {
+  meta:
+    description = "Packed with Unicom SDK Loader"
+
+  strings:
+    $decrypt_lib = "libdecrypt.jar"
+    $unicom_lib = "libunicomsdk.jar"
+    $classes_jar = "classes.jar"
+
+  condition:
+    apk and ($unicom_lib and ($decrypt_lib or $classes_jar))
+}
+
+rule liapp {
   meta:
     description = "Packed with LIAPP"
 
   strings:
-    $a = "/LIAPPEgg"
-    $b = "LIAPPClient.sc"
+    $dir = "/LIAPPEgg"
+    $lib = "LIAPPClient.sc"
 
   condition:
-    any of ($a, $b)
+    apk and any of ($dir, $lib)
 }
 
-rule app_fortify
-{
+rule app_fortify {
   meta:
     description = "Packed with App Fortify"
 
   strings:
-    $a = "libNSaferOnly.so"
+    $lib = "libNSaferOnly.so"
 
   condition:
-    $a
+    apk and $lib
 }
 
-rule nqshield
-{
+rule nqshield {
   meta:
     description = "Packed with NQ Shield"
 
   strings:
-    $a = "libnqshield.so"
-    $b = "nqshield"
-    $c = "nqshell"
+    $lib = "libnqshield.so"
+    $lib_sec1 = "nqshield"
+    $lib_sec2 = "nqshell"
 
   condition:
-    any of ($a, $b, $c)
+    apk and any of ($lib, $lib_sec1, $lib_sec2)
 }
 
 
-rule tencent
-{
+rule tencent {
   meta:
     description = "Packed with Tencent"
 
   strings:
-    $a = "libshell.so"
+    $decryptor_lib = "lib/armeabi/libshell.so"
+    $zip_lib = "lib/armeabi/libmobisecy.so"
+    $classpath = "com/tencent/StubShell"
+    $mix_dex = "/mix.dex"
 
   condition:
-    $a
+    apk and ($classpath or $decryptor_lib or $zip_lib or $mix_dex)
 }
 
-rule ijiami
-{
+rule ijiami {
   meta:
     description = "Packed with Ijiami"
 
   strings:
-    $a = "ijiami.dat"
+    $old_dat = "assets/ijiami.dat"
+    $new_ajm = "ijiami.ajm"
+    $ijm_lib = "assets/ijm_lib/"
 
   condition:
-    $a
+    apk and ($old_dat or $new_ajm or $ijm_lib)
 }
 
-rule naga
-{
+rule naga {
   meta:
     description = "Packed with Naga"
 
   strings:
-    $a = "libddog.so"
+    $lib = "libddog.so"
 
   condition:
-    $a
+    apk and $lib
 }
 
-rule alibaba
-{
+rule alibaba {
   meta:
     description = "Packed with Alibaba"
 
   strings:
-    $a = "libmobisec.so"
+    $lib = "libmobisec.so"
 
   condition:
-    $a
+    apk and $lib
 }
 
-rule medusa
-{
+rule medusa {
   meta:
     description = "Packed with Medusa "
 
   strings:
-    $a = "libmd.so"
+    $lib = "libmd.so"
 
   condition:
-    $a
+    apk and $lib
 }
 
-rule baidu
-{
+rule baidu {
   meta:
     description = "Packed with Baidu"
 
   strings:
-    $a = "libbaiduprotect.so"
+    $lib = "libbaiduprotect.so"
+    $encrypted = "baiduprotect1.jar"
+
   condition:
-    $a
+    apk and ($lib or $encrypted)
 }
