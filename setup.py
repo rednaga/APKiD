@@ -53,7 +53,7 @@ setup(
   packages=find_packages('src', exclude=['docs', 'tests']),
   install_requires=install_requires,
   dependency_links = [
-    'https://github.com/rednaga/yara-python/zipball/master#egg=python-3.4.0'
+    'https://github.com/rednaga/yara-python/zipball/master#egg=yara-python-3.4.0'
   ],
   extras_require={
     'dev': ['pypandoc'],

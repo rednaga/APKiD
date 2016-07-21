@@ -60,11 +60,14 @@ class APKiD:
 
       except yara.Error as e:
         print e
+      print results
 
   def scan_stream(fileobj):
+    return
 
   def zip_entries(zip_path):
     # yield each entry in the zipfile
+    return
 
   def collect_files(self, input_files):
     files = []
