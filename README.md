@@ -23,3 +23,9 @@ To install the package from source in editable mode (useful for devlopment):
 ```bash
 pip install --process-dependency-links -e .
 ```
+
+If the above doesn't work, due to permission errors dependant on your local machine and where Python has been installed, try specifying the `--user` flag. This is likely needed if you are working on OSX;
+
+```bash
+pip install --process-dependency-links -e . --user
+```
