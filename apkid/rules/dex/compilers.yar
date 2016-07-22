@@ -50,6 +50,7 @@ rule dexlib2
     /*
      * The map_list types are in different orders for DX, dexmerge, and dexlib (1 and 2 are the same)
      */
+    not dexlib1 and
     dex.map_list.map_items[7].type == 0x2002 // TYPE_STRING_DATA_ITEM
 }
 
@@ -65,7 +66,7 @@ rule dexlib2beta
      * interfaces_off should be 0 if there is no interface, which is what DX does. It's enough to check
      * if a single class has an interface which points to null bytes since no one else does this.
      */
-    dexlib2 and
+    not dexlib1 and dexlib2 and
     for any i in (0..dex.header.class_defs_size) : (dex.class_defs[i].interfaces_off > 0 and uint32(dex.class_defs[i].interfaces_off) == 0)
 }
 
@@ -79,7 +80,7 @@ rule dx
      * The map_list types are in different orders for DX, dexmerge, and dexlib (1 and 2 are the same)
      * DX order derrived from: http://osxr.org/android/source/dalvik/dx/src/com/android/dx/dex/file/DexFile.java#0111
      */
-    not dexlib1 and
+    not dexlib1 and not dexlib2 and not dexlib2beta
     (dex.map_list.map_items[7].type == 0x1002 or // TYPE_ANNOTATION_SET_REF_LIST
     dex.map_list.map_items[7].type == 0x1003 or  // TYPE_ANNOTATION_SET_ITEM
     dex.map_list.map_items[7].type == 0x2001)    // TYPE_CODE_ITEM
