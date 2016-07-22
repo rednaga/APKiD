@@ -26,8 +26,8 @@ print "[*] Compiling %d Yara rules ..." % len(yara_files)
 rules.save(compiled_rules_path)
 print "[*] Saved rules to %s" % compiled_rules_path
 
-print "[*] Registering ..."
-os.system("python setup.py register")
+#print "[*] Registering ..."
+#os.system("python setup.py register")
 
 #print "[*] Cleaning up ..."
 #os.remove('README.rst')

@@ -2,22 +2,22 @@ APKiD
 =====
 
 APKiD gives you information about how an APK was made. It identifies
-many compilers, packers, and obfuscators. *It's
-`PEiD <https://www.aldeid.com/wiki/PEiD>`__ for Android.*
+many compilers, packers, obfuscators, and other weird stuff.
+
+**It's PEiD for Android.**
 
 Installing
 ==========
 
 .. code:: bash
 
-    pip install --process-dependency-links apkid
+    git clone https://github.com/rednaga/yara-python
+    cd yara-python
+    python setup.py install
+    pip install apkid
 
-The ``--process-dependency-links`` option is temporarily necessary to
-install our custom fork of
-```yara-python`` <https://github.com/rednaga/yara-python>`__ rather than
-the official version. Our fork contains a
-`module <https://github.com/rednaga/yara/blob/master/libyara/modules/dex.c>`__
-we developed for processing DEX files. We're working on removing this.
+The *yara-python* dependency is temporarily necessary to install our
+custom DEX Yara module. We're working on removing this.
 
 Usage
 =====

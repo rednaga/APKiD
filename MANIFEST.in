@@ -1,1 +1,2 @@
 include LICENSE.md
+include apkid/rules/rules.yarc

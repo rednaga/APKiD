@@ -27,6 +27,8 @@
 import argparse
 import yara
 import apkid
+import pkg_resources
+
 
 def main():
   parser = argparse.ArgumentParser(description='Android Application Identifier')
@@ -37,4 +39,7 @@ def main():
   args = parser.parse_args()
 
   aid = apkid.APKiD(args.files)
+
+  version = pkg_resources.get_distribution("apkid").version
+  print "[!] APKiD :: from RedNaga :: rednaga.io"
   aid.scan()

@@ -12,12 +12,13 @@ def package_files(directory):
   paths = []
   for (filepath, directories, filenames) in walk(directory):
     for filename in filenames:
-      paths.append(path.join('..', filepath , filename))
+      paths.append(path.join(filepath , filename))
+  print paths
   return paths
 
 version = '0.9.0'
 install_requires = [
-  'yara-python==3.4.0'
+  'yara-python==3.4.0.999'
 ]
 
 setup(
@@ -49,19 +50,22 @@ setup(
 
   keywords='android analysis reversing malware apk dex',
 
-  packages=find_packages('apkid', exclude=['docs', 'tests']),
+  packages=find_packages('.', exclude=['docs', 'tests']),
+  package_data={
+    'rules': package_files('apkid/rules/'),
+  },
+  include_package_data=True,
+
   install_requires=install_requires,
   dependency_links = [
-    'https://github.com/rednaga/yara-python/zipball/master#egg=yara-python-3.4.0'
+    'https://github.com/rednaga/yara-python/zipball/master#egg=yara-python-3.4.0.999'
   ],
+
   extras_require={
     'dev': ['pypandoc'],
     'test': [],
   },
 
-  package_data={
-    'rules': package_files('apkid/rules/'),
-  },
 
   zip_safe=False,
   entry_points={
