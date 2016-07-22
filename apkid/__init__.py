@@ -31,18 +31,10 @@ import apkid
 def main():
   parser = argparse.ArgumentParser(description='Android Application Identifier')
   parser.add_argument('files', metavar='FILE', type=str, nargs='+',
-                      help='an integer for the accumulator')
-  #parser.add_argument('-v', dest='accumulate', action='store_const',
-  #                    const=sum, default=max,
-  #                    help='sum the integers (default: find the max)')
-
-# timeout
-# verbose
+                      help='apk, dex, or dir')
+  # TODO: match timeout, verbosity
 
   args = parser.parse_args()
-  #print args.accumulate(args.integers)
-  #print args.files
 
   aid = apkid.APKiD(args.files)
   aid.scan()
-
