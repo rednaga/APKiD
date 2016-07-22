@@ -54,27 +54,28 @@ class APKiD:
         magic = None
         with open(file, 'rb') as f:
           magic = f.read(4)
+        if magic not in ZIP_MAGIC:
+          continue
 
-        if magic in ZIP_MAGIC:
-          try:
-            zip_ref = zipfile.ZipFile(file, 'r')
-            td = tempfile.mkdtemp()
-            zip_ref.extractall(td)
-            zip_ref.close()
-            zip_files = self.collect_files([td])
+        try:
+          zip_ref = zipfile.ZipFile(file, 'r')
+          td = tempfile.mkdtemp()
+          zip_ref.extractall(td)
+          zip_ref.close()
+          zip_files = self.collect_files([td])
 
-            for zip_file in zip_files:
-              matches = self.rules.match(zip_file, timeout=self.timeout)
-              key_path = zip_file.replace('%s/' % td, '%s!' % file)
-              results[key_path] = matches
-            shutil.rmtree(td)
-          except Exception as e:
-            print "error extracting %s: %s" % (file, e)
+          for zip_file in zip_files:
+            matches2 = self.rules.match(zip_file, timeout=self.timeout)
+            key_path = zip_file.replace('%s/' % td, '%s!' % file)
+            results[key_path] = matches2
+          shutil.rmtree(td)
+        except Exception as e:
+          print "error extracting %s: %s" % (file, e)
 
       except yara.Error as e:
         print "error scanning: %s" % e
 
-      self.print_results(results)
+    self.print_results(results)
 
   def print_results(self, results):
     ''' example result dict
@@ -88,12 +89,16 @@ class APKiD:
     }]
     '''
     # TODO: https://pypi.python.org/pypi/colorama
-    for file in results:
-      descriptions = [result.meta['description'] for result in results[file]]
+    files = [file for file in results]
+    files.sort()
+    for file in files:
+      # Convert to set in case there are weird duplicate matches
+      descriptions = list(set([result.meta['description'] for result in results[file]]))
       if len(descriptions) == 0:
         continue
       print "[*] %s" % file
       descriptions.sort()
+
       for desc in descriptions:
         print "  - %s" % desc
 
