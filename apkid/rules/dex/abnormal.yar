@@ -27,19 +27,32 @@
 
 import "dex"
 
+rule abnormal_header_size
+{
+  meta:
+    description = "Non-Standard Header Size"
+
+  condition:
+    /*
+     * Header size is always 112 bytes but the format allows it to be bigger. This would make it
+     * possible to do weird stuff like hide files after the normal header data.
+     */
+    dex.header.header_size != 0x70
+}
+
 /*
-112 -header size non normal
 
-data after header
-string_ids_off not header size
+- data after header, file size is different from header.file_size?
 
-"CON", "PRN", "AUX", "CLOCK$", "NUL",
-                    "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9", "LPT1", "LPT2", "LPT3",
-                    "LPT4", "LPT5", "LPT6", "LPT7", "LPT8", "LPT9"
-class name is invalid
-abnormal endian magic
-link section is not 0
+- illegal class names:
+  "CON", "PRN", "AUX", "CLOCK$", "NUL",
+  "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9", "LPT1", "LPT2", "LPT3",
+  "LPT4", "LPT5", "LPT6", "LPT7", "LPT8", "LPT9"
 
-255 chars
-very long class path, if possible
+- abnormal endian magic
+
+- link section is not 0
+
+- class name length is > 255 characters
+
 */
