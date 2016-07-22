@@ -41,7 +41,7 @@ def main():
 
   args = parser.parse_args()
   #print args.accumulate(args.integers)
-  print args.files
+  #print args.files
 
   aid = apkid.APKiD(args.files)
   aid.scan()
