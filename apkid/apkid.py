@@ -88,8 +88,8 @@ class APKiD:
     }]
     '''
     # TODO: https://pypi.python.org/pypi/colorama
-    # Convert to set in case there are weird duplicate matches
-    descriptions = list(set([match.meta['description'] for match in matches]))
+    # Convert to set in case there are weird duplicate matchesd
+    descriptions = list(set([match.meta.get('description', match) for match in matches]))
     if len(descriptions) == 0:
       return
 

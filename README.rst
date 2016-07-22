@@ -1,7 +1,7 @@
 APKiD
 =====
 
-This tool gives you information about how an APK was made. It identifies
+APKiD gives you information about how an APK was made. It identifies
 many compilers, packers, and obfuscators. *It's
 `PEiD <https://www.aldeid.com/wiki/PEiD>`__ for Android.*
 
@@ -17,8 +17,29 @@ install our custom fork of
 ```yara-python`` <https://github.com/rednaga/yara-python>`__ rather than
 the official version. Our fork contains a
 `module <https://github.com/rednaga/yara/blob/master/libyara/modules/dex.c>`__
-we developed for processing dex files. This should be removed in a
-future release.
+we developed for processing DEX files. We're working on removing this.
+
+Usage
+=====
+
+::
+
+    usage: apkid [-h] FILE [FILE ...]
+
+    Android Application Identifier
+
+    positional arguments:
+      FILE        apk, dex, or dir
+
+    optional arguments:
+      -h, --help  show this help message and exit
+
+Submitting New Packers
+======================
+
+If you come across an APK or DEX that apkid does not recognize, please
+open a GitHub issue and tell us what you think it is and provide the
+file hash (either MD5, SHA1, SHA256).
 
 Licensing
 =========
