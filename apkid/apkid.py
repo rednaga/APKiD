@@ -36,7 +36,9 @@ class APKiD:
   def __init__(self, input_files, timeout=30):
     self.files = self.collect_files(input_files)
     self.files.sort()
-    self.rules = yara.load('apkid/rules/rules.yarc')
+
+    rules_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'rules/rules.yarc')
+    self.rules = yara.load(rules_path)
     self.timeout = timeout
     # if verbose
     # print sum(1 for _ in self.rules)
