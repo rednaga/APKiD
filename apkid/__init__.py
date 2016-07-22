@@ -32,7 +32,7 @@ def main():
   parser = argparse.ArgumentParser(description='Android Application Identifier')
   parser.add_argument('files', metavar='FILE', type=str, nargs='+',
                       help='apk, dex, or dir')
-  # TODO: match timeout, verbosity
+  # TODO: match timeout, verbosity, json output
 
   args = parser.parse_args()
 
