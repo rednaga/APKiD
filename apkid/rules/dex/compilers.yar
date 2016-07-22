@@ -66,7 +66,7 @@ rule dexlib2beta
      * interfaces_off should be 0 if there is no interface, which is what DX does. It's enough to check
      * if a single class has an interface which points to null bytes since no one else does this.
      */
-    not dexlib1 and dexlib2 and
+    not dexlib1 and not dexlib2 and
     for any i in (0..dex.header.class_defs_size) : (dex.class_defs[i].interfaces_off > 0 and uint32(dex.class_defs[i].interfaces_off) == 0)
 }
 

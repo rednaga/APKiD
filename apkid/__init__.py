@@ -41,5 +41,5 @@ def main():
   aid = apkid.APKiD(args.files)
 
   version = pkg_resources.get_distribution("apkid").version
-  print "[!] APKiD :: from RedNaga :: rednaga.io"
+  print "[!] APKiD %s :: from RedNaga :: rednaga.io" % version
   aid.scan()

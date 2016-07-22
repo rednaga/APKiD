@@ -16,7 +16,7 @@ def package_files(directory):
   print paths
   return paths
 
-version = '0.9.0'
+version = '0.9.1'
 install_requires = [
   'yara-python==3.4.0.999'
 ]
