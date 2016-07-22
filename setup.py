@@ -50,7 +50,7 @@ setup(
 
   keywords='android analysis reversing malware apk dex',
 
-  packages=find_packages('src', exclude=['docs', 'tests']),
+  packages=find_packages('apkid', exclude=['docs', 'tests']),
   install_requires=install_requires,
   dependency_links = [
     'https://github.com/rednaga/yara-python/zipball/master#egg=yara-python-3.4.0'
