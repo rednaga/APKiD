@@ -35,9 +35,6 @@ rule upx_sharedlib_unmodifed {
   meta:
     description = "Contains unmodified sharedlib upx stub"
 
-  meta:
-    description = "Contained an unmodified sharedlib upx stub"
-
   strings:
     $upx = "UPX!"
 
