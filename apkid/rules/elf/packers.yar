@@ -2,6 +2,9 @@ import "elf"
 include "../apk/packers.yar"
 
 private rule upx_elf32_arm_stub : Packer {
+  meta:
+    description = "Contains upx arm stub"
+
   strings:
     $UPX_STUB = { 1E 20 A0 E3 14 10 8F E2 02 00 A0 E3 04 70 A0 E3 00 00 00 EF 7F 00 A0 E3 01 70 A0 E3 00 00 00 EF }
 
@@ -23,6 +26,9 @@ private rule upx_unmodified {
 }
 
 rule upx_sharedlib_unmodifed {
+  meta:
+    description = "Contained an unmodified sharedlib upx stub"
+
   strings:
     $upx = "UPX!"
 
@@ -33,6 +39,9 @@ rule upx_sharedlib_unmodifed {
 
 // Technically unreleased, fixes included for Android shared libs
 rule upx_elf_3_92 : Packer Unmodified {
+  meta:
+    description = "Contains a unmodified UPX 3.92 stub"
+
   strings:
     $copyright = "UPX 3.92 Copyright"
 
@@ -41,6 +50,9 @@ rule upx_elf_3_92 : Packer Unmodified {
 }
 
 rule upx_elf_3_91 : Packer Unmodified {
+  meta:
+    description = "Contains a unmodified UPX 3.91 stub"
+
   strings:
     $copyright = "UPX 3.91 Copyright"
 
@@ -48,6 +60,9 @@ rule upx_elf_3_91 : Packer Unmodified {
     upx_unmodified and $copyright
 }
 rule upx_elf_3_09 : Packer Unmodified {
+  meta:
+    description = "Contains a unmodified UPX 3.09 stub"
+
     strings:
 	    $copyright = "UPX 3.09 Copyright"
 
@@ -56,6 +71,9 @@ rule upx_elf_3_09 : Packer Unmodified {
 }
 
 rule upx_elf_3_08 : Packer Unmodified {
+  meta:
+    description = "Contains a unmodified UPX 3.08 stub"
+
     strings:
         $copyright = "UPX 3.08 Copyright"
 
@@ -63,7 +81,10 @@ rule upx_elf_3_08 : Packer Unmodified {
         upx_unmodified and $copyright
 }
 
-rule upx_elf_3_07 : Packer Unmodified { 
+rule upx_elf_3_07 : Packer Unmodified {
+  meta:
+    description = "Contains a unmodified UPX 3.07 stub"
+
     strings:
      	$copyright = "UPX 3.07 Copyright"
 
@@ -72,6 +93,9 @@ rule upx_elf_3_07 : Packer Unmodified {
 }
 
 rule upx_elf_3_04 : Packer Unmodified {
+  meta:
+    description = "Contains a unmodified UPX 3.04 stub"
+
     strings:
         $copyright = "UPX 3.04 Copyright"
 
@@ -80,6 +104,9 @@ rule upx_elf_3_04 : Packer Unmodified {
 }
 
 rule upx_elf_3_03 : Packed Unmodified {
+  meta:
+    description = "Contains a unmodified UPX 3.03 stub"
+
     strings:
     	$copyright = "UPX 3.03 Copyright"
 
@@ -88,6 +115,9 @@ rule upx_elf_3_03 : Packed Unmodified {
 }
 
 rule upx_elf_3_02 : Packed Unmodified {
+  meta:
+    description = "Contains a unmodified UPX 3.02 stub"
+
     strings:
         $copyright = "UPX 3.02 Copyright"
     condition:
@@ -95,6 +125,9 @@ rule upx_elf_3_02 : Packed Unmodified {
 }
 
 rule upx_elf_3_01 : Packed Unmodified {
+  meta:
+    description = "Contains a unmodified UPX 3.01 stub"
+
   strings:
     $copyright = "UPX 3.01 Copyright"
   condition:
@@ -102,6 +135,9 @@ rule upx_elf_3_01 : Packed Unmodified {
 }
 
 rule upx_elf_bangcle_secneo : Packed Modified Bangle SecNeo {
+  meta:
+    description = "Contains a Bangcle packed elf binary (uses UPX)"
+
   strings:
     // They replace UPX! with SEC!
     $sec = "SEC!"
@@ -110,6 +146,9 @@ rule upx_elf_bangcle_secneo : Packed Modified Bangle SecNeo {
 }
 
 rule upx_elf_bangcle_secneo_newer : Packed Modified Bangle SecNeo {
+  meta:
+    description = "Contains a newer style Bangcle packed elf binary (uses UPX)"
+
   strings:
     // They replace UPX! with \x03\x02\x01\x00
     $TTO = { 03 02 01 00 }
@@ -118,6 +157,9 @@ rule upx_elf_bangcle_secneo_newer : Packed Modified Bangle SecNeo {
 }
 
 rule upx_elf_ijiami : Packed Modified Ijiami {
+  meta:
+    description = "Contains a Ijiami packed elf binary (uses UPX)"
+
   strings:
     // They replace UPX! with AJM!
     $ajm = "AJM!"
@@ -126,6 +168,9 @@ rule upx_elf_ijiami : Packed Modified Ijiami {
 }
 
 private rule upx_unknown_version : Packer {
+  meta:
+    description = "Contains an unknown version of UPX"
+
   condition:
     upx_stub
     // We could extend this for more comprehensive rules, however lower versions than this should not be
@@ -135,6 +180,9 @@ private rule upx_unknown_version : Packer {
 }
 
 rule upx_embedded_inside_elf : Dropper Packer {
+  meta:
+    description = "Contains and ELF file embedded in an ELF file (potentially a dropper/packer)"
+
   strings:
     $elf_magic = { 7F 45 4C 46 }
 
@@ -146,6 +194,9 @@ rule upx_embedded_inside_elf : Dropper Packer {
 }
 
 rule upx_unknown_version_modified : Packer {
+  meta:
+    description = "Contains an unknown version of UPX which has been modified"
+
   condition:
     upx_unknown_version
     and not apk
@@ -160,12 +211,18 @@ rule upx_unknown_version_modified : Packer {
 }
 
 rule upx_compressed_apk : Packer Compressed Android {
+  meta:
+    description = "Appears to be an APK that contains a UPX protected ELF file"
+
   condition:
     upx_unknown_version and apk
     and not (upx_unmodified or ijiami or bangcle or jiangu)
 }
 
 rule upx_unknown_version_unmodified : Packer Unmodified {
+  meta:
+    description = "Contains an unknown version of UPX which stub is not modifed"
+
   condition:
     upx_unknown_version and upx_unmodified
     and not upx_compressed_apk
