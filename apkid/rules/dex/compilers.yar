@@ -80,7 +80,7 @@ rule dx
      * The map_list types are in different orders for DX, dexmerge, and dexlib (1 and 2 are the same)
      * DX order derrived from: http://osxr.org/android/source/dalvik/dx/src/com/android/dx/dex/file/DexFile.java#0111
      */
-    not dexlib1 and not dexlib2 and not dexlib2beta
+    not dexlib1 and not dexlib2 and not dexlib2beta and
     (dex.map_list.map_items[7].type == 0x1002 or // TYPE_ANNOTATION_SET_REF_LIST
     dex.map_list.map_items[7].type == 0x1003 or  // TYPE_ANNOTATION_SET_ITEM
     dex.map_list.map_items[7].type == 0x2001)    // TYPE_CODE_ITEM
