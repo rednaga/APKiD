@@ -1,30 +1,3 @@
-/*
- * Copyright (C) 2016  RedNaga. http://rednaga.io
- * All rights reserved. Contact: rednaga@protonmail.com
- *
- *
- * This file is part of APKiD
- *
- *
- * Commercial License Usage
- * ------------------------
- * Licensees holding valid commercial APKiD licenses may use this file
- * in accordance with the commercial license agreement provided with the
- * Software or, alternatively, in accordance with the terms contained in
- * a written agreement between you and RedNaga.
- *
- *
- * GNU General Public License Usage
- * --------------------------------
- * Alternatively, this file may be used under the terms of the GNU General
- * Public License version 3.0 as published by the Free Software Foundation
- * and appearing in the file LICENSE.GPL included in the packaging of this
- * file. Please visit http://www.gnu.org/copyleft/gpl.html and review the
- * information to ensure the GNU General Public License version 3.0
- * requirements will be met.
- *
- **/
-
 import "elf"
 include "../apk/packers.yar"
 
@@ -40,11 +13,17 @@ private rule upx_elf32_arm_stub : Packer {
 }
 
 private rule upx_stub : Packer {
+  meta:
+    description = "Contains upx stub"
+
   condition:
     upx_elf32_arm_stub
 }
 
 private rule upx_unmodified {
+  meta:
+    description = "Contains unmodified upx stub"
+
   strings:
     $upx = "UPX!"
 
@@ -53,6 +32,9 @@ private rule upx_unmodified {
 }
 
 rule upx_sharedlib_unmodifed {
+  meta:
+    description = "Contains unmodified sharedlib upx stub"
+
   meta:
     description = "Contained an unmodified sharedlib upx stub"
 
@@ -200,8 +182,8 @@ private rule upx_unknown_version : Packer {
 
   condition:
     upx_stub
-    // We could extend this for more comprehensive rules. However lower versions than this should not be
-    // appears on ARM / Android devices.
+    // We could extend this for more comprehensive rules, however lower versions than this should not be
+    // appears on arm/android devices
     and not (upx_elf_3_01 or upx_elf_3_02 or upx_elf_3_03 or upx_elf_3_04 or upx_elf_3_07 or upx_elf_3_08 or upx_elf_3_09 or upx_elf_3_91 or upx_elf_3_92)
     and not (upx_elf_ijiami or upx_elf_bangcle_secneo or upx_elf_bangcle_secneo_newer)
 }
