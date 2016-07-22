@@ -57,6 +57,8 @@ rule bangcle {
 }
 
 rule kiro {
+  meta:
+    description = "Packed with Kiro"
 
   strings:
     $kiro_lib = "libkiroro.so"
