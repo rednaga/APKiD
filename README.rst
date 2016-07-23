@@ -2,9 +2,12 @@ APKiD
 =====
 
 APKiD gives you information about how an APK was made. It identifies
-many compilers, packers, obfuscators, and other weird stuff.
+many compilers, packers, obfuscators, and other weird stuff. **It's PEiD
+for Android.**
 
-**It's PEiD for Android.**
+Knowing the compiler can be a *strong* signal that an app is malicious
+or pirated. This is because there are certain tools which produce APKs
+which are almost never used by the original legitimate developer
 
 Installing
 ==========
@@ -60,12 +63,12 @@ devlopment):
 
 .. code:: bash
 
-    pip install --process-dependency-links -e .
+    pip install -e .
 
 If the above doesn't work, due to permission errors dependant on your
 local machine and where Python has been installed, try specifying the
-``--user`` flag. This is likely needed if you are working on OSX;
+``--user`` flag. This is likely needed if you are working on OSX:
 
 .. code:: bash
 
-    pip install --process-dependency-links -e . --user
+    pip install -e . --user

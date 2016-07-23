@@ -27,10 +27,10 @@
 
 import "dex"
 
-rule dexlib1
+rule dexlib1 : compiler
 {
   meta:
-    description = "Compiled with Dexlib 1.x"
+    description = "dexlib 1.x"
 
   condition:
     /*
@@ -41,10 +41,10 @@ rule dexlib1
     for any i in (0..dex.header.string_ids_size - 1) : (dex.string_ids[i].offset + dex.string_ids[i].item_size + 1 != dex.string_ids[i + 1].offset)
 }
 
-rule dexlib2
+rule dexlib2 : compiler
 {
   meta:
-    description = "Compiled with Dexlib 2.x"
+    description = "dexlib 2.x"
 
   condition:
     /*
@@ -54,10 +54,10 @@ rule dexlib2
     dex.map_list.map_items[7].type == 0x2002 // TYPE_STRING_DATA_ITEM
 }
 
-rule dexlib2beta
+rule dexlib2beta : compiler
 {
   meta:
-    description = "Compiled with Dexlib 2.x Beta"
+    description = "dexlib 2.x beta"
 
   condition:
     /*
@@ -70,10 +70,10 @@ rule dexlib2beta
     for any i in (0..dex.header.class_defs_size) : (dex.class_defs[i].interfaces_off > 0 and uint32(dex.class_defs[i].interfaces_off) == 0)
 }
 
-rule dx
+rule dx : compiler
 {
   meta:
-    description = "Compiled with dx"
+    description = "Android SDK (dx)"
 
   condition:
     /*
@@ -86,10 +86,10 @@ rule dx
     dex.map_list.map_items[7].type == 0x2001)    // TYPE_CODE_ITEM
 }
 
-rule dexmerge
+rule dexmerge : compiler
 {
   meta:
-    description = "Compiled with dxmerge"
+    description = "Android SDK (dexmerge)"
 
   condition:
     /*

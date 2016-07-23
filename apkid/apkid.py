@@ -91,15 +91,18 @@ class APKiD:
     '''
     # TODO: https://pypi.python.org/pypi/colorama
     # Convert to set in case there are weird duplicate matchesd
-    descriptions = list(set([match.meta.get('description', match) for match in matches]))
-    if len(descriptions) == 0:
+    if len(matches) == 0:
       return
 
-    print "[*] %s" % file
-    descriptions.sort()
+    results = {}
+    for match in matches:
+      tags = ', '.join(sorted(match.tags))
+      value = match.meta.get('description', match)
+      results[tags] = value
 
-    for desc in descriptions:
-      print " |-> %s" % desc
+    print "[*] %s" % file
+    for tags in sorted(results):
+      print " |-> %s : %s" % (tags, results[tags])
 
   def collect_files(self, input_files):
     files = []

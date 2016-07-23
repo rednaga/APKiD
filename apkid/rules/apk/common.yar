@@ -25,7 +25,8 @@
  *
  **/
 
-private rule apk {
+private rule apk
+{
   meta:
     description = "Resembles an simple APK that is likely not corrupt"
 
@@ -37,7 +38,8 @@ private rule apk {
     $zip_head at 0 and $manifest and #manifest >= 2
 }
 
-private rule signed_apk {
+private rule signed_apk
+{
   meta:
     description = "Resembles an simple APK that is signed and likely not corrupt"
 
@@ -50,7 +52,8 @@ private rule signed_apk {
     apk and for all of ($meta_inf*) : ( $rsa or $dsa in (@ + 9..@ + 9 + 100))
 }
 
-private rule unsigned_apk {
+private rule unsigned_apk
+{
   meta:
     description = "Resembles an simple APK that is unsigned and likely not corrupt"
 

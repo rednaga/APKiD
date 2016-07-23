@@ -27,9 +27,10 @@
 
 include "common.yar"
 
-rule apkprotect {
+rule apkprotect : packer
+{
   meta:
-    description = "Packed with APKProtect"
+    description = "APKProtect"
 
   strings:
     $key = "apkprotect.com/key.dat"
@@ -40,9 +41,10 @@ rule apkprotect {
     apk and ($key or $dir or $lib)
 }
 
-rule bangcle {
+rule bangcle : packer
+{
   meta:
-    description = "Packed with Bangcle"
+    description = "Bangcle"
 
   strings:
     $main_lib = "libsecexe.so"
@@ -56,9 +58,10 @@ rule bangcle {
     apk and any of ($main_lib, $second_lib, $container, $encrypted_jar, $encrypted_jar2)
 }
 
-rule kiro {
+rule kiro : packer
+{
   meta:
-    description = "Packed with Kiro"
+    description = "Kiro"
 
   strings:
     $kiro_lib = "libkiroro.so"
@@ -68,9 +71,10 @@ rule kiro {
     apk and $kiro_lib and $sbox
 }
 
-rule qihoo360 {
+rule qihoo360 : packer
+{
   meta:
-    description = "Packed with Qihoo 360"
+    description = "Qihoo 360"
 
   strings:
     $a = "libprotectClass.so"
@@ -80,9 +84,10 @@ rule qihoo360 {
     and not kiro
 }
 
-rule jiangu {
+rule jiangu : packer
+{
   meta:
-    description = "Packed with Jiangu"
+    description = "Jiangu"
 
   strings:
     // These contain a trick function "youAreFooled"
@@ -93,9 +98,10 @@ rule jiangu {
     apk and ($main_lib or $art_lib)
 }
 
-rule unknown_packer {
+rule qdbh_packer : packer
+{
   meta:
-    description = "Packed with an unknown packer"
+    description = "'qdbh' (?)"
 
   strings:
     $qdbh = "assets/qdbh"
@@ -104,9 +110,10 @@ rule unknown_packer {
     apk and $qdbh
 }
 
-rule unknown_packer_lib {
+rule unknown_packer_lib : packer
+{
   meta:
-    description = "Packed with an unknown packer"
+    description = "'jpj' packer (?)"
 
   strings:
     $pre_jar = { 00 6F 6E 43 72 65 61 74 65 00 28 29 56 00 63 6F 6D 2F 76 }
@@ -118,9 +125,10 @@ rule unknown_packer_lib {
     ($pre_jar and $jar_data and $post_jar)
 }
 
-rule unicom_loader {
+rule unicom_loader : packer
+{
   meta:
-    description = "Packed with Unicom SDK Loader"
+    description = "Unicom SDK Loader"
 
   strings:
     $decrypt_lib = "libdecrypt.jar"
@@ -131,9 +139,10 @@ rule unicom_loader {
     apk and ($unicom_lib and ($decrypt_lib or $classes_jar))
 }
 
-rule liapp {
+rule liapp : packer
+{
   meta:
-    description = "Packed with LIAPP"
+    description = "LIAPP"
 
   strings:
     $dir = "/LIAPPEgg"
@@ -143,9 +152,10 @@ rule liapp {
     apk and any of ($dir, $lib)
 }
 
-rule app_fortify {
+rule app_fortify : packer
+{
   meta:
-    description = "Packed with App Fortify"
+    description = "App Fortify"
 
   strings:
     $lib = "libNSaferOnly.so"
@@ -154,9 +164,10 @@ rule app_fortify {
     apk and $lib
 }
 
-rule nqshield {
+rule nqshield : packer
+{
   meta:
-    description = "Packed with NQ Shield"
+    description = "NQ Shield"
 
   strings:
     $lib = "libnqshield.so"
@@ -168,9 +179,10 @@ rule nqshield {
 }
 
 
-rule tencent {
+rule tencent : packer
+{
   meta:
-    description = "Packed with Tencent"
+    description = "Tencent"
 
   strings:
     $decryptor_lib = "lib/armeabi/libshell.so"
@@ -182,9 +194,10 @@ rule tencent {
     apk and ($classpath or $decryptor_lib or $zip_lib or $mix_dex)
 }
 
-rule ijiami {
+rule ijiami : packer
+{
   meta:
-    description = "Packed with Ijiami"
+    description = "Ijiami"
 
   strings:
     $old_dat = "assets/ijiami.dat"
@@ -195,9 +208,10 @@ rule ijiami {
     apk and ($old_dat or $new_ajm or $ijm_lib)
 }
 
-rule naga {
+rule naga : packer
+{
   meta:
-    description = "Packed with Naga"
+    description = "Naga"
 
   strings:
     $lib = "libddog.so"
@@ -206,9 +220,10 @@ rule naga {
     apk and $lib
 }
 
-rule alibaba {
+rule alibaba : packer
+{
   meta:
-    description = "Packed with Alibaba"
+    description = "Alibaba"
 
   strings:
     $lib = "libmobisec.so"
@@ -217,9 +232,10 @@ rule alibaba {
     apk and $lib
 }
 
-rule medusa {
+rule medusa : packer
+{
   meta:
-    description = "Packed with Medusa "
+    description = "Medusa"
 
   strings:
     $lib = "libmd.so"
@@ -228,9 +244,10 @@ rule medusa {
     apk and $lib
 }
 
-rule baidu {
+rule baidu : packer
+{
   meta:
-    description = "Packed with Baidu"
+    description = "Baidu"
 
   strings:
     $lib = "libbaiduprotect.so"

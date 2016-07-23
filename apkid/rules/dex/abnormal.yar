@@ -27,10 +27,10 @@
 
 import "dex"
 
-rule abnormal_header_size
+rule abnormal_header_size : abnormality
 {
   meta:
-    description = "Non-Standard Header Size"
+    description = "non-standard header size"
 
   condition:
     /*
