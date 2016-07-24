@@ -1,8 +1,6 @@
 # APKiD
 
-APKiD gives you information about how an APK was made. It identifies many compilers, packers, obfuscators, and other weird stuff. **It's PEiD for Android.**
-
-Knowing the compiler can be a _strong_ signal that an app is malicious or pirated. This is because there are certain tools which produce APKs which are almost never used by the original legitimate developer
+APKiD gives you information about how an APK was made. It identifies many compilers, packers, obfuscators, and other weird stuff. It's _PEiD_ for Android.
 
 # Installing
 
@@ -13,20 +11,23 @@ python setup.py install
 pip install apkid
 ```
 
-The _yara-python_ dependency is temporarily necessary to install our custom DEX Yara module. We're working on removing this.
+The _yara-python_ clone and compile steps are temporarily necessary because it installs our DEX Yara module. We're working on removing this step.
 
 # Usage
 
 ```
-usage: apkid [-h] FILE [FILE ...]
+usage: apkid [-h] [-j] [-t TIMEOUT] FILE [FILE ...]
 
-Android Application Identifier
+APKiD - Android Application Identifier
 
 positional arguments:
-  FILE        apk, dex, or dir
+  FILE                  apk, dex, or dir
 
 optional arguments:
-  -h, --help  show this help message and exit
+  -h, --help            show this help message and exit
+  -j, --json            output results in JSON
+  -t TIMEOUT, --timeout TIMEOUT
+                        Yara scan timeout in seconds
 ```
 
 # Submitting New Packers

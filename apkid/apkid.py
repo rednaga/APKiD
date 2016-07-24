@@ -29,27 +29,31 @@ import yara
 import zipfile
 import tempfile
 import shutil
+import json
 
 ZIP_MAGIC = ['PK\x03\x04', 'PK\x05\x06', 'PK\x07\x08']
 
 class APKiD:
-  def __init__(self, input_files, timeout=30):
+  def __init__(self, input_files, timeout, output_json):
     self.files = self.collect_files(input_files)
     self.files.sort()
 
     rules_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'rules/rules.yarc')
     self.rules = yara.load(rules_path)
     self.timeout = timeout
-    # if verbose
-    # print sum(1 for _ in self.rules)
-    # reload rules because the above breaks the iterator
+    self.output_json = output_json
 
   def scan(self):
     results = {}
     for file in self.files:
       try:
         matches = self.rules.match(file, timeout=self.timeout)
-        self.print_matches(file, matches)
+        if self.output_json:
+          collected = self.collect_matches(matches)
+          if len(collected) > 0:
+            results[file] = collected
+        else:
+          self.print_matches(file, matches)
 
         if not os.path.isfile(file):
           continue
@@ -70,13 +74,33 @@ class APKiD:
           for zip_file in zip_files:
             matches = self.rules.match(zip_file, timeout=self.timeout)
             key_path = zip_file.replace('%s/' % td, '%s!' % file)
-            self.print_matches(key_path, matches)
+            if self.output_json:
+              collected = self.collect_matches(matches)
+              if len(collected) > 0:
+                results[key_path] = collected
+            else:
+              self.print_matches(key_path, matches)
           shutil.rmtree(td)
         except Exception as e:
           print "error extracting %s: %s" % (file, e)
 
       except yara.Error as e:
         print "error scanning: %s" % e
+
+    if self.output_json:
+      print json.dumps(results)
+
+  def collect_matches(self, matches):
+    results = {}
+    for match in matches:
+      tags = ', '.join(sorted(match.tags))
+      value = match.meta.get('description', match)
+      if tags in results:
+        if value not in results[tags]:
+          results[tags].append(value)
+      else:
+        results[tags] = [value]
+    return results
 
   def print_matches(self, file, matches):
     ''' example matches dict
@@ -94,15 +118,11 @@ class APKiD:
     if len(matches) == 0:
       return
 
-    results = {}
-    for match in matches:
-      tags = ', '.join(sorted(match.tags))
-      value = match.meta.get('description', match)
-      results[tags] = value
+    results = self.collect_matches(matches)
 
     print "[*] %s" % file
     for tags in sorted(results):
-      print " |-> %s : %s" % (tags, results[tags])
+      print " |-> %s : %s" % (tags, ', '.join(sorted(results[tags])))
 
   def collect_files(self, input_files):
     files = []

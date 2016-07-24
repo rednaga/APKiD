@@ -31,15 +31,19 @@ import pkg_resources
 
 
 def main():
-  parser = argparse.ArgumentParser(description='Android Application Identifier')
+  parser = argparse.ArgumentParser(description="APKiD - Android Application Identifier")
   parser.add_argument('files', metavar='FILE', type=str, nargs='+',
-                      help='apk, dex, or dir')
-  # TODO: match timeout, verbosity, json output
+    help="apk, dex, or dir")
+  parser.add_argument('-j', '--json', action='store_true',
+    help="output results in JSON",)
+  parser.add_argument('-t', '--timeout', type=int, default=30,
+    help="Yara scan timeout in seconds")
 
   args = parser.parse_args()
 
-  aid = apkid.APKiD(args.files)
+  aid = apkid.APKiD(args.files, args.timeout, args.json)
 
-  version = pkg_resources.get_distribution("apkid").version
-  print "[!] APKiD %s :: from RedNaga :: rednaga.io" % version
+  if not args.json:
+    version = pkg_resources.get_distribution("apkid").version
+    print "[!] APKiD %s :: from RedNaga :: rednaga.io" % version
   aid.scan()
