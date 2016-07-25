@@ -27,7 +27,7 @@
 
 import "dex"
 
-rule abnormal_header_size : abnormality
+rule abnormal_header_size : abnormal
 {
   meta:
     description = "non-standard header size"
@@ -40,19 +40,60 @@ rule abnormal_header_size : abnormality
     dex.header.header_size != 0x70
 }
 
+rule non_zero_link_size : abnormal anti_disassembly
+{
+  meta:
+    description = "non-zero link size"
+
+  condition:
+    dex.header.link_size != 0x0
+}
+
+rule non_zero_link_offset : abnormal anti_disassembly
+{
+  meta:
+    description = "non-zero link offset"
+
+  condition:
+    dex.header.link_offset != 0x0
+}
+
+rule non_little_endian : abnormal
+{
+  meta:
+    description = "non little-endian format"
+
+  condition:
+    dex.header.endian_tag != 0x12345678
+}
+
+rule data_injected_after_map : abnormal dropper
+{
+  meta:
+    description = "injected data after map section"
+
+  condition:
+    dex.header.file_size < dex.header.map_offset + (dex.map_list.size * 12) + 4
+}
+
+rule illegal_class_names : anti_disassembly
+{
+  meta:
+    description = "illegal class name"
+
+  strings:
+    /*
+     * Disassemblers use class names for file names, and these file names
+     * are illegal on some file systems (looking at you, Windows)
+     */
+    $invalid = /\x00[^\x00]{1,4}L([^\x00\x2f]+\x2f)*(CON|PRN|AUX|CLOCK\$|NUL|COM[1-9]|LPT[1-9])(\x2f[^\x00\x2f]+\x2f+)*;\x00/is
+
+  condition:
+    any of them
+}
+
 /*
-
-- data after header, file size is different from header.file_size?
-
-- illegal class names:
-  "CON", "PRN", "AUX", "CLOCK$", "NUL",
-  "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9", "LPT1", "LPT2", "LPT3",
-  "LPT4", "LPT5", "LPT6", "LPT7", "LPT8", "LPT9"
-
-- abnormal endian magic
-
-- link section is not 0
+TODO:
 
 - class name length is > 255 characters
-
 */

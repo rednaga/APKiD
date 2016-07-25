@@ -61,13 +61,13 @@ rule dexlib2beta : compiler
 
   condition:
     /*
-     * Dexlib2 adds a non-zero interfaces_off to every class_def_item, even if the class doesn't implement an
+     * Dexlib2 adds a non-zero interfaces_offset to every class_def_item, even if the class doesn't implement an
      * interface. It points to 4 null bytes right after string pool. DEX documentation says the value for
-     * interfaces_off should be 0 if there is no interface, which is what DX does. It's enough to check
+     * interfaces_offset should be 0 if there is no interface, which is what DX does. It's enough to check
      * if a single class has an interface which points to null bytes since no one else does this.
      */
     not dexlib1 and not dexlib2 and
-    for any i in (0..dex.header.class_defs_size) : (dex.class_defs[i].interfaces_off > 0 and uint32(dex.class_defs[i].interfaces_off) == 0)
+    for any i in (0..dex.header.class_defs_size) : (dex.class_defs[i].interfaces_offset > 0 and uint32(dex.class_defs[i].interfaces_offset) == 0)
 }
 
 rule dx : compiler

@@ -34,9 +34,9 @@ optional arguments:
 
 If you come across an APK or DEX that apkid does not recognize, please open a GitHub issue and tell us what you think it is and provide the file hash (either MD5, SHA1, SHA256).
 
-# Licensing
+# License
 
-This tool is available under a dual license: a a commercial one suitable for closed source projects and a GPL license that can be used in open source software.
+This tool is available under a dual license: a commercial one suitable for closed source projects and a GPL license that can be used in open source software.
 
 Depending on your needs, you must choose one of them and follow its policies. A detail of the policies and agreements for each license type are available in the LICENSE.COMMERCIAL and LICENSE.GPL files.
 
