@@ -3,6 +3,8 @@ from setuptools import setup, find_packages
 from codecs import open
 from os import path, walk
 
+import apkid
+
 here = path.abspath(path.dirname(__file__))
 
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
@@ -16,25 +18,24 @@ def package_files(directory):
   print paths
   return paths
 
-version = '0.9.3'
 install_requires = [
   'yara-python==3.4.0.999'
 ]
 
 setup(
-  name='apkid',
+  name=apkid.__title__,
 
-  version=version,
+  version=apkid.__version__,
 
   description="Android Package Identifier",
   long_description=long_description,
 
   url='https://github.com/rednaga/APKiD',
 
-  author='RedNaga',
+  author=apkid.__author__,
   author_email='rednaga@protonmail.com',
 
-  license='Dual ',
+  license=apkid.__license__,
 
   classifiers=[
     'Development Status :: 4 - Beta',
