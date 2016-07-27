@@ -84,10 +84,11 @@ rule qihoo360 : packer
     and not kiro
 }
 
-rule jiangu : packer
+rule jiagu : packer
 {
   meta:
-    description = "Jiangu"
+    description = "Jiagu"
+    //developed by Qihoo 360 http://jiagu.360.cn/
 
   strings:
     // These contain a trick function "youAreFooled"

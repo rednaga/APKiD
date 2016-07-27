@@ -269,7 +269,7 @@ rule upx_compressed_apk : packer embedded
 
   condition:
     upx_unknown_version and apk
-    and not (upx_unmodified or ijiami or bangcle or jiangu)
+    and not (upx_unmodified or ijiami or bangcle or jiagu)
 }
 
 rule upx_unknown_version_unmodified : packer
