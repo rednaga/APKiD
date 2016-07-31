@@ -88,7 +88,18 @@ class APKiD:
         print "error scanning: %s" % e
 
     if self.output_json:
-      print json.dumps(results)
+      import pkg_resources
+      output = {
+        'apkid_version': pkg_resources.get_distribution("apkid").version,
+        'files': [],
+      }
+      for filename in results:
+        result = {
+          'filename': filename,
+          'results': results[filename],
+        }
+        output['files'].append(result)
+      print json.dumps(output)
 
   def collect_matches(self, matches):
     results = {}
