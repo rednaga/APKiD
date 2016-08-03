@@ -6,14 +6,14 @@ For more information on what this tool can be used for, check out our HITCON 201
 
 # Installing
 
+The _yara-python_ clone and compile steps here are temporarily necessary because we must point directly to our modified version of a _yara_ branch which includes our DEX Yara module. This step is nessecary until (if?) the original maintainers of _yara_ merge our module into the master branch. When this happens, we will undate the instructions here. After the _yara-python_ fork is compiled, you can use `pip` to the most currently published `APKiD` package.
+
 ```bash
 git clone https://github.com/rednaga/yara-python
 cd yara-python
 python setup.py install
 pip install apkid
 ```
-
-The _yara-python_ clone and compile steps are temporarily necessary because it installs our DEX Yara module. We're working on removing this step.
 
 # Usage
 
@@ -32,9 +32,9 @@ optional arguments:
                         Yara scan timeout in seconds
 ```
 
-# Submitting New Packers
+# Submitting New Packers / Compilers / Obfuscators
 
-If you come across an APK or DEX that apkid does not recognize, please open a GitHub issue and tell us what you think it is and provide the file hash (either MD5, SHA1, SHA256).
+If you come across an APK or DEX that apkid does not recognize, please open a GitHub issue and tell us what you think it is and provide the file hash (either MD5, SHA1, SHA256). We are open to any type of concept you might have for "something interesting" to detect, so do not limit yourself soley to packers, compilers or obfuscators. If there is an interesting anti* trick, please make an issue.
 
 # License
 
@@ -44,9 +44,19 @@ Depending on your needs, you must choose one of them and follow its policies. A 
 
 # Hacking
 
-To install the package from source in editable mode (useful for devlopment):
+First you will need to install the specific version of _yara-python_ the project depends on (more information about this in the _Installing_ section):
 
 ```bash
+git clone https://github.com/rednaga/yara-python
+cd yara-python
+python setup.py install
+```
+
+Then clone repo and install the package from source in editable mode (useful for development):
+
+```bash
+git clone https://github.com/rednaga/APKiD
+cd APKiD
 pip install -e .
 ```
 
