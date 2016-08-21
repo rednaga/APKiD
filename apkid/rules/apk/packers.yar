@@ -27,6 +27,25 @@
 
 include "common.yar"
 
+rule dexprotector : packer
+{
+ /**
+ * DexProtecot v6.x.x Both Standard And Business Edition // Edited By Jasi2169
+ **/
+  meta:
+    description = "Dexprotector Licel"
+
+  strings:
+    $encrptlib = "assets/dp.arm.so.dat"
+    $encrptlib1 = "assets/dp.arm-v7.so.dat"
+    $encrptlib2 = "assets/dp.arm-v8.so.dat"
+    $encrptlib3 = "assets/dp.x86.so.dat"
+    $encrptcustom = "assets/dp.mp3"
+
+  condition:
+    apk and any of ($encrptlib, $encrptlib1, $encrptlib2, $encrptlib3, $encrptcustom)
+}
+
 rule apkprotect : packer
 {
   meta:
