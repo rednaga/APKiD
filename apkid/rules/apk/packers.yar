@@ -30,7 +30,7 @@ include "common.yar"
 rule dexprotector : packer
 {
  /**
- * DexProtecot v6.x.x Both Standard And Business Edition // Edited By Jasi2169
+ * DexProtector v6.x.x Both Standard And Business Edition And Demo // Edited By Jasi2169
  **/
   meta:
     description = "Dexprotector Licel"
