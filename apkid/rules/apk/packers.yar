@@ -43,7 +43,7 @@ rule dexprotector : packer
     $encrptcustom = "assets/dp.mp3"
 
   condition:
-    apk and any of ($encrptlib, $encrptlib1, $encrptlib2, $encrptlib3, $encrptcustom)
+    apk and any of ($encrptlib, $encrptlib1, $encrptlib2, $encrptlib3) and $encrptcustom
 }
 
 rule apkprotect : packer
