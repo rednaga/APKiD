@@ -30,10 +30,11 @@ include "common.yar"
 rule dexprotector : packer
 {
  /**
- * DexProtector v6.x.x Both Standard And Business Edition And Demo // Edited By Jasi2169
+ * DexProtector v6.x.x :- Demo,Standard,Business Edition
  **/
   meta:
-    description = "Dexprotector Licel"
+    author = "Jasi2169"
+    description = "Dexprotector"
 
   strings:
     $encrptlib = "assets/dp.arm.so.dat"
