@@ -34,7 +34,13 @@ optional arguments:
 
 # Submitting New Packers / Compilers / Obfuscators
 
-If you come across an APK or DEX that apkid does not recognize, please open a GitHub issue and tell us what you think it is and provide the file hash (either MD5, SHA1, SHA256). We are open to any type of concept you might have for "something interesting" to detect, so do not limit yourself soley to packers, compilers or obfuscators. If there is an interesting anti* trick, please make an issue.
+If you come across an APK or DEX that apkid does not recognize, please open a GitHub issue and tell us:
+*  what you think it is
+* the file hash (either MD5, SHA1, SHA256)
+
+We are open to any type of concept you might have for "something interesting" to detect, so do not limit yourself solely to packers, compilers or obfuscators. If there is an interesting anti disassembler, anti vm, anti* trick, please make an issue.
+
+You're also welcome to submit pull requests, just be sure to include a file hash so we can check the rule.
 
 # License
 
@@ -52,11 +58,12 @@ cd yara-python
 python setup.py install
 ```
 
-Then clone repo and install the package from source in editable mode (useful for development):
+Then, clone this repo, compile the rules, and install the package in editable mode:
 
 ```bash
 git clone https://github.com/rednaga/APKiD
 cd APKiD
+./prep-release.py
 pip install -e .
 ```
 
