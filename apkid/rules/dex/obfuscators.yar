@@ -105,3 +105,22 @@ rule bitwise_antiskid : obfuscator
   condition:
     any of them
 }
+
+rule zelixklassmaster : obfuscator
+{
+  /**
+ * zelix klassmaster :- (http://www.zelix.com/klassmaster)
+ **/
+  meta:
+  author = "Jasi2169"
+  description = "ZelixKlassmaster"
+
+  strings:
+    $a = "getName"
+    $b = "getSize"
+    $c = "getCertificates"
+    $c = "getEncoded"
+
+  condition:
+    all of ($a, $b, $c,$d)
+}
