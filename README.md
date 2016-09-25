@@ -2,11 +2,14 @@
 
 APKiD gives you information about how an APK was made. It identifies many compilers, packers, obfuscators, and other weird stuff. It's _PEiD_ for Android.
 
-For more information on what this tool can be used for, check out our HITCON 2016 presentation: [Android Compiler Fingerprinting](http://hitcon.org/2016/CMT/slide/day1-r0-e-1.pdf).
+For more information on what this tool can be used for, check out:
+
+* [Android Compiler Fingerprinting](http://hitcon.org/2016/CMT/slide/day1-r0-e-1.pdf)
+* [Detecting Pirated and Malicious Android Apps with APKiD](http://rednaga.io/2016/07/31/detecting_pirated_and_malicious_android_apps_with_apkid/)
 
 # Installing
 
-The _yara-python_ clone and compile steps here are temporarily necessary because we must point directly to our modified version of a _yara_ branch which includes our DEX Yara module. This step is nessecary until (if?) the original maintainers of _yara_ merge our module into the master branch. When this happens, we will undate the instructions here. After the _yara-python_ fork is compiled, you can use `pip` to the most currently published `APKiD` package.
+The _yara-python_ clone and compile steps here are temporarily necessary because we must point directly to our modified version of a _Yara_ branch which includes our DEX Yara module. This step is nessecary until (if?) the original maintainers of _Yara_ merge our module into the master branch. When this happens, we will undate the instructions here. After the _yara-python_ fork is compiled, you can use `pip` to the most currently published `APKiD` package.
 
 ```bash
 git clone https://github.com/rednaga/yara-python
@@ -23,7 +26,7 @@ usage: apkid [-h] [-j] [-t TIMEOUT] FILE [FILE ...]
 APKiD - Android Application Identifier
 
 positional arguments:
-  FILE                  apk, dex, or dir
+  FILE                  apk, dex, or directory
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -34,13 +37,13 @@ optional arguments:
 
 # Submitting New Packers / Compilers / Obfuscators
 
-If you come across an APK or DEX that apkid does not recognize, please open a GitHub issue and tell us:
+If you come across an APK or DEX that APKiD does not recognize, please open a GitHub issue and tell us:
 *  what you think it is
 * the file hash (either MD5, SHA1, SHA256)
 
 We are open to any type of concept you might have for "something interesting" to detect, so do not limit yourself solely to packers, compilers or obfuscators. If there is an interesting anti disassembler, anti vm, anti* trick, please make an issue.
 
-You're also welcome to submit pull requests, just be sure to include a file hash so we can check the rule.
+You're also welcome to submit pull requests. Just be sure to include a file hash so we can check the rule.
 
 # License
 
@@ -67,7 +70,7 @@ pip install -e .[dev]
 ./prep-release.py
 ```
 
-If the above doesn't work, due to permission errors dependant on your local machine and where Python has been installed, try specifying the `--user` flag. This is likely needed if you are working on OSX:
+If the above doesn't work, due to permission errors dependent on your local machine and where Python has been installed, try specifying the `--user` flag. This is likely needed if you are working on OSX:
 
 ```bash
 pip install -e .[dev] --user
