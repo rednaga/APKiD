@@ -26,7 +26,6 @@
  requirements will be met.
 '''
 
-
 __title__ = 'apkid'
 __version__ = '0.9.3'
 __author__ = 'Caleb Fenton & Tim Strazzere'
@@ -34,23 +33,23 @@ __license__ = 'GPL & Commercial'
 __copyright__ = 'Copyright (C) 2016 RedNaga'
 
 import argparse
-import yara
+
 import apkid
 
 
 def main():
-  parser = argparse.ArgumentParser(description="APKiD - Android Application Identifier")
-  parser.add_argument('files', metavar='FILE', type=str, nargs='+',
-    help="apk, dex, or dir")
-  parser.add_argument('-j', '--json', action='store_true',
-    help="output results in JSON",)
-  parser.add_argument('-t', '--timeout', type=int, default=30,
-    help="Yara scan timeout in seconds")
+    parser = argparse.ArgumentParser(description="APKiD - Android Application Identifier")
+    parser.add_argument('files', metavar='FILE', type=str, nargs='+',
+                        help="apk, dex, or directory")
+    parser.add_argument('-j', '--json', action='store_true',
+                        help="output results in JSON", )
+    parser.add_argument('-t', '--timeout', type=int, default=30,
+                        help="Yara scan timeout in seconds")
 
-  args = parser.parse_args()
+    args = parser.parse_args()
 
-  aid = apkid.APKiD(args.files, args.timeout, args.json)
+    aid = apkid.APKiD(args.files, args.timeout, args.json)
 
-  if not args.json:
-    print "[!] APKiD %s :: from RedNaga :: rednaga.io" % __version__
-  aid.scan()
+    if not args.json:
+        print "[!] APKiD %s :: from RedNaga :: rednaga.io" % __version__
+    aid.scan()
