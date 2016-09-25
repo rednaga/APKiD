@@ -26,7 +26,7 @@
  **/
 
 import "elf"
-include "../apk/packers.yar"
+include "../apk/packers.yara"
 
 private rule upx_elf32_arm_stub : packer
 {

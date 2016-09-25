@@ -12,16 +12,20 @@ Fingerprinting <http://hitcon.org/2016/CMT/slide/day1-r0-e-1.pdf>`__.
 Installing
 ==========
 
+The *yara-python* clone and compile steps here are temporarily necessary
+because we must point directly to our modified version of a *yara*
+branch which includes our DEX Yara module. This step is nessecary until
+(if?) the original maintainers of *yara* merge our module into the
+master branch. When this happens, we will undate the instructions here.
+After the *yara-python* fork is compiled, you can use ``pip`` to the
+most currently published ``APKiD`` package.
+
 .. code:: bash
 
     git clone https://github.com/rednaga/yara-python
     cd yara-python
     python setup.py install
     pip install apkid
-
-The *yara-python* clone and compile steps are temporarily necessary
-because it installs our DEX Yara module. We're working on removing this
-step.
 
 Usage
 =====
@@ -41,12 +45,20 @@ Usage
       -t TIMEOUT, --timeout TIMEOUT
                             Yara scan timeout in seconds
 
-Submitting New Packers
-======================
+Submitting New Packers / Compilers / Obfuscators
+================================================
 
 If you come across an APK or DEX that apkid does not recognize, please
-open a GitHub issue and tell us what you think it is and provide the
-file hash (either MD5, SHA1, SHA256).
+open a GitHub issue and tell us: \* what you think it is \* the file
+hash (either MD5, SHA1, SHA256)
+
+We are open to any type of concept you might have for "something
+interesting" to detect, so do not limit yourself solely to packers,
+compilers or obfuscators. If there is an interesting anti disassembler,
+anti vm, anti\* trick, please make an issue.
+
+You're also welcome to submit pull requests, just be sure to include a
+file hash so we can check the rule.
 
 License
 =======
@@ -62,12 +74,25 @@ are available in the LICENSE.COMMERCIAL and LICENSE.GPL files.
 Hacking
 =======
 
-To install the package from source in editable mode (useful for
-devlopment):
+First you will need to install the specific version of *yara-python* the
+project depends on (more information about this in the *Installing*
+section):
 
 .. code:: bash
 
-    pip install -e .
+    git clone https://github.com/rednaga/yara-python
+    cd yara-python
+    python setup.py install
+
+Then, clone this repo, compile the rules, and install the package in
+editable mode:
+
+.. code:: bash
+
+    git clone https://github.com/rednaga/APKiD
+    cd APKiD
+    pip install -e .[dev]
+    ./prep-release.py
 
 If the above doesn't work, due to permission errors dependant on your
 local machine and where Python has been installed, try specifying the
@@ -75,4 +100,4 @@ local machine and where Python has been installed, try specifying the
 
 .. code:: bash
 
-    pip install -e . --user
+    pip install -e .[dev] --user

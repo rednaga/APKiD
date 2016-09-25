@@ -17,7 +17,7 @@ print "[*] Finished converting to README.rst (%s bytes)" % len(rst)
 
 yara_files = {}
 for root, dirnames, filenames in os.walk(rules_dir):
-    for filename in fnmatch.filter(filenames, '*.yar'):
+    for filename in fnmatch.filter(filenames, '*.yara'):
         path = os.path.join(root, filename)
         yara_files[path] = path
 

@@ -25,7 +25,7 @@
  *
  **/
 
-include "common.yar"
+include "common.yara"
 
 rule dexprotector : packer
 {
