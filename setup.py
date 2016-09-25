@@ -22,7 +22,7 @@ def package_files(directory):
 
 
 install_requires = [
-    'yara-python==3.4.0.999'
+    'yara-python==3.5.0.999'
 ]
 
 setup(

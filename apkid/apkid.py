@@ -36,8 +36,8 @@ ZIP_MAGIC = ['PK\x03\x04', 'PK\x05\x06', 'PK\x07\x08']
 
 
 class APKiD:
-    def __init__(self, input_files, timeout, output_json):
-        self.files = self.collect_files(input_files)
+    def __init__(self, input, timeout, output_json):
+        self.files = APKiD.collect_files(input)
         self.files.sort()
 
         rules_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'rules/rules.yarc')
@@ -51,7 +51,7 @@ class APKiD:
             try:
                 matches = self.rules.match(filename, timeout=self.timeout)
                 if self.output_json:
-                    collected = self.collect_matches(matches)
+                    collected = APKiD.collect_matches(matches)
                     if len(collected) > 0:
                         results[filename] = collected
                 else:
@@ -60,7 +60,6 @@ class APKiD:
                 if not os.path.isfile(filename):
                     continue
 
-                magic = None
                 with open(filename, 'rb') as f:
                     magic = f.read(4)
                 if magic not in ZIP_MAGIC:
@@ -71,20 +70,22 @@ class APKiD:
                     td = tempfile.mkdtemp()
                     zip_ref.extractall(td)
                     zip_ref.close()
-                    zip_files = self.collect_files([td])
+                    zip_files = APKiD.collect_files(td)
 
                     for zip_file in zip_files:
                         matches = self.rules.match(zip_file, timeout=self.timeout)
                         key_path = zip_file.replace('%s/' % td, '%s!' % filename)
                         if self.output_json:
-                            collected = self.collect_matches(matches)
+                            collected = APKiD.collect_matches(matches)
                             if len(collected) > 0:
                                 results[key_path] = collected
                         else:
                             self.print_matches(key_path, matches)
                     shutil.rmtree(td)
                 except Exception as e:
+                    import traceback
                     print "error extracting %s: %s" % (filename, e)
+                    traceback.print_exc()
 
             except yara.Error as e:
                 print "error scanning: %s" % e
@@ -140,12 +141,10 @@ class APKiD:
 
     @staticmethod
     def collect_files(input_files):
+        if os.path.isfile(input_files):
+            return [input_files]
         files = []
-        for input_file in input_files:
-            if not os.path.exists(input_file):
-                raise Exception("File does not exist: %s" % input_file)
-            if os.path.isfile(input_file):
-                files.append(input_file)
-                continue
-
+        for root, dirnames, filenames in os.walk(input_files):
+            for filename in filenames:
+                files.append('%s/%s' % (root, filename))
         return files
