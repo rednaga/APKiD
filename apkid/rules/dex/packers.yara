@@ -29,6 +29,7 @@ include "common.yara"
 
 rule pangxie_dex : packer
 {
+  // sample: ea70a5b3f7996e9bfea2d5d99693195fdb9ce86385b7116fd08be84032d43d2c
   meta:
     description = "PangXie"
 
@@ -44,5 +45,3 @@ rule pangxie_dex : packer
     is_dex and
     $wrapper
 }
-
-
