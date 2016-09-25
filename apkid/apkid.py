@@ -29,6 +29,7 @@ import os
 import shutil
 import tempfile
 import zipfile
+import traceback
 
 import yara
 
@@ -83,9 +84,9 @@ class APKiD:
                             self.print_matches(key_path, matches)
                     shutil.rmtree(td)
                 except Exception as e:
-                    import traceback
-                    print "error extracting %s: %s" % (filename, e)
-                    traceback.print_exc()
+                    tb = traceback.format_exc()
+                    print "error extracting %s: %s\n%s" % (filename, e, tb)
+
 
             except yara.Error as e:
                 print "error scanning: %s" % e
