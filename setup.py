@@ -27,19 +27,13 @@ install_requires = [
 
 setup(
     name=apkid.__title__,
-
     version=apkid.__version__,
-
     description="Android Package Identifier",
     long_description=long_description,
-
     url='https://github.com/rednaga/APKiD',
-
     author=apkid.__author__,
     author_email='rednaga@protonmail.com',
-
     license=apkid.__license__,
-
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
@@ -51,25 +45,22 @@ setup(
         'Topic :: Security',
         'Topic :: Utilities',
     ],
-
     keywords='android analysis reversing malware apk dex',
-
     packages=find_packages('.', exclude=['docs', 'tests']),
     package_data={
         'rules': package_files('apkid/rules/'),
     },
     include_package_data=True,
-
     install_requires=install_requires,
     dependency_links=[
         'https://github.com/rednaga/yara-python/zipball/master#egg=yara-python-3.4.0.999'
     ],
-
     extras_require={
-        'dev': ['pypandoc'],
+        'dev': [
+            'pypandoc'
+        ],
         'test': [],
     },
-
     zip_safe=False,
     entry_points={
         'console_scripts': [
