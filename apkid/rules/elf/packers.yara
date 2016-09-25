@@ -251,7 +251,7 @@ rule upx_unknown_version_modified : packer
 
   condition:
     upx_unknown_version
-    and not apk
+    and not is_apk
     and not upx_unmodified
     and not bangcle
     and not upx_elf_bangcle_secneo
@@ -268,8 +268,9 @@ rule upx_compressed_apk : packer embedded
     description = "UPX packed ELF embedded in APK"
 
   condition:
-    upx_unknown_version and apk
-    and not (upx_unmodified or ijiami or bangcle or jiagu)
+    upx_unknown_version and
+    is_apk and
+    not (upx_unmodified or ijiami or bangcle or jiagu)
 }
 
 rule upx_unknown_version_unmodified : packer
@@ -278,6 +279,7 @@ rule upx_unknown_version_unmodified : packer
     description = "UPX (unknown, unmodified)"
 
   condition:
-    upx_unknown_version and upx_unmodified
-    and not upx_compressed_apk
+    upx_unknown_version and
+    upx_unmodified and
+    not upx_compressed_apk
 }

@@ -26,6 +26,7 @@
  **/
 
 import "dex"
+include "common.yara"
 
 rule dexguard : obfuscator
 {
@@ -59,6 +60,7 @@ rule dexguard : obfuscator
     $c = "invoke"
 
   condition:
+    is_dex and
     $opcodes and
     all of ($a, $b, $c) and
     uint32(dex.header.data_offset + dex.header.data_size - 4) == 0
@@ -87,6 +89,7 @@ rule dexprotector : obfuscator
     $c = "invoke"
 
   condition:
+    is_dex and
     $method and
     all of ($a, $b, $c)
 }
@@ -103,5 +106,6 @@ rule bitwise_antiskid : obfuscator
     $truth2 = "Only skids can't get plaintext. Credits to Bitwise.\x00"
 
   condition:
+    is_dex and
     any of them
 }

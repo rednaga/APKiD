@@ -26,6 +26,7 @@
  **/
 
 import "dex"
+include "common.yara"
 
 rule abnormal_header_size : abnormal
 {
@@ -37,7 +38,7 @@ rule abnormal_header_size : abnormal
      * Header size is always 112 bytes but the format allows it to be bigger. This would make it
      * possible to do weird stuff like hide files after the normal header data.
      */
-    dex.header.header_size != 0x70
+    is_dex and dex.header.header_size != 0x70
 }
 
 rule non_zero_link_size : abnormal anti_disassembly

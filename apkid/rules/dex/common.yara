@@ -25,38 +25,16 @@
  *
  **/
 
-private rule is_apk
+private rule is_dex
 {
   meta:
-    description = "Resembles an APK that is likely not corrupt"
+    description = "Resembles a DEX file"
 
   strings:
-    $zip_head = "PK"
-    $manifest = "AndroidManifest.xml"
+    $dex = { 64 65 78 0A 30 33 ?? 00 }
+    $odex = { 64 65 79 0A 30 33 ?? 00 }
 
   condition:
-    $zip_head at 0 and $manifest and #manifest >= 2
-}
-
-private rule is_signed_apk
-{
-  meta:
-    description = "Resembles a signed APK that is likely not corrupt"
-
-  strings:
-    $meta_inf = "META-INF/"
-    $rsa = ".RSA"
-    $dsa = ".DSA"
-
-  condition:
-    is_apk and for all of ($meta_inf*) : ($rsa or $dsa in (@ + 9..@ + 9 + 100))
-}
-
-private rule is_unsigned_apk
-{
-  meta:
-    description = "Resembles an unsigned APK that is likely not corrupt"
-
-  condition:
-    is_apk and not is_signed_apk
+    $dex at 0 or
+    $odex at 0
 }

@@ -44,7 +44,7 @@ rule dexprotector : packer
     $encrptcustom = "assets/dp.mp3"
 
   condition:
-    apk and any of ($encrptlib, $encrptlib1, $encrptlib2, $encrptlib3) and $encrptcustom
+    is_apk and any of ($encrptlib, $encrptlib1, $encrptlib2, $encrptlib3) and $encrptcustom
 }
 
 rule apkprotect : packer
@@ -58,7 +58,7 @@ rule apkprotect : packer
     $lib = "libAPKProtect.so"
 
   condition:
-    apk and ($key or $dir or $lib)
+    is_apk and ($key or $dir or $lib)
 }
 
 rule bangcle : packer
@@ -73,9 +73,8 @@ rule bangcle : packer
     $encrypted_jar = "bangcleclasses.jar"
     $encrypted_jar2 = "bangcle_classes.jar"
 
-
   condition:
-    apk and any of ($main_lib, $second_lib, $container, $encrypted_jar, $encrypted_jar2)
+    is_apk and any of ($main_lib, $second_lib, $container, $encrypted_jar, $encrypted_jar2)
 }
 
 rule kiro : packer
@@ -88,7 +87,7 @@ rule kiro : packer
     $sbox = "assets/sbox"
 
   condition:
-    apk and $kiro_lib and $sbox
+    is_apk and $kiro_lib and $sbox
 }
 
 rule qihoo360 : packer
@@ -100,8 +99,9 @@ rule qihoo360 : packer
     $a = "libprotectClass.so"
 
   condition:
-    apk and $a
-    and not kiro
+    is_apk and
+    $a and
+    not kiro
 }
 
 rule jiagu : packer
@@ -116,7 +116,7 @@ rule jiagu : packer
     $art_lib = "libjiagu_art.so"
 
   condition:
-    apk and ($main_lib or $art_lib)
+    is_apk and ($main_lib or $art_lib)
 }
 
 rule qdbh_packer : packer
@@ -128,7 +128,7 @@ rule qdbh_packer : packer
     $qdbh = "assets/qdbh"
 
   condition:
-    apk and $qdbh
+    is_apk and $qdbh
 }
 
 rule unknown_packer_lib : packer
@@ -142,7 +142,7 @@ rule unknown_packer_lib : packer
     $post_jar = { 2E 6A 61 72 00 77 00 6A 61 76 61 2F 75 74 69 6C 2F 4D 61 70 00 67 65 74 49 6E 74 00 }
 
   condition:
-    //apk and
+    //is_apk and
     ($pre_jar and $jar_data and $post_jar)
 }
 
@@ -157,7 +157,7 @@ rule unicom_loader : packer
     $classes_jar = "classes.jar"
 
   condition:
-    apk and ($unicom_lib and ($decrypt_lib or $classes_jar))
+    is_apk and ($unicom_lib and ($decrypt_lib or $classes_jar))
 }
 
 rule liapp : packer
@@ -170,7 +170,7 @@ rule liapp : packer
     $lib = "LIAPPClient.sc"
 
   condition:
-    apk and any of ($dir, $lib)
+    is_apk and any of ($dir, $lib)
 }
 
 rule app_fortify : packer
@@ -182,7 +182,7 @@ rule app_fortify : packer
     $lib = "libNSaferOnly.so"
 
   condition:
-    apk and $lib
+    is_apk and $lib
 }
 
 rule nqshield : packer
@@ -196,9 +196,8 @@ rule nqshield : packer
     $lib_sec2 = "nqshell"
 
   condition:
-    apk and any of ($lib, $lib_sec1, $lib_sec2)
+    is_apk and any of ($lib, $lib_sec1, $lib_sec2)
 }
-
 
 rule tencent : packer
 {
@@ -212,7 +211,7 @@ rule tencent : packer
     $mix_dex = "/mix.dex"
 
   condition:
-    apk and ($classpath or $decryptor_lib or $zip_lib or $mix_dex)
+    is_apk and ($classpath or $decryptor_lib or $zip_lib or $mix_dex)
 }
 
 rule ijiami : packer
@@ -226,7 +225,7 @@ rule ijiami : packer
     $ijm_lib = "assets/ijm_lib/"
 
   condition:
-    apk and ($old_dat or $new_ajm or $ijm_lib)
+    is_apk and ($old_dat or $new_ajm or $ijm_lib)
 }
 
 rule naga : packer
@@ -238,7 +237,7 @@ rule naga : packer
     $lib = "libddog.so"
 
   condition:
-    apk and $lib
+    is_apk and $lib
 }
 
 rule alibaba : packer
@@ -250,7 +249,7 @@ rule alibaba : packer
     $lib = "libmobisec.so"
 
   condition:
-    apk and $lib
+    is_apk and $lib
 }
 
 rule medusa : packer
@@ -262,7 +261,7 @@ rule medusa : packer
     $lib = "libmd.so"
 
   condition:
-    apk and $lib
+    is_apk and $lib
 }
 
 rule baidu : packer
@@ -275,5 +274,17 @@ rule baidu : packer
     $encrypted = "baiduprotect1.jar"
 
   condition:
-    apk and ($lib or $encrypted)
+    is_apk and ($lib or $encrypted)
+}
+
+rule pangxie : packer
+{
+  meta:
+    description = "PangXie"
+
+  strings:
+    $lib = "libnsecure.so"
+
+  condition:
+    is_apk and $lib
 }

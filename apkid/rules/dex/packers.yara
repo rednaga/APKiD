@@ -25,38 +25,24 @@
  *
  **/
 
-private rule is_apk
+include "common.yara"
+
+rule pangxie_dex : packer
 {
   meta:
-    description = "Resembles an APK that is likely not corrupt"
+    description = "PangXie"
 
   strings:
-    $zip_head = "PK"
-    $manifest = "AndroidManifest.xml"
+    // Lcom/merry/wapper/WapperApplication;
+    $wrapper = {
+      00 24 4C 63 6F 6D 2F 6D 65 72 72 79 2F 77 61 70
+      70 65 72 2F 57 61 70 70 65 72 41 70 70 6C 69 63
+      61 74 69 6F 6E 3B 00
+    }
 
   condition:
-    $zip_head at 0 and $manifest and #manifest >= 2
+    is_dex and
+    $wrapper
 }
 
-private rule is_signed_apk
-{
-  meta:
-    description = "Resembles a signed APK that is likely not corrupt"
 
-  strings:
-    $meta_inf = "META-INF/"
-    $rsa = ".RSA"
-    $dsa = ".DSA"
-
-  condition:
-    is_apk and for all of ($meta_inf*) : ($rsa or $dsa in (@ + 9..@ + 9 + 100))
-}
-
-private rule is_unsigned_apk
-{
-  meta:
-    description = "Resembles an unsigned APK that is likely not corrupt"
-
-  condition:
-    is_apk and not is_signed_apk
-}

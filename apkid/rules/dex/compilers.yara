@@ -26,6 +26,7 @@
  **/
 
 import "dex"
+include "common.yara"
 
 rule dexlib1 : compiler
 {
