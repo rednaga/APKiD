@@ -98,16 +98,17 @@ rule upx_elf_3_91 : packer
   condition:
     upx_unmodified and $copyright
 }
+
 rule upx_elf_3_09 : packer
 {
   meta:
     description = "UPX 3.09 (unmodified)"
 
     strings:
-	    $copyright = "UPX 3.09 Copyright"
+	  $copyright = "UPX 3.09 Copyright"
 
     condition:
-        upx_unmodified and $copyright
+      upx_unmodified and $copyright
 }
 
 rule upx_elf_3_08 : packer
@@ -115,11 +116,11 @@ rule upx_elf_3_08 : packer
   meta:
     description = "UPX 3.08 (unmodified)"
 
-    strings:
-        $copyright = "UPX 3.08 Copyright"
+  strings:
+    $copyright = "UPX 3.08 Copyright"
 
-    condition:
-        upx_unmodified and $copyright
+  condition:
+    upx_unmodified and $copyright
 }
 
 rule upx_elf_3_07 : packer
@@ -127,11 +128,11 @@ rule upx_elf_3_07 : packer
   meta:
     description = "UPX 3.07 (unmodified)"
 
-    strings:
-     	$copyright = "UPX 3.07 Copyright"
+  strings:
+    $copyright = "UPX 3.07 Copyright"
 
-    condition:
-	    upx_unmodified and $copyright
+  condition:
+    upx_unmodified and $copyright
 }
 
 rule upx_elf_3_04 : packer
@@ -139,11 +140,11 @@ rule upx_elf_3_04 : packer
   meta:
     description = "UPX 3.04 (unmodified)"
 
-    strings:
-        $copyright = "UPX 3.04 Copyright"
+  strings:
+    $copyright = "UPX 3.04 Copyright"
 
-    condition:
-        upx_unmodified and $copyright
+  condition:
+    upx_unmodified and $copyright
 }
 
 rule upx_elf_3_03 : packer
@@ -151,11 +152,11 @@ rule upx_elf_3_03 : packer
   meta:
     description = "UPX 3.03 (unmodified)"
 
-    strings:
-    	$copyright = "UPX 3.03 Copyright"
+  strings:
+    $copyright = "UPX 3.03 Copyright"
 
-	condition:
-		upx_unmodified and $copyright
+  condition:
+	upx_unmodified and $copyright
 }
 
 rule upx_elf_3_02 : packer
@@ -163,10 +164,11 @@ rule upx_elf_3_02 : packer
   meta:
     description = "UPX 3.02 (unmodified)"
 
-    strings:
-        $copyright = "UPX 3.02 Copyright"
-    condition:
-        upx_unmodified and $copyright
+  strings:
+    $copyright = "UPX 3.02 Copyright"
+
+  condition:
+    upx_unmodified and $copyright
 }
 
 rule upx_elf_3_01 : packer
@@ -176,6 +178,7 @@ rule upx_elf_3_01 : packer
 
   strings:
     $copyright = "UPX 3.01 Copyright"
+
   condition:
     upx_unmodified and $copyright
 }
@@ -188,6 +191,7 @@ rule upx_elf_bangcle_secneo : packer
   strings:
     // They replace UPX! with SEC!
     $sec = "SEC!"
+
   condition:
     $sec in (0..200) and $sec in (filesize - 50 .. filesize) and upx_stub
 }
@@ -200,6 +204,7 @@ rule upx_elf_bangcle_secneo_newer : packer
   strings:
     // They replace UPX! with \x03\x02\x01\x00
     $TTO = { 03 02 01 00 }
+
   condition:
     $TTO in (filesize - 50 .. filesize) and upx_stub
 }
@@ -212,6 +217,7 @@ rule upx_elf_ijiami : packer
   strings:
     // They replace UPX! with AJM!
     $ajm = "AJM!"
+
   condition:
     $ajm in (filesize - 50 .. filesize) and upx_stub
 }

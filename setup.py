@@ -53,7 +53,7 @@ setup(
     include_package_data=True,
     install_requires=install_requires,
     dependency_links=[
-        'https://github.com/rednaga/yara-python/zipball/master#egg=yara-python-3.4.0.999'
+        'https://github.com/rednaga/yara-python/zipball/master#egg=yara-python-3.5.0.999'
     ],
     extras_require={
         'dev': [
