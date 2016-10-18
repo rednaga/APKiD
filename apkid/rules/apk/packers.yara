@@ -39,7 +39,7 @@ rule secneo : packer
     $encrypted_dex = "assets/classes0.jar"
 
   condition:
-    is_apk and $encrypted_dex and ($encryptlib2 or $encryptlib1)
+    is_apk and ($encrypted_dex or $encryptlib2 or $encryptlib1)
 }
 
 rule dexprotector : packer
