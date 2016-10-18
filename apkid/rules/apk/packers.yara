@@ -27,6 +27,21 @@
 
 include "common.yara"
 
+rule secneo : packer
+{
+  meta:
+    description = "SecNeo"
+    // http://www.secneo.com
+
+  strings:
+    $encryptlib1 = "libDexHelper.so"
+    $encryptlib2 = "libDexHelper-x86.so"
+    $encrypted_dex = "assets/classes0.jar"
+
+  condition:
+    is_apk and $encrypted_dex and ($encryptlib2 or $encryptlib1)
+}
+
 rule dexprotector : packer
 {
  /**
