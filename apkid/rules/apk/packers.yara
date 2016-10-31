@@ -27,6 +27,20 @@
 
 include "common.yara"
 
+rule dxshield : packer
+{
+  meta:
+    description = "DxShield"
+    // http://www.nshc.net/wp/portfolio-item/dxshield_eng/
+
+  strings:
+    $decryptlib = "libdxbase.so"
+    $res = "assets/DXINFO.XML"
+
+  condition:
+    is_apk and ($decryptlib and $res) 
+}
+
 rule secneo : packer
 {
   meta:
