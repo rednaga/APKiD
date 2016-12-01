@@ -27,7 +27,7 @@
 '''
 
 __title__ = 'apkid'
-__version__ = '0.9.4'
+__version__ = '0.9.5'
 __author__ = 'Caleb Fenton & Tim Strazzere'
 __license__ = 'GPL & Commercial'
 __copyright__ = 'Copyright (C) 2016 RedNaga'
@@ -40,19 +40,18 @@ import apkid
 
 def main():
     parser = argparse.ArgumentParser(description="APKiD - Android Application Identifier")
-    parser.add_argument('input', metavar='FILE', type=str,
+    parser.add_argument('input', metavar='FILE', type=str, nargs='*',
                         help="apk, dex, or directory")
     parser.add_argument('-j', '--json', action='store_true',
-                        help="output results in JSON", )
+                        help="output results in JSON format", )
     parser.add_argument('-t', '--timeout', type=int, default=30,
-                        help="Yara scan timeout in seconds")
+                        help="Yara scan timeout (in seconds)")
     args = parser.parse_args()
 
     if not args.json:
-        print "[!] APKiD %s :: from RedNaga :: rednaga.io" % __version__
+        print "[+] APKiD %s :: from RedNaga :: rednaga.io" % __version__
 
-    if not os.path.exists(args.input):
-        raise Exception("File does not exist: %s" % args.input)
 
-    aid = apkid.APKiD(args.input, args.timeout, args.json)
-    aid.scan()
+    for input in args.input:
+        aid = apkid.APKiD(input, args.timeout, args.json)
+        aid.scan()

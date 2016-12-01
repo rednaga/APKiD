@@ -86,8 +86,6 @@ class APKiD:
                 except Exception as e:
                     tb = traceback.format_exc()
                     print "error extracting %s: %s\n%s" % (filename, e, tb)
-
-
             except yara.Error as e:
                 print "error scanning: %s" % e
 
