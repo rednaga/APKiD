@@ -16,9 +16,9 @@ Installing
 ==========
 
 The *yara-python* clone and compile steps here are temporarily necessary
-because we must point directly to our modified version of a *yara*
+because we must point directly to our modified version of a *Yara*
 branch which includes our DEX Yara module. This step is nessecary until
-(if?) the original maintainers of *yara* merge our module into the
+(if?) the original maintainers of *Yara* merge our module into the
 master branch. When this happens, we will undate the instructions here.
 After the *yara-python* fork is compiled, you can use ``pip`` to the
 most currently published ``APKiD`` package.
@@ -40,7 +40,7 @@ Usage
     APKiD - Android Application Identifier
 
     positional arguments:
-      FILE                  apk, dex, or dir
+      FILE                  apk, dex, or directory
 
     optional arguments:
       -h, --help            show this help message and exit
@@ -51,7 +51,7 @@ Usage
 Submitting New Packers / Compilers / Obfuscators
 ================================================
 
-If you come across an APK or DEX that apkid does not recognize, please
+If you come across an APK or DEX that APKiD does not recognize, please
 open a GitHub issue and tell us: \* what you think it is \* the file
 hash (either MD5, SHA1, SHA256)
 
@@ -60,7 +60,7 @@ interesting" to detect, so do not limit yourself solely to packers,
 compilers or obfuscators. If there is an interesting anti disassembler,
 anti vm, anti\* trick, please make an issue.
 
-You're also welcome to submit pull requests, just be sure to include a
+You're also welcome to submit pull requests. Just be sure to include a
 file hash so we can check the rule.
 
 License
@@ -97,7 +97,7 @@ editable mode:
     pip install -e .[dev]
     ./prep-release.py
 
-If the above doesn't work, due to permission errors dependant on your
+If the above doesn't work, due to permission errors dependent on your
 local machine and where Python has been installed, try specifying the
 ``--user`` flag. This is likely needed if you are working on OSX:
 

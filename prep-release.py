@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 import fnmatch
 import os
-from codecs import open
-
 import pypandoc
 import yara
+from codecs import open
 
 rules_dir = 'apkid/rules/'
 compiled_rules_path = "%srules.yarc" % rules_dir
