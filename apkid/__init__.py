@@ -33,13 +33,13 @@ __license__ = 'GPL & Commercial'
 __copyright__ = 'Copyright (C) 2016 RedNaga'
 
 import argparse
-import os
 
 import apkid
 
 
 def main():
-    parser = argparse.ArgumentParser(description="APKiD - Android Application Identifier")
+    parser = argparse.ArgumentParser(
+        description="APKiD - Android Application Identifier v{}".format(__version__))
     parser.add_argument('input', metavar='FILE', type=str, nargs='*',
                         help="apk, dex, or directory")
     parser.add_argument('-j', '--json', action='store_true',
@@ -50,7 +50,6 @@ def main():
 
     if not args.json:
         print "[+] APKiD %s :: from RedNaga :: rednaga.io" % __version__
-
 
     for input in args.input:
         aid = apkid.APKiD(input, args.timeout, args.json)
