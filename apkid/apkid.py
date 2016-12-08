@@ -28,10 +28,9 @@ import json
 import os
 import shutil
 import tempfile
-import zipfile
 import traceback
-
 import yara
+import zipfile
 
 ZIP_MAGIC = ['PK\x03\x04', 'PK\x05\x06', 'PK\x07\x08']
 
@@ -145,5 +144,5 @@ class APKiD:
         files = []
         for root, dirnames, filenames in os.walk(input_files):
             for filename in filenames:
-                files.append('%s/%s' % (root, filename))
+                files.append(os.path.join(root, filename))
         return files
