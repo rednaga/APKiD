@@ -41,7 +41,7 @@ rule abnormal_header_size : abnormal
     is_dex and dex.header.header_size != 0x70
 }
 
-rule non_zero_link_size : abnormal anti_disassembly
+rule non_zero_link_size : anti_disassembly
 {
   meta:
     description = "non-zero link size"
@@ -50,7 +50,7 @@ rule non_zero_link_size : abnormal anti_disassembly
     dex.header.link_size != 0x0
 }
 
-rule non_zero_link_offset : abnormal anti_disassembly
+rule non_zero_link_offset : anti_disassembly
 {
   meta:
     description = "non-zero link offset"
@@ -68,7 +68,7 @@ rule non_little_endian : abnormal
     dex.header.endian_tag != 0x12345678
 }
 
-rule data_injected_after_map : abnormal dropper
+rule data_injected_after_map : dropper
 {
   meta:
     description = "injected data after map section"
