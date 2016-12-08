@@ -113,16 +113,26 @@ rule dexlib2beta : compiler
 rule dx : compiler
 {
   meta:
-    description = "Android SDK (dx)"
+    description = "dx"
 
   condition:
     not dexlib1 and not dexlib2 and not dexlib2beta and dx_map_type_order
 }
 
+rule dx_merged : compiler
+{
+  meta:
+    description = "dx (possible dexmerge)"
+
+  condition:
+    not dx
+    and not dexlib1 and not dexlib2 and not dexlib2beta
+}
+
 rule dexmerge : manipulator
 {
   meta:
-    description = "Android SDK (dexmerge)"
+    description = "dexmerge"
 
   condition:
     dexmerge_map_type_order
@@ -179,17 +189,59 @@ rule jack_5x : compiler
     is_dex and $jack_emitter
 }
 
+private rule has_jack_anon_methods
+{
+  // https://calebfenton.github.io/2016/12/01/building-with-and-detecting-jack/
+  strings:
+    $anon_set = {00 05 2D 73 65 74 30 00} // -set0
+    $anon_get = {00 05 2D 67 65 74 30 00} // -get0
+    $anon_wrap = {00 06 2D 77 72 61 70 30 00} // -wrap0
+
+  condition:
+    2 of ($anon_*)
+}
+
+private rule jack_emitter
+{
+  strings:
+    // "\0<len>emitter: jack-?.?\0"
+    $jack_emitter = {00 1? 65 6D 69 74 74 65 72 3A 20 6A 61 63 6B 2D ?? 2E [1-3] 00}
+
+  condition:
+    $jack_emitter or has_jack_anon_methods
+}
+
+private rule has_javac_anon_methods
+{
+  // https://calebfenton.github.io/2016/12/01/building-with-and-detecting-jack/
+  strings:
+    $anon_set = {00 0A 61 63 63 65 73 73 24 30 30 32 00} // access$002
+    $anon_get = {00 0A 61 63 63 65 73 73 24 30 30 30 00} // access$000
+    $anon_wrap = {00 0A 61 63 63 65 73 73 24 31 30 30 00} // access$100
+
+  condition:
+    2 of ($anon_*)
+}
+
 rule jack_generic : compiler
 {
   // http://tools.android.com/tech-docs/jackandjill
   meta:
     description = "Jack (unknown version)"
 
-  strings:
-    $jack_emitter = "emitter: jack-"
-
   condition:
     is_dex and not jack_3x and not jack_4x and not jack_5x
     and not jack_4_12
-    and $jack_emitter
+    and jack_emitter or has_jack_anon_methods
 }
+
+rule jack_and_dx : compiler
+{
+  meta:
+    description = "dx and Jack (possible dexmerge)"
+
+  condition:
+    jack_emitter or has_jack_anon_methods
+    and has_javac_anon_methods
+}
+
