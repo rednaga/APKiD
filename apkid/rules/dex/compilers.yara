@@ -35,8 +35,10 @@ private rule unsorted_string_table
      * DEX format requires string IDs to be sorted according to the data at their offsets but the actual
      * ordering of the string pool is undefined. Dexlib (smali/apktool) 1.x sorts strings by class and
      * proximity. DX sorts strings in the same order as the string table.
+     *
+     * Note: It's probably only necessary to check the first several strings.
      */
-    for any i in (0..dex.header.string_ids_size - 1) : (dex.string_ids[i].offset + dex.string_ids[i].item_size + 1 != dex.string_ids[i + 1].offset)
+    for any i in (0..dex.header.string_ids_size - 1) : (dex.string_ids[i].offset + dex.string_ids[i].item_size + 1 < dex.string_ids[i + 1].offset)
 }
 
 private rule dexlib2_map_type_order
@@ -80,62 +82,6 @@ private rule dexmerge_map_type_order
      * DexMerge order derrived from: http://osxr.org/android/source/dalvik/dx/src/com/android/dx/merge/DexMerger.java#0111
      */
     dex.map_list.map_items[7].type == 0x1000 // TYPE_MAP_LIST
-}
-
-
-rule dexlib1 : compiler
-{
-  meta:
-    description = "dexlib 1.x"
-
-  condition:
-    unsorted_string_table
-}
-
-rule dexlib2 : compiler
-{
-  meta:
-    description = "dexlib 2.x"
-
-  condition:
-    not dexlib1 and dexlib2_map_type_order
-}
-
-rule dexlib2beta : compiler
-{
-  meta:
-    description = "dexlib 2.x beta"
-
-  condition:
-    not dexlib1 and not dexlib2 and null_interfaces
-}
-
-rule dx : compiler
-{
-  meta:
-    description = "dx"
-
-  condition:
-    not dexlib1 and not dexlib2 and not dexlib2beta and dx_map_type_order
-}
-
-rule dx_merged : compiler
-{
-  meta:
-    description = "dx (possible dexmerge)"
-
-  condition:
-    not dx
-    and not dexlib1 and not dexlib2 and not dexlib2beta
-}
-
-rule dexmerge : manipulator
-{
-  meta:
-    description = "dexmerge"
-
-  condition:
-    dexmerge_map_type_order
 }
 
 rule jack_4_12 : compiler
@@ -230,18 +176,59 @@ rule jack_generic : compiler
     description = "Jack (unknown version)"
 
   condition:
-    is_dex and not jack_3x and not jack_4x and not jack_5x
+    is_dex
+    and not jack_3x and not jack_4x and not jack_5x
     and not jack_4_12
-    and jack_emitter or has_jack_anon_methods
+    and (jack_emitter or has_jack_anon_methods)
 }
 
-rule jack_and_dx : compiler
+rule dexlib1 : compiler
 {
   meta:
-    description = "dx and Jack (possible dexmerge)"
+    description = "dexlib 1.x"
 
   condition:
-    jack_emitter or has_jack_anon_methods
-    and has_javac_anon_methods
+    unsorted_string_table
+}
+
+rule dexlib2 : compiler
+{
+  meta:
+    description = "dexlib 2.x"
+
+  condition:
+    not dexlib1 and dexlib2_map_type_order
+}
+
+rule dexlib2beta : compiler
+{
+  meta:
+    description = "dexlib 2.x beta"
+
+  condition:
+    not dexlib1
+    and not dexlib2
+    and null_interfaces
+}
+
+rule dx_merged : compiler
+{
+  meta:
+    description = "dx (possible dexmerge)"
+
+  condition:
+    dexmerge_map_type_order
+    and not dexlib1
+    and not dexlib2
+    and not dexlib2beta
+}
+
+rule dexmerge : manipulator
+{
+  meta:
+    description = "dexmerge"
+
+  condition:
+    dexmerge_map_type_order
 }
 
