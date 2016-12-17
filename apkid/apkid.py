@@ -91,7 +91,7 @@ class APKiD:
         if self.output_json:
             import pkg_resources
             output = {
-                'apkid_version': pkg_resources.get_distribution("apkid").version,
+                'apkid_version': pkg_resources.get_distribution('apkid').version,
                 'files': [],
             }
             for filename in results:
