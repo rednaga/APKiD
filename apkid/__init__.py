@@ -52,5 +52,4 @@ def main():
         print "[+] APKiD %s :: from RedNaga :: rednaga.io" % __version__
 
     for input in args.input:
-        aid = apkid.APKiD(input, args.timeout, args.json)
-        aid.scan()
+        apkid.scan(input, args.timeout, args.json)
