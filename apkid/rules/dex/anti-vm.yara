@@ -61,6 +61,12 @@ rule checks_build_fingerprint : anti_vm
     $str_1 = {00 07 67 65 6E 65 72 69 63 00 0A}
     // unknown
     $str_2 = {00 07 75 6E 6B 6E 6F 77 6E 00}
+    $str_3 = "generic/sdk/generic"
+    $str_4 = "generic/generic/generic"
+    $str_5 = "generic/google_sdk/generic"
+    $str_6 = "generic_x86/sdk_x86/generic_x86"
+    $str_7 = "Android/full_x86/generic_x86"
+    $str_8 = "generic/vbox86p/vbox86p"
 
   condition:
     uses_build_class
@@ -83,8 +89,8 @@ rule checks_build_model : anti_vm
     // Emulator
     $str_3 = {00 08 45 6D 75 6C 61 74 6F 72 00}
     // Android SDK built for x86
-    $str_4 = {00 19 41 6E 64 72 6F 69 64 20 53 44 4B 20 62 75
-    69 6C 74 20 66 6F 72 20 78 38 36 00}
+    $str_4 = "Android SDK built for x86"
+    $str_5 = "Full Android on x86"
 
   condition:
     uses_build_class
@@ -176,6 +182,7 @@ rule checks_build_hardware : anti_vm
     $str_1 = {00 08 67 6F 6C 64 66 69 73 68 00}
     // ranchu
     $str_2 = {00 06 72 61 6E 63 68 75 00}
+    $str_4 = "vbox86"
 
   condition:
     uses_build_class
