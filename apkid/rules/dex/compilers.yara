@@ -211,6 +211,18 @@ rule dexlib2beta : compiler
     and null_interfaces
 }
 
+rule dx : compiler
+{
+  meta:
+    description = "dx"
+
+  condition:
+    dx_map_type_order
+    and not dexlib1
+    and not dexlib2
+    and not dexlib2beta
+}
+
 rule dx_merged : compiler
 {
   meta:
