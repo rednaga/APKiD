@@ -21,18 +21,20 @@ pip install apkid
 # Usage
 
 ```
-usage: apkid [-h] [-j] [-t TIMEOUT] FILE [FILE ...]
+usage: apkid [-h] [-j] [-t TIMEOUT] [-o DIR] [FILE [FILE ...]]
 
-APKiD - Android Application Identifier
+APKiD - Android Application Identifier v0.9.5
 
 positional arguments:
   FILE                  apk, dex, or directory
 
 optional arguments:
   -h, --help            show this help message and exit
-  -j, --json            output results in JSON
+  -j, --json            output results in JSON format
   -t TIMEOUT, --timeout TIMEOUT
-                        Yara scan timeout in seconds
+                        Yara scan timeout (in seconds)
+  -o DIR, --output-dir DIR
+                        write individual JSON results to this directory
 ```
 
 # Submitting New Packers / Compilers / Obfuscators

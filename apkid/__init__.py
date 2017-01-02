@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-'''
+"""
  Copyright (C) 2016  RedNaga. http://rednaga.io
  All rights reserved. Contact: rednaga@protonmail.com
 
@@ -24,7 +24,7 @@
  file. Please visit http://www.gnu.org/copyleft/gpl.html and review the
  information to ensure the GNU General Public License version 3.0
  requirements will be met.
-'''
+"""
 
 __title__ = 'apkid'
 __version__ = '0.9.5'
@@ -46,10 +46,15 @@ def main():
                         help="output results in JSON format", )
     parser.add_argument('-t', '--timeout', type=int, default=30,
                         help="Yara scan timeout (in seconds)")
+    parser.add_argument('-o', '--output-dir', metavar='DIR', type=str,
+                        help="write individual JSON results to this directory")
     args = parser.parse_args()
 
     if not args.json:
         print "[+] APKiD %s :: from RedNaga :: rednaga.io" % __version__
 
     for input in args.input:
-        apkid.scan(input, args.timeout, args.json)
+        if args.output_dir:
+            apkid.scan_singly(input, args.timeout, args.output_dir)
+        else:
+            apkid.scan(input, args.timeout, args.json)

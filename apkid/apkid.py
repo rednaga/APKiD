@@ -1,4 +1,4 @@
-'''
+"""
  Copyright (C) 2016  RedNaga. http://rednaga.io
  All rights reserved. Contact: rednaga@protonmail.com
 
@@ -22,18 +22,17 @@
  file. Please visit http://www.gnu.org/copyleft/gpl.html and review the
  information to ensure the GNU General Public License version 3.0
  requirements will be met.
-'''
+"""
 
 import json
 import logging
 import os
 import shutil
+import sys
 import tempfile
 import traceback
-import zipfile
-import sys
-
 import yara
+import zipfile
 
 LOGGING_LEVEL = logging.INFO
 logging.basicConfig(level=LOGGING_LEVEL,
@@ -66,24 +65,17 @@ def get_file_type(file_path):
 
 
 def collect_files(input):
-    files = []
     if os.path.isfile(input):
-        files.append(input)
+        file_type = get_file_type(input)
+        if file_type != 'invalid':
+            yield (file_type, input)
     else:
-        for root, dirnames, filenames in os.walk(input):
+        for root, _, filenames in os.walk(input):
             for filename in filenames:
                 filepath = os.path.join(root, filename)
-                files.append(filepath)
-    files.sort()
-    types_and_paths = map(lambda f: (get_file_type(f), f), files)
-    types_and_paths = filter(lambda e: e[0] != 'invalid', types_and_paths)
-    files = {}
-    for file_type, file_path in types_and_paths:
-        if file_type in files:
-            files[file_type].append(file_path)
-        else:
-            files[file_type] = [file_path]
-    return files
+                file_type = get_file_type(filepath)
+                if file_type != 'invalid':
+                    yield (file_type, filepath)
 
 
 def get_rules():
@@ -142,15 +134,14 @@ def scan_apk(apk_path, rules, timeout, output_json):
         td = tempfile.mkdtemp()
         zf.extractall(td, members=target_members)
         zf.close()
-        for file_type, file_paths in collect_files(td).iteritems():
-            for file_path in file_paths:
-                entry_name = file_path.replace('{}/'.format(td), '')
-                key_path = '{}!{}'.format(apk_path, entry_name)
-                match_dict = do_yara(file_path, rules, timeout)
-                if len(match_dict) > 0:
-                    results[key_path] = match_dict
-                    if not output_json:
-                        print_matches(key_path, match_dict)
+        for file_type, file_path in collect_files(td):
+            entry_name = file_path.replace('{}/'.format(td), '')
+            key_path = '{}!{}'.format(apk_path, entry_name)
+            match_dict = do_yara(file_path, rules, timeout)
+            if len(match_dict) > 0:
+                results[key_path] = match_dict
+                if not output_json:
+                    print_matches(key_path, match_dict)
     except Exception as e:
         tb = traceback.format_exc()
         logging.error("error extracting {}: {}\n{}".format(apk_path, e, tb))
@@ -159,7 +150,7 @@ def scan_apk(apk_path, rules, timeout, output_json):
     return results
 
 
-def print_json_results(results):
+def get_json_output(results):
     import pkg_resources
     output = {
         'apkid_version': pkg_resources.get_distribution('apkid').version,
@@ -171,25 +162,50 @@ def print_json_results(results):
             'results': results[filename],
         }
         output['files'].append(result)
+    return output
+
+
+def print_json_results(results):
+    output = get_json_output(results)
     print(json.dumps(output))
 
 
 def scan(input, timeout, output_json):
     rules = get_rules()
     results = {}
-    for file_type, file_paths in collect_files(input).iteritems():
-        for file_path in file_paths:
-            try:
-                match_dict = do_yara(file_path, rules, timeout)
-                if len(match_dict) > 0:
-                    results[file_path] = match_dict
-                    if not output_json:
-                        print_matches(file_path, match_dict)
-
-                if 'zip' == file_type:
-                    apk_matches = scan_apk(file_path, rules, timeout, output_json)
-                    results.update(apk_matches)
-            except yara.Error as e:
-                logging.error("error scanning: {}".format(e))
+    for file_type, file_path in collect_files(input):
+        try:
+            match_dict = do_yara(file_path, rules, timeout)
+            if len(match_dict) > 0:
+                results[file_path] = match_dict
+                if not output_json:
+                    print_matches(file_path, match_dict)
+            if 'zip' == file_type:
+                apk_matches = scan_apk(file_path, rules, timeout, output_json)
+                results.update(apk_matches)
+        except yara.Error as e:
+            logging.error("error scanning: {}".format(e))
     if output_json:
         print_json_results(results)
+
+
+def scan_singly(input, timeout, output_dir):
+    rules = get_rules()
+    for file_type, file_path in collect_files(input):
+        results = {}
+        try:
+            match_dict = do_yara(file_path, rules, timeout)
+            if len(match_dict) > 0:
+                results[file_path] = match_dict
+            if 'zip' == file_type:
+                apk_matches = scan_apk(file_path, rules, timeout, True)
+                results.update(apk_matches)
+            if len(results) > 0:
+                if not os.path.exists(output_dir):
+                    os.makedirs(output_dir)
+                filename = os.path.basename(file_path)
+                with open(os.path.join(output_dir, filename), 'w') as f:
+                    f.write(json.dumps(results))
+                print("Finished {}".format(file_path))
+        except yara.Error as e:
+            logging.error("error scanning: {}".format(e))
