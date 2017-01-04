@@ -25,6 +25,11 @@
  *
  **/
 
+/*
+TODO:
+    class name length is > 255 characters
+*/
+
 import "dex"
 include "common.yara"
 
@@ -93,8 +98,11 @@ rule illegal_class_names : anti_disassembly
     any of them
 }
 
-/*
-TODO:
+rule invalid_dex : abnormal
+{
+  meta:
+    description = "invalid dex (parsing error)"
 
-- class name length is > 255 characters
-*/
+  condition:
+    is_dex and dex.invalid_dex == 1
+}
