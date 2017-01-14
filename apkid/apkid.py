@@ -193,6 +193,11 @@ def scan_singly(input, timeout, output_dir):
     rules = get_rules()
     for file_type, file_path in collect_files(input):
         results = {}
+        filename = os.path.basename(file_path)
+        out_file = os.path.join(output_dir, filename)
+        if os.path.exists(out_file):
+            continue
+        print("Processing: {}".format(file_path))
         try:
             match_dict = do_yara(file_path, rules, timeout)
             if len(match_dict) > 0:
@@ -203,9 +208,8 @@ def scan_singly(input, timeout, output_dir):
             if len(results) > 0:
                 if not os.path.exists(output_dir):
                     os.makedirs(output_dir)
-                filename = os.path.basename(file_path)
-                with open(os.path.join(output_dir, filename), 'w') as f:
+                with open(out_file, 'w') as f:
                     f.write(json.dumps(results))
-                print("Finished {}".format(file_path))
+                print("Finished: {}".format(file_path))
         except yara.Error as e:
             logging.error("error scanning: {}".format(e))
