@@ -1,5 +1,5 @@
 """
- Copyright (C) 2016  RedNaga. http://rednaga.io
+ Copyright (C) 2017  RedNaga. http://rednaga.io
  All rights reserved. Contact: rednaga@protonmail.com
 
 

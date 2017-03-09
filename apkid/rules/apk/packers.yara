@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016  RedNaga. http://rednaga.io
+ * Copyright (C) 2017  RedNaga. http://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -38,7 +38,7 @@ rule dxshield : packer
     $res = "assets/DXINFO.XML"
 
   condition:
-    is_apk and ($decryptlib and $res) 
+    is_apk and ($decryptlib and $res)
 }
 
 rule secneo : packer

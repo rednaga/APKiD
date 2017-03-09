@@ -23,7 +23,7 @@ pip install apkid
 ```
 usage: apkid [-h] [-j] [-t TIMEOUT] [-o DIR] [FILE [FILE ...]]
 
-APKiD - Android Application Identifier v0.9.5
+APKiD - Android Application Identifier v1.0.0
 
 positional arguments:
   FILE                  apk, dex, or directory
@@ -39,8 +39,8 @@ optional arguments:
 
 # Submitting New Packers / Compilers / Obfuscators
 
-If you come across an APK or DEX that APKiD does not recognize, please open a GitHub issue and tell us:
-*  what you think it is
+If you come across an APK or DEX which APKiD does not recognize, please open a GitHub issue and tell us:
+* what you think it is
 * the file hash (either MD5, SHA1, SHA256)
 
 We are open to any type of concept you might have for "something interesting" to detect, so do not limit yourself solely to packers, compilers or obfuscators. If there is an interesting anti disassembler, anti vm, anti* trick, please make an issue.

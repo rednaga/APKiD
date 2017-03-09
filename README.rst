@@ -37,7 +37,7 @@ Usage
 
     usage: apkid [-h] [-j] [-t TIMEOUT] [-o DIR] [FILE [FILE ...]]
 
-    APKiD - Android Application Identifier v0.9.5
+    APKiD - Android Application Identifier v1.0.0
 
     positional arguments:
       FILE                  apk, dex, or directory
@@ -53,7 +53,7 @@ Usage
 Submitting New Packers / Compilers / Obfuscators
 ================================================
 
-If you come across an APK or DEX that APKiD does not recognize, please
+If you come across an APK or DEX which APKiD does not recognize, please
 open a GitHub issue and tell us: \* what you think it is \* the file
 hash (either MD5, SHA1, SHA256)
 
