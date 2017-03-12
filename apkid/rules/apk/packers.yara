@@ -293,6 +293,19 @@ rule medusa : packer
     is_apk and $lib
 }
 
+rule appsolid : packer
+{
+  meta:
+    description = "AppSolid"
+    // https://appsolid.co/
+
+  strings:
+    $encrypted_dex = "assets/high_resolution.png"
+
+  condition:
+    is_apk and $encrypted_dex and not medusa
+}
+
 rule baidu : packer
 {
   meta:

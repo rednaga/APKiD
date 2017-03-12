@@ -45,3 +45,16 @@ rule pangxie_dex : packer
     is_dex and
     $wrapper
 }
+
+rule appsolid_dex : packer
+{
+  meta:
+    description = "AppSolid"
+
+  strings:
+    $loader = "Lweb/apache/sax/app;"
+    $main_activity = "Lweb/apache/sax/MainActivity;"
+
+  condition:
+    is_dex and $loader and $main_activity
+}
