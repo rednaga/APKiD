@@ -58,3 +58,15 @@ rule appsolid_dex : packer
   condition:
     is_dex and $loader and $main_activity
 }
+
+rule medusah_dex : packer
+{
+  meta:
+    description = "Medusah"
+
+  strings:
+    $wrapper = "Lcom/seworks/medusah"
+
+  condition:
+    is_dex and $wrapper
+}
