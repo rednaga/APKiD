@@ -281,29 +281,19 @@ rule alibaba : packer
     is_apk and $lib
 }
 
-rule medusa : packer
+rule medusah_appsolid : packer
 {
   meta:
-    description = "Medusa"
+    description = "Medusah and/or AppSolid"
+    // https://appsolid.co/
+    // https://medusah.com/
 
   strings:
     $lib = "libmd.so"
-
-  condition:
-    is_apk and $lib
-}
-
-rule appsolid : packer
-{
-  meta:
-    description = "AppSolid"
-    // https://appsolid.co/
-
-  strings:
     $encrypted_dex = "assets/high_resolution.png"
 
   condition:
-    is_apk and $encrypted_dex and not medusa
+    is_apk and ($lib or $encrypted_dex)
 }
 
 rule baidu : packer
