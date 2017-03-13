@@ -46,19 +46,6 @@ rule pangxie_dex : packer
     $wrapper
 }
 
-rule appsolid_dex : packer
-{
-  meta:
-    description = "AppSolid"
-
-  strings:
-    $loader = "Lweb/apache/sax/app;"
-    $main_activity = "Lweb/apache/sax/MainActivity;"
-
-  condition:
-    is_dex and $loader and $main_activity
-}
-
 rule medusah_dex : packer
 {
   meta:
@@ -69,4 +56,17 @@ rule medusah_dex : packer
 
   condition:
     is_dex and $wrapper
+}
+
+rule medusah_appsolid_dex : packer
+{
+  meta:
+    description = "Medusah (AppSolid)"
+
+  strings:
+    $loader = "Lweb/apache/sax/app;"
+    $main_activity = "Lweb/apache/sax/MainActivity;"
+
+  condition:
+    is_dex and $loader and $main_activity
 }
