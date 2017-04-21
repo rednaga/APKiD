@@ -96,8 +96,8 @@ editable mode:
 
     git clone https://github.com/rednaga/APKiD
     cd APKiD
-    pip install -e .[dev]
     ./prep-release.py
+    pip install -e .[dev]
 
 If the above doesn't work, due to permission errors dependent on your
 local machine and where Python has been installed, try specifying the
