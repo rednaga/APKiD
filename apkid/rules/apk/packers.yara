@@ -333,3 +333,18 @@ rule pangxie : packer
   condition:
     is_apk and $lib
 }
+
+rule kony : packer
+{
+  meta:
+    description = "Kony"
+	// http://www.kony.com/
+
+  strings:
+    $lib = "libkonyjsvm.so"
+    $decrypt_keys = "assets/application.properties"
+    $encrypted_js = "assets/js/startup.js"
+
+  condition:
+    is_apk and $lib and $decrypt_keys and $encrypted_js
+}
