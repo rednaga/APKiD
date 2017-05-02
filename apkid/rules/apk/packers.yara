@@ -348,3 +348,17 @@ rule kony : packer
   condition:
     is_apk and $lib and $decrypt_keys and $encrypted_js
 }
+
+rule approov : packer
+{
+  meta:
+    description = "Aproov"
+	// https://www.approov.io/
+
+  strings:
+    $lib = "libapproov.so"
+    $sdk_config = "assets/cbconfig.JSON"
+
+  condition:
+    is_apk and $lib and $sdk_config
+}
