@@ -33,7 +33,7 @@ print("[*] Saved {} rules to {}").format(count, compiled_rules_path)
 # print("[*] Registering ...")
 # os.system("python setup.py register")
 
-# print "[*] Cleaning up ..."
+# print("[*] Cleaning up ...")
 # os.remove('README.rst')
 
-print "[*] Done."
+print("[*] Done.")
