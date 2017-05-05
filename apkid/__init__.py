@@ -51,7 +51,7 @@ def main():
     args = parser.parse_args()
 
     if not args.json:
-        print "[+] APKiD %s :: from RedNaga :: rednaga.io" % __version__
+        print("[+] APKiD %s :: from RedNaga :: rednaga.io" % __version__)
 
     for input in args.input:
         if args.output_dir:
