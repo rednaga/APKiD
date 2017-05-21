@@ -107,10 +107,10 @@ def print_matches(key_path, match_dict):
       'strings': [(81L, '$a', 'abc'), (141L, '$b', 'def')]
     }]
     '''
-    print(("[*] {}".format(key_path)))
+    print("[*] {}".format(key_path))
     for tags in sorted(match_dict):
         values = ', '.join(sorted(match_dict[tags]))
-        print((" |-> {} : {}".format(tags, values)))
+        print(" |-> {} : {}".format(tags, values))
 
 
 def is_target_member(name):
@@ -167,7 +167,7 @@ def get_json_output(results):
 
 def print_json_results(results):
     output = get_json_output(results)
-    print((json.dumps(output)))
+    print(json.dumps(output))
 
 
 def scan(input, timeout, output_json):
@@ -197,7 +197,7 @@ def scan_singly(input, timeout, output_dir):
         out_file = os.path.join(output_dir, filename)
         if os.path.exists(out_file):
             continue
-        print(("Processing: {}".format(file_path)))
+        print("Processing: {}".format(file_path))
         try:
             match_dict = do_yara(file_path, rules, timeout)
             if len(match_dict) > 0:
@@ -210,6 +210,6 @@ def scan_singly(input, timeout, output_dir):
                     os.makedirs(output_dir)
                 with open(out_file, 'w') as f:
                     f.write(json.dumps(results))
-                print(("Finished: {}".format(file_path)))
+                print("Finished: {}".format(file_path))
         except yara.Error as e:
             logging.error("error scanning: {}".format(e))
