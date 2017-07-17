@@ -376,3 +376,16 @@ rule approov : packer
   condition:
     is_apk and $lib and $sdk_config
 }
+
+rule yidun : packer
+{
+  meta:
+    description = "yidun"
+	// https://dun.163.com/product/app-protect
+
+  strings:
+    $lib = "libnesec.so"
+
+  condition:
+    is_apk and $lib 
+}
