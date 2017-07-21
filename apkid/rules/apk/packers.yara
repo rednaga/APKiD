@@ -376,3 +376,19 @@ rule approov : packer
   condition:
     is_apk and $lib and $sdk_config
 }
+
+rule yidun : packer
+{
+  meta:
+    description = "yidun"
+	// https://dun.163.com/product/app-protect
+
+  strings:
+    $anti_trick = "Lcom/_" // Class path of anti-trick
+    $entry_point = "Lcom/netease/nis/wrapper/Entry"
+    $jni_func = "Lcom/netease/nis/wrapper/MyJni"
+    $lib = "libnesec.so"
+
+  condition:
+    is_apk and (#lib > 1) or ($anti_trick and $entry_point and $jni_func)
+}
