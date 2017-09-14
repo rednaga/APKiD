@@ -12,7 +12,7 @@ For more information on what this tool can be used for, check out:
 The _yara-python_ clone and compile steps here are temporarily necessary because we must point directly to our modified version of a _Yara_ branch which includes our DEX Yara module. This step is nessecary until (if?) the original maintainers of _Yara_ merge our module into the master branch. When this happens, we will undate the instructions here. After the _yara-python_ fork is compiled, you can use `pip` to the most currently published `APKiD` package.
 
 ```bash
-git clone https://github.com/rednaga/yara-python
+git clone --recursive https://github.com/rednaga/yara-python
 cd yara-python
 python setup.py install
 pip install apkid
@@ -58,7 +58,7 @@ Depending on your needs, you must choose one of them and follow its policies. A 
 First you will need to install the specific version of _yara-python_ the project depends on (more information about this in the _Installing_ section):
 
 ```bash
-git clone https://github.com/rednaga/yara-python
+git clone --recursive https://github.com/rednaga/yara-python
 cd yara-python
 python setup.py install
 ```

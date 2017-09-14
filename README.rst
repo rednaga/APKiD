@@ -25,7 +25,7 @@ most currently published ``APKiD`` package.
 
 .. code:: bash
 
-    git clone https://github.com/rednaga/yara-python
+    git clone --recursive https://github.com/rednaga/yara-python
     cd yara-python
     python setup.py install
     pip install apkid
@@ -85,7 +85,7 @@ section):
 
 .. code:: bash
 
-    git clone https://github.com/rednaga/yara-python
+    git clone --recursive https://github.com/rednaga/yara-python
     cd yara-python
     python setup.py install
 
