@@ -130,7 +130,7 @@ def scan_apk(apk_path, rules, timeout, output_json):
     results = {}
     try:
         zf = zipfile.ZipFile(apk_path, 'r')
-        target_members = filter(lambda n: is_target_member(n), zf.namelist())
+        target_members = [n for n in zf.namelist() if is_target_member(n)]
         td = tempfile.mkdtemp()
         zf.extractall(td, members=target_members)
         zf.close()
