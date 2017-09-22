@@ -1,0 +1,6 @@
+version: '2'
+
+services:
+  apkid:
+    build: .
+    image: rednaga/apkid:v1

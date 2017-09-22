@@ -18,6 +18,22 @@ python setup.py install
 pip install apkid
 ```
 
+## Docker install
+
+In an attempt to reduce the support ticket we receive from the above instructions being hard to follow, there is
+a docker file and script which can be used for processing files quickly. This also serves as a proof that the above
+instructions _do_ work! This usage, of course, requires that you have docker correctly installed on your machine. However the following instructions should "just work" if you have docker and git install on a machine:
+
+```bash
+git clone https://github.com/rednaga/APKiD
+cd APKiD/docker
+docker-compose build
+./apkid.sh ~/reverse/targets/android/example/example.apk
+[+] APKiD 1.0.0 :: from RedNaga :: rednaga.io
+[*] example.apk!classes.dex
+ |-> compiler : dx
+```
+
 # Usage
 
 ```
