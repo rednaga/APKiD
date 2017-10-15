@@ -113,12 +113,24 @@ rule bitwise_antiskid : obfuscator
 rule arxan : obfuscator
 {
   meta:
-    description = "Arxan"
+    description = "Arxan Dalvik"
 
   strings:
-    $obf_package = "Lxxxxxx/"
+    $obf_package1 = "Lxxxxxx/"
+    $obf_package2 = "Ltttttt/"
+    $russian_char1 = "ййй"
+    $russian_char2 = "ЧЧЧ"
+    $russian_char3 = "ЯЯЯ"
+    $russian_char4 = "жжж"
+    $russian_char5 = "ЧЧ"
+    $russian_char6 = "лл"
+    $russian_char7 = "ии"
+    $russian_char8 = "ПП"
+    $russian_char9 = "УУ"
 
   condition:
     is_dex and
-    $obf_package
+    ($obf_package1 or $obf_package2) and
+    ($russian_char1 or $russian_char2 or $russian_char3 or $russian_char4) and
+    ($russian_char5 and $russian_char6 and $russian_char7 and $russian_char8 and $russian_char9)
 }
