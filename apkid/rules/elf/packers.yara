@@ -297,11 +297,10 @@ rule ollvm_obfuscator : packer embedded
 
   strings:
     $clang_version = "Obfuscator-LLVM clang version"
-    $based_on_version = "(based on Obfuscator-LLVM"
+    $based_on = "(based on Obfuscator-LLVM"
 
   condition:
     is_apk and
     $clang_version and
-    $based_on_version and
-    (#libs >= 1)
+    $based_on
 }
