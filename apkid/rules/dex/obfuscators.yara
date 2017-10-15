@@ -109,3 +109,16 @@ rule bitwise_antiskid : obfuscator
     is_dex and
     any of them
 }
+
+rule arxan : obfuscator
+{
+  meta:
+    description = "Arxan"
+
+  strings:
+    $obf_package = "Lxxxxxx/"
+
+  condition:
+    is_dex and
+    $obf_package
+}
