@@ -304,3 +304,15 @@ rule ollvm_obfuscator : packer embedded
     $clang_version and
     $based_on
 }
+
+rule arxan_native : obfuscator
+{
+  meta:
+    description = "Arxan native"
+
+  strings:
+    $jni_export = "Java_xxxxxx_"
+
+  condition:
+    $jni_export
+}
