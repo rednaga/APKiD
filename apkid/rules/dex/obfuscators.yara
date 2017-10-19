@@ -118,6 +118,9 @@ rule arxan : obfuscator
   strings:
     $obf_package1 = "Lxxxxxx/"
     $obf_package2 = "Ltttttt/"
+    $obf_package3 = "Loooooo/"
+    $obf_package4 = "Lpppppp/"
+    $russian_char0 = "ШШШ"
     $russian_char1 = "ййй"
     $russian_char2 = "ЧЧЧ"
     $russian_char3 = "ЯЯЯ"
@@ -130,6 +133,6 @@ rule arxan : obfuscator
 
   condition:
     is_dex and
-    ($obf_package1 or $obf_package2) and
+    2 of ($obf_package*) and
     5 of ($russian_char*)
 }
