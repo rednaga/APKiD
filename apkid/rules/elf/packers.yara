@@ -290,19 +290,17 @@ rule upx_unknown_version_unmodified : packer
     not upx_compressed_apk
 }
 
-rule ollvm_obfuscator : packer embedded
+rule ollvm_obfuscator : obfuscator
 {
   meta:
-    description = "Obfuscator-LLVM ELF embedded in APK"
+    description = "Obfuscator-LLVM native"
 
   strings:
     $clang_version = "Obfuscator-LLVM clang version"
     $based_on = "(based on Obfuscator-LLVM"
 
   condition:
-    is_apk and
-    $clang_version and
-    $based_on
+    all of them
 }
 
 rule arxan_native : obfuscator
