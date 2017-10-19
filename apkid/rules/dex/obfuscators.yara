@@ -131,6 +131,5 @@ rule arxan : obfuscator
   condition:
     is_dex and
     ($obf_package1 or $obf_package2) and
-    ($russian_char1 or $russian_char2 or $russian_char3 or $russian_char4) and
-    ($russian_char5 and $russian_char6 and $russian_char7 and $russian_char8 and $russian_char9)
+    5 of ($russian_char*)
 }
