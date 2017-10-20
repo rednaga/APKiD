@@ -121,6 +121,8 @@ rule arxan : obfuscator
     $obf_package2 = "Ltttttt/"
     $obf_package3 = "Loooooo/"
     $obf_package4 = "Lpppppp/"
+    $obf_package5 = "Liiiiii/"
+    $obf_package6 = "Lffffff/"
     $russian_char0 = "ШШШ"
     $russian_char1 = "ййй"
     $russian_char2 = "ЧЧЧ"
