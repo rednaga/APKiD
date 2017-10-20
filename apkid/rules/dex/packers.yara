@@ -70,3 +70,4 @@ rule medusah_appsolid_dex : packer
   condition:
     is_dex and $loader and $main_activity
 }
+
