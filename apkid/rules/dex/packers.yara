@@ -71,3 +71,19 @@ rule medusah_appsolid_dex : packer
     is_dex and $loader and $main_activity
 }
 
+rule apkguard : packer
+{
+  meta:
+    description = "ApkGuard"
+    info = "http://apkguard.io/"
+
+  strings:
+    $method = "attachBaseContext"
+    $dexclassloader = "DexClassLoader"
+    $getclass = "getClass"
+    $getdeclaredmethod = "getDeclaredMethod"
+
+  condition:
+    is_dex and
+    all of them
+}
