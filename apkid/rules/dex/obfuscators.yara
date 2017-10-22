@@ -69,7 +69,7 @@ rule dexguard : obfuscator
 rule dexprotector : obfuscator
 {
   meta:
-    description = "DexProtect"
+    description = "DexProtector"
 
   strings:
     $method = {
@@ -139,3 +139,4 @@ rule arxan : obfuscator
     2 of ($obf_package*) and
     5 of ($russian_char*)
 }
+
