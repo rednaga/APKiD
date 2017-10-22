@@ -352,7 +352,7 @@ rule kony : packer
 {
   meta:
     description = "Kony"
-	  // http://www.kony.com/
+    // http://www.kony.com/
 
   strings:
     $lib = "libkonyjsvm.so"
