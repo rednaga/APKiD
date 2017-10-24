@@ -109,3 +109,34 @@ rule bitwise_antiskid : obfuscator
     is_dex and
     any of them
 }
+
+rule arxan : obfuscator
+{
+  meta:
+    description = "Arxan"
+    info = "https://www.arxan.com/products/application-protection-mobile"
+
+  strings:
+    $obf_package1 = "Lxxxxxx/"
+    $obf_package2 = "Ltttttt/"
+    $obf_package3 = "Loooooo/"
+    $obf_package4 = "Lpppppp/"
+    $obf_package5 = "Liiiiii/"
+    $obf_package6 = "Lffffff/"
+    $russian_char0 = "ШШШ"
+    $russian_char1 = "ййй"
+    $russian_char2 = "ЧЧЧ"
+    $russian_char3 = "ЯЯЯ"
+    $russian_char4 = "жжж"
+    $russian_char5 = "ЧЧ"
+    $russian_char6 = "лл"
+    $russian_char7 = "ии"
+    $russian_char8 = "ПП"
+    $russian_char9 = "УУ"
+
+  condition:
+    is_dex and
+    2 of ($obf_package*) and
+    5 of ($russian_char*)
+}
+

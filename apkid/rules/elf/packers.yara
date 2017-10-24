@@ -156,7 +156,7 @@ rule upx_elf_3_03 : packer
     $copyright = "UPX 3.03 Copyright"
 
   condition:
-	upx_unmodified and $copyright
+	  upx_unmodified and $copyright
 }
 
 rule upx_elf_3_02 : packer
