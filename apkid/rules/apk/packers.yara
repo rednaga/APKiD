@@ -352,7 +352,7 @@ rule kony : packer
 {
   meta:
     description = "Kony"
-	// http://www.kony.com/
+    // http://www.kony.com/
 
   strings:
     $lib = "libkonyjsvm.so"
@@ -367,7 +367,7 @@ rule approov : packer
 {
   meta:
     description = "Aproov"
-	// https://www.approov.io/
+	  // https://www.approov.io/
 
   strings:
     $lib = "libapproov.so"
@@ -381,7 +381,7 @@ rule yidun : packer
 {
   meta:
     description = "yidun"
-	// https://dun.163.com/product/app-protect
+	  // https://dun.163.com/product/app-protect
 
   strings:
     $anti_trick = "Lcom/_" // Class path of anti-trick
