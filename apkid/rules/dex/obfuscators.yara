@@ -114,7 +114,7 @@ rule bitwise_antiskid : obfuscator
 rule arxan : obfuscator
 {
   meta:
-    description = "Arxan Dalvik"
+    description = "Arxan"
     info = "https://www.arxan.com/products/application-protection-mobile/"
 
   strings:
