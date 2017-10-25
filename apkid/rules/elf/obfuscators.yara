@@ -30,6 +30,7 @@ rule ollvm_v3_4 : obfuscator
 {
   meta:
     description = "Obfuscator-LLVM version 3.4 svn"
+    info = "https://github.com/obfuscator-llvm/obfuscator/wiki"
     // "Obfuscator-clang version 3.4 (tags/RELEASE_34/final) (based on LLVM 3.4svn)"
 
   strings:
@@ -44,6 +45,7 @@ rule ollvm_v3_6_1 : obfuscator
 {
   meta:
     description = "Obfuscator-LLVM version 3.6.1"
+    info = "https://github.com/obfuscator-llvm/obfuscator/wiki"
     // "Obfuscator-LLVM clang version 3.6.1 (tags/RELEASE_361/final) (based on Obfuscator-LLVM 3.6.1)"
 
   strings:
@@ -82,7 +84,7 @@ rule ollvm : obfuscator
 
   condition:
     $ollvm and
-    not ollvm_v3_4 and 
+    not ollvm_v3_4 and
     not ollvm_v3_6_1 and
     not ollvm_v4_0
 }
