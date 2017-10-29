@@ -32,7 +32,18 @@ private rule uses_build_class
 {
   strings:
     // Landroid/os/Build;
-    $a = {3B 00 12 4C 61 6E 64 72 6F 69 64 2F 6F 73 2F 42 75 69 6C 64 3B 00}
+    $a = {00 12 4C 61 6E 64 72 6F 69 64 2F 6F 73 2F 42 75 69 6C 64 3B 00}
+  condition:
+    is_dex
+    and $a
+}
+
+private rule uses_debug_class
+{
+
+  strings:
+    // Landroid/os/Debug;
+    $a = {00 12 4C 61 6E 64 72 6F 69 64 2F 6F 73 2F 44 65 62 75 67 3B 00}
   condition:
     is_dex
     and $a
@@ -72,6 +83,20 @@ rule checks_build_fingerprint : anti_vm
     uses_build_class
     and $prop
     and 1 of ($str_*)
+}
+
+rule checks_debugger_present : anti_debug
+{
+  meta:
+    description = "Debug.isDebuggerConnected() check"
+
+  strings:
+    $debug = "Debug"
+    $debugger_connected = "isDebuggerConnected"
+
+  condition:
+    uses_debug_class
+    and $debug and $debugger_connected
 }
 
 rule checks_build_model : anti_vm
@@ -479,6 +504,14 @@ rule checks_qemu_file : anti_vm
     $a = "/init.goldfish.rc"
     $b = "/sys/qemu_trace"
     $c = "/system/bin/qemud"
+    $d = "/system/bin/qemu-props"
+    $e = "/system/lib/libc_malloc_debug_qemu.so"
+    $f = "/dev/qemu_pipe"
+    $g = "/dev/socket/qemud"
+
+    // Geny detections
+    $h = "/dev/socket/genyd"
+    $i = "/dev/socket/baseband_genyd"
 
   condition:
     1 of them
