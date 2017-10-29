@@ -69,7 +69,7 @@ rule dexguard : obfuscator
 rule dexprotector : obfuscator
 {
   meta:
-    description = "DexProtect"
+    description = "DexProtector"
 
   strings:
     $method = {
