@@ -70,3 +70,25 @@ rule medusah_appsolid_dex : packer
   condition:
     is_dex and $loader and $main_activity
 }
+
+rule apkguard : packer
+{
+  meta:
+    description = "ApkGuard"
+    info = "http://apkguard.io/"
+
+  strings:
+    $method = "attachBaseContext"
+    $dexclassloader = "DexClassLoader"
+    $getclass = "getClass"
+    $getdeclaredmethod = "getDeclaredMethod"
+    $import = "java/lang/reflect/InvocationTargetException"
+    $getfilesdir = "getFilesDir"
+    $dex = "UEsDBB"
+    $b64decode = "Base64"
+
+  condition:
+    is_dex and
+    all of them
+}
+
