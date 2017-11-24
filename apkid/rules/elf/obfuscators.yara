@@ -89,6 +89,24 @@ rule ollvm_v6_0 : obfuscator
   strings:
     $clang_version = "Obfuscator-LLVM clang version 6"
     $based_on      = "(based on Obfuscator-LLVM 6"
+    $strenc        = /.datadiv_decode[0-9]{18,20}/
+
+  condition:
+    ($clang_version and $based_on) and not $strenc
+}
+
+rule ollvm_v6_0_strenc : obfuscator
+{
+  meta:
+    description = "Obfuscator-LLVM version 6.x (string encryption)"
+    info        = "https://github.com/obfuscator-llvm/obfuscator/wiki"
+    example     = "f3a2e6c57def9a8b4730965dd66ca0f243689153139758c44718b8c5ef9c1d17"
+    // "Obfuscator-LLVM clang version 6.0.0 (trunk) (based on Obfuscator-LLVM 6.0.0git-b9ea5776)"
+
+  strings:
+    $clang_version = "Obfuscator-LLVM clang version 6"
+    $based_on      = "(based on Obfuscator-LLVM 6"
+    $strenc        = /.datadiv_decode[0-9]{18,20}/
 
   condition:
     all of them
@@ -110,7 +128,8 @@ rule ollvm : obfuscator
     not ollvm_v3_4 and
     not ollvm_v3_6_1 and
     not ollvm_v4_0 and
-    not ollvm_v6_0
+    not ollvm_v6_0 and
+    not ollvm_v6_0_strenc
 }
 
 
