@@ -85,6 +85,7 @@ rule ollvm_v6_0 : obfuscator
     info        = "https://github.com/obfuscator-llvm/obfuscator/wiki"
     example     = ""
     // "Obfuscator-LLVM clang version 6.0.0 (trunk) (based on Obfuscator-LLVM 6.0.0git-b9ea5776)"
+    // "Obfuscator-LLVM clang version 6.0.0 (trunk) (based on Obfuscator-LLVM 6.0.0)"
 
   strings:
     $clang_version = "Obfuscator-LLVM clang version 6"
@@ -102,6 +103,7 @@ rule ollvm_v6_0_strenc : obfuscator
     info        = "https://github.com/obfuscator-llvm/obfuscator/wiki"
     example     = "f3a2e6c57def9a8b4730965dd66ca0f243689153139758c44718b8c5ef9c1d17"
     // "Obfuscator-LLVM clang version 6.0.0 (trunk) (based on Obfuscator-LLVM 6.0.0git-b9ea5776)"
+    // "Obfuscator-LLVM clang version 6.0.0 (trunk) (based on Obfuscator-LLVM 6.0.0)"
 
   strings:
     $clang_version = "Obfuscator-LLVM clang version 6"
