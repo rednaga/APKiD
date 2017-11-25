@@ -108,7 +108,7 @@ rule ollvm_v6_0_strenc : obfuscator
   strings:
     $clang_version = "Obfuscator-LLVM clang version 6"
     $based_on      = "(based on Obfuscator-LLVM 6"
-    $strenc        = /.datadiv_decode[0-9]{18,20}/
+    $strenc        = /datadiv_decode[0-9]{18,20}/
 
   condition:
     all of them
