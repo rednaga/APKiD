@@ -116,28 +116,27 @@ rule arxan : obfuscator
   meta:
     description = "Arxan"
     info = "https://www.arxan.com/products/application-protection-mobile/"
+    sample = "6703c4ebfd7ec3696f0b198e277bedbf4f220183c0e8468b07712ad7bc9ed821"
 
   strings:
-    $obf_package1 = "Lxxxxxx/"
-    $obf_package2 = "Ltttttt/"
-    $obf_package3 = "Loooooo/"
-    $obf_package4 = "Lpppppp/"
-    $obf_package5 = "Liiiiii/"
-    $obf_package6 = "Lffffff/"
-    $russian_char0 = "ШШШ"
-    $russian_char1 = "ййй"
-    $russian_char2 = "ЧЧЧ"
-    $russian_char3 = "ЯЯЯ"
-    $russian_char4 = "жжж"
-    $russian_char5 = "ЧЧ"
-    $russian_char6 = "лл"
-    $russian_char7 = "ии"
-    $russian_char8 = "ПП"
-    $russian_char9 = "УУ"
+    $obf_pkg_1 = "Lxxxxxx/"
+    $obf_pkg_2 = "Ltttttt/"
+    $obf_pkg_3 = "Loooooo/"
+    $obf_pkg_4 = "Lpppppp/"
+    $obf_pkg_5 = "Liiiiii/"
+    $obf_pkg_6 = "Lffffff/"
+
+    $obf_mtd_00 = { 10 62 (6? | 75) [14] 00 }
+    $obf_mtd_01 = { (0b | 0d) 62 d0 [15] 00 }
+    $obf_mtd_02 = { (0e | 10) 62 30 34 3? [15] 00 }
+    $obf_mtd_03 = { (0b | 0d) 62 30 34 3? [13] 00 }
+    $obf_mtd_04 = { (08 | 0b | 0d | 0e ) 62 [7-13] 00 }
+    $obf_mtd_05 = { 0a 62 (30 34 3? | d? ?? ??) [11] 00 }
+    $obf_mtd_06 = { (0d | 0b | 11) (62 d1 8? | 6? ?? ??) [14] 00 }
 
   condition:
     is_dex and
-    2 of ($obf_package*) and
-    5 of ($russian_char*)
+    2 of ($obf_pkg_*) and
+    6 of ($obf_mtd_*)
 }
 
