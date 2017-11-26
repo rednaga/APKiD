@@ -119,8 +119,11 @@ rule arxan : obfuscator
     sample      = "7bd1139b5f860d48e0c35a3f117f980564f45c177a6ef480588b5b5c8165f47e"
 
   strings:
+    // Obfuscated package
     $obf_pkg = /L[a-z]{6}\//
 
+    // Obfuscated methods are found to follow a pattern like:
+    // 1 byte size + 1 byte ASCII + [13-26] non-ASCII bytes + 00 (null terminator)
     $obf_mtd_00 = { 10 62 (6? | 75) [14] 00 }
     $obf_mtd_01 = { (0b | 0d) 62 d0 [15] 00 }
     $obf_mtd_02 = { (0e | 10) 62 30 34 3? [15] 00 }
@@ -132,6 +135,6 @@ rule arxan : obfuscator
   condition:
     is_dex and
     $obf_pkg and
-    6 of ($obf_mtd_*) // aggressiveness 7, 6 or 5?
+    6 of ($obf_mtd_*)
 }
 
