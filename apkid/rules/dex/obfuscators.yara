@@ -115,16 +115,11 @@ rule arxan : obfuscator
 {
   meta:
     description = "Arxan"
-    info = "https://www.arxan.com/products/application-protection-mobile/"
-    sample = "6703c4ebfd7ec3696f0b198e277bedbf4f220183c0e8468b07712ad7bc9ed821"
+    info        = "https://www.arxan.com/products/application-protection-mobile/"
+    sample      = "7bd1139b5f860d48e0c35a3f117f980564f45c177a6ef480588b5b5c8165f47e"
 
   strings:
-    $obf_pkg_1 = "Lxxxxxx/"
-    $obf_pkg_2 = "Ltttttt/"
-    $obf_pkg_3 = "Loooooo/"
-    $obf_pkg_4 = "Lpppppp/"
-    $obf_pkg_5 = "Liiiiii/"
-    $obf_pkg_6 = "Lffffff/"
+    $obf_pkg = /L[a-z]{6}\//
 
     $obf_mtd_00 = { 10 62 (6? | 75) [14] 00 }
     $obf_mtd_01 = { (0b | 0d) 62 d0 [15] 00 }
@@ -136,7 +131,7 @@ rule arxan : obfuscator
 
   condition:
     is_dex and
-    2 of ($obf_pkg_*) and
-    6 of ($obf_mtd_*)
+    $obf_pkg and
+    6 of ($obf_mtd_*) // aggressiveness 7, 6 or 5?
 }
 
