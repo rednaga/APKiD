@@ -116,25 +116,29 @@ rule arxan : obfuscator
   meta:
     description = "Arxan"
     info        = "https://www.arxan.com/products/application-protection-mobile/"
-    sample      = "7bd1139b5f860d48e0c35a3f117f980564f45c177a6ef480588b5b5c8165f47e"
+    example     = "7bd1139b5f860d48e0c35a3f117f980564f45c177a6ef480588b5b5c8165f47e"
 
   strings:
-    // Obfuscated package
-    $obf_pkg = /L[a-z]{6}\//
+    // Obfuscated Lpackage/class/: "L([a-z]\1{5}\/[a-z]{6}\/".
+    // AFAIK, Yara does not support backreferences at the moment, thus this combo does the same
+    $a = /L(a|b|c|d|e|f|g|h|i){6}\/[a-z]{6}/
+    $b = /L(j|k|l|m|n|o|p|q|r){6}\/[a-z]{6}/
+    $c = /L(s|t|u|v|w|x|y|z){6}\/[a-z]{6}/
 
     // Obfuscated methods are found to follow a pattern like:
-    // 1 byte size + 1 byte ASCII + [13-26] non-ASCII bytes + 00 (null terminator)
-    $obf_mtd_00 = { 10 62 (6? | 75) [14] 00 }
-    $obf_mtd_01 = { (0b | 0d) 62 d0 [15] 00 }
-    $obf_mtd_02 = { (0e | 10) 62 30 34 3? [15] 00 }
-    $obf_mtd_03 = { (0b | 0d) 62 30 34 3? [13] 00 }
-    $obf_mtd_04 = { (08 | 0b | 0d | 0e ) 62 [7-13] 00 }
-    $obf_mtd_05 = { 0a 62 (30 34 3? | d? ?? ??) [11] 00 }
-    $obf_mtd_06 = { (0d | 0b | 11) (62 d1 8? | 6? ?? ??) [14] 00 }
+    // 1 byte size + 1 byte ASCII + [7-26] non-ASCII bytes + 00 (null terminator)
+    $m1 = { 10 62 (6? | 75) [14] 00 }
+    $m2 = { (0b | 0d) 62 d0 [15] 00 }
+    $m3 = { (0e | 10) 62 30 34 3? [15] 00 }
+    $m4 = { (0b | 0d) 62 30 34 3? [13] 00 }
+    $m5 = { (08 | 0b | 0d | 0e ) 62 [7-13] 00 }
+    $m6 = { 0a 62 (30 34 3? | d? ?? ??) [11] 00 }
+    $m7 = { (0d | 0b | 11) (62 d1 8? | 6? ?? ??) [14] 00 }
 
   condition:
     is_dex and
-    $obf_pkg and
-    6 of ($obf_mtd_*)
+    ($a or $b or $c) and
+    6 of ($m*)
 }
+
 
