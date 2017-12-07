@@ -34,7 +34,7 @@ __copyright__ = 'Copyright (C) 2017 RedNaga'
 
 import argparse
 
-import apkid
+from . import apkid
 
 
 def main():
