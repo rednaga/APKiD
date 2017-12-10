@@ -144,17 +144,15 @@ rule firehash : obfuscator
     description = "Firehash (VM-based)"
     url         = "https://firehash.grayhash.com/"
 
-    // original : https://firehash.grayhash.com/static/sample/dodocrackme_obfuscated.apk
+    // original   : https://firehash.grayhash.com/static/sample/dodocrackme_original.apk
+    // firehashed : https://firehash.grayhash.com/static/sample/dodocrackme_obfuscated.apk
     example1    = "38e2170a5f272ecae97dddb0dac0c1f39f7f71a4639477764a9154557106dd94"
 
-    // original : https://firehash.grayhash.com/static/sample/dodocrackme_original.apk
-    example2    = "bc6924eede0c59021db18235ee0b2423aed9d9e265f85f0e35946cc2724cccbe"
-
     // original : 6352f6d0cdc85a42de3ccfd9226dfec28280aa835227acc507043a4403b7e700
-    example3    = "c98af9a777d9633559b7903e21b61b845f7e1766afa74ef85e3380f41265e6b5"
+    example2    = "c98af9a777d9633559b7903e21b61b845f7e1766afa74ef85e3380f41265e6b5"
 
     // original : 727be6789e8f4f6eab66288f957b58800e47a4bacebacc0dd700e8f9a374f116
-    example4    = "423dc9866d1c5f32cabfeb254030d83e11db4d807394a8ff09be47d8bfc38f18"
+    example3    = "423dc9866d1c5f32cabfeb254030d83e11db4d807394a8ff09be47d8bfc38f18"
 
   strings:
     //$lib = "libaurorabridge.so"
