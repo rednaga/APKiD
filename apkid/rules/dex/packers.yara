@@ -71,23 +71,32 @@ rule medusah_appsolid_dex : packer
     is_dex and $loader and $main_activity
 }
 
-rule apkguard_dex : packer
+
+
+rule cryptoshell_dex : packer
 {
   meta:
-    description = "APKGuard"
-    nfo = "http://apkguard.io/"
+    description = "APKGuard/CryptoShell"
+
+    url         = "http://apkguard.io/"
+    example     = "d9c98fff427646883ecb457fc2e9d2a8914ba7a9ee194735e0a18f56baa26cca"
+
+    url2        = "http://cryptoshell.io"
+    example2    = "d6745c1533b440c93f7bdfbb106470043b23aafdf91506c52332ed192d7b7003"
+
 
   strings:
 
     $attachBaseContextOpcodes = {
-        120b            // const/4 v11, #int 0 // #0
-        6f20 0100 fe00  // invoke-super {v14, v15}, Landroid/app/Application;.attachBaseContext:(Landroid/content/Context;)V // method@0001
-        2206 ??00       // new-instance v6, Ljava/io/File; // type@0006
-        6e10 ??00 0e00  // invoke-virtual {v14}, Lyxlhycuqv/weudayy;.getFilesDir:()Ljava/io/File; // method@0019
+        120b            // const/4 v11, 0
+        6f20 0100 fe00  // invoke-super {v14, v15}, Landroid/app/Application.attachBaseContext(Landroid/content/Context;)V ; 0x1
+        2206 ??00       // new-instance v6, Ljava/io/File; ; 0x180
+        6e10 ??00 0e00  // invoke-virtual {v14}, Llctavku/ngbdjdfqf.getFilesDir()Ljava/io/File; ; 0x19
         0c09            // move-result-object v9
-        1a0a 2f00       // const-string v10, "lllllllllllllllllllllllllllllllllllllllll.zip" // string@002f
-        7030 ??00 960a  // invoke-direct {v6, v9, v10}, Ljava/io/File;.<init>:(Ljava/io/File;Ljava/lang/String;)V // method@000a
-        1a09 1900       //  const-string v9, BASE64_ENCODED_ZIP_FILE
+        1a0a ??00       // const-string v10, str.mtuECIoALWpjXcVYbOOKBHNTMligrjLQpGFKT.zip ; 0x239c
+        7030 ???? 960a  // invoke-direct {v6, v9, v10}, Ljava/io/File.<init>(Ljava/io/File;Ljava/lang/String;)V ; 0xa
+        1a09 ??00       // const-string v9, str.UEsDBBQAAAAIAAMAi0tT_4a5ihQAAGArAAALABwAY2xhc3Nlcy5kZXhVVAkAA1Wg....
+
         7120 ??00 b900  // invoke-static {v9, v11}, Landroid/util/Base64;.decode:(Ljava/lang/String;I)[B // method@0003
         0c02            // move-result-object v2
         2205 ??00       // new-instance v5, Ljava/io/FileOutputStream; // type@0007
@@ -147,3 +156,4 @@ rule apkguard_dex : packer
     is_dex and $attachBaseContextOpcodes
 
 }
+
