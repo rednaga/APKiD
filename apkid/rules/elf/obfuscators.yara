@@ -146,13 +146,13 @@ rule firehash : obfuscator
 
     // original   : https://firehash.grayhash.com/static/sample/dodocrackme_original.apk
     // firehashed : https://firehash.grayhash.com/static/sample/dodocrackme_obfuscated.apk
-    example1    = "38e2170a5f272ecae97dddb0dac0c1f39f7f71a4639477764a9154557106dd94"
+    example1   = "38e2170a5f272ecae97dddb0dac0c1f39f7f71a4639477764a9154557106dd94"
 
     // original : 6352f6d0cdc85a42de3ccfd9226dfec28280aa835227acc507043a4403b7e700
-    example2    = "c98af9a777d9633559b7903e21b61b845f7e1766afa74ef85e3380f41265e6b5"
+    example2   = "c98af9a777d9633559b7903e21b61b845f7e1766afa74ef85e3380f41265e6b5"
 
     // original : 727be6789e8f4f6eab66288f957b58800e47a4bacebacc0dd700e8f9a374f116
-    example3    = "423dc9866d1c5f32cabfeb254030d83e11db4d807394a8ff09be47d8bfc38f18"
+    example3   = "423dc9866d1c5f32cabfeb254030d83e11db4d807394a8ff09be47d8bfc38f18"
 
   strings:
     //$lib = "libaurorabridge.so"
