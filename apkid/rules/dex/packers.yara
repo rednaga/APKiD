@@ -96,7 +96,6 @@ rule cryptoshell_apkguard : packer
         1a0a ??00       // const-string v10, str.mtuECIoALWpjXcVYbOOKBHNTMligrjLQpGFKT.zip ; 0x239c
         7030 ???? 960a  // invoke-direct {v6, v9, v10}, Ljava/io/File.<init>(Ljava/io/File;Ljava/lang/String;)V ; 0xa
         1a09 ??00       // const-string v9, str.UEsDBBQAAAAIAAMAi0tT_4a5ihQAAGArAAALABwAY2xhc3Nlcy5kZXhVVAkAA1Wg....
-
         7120 ??00 b900  // invoke-static {v9, v11}, Landroid/util/Base64;.decode:(Ljava/lang/String;I)[B // method@0003
         0c02            // move-result-object v2
         2205 ??00       // new-instance v5, Ljava/io/FileOutputStream; // type@0007
