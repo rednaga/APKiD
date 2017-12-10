@@ -73,7 +73,7 @@ rule medusah_appsolid_dex : packer
 
 
 
-rule cryptoshell_dex : packer
+rule cryptoshell_apkguard : packer
 {
   meta:
     description = "APKGuard/CryptoShell"
