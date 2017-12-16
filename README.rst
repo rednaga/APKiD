@@ -2,7 +2,7 @@ APKiD
 =====
 
 APKiD gives you information about how an APK was made. It identifies
-many compilers, packers, obfuscators, and other weird stuff. It's *PEiD*
+many compilers, packers, obfuscators, and other weird stuff. It’s *PEiD*
 for Android.
 
 For more information on what this tool can be used for, check out:
@@ -29,6 +29,27 @@ most currently published ``APKiD`` package.
     cd yara-python
     python setup.py install
     pip install apkid
+
+Docker install
+--------------
+
+In an attempt to reduce the support ticket we receive from the above
+instructions being hard to follow, there is a docker file and script
+which can be used for processing files quickly. This also serves as a
+proof that the above instructions *do* work! This usage, of course,
+requires that you have docker correctly installed on your machine.
+However the following instructions should “just work” if you have docker
+and git install on a machine:
+
+.. code:: bash
+
+    git clone https://github.com/rednaga/APKiD
+    cd APKiD/docker
+    docker-compose build
+    ./apkid.sh ~/reverse/targets/android/example/example.apk
+    [+] APKiD 1.0.0 :: from RedNaga :: rednaga.io
+    [*] example.apk!classes.dex
+     |-> compiler : dx
 
 Usage
 =====
@@ -57,12 +78,12 @@ If you come across an APK or DEX which APKiD does not recognize, please
 open a GitHub issue and tell us: \* what you think it is \* the file
 hash (either MD5, SHA1, SHA256)
 
-We are open to any type of concept you might have for "something
-interesting" to detect, so do not limit yourself solely to packers,
+We are open to any type of concept you might have for “something
+interesting” to detect, so do not limit yourself solely to packers,
 compilers or obfuscators. If there is an interesting anti disassembler,
 anti vm, anti\* trick, please make an issue.
 
-You're also welcome to submit pull requests. Just be sure to include a
+You’re also welcome to submit pull requests. Just be sure to include a
 file hash so we can check the rule.
 
 License
@@ -99,7 +120,7 @@ editable mode:
     ./prep-release.py
     pip install -e .[dev]
 
-If the above doesn't work, due to permission errors dependent on your
+If the above doesn’t work, due to permission errors dependent on your
 local machine and where Python has been installed, try specifying the
 ``--user`` flag. This is likely needed if you are working on OSX:
 
