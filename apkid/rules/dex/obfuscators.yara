@@ -115,7 +115,7 @@ rule arxan : obfuscator
 {
   meta:
     description = "Arxan"
-    info        = "https://www.arxan.com/products/application-protection-mobile/"
+    url         = "https://www.arxan.com/products/application-protection-mobile/"
     example     = "7bd1139b5f860d48e0c35a3f117f980564f45c177a6ef480588b5b5c8165f47e"
 
   strings:
