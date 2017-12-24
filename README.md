@@ -15,7 +15,10 @@ The _yara-python_ clone and compile steps here are temporarily necessary because
 git clone --recursive https://github.com/rednaga/yara-python
 cd yara-python
 python setup.py install
-pip install apkid
+cd ..
+git clone https://github.com/rednaga/APKiD
+cd APKiD
+python setup.py install
 ```
 
 ## Docker install
