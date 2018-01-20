@@ -170,7 +170,3 @@ rule arxan_multidex : obfuscator
 }
 
 
-
-
-
-
