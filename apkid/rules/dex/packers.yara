@@ -85,7 +85,7 @@ rule apkguard_dex : packer
         2206 ??00       // new-instance v6, Ljava/io/File; // type@0006
         6e10 ??00 0e00  // invoke-virtual {v14}, Lyxlhycuqv/weudayy;.getFilesDir:()Ljava/io/File; // method@0019
         0c09            // move-result-object v9
-        1a0a ??00       // const-string v10, "lllllllllllllllllllllllllllllllllllllllll.zip" // string@002f
+        1a0a (2f|30) 00 // const-string v10, "lllllllllllllllllllllllllllllllllllllllll.zip" // string@002f
         7030 ??00 960a  // invoke-direct {v6, v9, v10}, Ljava/io/File;.<init>:(Ljava/io/File;Ljava/lang/String;)V // method@000a
         1a09 1900       //  const-string v9, BASE64_ENCODED_ZIP_FILE
         7120 ??00 b900  // invoke-static {v9, v11}, Landroid/util/Base64;.decode:(Ljava/lang/String;I)[B // method@0003
