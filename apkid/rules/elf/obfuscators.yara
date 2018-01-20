@@ -140,9 +140,10 @@ rule ollvm : obfuscator
   strings:
     $ollvm1 = "Obfuscator-LLVM "
     $ollvm2 = "Obfuscator-clang "
+    $ollvm3 = "Obfuscator- clang "
 
   condition:
-    ($ollvm1 or $ollvm2) and
+    ($ollvm1 or $ollvm2 or $ollvm3) and
     not ollvm_v3_4 and
     not ollvm_v3_5
     not ollvm_v3_6_1 and
