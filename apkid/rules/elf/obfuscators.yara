@@ -49,7 +49,7 @@ rule ollvm_v3_5 : obfuscator
   meta:
     description = "Obfuscator-LLVM version 3.5"
     url         = "https://github.com/obfuscator-llvm/obfuscator/wiki"
-    example     = "cd16ad33bf203dbaa9add803a7a0740e3727e8e60c316d33206230ae5b985f25"
+    example     = "664214969f1b94494a8fc0491407f4440032fc5c922eb0664293d0440c52dbe7"
 
   strings:
     // "Obfuscator- clang version 3.5.0 (tags/RELEASE_350/final) (based on LLVM 3.5.0svn)"
