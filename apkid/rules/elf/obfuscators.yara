@@ -44,6 +44,23 @@ rule ollvm_v3_4 : obfuscator
 }
 
 
+rule ollvm_v3_5 : obfuscator
+{
+  meta:
+    description = "Obfuscator-LLVM version 3.5"
+    url         = "https://github.com/obfuscator-llvm/obfuscator/wiki"
+    example     = "cd16ad33bf203dbaa9add803a7a0740e3727e8e60c316d33206230ae5b985f25"
+
+  strings:
+    // "Obfuscator- clang version 3.5.0 (tags/RELEASE_350/final) (based on LLVM 3.5.0svn)"
+    $clang_version = "Obfuscator- clang version 3.5.0 "
+    $based_on      = "(based on LLVM 3.5"
+
+  condition:
+    all of them
+}
+
+
 rule ollvm_v3_6_1 : obfuscator
 {
   meta:
@@ -127,6 +144,7 @@ rule ollvm : obfuscator
   condition:
     ($ollvm1 or $ollvm2) and
     not ollvm_v3_4 and
+    not ollvm_v3_55555
     not ollvm_v3_6_1 and
     not ollvm_v4_0 and
     not ollvm_v6_0 and
