@@ -26,6 +26,8 @@
  **/
 
 
+import "elf"
+
 
 rule ollvm_v3_4 : obfuscator
 {
@@ -141,7 +143,7 @@ rule ollvm : obfuscator
 rule firehash : obfuscator
 {
   meta:
-    description = "Firehash (VM-based)"
+    description = "Firehash"
     url         = "https://firehash.grayhash.com/"
 
     // original   : https://firehash.grayhash.com/static/sample/dodocrackme_original.apk
@@ -168,6 +170,6 @@ rule firehash : obfuscator
     }
 
   condition:
-    all of them
+    elf.machine == elf.EM_ARM and all of them
 }
 
