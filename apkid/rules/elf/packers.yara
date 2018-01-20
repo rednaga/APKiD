@@ -289,3 +289,25 @@ rule upx_unknown_version_unmodified : packer
     upx_unmodified and
     not upx_compressed_apk
 }
+
+rule promon : packer
+{
+  meta:
+    description = "Promon Shield"
+    info        = "https://promon.co/"
+    example     = "6a3352f54d9f5199e4bf39687224e58df642d1d91f1d32b069acd4394a0c4fe0"
+
+  strings:
+    $a = "libshield.so"
+    $b = /.ncc/  // Code segment
+    $c = /.ncd/  // Data segment
+    $d = /.ncu/  // Another segment
+    $e = "deflate"
+    $f = "inflateInit2"
+    $g = "crc32"
+
+  condition:
+    all of them
+}
+
+
