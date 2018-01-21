@@ -26,8 +26,9 @@ instructions _do_ work! This usage, of course, requires that you have docker cor
 
 ```bash
 git clone https://github.com/rednaga/APKiD
-cd APKiD/docker
+cd APKiD/
 docker-compose build
+cd docker/
 ./apkid.sh ~/reverse/targets/android/example/example.apk
 [+] APKiD 1.0.0 :: from RedNaga :: rednaga.io
 [*] example.apk!classes.dex
