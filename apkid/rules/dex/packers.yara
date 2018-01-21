@@ -29,9 +29,9 @@ include "common.yara"
 
 rule pangxie_dex : packer
 {
-  // sample: ea70a5b3f7996e9bfea2d5d99693195fdb9ce86385b7116fd08be84032d43d2c
   meta:
     description = "PangXie"
+    example = "ea70a5b3f7996e9bfea2d5d99693195fdb9ce86385b7116fd08be84032d43d2c"
 
   strings:
     // Lcom/merry/wapper/WapperApplication;
@@ -144,11 +144,10 @@ rule apkguard_dex : packer
         0d08            // move-exception v8
         6e10 ??00 0800  // invoke-virtual {v8}, Ljava/lang/Exception;.printStackTrace:()V // method@000f
         28fb            // goto 0073 // -0005
-}
+    }
 
   condition:
     is_dex and $attachBaseContextOpcodes
-
 }
 
 
@@ -233,5 +232,3 @@ rule cryptoshell_dex : packer
     not apkguard_dex
 
 }
-
-
