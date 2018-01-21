@@ -299,15 +299,17 @@ rule promon : packer
 
   strings:
     $a = "libshield.so"
-    $b = /.ncc/  // Code segment
-    $c = /.ncd/  // Data segment
-    $d = /.ncu/  // Another segment
-    $e = "deflate"
-    $f = "inflateInit2"
-    $g = "crc32"
+    $b = "deflate"
+    $c = "inflateInit2"
+    $d = "crc32"
+
+    $s1 = /.ncc/  // Code segment
+    $s2 = /.ncd/  // Data segment
+    $s3 = /.ncu/  // Another segment
 
   condition:
-    all of them
+    ($a and $b and $c and $d) and
+    2 of ($s*)
 }
 
 
