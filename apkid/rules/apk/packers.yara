@@ -31,7 +31,7 @@ rule appguard : packer
 {
   meta:
     description = "AppGuard"
-    // http://appguard.nprotect.com/en/index.html
+    url = "http://appguard.nprotect.com/en/index.html"
 
   strings:
     $stub = "assets/appguard/"
@@ -45,7 +45,7 @@ rule dxshield : packer
 {
   meta:
     description = "DxShield"
-    // http://www.nshc.net/wp/portfolio-item/dxshield_eng/
+    url = "http://www.nshc.net/wp/portfolio-item/dxshield_eng/"
 
   strings:
     $decryptlib = "libdxbase.so"
@@ -59,7 +59,7 @@ rule secneo : packer
 {
   meta:
     description = "SecNeo"
-    // http://www.secneo.com
+    url = "http://www.secneo.com"
 
   strings:
     $encryptlib1 = "libDexHelper.so"
@@ -150,8 +150,9 @@ rule qihoo360 : packer
 rule jiagu : packer
 {
   meta:
+    //developed by Qihoo 360
     description = "Jiagu"
-    //developed by Qihoo 360 http://jiagu.360.cn/
+    url = "http://jiagu.360.cn/"
 
   strings:
     // These contain a trick function "youAreFooled"
@@ -298,8 +299,8 @@ rule alibaba : packer
 rule medusah : packer
 {
   meta:
-    // https://medusah.com/
     description = "Medusah"
+    url = "https://medusah.com/"
 
   strings:
     $lib = "libmd.so"
@@ -311,9 +312,9 @@ rule medusah : packer
 rule medusah_appsolid : packer
 {
   meta:
-    // https://appsolid.co/
     // Samples and discussion: https://github.com/rednaga/APKiD/issues/19
     description = "Medusah (AppSolid)"
+    url = "https://appsolid.co/"
 
   strings:
     $encrypted_dex = "assets/high_resolution.png"
@@ -337,9 +338,9 @@ rule baidu : packer
 
 rule pangxie : packer
 {
-  // sample: ea70a5b3f7996e9bfea2d5d99693195fdb9ce86385b7116fd08be84032d43d2c
   meta:
     description = "PangXie"
+    example = "ea70a5b3f7996e9bfea2d5d99693195fdb9ce86385b7116fd08be84032d43d2c"
 
   strings:
     $lib = "libnsecure.so"
@@ -352,7 +353,7 @@ rule kony : packer
 {
   meta:
     description = "Kony"
-	// http://www.kony.com/
+	  url = "http://www.kony.com/"
 
   strings:
     $lib = "libkonyjsvm.so"
@@ -367,7 +368,7 @@ rule approov : packer
 {
   meta:
     description = "Aproov"
-	// https://www.approov.io/
+	  url = "https://www.approov.io/"
 
   strings:
     $lib = "libapproov.so"
@@ -381,7 +382,7 @@ rule yidun : packer
 {
   meta:
     description = "yidun"
-	// https://dun.163.com/product/app-protect
+	  url = "https://dun.163.com/product/app-protect"
 
   strings:
     $anti_trick = "Lcom/_" // Class path of anti-trick
