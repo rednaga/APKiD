@@ -26,6 +26,8 @@
  **/
 
 
+import "elf"
+
 
 rule ollvm_v3_4 : obfuscator
 {
@@ -150,4 +152,38 @@ rule ollvm : obfuscator
     not ollvm_v4_0 and
     not ollvm_v6_0 and
     not ollvm_v6_0_strenc
+}
+
+
+rule firehash : obfuscator
+{
+  meta:
+    description = "Firehash"
+    url         = "https://firehash.grayhash.com/"
+
+    // original   : https://firehash.grayhash.com/static/sample/dodocrackme_original.apk
+    // firehashed : https://firehash.grayhash.com/static/sample/dodocrackme_obfuscated.apk
+    example1   = "38e2170a5f272ecae97dddb0dac0c1f39f7f71a4639477764a9154557106dd94"
+
+    // original : 6352f6d0cdc85a42de3ccfd9226dfec28280aa835227acc507043a4403b7e700
+    example2   = "c98af9a777d9633559b7903e21b61b845f7e1766afa74ef85e3380f41265e6b5"
+
+    // original : 727be6789e8f4f6eab66288f957b58800e47a4bacebacc0dd700e8f9a374f116
+    example3   = "423dc9866d1c5f32cabfeb254030d83e11db4d807394a8ff09be47d8bfc38f18"
+
+  strings:
+    // Library below heuristic is found inside of is normally named "libaurorabridge.so"
+    $segment = ".firehash"
+    $opcodes_arm = {
+        04 00 2D E5  //  STR     R0, [SP,#var_4]!
+        00 00 0F E1  //  MRS     R0, CPSR
+        01 00 51 E1  //  CMP     R1, R1
+        02 00 00 ?A  //  BNE     loc_F0854
+        00 F0 29 E1  //  MSR     CPSR_cf, R0
+        04 00 9D E4  //  LDR     R0, [SP+4+var_4],#4
+        ?? ?? ?? EA  //  B       loc_F0828
+    }
+
+  condition:
+    elf.machine == elf.EM_ARM and all of them
 }
