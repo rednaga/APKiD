@@ -145,7 +145,7 @@ rule ollvm : obfuscator
   condition:
     ($ollvm1 or $ollvm2 or $ollvm3) and
     not ollvm_v3_4 and
-    not ollvm_v3_5
+    not ollvm_v3_5 and
     not ollvm_v3_6_1 and
     not ollvm_v4_0 and
     not ollvm_v6_0 and
