@@ -74,7 +74,29 @@ rule upx_sharedlib_unmodifed : packer
     and $upx in (filesize - 50 .. filesize) and upx_stub
 }
 
-// Technically unreleased; fixes included for Android shared libs
+rule upx_elf_3_94 : packer {
+  meta:
+    description = "UPX 3.94 (unmodified)"
+
+  strings:
+    $copyright = "UPX 3.94 Copyright"
+
+  condition:
+    upx_unmodified and $copyright
+}
+
+rule upx_elf_3_93 : packer {
+  meta:
+    description = "UPX 3.93 (unmodified)"
+
+  strings:
+    $copyright = "UPX 3.93 Copyright"
+
+  condition:
+    upx_unmodified and $copyright
+}
+
+// Fixes included for Android shared libs
 rule upx_elf_3_92 : packer
 {
   meta:
@@ -231,7 +253,7 @@ private rule upx_unknown_version : packer
     upx_stub
     // We could extend this for more comprehensive rules, however lower versions than this should not be
     // appears on arm/android devices
-    and not (upx_elf_3_01 or upx_elf_3_02 or upx_elf_3_03 or upx_elf_3_04 or upx_elf_3_07 or upx_elf_3_08 or upx_elf_3_09 or upx_elf_3_91 or upx_elf_3_92)
+    and not (upx_elf_3_01 or upx_elf_3_02 or upx_elf_3_03 or upx_elf_3_04 or upx_elf_3_07 or upx_elf_3_08 or upx_elf_3_09 or upx_elf_3_91 or upx_elf_3_92 or upx_elf_3_93 or upx_elf_3_94)
     and not (upx_elf_ijiami or upx_elf_bangcle_secneo or upx_elf_bangcle_secneo_newer)
 }
 
@@ -289,3 +311,27 @@ rule upx_unknown_version_unmodified : packer
     upx_unmodified and
     not upx_compressed_apk
 }
+
+rule promon : packer
+{
+  meta:
+    description = "Promon Shield"
+    info        = "https://promon.co/"
+    example     = "6a3352f54d9f5199e4bf39687224e58df642d1d91f1d32b069acd4394a0c4fe0"
+
+  strings:
+    $a = "libshield.so"
+    $b = "deflate"
+    $c = "inflateInit2"
+    $d = "crc32"
+
+    $s1 = /.ncc/  // Code segment
+    $s2 = /.ncd/  // Data segment
+    $s3 = /.ncu/  // Another segment
+
+  condition:
+    ($a and $b and $c and $d) and
+    2 of ($s*)
+}
+
+
