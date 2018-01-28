@@ -74,7 +74,29 @@ rule upx_sharedlib_unmodifed : packer
     and $upx in (filesize - 50 .. filesize) and upx_stub
 }
 
-// Technically unreleased; fixes included for Android shared libs
+rule upx_elf_3_94 : packer {
+  meta:
+    description = "UPX 3.94 (unmodified)"
+
+  strings:
+    $copyright = "UPX 3.94 Copyright"
+
+  condition:
+    upx_unmodified and $copyright
+}
+
+rule upx_elf_3_93 : packer {
+  meta:
+    description = "UPX 3.93 (unmodified)"
+
+  strings:
+    $copyright = "UPX 3.93 Copyright"
+
+  condition:
+    upx_unmodified and $copyright
+}
+
+// Fixes included for Android shared libs
 rule upx_elf_3_92 : packer
 {
   meta:
