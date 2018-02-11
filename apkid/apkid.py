@@ -1,5 +1,5 @@
 """
- Copyright (C) 2017  RedNaga. http://rednaga.io
+ Copyright (C) 2018  RedNaga. https://rednaga.io
  All rights reserved. Contact: rednaga@protonmail.com
 
 
@@ -26,13 +26,14 @@
 
 import json
 import logging
-import os
-import shutil
 import sys
-import tempfile
 import traceback
 import yara
 import zipfile
+
+import os
+import shutil
+import tempfile
 
 LOGGING_LEVEL = logging.INFO
 logging.basicConfig(level=LOGGING_LEVEL,
@@ -97,7 +98,8 @@ def build_match_dict(matches):
 
 
 def print_matches(key_path, match_dict):
-    ''' example matches dict
+    """
+     example matches dict
     [{
       'tags': ['foo', 'bar'],
       'matches': True,
@@ -106,7 +108,7 @@ def print_matches(key_path, match_dict):
       'meta': {},
       'strings': [(81L, '$a', 'abc'), (141L, '$b', 'def')]
     }]
-    '''
+    """
     print("[*] {}".format(key_path))
     for tags in sorted(match_dict):
         values = ', '.join(sorted(match_dict[tags]))
@@ -114,8 +116,9 @@ def print_matches(key_path, match_dict):
 
 
 def is_target_member(name):
-    if name.startswith('classes') or name.startswith('AndroidManifest.xml') or name.startswith(
-            'lib/'):
+    if name.startswith('classes') \
+            or name.startswith('AndroidManifest.xml') \
+            or name.startswith('lib/'):
         return True
     return False
 
