@@ -70,25 +70,81 @@ rule secneo : packer
     is_apk and any of ($encrypted_dex, $encryptlib2, $encryptlib1)
 }
 
+
 rule dexprotector : packer
 {
+
  /**
  * DexProtector v6.x.x :- Demo,Standard,Business Edition (https://dexprotector.com)
  **/
+
   meta:
-    author = "Jasi2169"
+    author = "Jasi2169 and Eduardo Novella"
     description = "DexProtector"
 
   strings:
-    $encrptlib = "assets/dp.arm.so.dat"
-    $encrptlib1 = "assets/dp.arm-v7.so.dat"
-    $encrptlib2 = "assets/dp.arm-v8.so.dat"
-    $encrptlib3 = "assets/dp.x86.so.dat"
+    $encrptlib_1 = "assets/dp.arm.so.dat"
+    $encrptlib_2 = "assets/dp.arm-v7.so.dat"
+    $encrptlib_3 = "assets/dp.arm-v8.so.dat"
+    $encrptlib_4 = "assets/dp.x86.so.dat"
+    $encrptlib_5 = "assets/dp.x86_64.so.dat"
+    $encrptlib_6 = "assets/classes.dex.dat"
+
     $encrptcustom = "assets/dp.mp3"
 
   condition:
-    is_apk and any of ($encrptlib, $encrptlib1, $encrptlib2, $encrptlib3) and $encrptcustom
+    is_apk and 1 of ($encrptlib_*) and $encrptcustom
 }
+
+
+rule dexprotector_old : packer
+{
+
+  meta:
+    author      = "Eduardo Novella"
+    description = "DexProtector"
+
+  strings:
+    $encrptlib_1 = "assets/dp.arm-v7.art.kk.so"
+    $encrptlib_2 = "assets/dp.arm-v7.art.l.so"
+    $encrptlib_3 = "assets/dp.arm-v7.dvm.so"
+    $encrptlib_4 = "assets/dp.arm.art.kk.so"
+    $encrptlib_5 = "assets/dp.arm.art.l.so"
+    $encrptlib_6 = "assets/dp.arm.dvm.so"
+    $encrptlib_7 = "assets/dp.x86.art.kk.so"
+    $encrptlib_8 = "assets/dp.x86.art.l.so"
+    $encrptlib_9 = "assets/dp.x86.dvm.so"
+
+    $encrptcustom = "assets/dp.mp3"
+
+  condition:
+    is_apk and 2 of ($encrptlib_*) and $encrptcustom
+}
+
+rule dexprotector_new : packer
+{
+
+  meta:
+    author      = "Eduardo Novella"
+    description = "DexProtector"
+
+  strings:
+    //              assets/com.package.name.arm.so.dat
+    $encrptlib_1 = /assets\/[A-Za-z0-9.]{2,50}\.arm\-v7\.so\.dat/
+    $encrptlib_2 = /assets\/[A-Za-z0-9.]{2,50}\.arm\-v8\.so\.dat/
+    $encrptlib_3 = /assets\/[A-Za-z0-9.]{2,50}\.arm\.so\.dat/
+    $encrptlib_4 = /assets\/[A-Za-z0-9.]{2,50}\.dex\.dat/
+    $encrptlib_5 = /assets\/[A-Za-z0-9.]{2,50}\.x86\.so\.dat/
+    $encrptlib_6 = /assets\/[A-Za-z0-9.]{2,50}\.x86\_64\.so\.dat/
+
+    $encrptcustom = /assets\/[A-Za-z0-9.]{2,50}\.mp3/
+
+  condition:
+    is_apk and 2 of ($encrptlib_*) and $encrptcustom and
+    not dexprotector_old and
+    not dexprotector
+}
+
 
 rule apkprotect : packer
 {
@@ -395,3 +451,22 @@ rule yidun : packer
   condition:
     is_apk and (#lib > 1) or ($anti_trick and $entry_point and $jni_func)
 }
+
+
+rule apkpacker : packer
+{
+    meta:
+        description = "ApkPacker"
+        sample      = "087af5aacab8fc8bc7b1dcb7a138c3552d175c74b496056893299bc437422f95"
+        author      = "Eduardo Novella"
+
+    strings:
+        $a = "assets/ApkPacker/apkPackerConfiguration"
+        $b = "assets/ApkPacker/classes.dex"
+        //$c = "assets/config.txt"
+        //$d = "assets/sht.txt"
+
+    condition:
+        is_apk and all of them
+}
+
