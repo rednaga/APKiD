@@ -395,3 +395,22 @@ rule yidun : packer
   condition:
     is_apk and (#lib > 1) or ($anti_trick and $entry_point and $jni_func)
 }
+
+
+rule apkpacker : packer
+{
+    meta:
+        description = "ApkPacker"
+        sample      = "087af5aacab8fc8bc7b1dcb7a138c3552d175c74b496056893299bc437422f95"
+        author      = "Eduardo Novella"
+
+    strings:
+        $a = "assets/ApkPacker/apkPackerConfiguration"
+        $b = "assets/ApkPacker/classes.dex"
+        //$c = "assets/config.txt"
+        //$d = "assets/sht.txt"
+
+    condition:
+        is_apk and all of them
+}
+
