@@ -169,3 +169,17 @@ rule arxan_multidex : obfuscator
     not arxan
 }
 
+rule allatori_demo : obfuscator
+{
+  meta:
+    description = "Allatori demo"
+    url         = "http://www.allatori.com/features.html"
+    author      = "Eduardo Novella"
+
+  strings:
+    $s = "ALLATORIxDEMO"
+
+  condition:
+    $s and is_dex
+}
+
