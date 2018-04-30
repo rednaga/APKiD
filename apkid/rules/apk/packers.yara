@@ -166,7 +166,8 @@ rule jiagu : packer
 rule qdbh_packer : packer
 {
   meta:
-    description = "'qdbh' (?)"
+    description = "Unknown. Asset 'qdbh'"
+    example     = "faf1e85f878ea52a3b3fbb67126132b527f509586706f242f39b8c1fdb4a2065"
 
   strings:
     $qdbh = "assets/qdbh"
@@ -178,12 +179,13 @@ rule qdbh_packer : packer
 rule unknown_packer_lib : packer
 {
   meta:
-    description = "'jpj' packer (?)"
+    description = "Unknown. Random library name."
+    example     = "faf1e85f878ea52a3b3fbb67126132b527f509586706f242f39b8c1fdb4a2065"
 
   strings:
-    $pre_jar = { 00 6F 6E 43 72 65 61 74 65 00 28 29 56 00 63 6F 6D 2F 76 }
-    $jar_data = { 2E 6A 61 72 00 2F 64 61 74 61 2F 64 61 74 61 2F 00 2F }
-    $post_jar = { 2E 6A 61 72 00 77 00 6A 61 76 61 2F 75 74 69 6C 2F 4D 61 70 00 67 65 74 49 6E 74 00 }
+    $pre_jar  = { 00 6F 6E 43 72 65 61 74 65 00 28 29 56 00 63 6F 6D 2F 76 } // .onCreate.()V.com/v
+    $jar_data = { 2E 6A 61 72 00 2F 64 61 74 61 2F 64 61 74 61 2F 00 2F } // .jar./data/data
+    $post_jar = { 2E 6A 61 72 00 77 00 6A 61 76 61 2F 75 74 69 6C 2F 4D 61 70 00 67 65 74 49 6E 74 00 } // .jar.w.java/util/Map.getInt.
 
   condition:
     //is_apk and
