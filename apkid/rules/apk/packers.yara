@@ -41,6 +41,24 @@ rule appguard : packer
     is_apk and ($stub and $encrypted_dex)
 }
 
+rule appguard_new : packer
+{
+    meta:
+        description = "AppGuard"
+        sample      = "c5195daa5d17ba6e1755f8cb7270ae3a971eb688ee7d650d10c284d7c93b777d"
+        url         = "http://appguard.nprotect.com/en/index.html"
+        author      = "Eduardo Novella"
+
+    strings:
+        $a = "assets/AppGuard0.jar"
+        $b = "assets/AppGuard.dgc"
+        $c = "libAppGuard.so"
+        $d = "libAppGuard-x86.so"
+
+    condition:
+        is_apk and 3 of them
+}
+
 rule dxshield : packer
 {
   meta:
