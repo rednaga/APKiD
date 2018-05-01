@@ -407,6 +407,9 @@ rule apkpacker : packer
     strings:
         $a = "assets/ApkPacker/apkPackerConfiguration"
         $b = "assets/ApkPacker/classes.dex"
+
+        // I do not know if these config files are malware or packer related.
+        // Lets see when more samples are discovered.
         //$c = "assets/config.txt"
         //$d = "assets/sht.txt"
 
