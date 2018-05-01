@@ -180,7 +180,7 @@ rule allatori_demo : obfuscator
     example     = "7f2f5aac9833f7bdccc0b9865f5cc2a9c94ee795a285ef2fa6ff83a34c91827f"
 
   strings:
-    $s = ";->ALLATORIxDEMO("
+    $s = "ALLATORIxDEMO"
 
   condition:
     $s and is_dex
