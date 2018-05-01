@@ -79,8 +79,9 @@ rule dexprotector : packer
  **/
 
   meta:
-    author = "Jasi2169 and Eduardo Novella"
+    author      = "Jasi2169 and Eduardo Novella"
     description = "DexProtector"
+    url         = "https://dexprotector.com/"
 
   strings:
     $encrptlib_1 = "assets/dp.arm.so.dat"
@@ -103,6 +104,8 @@ rule dexprotector_old : packer
   meta:
     author      = "Eduardo Novella"
     description = "DexProtector"
+    url         = "https://dexprotector.com/"
+    example     = "242e0ee59de46c7648b7b38efeb8c088ae3dc8c5c8fe9fbd5e707b098ab8f404"
 
   strings:
     $encrptlib_1 = "assets/dp.arm-v7.art.kk.so"
@@ -127,6 +130,8 @@ rule dexprotector_new : packer
   meta:
     author      = "Eduardo Novella"
     description = "DexProtector"
+    url         = "https://dexprotector.com/"
+    example     = "dca2a0bc0f2605072b9b48579e73711af816b0fa1108b825335d2d1f2418e2a7"
 
   strings:
     //              assets/com.package.name.arm.so.dat
