@@ -117,6 +117,7 @@ rule arxan : obfuscator
     description = "Arxan"
     url         = "https://www.arxan.com/products/application-protection-mobile/"
     example     = "7bd1139b5f860d48e0c35a3f117f980564f45c177a6ef480588b5b5c8165f47e"
+    author      = "Eduardo Novella"
 
   strings:
     // Obfuscated Lpackage/class/: "L([a-z]\1{5}\/[a-z]{6}\/".
@@ -146,6 +147,7 @@ rule arxan_multidex : obfuscator
     description = "Arxan (multidex)"
     url         = "https://www.arxan.com/products/application-protection-mobile/"
     example     = "9b2a978a937293d6cb93439e0f819b4e044a3fad80dde92dec9b67e419278b5d"
+    author      = "Eduardo Novella"
 
   strings:
     // Obfuscated Lpackage/class/: "L([a-z]\1{5}\/[a-z]{6}\/".
@@ -175,9 +177,10 @@ rule allatori_demo : obfuscator
     description = "Allatori demo"
     url         = "http://www.allatori.com/features.html"
     author      = "Eduardo Novella"
+    example     = "7f2f5aac9833f7bdccc0b9865f5cc2a9c94ee795a285ef2fa6ff83a34c91827f"
 
   strings:
-    $s = "ALLATORIxDEMO"
+    $s = ";->ALLATORIxDEMO("
 
   condition:
     $s and is_dex
