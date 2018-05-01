@@ -120,6 +120,24 @@ rule bangcle : packer
     is_apk and any of ($main_lib, $second_lib, $container, $encrypted_jar, $encrypted_jar2)
 }
 
+rule bangcle_secshell : packer
+{
+    meta:
+        description = "Bangcle (SecShell)"
+        sample      = "d710a24971a0cd56c5cbe62b4b926e0122704fba52821e9c888e651a2d26a05c"
+        url         = "https://blog.fortinet.com/2017/01/26/deep-analysis-of-android-rootnik-malware-using-advanced-anti-debug-and-anti-hook-part-i-debugging-in-the-scope-of-native-layer"
+        author      = "Eduardo Novella"
+
+
+    strings:
+        $a = "assets/secData0.jar"
+        $b = "libSecShell.so"
+        $c = "libSecShell-x86.so"
+
+    condition:
+        is_apk and 2 of them
+}
+
 rule kiro : packer
 {
   meta:
