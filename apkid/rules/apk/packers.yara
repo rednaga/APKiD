@@ -98,8 +98,11 @@ rule dexprotector : packer
 }
 
 
-rule dexprotector_old : packer
+rule dexprotector_a : packer
 {
+ /**
+ * DexProtector old version possibly
+ **/
 
   meta:
     author      = "Eduardo Novella"
@@ -124,8 +127,11 @@ rule dexprotector_old : packer
     is_apk and 2 of ($encrptlib_*) and $encrptcustom
 }
 
-rule dexprotector_new : packer
+rule dexprotector_b : packer
 {
+ /**
+ * DexProtector new version possibly
+ **/
 
   meta:
     author      = "Eduardo Novella"
@@ -146,7 +152,7 @@ rule dexprotector_new : packer
 
   condition:
     is_apk and 2 of ($encrptlib_*) and $encrptcustom and
-    not dexprotector_old and
+    not dexprotector_a and
     not dexprotector
 }
 
