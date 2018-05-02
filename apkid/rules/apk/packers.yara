@@ -401,15 +401,14 @@ rule apkpacker : packer
 {
     meta:
         description = "ApkPacker"
-        sample      = "087af5aacab8fc8bc7b1dcb7a138c3552d175c74b496056893299bc437422f95"
+        example     = "087af5aacab8fc8bc7b1dcb7a138c3552d175c74b496056893299bc437422f95"
         author      = "Eduardo Novella"
 
     strings:
         $a = "assets/ApkPacker/apkPackerConfiguration"
         $b = "assets/ApkPacker/classes.dex"
 
-        // I do not know if these config files are malware or packer related.
-        // Lets see when more samples are discovered.
+        // These may be related, but not enough samples to be sure
         //$c = "assets/config.txt"
         //$d = "assets/sht.txt"
 
