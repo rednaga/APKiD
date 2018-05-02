@@ -178,9 +178,11 @@ rule allatori_demo : obfuscator
     url         = "http://www.allatori.com/features.html"
     author      = "Eduardo Novella"
     example     = "7f2f5aac9833f7bdccc0b9865f5cc2a9c94ee795a285ef2fa6ff83a34c91827f"
+    example2    = "8c9e6c7b8c516499dd2065cb435ef68089feb3d4053faf2cfcb2b759b051383c"
 
   strings:
-    $s = "ALLATORIxDEMO"
+    // null-prev-str + len + str + null
+    $s = { 00 0D 41 4C 4C 41 54 4F 52 49 78 44 45 4D 4F 00 }  // ALLATORIxDEMO
 
   condition:
     $s and is_dex
