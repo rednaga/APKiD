@@ -97,12 +97,3 @@ rule illegal_class_names : anti_disassembly
   condition:
     any of them
 }
-
-rule invalid_dex : abnormal
-{
-  meta:
-    description = "invalid dex (parsing error)"
-
-  condition:
-    is_dex and dex.invalid_dex == 1
-}

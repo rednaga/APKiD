@@ -38,7 +38,7 @@ private rule unsorted_string_table
      *
      * Note: It's probably only necessary to check the first several strings.
      */
-    for any i in (0..dex.header.string_ids_size - 1) : (dex.string_ids[i].offset + dex.string_ids[i].item_size + 1 < dex.string_ids[i + 1].offset)
+    for any i in (0..dex.header.string_ids_size - 1) : (dex.string_ids[i].offset + dex.string_ids[i].size + 1 < dex.string_ids[i + 1].offset)
 }
 
 private rule dexlib2_map_type_order
@@ -47,7 +47,7 @@ private rule dexlib2_map_type_order
     /*
      * The map_list types are in different orders for DX, dexmerge, and dexlib (1 and 2 are the same)
      */
-    dex.map_list.map_items[7].type == 0x2002 // TYPE_STRING_DATA_ITEM
+    dex.map_list.map_item[7].type == 0x2002 // TYPE_STRING_DATA_ITEM
 }
 
 private rule null_interfaces
@@ -69,9 +69,9 @@ private rule dx_map_type_order
      * The map_list types are in different orders for DX, dexmerge, and dexlib (1 and 2 are the same)
      * DX order derrived from: http://osxr.org/android/source/dalvik/dx/src/com/android/dx/dex/file/DexFile.java#0111
      */
-    (dex.map_list.map_items[7].type == 0x1002 or // TYPE_ANNOTATION_SET_REF_LIST
-    dex.map_list.map_items[7].type == 0x1003 or  // TYPE_ANNOTATION_SET_ITEM
-    dex.map_list.map_items[7].type == 0x2001)    // TYPE_CODE_ITEM
+    (dex.map_list.map_item[7].type == 0x1002 or // TYPE_ANNOTATION_SET_REF_LIST
+    dex.map_list.map_item[7].type == 0x1003 or  // TYPE_ANNOTATION_SET_ITEM
+    dex.map_list.map_item[7].type == 0x2001)    // TYPE_CODE_ITEM
 }
 
 private rule dexmerge_map_type_order
@@ -81,7 +81,7 @@ private rule dexmerge_map_type_order
      * The map_list types are in different orders for DX, dexmerge, and dexlib (1 and 2 are the same)
      * DexMerge order derrived from: http://osxr.org/android/source/dalvik/dx/src/com/android/dx/merge/DexMerger.java#0111
      */
-    dex.map_list.map_items[7].type == 0x1000 // TYPE_MAP_LIST
+    dex.map_list.map_item[7].type == 0x1000 // TYPE_MAP_LIST
 }
 
 rule jack_4_12 : compiler
