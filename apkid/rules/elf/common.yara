@@ -25,15 +25,15 @@
  *
  **/
 
+import "elf"
+
 private rule is_elf
 {
     meta:
         description = "Identifies an ELF binary based on its magic number"
         author      = "Eduardo Novella"
 
-    strings:
-        $elf_magic = { 7F 45 4C 46 }
-
     condition:
-       $elf_magic at 0
+       //$elf_magic at 0
+       elf.number_of_sections >= 0
 }
