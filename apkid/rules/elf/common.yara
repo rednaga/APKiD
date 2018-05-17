@@ -34,6 +34,5 @@ private rule is_elf
         author      = "Eduardo Novella"
 
     condition:
-       //$elf_magic at 0
        elf.number_of_sections >= 0
 }
