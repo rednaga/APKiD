@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017  RedNaga. http://rednaga.io
+ * Copyright (C) 2018  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -27,6 +27,7 @@
 
 
 import "elf"
+include "common.yara"
 
 
 rule ollvm_v3_4 : obfuscator
@@ -35,6 +36,7 @@ rule ollvm_v3_4 : obfuscator
     description = "Obfuscator-LLVM version 3.4"
     url         = "https://github.com/obfuscator-llvm/obfuscator/wiki"
     example     = "cd16ad33bf203dbaa9add803a7a0740e3727e8e60c316d33206230ae5b985f25"
+    author      = "Eduardo Novella"
 
   strings:
     // "Obfuscator-clang version 3.4 (tags/RELEASE_34/final) (based on LLVM 3.4svn)"
@@ -52,6 +54,7 @@ rule ollvm_v3_5 : obfuscator
     description = "Obfuscator-LLVM version 3.5"
     url         = "https://github.com/obfuscator-llvm/obfuscator/wiki"
     example     = "664214969f1b94494a8fc0491407f4440032fc5c922eb0664293d0440c52dbe7"
+    author      = "Eduardo Novella"
 
   strings:
     // "Obfuscator- clang version 3.5.0 (tags/RELEASE_350/final) (based on LLVM 3.5.0svn)"
@@ -69,6 +72,7 @@ rule ollvm_v3_6_1 : obfuscator
     description = "Obfuscator-LLVM version 3.6.1"
     url         = "https://github.com/obfuscator-llvm/obfuscator/wiki"
     example     = "d84b45856b5c95f7a6e96ab0461648f22ad29d1c34a8e85588dad3d89f829208"
+    author      = "Eduardo Novella"
 
   strings:
     // "Obfuscator-LLVM clang version 3.6.1 (tags/RELEASE_361/final) (based on Obfuscator-LLVM 3.6.1)"
@@ -86,6 +90,7 @@ rule ollvm_v4_0 : obfuscator
     description = "Obfuscator-LLVM version 4.0"
     url         = "https://github.com/obfuscator-llvm/obfuscator/wiki"
     example     = "aaba570388d0fe25df45480ecf894625be7affefaba24695d8c1528b974c00df"
+    author      = "Eduardo Novella"
 
   strings:
     // "Obfuscator-LLVM clang version 4.0.1  (based on Obfuscator-LLVM 4.0.1)"
@@ -103,6 +108,7 @@ rule ollvm_v6_0_strenc : obfuscator
     description = "Obfuscator-LLVM version 6.0 (string encryption)"
     url         = "https://github.com/obfuscator-llvm/obfuscator/wiki"
     example     = "f3a2e6c57def9a8b4730965dd66ca0f243689153139758c44718b8c5ef9c1d17"
+    author      = "Eduardo Novella"
 
   strings:
     // "Obfuscator-LLVM clang version 6.0.0 (trunk) (based on Obfuscator-LLVM 6.0.0)"
@@ -121,6 +127,7 @@ rule ollvm_v6_0 : obfuscator
   meta:
     description = "Obfuscator-LLVM version 6.0"
     url         = "https://github.com/obfuscator-llvm/obfuscator/wiki"
+    author      = "Eduardo Novella"
 
   strings:
     // "Obfuscator-LLVM clang version 6.0.0 (trunk) (based on Obfuscator-LLVM 6.0.0)"
@@ -138,6 +145,7 @@ rule ollvm : obfuscator
   meta:
     description = "Obfuscator-LLVM version unknown"
     url         = "https://github.com/obfuscator-llvm/obfuscator/wiki"
+    author      = "Eduardo Novella"
 
   strings:
     $ollvm1 = "Obfuscator-LLVM "
@@ -160,6 +168,7 @@ rule firehash : obfuscator
   meta:
     description = "Firehash"
     url         = "https://firehash.grayhash.com/"
+    author      = "Eduardo Novella"
 
     // original   : https://firehash.grayhash.com/static/sample/dodocrackme_original.apk
     // firehashed : https://firehash.grayhash.com/static/sample/dodocrackme_obfuscated.apk
@@ -187,3 +196,24 @@ rule firehash : obfuscator
   condition:
     elf.machine == elf.EM_ARM and all of them
 }
+
+rule avdobfuscator : obfuscator
+{
+  meta:
+    description = "AVDobfuscator"
+    url         = "https://github.com/andrivet/ADVobfuscator"
+    author      = "Eduardo Novella"
+    example     = "357f0c2ad6bf5cf60c671b090eab134251db63993f52aef512bde5bfa4a1b598 "
+
+  strings:
+    $o1 = "ObfuscatedAddress"
+    $o2 = "ObfuscatedCall"
+    $o3 = "ObfuscatedCallP"
+    $o4 = "ObfuscatedCallRet"
+    $o5 = "ObfuscatedCallRetP"
+    $o6 = "ObfuscatedFunc"
+
+  condition:
+    1 of ($o*) and is_elf
+}
+
