@@ -203,7 +203,7 @@ rule avdobfuscator : obfuscator
     description = "AVDobfuscator"
     url         = "https://github.com/andrivet/ADVobfuscator"
     author      = "Eduardo Novella"
-    example     = "357f0c2ad6bf5cf60c671b090eab134251db63993f52aef512bde5bfa4a1b598 "
+    example     = "357f0c2ad6bf5cf60c671b090eab134251db63993f52aef512bde5bfa4a1b598"
 
   strings:
     $o1 = "ObfuscatedAddress"
