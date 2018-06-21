@@ -41,6 +41,24 @@ rule appguard : packer
     is_apk and ($stub and $encrypted_dex)
 }
 
+rule appguard_new : packer
+{
+    meta:
+        description = "AppGuard"
+        sample      = "c5195daa5d17ba6e1755f8cb7270ae3a971eb688ee7d650d10c284d7c93b777d"
+        url         = "http://appguard.nprotect.com/en/index.html"
+        author      = "Eduardo Novella"
+
+    strings:
+        $a = "assets/AppGuard0.jar"
+        $b = "assets/AppGuard.dgc"
+        $c = "libAppGuard.so"
+        $d = "libAppGuard-x86.so"
+
+    condition:
+        is_apk and 3 of them
+}
+
 rule dxshield : packer
 {
   meta:
@@ -118,6 +136,24 @@ rule bangcle : packer
 
   condition:
     is_apk and any of ($main_lib, $second_lib, $container, $encrypted_jar, $encrypted_jar2)
+}
+
+rule bangcle_secshell : packer
+{
+    meta:
+        description = "Bangcle (SecShell)"
+        sample      = "d710a24971a0cd56c5cbe62b4b926e0122704fba52821e9c888e651a2d26a05c"
+        url         = "https://blog.fortinet.com/2017/01/26/deep-analysis-of-android-rootnik-malware-using-advanced-anti-debug-and-anti-hook-part-i-debugging-in-the-scope-of-native-layer"
+        author      = "Eduardo Novella"
+
+
+    strings:
+        $a = "assets/secData0.jar"
+        $b = "libSecShell.so"
+        $c = "libSecShell-x86.so"
+
+    condition:
+        is_apk and 2 of them
 }
 
 rule kiro : packer
