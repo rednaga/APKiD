@@ -187,4 +187,3 @@ rule allatori_demo : obfuscator
   condition:
     $s and is_dex
 }
-
