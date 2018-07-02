@@ -266,6 +266,23 @@ rule jiagu : packer
     is_apk and ($main_lib or $art_lib)
 }
 
+rule jiagu_a : packer
+{
+    meta:
+        description = "Jiagu (ApkToolPlus)"
+        example     = "684baab16344dc663b7ae84dd1f8d6a39bfb480a977ad581a0a6032f6e437218"
+        url         = "https://github.com/linchaolong/ApkToolPlus/tree/master/lib.JiaGu/src/com/linchaolong/apktoolplus/jiagu"
+        author      = "Eduardo Novella"
+
+    strings:
+        $a = "assets/jiagu_data.bin"
+        $b = "assets/sign.bin"
+        $c = "libapktoolplus_jiagu.so"
+
+    condition:
+        is_apk and all of them
+}
+
 rule qdbh_packer : packer
 {
   meta:
