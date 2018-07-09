@@ -191,7 +191,7 @@ rule allatori_demo : obfuscator
 rule aamo : obfuscator
 {
   meta:
-    description = "aamo obfuscator"
+    description = "AAMO"
     author = "P0r0"
     url = "https://github.com/necst/aamo"
     backup_url = "https://github.com/P0r0/aamo"
