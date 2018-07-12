@@ -188,73 +188,59 @@ rule allatori_demo : obfuscator
     $s and is_dex
 }
 
-rule aamo_str_enc_nop : obfuscator
+rule aamo_str_enc : obfuscator
 {
   meta:
-    description = "AAMO (String decryption function + interleaved NOPs)"
+    description = "AAMO (String decryption function)"
     author = "P0r0"
     url = "https://github.com/necst/aamo"
     example1 = "c1ef860af0e168f924663630ed3b61920b474d0c8b10e2bde6bfd3769dbd31a8"
     example2 = "eb0d4e1ba2e880749594eb8739e65aa21b6f7b43798f04b6681065b396c15a78"
 
   strings:
-    $opcodes = {
-        22 ?? ?? ?? 
+    $opcodes_nops = {
+        22 ?? ?? ??                                 //new-instance v? Ljava/lang/String;
         ( 00 00 | 00 00 00 00 | 00 00 00 00 00 00 )
-        12 22
-        ( 00 00 | 00 00 00 00 | 00 00 00 00 00 00 ) 
-        1a ?? ?? ??
-        ( 00 00 | 00 00 00 00 | 00 00 00 00 00 00 ) 
-        71 ?? ?? ?? ?? ??
-        0c 02
-        ( 00 00 | 00 00 00 00 | 00 00 00 00 00 00 ) 
-        71 ?? ?? ?? ?? ??
-        0c 03
-        ( 00 00 | 00 00 00 00 | 00 00 00 00 00 00 ) 
-        6e ?? ?? ?? ?? ??
-        0c 02
-        ( 00 00 | 00 00 00 00 | 00 00 00 00 00 00 ) 
-        1a ?? ?? ??
-        ( 00 00 | 00 00 00 00 | 00 00 00 00 00 00 ) 
-        70 ?? ?? ?? ?? ??
-        71 ?? ?? ?? ?? ??
-        0c 04
+        12 22                                       //const/4 v2, 0x2 (the register and constant never change)
+        ( 00 00 | 00 00 00 00 | 00 00 00 00 00 00 )
+        1a ?? ?? ??                                 //const-string v?, _ref_to_string_
+        ( 00 00 | 00 00 00 00 | 00 00 00 00 00 00 )
+        71 ?? ?? ?? ?? ??                           //invoke-static {v?, v?}, Landroid/content/res/_RANDOM_CLASS_NAME.getStorageEncryption(ILjava/lang/String;)Ljavax/crypto/Cipher;
+        0c 02                                       //move-result-object v2 (the register never changes)
+        ( 00 00 | 00 00 00 00 | 00 00 00 00 00 00 )
+        71 ?? ?? ?? ?? ??                           //invoke-static {v?, v?}, Landroid/content/res/_RANDOM_CLASS_NAME.decode(Ljava/lang/String;)[B
+        0c 03                                       //move-result-object v3
+        ( 00 00 | 00 00 00 00 | 00 00 00 00 00 00 )
+        6e ?? ?? ?? ?? ??                           //invoke-virtual {v?, v?}, Ljavax/crypto/Cipher.doFinal([B)[B
+        0c 02                                       //move-result-object v2
+        ( 00 00 | 00 00 00 00 | 00 00 00 00 00 00 )
+        1a ?? ?? ??                                 //const-string v?, _CONST_STR_
+        ( 00 00 | 00 00 00 00 | 00 00 00 00 00 00 )
+        70 ?? ?? ?? ?? ??                           //invoke-direct {v?, v?, v?}, Ljava/lang/String.<init>([BLjava/lang/String;)
+        71 ?? ?? ?? ?? ??                           //invoke-static {v?, v?}, Landroid/content/res/_RANDOM_CLASS_NAME._RANDOM_METHOD_NAME_(Ljava/lang/String;)Ljava/lang/String;
+        0c 04                                       //move-result-object v4
     }
-    $a = { 00 0f 63 6f 6e 76 65 72 74 54 6f 53 74 72 69 6e 67 00 } // convertToString
-    $b = { 00 14 67 65 74 53 74 6f 72 61 67 65 45 6e 63 72 79 70 74 69 6f 6e 00 } //getStorageEncryption
 
-  condition:
-    $opcodes and
-    all of ($a, $b)
-}
-
-rule aamo_str_enc : obfuscator
-{
-  meta:
-    description = "AAMO (String decryption function only)"
-    author = "P0r0"
-    url = "https://github.com/necst/aamo"
-
-  strings:
     $opcodes = {
-        22 ?? ?? ??
-        12 22
-        1a ?? ?? ??
-        71 ?? ?? ?? ?? ??
-        0c 02
-        71 ?? ?? ?? ?? ??
-        0c 03
-        6e ?? ?? ?? ?? ??
-        0c 02
-        1a ?? ?? ??
-        70 ?? ?? ?? ?? ??
-        71 ?? ?? ?? ?? ??
-        0c 04
+        22 ?? ?? ??         //new-instance v? Ljava/lang/String;
+        12 22               //const/4 v2, 0x2 (the register and constant never change)
+        1a ?? ?? ??         //const-string v?, _ref_to_string_
+        71 ?? ?? ?? ?? ??   //invoke-static {v?, v?}, Landroid/content/res/_RANDOM_CLASS_NAME.getStorageEncryption(ILjava/lang/String;)Ljavax/crypto/Cipher;
+        0c 02               //move-result-object v2 (the register never changes)
+        71 ?? ?? ?? ?? ??   //invoke-static {v?, v?}, Landroid/content/res/_RANDOM_CLASS_NAME.decode(Ljava/lang/String;)[B
+        0c 03               //move-result-object v3
+        6e ?? ?? ?? ?? ??   //invoke-virtual {v?, v?}, Ljavax/crypto/Cipher.doFinal([B)[B
+        0c 02               //move-result-object v2
+        1a ?? ?? ??         //const-string v?, _CONST_STR_
+        70 ?? ?? ?? ?? ??   //invoke-direct {v?, v?, v?}, Ljava/lang/String.<init>([BLjava/lang/String;)
+        71 ?? ?? ?? ?? ??   //invoke-static {v?, v?}, Landroid/content/res/_RANDOM_CLASS_NAME._RANDOM_METHOD_NAME_(Ljava/lang/String;)Ljava/lang/String;
+        0c 04               //move-result-object v4
     }
+
     $a = { 00 0f 63 6f 6e 76 65 72 74 54 6f 53 74 72 69 6e 67 00 } // convertToString
     $b = { 00 14 67 65 74 53 74 6f 72 61 67 65 45 6e 63 72 79 70 74 69 6f 6e 00 } //getStorageEncryption
 
   condition:
-    $opcodes and
-    all of ($a, $b)
+    1 of ($opcodes*) and all of ($a, $b)
 }
+
