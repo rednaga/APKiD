@@ -1,5 +1,7 @@
 # APKiD
 
+[![Build Status](https://travis-ci.org/rednaga/APKiD.svg?branch=master)](https://travis-ci.org/rednaga/APKiD)
+
 APKiD gives you information about how an APK was made. It identifies many compilers, packers, obfuscators, and other weird stuff. It's _PEiD_ for Android.
 
 For more information on what this tool can be used for check out:
