@@ -535,8 +535,8 @@ rule chornclickers : packer
 {
 
   meta:
+    // This has no name so we made one up from Ch-china,-orn-porn and -clickers
     description = "ChornClickers"
-    explanation = "ChornClickers ('Ch'-china '-orn'-porn '-clickers')"
     url         = "https://github.com/rednaga/APKiD/issues/93"
     example     = "0c4a26d6b27986775c9c58813407a737657294579b6fd37618b0396d90d3efc3"
     author      = "Eduardo Novella"
