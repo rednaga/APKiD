@@ -1,0 +1,9 @@
+language: python
+python:
+  - "2.7"
+  - "3.6"
+  - "3.7-dev"
+install:
+  - pip install -r requirements.txt
+script:
+  - pytest # or py.test for Python versions 3.5 and below
