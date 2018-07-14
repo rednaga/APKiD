@@ -25,6 +25,7 @@
 """
 
 import json
+import sys
 
 
 def print_matches(key_path, matches):
@@ -42,25 +43,33 @@ def print_matches(key_path, matches):
     print("[*] {}".format(key_path))
     for tags in sorted(matches):
         descriptions = ', '.join(sorted(matches[tags]))
-        colored_tags = []
-        for tag in tags.split(', '):
-            if tag == 'compiler':
-                colored_tag = prt_cyan(tag)
-            elif tag == 'manipulator':
-                colored_tag = prt_lightCyan(tag)
-            elif tag == 'abnormal':
-                colored_tag = prt_lightGray(tag)
-            elif tag in ['anti_vm', 'anti_disassembly', 'anti_debug']:
-                colored_tag = prt_purple(tag)
-            elif tag in ['packer', 'protector']:
-                colored_tag = prt_red(tag)
-            elif tag == 'obfuscator':
-                colored_tag = prt_yellow(tag)
-            else:
-                colored_tag = tag
-            colored_tags.append(colored_tag)
-        colored_tags = ', '.join(colored_tags)
-        print(" |-> {} : {}".format(colored_tags, descriptions))
+        if sys.stdout.isatty():
+            tags_str = colorize_tags(tags)
+        else:
+            tags_str = tags
+        print(" |-> {} : {}".format(tags_str, descriptions))
+
+
+def colorize_tags(tags):
+    colored_tags = []
+    for tag in tags.split(', '):
+        if tag == 'compiler':
+            colored_tag = prt_cyan(tag)
+        elif tag == 'manipulator':
+            colored_tag = prt_lightCyan(tag)
+        elif tag == 'abnormal':
+            colored_tag = prt_lightGray(tag)
+        elif tag in ['anti_vm', 'anti_disassembly', 'anti_debug']:
+            colored_tag = prt_purple(tag)
+        elif tag in ['packer', 'protector']:
+            colored_tag = prt_red(tag)
+        elif tag == 'obfuscator':
+            colored_tag = prt_yellow(tag)
+        else:
+            colored_tag = tag
+        colored_tags.append(colored_tag)
+    colored_tags = ', '.join(colored_tags)
+    return colored_tags
 
 
 def get_json_output(results):
