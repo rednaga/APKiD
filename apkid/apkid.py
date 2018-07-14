@@ -26,14 +26,16 @@
 
 import json
 import logging
-import sys
-import traceback
-import yara
-import zipfile
-
 import os
 import shutil
+import sys
 import tempfile
+import traceback
+import zipfile
+
+import yara
+
+from . import rules, output
 
 LOGGING_LEVEL = logging.INFO
 logging.basicConfig(level=LOGGING_LEVEL,
@@ -41,27 +43,73 @@ logging.basicConfig(level=LOGGING_LEVEL,
                     datefmt='%Y-%m-%d %H:%M:%S',
                     stream=sys.stdout)
 
-# Magic doesn't need to be perfect. Just used to filter likely scannable files.
-ZIP_MAGIC = [b'PK\x03\x04', b'PK\x05\x06', b'PK\x07\x08']
-DEX_MAGIC = [b'dex\n', b'dey\n']
-ELF_MAGIC = [b'\x7fELF']
-AXML_MAGIC = []  # TODO
+FILE_MAGICS = {
+    'zip': [b'PK\x03\x04', b'PK\x05\x06', b'PK\x07\x08'],
+    'dex': [b'dex\n', b'dey\n'],
+    'elf': [b'\x7fELF'],
+    'axml': [],
+}
+
+
+def scan(input, timeout, use_json, output_dir, quiet):
+    all_results = {}
+    out_file = None
+    for file_type, file_path in collect_files(input):
+        file_results = {}
+
+        if output_dir:
+            filename = os.path.basename(file_path)
+            out_file = os.path.join(output_dir, '{}_apkid.json'.format(filename))
+            if os.path.exists(out_file):
+                if not quiet:
+                    print("Match result {} already exists; skipping {}".format(out_file, file_path))
+                continue
+
+        if output_dir and not quiet:
+            print("Processing: {}".format(file_path))
+
+        try:
+            matches = rules.match(file_path, timeout)
+
+            if len(matches) > 0:
+                file_results[file_path] = matches
+
+            if 'zip' == file_type:
+                apk_matches = scan_apk(file_path, timeout, use_json)
+                file_results.update(apk_matches)
+
+            if output_dir:
+                with open(out_file, 'w') as f:
+                    f.write(json.dumps(file_results))
+            else:
+                all_results.update(file_results)
+
+            if not use_json:
+                output.print_matches(file_path, matches)
+
+            if output_dir and not quiet:
+                print("Finished: {}".format(file_path))
+        except yara.Error as e:
+            tb = traceback.format_exc()
+            logging.error("error scanning {}: {}\n{}".format(file_path, e, tb))
+            if output_dir and not os.path.exists(out_file):
+                with open(out_file, 'w') as f:
+                    f.write(json.dumps({'error': e, 'trace': tb}))
+
+    if not output_dir and use_json:
+        print(json.dumps(all_results))
 
 
 def get_file_type(file_path):
-    # Don't scan links
     if not os.path.isfile(file_path):
         return 'invalid'
+
     with open(file_path, 'rb') as f:
         magic = f.read(4)
-    if magic in ZIP_MAGIC:
-        return 'zip'
-    elif magic in DEX_MAGIC:
-        return 'dex'
-    elif magic in ELF_MAGIC:
-        return 'elf'
-    elif magic in AXML_MAGIC:
-        return 'axml'
+
+    for file_type, magics in FILE_MAGICS.items():
+        if magic in magics:
+            return file_type
     return 'invalid'
 
 
@@ -79,140 +127,37 @@ def collect_files(input):
                     yield (file_type, filepath)
 
 
-def get_rules():
-    rules_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'rules/rules.yarc')
-    return yara.load(rules_path)
-
-
-def build_match_dict(matches):
-    results = {}
-    for match in matches:
-        tags = ', '.join(sorted(match.tags))
-        value = match.meta.get('description', match)
-        if tags in results:
-            if value not in results[tags]:
-                results[tags].append(value)
-        else:
-            results[tags] = [value]
-    return results
-
-
-def print_matches(key_path, match_dict):
-    """
-     example matches dict
-    [{
-      'tags': ['foo', 'bar'],
-      'matches': True,
-      'namespace': 'default',
-      'rule': 'my_rule',
-      'meta': {},
-      'strings': [(81L, '$a', 'abc'), (141L, '$b', 'def')]
-    }]
-    """
-    print("[*] {}".format(key_path))
-    for tags in sorted(match_dict):
-        values = ', '.join(sorted(match_dict[tags]))
-        print(" |-> {} : {}".format(tags, values))
-
-
-def is_target_member(name):
+def is_likely_supported_file(name):
     if name.startswith('classes') \
             or name.startswith('AndroidManifest.xml') \
-            or name.startswith('lib/'):
+            or name.startswith('lib/') \
+            or name.endswith('.so') \
+            or name.endswith('.dex') \
+            or name.endswith('.apk'):
         return True
     return False
 
 
-def do_yara(file_path, rules, timeout):
-    matches = rules.match(file_path, timeout=timeout)
-    return build_match_dict(matches)
-
-
-def scan_apk(apk_path, rules, timeout, output_json):
+def scan_apk(apk_path, timeout, output_json):
     td = None
     results = {}
     try:
         zf = zipfile.ZipFile(apk_path, 'r')
-        target_members = filter(lambda n: is_target_member(n), zf.namelist())
+        target_members = filter(lambda n: is_likely_supported_file(n), zf.namelist())
         td = tempfile.mkdtemp()
         zf.extractall(td, members=target_members)
         zf.close()
         for file_type, file_path in collect_files(td):
             entry_name = file_path.replace('{}/'.format(td), '')
             key_path = '{}!{}'.format(apk_path, entry_name)
-            match_dict = do_yara(file_path, rules, timeout)
-            if len(match_dict) > 0:
-                results[key_path] = match_dict
+            matches = rules.match(file_path, timeout)
+            if len(matches) > 0:
+                results[key_path] = matches
                 if not output_json:
-                    print_matches(key_path, match_dict)
+                    output.print_matches(key_path, matches)
     except Exception as e:
         tb = traceback.format_exc()
         logging.error("error extracting {}: {}\n{}".format(apk_path, e, tb))
 
     if td: shutil.rmtree(td)
     return results
-
-
-def get_json_output(results):
-    import pkg_resources
-    output = {
-        'apkid_version': pkg_resources.get_distribution('apkid').version,
-        'files': [],
-    }
-    for filename in results:
-        result = {
-            'filename': filename,
-            'results': results[filename],
-        }
-        output['files'].append(result)
-    return output
-
-
-def print_json_results(results):
-    output = get_json_output(results)
-    print(json.dumps(output))
-
-
-def scan(input, timeout, output_json):
-    rules = get_rules()
-    results = {}
-    for file_type, file_path in collect_files(input):
-        try:
-            match_dict = do_yara(file_path, rules, timeout)
-            if len(match_dict) > 0:
-                results[file_path] = match_dict
-                if not output_json:
-                    print_matches(file_path, match_dict)
-            if 'zip' == file_type:
-                apk_matches = scan_apk(file_path, rules, timeout, output_json)
-                results.update(apk_matches)
-        except yara.Error as e:
-            logging.error("error scanning: {}".format(e))
-    if output_json:
-        print_json_results(results)
-
-
-def scan_singly(input, timeout, output_dir):
-    rules = get_rules()
-    for file_type, file_path in collect_files(input):
-        results = {}
-        filename = os.path.basename(file_path)
-        out_file = os.path.join(output_dir, filename)
-        if os.path.exists(out_file):
-            continue
-        print("Processing: {}".format(file_path))
-        try:
-            match_dict = do_yara(file_path, rules, timeout)
-            if len(match_dict) > 0:
-                results[file_path] = match_dict
-            if 'zip' == file_type:
-                apk_matches = scan_apk(file_path, rules, timeout, True)
-                results.update(apk_matches)
-            if len(results) > 0:
-                if not os.path.exists(output_dir):
-                    os.makedirs(output_dir)
-                with open(out_file, 'w') as f:
-                    f.write(json.dumps(results))
-                print("Finished: {}".format(file_path))
-        except yara.Error as e:
-            logging.error("error scanning: {}".format(e))

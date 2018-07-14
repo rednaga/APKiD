@@ -20,12 +20,12 @@ python setup.py build --enable-dex install
 pip install apkid
 ```
 
-These extra steps are necessary until yara-python is updated with a version of Yara which includes the new, experimental DEX module.   
+These extra steps are necessary until yara-python is updated with a version of Yara which includes the new, experimental DEX module.
 
 ## Docker
 
 If installing is too complicated, you can just use [Docker](https://www.docker.com/community-edition)! Of course, this usage requires that you have git and docker installed on your machine.
- 
+
 Here's how to use Docker:
 
 ```bash

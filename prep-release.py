@@ -25,12 +25,11 @@
  requirements will be met.
 """
 
-import sys
-
-import fnmatch
 import os
-import yara
+import sys
 from codecs import open
+
+from apkid import rules
 
 
 def convert_readme():
@@ -42,25 +41,21 @@ def convert_readme():
     print("[*] Finished converting to README.rst ({} bytes)".format(len(rst)))
 
 
-def compile_rules():
-    rules_dir = 'apkid/rules/'
-    compiled_rules_path = os.path.join(rules_dir, 'rules.yarc')
-    yara_files = {}
-    for root, dirnames, filenames in os.walk(rules_dir):
-        for filename in fnmatch.filter(filenames, '*.yara'):
-            path = os.path.join(root, filename)
-            yara_files[path] = path
-
-    print("[*] Compiling {} Yara rule files".format(len(yara_files)))
-    rules = yara.compile(filepaths=yara_files)
-    rules.save(compiled_rules_path)
-
-    count = sum(1 for _ in rules)
-    print("[*] Saved {} rules to {}".format(count, compiled_rules_path))
-
-
 if __name__ == '__main__':
-    compile_rules()
+    print("[*] Compiling Yara files")
+    rules_count = rules.compile()
+    print("[*] Saved {} rules to {}".format(rules_count, rules.RULES_PATH))
+    tag_counts = {}
+    for rule in rules.load():
+        for t in rule.tags:
+            if t not in tag_counts:
+                tag_counts[t] = 1
+            else:
+                tag_counts[t] += 1
+    print("Tag counts:")
+    for tag in sorted(tag_counts.keys()):
+        count = tag_counts[tag]
+        print("\t{}: {}".format(tag, count))
 
     if len(sys.argv) > 1:
         if sys.argv[1] == 'register':
@@ -69,4 +64,4 @@ if __name__ == '__main__':
         if sys.argv[1] == 'readme':
             convert_readme()
 
-print("[*] Done.")
+    print("[*] Finished prepping.")

@@ -27,34 +27,48 @@
 """
 
 __title__ = 'apkid'
-__version__ = '1.1.0'
+__version__ = '1.2.0'
 __author__ = 'Caleb Fenton & Tim Strazzere'
 __license__ = 'GPL & Commercial'
 __copyright__ = 'Copyright (C) 2018 RedNaga'
 
 import argparse
+import os
 
 from . import apkid
 
 
-def main():
+def get_parser():
+    formatter = lambda prog: argparse.HelpFormatter(prog, max_help_position=50, width=100)
+
     parser = argparse.ArgumentParser(
-        description="APKiD - Android Application Identifier v{}".format(__version__))
+        description="APKiD - Android Application Identifier v{}".format(__version__),
+        formatter_class=formatter
+    )
     parser.add_argument('input', metavar='FILE', type=str, nargs='*',
                         help="apk, dex, or directory")
     parser.add_argument('-j', '--json', action='store_true',
-                        help="output results in JSON format", )
+                        help="output scan results in JSON format", )
     parser.add_argument('-t', '--timeout', type=int, default=30,
                         help="Yara scan timeout (in seconds)")
     parser.add_argument('-o', '--output-dir', metavar='DIR', type=str,
-                        help="write individual JSON results to this directory")
+                        help="write individual results to this directory (implies --json)")
+    parser.add_argument('-q', '--quiet', action='store_true',
+                        help="suppress extraneous output")
+    return parser
+
+
+def main():
+    parser = get_parser()
     args = parser.parse_args()
 
     if not args.json:
-        print("[+] APKiD %s :: from RedNaga :: rednaga.io" % __version__)
+        print("[+] APKiD {} :: from RedNaga :: rednaga.io".format(__version__))
 
     for input in args.input:
         if args.output_dir:
-            apkid.scan_singly(input, args.timeout, args.output_dir)
-        else:
-            apkid.scan(input, args.timeout, args.json)
+            args.json = True
+            if not os.path.exists(args.output_dir):
+                os.makedirs(args.output_dir)
+
+        apkid.scan(input, args.timeout, args.json, args.output_dir, args.quiet)
