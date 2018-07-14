@@ -39,7 +39,7 @@ git clone https://github.com/rednaga/APKiD
 cd APKiD/
 docker build . -t rednaga:apkid
 docker/apkid.sh ~/reverse/targets/android/example/example.apk
-[+] APKiD 1.2.0 :: from RedNaga :: rednaga.io
+[+] APKiD 1.2.1 :: from RedNaga :: rednaga.io
 [*] example.apk!classes.dex
  |-> compiler : dx
 ```
@@ -49,7 +49,7 @@ docker/apkid.sh ~/reverse/targets/android/example/example.apk
 ```
 usage: apkid [-h] [-j] [-t TIMEOUT] [-o DIR] [-q] [FILE [FILE ...]]
 
-APKiD - Android Application Identifier v1.2.0
+APKiD - Android Application Identifier v1.2.1
 
 positional arguments:
   FILE                           apk, dex, or directory
