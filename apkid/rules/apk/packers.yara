@@ -90,23 +90,86 @@ rule secneo : packer
 
 rule dexprotector : packer
 {
+
  /**
   * DexProtector v6.x.x :- Demo, Standard, Business Edition
   **/
+
   meta:
-    author = "Jasi2169"
+    author      = "Jasi2169 and Eduardo Novella"
     description = "DexProtector"
-    url = "https://dexprotector.com"
+    url         = "https://dexprotector.com/"
 
   strings:
-    $encrptlib = "assets/dp.arm.so.dat"
-    $encrptlib1 = "assets/dp.arm-v7.so.dat"
-    $encrptlib2 = "assets/dp.arm-v8.so.dat"
-    $encrptlib3 = "assets/dp.x86.so.dat"
+    $encrptlib_1 = "assets/dp.arm.so.dat"
+    $encrptlib_2 = "assets/dp.arm-v7.so.dat"
+    $encrptlib_3 = "assets/dp.arm-v8.so.dat"
+    $encrptlib_4 = "assets/dp.x86.so.dat"
+    $encrptlib_5 = "assets/dp.x86_64.so.dat"
+    $encrptlib_6 = "assets/classes.dex.dat"
+
     $encrptcustom = "assets/dp.mp3"
 
   condition:
-    is_apk and any of ($encrptlib, $encrptlib1, $encrptlib2, $encrptlib3) and $encrptcustom
+    is_apk and 1 of ($encrptlib_*) and $encrptcustom
+}
+
+rule dexprotector_a : packer
+{
+ /**
+ * DexProtector old version possibly
+ **/
+
+  meta:
+    author      = "Eduardo Novella"
+    description = "DexProtector"
+    url         = "https://dexprotector.com/"
+    example     = "242e0ee59de46c7648b7b38efeb8c088ae3dc8c5c8fe9fbd5e707b098ab8f404"
+
+  strings:
+    $encrptlib_1 = "assets/dp.arm-v7.art.kk.so"
+    $encrptlib_2 = "assets/dp.arm-v7.art.l.so"
+    $encrptlib_3 = "assets/dp.arm-v7.dvm.so"
+    $encrptlib_4 = "assets/dp.arm.art.kk.so"
+    $encrptlib_5 = "assets/dp.arm.art.l.so"
+    $encrptlib_6 = "assets/dp.arm.dvm.so"
+    $encrptlib_7 = "assets/dp.x86.art.kk.so"
+    $encrptlib_8 = "assets/dp.x86.art.l.so"
+    $encrptlib_9 = "assets/dp.x86.dvm.so"
+
+    $encrptcustom = "assets/dp.mp3"
+
+  condition:
+    is_apk and 2 of ($encrptlib_*) and $encrptcustom
+}
+
+rule dexprotector_b : packer
+{
+ /**
+ * DexProtector new version possibly
+ **/
+
+  meta:
+    author      = "Eduardo Novella"
+    description = "DexProtector"
+    url         = "https://dexprotector.com/"
+    example     = "dca2a0bc0f2605072b9b48579e73711af816b0fa1108b825335d2d1f2418e2a7"
+
+  strings:
+    //              assets/com.package.name.arm.so.dat
+    $encrptlib_1 = /assets\/[A-Za-z0-9.]{2,50}\.arm\-v7\.so\.dat/
+    $encrptlib_2 = /assets\/[A-Za-z0-9.]{2,50}\.arm\-v8\.so\.dat/
+    $encrptlib_3 = /assets\/[A-Za-z0-9.]{2,50}\.arm\.so\.dat/
+    $encrptlib_4 = /assets\/[A-Za-z0-9.]{2,50}\.dex\.dat/
+    $encrptlib_5 = /assets\/[A-Za-z0-9.]{2,50}\.x86\.so\.dat/
+    $encrptlib_6 = /assets\/[A-Za-z0-9.]{2,50}\.x86\_64\.so\.dat/
+
+    $encrptcustom = /assets\/[A-Za-z0-9.]{2,50}\.mp3/
+
+  condition:
+    is_apk and 2 of ($encrptlib_*) and $encrptcustom and
+    not dexprotector_a and
+    not dexprotector
 }
 
 rule apkprotect : packer
@@ -197,6 +260,23 @@ rule jiagu : packer
 
   condition:
     is_apk and ($main_lib or $art_lib)
+}
+
+rule jiagu_a : packer
+{
+    meta:
+        description = "Jiagu (ApkToolPlus)"
+        example     = "684baab16344dc663b7ae84dd1f8d6a39bfb480a977ad581a0a6032f6e437218"
+        url         = "https://github.com/linchaolong/ApkToolPlus/tree/master/lib.JiaGu/src/com/linchaolong/apktoolplus/jiagu"
+        author      = "Eduardo Novella"
+
+    strings:
+        $a = "assets/jiagu_data.bin"
+        $b = "assets/sign.bin"
+        $c = "libapktoolplus_jiagu.so"
+
+    condition:
+        is_apk and all of them
 }
 
 rule qdbh_packer : packer
@@ -415,3 +495,40 @@ rule yidun : packer
   condition:
     is_apk and (#lib > 1) or ($anti_trick and $entry_point and $jni_func)
 }
+
+rule apkpacker : packer
+{
+    meta:
+        description = "ApkPacker"
+        example     = "087af5aacab8fc8bc7b1dcb7a138c3552d175c74b496056893299bc437422f95"
+        author      = "Eduardo Novella"
+
+    strings:
+        $a = "assets/ApkPacker/apkPackerConfiguration"
+        $b = "assets/ApkPacker/classes.dex"
+        // These may be related, but not enough samples to be sure
+        //$c = "assets/config.txt"
+        //$d = "assets/sht.txt"
+
+    condition:
+        is_apk and all of them
+}
+
+rule chornclickers : packer
+{
+
+  meta:
+    // This has no name so we made one up from Ch-china,-orn-porn and -clickers
+    description = "ChornClickers"
+    url         = "https://github.com/rednaga/APKiD/issues/93"
+    example     = "0c4a26d6b27986775c9c58813407a737657294579b6fd37618b0396d90d3efc3"
+    author      = "Eduardo Novella"
+
+  strings:
+    $a = "lib/armeabi/libhdus.so"
+    $b = "lib/armeabi/libwjus.so"
+
+  condition:
+    is_apk and all of them
+}
+
