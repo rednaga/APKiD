@@ -48,7 +48,7 @@ if __name__ == '__main__':
     print("[*] Saved {} rules to {}".format(rules_count, rules_path))
 
     tag_counts = {}
-    for rule in rules.RULES:
+    for rule in rules.load():
         for t in rule.tags:
             if t not in tag_counts:
                 tag_counts[t] = 1

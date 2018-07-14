@@ -32,7 +32,14 @@ import yara
 RULES_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'rules')
 RULES_PATH = os.path.join(RULES_DIR, 'rules.yarc')
 RULES_EXT = '.yara'
-RULES = yara.load(RULES_PATH)
+RULES = None
+
+
+def load():
+    global RULES
+    if not RULES:
+        RULES = yara.load(RULES_PATH)
+    return RULES
 
 
 def collect_yara_files():
@@ -62,6 +69,7 @@ def sha256():
 
 
 def match(file_path, timeout):
+    load()
     matches = RULES.match(file_path, timeout=timeout)
     return build_match_dict(matches)
 
