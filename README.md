@@ -11,16 +11,20 @@ For more information on what this tool can be used for check out:
 
 Unfortunately, you can't just `pip install` APKiD since it depends on RedNaga's custom fork of [yara-python](https://github.com/rednaga/yara-python-1).
 
-Here's how to install:
+First, install our yara-python fork:
 
 ```bash
 git clone --recursive https://github.com/rednaga/yara-python-1 yara-python
 cd yara-python
 python setup.py build --enable-dex install
+```
+
+Then, you can install apkid normally:
+```bash
 pip install apkid
 ```
 
-These extra steps are necessary until yara-python is updated with a version of Yara which includes the new, experimental DEX module.
+This extra step is necessary until yara-python is updated with a version of Yara which includes the new, experimental DEX module.
 
 ## Docker
 
@@ -33,7 +37,7 @@ git clone https://github.com/rednaga/APKiD
 cd APKiD/
 docker build . -t rednaga:apkid
 docker/apkid.sh ~/reverse/targets/android/example/example.apk
-[+] APKiD 1.1.0 :: from RedNaga :: rednaga.io
+[+] APKiD 1.2.0 :: from RedNaga :: rednaga.io
 [*] example.apk!classes.dex
  |-> compiler : dx
 ```
@@ -41,20 +45,19 @@ docker/apkid.sh ~/reverse/targets/android/example/example.apk
 # Usage
 
 ```
-usage: apkid [-h] [-j] [-t TIMEOUT] [-o DIR] [FILE [FILE ...]]
+usage: apkid [-h] [-j] [-t TIMEOUT] [-o DIR] [-q] [FILE [FILE ...]]
 
-APKiD - Android Application Identifier v1.1.0
+APKiD - Android Application Identifier v1.2.0
 
 positional arguments:
-  FILE                  apk, dex, or directory
+  FILE                           apk, dex, or directory
 
 optional arguments:
-  -h, --help            show this help message and exit
-  -j, --json            output results in JSON format
-  -t TIMEOUT, --timeout TIMEOUT
-                        Yara scan timeout (in seconds)
-  -o DIR, --output-dir DIR
-                        write individual JSON results to this directory
+  -h, --help                     show this help message and exit
+  -j, --json                     output scan results in JSON format
+  -t TIMEOUT, --timeout TIMEOUT  Yara scan timeout (in seconds)
+  -o DIR, --output-dir DIR       write individual results to this directory (implies --json)
+  -q, --quiet                    suppress extraneous output
 ```
 
 # Submitting New Packers / Compilers / Obfuscators
@@ -100,3 +103,18 @@ pip install -e .[dev] --user
 ```
 
 If you update any of the rules, be sure to run `prep-release.py` to recompile them.
+
+# For Maintainers
+
+This section is for package maintainers.
+
+To update the PyPI package:
+
+```bash
+./prep-release.py readme
+rm dist/*
+python setup.py sdist bdist_wheel
+twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+```
+
+For more information see [Packaging Projects](https://packaging.python.org/tutorials/packaging-projects/).
