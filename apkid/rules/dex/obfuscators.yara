@@ -110,13 +110,12 @@ rule bitwise_antiskid : obfuscator
     any of them
 }
 
-
 rule arxan : obfuscator
 {
   meta:
     description = "Arxan"
     url         = "https://www.arxan.com/products/application-protection-mobile/"
-    example     = "7bd1139b5f860d48e0c35a3f117f980564f45c177a6ef480588b5b5c8165f47e"
+    sample     = "7bd1139b5f860d48e0c35a3f117f980564f45c177a6ef480588b5b5c8165f47e"
 
   strings:
     // Obfuscated Lpackage/class/: "L([a-z]\1{5}\/[a-z]{6}\/".
@@ -145,7 +144,7 @@ rule arxan_multidex : obfuscator
   meta:
     description = "Arxan (multidex)"
     url         = "https://www.arxan.com/products/application-protection-mobile/"
-    example     = "9b2a978a937293d6cb93439e0f819b4e044a3fad80dde92dec9b67e419278b5d"
+    sample     = "9b2a978a937293d6cb93439e0f819b4e044a3fad80dde92dec9b67e419278b5d"
 
   strings:
     // Obfuscated Lpackage/class/: "L([a-z]\1{5}\/[a-z]{6}\/".
@@ -168,5 +167,3 @@ rule arxan_multidex : obfuscator
     2 of ($m*) and
     not arxan
 }
-
-

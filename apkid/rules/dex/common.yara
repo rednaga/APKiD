@@ -25,7 +25,7 @@
  *
  **/
 
-private rule is_dex
+private rule is_dex : internal
 {
   meta:
     description = "Resembles a DEX file"

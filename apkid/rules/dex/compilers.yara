@@ -28,21 +28,27 @@
 import "dex"
 include "common.yara"
 
-private rule unsorted_string_table
+private rule unsorted_string_pool : internal
 {
+  meta:
+    description = "String pool in non-standard order"
+
   condition:
     /*
      * DEX format requires string IDs to be sorted according to the data at their offsets but the actual
      * ordering of the string pool is undefined. Dexlib (smali/apktool) 1.x sorts strings by class and
-     * proximity. DX sorts strings in the same order as the string table.
+     * proximity. DX sorts the string pool in the same order as the string table.
      *
      * Note: It's probably only necessary to check the first several strings.
      */
     for any i in (0..dex.header.string_ids_size - 1) : (dex.string_ids[i].offset + dex.string_ids[i].size + 1 < dex.string_ids[i + 1].offset)
 }
 
-private rule dexlib2_map_type_order
+private rule dexlib2_map_type_order : internal
 {
+  meta:
+    description = "dexlib2 map_list type order"
+
   condition:
     /*
      * The map_list types are in different orders for DX, dexmerge, and dexlib (1 and 2 are the same)
@@ -50,8 +56,11 @@ private rule dexlib2_map_type_order
     dex.map_list.map_item[7].type == 0x2002 // TYPE_STRING_DATA_ITEM
 }
 
-private rule null_interfaces
+private rule null_interfaces : internal
 {
+  meta:
+    description = "null interfaces offset"
+
   condition:
     /*
      * Dexlib2 adds a non-zero interfaces_offset to every class_def_item, even if the class doesn't implement an
@@ -62,8 +71,11 @@ private rule null_interfaces
     for any i in (0..dex.header.class_defs_size) : (dex.class_defs[i].interfaces_offset > 0 and uint32(dex.class_defs[i].interfaces_offset) == 0)
 }
 
-private rule dx_map_type_order
+private rule dx_map_type_order : internal
 {
+  meta:
+    description = "dx map_list type order"
+
   condition:
     /*
      * The map_list types are in different orders for DX, dexmerge, and dexlib (1 and 2 are the same)
@@ -74,8 +86,11 @@ private rule dx_map_type_order
     dex.map_list.map_item[7].type == 0x2001)    // TYPE_CODE_ITEM
 }
 
-private rule dexmerge_map_type_order
+private rule dexmerge_map_type_order : internal
 {
+  meta:
+    description = "dexmerge map_list type order"
+
   condition:
     /*
      * The map_list types are in different orders for DX, dexmerge, and dexlib (1 and 2 are the same)
@@ -135,9 +150,11 @@ rule jack_5x : compiler
     is_dex and $jack_emitter
 }
 
-private rule has_jack_anon_methods
+private rule has_jack_anon_methods : internal
 {
-  // https://calebfenton.github.io/2016/12/01/building-with-and-detecting-jack/
+  meta:
+    description = "has Jack compiler anonymous methods"
+    url = "https://calebfenton.github.io/2016/12/01/building-with-and-detecting-jack/"
   strings:
     $anon_set = {00 05 2D 73 65 74 30 00} // -set0
     $anon_get = {00 05 2D 67 65 74 30 00} // -get0
@@ -147,8 +164,11 @@ private rule has_jack_anon_methods
     2 of ($anon_*)
 }
 
-private rule jack_emitter
+private rule jack_emitter : internal
 {
+  meta:
+    description = "has Jack compiler emitter string"
+
   strings:
     // "\0<len>emitter: jack-?.?\0"
     $jack_emitter = {00 1? 65 6D 69 74 74 65 72 3A 20 6A 61 63 6B 2D ?? 2E [1-3] 00}
@@ -157,9 +177,12 @@ private rule jack_emitter
     $jack_emitter or has_jack_anon_methods
 }
 
-private rule has_javac_anon_methods
+private rule has_javac_anon_methods : internal
 {
-  // https://calebfenton.github.io/2016/12/01/building-with-and-detecting-jack/
+  meta:
+    description = "has Javac compiler anonymous methods"
+    url = "https://calebfenton.github.io/2016/12/01/building-with-and-detecting-jack/"
+
   strings:
     $anon_set = {00 0A 61 63 63 65 73 73 24 30 30 32 00} // access$002
     $anon_get = {00 0A 61 63 63 65 73 73 24 30 30 30 00} // access$000
@@ -188,7 +211,7 @@ rule dexlib1 : compiler
     description = "dexlib 1.x"
 
   condition:
-    unsorted_string_table
+    unsorted_string_pool
 }
 
 rule dexlib2 : compiler
@@ -243,4 +266,3 @@ rule dexmerge : manipulator
   condition:
     dexmerge_map_type_order
 }
-

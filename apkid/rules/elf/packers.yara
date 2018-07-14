@@ -74,7 +74,8 @@ rule upx_sharedlib_unmodifed : packer
     and $upx in (filesize - 50 .. filesize) and upx_stub
 }
 
-rule upx_elf_3_94 : packer {
+rule upx_elf_3_94 : packer
+{
   meta:
     description = "UPX 3.94 (unmodified)"
 
@@ -85,7 +86,8 @@ rule upx_elf_3_94 : packer {
     upx_unmodified and $copyright
 }
 
-rule upx_elf_3_93 : packer {
+rule upx_elf_3_93 : packer
+{
   meta:
     description = "UPX 3.93 (unmodified)"
 
@@ -317,7 +319,7 @@ rule promon : packer
   meta:
     description = "Promon Shield"
     info        = "https://promon.co/"
-    example     = "6a3352f54d9f5199e4bf39687224e58df642d1d91f1d32b069acd4394a0c4fe0"
+    sample     = "6a3352f54d9f5199e4bf39687224e58df642d1d91f1d32b069acd4394a0c4fe0"
 
   strings:
     $a = "libshield.so"
@@ -333,5 +335,3 @@ rule promon : packer
     ($a and $b and $c and $d) and
     2 of ($s*)
 }
-
-

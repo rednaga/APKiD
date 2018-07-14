@@ -28,8 +28,11 @@
 import "dex"
 include "common.yara"
 
-private rule uses_build_class
+private rule uses_build_class : internal
 {
+  meta:
+    description = "References android.os.Build class"
+
   strings:
     // Landroid/os/Build;
     $a = {00 12 4C 61 6E 64 72 6F 69 64 2F 6F 73 2F 42 75 69 6C 64 3B 00}
@@ -38,8 +41,10 @@ private rule uses_build_class
     and $a
 }
 
-private rule uses_debug_class
+private rule uses_debug_class : internal
 {
+  meta:
+    description = "References android.os.Debug class"
 
   strings:
     // Landroid/os/Debug;
@@ -49,8 +54,11 @@ private rule uses_debug_class
     and $a
 }
 
-private rule uses_telephony_class
+private rule uses_telephony_class : internal
 {
+  meta:
+    description = "References android.telephony.TelephonyManager class"
+
   strings:
     // Landroid/telephony/TelephonyManager;
     $a = {00 24 4C 61 6E 64 72 6F 69 64 2F 74 65 6C 65 70 68 6F 6E 79 2F 54
