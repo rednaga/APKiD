@@ -201,7 +201,7 @@ rule aamo_str_enc : obfuscator
     $opcodes_nops = {
         22 ?? ?? ??                                 //new-instance v? Ljava/lang/String;
         ( 00 00 | 00 00 00 00 | 00 00 00 00 00 00 )
-        12 22                                       //const/4 v2, 0x2 (the register and constant never change)
+        12 ?2                                       //const/4 v2, 0x2 (the register and constant never change)
         ( 00 00 | 00 00 00 00 | 00 00 00 00 00 00 )
         1a ?? ?? ??                                 //const-string v?, _ref_to_string_
         ( 00 00 | 00 00 00 00 | 00 00 00 00 00 00 )
@@ -218,12 +218,12 @@ rule aamo_str_enc : obfuscator
         ( 00 00 | 00 00 00 00 | 00 00 00 00 00 00 )
         70 ?? ?? ?? ?? ??                           //invoke-direct {v?, v?, v?}, Ljava/lang/String.<init>([BLjava/lang/String;)
         71 ?? ?? ?? ?? ??                           //invoke-static {v?, v?}, Landroid/content/res/_RANDOM_CLASS_NAME._RANDOM_METHOD_NAME_(Ljava/lang/String;)Ljava/lang/String;
-        0c 04                                       //move-result-object v4
+        0c ??                                       //move-result-object v4
     }
 
     $opcodes = {
         22 ?? ?? ??         //new-instance v? Ljava/lang/String;
-        12 22               //const/4 v2, 0x2 (the register and constant never change)
+        12 ?2               //const/4 v2, 0x2 (the register and constant never change)
         1a ?? ?? ??         //const-string v?, _ref_to_string_
         71 ?? ?? ?? ?? ??   //invoke-static {v?, v?}, Landroid/content/res/_RANDOM_CLASS_NAME.getStorageEncryption(ILjava/lang/String;)Ljavax/crypto/Cipher;
         0c 02               //move-result-object v2 (the register never changes)
@@ -234,7 +234,7 @@ rule aamo_str_enc : obfuscator
         1a ?? ?? ??         //const-string v?, _CONST_STR_
         70 ?? ?? ?? ?? ??   //invoke-direct {v?, v?, v?}, Ljava/lang/String.<init>([BLjava/lang/String;)
         71 ?? ?? ?? ?? ??   //invoke-static {v?, v?}, Landroid/content/res/_RANDOM_CLASS_NAME._RANDOM_METHOD_NAME_(Ljava/lang/String;)Ljava/lang/String;
-        0c 04               //move-result-object v4
+        0c ??               //move-result-object v4
     }
 
     $a = { 00 0f 63 6f 6e 76 65 72 74 54 6f 53 74 72 69 6e 67 00 } // convertToString
