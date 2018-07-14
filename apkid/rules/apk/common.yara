@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017  RedNaga. http://rednaga.io
+ * Copyright (C) 2018  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -25,7 +25,7 @@
  *
  **/
 
-private rule is_apk
+private rule is_apk : internal
 {
   meta:
     description = "Resembles an APK that is likely not corrupt"
@@ -38,21 +38,23 @@ private rule is_apk
     $zip_head at 0 and $manifest and #manifest >= 2
 }
 
-private rule is_signed_apk
+private rule is_signed_apk : internal
 {
   meta:
     description = "Resembles a signed APK that is likely not corrupt"
 
   strings:
     $meta_inf = "META-INF/"
-    $rsa = ".RSA"
-    $dsa = ".DSA"
+    $ext_rsa = ".RSA"
+    $ext_dsa = ".DSA"
+    $ext_ec = ".EC"
 
   condition:
-    is_apk and for all of ($meta_inf*) : ($rsa or $dsa in (@ + 9..@ + 9 + 100))
+    is_apk and
+    for all of ($meta_inf*) : ($ext_rsa or $ext_dsa or $ext_ec in (@ + 9..@ + 9 + 100))
 }
 
-private rule is_unsigned_apk
+private rule is_unsigned_apk : internal
 {
   meta:
     description = "Resembles an unsigned APK that is likely not corrupt"

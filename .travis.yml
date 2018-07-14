@@ -1,0 +1,18 @@
+language: python
+dist: trusty
+cache:
+  pip: true
+#  directories:
+#    - $HOME/.cache/samples
+python:
+  - "2.7"
+  - "3.6"
+install:
+  - git clone --recursive https://github.com/rednaga/yara-python-1 yara-python
+  - cd yara-python
+  - CFLAGS="-std=gnu99" python setup.py build --enable-dex install
+  - cd ../
+  - pip install -e .
+script:
+  - ./prep-release.py | true
+  - pytest

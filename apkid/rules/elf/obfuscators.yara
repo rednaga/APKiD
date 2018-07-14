@@ -29,13 +29,12 @@
 import "elf"
 include "common.yara"
 
-
 rule ollvm_v3_4 : obfuscator
 {
   meta:
     description = "Obfuscator-LLVM version 3.4"
     url         = "https://github.com/obfuscator-llvm/obfuscator/wiki"
-    example     = "cd16ad33bf203dbaa9add803a7a0740e3727e8e60c316d33206230ae5b985f25"
+    sample      = "cd16ad33bf203dbaa9add803a7a0740e3727e8e60c316d33206230ae5b985f25"
     author      = "Eduardo Novella"
 
   strings:
@@ -47,13 +46,12 @@ rule ollvm_v3_4 : obfuscator
     all of them
 }
 
-
 rule ollvm_v3_5 : obfuscator
 {
   meta:
     description = "Obfuscator-LLVM version 3.5"
     url         = "https://github.com/obfuscator-llvm/obfuscator/wiki"
-    example     = "664214969f1b94494a8fc0491407f4440032fc5c922eb0664293d0440c52dbe7"
+    sample      = "664214969f1b94494a8fc0491407f4440032fc5c922eb0664293d0440c52dbe7"
     author      = "Eduardo Novella"
 
   strings:
@@ -65,13 +63,12 @@ rule ollvm_v3_5 : obfuscator
     all of them
 }
 
-
 rule ollvm_v3_6_1 : obfuscator
 {
   meta:
     description = "Obfuscator-LLVM version 3.6.1"
     url         = "https://github.com/obfuscator-llvm/obfuscator/wiki"
-    example     = "d84b45856b5c95f7a6e96ab0461648f22ad29d1c34a8e85588dad3d89f829208"
+    sample      = "d84b45856b5c95f7a6e96ab0461648f22ad29d1c34a8e85588dad3d89f829208"
     author      = "Eduardo Novella"
 
   strings:
@@ -83,13 +80,12 @@ rule ollvm_v3_6_1 : obfuscator
     all of them
 }
 
-
 rule ollvm_v4_0 : obfuscator
 {
   meta:
     description = "Obfuscator-LLVM version 4.0"
     url         = "https://github.com/obfuscator-llvm/obfuscator/wiki"
-    example     = "aaba570388d0fe25df45480ecf894625be7affefaba24695d8c1528b974c00df"
+    sample      = "aaba570388d0fe25df45480ecf894625be7affefaba24695d8c1528b974c00df"
     author      = "Eduardo Novella"
 
   strings:
@@ -101,13 +97,12 @@ rule ollvm_v4_0 : obfuscator
     all of them
 }
 
-
 rule ollvm_v6_0_strenc : obfuscator
 {
   meta:
     description = "Obfuscator-LLVM version 6.0 (string encryption)"
     url         = "https://github.com/obfuscator-llvm/obfuscator/wiki"
-    example     = "f3a2e6c57def9a8b4730965dd66ca0f243689153139758c44718b8c5ef9c1d17"
+    sample      = "f3a2e6c57def9a8b4730965dd66ca0f243689153139758c44718b8c5ef9c1d17"
     author      = "Eduardo Novella"
 
   strings:
@@ -120,7 +115,6 @@ rule ollvm_v6_0_strenc : obfuscator
   condition:
     all of them
 }
-
 
 rule ollvm_v6_0 : obfuscator
 {
@@ -138,7 +132,6 @@ rule ollvm_v6_0 : obfuscator
   condition:
     all of them and not ollvm_v6_0_strenc
 }
-
 
 rule ollvm : obfuscator
 {
@@ -162,7 +155,6 @@ rule ollvm : obfuscator
     not ollvm_v6_0_strenc
 }
 
-
 rule firehash : obfuscator
 {
   meta:
@@ -172,13 +164,13 @@ rule firehash : obfuscator
 
     // original   : https://firehash.grayhash.com/static/sample/dodocrackme_original.apk
     // firehashed : https://firehash.grayhash.com/static/sample/dodocrackme_obfuscated.apk
-    example1   = "38e2170a5f272ecae97dddb0dac0c1f39f7f71a4639477764a9154557106dd94"
+    sample   = "38e2170a5f272ecae97dddb0dac0c1f39f7f71a4639477764a9154557106dd94"
 
     // original : 6352f6d0cdc85a42de3ccfd9226dfec28280aa835227acc507043a4403b7e700
-    example2   = "c98af9a777d9633559b7903e21b61b845f7e1766afa74ef85e3380f41265e6b5"
+    sample2   = "c98af9a777d9633559b7903e21b61b845f7e1766afa74ef85e3380f41265e6b5"
 
     // original : 727be6789e8f4f6eab66288f957b58800e47a4bacebacc0dd700e8f9a374f116
-    example3   = "423dc9866d1c5f32cabfeb254030d83e11db4d807394a8ff09be47d8bfc38f18"
+    sample3   = "423dc9866d1c5f32cabfeb254030d83e11db4d807394a8ff09be47d8bfc38f18"
 
   strings:
     // Library below heuristic is found inside of is normally named "libaurorabridge.so"

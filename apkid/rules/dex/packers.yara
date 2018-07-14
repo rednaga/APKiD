@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017  RedNaga. http://rednaga.io
+ * Copyright (C) 2018  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -31,7 +31,7 @@ rule pangxie_dex : packer
 {
   meta:
     description = "PangXie"
-    example = "ea70a5b3f7996e9bfea2d5d99693195fdb9ce86385b7116fd08be84032d43d2c"
+    sample = "ea70a5b3f7996e9bfea2d5d99693195fdb9ce86385b7116fd08be84032d43d2c"
 
   strings:
     // Lcom/merry/wapper/WapperApplication;
@@ -71,17 +71,14 @@ rule medusah_appsolid_dex : packer
     is_dex and $loader and $main_activity
 }
 
-
-
 rule apkguard_dex : packer
 {
   meta:
     description = "APKGuard"
     url         = "http://apkguard.io/"
-    example     = "d9c98fff427646883ecb457fc2e9d2a8914ba7a9ee194735e0a18f56baa26cca"
+    sample     = "d9c98fff427646883ecb457fc2e9d2a8914ba7a9ee194735e0a18f56baa26cca"
 
   strings:
-
     $attachBaseContextOpcodes = {
         120b            // const/4 v11, #int 0 // #0
         6f20 0100 fe00  // invoke-super {v14, v15}, Landroid/app/Application;.attachBaseContext:(Landroid/content/Context;)V // method@0001
@@ -150,15 +147,12 @@ rule apkguard_dex : packer
     is_dex and $attachBaseContextOpcodes
 }
 
-
-
 rule cryptoshell_dex : packer
 {
   meta:
     description = "CryptoShell"
     url         = "http://cryptoshell.io"
-    example     = "d6745c1533b440c93f7bdfbb106470043b23aafdf91506c52332ed192d7b7003"
-
+    sample     = "d6745c1533b440c93f7bdfbb106470043b23aafdf91506c52332ed192d7b7003"
 
   strings:
 
@@ -224,11 +218,28 @@ rule cryptoshell_dex : packer
         0d08            // move-exception v8
         6e10 ??00 0800  // invoke-virtual {v8}, Ljava/lang/Exception;.printStackTrace:()V // method@000f
         28fb            // goto 0073 // -0005
-}
+    }
 
   condition:
     is_dex and
     $attachBaseContextOpcodes and
     not apkguard_dex
+}
 
+
+rule jar_pack01 : packer
+{
+  meta:
+    // Unknown name, made this one up
+    description = "jar_pack01"
+    sample     = "faf1e85f878ea52a3b3fbb67126132b527f509586706f242f39b8c1fdb4a2065"
+
+  strings:
+    $pre_jar  = { 00 6F 6E 43 72 65 61 74 65 00 28 29 56 00 63 6F 6D 2F 76 } // .onCreate.()V.com/v
+    $jar_data = { 2E 6A 61 72 00 2F 64 61 74 61 2F 64 61 74 61 2F 00 2F } // .jar./data/data
+    $post_jar = { 2E 6A 61 72 00 77 00 6A 61 76 61 2F 75 74 69 6C 2F 4D 61 70 00 67 65 74 49 6E 74 00 } // .jar.w.java/util/Map.getInt.
+
+  condition:
+    is_dex and
+    ($pre_jar and $jar_data and $post_jar)
 }

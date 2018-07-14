@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017  RedNaga. http://rednaga.io
+ * Copyright (C) 2018  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -110,13 +110,12 @@ rule bitwise_antiskid : obfuscator
     any of them
 }
 
-
 rule arxan : obfuscator
 {
   meta:
     description = "Arxan"
     url         = "https://www.arxan.com/products/application-protection-mobile/"
-    example     = "7bd1139b5f860d48e0c35a3f117f980564f45c177a6ef480588b5b5c8165f47e"
+    sample      = "7bd1139b5f860d48e0c35a3f117f980564f45c177a6ef480588b5b5c8165f47e"
     author      = "Eduardo Novella"
 
   strings:
@@ -140,13 +139,12 @@ rule arxan : obfuscator
     6 of ($m*)
 }
 
-
 rule arxan_multidex : obfuscator
 {
   meta:
     description = "Arxan (multidex)"
     url         = "https://www.arxan.com/products/application-protection-mobile/"
-    example     = "9b2a978a937293d6cb93439e0f819b4e044a3fad80dde92dec9b67e419278b5d"
+    sample      = "9b2a978a937293d6cb93439e0f819b4e044a3fad80dde92dec9b67e419278b5d"
     author      = "Eduardo Novella"
 
   strings:
@@ -191,10 +189,10 @@ rule allatori_demo : obfuscator
 rule aamo_str_enc : obfuscator
 {
   meta:
-    description = "AAMO (String decryption function)"
+    description = "AAMO"
     author = "P0r0"
     url = "https://github.com/necst/aamo"
-    example1 = "c1ef860af0e168f924663630ed3b61920b474d0c8b10e2bde6bfd3769dbd31a8"
+    example = "c1ef860af0e168f924663630ed3b61920b474d0c8b10e2bde6bfd3769dbd31a8"
     example2 = "eb0d4e1ba2e880749594eb8739e65aa21b6f7b43798f04b6681065b396c15a78"
 
   strings:
@@ -243,4 +241,3 @@ rule aamo_str_enc : obfuscator
   condition:
     1 of ($opcodes*) and all of ($a, $b)
 }
-

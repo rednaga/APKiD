@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017  RedNaga. http://rednaga.io
+ * Copyright (C) 2018  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -30,8 +30,8 @@ import "elf"
 rule check_qemu_entropy : anti_vm
 {
     meta:
-      // https://github.com/Fuzion24/AndroidHostileEnvironmentDetection/blob/master/app/jni/emudetect.c
       description = "Checks for QEMU entropy"
+      url = "https://github.com/Fuzion24/AndroidHostileEnvironmentDetection/blob/master/app/jni/emudetect.c"
 
     strings:
       $a = "atomicallyIncreasingGlobalVarThread"
