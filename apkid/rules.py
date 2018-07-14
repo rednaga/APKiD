@@ -70,10 +70,10 @@ def build_match_dict(matches):
     results = {}
     for m in matches:
         tags = ', '.join(sorted(m.tags))
-        value = m.meta.get('description', m)
+        description = m.meta.get('description', m)
         if tags in results:
-            if value not in results[tags]:
-                results[tags].append(value)
+            if description not in results[tags]:
+                results[tags].append(description)
         else:
-            results[tags] = [value]
+            results[tags] = [description]
     return results

@@ -41,8 +41,26 @@ def print_matches(key_path, matches):
     """
     print("[*] {}".format(key_path))
     for tags in sorted(matches):
-        values = ', '.join(sorted(matches[tags]))
-        print(" |-> {} : {}".format(tags, values))
+        descriptions = ', '.join(sorted(matches[tags]))
+        colored_tags = []
+        for tag in tags.split(', '):
+            if tag == 'compiler':
+                colored_tag = prt_cyan(tag)
+            elif tag == 'manipulator':
+                colored_tag = prt_lightCyan(tag)
+            elif tag == 'abnormal':
+                colored_tag = prt_lightGray(tag)
+            elif tag in ['anti_vm', 'anti_disassembly', 'anti_debug']:
+                colored_tag = prt_purple(tag)
+            elif tag in ['packer', 'protector']:
+                colored_tag = prt_red(tag)
+            elif tag == 'obfuscator':
+                colored_tag = prt_yellow(tag)
+            else:
+                colored_tag = tag
+            colored_tags.append(colored_tag)
+        colored_tags = ', '.join(colored_tags)
+        print(" |-> {} : {}".format(colored_tags, descriptions))
 
 
 def get_json_output(results):
@@ -64,3 +82,15 @@ def get_json_output(results):
 def print_json_results(results):
     output = get_json_output(results)
     print(json.dumps(output))
+
+
+prt_red = lambda s: "\033[91m{}\033[00m".format(s)
+prt_green = lambda s: "\033[92m{}\033[00m".format(s)
+prt_yellow = lambda s: "\033[93m{}\033[00m".format(s)
+prt_lightPurple = lambda s: "\033[94m{}\033[00m".format(s)
+prt_purple = lambda s: "\033[95m{}\033[00m".format(s)
+prt_cyan = lambda s: "\033[36m{}\033[00m".format(s)
+prt_lightCyan = lambda s: "\033[96m{}\033[00m".format(s)
+prt_lightGray = lambda s: "\033[97m{}\033[00m".format(s)
+prt_orange = lambda s: "\033[33m{}\033[00m".format(s)
+prt_pink = lambda s: "'\033[95m'{}\033[00m".format(s)
