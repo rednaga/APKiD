@@ -32,6 +32,7 @@ import yara
 RULES_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'rules')
 RULES_PATH = os.path.join(RULES_DIR, 'rules.yarc')
 RULES_EXT = '.yara'
+RULES = yara.load(RULES_PATH)
 
 
 def collect_yara_files():
@@ -47,32 +48,29 @@ def collect_yara_files():
 
 def compile():
     yara_files = collect_yara_files()
-    rules = yara.compile(filepaths=yara_files)
-    rules.save(RULES_PATH)
+    return yara.compile(filepaths=yara_files)
 
+
+def save(rules):
+    rules.save(RULES_PATH)
     rules_count = sum(1 for _ in rules)
-    return rules_count
+    return rules_count, RULES_PATH
 
 
 def sha256():
     hashlib.sha256(open(RULES_PATH, 'rb').read()).hexdigest()
 
 
-def load():
-    return yara.load(RULES_PATH)
-
-
 def match(file_path, timeout):
-    yara_rules = load()
-    matches = yara_rules.match(file_path, timeout=timeout)
+    matches = RULES.match(file_path, timeout=timeout)
     return build_match_dict(matches)
 
 
 def build_match_dict(matches):
     results = {}
-    for match in matches:
-        tags = ', '.join(sorted(match.tags))
-        value = match.meta.get('description', match)
+    for m in matches:
+        tags = ', '.join(sorted(m.tags))
+        value = m.meta.get('description', m)
         if tags in results:
             if value not in results[tags]:
                 results[tags].append(value)

@@ -138,7 +138,6 @@ rule arxan : obfuscator
     6 of ($m*)
 }
 
-
 rule arxan_multidex : obfuscator
 {
   meta:

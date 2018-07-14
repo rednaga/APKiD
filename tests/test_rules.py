@@ -4,12 +4,12 @@ from apkid import rules
 
 
 def test_rules_compile():
-    rule_count = rules.compile()
-    assert rule_count > 0
+    rulez = rules.RULES
+    assert rulez
 
 
 def test_lint_rules():
-    for r in rules.load():
+    for r in rules.RULES:
         if len(r.tags) == 0:
             warnings.warn("rule has no tags: {}".format(r.identifier), stacklevel=0)
 

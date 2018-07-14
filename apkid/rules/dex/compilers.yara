@@ -155,6 +155,7 @@ private rule has_jack_anon_methods : internal
   meta:
     description = "has Jack compiler anonymous methods"
     url = "https://calebfenton.github.io/2016/12/01/building-with-and-detecting-jack/"
+
   strings:
     $anon_set = {00 05 2D 73 65 74 30 00} // -set0
     $anon_get = {00 05 2D 67 65 74 30 00} // -get0

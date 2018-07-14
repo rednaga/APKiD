@@ -91,11 +91,12 @@ rule secneo : packer
 rule dexprotector : packer
 {
  /**
- * DexProtector v6.x.x :- Demo,Standard,Business Edition (https://dexprotector.com)
- **/
+  * DexProtector v6.x.x :- Demo, Standard, Business Edition
+  **/
   meta:
     author = "Jasi2169"
     description = "DexProtector"
+    url = "https://dexprotector.com"
 
   strings:
     $encrptlib = "assets/dp.arm.so.dat"

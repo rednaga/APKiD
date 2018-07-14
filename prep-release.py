@@ -43,19 +43,21 @@ def convert_readme():
 
 if __name__ == '__main__':
     print("[*] Compiling Yara files")
-    rules_count = rules.compile()
-    print("[*] Saved {} rules to {}".format(rules_count, rules.RULES_PATH))
+    rulez = rules.compile()
+    rules_count, rules_path = rules.save(rulez)
+    print("[*] Saved {} rules to {}".format(rules_count, rules_path))
+
     tag_counts = {}
-    for rule in rules.load():
+    for rule in rules.RULES:
         for t in rule.tags:
             if t not in tag_counts:
                 tag_counts[t] = 1
             else:
                 tag_counts[t] += 1
-    print("Tag counts:")
+    print("[*] Rule tag counts:")
     for tag in sorted(tag_counts.keys()):
         count = tag_counts[tag]
-        print("\t{}: {}".format(tag, count))
+        print(" |-> {}: {}".format(tag, count))
 
     if len(sys.argv) > 1:
         if sys.argv[1] == 'register':

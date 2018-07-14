@@ -147,8 +147,6 @@ rule apkguard_dex : packer
     is_dex and $attachBaseContextOpcodes
 }
 
-
-
 rule cryptoshell_dex : packer
 {
   meta:
