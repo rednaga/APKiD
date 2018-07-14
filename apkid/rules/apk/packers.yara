@@ -88,7 +88,6 @@ rule secneo : packer
     is_apk and any of ($encrypted_dex, $encryptlib2, $encryptlib1)
 }
 
-
 rule dexprotector : packer
 {
 
@@ -114,7 +113,6 @@ rule dexprotector : packer
   condition:
     is_apk and 1 of ($encrptlib_*) and $encrptcustom
 }
-
 
 rule dexprotector_a : packer
 {
@@ -173,7 +171,6 @@ rule dexprotector_b : packer
     not dexprotector_a and
     not dexprotector
 }
-
 
 rule apkprotect : packer
 {
@@ -516,7 +513,6 @@ rule yidun : packer
     is_apk and (#lib > 1) or ($anti_trick and $entry_point and $jni_func)
 }
 
-
 rule apkpacker : packer
 {
     meta:
@@ -534,3 +530,22 @@ rule apkpacker : packer
     condition:
         is_apk and all of them
 }
+
+rule chornclickers : packer
+{
+
+  meta:
+    // This has no name so we made one up from Ch-china,-orn-porn and -clickers
+    description = "ChornClickers"
+    url         = "https://github.com/rednaga/APKiD/issues/93"
+    example     = "0c4a26d6b27986775c9c58813407a737657294579b6fd37618b0396d90d3efc3"
+    author      = "Eduardo Novella"
+
+  strings:
+    $a = "lib/armeabi/libhdus.so"
+    $b = "lib/armeabi/libwjus.so"
+
+  condition:
+    is_apk and all of them
+}
+
