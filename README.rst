@@ -1,7 +1,20 @@
 APKiD
 =====
 
-`Build Status <https://travis-ci.org/rednaga/APKiD>`__
+.. image:: https://travis-ci.org/rednaga/APKiD.svg?branch=master
+    :target: https://travis-ci.org/rednaga/APKiD
+
+.. image:: https://img.shields.io/pypi/v/apkid.svg
+    :target: https://pypi.python.org/pypi/apkid
+
+.. image:: https://img.shields.io/pypi/pyversions/apkid.svg
+    :target: https://pypi.python.org/pypi/apkid
+
+.. image:: https://img.shields.io/pypi/format/apkid.svg
+    :target: https://pypi.python.org/pypi/apkid
+
+.. image:: https://img.shields.io/pypi/l/apkid.svg
+    :target: https://pypi.python.org/pypi/apkid
 
 APKiD gives you information about how an APK was made. It identifies
 many compilers, packers, obfuscators, and other weird stuff. It’s *PEiD*
@@ -149,6 +162,26 @@ To update the PyPI package:
    rm dist/*
    python setup.py sdist bdist_wheel
    twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
+
+Update the generated ``README.rst`` until Pandoc learns how to translate
+Markdown with images that are links into reStructuredText:
+
+.. code:: rst
+
+   .. image:: https://travis-ci.org/rednaga/APKiD.svg?branch=master
+       :target: https://travis-ci.org/rednaga/APKiD
+
+   .. image:: https://img.shields.io/pypi/v/apkid.svg
+       :target: https://pypi.python.org/pypi/apkid
+
+   .. image:: https://img.shields.io/pypi/pyversions/apkid.svg
+       :target: https://pypi.python.org/pypi/apkid
+
+   .. image:: https://img.shields.io/pypi/format/apkid.svg
+       :target: https://pypi.python.org/pypi/apkid
+
+   .. image:: https://img.shields.io/pypi/l/apkid.svg
+       :target: https://pypi.python.org/pypi/apkid
 
 For more information see `Packaging
 Projects <https://packaging.python.org/tutorials/packaging-projects/>`__.
