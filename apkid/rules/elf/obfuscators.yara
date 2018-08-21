@@ -192,7 +192,7 @@ rule firehash : obfuscator
 rule avdobfuscator : obfuscator
 {
   meta:
-    description = "AVDobfuscator"
+    description = "ADVobfuscator"
     url         = "https://github.com/andrivet/ADVobfuscator"
     author      = "Eduardo Novella"
     example     = "357f0c2ad6bf5cf60c671b090eab134251db63993f52aef512bde5bfa4a1b598"
