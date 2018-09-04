@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # This will simply take the argument passed to it,
 # parse the directory and bind it as a read-only mount point on the container
 # and pass in the filename as the argument to APKiD
