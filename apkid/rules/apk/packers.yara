@@ -88,6 +88,21 @@ rule secneo : packer
     is_apk and any of ($encrypted_dex, $encryptlib2, $encryptlib1)
 }
 
+rule secneo_a : packer
+{
+  meta:
+    description = "SecNeo"
+    url = "http://www.secneo.com"
+
+  strings:
+    $lib1 = "libdexjni.so"
+    $lib2 = "libdexjni%s.so"
+
+  condition:
+    secneo and any of ($lib1, $lib2)
+}
+
+
 
 rule dexprotector : packer
 {
