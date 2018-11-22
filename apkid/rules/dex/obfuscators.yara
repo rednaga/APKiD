@@ -32,6 +32,7 @@ rule dexguard : obfuscator
 {
   meta:
     description = "DexGuard"
+    url         = "https://www.guardsquare.com/en/products/dexguard"
 
   strings:
     $opcodes = {
@@ -64,6 +65,46 @@ rule dexguard : obfuscator
     $opcodes and
     all of ($a, $b, $c) and
     uint32(dex.header.data_offset + dex.header.data_size - 4) == 0
+}
+
+rule dexguard_a : obfuscator
+{
+  meta:
+    description = "DexGuard"
+    url         = "https://www.guardsquare.com/en/products/dexguard"
+    sample      = "41a9b44af8931d63812b4a23395b29279d2e055f357222dabed7153d4aee6299"
+    author      = "Eduardo Novella"
+
+  strings:
+    // 1-byte size + size-bytes obfuscated class + 1-byte NULL terminator
+    $Loaux   = { 07 4C 6F 2F (41|61) (55|75) (58|78) 3B 00 }  // Lo/[Aa][Uu][Xx];
+    $Locon   = { 07 4C 6F 2F (43|63) (4F|6F) (4E|6E) 3B 00 }  // Lo/[Cc][Oo][Nn];
+    $Lolcase = { 05 4C 6F 2F ?? 3B 00 }                       // Lo/[a-z];
+    $Loucase = { 05 4C 6F 2F ?? 3B 00 }                       // Lo/[A-Z];
+    $Loif    = { 06 4C 6F 2F ?? (46|66) 3B 00 }               // Lo/[iI][fF];
+    $Loif1U  = { 08 4C 6F 2F ?? 24 (49|69) (46|66) 3B 00 }    // Lo/[A-Z]$[iI][fF];
+    $Loif2UL = { 09 4C 6F 2F ?? ?? 24 (49|69) (46|66) 3B 00 } // Lo/[a-zA-Z][a-zA-Z]$[iI][fF];
+    $Lo2c    = { 06 4C 6F 2F ?? ?? 3B 00 }                    // Lo/[a-zA-z][a-zA-z];
+    $Lo2odd  = { 05 4C 6F 2F ?? ?? 3B 00 }                    // Lo/odd;
+    $Lo3odd  = { 05 4C 6F 2F ?? ?? ?? 3B 00 }                 // Lo/odd;
+
+    // Artifacts
+    $lib_runtime = "libruntime.so"
+    $dexguard    = "DexGuard" nocase
+    $guardsquare = "guardsquare" nocase
+    $lib_x       = /lib[a-z]{1}\.so/
+    $export      = /Java\_o\_\_[0-9a-f]{5}\_[0-9a-z]/
+
+  condition:
+      (
+        ($lib_runtime or $dexguard or $guardsquare)
+        or
+        (($Loaux or $Locon))
+        or
+        ( ($Lolcase or $Loucase or $Lo2c or 1 of ($Loif*)) and ($Lo2odd or $Lo3odd) )
+        or
+        ( $export and ($lib_runtime or $lib_x) )
+      ) and not dexguard
 }
 
 rule dexprotector : obfuscator
