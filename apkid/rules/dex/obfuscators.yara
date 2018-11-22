@@ -241,3 +241,19 @@ rule aamo_str_enc : obfuscator
   condition:
     1 of ($opcodes*) and all of ($a, $b)
 }
+
+rule kiwi_amazon : obfuscator
+{
+    meta:
+        description = "Kiwi encrypter"
+        sample      = "3e309548f90160e3a4dc6f67621c75d2b66cc3b580da7306ff3dc6d6c25bb8a1"
+        author      = "Eduardo Novella"
+
+    strings:
+        $key   = "Kiwi__Version__Obfuscator"
+        $class = "KiwiVersionEncrypter"
+
+    condition:
+        any of them
+}
+
