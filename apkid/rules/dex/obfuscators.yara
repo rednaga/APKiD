@@ -27,6 +27,7 @@
 
 import "dex"
 include "common.yara"
+include "../apk/common.yara"
 
 rule dexguard : obfuscator
 {
