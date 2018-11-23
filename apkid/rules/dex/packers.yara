@@ -249,7 +249,7 @@ rule appsuit_packer : packer
     meta:
         description = "AppSuit"
         url         = "http://www.stealien.com/appsuit.html"
-        example     = "8dc42cc950617ff51d0409a05809d20ca4c375f05c3fa2324b249e1306758a94"
+        sample      = "8dc42cc950617ff51d0409a05809d20ca4c375f05c3fa2324b249e1306758a94"
         author      = "Eduardo Novella"
 
     strings:
