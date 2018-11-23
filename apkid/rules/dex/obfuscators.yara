@@ -241,3 +241,23 @@ rule aamo_str_enc : obfuscator
   condition:
     1 of ($opcodes*) and all of ($a, $b)
 }
+
+rule appsuit : obfuscator
+{
+    meta:
+        description = "AppSuit"
+        url         = "http://www.stealien.com/appsuit.html"
+        example     = "b99bafbbd5288ac93647d22f1c5b1863c96f581ae7a19fdc0e84bff4c2141328"
+        author      = "Eduardo Novella"
+
+    strings:
+        $class1      = "Lcom/stealien/const"
+        $class2      = "Lcom/stealien/appsuit"
+        $class3      = "La_lock"
+        $native_lib  = "AppSuit"
+        $packer      = "AppSuitDexLoader"
+
+    condition:
+        any of them and not is_apk
+}
+

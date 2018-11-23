@@ -243,3 +243,21 @@ rule jar_pack01 : packer
     is_dex and
     ($pre_jar and $jar_data and $post_jar)
 }
+
+rule appsuit_packer : packer
+{
+    meta:
+        description = "AppSuit"
+        url         = "http://www.stealien.com/appsuit.html"
+        example     = "8dc42cc950617ff51d0409a05809d20ca4c375f05c3fa2324b249e1306758a94"
+        author      = "Eduardo Novella"
+
+    strings:
+        $asset1      = "assets/appsuit/momo"
+        $asset2      = "assets/appsuit/meme"
+        $native_lib2 = "libAppSuit.so"
+
+    condition:
+        2 of them
+}
+
