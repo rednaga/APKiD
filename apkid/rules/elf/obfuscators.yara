@@ -220,11 +220,11 @@ rule metafortress : obfuscator
   meta:
     description = "MetaFortress"
     url         = "https://www.insidesecure.com/Products/Application-Protection/Software-Protection/Code-Protection"
-    example     = "326632f52eba45609f825ab6746037f2f2b47bfe66fd1aeebd835c8031f4fdb0"
+    sample      = "326632f52eba45609f825ab6746037f2f2b47bfe66fd1aeebd835c8031f4fdb0"
     author      = "Eduardo Novella"
 
   strings:
-    $a = "MetaFortress" nocase
+    $a = "MetaFortress: %s"
     $b = "METAFORIC"
 
   condition:
