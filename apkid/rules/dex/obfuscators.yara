@@ -246,12 +246,12 @@ rule md5obfuscator : obfuscator
 {
     meta:
       description = "MD5 obfuscator"
-      example     = "843a6562b62932df8b4c787466208a0523c1d88401f8cbf86f36de84ed4b7ccd"
+      sample      = "843a6562b62932df8b4c787466208a0523c1d88401f8cbf86f36de84ed4b7ccd"
       author      = "Eduardo Novella"
 
     strings:
-      // md513d0258903c37fed2a3d17a14e8551a2
-      $package = /Lmd5[a-f0-9]{32}/
+      // Lmd513d0258903c37fed2a3d17a14e8551a2/
+      $package = /Lmd5[a-f0-9]{32}\//
 
     condition:
         all of them and is_dex
