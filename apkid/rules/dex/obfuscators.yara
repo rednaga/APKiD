@@ -254,6 +254,6 @@ rule kiwi_amazon : obfuscator
         $class = "KiwiVersionEncrypter"
 
     condition:
-        any of them
+        all of them
 }
 
