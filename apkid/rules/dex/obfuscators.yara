@@ -250,8 +250,8 @@ rule kiwi_amazon : obfuscator
         author      = "Eduardo Novella"
 
     strings:
-        $key   = "Kiwi__Version__Obfuscator"
-        $class = "KiwiVersionEncrypter"
+        $key   = { 0019 4B69 7769 5F5F 5665 7273 696F 6E5F 5F4F 6266 7573 6361 746F 7200 }  // "Kiwi__Version__Obfuscator"
+        $class = { 00 194B 6977 6956 6572 7369 6F6E 456E 6372 7970 7465 722E 6A61 7661 00 } // "KiwiVersionEncrypter.java"
 
     condition:
         all of them
