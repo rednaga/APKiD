@@ -241,3 +241,22 @@ rule aamo_str_enc : obfuscator
   condition:
     1 of ($opcodes*) and all of ($a, $b)
 }
+
+rule gemalto_sdk : obfuscator
+{
+  meta:
+    description = "Gemalto"
+    url         = "https://www.gemalto.com/brochures-site/download-site/Documents/eba_ezio_on_mobile.pdf"
+    author      = "Eduardo Novella"
+    sample      = "294f95298189080a25b20ef28295d60ecde27ee12361f93ad2f024fdcb5bdb0b"
+
+
+  strings:
+    $p1 = "Lcom/gemalto/idp/mobile/"
+    $p2 = "Lcom/gemalto/medl/"
+    $p3 = "Lcom/gemalto/ezio/mobile/sdk/"
+
+  condition:
+    any of them and is_dex
+}
+
