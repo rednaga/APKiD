@@ -248,7 +248,7 @@ rule unk_packer_a : packer
 {
 
   meta:
-    description = "Unknown packer"
+    description = "GaoXor"
     url         = "https://github.com/rednaga/APKiD/issues/71"
     example     = "673b3ab2e06f830e7ece1e3106a6a8c5f4bacd31393998fa73f6096b89f2df47"
     author      = "Eduardo Novella"
