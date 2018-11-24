@@ -224,9 +224,10 @@ rule metafortress : obfuscator
     author      = "Eduardo Novella"
 
   strings:
-    $a = "MetaFortress: %s"
-    $b = "METAFORIC"
+    $a = { 00 4d65 7461 466f 7274 7265 7373 3a20 2573 0025 733a 2025 730a 00 } // MetaFortress %s.%s: %s
+    $b = { 00 4d65 7461 466f 7274 7265 7373 00 } // MetaFortress
+    $c = "METAFORIC"
 
   condition:
-    $a or $b and is_elf
+    (($a and $b) or $c) and is_elf
 }
