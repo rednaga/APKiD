@@ -215,18 +215,24 @@ rule avdobfuscator : obfuscator
     any of them and is_elf
 }
 
-rule metafortress : obfuscator
+rule alipay : obfuscator
 {
   meta:
-    description = "MetaFortress"
-    url         = "https://www.insidesecure.com/Products/Application-Protection/Software-Protection/Code-Protection"
-    sample      = "326632f52eba45609f825ab6746037f2f2b47bfe66fd1aeebd835c8031f4fdb0"
+    description = "Alipay"
+    url         = "https://www.jianshu.com/p/477af178d7d8"
+    sample      = "cbfec478f4860cb503ecb28711fe4767a68b7819d9a0c17cf51aaa77e11eb19a"
     author      = "Eduardo Novella"
 
   strings:
-    $a = "MetaFortress: %s"
-    $b = "METAFORIC"
+    /**
+        __obfuscator_version
+        Alipay  Obfuscator (based on LLVM 4.0.1)
+        Alipay clang version 4.0.1  (based on LLVM 4.0.1.Alipay.Obfuscator.Trial)
+    */
+    $a = "Alipay clang version "
+    $b = "Alipay  Obfuscator (based on LLVM "
+    $c = "Alipay.Obfuscator."
 
   condition:
-    $a or $b and is_elf
+    any of them and is_elf
 }
