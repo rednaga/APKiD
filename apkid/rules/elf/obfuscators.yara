@@ -224,6 +224,7 @@ rule arxan_native_arm : obfuscator
         author      = "Eduardo Novella"
 
     strings:
+        // Prolog breakage 1 ARM32
         $a = {
             00 10 90 E5    // LDR R1, [R0]
             00 00 81 E0    // ADD R0, R1, R0
@@ -235,6 +236,7 @@ rule arxan_native_arm : obfuscator
             00 F0 A0 E1    // MOV PC, R0
         }
 
+        // Prolog breakage 2 Thumb2
         $b = {
             4F F0 01 00    // MOV.W   R0, #1
             02 A1          // ADR     R1, loc_191658
@@ -242,6 +244,7 @@ rule arxan_native_arm : obfuscator
             87 46          // MOV     PC, R0
         }
 
+        // Prolog breakage 3 ARM32
         $c = {
             ?? ?? ?? E?
             91 00 00 E0    // MUL     R0, R1, R0
@@ -249,8 +252,6 @@ rule arxan_native_arm : obfuscator
         }
 
     condition:
-        // TODO: Count occurrences and > 20 times //(for 10 i in (1..#a): (@a[i] >= 50 and @a[i] <= 100))
-        // TODO: ARM64 & X86
-        ($a or $b or $c) and elf.machine == elf.EM_ARM
+        (#a > 5 or #b > 5 or #c > 10) and elf.machine == elf.EM_ARM
 }
 
