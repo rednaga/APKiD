@@ -539,8 +539,8 @@ rule secenh : packer
 	sample = "0709d38575e15643f03793445479d869116dca319bce2296cb8af798453a8752"
 	author = "Nacho Sanmillan"
   strings:
-	$a1 = "assets/libseceh.so"
-	$a2 = "assets/libseceh_x86.so"
+	$a1 = "assets/libsecenh.so"
+	$a2 = "assets/libsecenh_x86.so"
 	$b1 = "assets/respatcher.jar"
 	$b2 = "assets/res.zip"
   condition:
