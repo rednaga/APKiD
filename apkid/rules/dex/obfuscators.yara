@@ -27,7 +27,6 @@
 
 import "dex"
 include "common.yara"
-include "../apk/common.yara"
 
 rule dexguard : obfuscator
 {
@@ -260,6 +259,6 @@ rule appsuit : obfuscator
         $packer      = "AppSuitDexLoader"
 
     condition:
-        2 of them and not is_apk
+        is_dex and 2 of them
 }
 
