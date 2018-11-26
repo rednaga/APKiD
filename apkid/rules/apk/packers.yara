@@ -536,7 +536,7 @@ rule secenh : packer
 {
   meta:
 	decription = "Secenh"
-	example = "0709d38575e15643f03793445479d869116dca319bce2296cb8af798453a8752"
+	sample = "0709d38575e15643f03793445479d869116dca319bce2296cb8af798453a8752"
 	author = "Nacho Sanmillan"
   strings:
 	$a1 = "assets/libseceh.so"
