@@ -251,10 +251,10 @@ rule md5obfuscator : obfuscator
 
     strings:
       // Lmd513d0258903c37fed2a3d17a14e8551a2/
-      $package = { 00 334c 6d64 35 [32] 2f [1-100] 3b 00 } // 00Lmd5......../....;00
+      $package = { 00 334C6D6435 [32] 2F [1-100] 3B 00 } // 00Lmd5......../....;00
 
     condition:
-        all of them and is_dex
+        #package >= 2 and is_dex
 }
 
 
