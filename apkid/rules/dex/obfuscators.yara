@@ -254,7 +254,38 @@ rule md5obfuscator : obfuscator
       $package = { 00 334C6D6435 [32] 2F [1-100] 3B 00 } // 00Lmd5......../....;00
 
     condition:
-        #package >= 2 and is_dex
+      #package >= 2 and is_dex
 }
 
+rule gemalto_sdk : obfuscator
+{
+  meta:
+    description = "Gemalto"
+    url         = "https://www.gemalto.com/brochures-site/download-site/Documents/eba_ezio_on_mobile.pdf"
+    author      = "Eduardo Novella"
+    sample      = "294f95298189080a25b20ef28295d60ecde27ee12361f93ad2f024fdcb5bdb0b"
 
+
+  strings:
+    $p1 = "Lcom/gemalto/idp/mobile/"
+    $p2 = "Lcom/gemalto/medl/"
+    $p3 = "Lcom/gemalto/ezio/mobile/sdk/"
+
+  condition:
+    any of them and is_dex
+}
+
+rule kiwi_amazon : obfuscator
+{
+    meta:
+        description = "Kiwi encrypter"
+        sample      = "3e309548f90160e3a4dc6f67621c75d2b66cc3b580da7306ff3dc6d6c25bb8a1"
+        author      = "Eduardo Novella"
+
+    strings:
+        $key   = { 00 19 4B6977695F5F56657273696F6E5F5F4F626675736361746F72 00 } // 00+len+"Kiwi__Version__Obfuscator"+00
+        $class = { 00 19 4B69776956657273696F6E456E637279707465722E6A617661 00 } // 00+len+"KiwiVersionEncrypter.java"+00
+
+    condition:
+        all of them
+}

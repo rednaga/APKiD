@@ -215,3 +215,64 @@ rule avdobfuscator : obfuscator
     any of them and is_elf
 }
 
+rule arxan_native_arm : obfuscator
+{
+    meta:
+        description = "Arxan"
+        url         = "https://www.arxan.com/resources/technology/app-code-obfuscation"
+        sample      = "5bbb241d41c4150798b5800e62afcb6f49e05755d2fd89c7a9f7e356609c9012"
+        author      = "Eduardo Novella"
+
+    strings:
+        // Prolog breakage 1 ARM32
+        $a = {
+            00 10 90 E5    // LDR R1, [R0]
+            00 00 81 E0    // ADD R0, R1, R0
+            03 10 00 E0    // AND R1, R0, R3
+            02 20 A0 E3    // MOV R2, #2
+            92 01 01 E0    // MUL R1, R2, R1
+            03 00 20 E0    // EOR R0, R0, R3
+            01 00 80 E0    // ADD R0, R0, R1
+            00 F0 A0 E1    // MOV PC, R0
+        }
+
+        // Prolog breakage 2 Thumb2
+        $b = {
+            4F F0 01 00    // MOV.W   R0, #1
+            02 A1          // ADR     R1, loc_191658
+            01 FB 00 F0    // MUL.W   R0, R1, R0
+            87 46          // MOV     PC, R0
+        }
+
+        // Prolog breakage 3 ARM32
+        $c = {
+            ?? ?? ?? E?
+            91 00 00 E0    // MUL     R0, R1, R0
+            00 F0 A0 E1    // MOV     PC, R0
+        }
+
+    condition:
+        (#a > 5 or #b > 5 or #c > 10) and elf.machine == elf.EM_ARM
+}
+
+rule alipay : obfuscator
+{
+  meta:
+    description = "Alipay"
+    url         = "https://www.jianshu.com/p/477af178d7d8"
+    sample      = "cbfec478f4860cb503ecb28711fe4767a68b7819d9a0c17cf51aaa77e11eb19a"
+    author      = "Eduardo Novella"
+
+  strings:
+    /**
+        __obfuscator_version
+        Alipay  Obfuscator (based on LLVM 4.0.1)
+        Alipay clang version 4.0.1  (based on LLVM 4.0.1.Alipay.Obfuscator.Trial)
+    */
+    $a = "Alipay clang version "
+    $b = "Alipay  Obfuscator (based on LLVM "
+    $c = "Alipay.Obfuscator."
+
+  condition:
+    any of them and is_elf
+}
