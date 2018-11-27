@@ -532,3 +532,20 @@ rule chornclickers : packer
     is_apk and all of them
 }
 
+rule secenh : packer
+{
+  meta:
+	decription = "Secenh"
+	sample = "0709d38575e15643f03793445479d869116dca319bce2296cb8af798453a8752"
+	author = "Nacho Sanmillan"
+  strings:
+	$a1 = "assets/libsecenh.so"
+	$a2 = "assets/libsecenh_x86.so"
+	$b1 = "assets/respatcher.jar"
+	$b2 = "assets/res.zip"
+  condition:
+	is_apk 
+	and 1 of ($a*) 
+	and 1 of ($b*)
+}
+
