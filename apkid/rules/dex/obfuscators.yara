@@ -251,14 +251,30 @@ rule appsuit : obfuscator
         author      = "Eduardo Novella"
 
     strings:
-        $class1      = "Lcom/stealien/const"
-        $class2      = "Lcom/stealien/appsuit"
-        $class3      = "La_lock"
-        $native_lib  = "AppSuit"
-        $package     = "stealien"
-        $packer      = "AppSuitDexLoader"
+        $a1 = { 00 0741707053756974 00 }                             // 00AppSuit00
+        $a2 = { 00 0741505053554954 00 }                             // 00APPSUIT00
+        $c1 = { 00 144c636f6d2f737465616c69656e2f636f6e73743b00 }    // 00Lcom/stealien/const;00
+        $c3 = { 00 084c615f6c6f636b3b00 }                            // 00La_lock;00
+        $l1 = { 00 6c6962417070537569742e736f 00 }                   // 00libAppSuit.so00
+        $o  = { 000c 6368 6563 6b41 7070 5375 6974 00 }              // 00checkAppSuit00
+        $p1 = { 00 08737465616c69656e 00 }                           // 00stealien00
 
     condition:
         is_dex and 2 of them
+}
+
+rule appsuit_a : obfuscator
+{
+    meta:
+        description = "AppSuit"
+        url         = "http://www.stealien.com/appsuit.html"
+        sample      = "6055deceb83233cceefc89b2bce4e978fd417820c5f534b0df66415122f394ea"
+        author      = "Eduardo Novella"
+
+    strings:
+        $c = { 0053 4c636f6d2f737465616c69656e2f61707073756974 2f } // 00??Lcom/stealien/appsuit/
+
+    condition:
+        is_dex and all of them
 }
 
