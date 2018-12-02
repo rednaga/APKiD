@@ -92,8 +92,9 @@ rule dexprotector : packer
 {
 
  /**
-  * DexProtector v6.x.x :- Demo, Standard, Business Edition
-  **/
+ * DexProtector v6.x.x-v9.x.x :- Demo,Standard,Business Edition (https://dexprotector.com)
+ * main file is dp.mp3 it will exists in every edition it is used for decryption
+ **/
 
   meta:
     author      = "Jasi2169 and Eduardo Novella"
@@ -112,6 +113,23 @@ rule dexprotector : packer
 
   condition:
     is_apk and 1 of ($encrptlib_*) and $encrptcustom
+}
+
+rule tencentbugly : packer
+{
+ /**
+ * Tencent Bugly v1.x/v2.x (MultiDex Packer)
+ **/
+ 
+  meta:
+    author = "Jasi2169"
+    description = "Tencent Bugly"
+    
+  strings:
+    $main_lib = "libBugly.so"
+    
+  condition:
+    apk and $main_lib
 }
 
 rule dexprotector_a : packer
