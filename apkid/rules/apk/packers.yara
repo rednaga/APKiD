@@ -534,12 +534,11 @@ rule chornclickers : packer
 
 rule appsealing : packer
 {
-
   meta:
     // Commercial packer
     description = "AppSealing"
     url         = "https://www.appsealing.com/"
-    example      = "61a983b032aee2e56159e682ad1588ad30fa8c3957bf849d1afe6f10e1d9645d"
+    sample      = "61a983b032aee2e56159e682ad1588ad30fa8c3957bf849d1afe6f10e1d9645d"
     author      = "zeroload"
 
   strings:
@@ -550,4 +549,21 @@ rule appsealing : packer
 
   condition:
     is_apk and all of them
+}
+
+rule secenh : packer
+{
+  meta:
+	decription = "Secenh"
+	sample = "0709d38575e15643f03793445479d869116dca319bce2296cb8af798453a8752"
+	author = "Nacho Sanmillan"
+  strings:
+	$a1 = "assets/libsecenh.so"
+	$a2 = "assets/libsecenh_x86.so"
+	$b1 = "assets/respatcher.jar"
+	$b2 = "assets/res.zip"
+  condition:
+	is_apk 
+	and 1 of ($a*) 
+	and 1 of ($b*)
 }
