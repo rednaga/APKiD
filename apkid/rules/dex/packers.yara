@@ -319,3 +319,21 @@ rule gaoxor : packer
     $attachBaseContextOpcodes and $xor_key and is_dex and 3 of ($str_*)
 }
 
+rule appsealing_loader_1_2_2 : packer
+{
+
+  meta:
+    // Commercial packer
+    description = "AppSealing Loader v1.2.2"
+    url         = "https://www.appsealing.com/"
+    example      = "61a983b032aee2e56159e682ad1588ad30fa8c3957bf849d1afe6f10e1d9645d"
+    author      = "zeroload"
+
+  strings:
+    $loader_ver = /AppSealingLoader [.]+ v1.2.2/
+    $class = "Lcom/inka/appsealing/AppSealingApplication;"
+
+  condition:
+    is_dex and all of them
+}
+
