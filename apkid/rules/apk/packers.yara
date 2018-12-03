@@ -543,8 +543,8 @@ rule appsealing : packer
     author      = "zeroload"
 
   strings:
-    $native-lib-1 = "libcovault.so"
-    $native-lib-2 = "libcovault-appsec.so"
+    $native_lib_1 = "libcovault.so"
+    $native_lib_2 = "libcovault-appsec.so"
     $stub = "appsealing.dex"
     $dex = "sealed1.dex"
 
