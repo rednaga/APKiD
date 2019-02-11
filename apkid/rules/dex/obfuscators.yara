@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018  RedNaga. https://rednaga.io
+ * Copyright (C) 2019  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -190,10 +190,10 @@ rule aamo_str_enc : obfuscator
 {
   meta:
     description = "AAMO"
-    author = "P0r0"
-    url = "https://github.com/necst/aamo"
-    sample = "c1ef860af0e168f924663630ed3b61920b474d0c8b10e2bde6bfd3769dbd31a8"
-    sample2 = "eb0d4e1ba2e880749594eb8739e65aa21b6f7b43798f04b6681065b396c15a78"
+    author      = "P0r0"
+    url         = "https://github.com/necst/aamo"
+    sample      = "c1ef860af0e168f924663630ed3b61920b474d0c8b10e2bde6bfd3769dbd31a8"
+    sample2     = "eb0d4e1ba2e880749594eb8739e65aa21b6f7b43798f04b6681065b396c15a78"
 
   strings:
     $opcodes_nops = {
@@ -242,7 +242,7 @@ rule aamo_str_enc : obfuscator
     1 of ($opcodes*) and all of ($a, $b)
 }
 
-rule appsuit : obfuscator
+rule appsuit_a : obfuscator
 {
     meta:
         description = "AppSuit"
@@ -251,19 +251,19 @@ rule appsuit : obfuscator
         author      = "Eduardo Novella"
 
     strings:
-        $a1 = { 00 0741707053756974 00 }                             // 00AppSuit00
-        $a2 = { 00 0741505053554954 00 }                             // 00APPSUIT00
-        $c1 = { 00 144c636f6d2f737465616c69656e2f636f6e73743b00 }    // 00Lcom/stealien/const;00
-        $c3 = { 00 084c615f6c6f636b3b00 }                            // 00La_lock;00
-        $l1 = { 00 6c6962417070537569742e736f 00 }                   // 00libAppSuit.so00
-        $o  = { 000c 6368 6563 6b41 7070 5375 6974 00 }              // 00checkAppSuit00
-        $p1 = { 00 08737465616c69656e 00 }                           // 00stealien00
+        $a1 = { 00 0741707053756974 00 }                          // 00AppSuit00
+        $a2 = { 00 0741505053554954 00 }                          // 00APPSUIT00
+        $c1 = { 00 144c636f6d2f737465616c69656e2f636f6e73743b00 } // 00Lcom/stealien/const;00
+        $c3 = { 00 084c615f6c6f636b3b00 }                         // 00La_lock;00
+        $l1 = { 00 6c6962417070537569742e736f 00 }                // 00libAppSuit.so00
+        $o  = { 000c 6368 6563 6b41 7070 5375 6974 00 }           // 00checkAppSuit00
+        $p1 = { 00 08737465616c69656e 00 }                        // 00stealien00
 
     condition:
         is_dex and 2 of them
 }
 
-rule appsuit_a : obfuscator
+rule appsuit_b : obfuscator
 {
     meta:
         description = "AppSuit"
@@ -272,7 +272,7 @@ rule appsuit_a : obfuscator
         author      = "Eduardo Novella"
 
     strings:
-        $c = { 0053 4c636f6d2f737465616c69656e2f61707073756974 2f } // 00??Lcom/stealien/appsuit/
+        $c = { 00?? 4c636f6d2f737465616c69656e2f61707073756974 2f } // 00??Lcom/stealien/appsuit/
 
     condition:
         is_dex and all of them

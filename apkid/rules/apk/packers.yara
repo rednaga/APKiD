@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018  RedNaga. https://rednaga.io
+ * Copyright (C) 2019  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -532,7 +532,7 @@ rule chornclickers : packer
     is_apk and all of them
 }
 
-rule appsuit : packer
+rule appsuit_packer : packer
 {
     meta:
         description = "AppSuit"
