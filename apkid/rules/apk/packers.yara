@@ -532,6 +532,25 @@ rule chornclickers : packer
     is_apk and all of them
 }
 
+rule appsealing : packer
+{
+  meta:
+    // Commercial packer
+    description = "AppSealing"
+    url         = "https://www.appsealing.com/"
+    sample      = "61a983b032aee2e56159e682ad1588ad30fa8c3957bf849d1afe6f10e1d9645d"
+    author      = "zeroload"
+
+  strings:
+    $native_lib_1 = "libcovault.so"
+    $native_lib_2 = "libcovault-appsec.so"
+    $stub = "appsealing.dex"
+    $dex = "sealed1.dex"
+
+  condition:
+    is_apk and all of them
+}
+
 rule secenh : packer
 {
   meta:
@@ -548,4 +567,3 @@ rule secenh : packer
 	and 1 of ($a*) 
 	and 1 of ($b*)
 }
-
