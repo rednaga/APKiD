@@ -28,7 +28,7 @@ import os
 import yara
 import zipfile
 from typing import Union, IO, List, Dict, Set
-
+import io
 from .output import OutputFormatter
 from .rules import RulesManager
 
@@ -125,16 +125,21 @@ class Scanner(object):
                     results[f'{filename}!{entry_name}'] = entry_matches
         return results
 
-    def _scan_zip(self, zf: zipfile.ZipFile, level=0) -> Dict[str, List[yara.Match]]:
+    def _scan_zip(self, zf: zipfile.ZipFile, depth=0) -> Dict[str, List[yara.Match]]:
         results = {}
         for name in zf.namelist():
-            entry = zf.open(name)
-            matches = self.rules.match(data=entry.read(), timeout=self.options.timeout)
+            with zf.open(name) as entry:
+                entry_buffer: IO = io.BytesIO(entry.read())
+            matches = self.rules.match(data=entry_buffer.read(), timeout=self.options.timeout)
+            entry_buffer.seek(0)
+
             if len(matches) > 0:
                 results[name] = matches
-            if level < self.options.scan_depth and self._is_zipfile(entry, name):
-                with zipfile.ZipFile(entry) as zip_entry:
-                    nested_results = self._scan_zip(zip_entry, level=level + 1)
+
+            print('name', name, 'depth', depth, 'max depth', self.options.scan_depth, 'is zipfile', self._is_zipfile(entry_buffer, name))
+            if depth < self.options.scan_depth and self._is_zipfile(entry_buffer, name):
+                with zipfile.ZipFile(entry_buffer) as zip_entry:
+                    nested_results = self._scan_zip(zip_entry, depth=depth + 1)
                     for nested_name, nested_matches in nested_results.items():
                         results[f'{name}!{nested_name}'] = nested_matches
         return results
@@ -148,11 +153,11 @@ class Scanner(object):
         return None
 
     def _is_zipfile(self, file_obj: IO, name: str):
-        if self.options.typing == 'magic':
-            return zipfile.is_zipfile(file_obj)
-        elif self.options.typing == 'filename':
+        if self.options.typing == 'filename':
             name = name.lower()
             return name.endswith('.apk') or name.endswith('.zip')
+        else:
+            return zipfile.is_zipfile(file_obj)
 
     def _should_scan(self, file_obj: IO, name: str):
         if self.options.typing == 'magic':
