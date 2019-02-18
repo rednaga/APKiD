@@ -11,7 +11,7 @@ install:
   - cd yara-python
   - CFLAGS="-std=gnu99" python setup.py build --enable-dex install
   - cd ../
-  - pip install -e .
+  - pip install -e . [test,dev]
 script:
   - ./prep-release.py | true
-  - pytest
+  - python -m pytest -s

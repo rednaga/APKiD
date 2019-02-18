@@ -61,28 +61,31 @@ def test_scan_with_zip_with_dex(scanner: Scanner):
 
 def test_scan_with_nested_zips(scanner: Scanner):
     third_layer = {
-        '3.dex': b'dex\nnot a real dex!'
+        '3.dex': b'dex\n'
     }
     second_layer = {
         '3.zip': make_zip(third_layer).read(),
-        '2.dex': b'dex\nnot a real dex!',
+        '2.dex': b'dex\n',
     }
     first_layer = {
         '2.zip': make_zip(second_layer).read(),
-        '1.dex': b'dex\nnot a real dex!',
+        '1.dex': b'dex\n',
     }
-    base_layer = {
+    zero_layer = {
         '1.zip': make_zip(first_layer).read(),
-        'base.dex': b'dex\nnot a real dex!',
+        '0.dex': b'dex\n',
     }
 
+    print('zero layer', zero_layer)
+
     scanner.options.scan_depth = 2
-    with make_temp_zip(base_layer) as tz:
+    with make_temp_zip(zero_layer) as tz:
         filename: str = os.path.basename(tz.name)
         results = scanner.scan_file(tz.name)
 
+    print('all results', results)
     for key in (
-            filename, f'{filename}!base.dex', f'{filename}!1.zip', f'{filename}!1.zip!1.dex', f'{filename}!1.zip!2.zip',
+            filename, f'{filename}!0.dex', f'{filename}!1.zip', f'{filename}!1.zip!1.dex', f'{filename}!1.zip!2.zip',
             f'{filename}!1.zip!2.zip!2.dex', f'{filename}!1.zip!2.zip!3.zip'
     ):
         assert key in results
