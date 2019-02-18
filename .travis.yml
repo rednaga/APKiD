@@ -5,10 +5,9 @@ cache:
 #  directories:
 #    - $HOME/.cache/samples
 python:
-  - "2.7"
   - "3.6"
 install:
-  - git clone --recursive https://github.com/rednaga/yara-python-1 yara-python
+  - git clone -b merge_master --recursive https://github.com/rednaga/yara-python-1 yara-python
   - cd yara-python
   - CFLAGS="-std=gnu99" python setup.py build --enable-dex install
   - cd ../
