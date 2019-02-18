@@ -100,13 +100,13 @@ Then, clone this repository, compile the rules, and install the package in edita
 git clone https://github.com/rednaga/APKiD
 cd APKiD
 ./prep-release.py
-pip install -e .[dev]
+pip install -e .[dev,test]
 ```
 
 If the above doesn't work, due to permission errors dependent on your local machine and where Python has been installed, try specifying the `--user` flag. This is likely needed if you are working on OSX:
 
 ```bash
-pip install -e .[dev] --user
+pip install -e .[dev,test] --user
 ```
 
 If you update any of the rules, be sure to run `prep-release.py` to recompile them.
