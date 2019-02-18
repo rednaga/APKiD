@@ -12,7 +12,7 @@ install:
   - CFLAGS="-std=gnu99" python setup.py build --enable-dex install
   - cd ../
   - pip install --upgrade pip
-  - pip install -e .[dev,test]
+  - pip install -e .[dev,test] --upgrade
 script:
   - ./prep-release.py | true
   - python -m pytest -s
