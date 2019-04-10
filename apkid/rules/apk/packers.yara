@@ -88,6 +88,21 @@ rule secneo : packer
     is_apk and any of ($encrypted_dex, $encryptlib2, $encryptlib1)
 }
 
+rule secneo_a : packer
+{
+  meta:
+    description = "SecNeo"
+    url = "http://www.secneo.com"
+
+  strings:
+    $lib1 = "libdexjni.so"
+    $lib2 = "libdexjni%s.so"
+
+  condition:
+    secneo and any of ($lib1, $lib2)
+}
+
+
 rule dexprotector : packer
 {
 
@@ -455,7 +470,7 @@ rule kony : packer
 {
   meta:
     description = "Kony"
-	url = "http://www.kony.com/"
+    url = "http://www.kony.com/"
 
   strings:
     $lib = "libkonyjsvm.so"
@@ -470,7 +485,7 @@ rule approov : packer
 {
   meta:
     description = "Aproov"
-	url = "https://www.approov.io/"
+    url = "https://www.approov.io/"
 
   strings:
     $lib = "libapproov.so"
@@ -484,7 +499,7 @@ rule yidun : packer
 {
   meta:
     description = "yidun"
-	url = "https://dun.163.com/product/app-protect"
+    url = "https://dun.163.com/product/app-protect"
 
   strings:
     $anti_trick = "Lcom/_" // Class path of anti-trick
@@ -554,16 +569,16 @@ rule appsealing : packer
 rule secenh : packer
 {
   meta:
-	description = "Secenh"
-	sample = "0709d38575e15643f03793445479d869116dca319bce2296cb8af798453a8752"
-	author = "Nacho Sanmillan"
+    description = "Secenh"
+    sample = "0709d38575e15643f03793445479d869116dca319bce2296cb8af798453a8752"
+    author = "Nacho Sanmillan"
   strings:
-	$a1 = "assets/libsecenh.so"
-	$a2 = "assets/libsecenh_x86.so"
-	$b1 = "assets/respatcher.jar"
-	$b2 = "assets/res.zip"
+    $a1 = "assets/libsecenh.so"
+    $a2 = "assets/libsecenh_x86.so"
+    $b1 = "assets/respatcher.jar"
+    $b2 = "assets/res.zip"
   condition:
-	is_apk 
-	and 1 of ($a*) 
-	and 1 of ($b*)
+    is_apk 
+    and 1 of ($a*) 
+    and 1 of ($b*)
 }
