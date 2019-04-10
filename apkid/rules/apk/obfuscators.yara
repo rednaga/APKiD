@@ -35,7 +35,6 @@ rule gemalto_protector : obfuscator
     author      = "Eduardo Novella"
     sample      = "294f95298189080a25b20ef28295d60ecde27ee12361f93ad2f024fdcb5bdb0b"
 
-
   strings:
     $l1 = "lib/arm64-v8a/libmedl.so"
     $l2 = "lib/armeabi-v7a/libmedl.so"

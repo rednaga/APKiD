@@ -155,7 +155,6 @@ rule cryptoshell_dex : packer
     sample     = "d6745c1533b440c93f7bdfbb106470043b23aafdf91506c52332ed192d7b7003"
 
   strings:
-
     $attachBaseContextOpcodes = {
         120b            // const/4 v11, 0
         6f20 0100 fe00  // invoke-super {v14, v15}, Landroid/app/Application.attachBaseContext(Landroid/content/Context;)V ; 0x1
@@ -230,9 +229,9 @@ rule cryptoshell_dex : packer
 rule jar_pack01 : packer
 {
   meta:
-    // Unknown name, made this one up
+    //Official name unknown
     description = "jar_pack01"
-    sample     = "faf1e85f878ea52a3b3fbb67126132b527f509586706f242f39b8c1fdb4a2065"
+    sample      = "faf1e85f878ea52a3b3fbb67126132b527f509586706f242f39b8c1fdb4a2065"
 
   strings:
     $pre_jar  = { 00 6F 6E 43 72 65 61 74 65 00 28 29 56 00 63 6F 6D 2F 76 } // .onCreate.()V.com/v
@@ -246,11 +245,10 @@ rule jar_pack01 : packer
 
 rule gaoxor : packer
 {
-
   meta:
     description = "GaoXor"
     url         = "https://github.com/rednaga/APKiD/issues/71"
-    example     = "673b3ab2e06f830e7ece1e3106a6a8c5f4bacd31393998fa73f6096b89f2df47"
+    sample      = "673b3ab2e06f830e7ece1e3106a6a8c5f4bacd31393998fa73f6096b89f2df47"
     author      = "Eduardo Novella"
 
   strings:
@@ -321,12 +319,11 @@ rule gaoxor : packer
 
 rule appsealing_loader_1_2_2 : packer
 {
-
   meta:
     // Commercial packer
     description = "AppSealing Loader v1.2.2"
     url         = "https://www.appsealing.com/"
-    example      = "61a983b032aee2e56159e682ad1588ad30fa8c3957bf849d1afe6f10e1d9645d"
+    sample      = "61a983b032aee2e56159e682ad1588ad30fa8c3957bf849d1afe6f10e1d9645d"
     author      = "zeroload"
 
   strings:

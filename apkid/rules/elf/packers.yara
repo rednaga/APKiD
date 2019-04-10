@@ -341,7 +341,7 @@ rule appsealing_core_2_10_10 : packer
   meta:
     description = "AppSealing CORE VERSION 2.10.10"
     url         = "https://www.appsealing.com/"
-    example      = "61a983b032aee2e56159e682ad1588ad30fa8c3957bf849d1afe6f10e1d9645d"
+    sample      = "61a983b032aee2e56159e682ad1588ad30fa8c3957bf849d1afe6f10e1d9645d"
     author      = "zeroload"
 
   strings:

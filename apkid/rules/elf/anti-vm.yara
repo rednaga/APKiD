@@ -29,14 +29,14 @@ import "elf"
 
 rule check_qemu_entropy : anti_vm
 {
-    meta:
-      description = "Checks for QEMU entropy"
-      url = "https://github.com/Fuzion24/AndroidHostileEnvironmentDetection/blob/master/app/jni/emudetect.c"
+  meta:
+    description = "Checks for QEMU entropy"
+    url = "https://github.com/Fuzion24/AndroidHostileEnvironmentDetection/blob/master/app/jni/emudetect.c"
 
-    strings:
-      $a = "atomicallyIncreasingGlobalVarThread"
-      $b = "_qemuFingerPrint"
+  strings:
+    $a = "atomicallyIncreasingGlobalVarThread"
+    $b = "_qemuFingerPrint"
 
-    condition:
-      any of them
+  condition:
+    any of them
 }

@@ -175,8 +175,8 @@ rule allatori_demo : obfuscator
     description = "Allatori demo"
     url         = "http://www.allatori.com/features.html"
     author      = "Eduardo Novella"
-    example     = "7f2f5aac9833f7bdccc0b9865f5cc2a9c94ee795a285ef2fa6ff83a34c91827f"
-    example2    = "8c9e6c7b8c516499dd2065cb435ef68089feb3d4053faf2cfcb2b759b051383c"
+    sample     = "7f2f5aac9833f7bdccc0b9865f5cc2a9c94ee795a285ef2fa6ff83a34c91827f"
+    sample2    = "8c9e6c7b8c516499dd2065cb435ef68089feb3d4053faf2cfcb2b759b051383c"
 
   strings:
     // null-prev-str + len + str + null
@@ -192,8 +192,8 @@ rule aamo_str_enc : obfuscator
     description = "AAMO"
     author = "P0r0"
     url = "https://github.com/necst/aamo"
-    example = "c1ef860af0e168f924663630ed3b61920b474d0c8b10e2bde6bfd3769dbd31a8"
-    example2 = "eb0d4e1ba2e880749594eb8739e65aa21b6f7b43798f04b6681065b396c15a78"
+    sample = "c1ef860af0e168f924663630ed3b61920b474d0c8b10e2bde6bfd3769dbd31a8"
+    sample2 = "eb0d4e1ba2e880749594eb8739e65aa21b6f7b43798f04b6681065b396c15a78"
 
   strings:
     $opcodes_nops = {

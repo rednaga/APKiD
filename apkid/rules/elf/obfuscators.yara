@@ -195,7 +195,7 @@ rule avdobfuscator : obfuscator
     description = "ADVobfuscator"
     url         = "https://github.com/andrivet/ADVobfuscator"
     author      = "Eduardo Novella"
-    example     = "357f0c2ad6bf5cf60c671b090eab134251db63993f52aef512bde5bfa4a1b598"
+    sample     = "357f0c2ad6bf5cf60c671b090eab134251db63993f52aef512bde5bfa4a1b598"
 
   strings:
     $s_01 = "_ZNK17ObfuscatedAddressIPFiiiPciS0_S0_EE8originalEv"
@@ -217,42 +217,42 @@ rule avdobfuscator : obfuscator
 
 rule arxan_native_arm : obfuscator
 {
-    meta:
-        description = "Arxan"
-        url         = "https://www.arxan.com/resources/technology/app-code-obfuscation"
-        sample      = "5bbb241d41c4150798b5800e62afcb6f49e05755d2fd89c7a9f7e356609c9012"
-        author      = "Eduardo Novella"
+  meta:
+    description = "Arxan"
+    url         = "https://www.arxan.com/resources/technology/app-code-obfuscation"
+    sample      = "5bbb241d41c4150798b5800e62afcb6f49e05755d2fd89c7a9f7e356609c9012"
+    author      = "Eduardo Novella"
 
-    strings:
-        // Prolog breakage 1 ARM32
-        $a = {
-            00 10 90 E5    // LDR R1, [R0]
-            00 00 81 E0    // ADD R0, R1, R0
-            03 10 00 E0    // AND R1, R0, R3
-            02 20 A0 E3    // MOV R2, #2
-            92 01 01 E0    // MUL R1, R2, R1
-            03 00 20 E0    // EOR R0, R0, R3
-            01 00 80 E0    // ADD R0, R0, R1
-            00 F0 A0 E1    // MOV PC, R0
-        }
+  strings:
+    // Prolog breakage 1 ARM32
+    $a = {
+      00 10 90 E5    // LDR R1, [R0]
+      00 00 81 E0    // ADD R0, R1, R0
+      03 10 00 E0    // AND R1, R0, R3
+      02 20 A0 E3    // MOV R2, #2
+      92 01 01 E0    // MUL R1, R2, R1
+      03 00 20 E0    // EOR R0, R0, R3
+      01 00 80 E0    // ADD R0, R0, R1
+      00 F0 A0 E1    // MOV PC, R0
+    }
 
-        // Prolog breakage 2 Thumb2
-        $b = {
-            4F F0 01 00    // MOV.W   R0, #1
-            02 A1          // ADR     R1, loc_191658
-            01 FB 00 F0    // MUL.W   R0, R1, R0
-            87 46          // MOV     PC, R0
-        }
+    // Prolog breakage 2 Thumb2
+    $b = {
+      4F F0 01 00    // MOV.W   R0, #1
+      02 A1          // ADR     R1, loc_191658
+      01 FB 00 F0    // MUL.W   R0, R1, R0
+      87 46          // MOV     PC, R0
+    }
 
-        // Prolog breakage 3 ARM32
-        $c = {
-            ?? ?? ?? E?
-            91 00 00 E0    // MUL     R0, R1, R0
-            00 F0 A0 E1    // MOV     PC, R0
-        }
+    // Prolog breakage 3 ARM32
+    $c = {
+      ?? ?? ?? E?
+      91 00 00 E0    // MUL     R0, R1, R0
+      00 F0 A0 E1    // MOV     PC, R0
+    }
 
-    condition:
-        (#a > 5 or #b > 5 or #c > 10) and elf.machine == elf.EM_ARM
+  condition:
+    (#a > 5 or #b > 5 or #c > 10) and elf.machine == elf.EM_ARM
 }
 
 rule alipay : obfuscator

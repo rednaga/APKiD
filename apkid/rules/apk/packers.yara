@@ -43,20 +43,20 @@ rule appguard : packer
 
 rule appguard_new : packer
 {
-    meta:
-      description = "AppGuard"
-      sample      = "c5195daa5d17ba6e1755f8cb7270ae3a971eb688ee7d650d10c284d7c93b777d"
-      url         = "http://appguard.nprotect.com/en/index.html"
-      author      = "Eduardo Novella"
+  meta:
+    description = "AppGuard"
+    sample      = "c5195daa5d17ba6e1755f8cb7270ae3a971eb688ee7d650d10c284d7c93b777d"
+    url         = "http://appguard.nprotect.com/en/index.html"
+    author      = "Eduardo Novella"
 
-    strings:
-      $a = "assets/AppGuard0.jar"
-      $b = "assets/AppGuard.dgc"
-      $c = "libAppGuard.so"
-      $d = "libAppGuard-x86.so"
+  strings:
+    $a = "assets/AppGuard0.jar"
+    $b = "assets/AppGuard.dgc"
+    $c = "libAppGuard.so"
+    $d = "libAppGuard-x86.so"
 
-    condition:
-        is_apk and 3 of them
+  condition:
+    is_apk and 3 of them
 }
 
 rule dxshield : packer
@@ -110,13 +110,9 @@ rule secneo_a : packer
     and not secneo_b
 }
 
-
 rule dexprotector : packer
 {
-
- /**
-  * DexProtector v6.x.x :- Demo, Standard, Business Edition
-  **/
+  // DexProtector v6.x.x :- Demo, Standard, Business Edition
 
   meta:
     author      = "Jasi2169 and Eduardo Novella"
@@ -139,15 +135,13 @@ rule dexprotector : packer
 
 rule dexprotector_a : packer
 {
- /**
- * DexProtector old version possibly
- **/
+  // Possible older version
 
   meta:
     author      = "Eduardo Novella"
     description = "DexProtector"
     url         = "https://dexprotector.com/"
-    example     = "242e0ee59de46c7648b7b38efeb8c088ae3dc8c5c8fe9fbd5e707b098ab8f404"
+    sample      = "242e0ee59de46c7648b7b38efeb8c088ae3dc8c5c8fe9fbd5e707b098ab8f404"
 
   strings:
     $encrptlib_1 = "assets/dp.arm-v7.art.kk.so"
@@ -168,15 +162,13 @@ rule dexprotector_a : packer
 
 rule dexprotector_b : packer
 {
- /**
- * DexProtector new version possibly
- **/
+  // Possible newer version
 
   meta:
     author      = "Eduardo Novella"
     description = "DexProtector"
     url         = "https://dexprotector.com/"
-    example     = "dca2a0bc0f2605072b9b48579e73711af816b0fa1108b825335d2d1f2418e2a7"
+    sample      = "dca2a0bc0f2605072b9b48579e73711af816b0fa1108b825335d2d1f2418e2a7"
 
   strings:
     //              assets/com.package.name.arm.so.dat
@@ -287,26 +279,26 @@ rule jiagu : packer
 
 rule jiagu_a : packer
 {
-    meta:
-        description = "Jiagu (ApkToolPlus)"
-        example     = "684baab16344dc663b7ae84dd1f8d6a39bfb480a977ad581a0a6032f6e437218"
-        url         = "https://github.com/linchaolong/ApkToolPlus/tree/master/lib.JiaGu/src/com/linchaolong/apktoolplus/jiagu"
-        author      = "Eduardo Novella"
+  meta:
+    description = "Jiagu (ApkToolPlus)"
+    sample      = "684baab16344dc663b7ae84dd1f8d6a39bfb480a977ad581a0a6032f6e437218"
+    url         = "https://github.com/linchaolong/ApkToolPlus/tree/master/lib.JiaGu/src/com/linchaolong/apktoolplus/jiagu"
+    author      = "Eduardo Novella"
 
-    strings:
-        $a = "assets/jiagu_data.bin"
-        $b = "assets/sign.bin"
-        $c = "libapktoolplus_jiagu.so"
+  strings:
+    $a = "assets/jiagu_data.bin"
+    $b = "assets/sign.bin"
+    $c = "libapktoolplus_jiagu.so"
 
-    condition:
-        is_apk and all of them
+  condition:
+    is_apk and all of them
 }
 
 rule qdbh_packer : packer
 {
   meta:
     description = "qdbh packer"
-    sample     = "faf1e85f878ea52a3b3fbb67126132b527f509586706f242f39b8c1fdb4a2065"
+    sample      = "faf1e85f878ea52a3b3fbb67126132b527f509586706f242f39b8c1fdb4a2065"
 
   strings:
     $qdbh = "assets/qdbh"
@@ -440,6 +432,7 @@ rule medusah_appsolid : packer
     // Samples and discussion: https://github.com/rednaga/APKiD/issues/19
     description = "Medusah (AppSolid)"
     url = "https://appsolid.co/"
+    sample = "5c1f14c1674c6f3ff72d9a017b083023d6c59635bec83718afec2d23372f84f4"
 
   strings:
     $encrypted_dex = "assets/high_resolution.png"
@@ -521,20 +514,20 @@ rule yidun : packer
 
 rule apkpacker : packer
 {
-    meta:
-        description = "ApkPacker"
-        example     = "087af5aacab8fc8bc7b1dcb7a138c3552d175c74b496056893299bc437422f95"
-        author      = "Eduardo Novella"
+  meta:
+    description = "ApkPacker"
+    sample      = "087af5aacab8fc8bc7b1dcb7a138c3552d175c74b496056893299bc437422f95"
+    author      = "Eduardo Novella"
 
-    strings:
-        $a = "assets/ApkPacker/apkPackerConfiguration"
-        $b = "assets/ApkPacker/classes.dex"
-        // These may be related, but not enough samples to be sure
-        //$c = "assets/config.txt"
-        //$d = "assets/sht.txt"
+  strings:
+    $a = "assets/ApkPacker/apkPackerConfiguration"
+    $b = "assets/ApkPacker/classes.dex"
+    // These may be related, but not enough samples to be sure
+    //$c = "assets/config.txt"
+    //$d = "assets/sht.txt"
 
-    condition:
-        is_apk and all of them
+  condition:
+    is_apk and all of them
 }
 
 rule chornclickers : packer
@@ -544,7 +537,7 @@ rule chornclickers : packer
     // This has no name so we made one up from Ch-china,-orn-porn and -clickers
     description = "ChornClickers"
     url         = "https://github.com/rednaga/APKiD/issues/93"
-    example     = "0c4a26d6b27986775c9c58813407a737657294579b6fd37618b0396d90d3efc3"
+    sample     = "0c4a26d6b27986775c9c58813407a737657294579b6fd37618b0396d90d3efc3"
     author      = "Eduardo Novella"
 
   strings:
@@ -580,11 +573,13 @@ rule secenh : packer
     description = "Secenh"
     sample = "0709d38575e15643f03793445479d869116dca319bce2296cb8af798453a8752"
     author = "Nacho Sanmillan"
+
   strings:
     $a1 = "assets/libsecenh.so"
     $a2 = "assets/libsecenh_x86.so"
     $b1 = "assets/respatcher.jar"
     $b2 = "assets/res.zip"
+
   condition:
     is_apk
     and 1 of ($a*)
