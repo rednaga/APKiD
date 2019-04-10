@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017  RedNaga. http://rednaga.io
+ * Copyright (C) 2018  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -74,7 +74,8 @@ rule upx_sharedlib_unmodifed : packer
     and $upx in (filesize - 50 .. filesize) and upx_stub
 }
 
-rule upx_elf_3_94 : packer {
+rule upx_elf_3_94 : packer
+{
   meta:
     description = "UPX 3.94 (unmodified)"
 
@@ -85,7 +86,8 @@ rule upx_elf_3_94 : packer {
     upx_unmodified and $copyright
 }
 
-rule upx_elf_3_93 : packer {
+rule upx_elf_3_93 : packer
+{
   meta:
     description = "UPX 3.93 (unmodified)"
 
@@ -317,7 +319,7 @@ rule promon : packer
   meta:
     description = "Promon Shield"
     info        = "https://promon.co/"
-    example     = "6a3352f54d9f5199e4bf39687224e58df642d1d91f1d32b069acd4394a0c4fe0"
+    sample     = "6a3352f54d9f5199e4bf39687224e58df642d1d91f1d32b069acd4394a0c4fe0"
 
   strings:
     $a = "libshield.so"
@@ -334,4 +336,17 @@ rule promon : packer
     2 of ($s*)
 }
 
+rule appsealing_core_2_10_10 : packer
+{
+  meta:
+    description = "AppSealing CORE VERSION 2.10.10"
+    url         = "https://www.appsealing.com/"
+    example      = "61a983b032aee2e56159e682ad1588ad30fa8c3957bf849d1afe6f10e1d9645d"
+    author      = "zeroload"
 
+  strings:
+    $core_ver = "APPSEALING-CORE-VERSION_2.10.10"
+
+  condition:
+    $core_ver
+}

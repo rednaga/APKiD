@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017  RedNaga. http://rednaga.io
+ * Copyright (C) 2018  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -44,16 +44,16 @@ rule appguard : packer
 rule appguard_new : packer
 {
     meta:
-        description = "AppGuard"
-        sample      = "c5195daa5d17ba6e1755f8cb7270ae3a971eb688ee7d650d10c284d7c93b777d"
-        url         = "http://appguard.nprotect.com/en/index.html"
-        author      = "Eduardo Novella"
+      description = "AppGuard"
+      sample      = "c5195daa5d17ba6e1755f8cb7270ae3a971eb688ee7d650d10c284d7c93b777d"
+      url         = "http://appguard.nprotect.com/en/index.html"
+      author      = "Eduardo Novella"
 
     strings:
-        $a = "assets/AppGuard0.jar"
-        $b = "assets/AppGuard.dgc"
-        $c = "libAppGuard.so"
-        $d = "libAppGuard-x86.so"
+      $a = "assets/AppGuard0.jar"
+      $b = "assets/AppGuard.dgc"
+      $c = "libAppGuard.so"
+      $d = "libAppGuard-x86.so"
 
     condition:
         is_apk and 3 of them
@@ -103,13 +103,12 @@ rule secneo_a : packer
 }
 
 
-
 rule dexprotector : packer
 {
 
  /**
- * DexProtector v6.x.x :- Demo,Standard,Business Edition (https://dexprotector.com)
- **/
+  * DexProtector v6.x.x :- Demo, Standard, Business Edition
+  **/
 
   meta:
     author      = "Jasi2169 and Eduardo Novella"
@@ -129,7 +128,6 @@ rule dexprotector : packer
   condition:
     is_apk and 1 of ($encrptlib_*) and $encrptcustom
 }
-
 
 rule dexprotector_a : packer
 {
@@ -189,7 +187,6 @@ rule dexprotector_b : packer
     not dexprotector
 }
 
-
 rule apkprotect : packer
 {
   meta:
@@ -222,20 +219,19 @@ rule bangcle : packer
 
 rule bangcle_secshell : packer
 {
-    meta:
-        description = "Bangcle (SecShell)"
-        sample      = "d710a24971a0cd56c5cbe62b4b926e0122704fba52821e9c888e651a2d26a05c"
-        url         = "https://blog.fortinet.com/2017/01/26/deep-analysis-of-android-rootnik-malware-using-advanced-anti-debug-and-anti-hook-part-i-debugging-in-the-scope-of-native-layer"
-        author      = "Eduardo Novella"
+  meta:
+    description = "Bangcle (SecShell)"
+    sample      = "d710a24971a0cd56c5cbe62b4b926e0122704fba52821e9c888e651a2d26a05c"
+    url         = "https://blog.fortinet.com/2017/01/26/deep-analysis-of-android-rootnik-malware-using-advanced-anti-debug-and-anti-hook-part-i-debugging-in-the-scope-of-native-layer"
+    author      = "Eduardo Novella"
 
+  strings:
+    $a = "assets/secData0.jar"
+    $b = "libSecShell.so"
+    $c = "libSecShell-x86.so"
 
-    strings:
-        $a = "assets/secData0.jar"
-        $b = "libSecShell.so"
-        $c = "libSecShell-x86.so"
-
-    condition:
-        is_apk and 2 of them
+  condition:
+    is_apk and 2 of them
 }
 
 rule kiro : packer
@@ -301,30 +297,14 @@ rule jiagu_a : packer
 rule qdbh_packer : packer
 {
   meta:
-    description = "Unknown. Asset 'qdbh'"
-    example     = "faf1e85f878ea52a3b3fbb67126132b527f509586706f242f39b8c1fdb4a2065"
+    description = "qdbh packer"
+    sample     = "faf1e85f878ea52a3b3fbb67126132b527f509586706f242f39b8c1fdb4a2065"
 
   strings:
     $qdbh = "assets/qdbh"
 
   condition:
     is_apk and $qdbh
-}
-
-rule unknown_packer_lib : packer
-{
-  meta:
-    description = "Unknown. Random library name."
-    example     = "faf1e85f878ea52a3b3fbb67126132b527f509586706f242f39b8c1fdb4a2065"
-
-  strings:
-    $pre_jar  = { 00 6F 6E 43 72 65 61 74 65 00 28 29 56 00 63 6F 6D 2F 76 } // .onCreate.()V.com/v
-    $jar_data = { 2E 6A 61 72 00 2F 64 61 74 61 2F 64 61 74 61 2F 00 2F } // .jar./data/data
-    $post_jar = { 2E 6A 61 72 00 77 00 6A 61 76 61 2F 75 74 69 6C 2F 4D 61 70 00 67 65 74 49 6E 74 00 } // .jar.w.java/util/Map.getInt.
-
-  condition:
-    //is_apk and
-    ($pre_jar and $jar_data and $post_jar)
 }
 
 rule unicom_loader : packer
@@ -477,7 +457,7 @@ rule pangxie : packer
 {
   meta:
     description = "PangXie"
-    example = "ea70a5b3f7996e9bfea2d5d99693195fdb9ce86385b7116fd08be84032d43d2c"
+    sample = "ea70a5b3f7996e9bfea2d5d99693195fdb9ce86385b7116fd08be84032d43d2c"
 
   strings:
     $lib = "libnsecure.so"
@@ -490,7 +470,7 @@ rule kony : packer
 {
   meta:
     description = "Kony"
-	  url = "http://www.kony.com/"
+    url = "http://www.kony.com/"
 
   strings:
     $lib = "libkonyjsvm.so"
@@ -505,7 +485,7 @@ rule approov : packer
 {
   meta:
     description = "Aproov"
-	  url = "https://www.approov.io/"
+    url = "https://www.approov.io/"
 
   strings:
     $lib = "libapproov.so"
@@ -519,7 +499,7 @@ rule yidun : packer
 {
   meta:
     description = "yidun"
-	  url = "https://dun.163.com/product/app-protect"
+    url = "https://dun.163.com/product/app-protect"
 
   strings:
     $anti_trick = "Lcom/_" // Class path of anti-trick
@@ -530,7 +510,6 @@ rule yidun : packer
   condition:
     is_apk and (#lib > 1) or ($anti_trick and $entry_point and $jni_func)
 }
-
 
 rule apkpacker : packer
 {
@@ -548,4 +527,58 @@ rule apkpacker : packer
 
     condition:
         is_apk and all of them
+}
+
+rule chornclickers : packer
+{
+
+  meta:
+    // This has no name so we made one up from Ch-china,-orn-porn and -clickers
+    description = "ChornClickers"
+    url         = "https://github.com/rednaga/APKiD/issues/93"
+    example     = "0c4a26d6b27986775c9c58813407a737657294579b6fd37618b0396d90d3efc3"
+    author      = "Eduardo Novella"
+
+  strings:
+    $a = "lib/armeabi/libhdus.so"
+    $b = "lib/armeabi/libwjus.so"
+
+  condition:
+    is_apk and all of them
+}
+
+rule appsealing : packer
+{
+  meta:
+    // Commercial packer
+    description = "AppSealing"
+    url         = "https://www.appsealing.com/"
+    sample      = "61a983b032aee2e56159e682ad1588ad30fa8c3957bf849d1afe6f10e1d9645d"
+    author      = "zeroload"
+
+  strings:
+    $native_lib_1 = "libcovault.so"
+    $native_lib_2 = "libcovault-appsec.so"
+    $stub = "appsealing.dex"
+    $dex = "sealed1.dex"
+
+  condition:
+    is_apk and all of them
+}
+
+rule secenh : packer
+{
+  meta:
+    description = "Secenh"
+    sample = "0709d38575e15643f03793445479d869116dca319bce2296cb8af798453a8752"
+    author = "Nacho Sanmillan"
+  strings:
+    $a1 = "assets/libsecenh.so"
+    $a2 = "assets/libsecenh_x86.so"
+    $b1 = "assets/respatcher.jar"
+    $b2 = "assets/res.zip"
+  condition:
+    is_apk 
+    and 1 of ($a*) 
+    and 1 of ($b*)
 }

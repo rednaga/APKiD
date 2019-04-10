@@ -27,20 +27,25 @@
 
 include "common.yara"
 
-rule CNProtect_dex : protector
+rule gemalto_protector : obfuscator
 {
-  // https://github.com/rednaga/APKiD/issues/52
   meta:
-    description = "CNProtect (anti-disassemble)"
-    sample = "5bf6887871ce5f00348b1ec6886f9dd10b5f3f5b85d3d628cf21116548a3b37d"
+    description = "Gemalto"
+    url         = "https://www.gemalto.com"
+    author      = "Eduardo Novella"
+    sample      = "294f95298189080a25b20ef28295d60ecde27ee12361f93ad2f024fdcb5bdb0b"
+
 
   strings:
-    // code segment of the injected methods plus junk opcodes
-    $code_segment = {
-	  02 00 01 00 00 00 00 00 ?? ?? ?? ?? 11 00 00 00 00 (1? | 2? | 3? | 4? | 5? | 6? | 7? | 8? | 9? | a? | b? | c0 | c1 | c2 | c3 | c4 | c5 | c6 | c7)
-    }
+    $l1 = "lib/arm64-v8a/libmedl.so"
+    $l2 = "lib/armeabi-v7a/libmedl.so"
+    $l3 = "lib/armeabi/libmedl.so"
+    $l4 = "lib/mips/libmedl.so"
+    $l5 = "lib/mips64/libmedl.so"
+    $l6 = "lib/x86/libmedl.so"
+    $l7 = "lib/x86_64/libmedl.so"
 
   condition:
-    is_dex and
-    $code_segment
+    any of them and is_apk
 }
+

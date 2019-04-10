@@ -1,9 +1,10 @@
 # precompiled rules included in dist but not source
 apkid/rules/rules.yarc
 
-# Apks and dex files for testing
+# APKs and DEX files for local testing
 test-data
 research
+
 ### VirtualEnv template
 # Virtualenv
 # http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
@@ -318,6 +319,7 @@ nosetests.xml
 coverage.xml
 *,cover
 .hypothesis/
+.pytest_cache/
 
 # Translations
 *.mo

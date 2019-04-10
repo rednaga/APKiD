@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017  RedNaga. http://rednaga.io
+ * Copyright (C) 2018  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -110,13 +110,12 @@ rule bitwise_antiskid : obfuscator
     any of them
 }
 
-
 rule arxan : obfuscator
 {
   meta:
     description = "Arxan"
     url         = "https://www.arxan.com/products/application-protection-mobile/"
-    example     = "7bd1139b5f860d48e0c35a3f117f980564f45c177a6ef480588b5b5c8165f47e"
+    sample      = "7bd1139b5f860d48e0c35a3f117f980564f45c177a6ef480588b5b5c8165f47e"
     author      = "Eduardo Novella"
 
   strings:
@@ -140,13 +139,12 @@ rule arxan : obfuscator
     6 of ($m*)
 }
 
-
 rule arxan_multidex : obfuscator
 {
   meta:
     description = "Arxan (multidex)"
     url         = "https://www.arxan.com/products/application-protection-mobile/"
-    example     = "9b2a978a937293d6cb93439e0f819b4e044a3fad80dde92dec9b67e419278b5d"
+    sample      = "9b2a978a937293d6cb93439e0f819b4e044a3fad80dde92dec9b67e419278b5d"
     author      = "Eduardo Novella"
 
   strings:
@@ -186,4 +184,108 @@ rule allatori_demo : obfuscator
 
   condition:
     $s and is_dex
+}
+
+rule aamo_str_enc : obfuscator
+{
+  meta:
+    description = "AAMO"
+    author = "P0r0"
+    url = "https://github.com/necst/aamo"
+    example = "c1ef860af0e168f924663630ed3b61920b474d0c8b10e2bde6bfd3769dbd31a8"
+    example2 = "eb0d4e1ba2e880749594eb8739e65aa21b6f7b43798f04b6681065b396c15a78"
+
+  strings:
+    $opcodes_nops = {
+        22 ?? ?? ??                                 //new-instance v? Ljava/lang/String;
+        ( 00 00 | 00 00 00 00 | 00 00 00 00 00 00 )
+        12 ?2                                       //const/4 v2, 0x2 (the register and constant never change)
+        ( 00 00 | 00 00 00 00 | 00 00 00 00 00 00 )
+        1a ?? ?? ??                                 //const-string v?, _ref_to_string_
+        ( 00 00 | 00 00 00 00 | 00 00 00 00 00 00 )
+        71 ?? ?? ?? ?? ??                           //invoke-static {v?, v?}, Landroid/content/res/_RANDOM_CLASS_NAME.getStorageEncryption(ILjava/lang/String;)Ljavax/crypto/Cipher;
+        0c 02                                       //move-result-object v2 (the register never changes)
+        ( 00 00 | 00 00 00 00 | 00 00 00 00 00 00 )
+        71 ?? ?? ?? ?? ??                           //invoke-static {v?, v?}, Landroid/content/res/_RANDOM_CLASS_NAME.decode(Ljava/lang/String;)[B
+        0c 03                                       //move-result-object v3
+        ( 00 00 | 00 00 00 00 | 00 00 00 00 00 00 )
+        6e ?? ?? ?? ?? ??                           //invoke-virtual {v?, v?}, Ljavax/crypto/Cipher.doFinal([B)[B
+        0c 02                                       //move-result-object v2
+        ( 00 00 | 00 00 00 00 | 00 00 00 00 00 00 )
+        1a ?? ?? ??                                 //const-string v?, _CONST_STR_
+        ( 00 00 | 00 00 00 00 | 00 00 00 00 00 00 )
+        70 ?? ?? ?? ?? ??                           //invoke-direct {v?, v?, v?}, Ljava/lang/String.<init>([BLjava/lang/String;)
+        71 ?? ?? ?? ?? ??                           //invoke-static {v?, v?}, Landroid/content/res/_RANDOM_CLASS_NAME._RANDOM_METHOD_NAME_(Ljava/lang/String;)Ljava/lang/String;
+        0c ??                                       //move-result-object v4
+    }
+
+    $opcodes = {
+        22 ?? ?? ??         //new-instance v? Ljava/lang/String;
+        12 ?2               //const/4 v2, 0x2 (the register and constant never change)
+        1a ?? ?? ??         //const-string v?, _ref_to_string_
+        71 ?? ?? ?? ?? ??   //invoke-static {v?, v?}, Landroid/content/res/_RANDOM_CLASS_NAME.getStorageEncryption(ILjava/lang/String;)Ljavax/crypto/Cipher;
+        0c 02               //move-result-object v2 (the register never changes)
+        71 ?? ?? ?? ?? ??   //invoke-static {v?, v?}, Landroid/content/res/_RANDOM_CLASS_NAME.decode(Ljava/lang/String;)[B
+        0c 03               //move-result-object v3
+        6e ?? ?? ?? ?? ??   //invoke-virtual {v?, v?}, Ljavax/crypto/Cipher.doFinal([B)[B
+        0c 02               //move-result-object v2
+        1a ?? ?? ??         //const-string v?, _CONST_STR_
+        70 ?? ?? ?? ?? ??   //invoke-direct {v?, v?, v?}, Ljava/lang/String.<init>([BLjava/lang/String;)
+        71 ?? ?? ?? ?? ??   //invoke-static {v?, v?}, Landroid/content/res/_RANDOM_CLASS_NAME._RANDOM_METHOD_NAME_(Ljava/lang/String;)Ljava/lang/String;
+        0c ??               //move-result-object v4
+    }
+
+    $a = { 00 0f 63 6f 6e 76 65 72 74 54 6f 53 74 72 69 6e 67 00 } // convertToString
+    $b = { 00 14 67 65 74 53 74 6f 72 61 67 65 45 6e 63 72 79 70 74 69 6f 6e 00 } //getStorageEncryption
+
+  condition:
+    1 of ($opcodes*) and all of ($a, $b)
+}
+
+rule md5obfuscator : obfuscator
+{
+    meta:
+      description = "MD5 obfuscator"
+      sample      = "843a6562b62932df8b4c787466208a0523c1d88401f8cbf86f36de84ed4b7ccd"
+      author      = "Eduardo Novella"
+
+    strings:
+      // Lmd513d0258903c37fed2a3d17a14e8551a2/
+      $package = { 00 334C6D6435 [32] 2F [1-100] 3B 00 } // 00Lmd5......../....;00
+
+    condition:
+      #package >= 2 and is_dex
+}
+
+rule gemalto_sdk : obfuscator
+{
+  meta:
+    description = "Gemalto"
+    url         = "https://www.gemalto.com/brochures-site/download-site/Documents/eba_ezio_on_mobile.pdf"
+    author      = "Eduardo Novella"
+    sample      = "294f95298189080a25b20ef28295d60ecde27ee12361f93ad2f024fdcb5bdb0b"
+
+
+  strings:
+    $p1 = "Lcom/gemalto/idp/mobile/"
+    $p2 = "Lcom/gemalto/medl/"
+    $p3 = "Lcom/gemalto/ezio/mobile/sdk/"
+
+  condition:
+    any of them and is_dex
+}
+
+rule kiwi_amazon : obfuscator
+{
+    meta:
+        description = "Kiwi encrypter"
+        sample      = "3e309548f90160e3a4dc6f67621c75d2b66cc3b580da7306ff3dc6d6c25bb8a1"
+        author      = "Eduardo Novella"
+
+    strings:
+        $key   = { 00 19 4B6977695F5F56657273696F6E5F5F4F626675736361746F72 00 } // 00+len+"Kiwi__Version__Obfuscator"+00
+        $class = { 00 19 4B69776956657273696F6E456E637279707465722E6A617661 00 } // 00+len+"KiwiVersionEncrypter.java"+00
+
+    condition:
+        all of them
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017  RedNaga. http://rednaga.io
+ * Copyright (C) 2018  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -31,7 +31,7 @@ rule pangxie_dex : packer
 {
   meta:
     description = "PangXie"
-    example = "ea70a5b3f7996e9bfea2d5d99693195fdb9ce86385b7116fd08be84032d43d2c"
+    sample = "ea70a5b3f7996e9bfea2d5d99693195fdb9ce86385b7116fd08be84032d43d2c"
 
   strings:
     // Lcom/merry/wapper/WapperApplication;
@@ -71,17 +71,14 @@ rule medusah_appsolid_dex : packer
     is_dex and $loader and $main_activity
 }
 
-
-
 rule apkguard_dex : packer
 {
   meta:
     description = "APKGuard"
     url         = "http://apkguard.io/"
-    example     = "d9c98fff427646883ecb457fc2e9d2a8914ba7a9ee194735e0a18f56baa26cca"
+    sample     = "d9c98fff427646883ecb457fc2e9d2a8914ba7a9ee194735e0a18f56baa26cca"
 
   strings:
-
     $attachBaseContextOpcodes = {
         120b            // const/4 v11, #int 0 // #0
         6f20 0100 fe00  // invoke-super {v14, v15}, Landroid/app/Application;.attachBaseContext:(Landroid/content/Context;)V // method@0001
@@ -150,15 +147,12 @@ rule apkguard_dex : packer
     is_dex and $attachBaseContextOpcodes
 }
 
-
-
 rule cryptoshell_dex : packer
 {
   meta:
     description = "CryptoShell"
     url         = "http://cryptoshell.io"
-    example     = "d6745c1533b440c93f7bdfbb106470043b23aafdf91506c52332ed192d7b7003"
-
+    sample     = "d6745c1533b440c93f7bdfbb106470043b23aafdf91506c52332ed192d7b7003"
 
   strings:
 
@@ -224,11 +218,122 @@ rule cryptoshell_dex : packer
         0d08            // move-exception v8
         6e10 ??00 0800  // invoke-virtual {v8}, Ljava/lang/Exception;.printStackTrace:()V // method@000f
         28fb            // goto 0073 // -0005
-}
+    }
 
   condition:
     is_dex and
     $attachBaseContextOpcodes and
     not apkguard_dex
-
 }
+
+
+rule jar_pack01 : packer
+{
+  meta:
+    // Unknown name, made this one up
+    description = "jar_pack01"
+    sample     = "faf1e85f878ea52a3b3fbb67126132b527f509586706f242f39b8c1fdb4a2065"
+
+  strings:
+    $pre_jar  = { 00 6F 6E 43 72 65 61 74 65 00 28 29 56 00 63 6F 6D 2F 76 } // .onCreate.()V.com/v
+    $jar_data = { 2E 6A 61 72 00 2F 64 61 74 61 2F 64 61 74 61 2F 00 2F } // .jar./data/data
+    $post_jar = { 2E 6A 61 72 00 77 00 6A 61 76 61 2F 75 74 69 6C 2F 4D 61 70 00 67 65 74 49 6E 74 00 } // .jar.w.java/util/Map.getInt.
+
+  condition:
+    is_dex and
+    ($pre_jar and $jar_data and $post_jar)
+}
+
+rule gaoxor : packer
+{
+
+  meta:
+    description = "GaoXor"
+    url         = "https://github.com/rednaga/APKiD/issues/71"
+    example     = "673b3ab2e06f830e7ece1e3106a6a8c5f4bacd31393998fa73f6096b89f2df47"
+    author      = "Eduardo Novella"
+
+  strings:
+    $str_0 = { 11 61 74 74 61 63 68 42 61 73 65 43 6F 6E 74 65 78 74 00 } // "attachBaseContext"
+    $str_1 = { 04 2F 6C 69 62 00 } // "/lib"
+    $str_2 = { 17 4C 6A 61 76 61 2F 6C 61 6E 67 2F 43 6C 61 73 73 4C 6F 61 64 65 72 3B 00 } // Ljava/lang/ClassLoader;
+    $str_3 = { 77 72 69 74 65 64 44 65 78 46 69 6C 65 00 } // writedDexFile
+
+    /**
+      public void attachBaseContext(Context base) {
+          super.attachBaseContext(base);
+          try {
+              getClass().getDeclaredMethod(GaoAoxCoJpRm("MS4zNiguNyIBJCQ9HAU="), new Class[0]).invoke(this, new Object[0]);
+          } catch (Exception e) {
+          }
+      }
+    */
+    $attachBaseContextOpcodes = {
+        // method.public.Lpykqdxlnyt_iytDlJSoOg.Lpykqdxlnyt_iytDlJSoOg.method.attachBaseContext_Landroid_content_Context__V:
+        6f20??004300   // invoke-super {v3, v4}, Landroid/app/Application.attachBaseContext(Landroid/content/Context;)V
+        6e10??000300   // invoke-virtual {v3}, Ljava/lang/Object.getClass()Ljava/lang/Class;
+        0c00           // move-result-object v0
+        1a01??00       // const-string v1, str.MS4zNiguNyIBJCQ9HAU ; 0xdfd
+        6e20??001300   // invoke-virtual {v3, v1}, Lpykqdxlnyt/iytDlJSoOg.GaoAoxCoJpRm(Ljava/lang/String;)Ljava/lang/String;
+        0c01           // move-result-object v1
+        1202           // const/4 v2, 0               ; Protect.java:79
+        2322??00       // new-array v2, v2, [Ljava/lang/Class; ; 0x3b8
+        6e30??001002   // invoke-virtual {v0, v1, v2}, Ljava/lang/Class.getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+        0c00           // move-result-object v0
+        1201           // const/4 v1, 0
+        2311??00       // new-array v1, v1, [Ljava/lang/Object; ; 0x3bc
+        6e30??003001   // invoke-virtual {v0, v3, v1}, Ljava/lang/reflect/Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+        0e00           // return-void
+        0d00           // move-exception v0
+        28fe           // goto 0x00002984
+    }
+
+    /**
+        private byte[] mMuKJXDuYr(byte[] a, byte[] key) {
+            byte[] out = new byte[a.length];
+            for (int i = 0; i < a.length; i++) {
+                out[i] = (byte) (a[i] ^ key[i % key.length]);
+            }
+            return out;
+        }
+    */
+    $xor_key = {
+       21 ?2         //  array-length        v2, p1
+       23 21 17 00   //  new-array           v1, v2, [B
+       12 00         //  const/4             v0, 0
+       21 ?2         //  array-length        v2, p1
+       35 20 10 00   //  if-ge               v0, v2, :2A
+       48 02 0? 00   //  aget-byte           v2, p1, v0
+       21 ?3         //  array-length        v3, p2
+       94 03 00 03   //  rem-int             v3, v0, v3
+       48 03 0? 03   //  aget-byte           v3, p2, v3
+       B7 32         //  xor-int/2addr       v2, v3
+       8D 22         //  int-to-byte         v2, v2
+       4F 02 01 00   //  aput-byte           v2, v1, v0
+       D8 00 00 01   //  add-int/lit8        v0, v0, 1
+       28 F0         //  goto                :8
+       11 01         //  return-object       v1
+    }
+
+  condition:
+    $attachBaseContextOpcodes and $xor_key and is_dex and 3 of ($str_*)
+}
+
+rule appsealing_loader_1_2_2 : packer
+{
+
+  meta:
+    // Commercial packer
+    description = "AppSealing Loader v1.2.2"
+    url         = "https://www.appsealing.com/"
+    example      = "61a983b032aee2e56159e682ad1588ad30fa8c3957bf849d1afe6f10e1d9645d"
+    author      = "zeroload"
+
+  strings:
+    $loader_ver = /AppSealingLoader [.]+ v1.2.2/
+    $class = "Lcom/inka/appsealing/AppSealingApplication;"
+
+  condition:
+    is_dex and all of them
+}
+
