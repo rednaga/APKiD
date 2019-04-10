@@ -73,12 +73,8 @@ rule dxshield : packer
     is_apk and ($decryptlib and $res)
 }
 
-rule secneo : packer
+private rule secneo_base
 {
-  meta:
-    description = "SecNeo"
-    url = "http://www.secneo.com"
-
   strings:
     $encryptlib1 = "libDexHelper.so"
     $encryptlib2 = "libDexHelper-x86.so"
@@ -88,18 +84,30 @@ rule secneo : packer
     is_apk and any of ($encrypted_dex, $encryptlib2, $encryptlib1)
 }
 
-rule secneo_a : packer
+rule secneo_b : packer
 {
   meta:
-    description = "SecNeo"
+    description = "SecNeo.B"
     url = "http://www.secneo.com"
+    sample = "f5d7985e2add50fce74c99511512084845558ac996ce66f45e633c9495d78400"
 
   strings:
     $lib1 = "libdexjni.so"
     $lib2 = "libdexjni%s.so"
 
   condition:
-    secneo and any of ($lib1, $lib2)
+    secneo_base and any of ($lib1, $lib2)
+}
+
+rule secneo_a : packer
+{
+  meta:
+    description = "SecNeo.A"
+    url = "http://www.secneo.com"
+
+  condition:
+    secneo_base
+    and not secneo_b
 }
 
 
@@ -578,7 +586,7 @@ rule secenh : packer
     $b1 = "assets/respatcher.jar"
     $b2 = "assets/res.zip"
   condition:
-    is_apk 
-    and 1 of ($a*) 
+    is_apk
+    and 1 of ($a*)
     and 1 of ($b*)
 }
