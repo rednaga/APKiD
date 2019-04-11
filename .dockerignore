@@ -6,3 +6,5 @@ venv
 .idea
 .pytest_cache
 apkid.egg-info
+
+.mypy_cache
