@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018  RedNaga. https://rednaga.io
+ * Copyright (C) 2019  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -42,4 +42,23 @@ rule arxan_guardit : obfuscator
     is_apk and $cfg
 }
 
+rule gemalto_protector : obfuscator
+{
+  meta:
+    description = "Gemalto"
+    url         = "https://www.gemalto.com"
+    author      = "Eduardo Novella"
+    sample      = "294f95298189080a25b20ef28295d60ecde27ee12361f93ad2f024fdcb5bdb0b"
 
+  strings:
+    $l1 = "lib/arm64-v8a/libmedl.so"
+    $l2 = "lib/armeabi-v7a/libmedl.so"
+    $l3 = "lib/armeabi/libmedl.so"
+    $l4 = "lib/mips/libmedl.so"
+    $l5 = "lib/mips64/libmedl.so"
+    $l6 = "lib/x86/libmedl.so"
+    $l7 = "lib/x86_64/libmedl.so"
+
+  condition:
+    any of them and is_apk
+}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018  RedNaga. https://rednaga.io
+ * Copyright (C) 2019  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -334,4 +334,19 @@ rule promon : packer
   condition:
     ($a and $b and $c and $d) and
     2 of ($s*)
+}
+
+rule appsealing_core_2_10_10 : packer
+{
+  meta:
+    description = "AppSealing CORE VERSION 2.10.10"
+    url         = "https://www.appsealing.com/"
+    sample      = "61a983b032aee2e56159e682ad1588ad30fa8c3957bf849d1afe6f10e1d9645d"
+    author      = "zeroload"
+
+  strings:
+    $core_ver = "APPSEALING-CORE-VERSION_2.10.10"
+
+  condition:
+    $core_ver
 }

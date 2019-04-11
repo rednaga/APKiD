@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018  RedNaga. https://rednaga.io
+ * Copyright (C) 2019  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -175,8 +175,8 @@ rule allatori_demo : obfuscator
     description = "Allatori demo"
     url         = "http://www.allatori.com/features.html"
     author      = "Eduardo Novella"
-    example     = "7f2f5aac9833f7bdccc0b9865f5cc2a9c94ee795a285ef2fa6ff83a34c91827f"
-    example2    = "8c9e6c7b8c516499dd2065cb435ef68089feb3d4053faf2cfcb2b759b051383c"
+    sample     = "7f2f5aac9833f7bdccc0b9865f5cc2a9c94ee795a285ef2fa6ff83a34c91827f"
+    sample2    = "8c9e6c7b8c516499dd2065cb435ef68089feb3d4053faf2cfcb2b759b051383c"
 
   strings:
     // null-prev-str + len + str + null
@@ -192,8 +192,8 @@ rule aamo_str_enc : obfuscator
     description = "AAMO"
     author = "P0r0"
     url = "https://github.com/necst/aamo"
-    example = "c1ef860af0e168f924663630ed3b61920b474d0c8b10e2bde6bfd3769dbd31a8"
-    example2 = "eb0d4e1ba2e880749594eb8739e65aa21b6f7b43798f04b6681065b396c15a78"
+    sample = "c1ef860af0e168f924663630ed3b61920b474d0c8b10e2bde6bfd3769dbd31a8"
+    sample2 = "eb0d4e1ba2e880749594eb8739e65aa21b6f7b43798f04b6681065b396c15a78"
 
   strings:
     $opcodes_nops = {
@@ -240,4 +240,52 @@ rule aamo_str_enc : obfuscator
 
   condition:
     1 of ($opcodes*) and all of ($a, $b)
+}
+
+rule md5obfuscator : obfuscator
+{
+    meta:
+      description = "MD5 obfuscator"
+      sample      = "843a6562b62932df8b4c787466208a0523c1d88401f8cbf86f36de84ed4b7ccd"
+      author      = "Eduardo Novella"
+
+    strings:
+      // Lmd513d0258903c37fed2a3d17a14e8551a2/
+      $package = { 00 334C6D6435 [32] 2F [1-100] 3B 00 } // 00Lmd5......../....;00
+
+    condition:
+      #package >= 2 and is_dex
+}
+
+rule gemalto_sdk : obfuscator
+{
+  meta:
+    description = "Gemalto"
+    url         = "https://www.gemalto.com/brochures-site/download-site/Documents/eba_ezio_on_mobile.pdf"
+    author      = "Eduardo Novella"
+    sample      = "294f95298189080a25b20ef28295d60ecde27ee12361f93ad2f024fdcb5bdb0b"
+
+
+  strings:
+    $p1 = "Lcom/gemalto/idp/mobile/"
+    $p2 = "Lcom/gemalto/medl/"
+    $p3 = "Lcom/gemalto/ezio/mobile/sdk/"
+
+  condition:
+    any of them and is_dex
+}
+
+rule kiwi_amazon : obfuscator
+{
+    meta:
+        description = "Kiwi encrypter"
+        sample      = "3e309548f90160e3a4dc6f67621c75d2b66cc3b580da7306ff3dc6d6c25bb8a1"
+        author      = "Eduardo Novella"
+
+    strings:
+        $key   = { 00 19 4B6977695F5F56657273696F6E5F5F4F626675736361746F72 00 } // 00+len+"Kiwi__Version__Obfuscator"+00
+        $class = { 00 19 4B69776956657273696F6E456E637279707465722E6A617661 00 } // 00+len+"KiwiVersionEncrypter.java"+00
+
+    condition:
+        all of them
 }
