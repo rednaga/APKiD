@@ -32,14 +32,15 @@ rule arxan_guardit : obfuscator
   meta:
     description = "Arxan GuardIT"
     url         = "https://www.arxan.com"
-    sample      = ""
+    sample      = "0da79f5202b4c29c4ef43f769d5703a3d4ebfa65e49ea967abb49965d4ac3ba4"
     author      = "Eduardo Novella"
 
   strings:
-    $cfg = "guardit4j.fin"
+    // guardit4j.fin -- in root of apk; contains GuardIT version
+    $cfg = { 00 67 75 61 72 64 69 74 34 6A 2E 66 69 6E }
 
   condition:
-    is_apk and $cfg
+    is_apk and #cfg > 1
 }
 
 rule gemalto_protector : obfuscator
