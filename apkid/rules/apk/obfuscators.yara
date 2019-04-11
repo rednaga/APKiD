@@ -27,6 +27,21 @@
 
 include "common.yara"
 
+rule arxan_guardit : obfuscator
+{
+  meta:
+    description = "Arxan GuardIT"
+    url         = "https://www.arxan.com"
+    sample      = ""
+    author      = "Eduardo Novella"
+
+  strings:
+    $cfg = "guardit4j.fin"
+
+  condition:
+    is_apk and $cfg
+}
+
 rule gemalto_protector : obfuscator
 {
   meta:
@@ -47,4 +62,3 @@ rule gemalto_protector : obfuscator
   condition:
     any of them and is_apk
 }
-
