@@ -8,7 +8,12 @@ APKiD gives you information about how an APK was made. It identifies
 many compilers, packers, obfuscators, and other weird stuff. It’s
 `PEiD <https://www.aldeid.com/wiki/PEiD>`__ for Android.
 
-For more information on what this tool can be used for check out:
+.. figure:: https://user-images.githubusercontent.com/1356658/57322793-49be9c00-70b9-11e9-84da-1e64d9459a8a.png
+   :alt: Screen Shot 2019-05-07 at 10 55 00 AM
+
+   Screen Shot 2019-05-07 at 10 55 00 AM
+
+For more information on what this tool can be used, for check out:
 
 -  `Android Compiler
    Fingerprinting <http://hitcon.org/2016/CMT/slide/day1-r0-e-1.pdf>`__
@@ -25,6 +30,7 @@ module:
 
 .. code:: bash
 
+   pip install wheel
    pip wheel --wheel-dir=/tmp/yara-python --build-option="build" --build-option="--enable-dex" git+https://github.com/VirusTotal/yara-python.git@v3.10.0
    pip install --no-index --find-links=/tmp/yara-python yara-python
 
