@@ -27,5 +27,4 @@ RUN chown -R appuser:appuser /apkid
 RUN chown -R appuser:appuser /input
 USER appuser
 
-
 ENTRYPOINT ["apkid"]
