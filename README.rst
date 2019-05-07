@@ -20,7 +20,15 @@ For more information on what this tool can be used for check out:
 Installing
 ==========
 
-Install via ``pip`` with:
+First, install yara-python with ``--enable-dex`` to compile Yara’s DEX
+module:
+
+.. code:: bash
+
+   pip wheel --wheel-dir=/tmp/yara-python --build-option="build" --build-option="--enable-dex" git+https://github.com/VirusTotal/yara-python.git@v3.10.0
+   pip install --no-index --find-links=/tmp/yara-python yara-python
+
+Then, install apkid:
 
 .. code:: bash
 
@@ -105,7 +113,7 @@ the rules, and install the package in editable mode:
    git clone https://github.com/rednaga/APKiD
    cd APKiD
    ./prep-release.py
-   pip install -e .[dev]
+   pip install -e .[dev,test]
 
 If the above doesn’t work, due to permission errors dependent on your
 local machine and where Python has been installed, try specifying the
@@ -114,7 +122,7 @@ environment:
 
 .. code:: bash
 
-   pip install -e .[dev] --user
+   pip install -e .[dev,test] --user
 
 If you update any of the rules, be sure to run ``prep-release.py`` to
 recompile them.

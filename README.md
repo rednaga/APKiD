@@ -16,7 +16,14 @@ For more information on what this tool can be used for check out:
 
 # Installing
 
-Install via `pip` with:
+First, install yara-python with `--enable-dex` to compile Yara's DEX module:
+
+```bash
+pip wheel --wheel-dir=/tmp/yara-python --build-option="build" --build-option="--enable-dex" git+https://github.com/VirusTotal/yara-python.git@v3.10.0
+pip install --no-index --find-links=/tmp/yara-python yara-python
+```
+
+Then, install apkid:
 
 ```bash
 pip install apkid
