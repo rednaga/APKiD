@@ -6,7 +6,7 @@
 [![PyPI - Format](https://img.shields.io/pypi/format/apkid.svg)](https://pypi.org/project/apkid/)
 [![PyPI - License](https://img.shields.io/pypi/l/apkid.svg)](https://pypi.org/project/apkid/)
 
-APKiD gives you information about how an APK was made. It identifies many compilers, packers, obfuscators, and other weird stuff. It's _PEiD_ for Android.
+APKiD gives you information about how an APK was made. It identifies many compilers, packers, obfuscators, and other weird stuff. It's [_PEiD_](https://www.aldeid.com/wiki/PEiD) for Android.
 
 For more information on what this tool can be used for check out:
 
@@ -16,22 +16,11 @@ For more information on what this tool can be used for check out:
 
 # Installing
 
-Unfortunately, you can't just `pip install` APKiD since it depends on RedNaga's custom fork of [yara-python](https://github.com/rednaga/yara-python-1).
+Install via `pip` with:
 
-First, install our yara-python fork:
-
-```bash
-git clone --recursive https://github.com/rednaga/yara-python-1 yara-python
-cd yara-python
-python setup.py build --enable-dex install
-```
-
-Then, you can install apkid normally:
 ```bash
 pip install apkid
 ```
-
-This extra step is necessary until yara-python is updated with a version of Yara which includes the new, experimental DEX module.
 
 ## Docker
 
@@ -44,7 +33,7 @@ git clone https://github.com/rednaga/APKiD
 cd APKiD/
 docker build . -t rednaga:apkid
 docker/apkid.sh ~/reverse/targets/android/example/example.apk
-[+] APKiD 1.2.1 :: from RedNaga :: rednaga.io
+[+] APKiD 2.0.0 :: from RedNaga :: rednaga.io
 [*] example.apk!classes.dex
  |-> compiler : dx
 ```
@@ -54,7 +43,7 @@ docker/apkid.sh ~/reverse/targets/android/example/example.apk
 ```
 usage: apkid [-h] [-j] [-t TIMEOUT] [-o DIR] [-q] [FILE [FILE ...]]
 
-APKiD - Android Application Identifier v1.2.1
+APKiD - Android Application Identifier v2.0.0
 
 positional arguments:
   FILE                           apk, dex, or directory
@@ -86,15 +75,9 @@ Depending on your needs, you must choose one of them and follow its policies. A 
 
 # Hacking
 
-First, you'll need to install our fork of _yara-python_:
+This section is useful if you want to install the latest version in order to make changes, develop your own rules, and so on.
 
-```bash
-git clone --recursive https://github.com/rednaga/yara-python-1 yara-python
-cd yara-python
-python setup.py build --enable-dex install
-```
-
-Then, clone this repository, compile the rules, and install the package in editable mode:
+Clone this repository, compile the rules, and install the package in editable mode:
 
 ```bash
 git clone https://github.com/rednaga/APKiD
@@ -103,7 +86,7 @@ cd APKiD
 pip install -e .[dev,test]
 ```
 
-If the above doesn't work, due to permission errors dependent on your local machine and where Python has been installed, try specifying the `--user` flag. This is likely needed if you are working on OSX:
+If the above doesn't work, due to permission errors dependent on your local machine and where Python has been installed, try specifying the `--user` flag. This is likely needed if you're not using a virtual environment:
 
 ```bash
 pip install -e .[dev,test] --user
