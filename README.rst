@@ -1,24 +1,12 @@
 APKiD
 =====
 
-.. image:: https://travis-ci.org/rednaga/APKiD.svg?branch=master
-    :target: https://travis-ci.org/rednaga/APKiD
-
-.. image:: https://img.shields.io/pypi/v/apkid.svg
-    :target: https://pypi.python.org/pypi/apkid
-
-.. image:: https://img.shields.io/pypi/pyversions/apkid.svg
-    :target: https://pypi.python.org/pypi/apkid
-
-.. image:: https://img.shields.io/pypi/format/apkid.svg
-    :target: https://pypi.python.org/pypi/apkid
-
-.. image:: https://img.shields.io/pypi/l/apkid.svg
-    :target: https://pypi.python.org/pypi/apkid
+|Build Status| |PyPI| |PyPI - Python Version| |PyPI - Format| |PyPI -
+License|
 
 APKiD gives you information about how an APK was made. It identifies
-many compilers, packers, obfuscators, and other weird stuff. It’s *PEiD*
-for Android.
+many compilers, packers, obfuscators, and other weird stuff. It’s
+`PEiD <https://www.aldeid.com/wiki/PEiD>`__ for Android.
 
 For more information on what this tool can be used for check out:
 
@@ -26,37 +14,24 @@ For more information on what this tool can be used for check out:
    Fingerprinting <http://hitcon.org/2016/CMT/slide/day1-r0-e-1.pdf>`__
 -  `Detecting Pirated and Malicious Android Apps with
    APKiD <http://rednaga.io/2016/07/31/detecting_pirated_and_malicious_android_apps_with_apkid/>`__
+-  `APKiD: PEiD for Android
+   Apps <https://github.com/enovella/cve-bio-enovella/blob/master/slides/bheu18-enovella-APKID.pdf>`__
 
 Installing
 ==========
 
-Unfortunately, you can’t just ``pip install`` APKiD since it depends on
-RedNaga’s custom fork of
-`yara-python <https://github.com/rednaga/yara-python-1>`__.
-
-First, install our yara-python fork:
-
-.. code:: bash
-
-   git clone --recursive https://github.com/rednaga/yara-python-1 yara-python
-   cd yara-python
-   python setup.py build --enable-dex install
-
-Then, you can install apkid normally:
+Install via ``pip`` with:
 
 .. code:: bash
 
    pip install apkid
 
-This extra step is necessary until yara-python is updated with a version
-of Yara which includes the new, experimental DEX module.
-
 Docker
 ------
 
-If installing is too complicated, you can just use
+You can also run APKiD with
 `Docker <https://www.docker.com/community-edition>`__! Of course, this
-usage requires that you have git and docker installed on your machine.
+requires that you have git and Docker installed.
 
 Here’s how to use Docker:
 
@@ -66,7 +41,7 @@ Here’s how to use Docker:
    cd APKiD/
    docker build . -t rednaga:apkid
    docker/apkid.sh ~/reverse/targets/android/example/example.apk
-   [+] APKiD 1.2.1 :: from RedNaga :: rednaga.io
+   [+] APKiD 2.0.0 :: from RedNaga :: rednaga.io
    [*] example.apk!classes.dex
     |-> compiler : dx
 
@@ -77,7 +52,7 @@ Usage
 
    usage: apkid [-h] [-j] [-t TIMEOUT] [-o DIR] [-q] [FILE [FILE ...]]
 
-   APKiD - Android Application Identifier v1.2.1
+   APKiD - Android Application Identifier v2.0.0
 
    positional arguments:
      FILE                           apk, dex, or directory
@@ -95,7 +70,7 @@ Submitting New Packers / Compilers / Obfuscators
 If you come across an APK or DEX which APKiD does not recognize, please
 open a GitHub issue and tell us:
 
--  what you think it is
+-  what you think it is – obfuscated, packed, etc.
 -  the file hash (either MD5, SHA1, SHA256)
 
 We are open to any type of concept you might have for “something
@@ -115,21 +90,15 @@ source software.
 
 Depending on your needs, you must choose one of them and follow its
 policies. A detail of the policies and agreements for each license type
-are available in the LICENSE.COMMERCIAL and LICENSE.GPL files.
+are available in the `LICENSE.COMMERCIAL <LICENSE.COMMERCIAL>`__ and
+`LICENSE.GPL <LICENSE.GPL>`__ files.
 
 Hacking
 =======
 
-First, you’ll need to install our fork of *yara-python*:
-
-.. code:: bash
-
-   git clone --recursive https://github.com/rednaga/yara-python-1 yara-python
-   cd yara-python
-   python setup.py build --enable-dex install
-
-Then, clone this repository, compile the rules, and install the package
-in editable mode:
+If you want to install the latest version in order to make changes,
+develop your own rules, and so on, simply clone this repository, compile
+the rules, and install the package in editable mode:
 
 .. code:: bash
 
@@ -140,7 +109,8 @@ in editable mode:
 
 If the above doesn’t work, due to permission errors dependent on your
 local machine and where Python has been installed, try specifying the
-``--user`` flag. This is likely needed if you are working on OSX:
+``--user`` flag. This is likely needed if you’re not using a virtual
+environment:
 
 .. code:: bash
 
@@ -185,3 +155,14 @@ Markdown with images that are links into reStructuredText:
 
 For more information see `Packaging
 Projects <https://packaging.python.org/tutorials/packaging-projects/>`__.
+
+.. |Build Status| image:: https://travis-ci.org/rednaga/APKiD.svg?branch=master
+   :target: https://travis-ci.org/rednaga/APKiD
+.. |PyPI| image:: https://img.shields.io/pypi/v/apkid.svg
+   :target: https://pypi.org/project/apkid/
+.. |PyPI - Python Version| image:: https://img.shields.io/pypi/pyversions/apkid.svg
+   :target: https://pypi.org/project/apkid/
+.. |PyPI - Format| image:: https://img.shields.io/pypi/format/apkid.svg
+   :target: https://pypi.org/project/apkid/
+.. |PyPI - License| image:: https://img.shields.io/pypi/l/apkid.svg
+   :target: https://pypi.org/project/apkid/

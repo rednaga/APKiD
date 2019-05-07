@@ -24,7 +24,7 @@ pip install apkid
 
 ## Docker
 
-If installing is too complicated, you can just use [Docker](https://www.docker.com/community-edition)! Of course, this usage requires that you have git and docker installed on your machine.
+You can also run APKiD with [Docker](https://www.docker.com/community-edition)! Of course, this requires that you have git and Docker installed.
 
 Here's how to use Docker:
 
@@ -60,7 +60,7 @@ optional arguments:
 
 If you come across an APK or DEX which APKiD does not recognize, please open a GitHub issue and tell us:
 
-* what you think it is
+* what you think it is -- obfuscated, packed, etc.
 * the file hash (either MD5, SHA1, SHA256)
 
 We are open to any type of concept you might have for "something interesting" to detect, so do not limit yourself solely to packers, compilers or obfuscators. If there is an interesting anti-disassembler, anti-vm, anti-* trick, please make an issue.
@@ -71,13 +71,11 @@ Pull requests are welcome. If you're submitting a new rule, be sure to include a
 
 This tool is available under a dual license: a commercial one suitable for closed source projects and a GPL license that can be used in open source software.
 
-Depending on your needs, you must choose one of them and follow its policies. A detail of the policies and agreements for each license type are available in the LICENSE.COMMERCIAL and LICENSE.GPL files.
+Depending on your needs, you must choose one of them and follow its policies. A detail of the policies and agreements for each license type are available in the [LICENSE.COMMERCIAL](LICENSE.COMMERCIAL) and [LICENSE.GPL](LICENSE.GPL) files.
 
 # Hacking
 
-This section is useful if you want to install the latest version in order to make changes, develop your own rules, and so on.
-
-Clone this repository, compile the rules, and install the package in editable mode:
+If you want to install the latest version in order to make changes, develop your own rules, and so on, simply clone this repository, compile the rules, and install the package in editable mode:
 
 ```bash
 git clone https://github.com/rednaga/APKiD
