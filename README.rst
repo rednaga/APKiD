@@ -13,7 +13,7 @@ many compilers, packers, obfuscators, and other weird stuff. It’s
 
    Screen Shot 2019-05-07 at 10 55 00 AM
 
-For more information on what this tool can be used, for check out:
+For more information on what this tool can be used for, check out:
 
 -  `Android Compiler
    Fingerprinting <http://hitcon.org/2016/CMT/slide/day1-r0-e-1.pdf>`__
