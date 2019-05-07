@@ -136,7 +136,6 @@ class Scanner(object):
             if len(matches) > 0:
                 results[name] = matches
 
-            print('name', name, 'depth', depth, 'max depth', self.options.scan_depth, 'is zipfile', self._is_zipfile(entry_buffer, name))
             if depth < self.options.scan_depth and self._is_zipfile(entry_buffer, name):
                 with zipfile.ZipFile(entry_buffer) as zip_entry:
                     nested_results = self._scan_zip(zip_entry, depth=depth + 1)
