@@ -8,7 +8,9 @@
 
 APKiD gives you information about how an APK was made. It identifies many compilers, packers, obfuscators, and other weird stuff. It's [_PEiD_](https://www.aldeid.com/wiki/PEiD) for Android.
 
-For more information on what this tool can be used for check out:
+![Screen Shot 2019-05-07 at 10 55 00 AM](https://user-images.githubusercontent.com/1356658/57322793-49be9c00-70b9-11e9-84da-1e64d9459a8a.png)
+
+For more information on what this tool can be used, for check out:
 
 * [Android Compiler Fingerprinting](http://hitcon.org/2016/CMT/slide/day1-r0-e-1.pdf)
 * [Detecting Pirated and Malicious Android Apps with APKiD](http://rednaga.io/2016/07/31/detecting_pirated_and_malicious_android_apps_with_apkid/)
