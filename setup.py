@@ -64,7 +64,7 @@ setup(
         'Topic :: Utilities',
     ],
     keywords='android analysis reversing malware apk dex dalvik',
-    packages=find_packages(include='apkid', exclude=['docs', 'tests']),
+    packages=find_packages(exclude=['docs', 'tests']),
     package_data={
         'rules': package_files('apkid/rules/'),
     },
