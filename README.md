@@ -53,7 +53,7 @@ docker/apkid.sh ~/reverse/targets/android/example/example.apk
 ```
 usage: apkid [-h] [-j] [-t TIMEOUT] [-o DIR] [-q] [FILE [FILE ...]]
 
-APKiD - Android Application Identifier v2.0.0
+APKiD - Android Application Identifier v2.0.1
 
 positional arguments:
   FILE                           apk, dex, or directory
@@ -110,7 +110,7 @@ To update the PyPI package:
 
 ```bash
 ./prep-release.py readme
-rm dist/*
+rm -f dist/*
 python setup.py sdist bdist_wheel
 twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
 ```
