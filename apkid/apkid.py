@@ -24,11 +24,14 @@
  requirements will be met.
 """
 
+import io
 import os
-import yara
+import traceback
 import zipfile
 from typing import Union, IO, List, Dict, Set
-import io
+
+import yara
+
 from .output import OutputFormatter
 from .rules import RulesManager
 
@@ -118,30 +121,41 @@ class Scanner(object):
             if len(matches) > 0:
                 results[filename] = matches
 
-            if self._is_zipfile(f, filename):
-                with zipfile.ZipFile(f) as zf:
-                    zip_results = self._scan_zip(zf)
-                for entry_name, entry_matches in zip_results.items():
-                    results[f'{filename}!{entry_name}'] = entry_matches
+            try:
+                if self._is_zipfile(f, filename):
+                    with zipfile.ZipFile(f) as zf:
+                        zip_results = self._scan_zip(zf)
+                    for entry_name, entry_matches in zip_results.items():
+                        results[f'{filename}!{entry_name}'] = entry_matches
+            except Exception as e:
+                stack = traceback.format_exc()
+                print(f"Exception scanning {file_path}: {stack}")
         return results
 
     def _scan_zip(self, zf: zipfile.ZipFile, depth=0) -> Dict[str, List[yara.Match]]:
-        results = {}
+        results: Dict[str, List[yara.Match]] = {}
         for name in zf.namelist():
-            with zf.open(name) as entry:
-                entry_buffer: IO = io.BytesIO(entry.read())
-            matches = self.rules.match(data=entry_buffer.read(), timeout=self.options.timeout)
-            entry_buffer.seek(0)
-
-            if len(matches) > 0:
-                results[name] = matches
-
-            if depth < self.options.scan_depth and self._is_zipfile(entry_buffer, name):
-                with zipfile.ZipFile(entry_buffer) as zip_entry:
-                    nested_results = self._scan_zip(zip_entry, depth=depth + 1)
-                    for nested_name, nested_matches in nested_results.items():
-                        results[f'{name}!{nested_name}'] = nested_matches
+            try:
+                self._scan_zip_entry(zf, name, results, depth)
+            except Exception as e:
+                stack = traceback.format_exc()
+                print(f"Exception scanning {name} in {zf.filename}, depth={depth}: {stack}")
         return results
+
+    def _scan_zip_entry(self, zf, name, results, depth) -> None:
+        with zf.open(name) as entry:
+            entry_buffer: IO = io.BytesIO(entry.read())
+        matches = self.rules.match(data=entry_buffer.read(), timeout=self.options.timeout)
+        entry_buffer.seek(0)
+
+        if len(matches) > 0:
+            results[name] = matches
+
+        if depth < self.options.scan_depth and self._is_zipfile(entry_buffer, name):
+            with zipfile.ZipFile(entry_buffer) as zip_entry:
+                nested_results = self._scan_zip(zip_entry, depth=depth + 1)
+                for nested_name, nested_matches in nested_results.items():
+                    results[f'{name}!{nested_name}'] = nested_matches
 
     def _type_file(self, file_obj: IO) -> Union[None, str]:
         magic = file_obj.read(4)
