@@ -93,7 +93,7 @@ class OutputFormatter(object):
             out_file = sorted(results.keys(), key=lambda k: len(k))[0]
             out_path = os.path.join(self.output_dir, out_file)
             with open(out_path, 'w') as f:
-                f.write(output)
+                f.write(json.dumps(output))
         else:
             if self.json:
                 self._print_json(results)
