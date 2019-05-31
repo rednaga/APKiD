@@ -144,6 +144,9 @@ class Scanner(object):
 
     def _scan_zip_entry(self, zf, name, results, depth) -> None:
         with zf.open(name) as entry:
+            if not self._should_scan(entry, name):
+                return
+            entry.seek(0)
             entry_buffer: IO = io.BytesIO(entry.read())
         matches = self.rules.match(data=entry_buffer.read(), timeout=self.options.timeout)
         entry_buffer.seek(0)
