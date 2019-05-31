@@ -27,24 +27,25 @@
 import json
 import os
 import sys
-import yara
 from typing import Dict, List, Union
+
+import yara
 
 from .rules import RulesManager
 
-prt_red = lambda s: "\033[91m{}\033[00m".format(s)
-prt_green = lambda s: "\033[92m{}\033[00m".format(s)
-prt_yellow = lambda s: "\033[93m{}\033[00m".format(s)
-prt_light_purple = lambda s: "\033[94m{}\033[00m".format(s)
-prt_purple = lambda s: "\033[95m{}\033[00m".format(s)
-prt_cyan = lambda s: "\033[36m{}\033[00m".format(s)
-prt_light_cyan = lambda s: "\033[96m{}\033[00m".format(s)
-prt_light_gray = lambda s: "\033[97m{}\033[00m".format(s)
-prt_orange = lambda s: "\033[33m{}\033[00m".format(s)
-prt_pink = lambda s: "'\033[95m'{}\033[00m".format(s)
+prt_red = lambda s: f"\033[91m{s}\033[00m"
+prt_green = lambda s: f"\033[92m{s}\033[00m"
+prt_yellow = lambda s: f"\033[93m{s}\033[00m"
+prt_light_purple = lambda s: f"\033[94m{s}\033[00m"
+prt_purple = lambda s: f"\033[95m{s}\033[00m"
+prt_cyan = lambda s: f"\033[36m{s}\033[00m"
+prt_light_cyan = lambda s: f"\033[96m{s}\033[00m"
+prt_light_gray = lambda s: f"\033[97m{s}\033[00m"
+prt_orange = lambda s: f"\033[33m{s}\033[00m"
+prt_pink = lambda s: f"'\033[95m'{s}\033[00m"
 
 
-def colorize_tag(tag):
+def colorize_tag(tag) -> str:
     if tag == 'compiler':
         return prt_cyan(tag)
     elif tag == 'manipulator':
@@ -73,7 +74,7 @@ class OutputFormatter(object):
         self.version = __version__
         self.rules_hash = rules_manager.hash()
 
-    def write(self, results: Dict[str, List[yara.Match]]):
+    def write(self, results: Dict[str, List[yara.Match]]) -> None:
         """
          Example yara.Match:
         {
@@ -109,29 +110,30 @@ class OutputFormatter(object):
         for filename, matches in results.items():
             result = {
                 'filename': filename,
-                'matches': self._build_match_dict(matches),
+                'matches': OutputFormatter._build_match_dict(matches),
             }
             output['files'].append(result)
         return output
 
-    def _print_json(self, results: Dict[str, List[yara.Match]]):
+    def _print_json(self, results: Dict[str, List[yara.Match]]) -> None:
         output = self.build_json_output(results)
         print(json.dumps(output, sort_keys=True))
 
-    def _print_console(self, results: Dict[str, List[yara.Match]]):
+    def _print_console(self, results: Dict[str, List[yara.Match]]) -> None:
         for key, raw_matches in results.items():
-            matches = self._build_match_dict(raw_matches)
+            matches = OutputFormatter._build_match_dict(raw_matches)
             print(f"[*] {key}")
             for tags in sorted(matches):
                 descriptions = ', '.join(sorted(matches[tags]))
                 if sys.stdout.isatty():
-                    tags_str = self._colorize_tags(tags)
+                    tags_str = OutputFormatter._colorize_tags(tags)
                 else:
                     tags_str = tags
                 print(f" |-> {tags_str} : {descriptions}")
 
-    def _build_match_dict(self, matches):
-        results = {}
+    @staticmethod
+    def _build_match_dict(matches) -> Dict[str, List[str]]:
+        results: Dict[str, List[str]] = {}
         for m in matches:
             tags = ', '.join(sorted(m.tags))
             description = m.meta.get('description', m)
@@ -142,43 +144,11 @@ class OutputFormatter(object):
                 results[tags] = [description]
         return results
 
-    def _colorize_tags(self, tags):
+    @staticmethod
+    def _colorize_tags(tags) -> str:
         colored_tags = []
         for tag in tags.split(', '):
             colored_tag = colorize_tag(tag)
             colored_tags.append(colored_tag)
         colored_tags = ', '.join(colored_tags)
         return colored_tags
-
-# def get_json_output(results):
-#     from . import __version__, rules
-#     output = {
-#         'apkid_version': __version__,
-#         'rules_sha256': rules.sha256(),
-#         'files': [],
-#     }
-#     for filename in results:
-#         result = {
-#             'filename': filename,
-#             'results': results[filename],
-#         }
-#         output['files'].append(result)
-#     return output
-#
-#
-# def build_match_dict(matches):
-#     results = {}
-#     for m in matches:
-#         tags = ', '.join(sorted(m.tags))
-#         description = m.meta.get('description', m)
-#         if tags in results:
-#             if description not in results[tags]:
-#                 results[tags].append(description)
-#         else:
-#             results[tags] = [description]
-#     return results
-#
-#
-# def print_json_results(results):
-#     output = get_json_output(results)
-#     print(json.dumps(output))

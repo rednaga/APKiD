@@ -160,7 +160,8 @@ class Scanner(object):
                 for nested_name, nested_matches in nested_results.items():
                     results[f'{name}!{nested_name}'] = nested_matches
 
-    def _type_file(self, file_obj: IO) -> Union[None, str]:
+    @staticmethod
+    def _type_file(file_obj: IO) -> Union[None, str]:
         magic = file_obj.read(4)
         file_obj.seek(0)
         for file_type, magics in SCANNABLE_FILE_MAGICS.items():
@@ -168,16 +169,16 @@ class Scanner(object):
                 return file_type
         return None
 
-    def _is_zipfile(self, file_obj: IO, name: str):
+    def _is_zipfile(self, file_obj: IO, name: str) -> bool:
         if self.options.typing == 'filename':
             name = name.lower()
             return name.endswith('.apk') or name.endswith('.zip')
         else:
             return zipfile.is_zipfile(file_obj)
 
-    def _should_scan(self, file_obj: IO, name: str):
+    def _should_scan(self, file_obj: IO, name: str) -> bool:
         if self.options.typing == 'magic':
-            file_type = self._type_file(file_obj)
+            file_type = Scanner._type_file(file_obj)
             return file_type is not None
         elif self.options.typing == 'filename':
             name = name.lower()
