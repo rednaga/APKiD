@@ -89,7 +89,7 @@ class OutputFormatter(object):
         if self.output_dir:
             if not os.path.exists(self.output_dir):
                 os.makedirs(self.output_dir)
-            output = self._build_json_output(results)
+            output = self.build_json_output(results)
             out_file = sorted(results.keys(), key=lambda k: len(k))[0]
             out_path = os.path.join(self.output_dir, out_file)
             with open(out_path, 'w') as f:
@@ -100,11 +100,7 @@ class OutputFormatter(object):
             else:
                 self._print_console(results)
 
-    def _print_json(self, results: Dict[str, List[yara.Match]]):
-        output = self._build_json_output(results)
-        print(json.dumps(output, sort_keys=True))
-
-    def _build_json_output(self, results: Dict[str, List[yara.Match]]):
+    def build_json_output(self, results: Dict[str, List[yara.Match]]):
         output = {
             'apkid_version': self.version,
             'rules_sha256': self.rules_hash,
@@ -117,6 +113,10 @@ class OutputFormatter(object):
             }
             output['files'].append(result)
         return output
+
+    def _print_json(self, results: Dict[str, List[yara.Match]]):
+        output = self.build_json_output(results)
+        print(json.dumps(output, sort_keys=True))
 
     def _print_console(self, results: Dict[str, List[yara.Match]]):
         for key, raw_matches in results.items():
