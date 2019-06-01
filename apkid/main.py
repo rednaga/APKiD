@@ -25,7 +25,7 @@ def get_parser():
                         help="how deep to go when scanning nested zips")
     parser.add_argument('--entry-max-scan-size', type=int, default=100 * 1024 * 1024,
                         help="max zip entry size to scan in bytes, 0 = no limit")
-    parser.add_argument('--typing', choices=('magic', 'filename', None), default=None,
+    parser.add_argument('--typing', choices=('magic', 'filename', 'none'), default='magic',
                         help="method to decide which files to scan")
     parser.add_argument('-v', '--verbose', action='store_true',
                         help="log debug messages")
