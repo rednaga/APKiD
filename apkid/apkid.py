@@ -176,7 +176,7 @@ class Scanner(object):
     def _is_zipfile(self, file_obj: IO, name: str) -> bool:
         if self.options.typing == 'filename':
             name = name.lower()
-            return name.endswith('.apk') or name.endswith('.zip')
+            return name.endswith('.apk') or name.endswith('.zip') or name.endswith('.jar')
         else:
             return zipfile.is_zipfile(file_obj)
 
