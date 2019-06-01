@@ -77,7 +77,7 @@ setup(
     zip_safe=False,
     entry_points={
         'console_scripts': [
-            'apkid=apkid:main',
+            'apkid=apkid.main:main',
         ],
     },
 )

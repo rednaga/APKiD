@@ -134,30 +134,38 @@ class Scanner(object):
 
     def _scan_zip(self, zf: zipfile.ZipFile, depth=0) -> Dict[str, List[yara.Match]]:
         results: Dict[str, List[yara.Match]] = {}
-        for name in zf.namelist():
+        for info in zf.infolist():
+            if info.is_dir():
+                continue
             try:
-                self._scan_zip_entry(zf, name, results, depth)
+                self._scan_zip_entry(zf, info, results, depth)
             except Exception as e:
                 stack = traceback.format_exc()
-                print(f"Exception scanning {name} in {zf.filename}, depth={depth}: {stack}")
+                print(f"Exception scanning {info.filename} in {zf.filename}, depth={depth}: {stack}")
         return results
 
-    def _scan_zip_entry(self, zf, name, results, depth) -> None:
-        with zf.open(name) as entry:
-            entry_buffer: IO = io.BytesIO(entry.read())
+    def _scan_zip_entry(self, zf, info, results, depth) -> None:
+        with zf.open(info) as entry:
+            # Python 3.6 zip entries are not seek'able :(
+            entry_buffer: IO = io.BytesIO(entry.read(4))
+            entry_buffer.seek(0)
+            if not self._should_scan(entry_buffer, info.filename):
+                return
+            entry_buffer.seek(4)
+            entry_buffer.write(entry.read())
         matches = self.rules.match(data=entry_buffer.read(), timeout=self.options.timeout)
-        entry_buffer.seek(0)
 
         if len(matches) > 0:
-            results[name] = matches
+            results[info.filename] = matches
 
-        if depth < self.options.scan_depth and self._is_zipfile(entry_buffer, name):
+        if depth < self.options.scan_depth and self._is_zipfile(entry_buffer, info.filename):
             with zipfile.ZipFile(entry_buffer) as zip_entry:
                 nested_results = self._scan_zip(zip_entry, depth=depth + 1)
                 for nested_name, nested_matches in nested_results.items():
-                    results[f'{name}!{nested_name}'] = nested_matches
+                    results[f'{info.filename}!{nested_name}'] = nested_matches
 
-    def _type_file(self, file_obj: IO) -> Union[None, str]:
+    @staticmethod
+    def _type_file(file_obj: IO) -> Union[None, str]:
         magic = file_obj.read(4)
         file_obj.seek(0)
         for file_type, magics in SCANNABLE_FILE_MAGICS.items():
@@ -165,16 +173,16 @@ class Scanner(object):
                 return file_type
         return None
 
-    def _is_zipfile(self, file_obj: IO, name: str):
+    def _is_zipfile(self, file_obj: IO, name: str) -> bool:
         if self.options.typing == 'filename':
             name = name.lower()
             return name.endswith('.apk') or name.endswith('.zip')
         else:
             return zipfile.is_zipfile(file_obj)
 
-    def _should_scan(self, file_obj: IO, name: str):
+    def _should_scan(self, file_obj: IO, name: str) -> bool:
         if self.options.typing == 'magic':
-            file_type = self._type_file(file_obj)
+            file_type = Scanner._type_file(file_obj)
             return file_type is not None
         elif self.options.typing == 'filename':
             name = name.lower()
