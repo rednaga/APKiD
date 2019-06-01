@@ -134,31 +134,35 @@ class Scanner(object):
 
     def _scan_zip(self, zf: zipfile.ZipFile, depth=0) -> Dict[str, List[yara.Match]]:
         results: Dict[str, List[yara.Match]] = {}
-        for name in zf.namelist():
+        for info in zf.infolist():
+            if info.is_dir():
+                continue
             try:
-                self._scan_zip_entry(zf, name, results, depth)
+                self._scan_zip_entry(zf, info, results, depth)
             except Exception as e:
                 stack = traceback.format_exc()
-                print(f"Exception scanning {name} in {zf.filename}, depth={depth}: {stack}")
+                print(f"Exception scanning {info.filename} in {zf.filename}, depth={depth}: {stack}")
         return results
 
-    def _scan_zip_entry(self, zf, name, results, depth) -> None:
-        with zf.open(name) as entry:
-            if not self._should_scan(entry, name):
+    def _scan_zip_entry(self, zf, info, results, depth) -> None:
+        with zf.open(info) as entry:
+            # Python 3.6 zip entries are not seek'able :(
+            entry_buffer: IO = io.BytesIO(entry.read(4))
+            entry_buffer.seek(0)
+            if not self._should_scan(entry_buffer, info.filename):
                 return
-            entry.seek(0)
-            entry_buffer: IO = io.BytesIO(entry.read())
+            entry_buffer.seek(4)
+            entry_buffer.write(entry.read())
         matches = self.rules.match(data=entry_buffer.read(), timeout=self.options.timeout)
-        entry_buffer.seek(0)
 
         if len(matches) > 0:
-            results[name] = matches
+            results[info.filename] = matches
 
-        if depth < self.options.scan_depth and self._is_zipfile(entry_buffer, name):
+        if depth < self.options.scan_depth and self._is_zipfile(entry_buffer, info.filename):
             with zipfile.ZipFile(entry_buffer) as zip_entry:
                 nested_results = self._scan_zip(zip_entry, depth=depth + 1)
                 for nested_name, nested_matches in nested_results.items():
-                    results[f'{name}!{nested_name}'] = nested_matches
+                    results[f'{info.filename}!{nested_name}'] = nested_matches
 
     @staticmethod
     def _type_file(file_obj: IO) -> Union[None, str]:
