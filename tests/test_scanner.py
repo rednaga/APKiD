@@ -76,14 +76,11 @@ def test_scan_with_nested_zips(scanner: Scanner):
         '0.dex': b'dex\n',
     }
 
-    print('zero layer', zero_layer)
-
     scanner.options.scan_depth = 2
     with make_temp_zip(zero_layer) as tz:
         filename: str = os.path.basename(tz.name)
         results = scanner.scan_file(tz.name)
 
-    print('all results', results)
     for key in (
             filename, f'{filename}!0.dex', f'{filename}!1.zip', f'{filename}!1.zip!1.dex', f'{filename}!1.zip!2.zip',
             f'{filename}!1.zip!2.zip!2.dex', f'{filename}!1.zip!2.zip!3.zip'
