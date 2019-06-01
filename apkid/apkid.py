@@ -116,7 +116,7 @@ class Scanner(object):
         with open(file_path, 'rb') as f:
             if not self._should_scan(f, filename):
                 return results
-
+            f.seek(0)
             matches: List[yara.Matches] = self.rules.match(data=f.read(), timeout=self.options.timeout)
             if len(matches) > 0:
                 results[filename] = matches
@@ -151,13 +151,14 @@ class Scanner(object):
             entry_buffer.seek(0)
             if not self._should_scan(entry_buffer, info.filename):
                 return
-            entry_buffer.seek(4)
             entry_buffer.write(entry.read())
+        entry_buffer.seek(0)
         matches = self.rules.match(data=entry_buffer.read(), timeout=self.options.timeout)
 
         if len(matches) > 0:
             results[info.filename] = matches
 
+        entry_buffer.seek(0)
         if depth < self.options.scan_depth and self._is_zipfile(entry_buffer, info.filename):
             with zipfile.ZipFile(entry_buffer) as zip_entry:
                 nested_results = self._scan_zip(zip_entry, depth=depth + 1)
@@ -167,7 +168,6 @@ class Scanner(object):
     @staticmethod
     def _type_file(file_obj: IO) -> Union[None, str]:
         magic = file_obj.read(4)
-        file_obj.seek(0)
         for file_type, magics in SCANNABLE_FILE_MAGICS.items():
             if magic in magics:
                 return file_type
