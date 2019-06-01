@@ -55,7 +55,7 @@ Here’s how to use Docker:
    cd APKiD/
    docker build . -t rednaga:apkid
    docker/apkid.sh ~/reverse/targets/android/example/example.apk
-   [+] APKiD 2.0.2 :: from RedNaga :: rednaga.io
+   [+] APKiD 2.0.3 :: from RedNaga :: rednaga.io
    [*] example.apk!classes.dex
     |-> compiler : dx
 
@@ -64,19 +64,25 @@ Usage
 
 ::
 
-   usage: apkid [-h] [-j] [-t TIMEOUT] [-o DIR] [-q] [FILE [FILE ...]]
+   usage: apkid [-h] [-j] [-t TIMEOUT] [-o DIR] [-r] [--scan-depth SCAN_DEPTH]
+                [--entry-max-scan-size ENTRY_MAX_SCAN_SIZE] [--typing {magic,filename,none}] [-v]
+                [FILE [FILE ...]]
 
-   APKiD - Android Application Identifier v2.0.2
+   APKiD - Android Application Identifier v2.0.3
 
    positional arguments:
-     FILE                           apk, dex, or directory
+     FILE                                       apk, dex, or directory
 
    optional arguments:
-     -h, --help                     show this help message and exit
-     -j, --json                     output scan results in JSON format
-     -t TIMEOUT, --timeout TIMEOUT  Yara scan timeout (in seconds)
-     -o DIR, --output-dir DIR       write individual results to this directory (implies --json)
-     -q, --quiet                    suppress extraneous output
+     -h, --help                                 show this help message and exit
+     -j, --json                                 output scan results in JSON format
+     -t TIMEOUT, --timeout TIMEOUT              Yara scan timeout (in seconds)
+     -o DIR, --output-dir DIR                   write individual results here (implies --json)
+     -r, --recursive                            recurse into subdirectories
+     --scan-depth SCAN_DEPTH                    how deep to go when scanning nested zips
+     --entry-max-scan-size ENTRY_MAX_SCAN_SIZE  max zip entry size to scan in bytes, 0 = no limit
+     --typing {magic,filename,none}             method to decide which files to scan
+     -v, --verbose                              log debug messages
 
 Submitting New Packers / Compilers / Obfuscators
 ================================================
