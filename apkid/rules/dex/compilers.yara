@@ -41,7 +41,7 @@ private rule unsorted_string_pool : internal
      *
      * Note: It's probably only necessary to check the first several strings.
      */
-    for any i in (0..dex.header.string_ids_size - 1) : (dex.string_ids[i].offset + dex.string_ids[i].size + 1 < dex.string_ids[i + 1].offset)
+    for any i in (0..dex.header.string_ids_size - 1) : (dex.string_ids[i + 1].offset < dex.string_ids[i].offset)
 }
 
 private rule dexlib2_map_type_order : internal
