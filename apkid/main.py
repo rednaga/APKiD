@@ -45,7 +45,7 @@ def get_parser():
                         help="Yara scan timeout (in seconds)")
     parser.add_argument('-o', '--output-dir', metavar='DIR', default=None,
                         help="write individual results here (implies --json)")
-    parser.add_argument('-r', '--recursive', action='store_true', default=True,
+    parser.add_argument('-r', '--recursive', action='store_true', default=False,
                         help="recurse into subdirectories")
     parser.add_argument('--scan-depth', type=int, default=2,
                         help="how deep to go when scanning nested zips")
