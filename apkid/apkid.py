@@ -200,8 +200,12 @@ class Scanner(object):
 
     def _yield_file_paths(self, dir_path: str):
         if self.options.recursive:
-            for filename in os.listdir(dir_path):
-                yield os.path.join(dir_path, filename)
-        for root, _, filenames in os.walk(dir_path):
-            for filename in filenames:
-                yield os.path.join(dir_path, filename)
+            for root, _, filenames in os.walk(dir_path):
+                for path in filenames:
+                    yield os.path.join(dir_path, path)
+        else:
+            for path in os.listdir(dir_path):
+                full_path = os.path.join(dir_path, path)
+                if os.path.isdir(full_path):
+                    continue
+                yield full_path
