@@ -276,3 +276,23 @@ rule alipay : obfuscator
   condition:
     any of them and is_elf
 }
+
+rule dexguard_native : obfuscator
+{
+  meta:
+    description = "DexGuard"
+    url         = "https://www.guardsquare.com/en/products/dexguard"
+    sample      = "ad25035a9ff2ccf44535fd0e5c9d3390f9ba2c4cd68ddf2aa69608494c48ea9e"
+
+    strings:
+      // "Java_com_guardsquare_dexguard_runtime_detection_HookDetector"
+      $hook_detector = {
+        00 4A 61 76 61 5F 63 6F 6D 5F 67 75 61 72 64 73 71 75 61 72 65 5F
+        64 65 78 67 75 61 72 64 5F 72 75 6E 74 69 6D 65 5F 64 65 74 65 63
+        74 69 6F 6E 5F 48 6F 6F 6B 44 65 74 65 63 74 6F 72
+      }
+
+    condition:
+      is_elf
+      and any of them
+}
