@@ -24,8 +24,6 @@
  requirements will be met.
 """
 
-import os
-
 from apkid.apkid import Scanner
 from .factories import make_temp_zip, make_temp_file, make_zip
 
@@ -33,28 +31,26 @@ from .factories import make_temp_zip, make_temp_file, make_zip
 def test_scan_with_dummy_zip(scanner: Scanner):
     zip_entries = {'dummy': b'hello'}
     with make_temp_zip(zip_entries) as tz:
-        filename: str = os.path.basename(tz.name)
         results = scanner.scan_file(tz.name)
 
-    assert filename in results
-    assert len(results[filename]) > 0
+    assert tz.name in results
+    assert len(results) == 1
+    assert len(results[tz.name]) > 0
 
 
 def test_scan_with_unscannable_file(scanner: Scanner):
     with make_temp_file(b'hello') as tz:
-        filename: str = os.path.basename(tz.name)
         results = scanner.scan_file(tz.name)
 
-    assert results == {}
+    assert len(results) == 0
 
 
 def test_scan_with_zip_with_dex(scanner: Scanner):
     zip_entries = {'classes.dex': b'dex\nnot a real dex!'}
     with make_temp_zip(zip_entries) as tz:
-        filename: str = os.path.basename(tz.name)
         results = scanner.scan_file(tz.name)
 
-    for key in (filename, f'{filename}!classes.dex'):
+    for key in (tz.name, f'{tz.name}!classes.dex'):
         assert key in results
         assert len(results[key]) > 0
 
@@ -78,12 +74,11 @@ def test_scan_with_nested_zips(scanner: Scanner):
 
     scanner.options.scan_depth = 2
     with make_temp_zip(zero_layer) as tz:
-        filename: str = os.path.basename(tz.name)
         results = scanner.scan_file(tz.name)
 
     for key in (
-            filename, f'{filename}!0.dex', f'{filename}!1.zip', f'{filename}!1.zip!1.dex', f'{filename}!1.zip!2.zip',
-            f'{filename}!1.zip!2.zip!2.dex', f'{filename}!1.zip!2.zip!3.zip'
+            tz.name, f'{tz.name}!0.dex', f'{tz.name}!1.zip', f'{tz.name}!1.zip!1.dex', f'{tz.name}!1.zip!2.zip',
+            f'{tz.name}!1.zip!2.zip!2.dex', f'{tz.name}!1.zip!2.zip!3.zip'
     ):
         assert key in results
         assert len(results[key]) > 0
