@@ -99,6 +99,7 @@ class Scanner(object):
         self.options = options
 
     def scan(self, path: str) -> None:
+
         if os.path.isfile(path):
             results = self.scan_file(path)
             if len(results) > 0:
@@ -202,7 +203,7 @@ class Scanner(object):
         if self.options.recursive:
             for root, _, filenames in os.walk(dir_path):
                 for path in filenames:
-                    yield os.path.join(dir_path, path)
+                    yield os.path.join(root, path)
         else:
             for path in os.listdir(dir_path):
                 full_path = os.path.join(dir_path, path)
