@@ -99,7 +99,6 @@ class Scanner(object):
         self.options = options
 
     def scan(self, path: str) -> None:
-
         if os.path.isfile(path):
             results = self.scan_file(path)
             if len(results) > 0:
@@ -119,14 +118,14 @@ class Scanner(object):
                 return results
             matches: List[yara.Matches] = self.rules.match(data=f.read(), timeout=self.options.timeout)
             if len(matches) > 0:
-                results[filename] = matches
+                results[file_path] = matches
 
             try:
                 if self._is_zipfile(f, filename):
                     with zipfile.ZipFile(f) as zf:
                         zip_results = self._scan_zip(zf)
                     for entry_name, entry_matches in zip_results.items():
-                        results[f'{filename}!{entry_name}'] = entry_matches
+                        results[f'{file_path}!{entry_name}'] = entry_matches
             except Exception as e:
                 stack = traceback.format_exc()
                 print(f"Exception scanning {file_path}: {stack}")
