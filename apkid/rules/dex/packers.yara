@@ -31,7 +31,7 @@ rule pangxie_dex : packer
 {
   meta:
     description = "PangXie"
-    sample = "ea70a5b3f7996e9bfea2d5d99693195fdb9ce86385b7116fd08be84032d43d2c"
+    sample      = "ea70a5b3f7996e9bfea2d5d99693195fdb9ce86385b7116fd08be84032d43d2c"
 
   strings:
     // Lcom/merry/wapper/WapperApplication;
@@ -50,6 +50,7 @@ rule medusah_dex : packer
 {
   meta:
     description = "Medusah"
+    sample      = "b92c0090038f3185908f2fb3b7e927da734040b9332332fc09542e20c615e083"
 
   strings:
     $wrapper = "Lcom/seworks/medusah"
@@ -76,7 +77,7 @@ rule apkguard_dex : packer
   meta:
     description = "APKGuard"
     url         = "http://apkguard.io/"
-    sample     = "d9c98fff427646883ecb457fc2e9d2a8914ba7a9ee194735e0a18f56baa26cca"
+    sample      = "d9c98fff427646883ecb457fc2e9d2a8914ba7a9ee194735e0a18f56baa26cca"
 
   strings:
     $attachBaseContextOpcodes = {
@@ -152,7 +153,7 @@ rule cryptoshell_dex : packer
   meta:
     description = "CryptoShell"
     url         = "http://cryptoshell.io"
-    sample     = "d6745c1533b440c93f7bdfbb106470043b23aafdf91506c52332ed192d7b7003"
+    sample      = "d6745c1533b440c93f7bdfbb106470043b23aafdf91506c52332ed192d7b7003"
 
   strings:
     $attachBaseContextOpcodes = {
@@ -229,7 +230,7 @@ rule cryptoshell_dex : packer
 rule jar_pack01 : packer
 {
   meta:
-    //Official name unknown
+    // Official name unknown
     description = "jar_pack01"
     sample      = "faf1e85f878ea52a3b3fbb67126132b527f509586706f242f39b8c1fdb4a2065"
 
@@ -333,4 +334,3 @@ rule appsealing_loader_1_2_2 : packer
   condition:
     is_dex and all of them
 }
-

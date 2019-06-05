@@ -318,8 +318,8 @@ rule promon : packer
 {
   meta:
     description = "Promon Shield"
-    info        = "https://promon.co/"
-    sample     = "6a3352f54d9f5199e4bf39687224e58df642d1d91f1d32b069acd4394a0c4fe0"
+    url         = "https://promon.co/"
+    sample      = "6a3352f54d9f5199e4bf39687224e58df642d1d91f1d32b069acd4394a0c4fe0"
 
   strings:
     $a = "libshield.so"

@@ -51,8 +51,9 @@ private rule short_unicode_method_names : internal
 rule dexguard_a : obfuscator
 {
   meta:
-    description = "DexGuard.A"
+    description = "DexGuard"
     url         = "https://www.guardsquare.com/en/products/dexguard"
+    sample      = "74eb7cf3b81ff14add71ca884ef0cc9c7477b4193a74ca71b92f81212ff56101"
 
   strings:
     $opcodes = {
@@ -90,7 +91,7 @@ rule dexguard_a : obfuscator
 rule dexguard_b : obfuscator
 {
   meta:
-    description = "DexGuard.B"
+    description = "DexGuard"
     url         = "https://www.guardsquare.com/en/products/dexguard"
     sample      = "41a9b44af8931d63812b4a23395b29279d2e055f357222dabed7153d4aee6299"
 
@@ -114,7 +115,7 @@ rule dexguard_b : obfuscator
 rule dexguard_c : obfuscator
 {
   meta:
-    description = "DexGuard.C"
+    description = "DexGuard"
     url         = "https://www.guardsquare.com/en/products/dexguard"
     sample      = "de67161a8bd7ebcaa26c9661efd811375b59260924eb0dfd9436d3a47a1c31fe"
 
@@ -152,7 +153,7 @@ rule dexguard_c : obfuscator
 rule dexguard_d : obfuscator
 {
   meta:
-    description = "DexGuard.D"
+    description = "DexGuard"
     url         = "https://www.guardsquare.com/en/products/dexguard"
     sample      = "423b09d2aec74b1624d5b5c63d24486efc873c9cce75ea9e2f2d699f40ca8f7c"
 
@@ -354,7 +355,6 @@ rule gemalto_sdk : obfuscator
     author      = "Eduardo Novella"
     sample      = "294f95298189080a25b20ef28295d60ecde27ee12361f93ad2f024fdcb5bdb0b"
 
-
   strings:
     $p1 = "Lcom/gemalto/idp/mobile/"
     $p2 = "Lcom/gemalto/medl/"
@@ -366,17 +366,17 @@ rule gemalto_sdk : obfuscator
 
 rule kiwi_amazon : obfuscator
 {
-    meta:
-        description = "Kiwi encrypter"
-        sample      = "3e309548f90160e3a4dc6f67621c75d2b66cc3b580da7306ff3dc6d6c25bb8a1"
-        author      = "Eduardo Novella"
+  meta:
+    description = "Kiwi encrypter"
+    sample      = "3e309548f90160e3a4dc6f67621c75d2b66cc3b580da7306ff3dc6d6c25bb8a1"
+    author      = "Eduardo Novella"
 
-    strings:
-        $key   = { 00 19 4B6977695F5F56657273696F6E5F5F4F626675736361746F72 00 } // 00+len+"Kiwi__Version__Obfuscator"+00
-        $class = { 00 19 4B69776956657273696F6E456E637279707465722E6A617661 00 } // 00+len+"KiwiVersionEncrypter.java"+00
+  strings:
+    $key   = { 00 19 4B6977695F5F56657273696F6E5F5F4F626675736361746F72 00 } // 00+len+"Kiwi__Version__Obfuscator"+00
+    $class = { 00 19 4B69776956657273696F6E456E637279707465722E6A617661 00 } // 00+len+"KiwiVersionEncrypter.java"+00
 
-    condition:
-        all of them
+  condition:
+    all of them
 }
 
 rule unreadable_field_names : obfuscator

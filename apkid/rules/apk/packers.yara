@@ -325,6 +325,7 @@ rule liapp : packer
 {
   meta:
     description = "LIAPP"
+    sample = "b5be20d225edf55634621aa17988a6ed3368d4f7632c8a1eb4d3fc3b6a61c325"
 
   strings:
     $dir = "/LIAPPEgg"

@@ -29,10 +29,9 @@ import "elf"
 
 private rule is_elf
 {
-    meta:
-        description = "Identifies an ELF binary based on its magic number"
-        author      = "Eduardo Novella"
+  meta:
+    description = "ELF file"
 
-    condition:
-       elf.number_of_sections >= 0
+  condition:
+    elf.number_of_sections >= 0
 }
