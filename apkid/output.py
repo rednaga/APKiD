@@ -72,7 +72,7 @@ class OutputFormatter(object):
         self.output_dir = output_dir
         self.json = json_output or output_dir
         self.version = __version__
-        self.rules_hash = rules_manager.hash()
+        self.rules_hash = rules_manager.hash
 
     def write(self, results: Dict[str, List[yara.Match]]) -> None:
         """

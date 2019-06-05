@@ -26,18 +26,21 @@
 
 import hashlib
 import os
-import yara
 from typing import Dict
+from typing import Optional
+
+import yara
 
 
 class RulesManager(object):
     def __init__(self, rules_dir=None, rules_ext='.yara'):
         if not rules_dir:
             rules_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'rules')
-        self.rules_dir = rules_dir
-        self.rules_path = os.path.join(self.rules_dir, 'rules.yarc')
-        self.rules_ext = rules_ext
-        self.rules = None
+        self.rules_dir: str = rules_dir
+        self.rules_path: str = os.path.join(self.rules_dir, 'rules.yarc')
+        self.rules_ext: str = rules_ext
+        self.rules: Optional[yara.Rules] = None
+        self.rules_hash: Optional[str] = None
 
     def load(self) -> yara.Rules:
         self.rules = yara.load(self.rules_path)
@@ -63,6 +66,12 @@ class RulesManager(object):
         rules_count = sum(1 for _ in self.rules)
         return rules_count
 
+    @property
     def hash(self) -> str:
-        with open(self.rules_path, 'rb') as f:
-            return hashlib.sha256(f.read()).hexdigest()
+        if not self.rules_hash:
+            h = hashlib.sha256()
+            for file_path in self._collect_yara_files():
+                with open(file_path, 'rb') as f:
+                    h.update(f.read())
+            self.rules_hash = h.hexdigest()
+        return self.rules_hash

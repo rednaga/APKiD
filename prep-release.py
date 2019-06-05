@@ -49,7 +49,7 @@ if __name__ == '__main__':
     rules = rules_manager.compile()
     rules_count = rules_manager.save()
     print(f"[*] Saved {rules_count} rules to {rules_manager.rules_path}")
-    print(f"[*] Rules hash: {rules_manager.hash()}")
+    print(f"[*] Rules hash: {rules_manager.hash}")
 
     tag_counts: Dict[str, int] = {}
     for rule in rules:
