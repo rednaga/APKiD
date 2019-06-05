@@ -55,7 +55,7 @@ Here’s how to use Docker:
    cd APKiD/
    docker build . -t rednaga:apkid
    docker/apkid.sh ~/reverse/targets/android/example/example.apk
-   [+] APKiD 2.0.3 :: from RedNaga :: rednaga.io
+   [+] APKiD 2.1.0 :: from RedNaga :: rednaga.io
    [*] example.apk!classes.dex
     |-> compiler : dx
 
@@ -68,7 +68,7 @@ Usage
                 [--entry-max-scan-size ENTRY_MAX_SCAN_SIZE] [--typing {magic,filename,none}] [-v]
                 [FILE [FILE ...]]
 
-   APKiD - Android Application Identifier v2.0.3
+   APKiD - Android Application Identifier v2.1.0
 
    positional arguments:
      FILE                                       apk, dex, or directory
