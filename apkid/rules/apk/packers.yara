@@ -364,16 +364,17 @@ rule nqshield : packer
 rule tencent : packer
 {
   meta:
-    description = "Tencent"
+    description = "Mobile Tencent Protect"
+    url         = "https://intl.cloud.tencent.com/product/mtp"
+    sample      = "7c6024abc61b184ddcc9fa49f9fac1a7e5568d1eab09ee748f8c4987844a3f81"
 
   strings:
     $decryptor_lib = "lib/armeabi/libshell.so"
     $zip_lib = "lib/armeabi/libmobisecy.so"
-    $classpath = "com/tencent/StubShell"
     $mix_dex = "/mix.dex"
 
   condition:
-    is_apk and ($classpath or $decryptor_lib or $zip_lib or $mix_dex)
+    is_apk and ($decryptor_lib or $zip_lib or $mix_dex)
 }
 
 rule ijiami : packer

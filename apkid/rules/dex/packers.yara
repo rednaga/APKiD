@@ -334,3 +334,31 @@ rule appsealing_loader_1_2_2 : packer
   condition:
     is_dex and all of them
 }
+
+rule tencent : packer
+{
+  meta:
+    description = "Mobile Tencent Protect"
+    url         = "https://intl.cloud.tencent.com/product/mtp"
+    sample      = "7c6024abc61b184ddcc9fa49f9fac1a7e5568d1eab09ee748f8c4987844a3f81"
+
+  strings:
+    $libshell_a = { 00 0C 6C 69 62 73 68 65 6C 6C 61 2E 73 6F 00 } // libshella.so
+    $libshell_b = { 00 0C 6C 69 62 73 68 65 6C 6C 62 2E 73 6F 00 } // libshellb.so
+    $libshell_c = { 00 0C 6C 69 62 73 68 65 6C 6C 63 2E 73 6F 00 } // libshellc.so
+    // Lcom/tencent/StubShell/TxAppEntry;
+    $class_app_entry = {
+        00 22 4C 63 6F 6D 2F 74 65 6E 63 65 6E 74 2F 53 74 75 62 53 68 65
+        6C 6C 2F 54 78 41 70 70 45 6E 74 72 79 3B 00
+    }
+    // Lcom/tencent/StubShell/a
+    $class_stubshell = {
+        00 19 4C 63 6F 6D 2F 74 65 6E 63 65 6E 74 2F 53 74 75 62 53 68 65
+        6C 6C 2F 61 3B 00
+    }
+
+  condition:
+    is_dex
+    and 2 of ($libshell_*)
+    or 1 of ($class_*)
+}
