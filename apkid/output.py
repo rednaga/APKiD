@@ -42,7 +42,7 @@ prt_cyan = lambda s: f"\033[36m{s}\033[00m"
 prt_light_cyan = lambda s: f"\033[96m{s}\033[00m"
 prt_light_gray = lambda s: f"\033[97m{s}\033[00m"
 prt_orange = lambda s: f"\033[33m{s}\033[00m"
-prt_pink = lambda s: f"'\033[95m'{s}\033[00m"
+prt_pink = lambda s: f"\033[35m{s}\033[00m"
 
 
 def colorize_tag(tag) -> str:
@@ -62,17 +62,22 @@ def colorize_tag(tag) -> str:
         return prt_green(tag)
     elif tag == 'embedded':
         return prt_light_purple(tag)
+    elif tag == 'file_type':
+        return prt_orange(tag)
+    elif tag == 'internal':
+        return prt_pink(tag)
     else:
         return tag
 
 
 class OutputFormatter(object):
-    def __init__(self, json_output: bool, output_dir: Union[str, None], rules_manager: RulesManager):
+    def __init__(self, json_output: bool, output_dir: Union[str, None], rules_manager: RulesManager, include_types: bool):
         from apkid import __version__
         self.output_dir = output_dir
         self.json = json_output or output_dir
         self.version = __version__
         self.rules_hash = rules_manager.hash
+        self.include_types = include_types
 
     def write(self, results: Dict[str, List[yara.Match]]) -> None:
         """
@@ -108,9 +113,12 @@ class OutputFormatter(object):
             'files': [],
         }
         for filename, matches in results.items():
+            match_results = self._build_match_results(matches)
+            if len(match_results) == 0:
+                continue
             result = {
                 'filename': filename,
-                'matches': OutputFormatter._build_match_dict(matches),
+                'matches': match_results,
             }
             output['files'].append(result)
         return output
@@ -121,20 +129,23 @@ class OutputFormatter(object):
 
     def _print_console(self, results: Dict[str, List[yara.Match]]) -> None:
         for key, raw_matches in results.items():
-            matches = OutputFormatter._build_match_dict(raw_matches)
+            match_results = self._build_match_results(raw_matches)
+            if len(match_results) == 0:
+                continue
             print(f"[*] {key}")
-            for tags in sorted(matches):
-                descriptions = ', '.join(sorted(matches[tags]))
+            for tags in sorted(match_results):
+                descriptions = ', '.join(sorted(match_results[tags]))
                 if sys.stdout.isatty():
                     tags_str = OutputFormatter._colorize_tags(tags)
                 else:
                     tags_str = tags
                 print(f" |-> {tags_str} : {descriptions}")
 
-    @staticmethod
-    def _build_match_dict(matches) -> Dict[str, List[str]]:
+    def _build_match_results(self, matches) -> Dict[str, List[str]]:
         results: Dict[str, List[str]] = {}
         for m in matches:
+            if 'file_type' in m.tags and not self.include_types:
+                continue
             tags = ', '.join(sorted(m.tags))
             description = m.meta.get('description', m)
             if tags in results:
@@ -150,5 +161,4 @@ class OutputFormatter(object):
         for tag in tags.split(', '):
             colored_tag = colorize_tag(tag)
             colored_tags.append(colored_tag)
-        colored_tags = ', '.join(colored_tags)
-        return colored_tags
+        return ', '.join(colored_tags)

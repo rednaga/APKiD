@@ -59,6 +59,8 @@ def get_parser():
                         help="output scan results in JSON format", )
     output.add_argument('-o', '--output-dir', metavar='DIR', default=None,
                         help="write individual results here (implies --json)")
+    output.add_argument('--include-types', action='store_true', default=False,
+                        help="include file type info for matched files")
 
     return parser
 
@@ -72,7 +74,8 @@ def build_options(args) -> Options:
         typing=args.typing,
         entry_max_scan_size=args.entry_max_scan_size,
         scan_depth=args.scan_depth,
-        recursive=args.recursive
+        recursive=args.recursive,
+        include_types=args.include_types,
     )
 
 

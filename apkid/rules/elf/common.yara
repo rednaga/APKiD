@@ -27,10 +27,10 @@
 
 import "elf"
 
-private rule is_elf
+rule is_elf : file_type
 {
   meta:
-    description = "ELF file"
+    description = "ELF"
 
   condition:
     elf.number_of_sections >= 0

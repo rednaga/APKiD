@@ -47,7 +47,8 @@ SCANNABLE_FILE_MAGICS: Dict[str, Set[bytes]] = {
 class Options(object):
 
     def __init__(self, timeout: int = 10, verbose: bool = False, json: bool = False, output_dir: Union[str, None] = None,
-                 typing: Union[str, None] = 'magic', entry_max_scan_size: int = 0, scan_depth=2, recursive: bool = False):
+                 typing: Union[str, None] = 'magic', entry_max_scan_size: int = 0, scan_depth=2, recursive: bool = False,
+                 include_types: bool = False):
         """Scan options.
         Holds user-supplied options governing how APKiD behaves.
 
@@ -89,7 +90,12 @@ class Options(object):
         self.scan_depth = scan_depth
         self.recursive = recursive
         self.rules_manager = RulesManager()
-        self.output = OutputFormatter(json_output=json, output_dir=output_dir, rules_manager=self.rules_manager)
+        self.output = OutputFormatter(
+            json_output=json,
+            output_dir=output_dir,
+            rules_manager=self.rules_manager,
+            include_types=include_types
+        )
 
 
 class Scanner(object):

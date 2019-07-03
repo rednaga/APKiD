@@ -25,10 +25,10 @@
  *
  **/
 
-private rule is_apk : internal
+rule is_apk : file_type
 {
   meta:
-    description = "Resembles an APK that is likely not corrupt"
+    description = "APK"
 
   strings:
     $zip_head = "PK"

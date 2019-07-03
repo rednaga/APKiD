@@ -25,10 +25,10 @@
  *
  **/
 
-private rule is_dex : internal
+rule is_dex : file_type
 {
   meta:
-    description = "Resembles a DEX file"
+    description = "DEX"
 
   strings:
     $dex = { 64 65 78 0A 30 33 ?? 00 }
