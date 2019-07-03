@@ -63,7 +63,7 @@ class RulesManager(object):
 
     def save(self) -> int:
         self.rules.save(self.rules_path)
-        rules_count = sum(1 for _ in self.rules)
+        rules_count = len(set([r.identifier for r in self.rules]))
         return rules_count
 
     @property

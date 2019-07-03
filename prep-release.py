@@ -28,7 +28,7 @@
 import os
 import sys
 from codecs import open
-from typing import Dict
+from typing import Dict, Set
 
 from apkid.output import colorize_tag
 from apkid.rules import RulesManager
@@ -51,13 +51,13 @@ if __name__ == '__main__':
     print(f"[*] Saved {rules_count} rules to {rules_manager.rules_path}")
     print(f"[*] Rules hash: {rules_manager.hash}")
 
-    tag_counts: Dict[str, int] = {}
+    tag_to_identifiers: Dict[str, Set[str]] = {}
     for rule in rules:
         for t in rule.tags:
-            if t not in tag_counts:
-                tag_counts[t] = 1
-            else:
-                tag_counts[t] += 1
+            if t not in tag_to_identifiers:
+                tag_to_identifiers[t] = set()
+            tag_to_identifiers[t].add(rule.identifier)
+    tag_counts = dict([(k, len(v)) for k, v in tag_to_identifiers.items()])
     print("[*] Rule tag counts:")
     for tag in sorted(tag_counts.keys()):
         count = tag_counts[tag]
