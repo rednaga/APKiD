@@ -65,8 +65,9 @@ docker/apkid.sh ~/reverse/targets/android/example/example.apk
 # Usage
 
 ```
-usage: apkid [-h] [-j] [-t TIMEOUT] [-o DIR] [-r] [--scan-depth SCAN_DEPTH]
-             [--entry-max-scan-size ENTRY_MAX_SCAN_SIZE] [--typing {magic,filename,none}] [-v]
+usage: apkid [-h] [-v] [-t TIMEOUT] [-r] [--scan-depth SCAN_DEPTH]
+             [--entry-max-scan-size ENTRY_MAX_SCAN_SIZE] [--typing {magic,filename,none}] [-j]
+             [-o DIR]
              [FILE [FILE ...]]
 
 APKiD - Android Application Identifier v2.1.0
@@ -76,14 +77,18 @@ positional arguments:
 
 optional arguments:
   -h, --help                                 show this help message and exit
-  -j, --json                                 output scan results in JSON format
+  -v, --verbose                              log debug messages
+
+scanning:
   -t TIMEOUT, --timeout TIMEOUT              Yara scan timeout (in seconds)
-  -o DIR, --output-dir DIR                   write individual results here (implies --json)
   -r, --recursive                            recurse into subdirectories
   --scan-depth SCAN_DEPTH                    how deep to go when scanning nested zips
   --entry-max-scan-size ENTRY_MAX_SCAN_SIZE  max zip entry size to scan in bytes, 0 = no limit
   --typing {magic,filename,none}             method to decide which files to scan
-  -v, --verbose                              log debug messages
+
+output:
+  -j, --json                                 output scan results in JSON format
+  -o DIR, --output-dir DIR                   write individual results here (implies --json)
 ```
 
 # Submitting New Packers / Compilers / Obfuscators

@@ -39,22 +39,27 @@ def get_parser():
     )
     parser.add_argument('input', metavar='FILE', type=str, nargs='*',
                         help="apk, dex, or directory")
-    parser.add_argument('-j', '--json', action='store_true',
-                        help="output scan results in JSON format", )
-    parser.add_argument('-t', '--timeout', type=int, default=30,
-                        help="Yara scan timeout (in seconds)")
-    parser.add_argument('-o', '--output-dir', metavar='DIR', default=None,
-                        help="write individual results here (implies --json)")
-    parser.add_argument('-r', '--recursive', action='store_true', default=False,
-                        help="recurse into subdirectories")
-    parser.add_argument('--scan-depth', type=int, default=2,
-                        help="how deep to go when scanning nested zips")
-    parser.add_argument('--entry-max-scan-size', type=int, default=100 * 1024 * 1024,
-                        help="max zip entry size to scan in bytes, 0 = no limit")
-    parser.add_argument('--typing', choices=('magic', 'filename', 'none'), default='magic',
-                        help="method to decide which files to scan")
     parser.add_argument('-v', '--verbose', action='store_true',
                         help="log debug messages")
+
+    scanning = parser.add_argument_group('scanning')
+    scanning.add_argument('-t', '--timeout', type=int, default=30,
+                          help="Yara scan timeout (in seconds)")
+    scanning.add_argument('-r', '--recursive', action='store_true', default=False,
+                          help="recurse into subdirectories")
+    scanning.add_argument('--scan-depth', type=int, default=2,
+                          help="how deep to go when scanning nested zips")
+    scanning.add_argument('--entry-max-scan-size', type=int, default=100 * 1024 * 1024,
+                          help="max zip entry size to scan in bytes, 0 = no limit")
+    scanning.add_argument('--typing', choices=('magic', 'filename', 'none'), default='magic',
+                          help="method to decide which files to scan")
+
+    output = parser.add_argument_group('output')
+    output.add_argument('-j', '--json', action='store_true',
+                        help="output scan results in JSON format", )
+    output.add_argument('-o', '--output-dir', metavar='DIR', default=None,
+                        help="write individual results here (implies --json)")
+
     return parser
 
 

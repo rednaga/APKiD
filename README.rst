@@ -25,16 +25,34 @@ For more information on what this tool can be used for, check out:
 Installing
 ==========
 
-First, install yara-python with ``--enable-dex`` to compile Yara’s DEX
-module:
+Installation is unfortunately a bit involved until a `pull
+request <https://github.com/VirusTotal/yara/pull/1073>`__ is merged in a
+dependency. Here’s how you do it:
 
 .. code:: bash
 
-   pip install wheel
-   pip wheel --wheel-dir=/tmp/yara-python --build-option="build" --build-option="--enable-dex" git+https://github.com/VirusTotal/yara-python.git@v3.10.0
-   pip install --no-index --find-links=/tmp/yara-python yara-python
+   git clone --recursive -b "v3.10.0" https://github.com/VirusTotal/yara-python.git /tmp/yara-python
+   cd /tmp/yara-python/yara 
+   curl https://patch-diff.githubusercontent.com/raw/VirusTotal/yara/pull/1073.patch | git am
+   cd ..
+   python setup.py build --enable-dex
+   python setup.py install
 
-Then, install apkid:
+Without this patch to Yara, the dexlib1 detection rule will fail as will
+any rule relying on string sizes.
+
+If this patch wasn’t needed, here’s how you’d install. First, install
+`yara-python <https://github.com/VirusTotal/yara-python>`__ with
+``--enable-dex`` to compile Yara’s DEX module:
+
+.. code:: bash
+
+   # Don't use this method, for now.
+   #pip install --upgrade wheel
+   #pip wheel --wheel-dir=/tmp/yara-python --build-option="build" --build-option="--enable-dex" git+https://github.com/VirusTotal/yara-python.git@v3.10.0
+   #pip install --no-index --find-links=/tmp/yara-python yara-python
+
+Finally, install APKiD:
 
 .. code:: bash
 
@@ -64,8 +82,9 @@ Usage
 
 ::
 
-   usage: apkid [-h] [-j] [-t TIMEOUT] [-o DIR] [-r] [--scan-depth SCAN_DEPTH]
-                [--entry-max-scan-size ENTRY_MAX_SCAN_SIZE] [--typing {magic,filename,none}] [-v]
+   usage: apkid [-h] [-v] [-t TIMEOUT] [-r] [--scan-depth SCAN_DEPTH]
+                [--entry-max-scan-size ENTRY_MAX_SCAN_SIZE] [--typing {magic,filename,none}] [-j]
+                [-o DIR]
                 [FILE [FILE ...]]
 
    APKiD - Android Application Identifier v2.1.0
@@ -75,14 +94,18 @@ Usage
 
    optional arguments:
      -h, --help                                 show this help message and exit
-     -j, --json                                 output scan results in JSON format
+     -v, --verbose                              log debug messages
+
+   scanning:
      -t TIMEOUT, --timeout TIMEOUT              Yara scan timeout (in seconds)
-     -o DIR, --output-dir DIR                   write individual results here (implies --json)
      -r, --recursive                            recurse into subdirectories
      --scan-depth SCAN_DEPTH                    how deep to go when scanning nested zips
      --entry-max-scan-size ENTRY_MAX_SCAN_SIZE  max zip entry size to scan in bytes, 0 = no limit
      --typing {magic,filename,none}             method to decide which files to scan
-     -v, --verbose                              log debug messages
+
+   output:
+     -j, --json                                 output scan results in JSON format
+     -o DIR, --output-dir DIR                   write individual results here (implies --json)
 
 Submitting New Packers / Compilers / Obfuscators
 ================================================
