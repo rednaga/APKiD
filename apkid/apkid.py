@@ -117,24 +117,32 @@ class Scanner(object):
             self.scan(file_path)
 
     def scan_file(self, file_path: str) -> Dict[str, List[yara.Match]]:
-        filename: str = os.path.basename(file_path)
-        results: Dict[str, List[yara.Match]] = {}
         with open(file_path, 'rb') as f:
-            if not self._should_scan(f, filename):
-                return results
-            matches: List[yara.Matches] = self.rules.match(data=f.read(), timeout=self.options.timeout)
-            if len(matches) > 0:
-                results[file_path] = matches
-
             try:
-                if self._is_zipfile(f, filename):
-                    with zipfile.ZipFile(f) as zf:
-                        zip_results = self._scan_zip(zf)
-                    for entry_name, entry_matches in zip_results.items():
-                        results[f'{file_path}!{entry_name}'] = entry_matches
+                results: Dict[str, List[yara.Match]] = self.scan_file_obj(f, file_path)
             except Exception as e:
                 stack = traceback.format_exc()
                 print(f"Exception scanning {file_path}: {stack}")
+        return results
+
+    def scan_file_obj(self, file: IO, file_path: str = '$FILE$'):
+        if file_path == '$FILE$':
+            file_name = file_path
+        else:
+            file_name = os.path.basename(file_path)
+
+        results: Dict[str, List[yara.Match]] = {}
+        if not self._should_scan(file, file_name):
+            return results
+
+        matches: List[yara.Matches] = self.rules.match(data=file.read(), timeout=self.options.timeout)
+        if len(matches) > 0:
+            results[file_path] = matches
+        if self._is_zipfile(file, file_name):
+            with zipfile.ZipFile(file) as zf:
+                zip_results = self._scan_zip(zf)
+            for entry_name, entry_matches in zip_results.items():
+                results[f'{file_path}!{entry_name}'] = entry_matches
         return results
 
     def _scan_zip(self, zf: zipfile.ZipFile, depth=0) -> Dict[str, List[yara.Match]]:
@@ -172,27 +180,27 @@ class Scanner(object):
                     results[f'{info.filename}!{nested_name}'] = nested_matches
 
     @staticmethod
-    def _type_file(file_obj: IO) -> Union[None, str]:
-        magic = file_obj.read(4)
-        file_obj.seek(0)
+    def _type_file(file: IO) -> Union[None, str]:
+        magic = file.read(4)
+        file.seek(0)
         for file_type, magics in SCANNABLE_FILE_MAGICS.items():
             if magic in magics:
                 return file_type
         return None
 
-    def _is_zipfile(self, file_obj: IO, name: str) -> bool:
+    def _is_zipfile(self, file: IO, name: str) -> bool:
         if self.options.typing == 'filename':
             name = name.lower()
             return name.endswith('.apk') or name.endswith('.zip') or name.endswith('.jar')
         else:
             # Look at file magic since zipfile.is_zipfile isn't perfect
             # Some elfs may be considered zips and this causes apkid to barf errors
-            file_obj.seek(0)
-            return Scanner._type_file(file_obj) == 'zip' and zipfile.is_zipfile(file_obj)
+            file.seek(0)
+            return Scanner._type_file(file) == 'zip' and zipfile.is_zipfile(file)
 
-    def _should_scan(self, file_obj: IO, name: str) -> bool:
+    def _should_scan(self, file: IO, name: str) -> bool:
         if self.options.typing == 'magic':
-            file_type = Scanner._type_file(file_obj)
+            file_type = Scanner._type_file(file)
             return file_type is not None
         elif self.options.typing == 'filename':
             name = name.lower()
