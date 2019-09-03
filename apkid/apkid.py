@@ -117,6 +117,7 @@ class Scanner(object):
             self.scan(file_path)
 
     def scan_file(self, file_path: str) -> Dict[str, List[yara.Match]]:
+        results = []
         with open(file_path, 'rb') as f:
             try:
                 results: Dict[str, List[yara.Match]] = self.scan_file_obj(f, file_path)
