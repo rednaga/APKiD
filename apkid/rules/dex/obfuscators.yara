@@ -28,10 +28,32 @@
 import "dex"
 include "common.yara"
 
-rule dexguard : obfuscator
+private rule short_unicode_field_names : internal
+{
+  meta:
+    description = "one or two character unicode field names"
+
+  condition:
+    is_dex and
+    for 3 i in (0..dex.header.field_ids_size) : (dex.field[i].name matches /[^\x00-\x7F]{1,4}/)
+}
+
+private rule short_unicode_method_names : internal
+{
+  meta:
+    description = "one or two character unicode method names"
+
+  condition:
+    is_dex and
+    for 3 i in (0..dex.header.method_ids_size) : (dex.method[i].name matches /[^\x00-\x7F]{1,4}/)
+}
+
+rule dexguard_a : obfuscator
 {
   meta:
     description = "DexGuard"
+    url         = "https://www.guardsquare.com/en/products/dexguard"
+    sample      = "74eb7cf3b81ff14add71ca884ef0cc9c7477b4193a74ca71b92f81212ff56101"
 
   strings:
     $opcodes = {
@@ -64,6 +86,89 @@ rule dexguard : obfuscator
     $opcodes and
     all of ($a, $b, $c) and
     uint32(dex.header.data_offset + dex.header.data_size - 4) == 0
+}
+
+rule dexguard_b : obfuscator
+{
+  meta:
+    description = "DexGuard"
+    url         = "https://www.guardsquare.com/en/products/dexguard"
+    sample      = "41a9b44af8931d63812b4a23395b29279d2e055f357222dabed7153d4aee6299"
+
+  strings:
+    // Other obfuscators use aux and con (protected Windows file names), but not from Lo/
+    $a_aux_class     = { 00 07 4C 6F 2F (41|61) (55|75) (58|78) 3B 00 }  // Lo/[Aa][Uu][Xx];
+    $a_con_class     = { 00 07 4C 6F 2F (43|63) (4F|6F) (4E|6E) 3B 00 }  // Lo/[Cc][Oo][Nn];
+    $a_if_class      = { 00 ?? 4C 6F 2F [1-4] 24 (49|69) (46|66) 3B 00 } // Lo/???$[iI][fF];
+    // A single unicode code point may take 1 or more bytes depending on encoding.
+    // Normally only see one code point worth, but not sure how many bytes it might be in some variants.
+    // Also note the trailing null byte in the regex so this  is less of a naked string.
+    $a_inner_unicode = /Lo\/([\u0000-\u007F]{1,4}|[^\u0000-\u007F]{1,4})\$[^\u0000-\u007F]{1,4};\x00/
+    $b_o_three_class = { 00 07 4C 6F 2F ?? ?? ?? 3B 00 }  // Lo/???;
+
+  condition:
+    2 of ($a_*)
+    or (#a_if_class >= 3 and (short_unicode_field_names or short_unicode_method_names))
+    or (#b_o_three_class >= 3 and (short_unicode_field_names or short_unicode_method_names))
+}
+
+rule dexguard_c : obfuscator
+{
+  meta:
+    description = "DexGuard"
+    url         = "https://www.guardsquare.com/en/products/dexguard"
+    sample      = "de67161a8bd7ebcaa26c9661efd811375b59260924eb0dfd9436d3a47a1c31fe"
+
+  strings:
+    $dexguard_pkg = "guardsquare/dexguard/runtime"
+    // Most of some kind of runtime decryption method, signature = a(IIZI[I[[I[I)V
+    $decrypt_method = {
+      12 01                 // const/4 v1, 0x0
+      39 ?? ?? ??           // if-nez ??, :????
+      71 ?? ?? ?? ?? ??     // invoke-static {??}, ??
+      01 10                 // move v0, v1
+      35 ?? ?? ??           // if-ge ?, ?, :????
+      44 ?? ?? ??           // aget ??, ??, ??
+      B7 ??                 // xor-int/2addr (xor is fairly rare in legit code)
+      71 ?? ?? ?? ?? ??     // invoke-static
+      0A ??                 // move-result ??
+      97 ?? ?? ??           // xor-int ??, ??, ??
+      D8 00 00 01           // add-int/lit8 v0, v0, 0x1
+      01 ??                 // move ?, ?
+      28 F2                 // goto
+      21 80                 // array-length
+      D8 00 00 FE           // add-int/lit8 v0, v0, -0x2
+      44 ?? ?? ??           // aget ??
+      B7 ??                 // xor-int/2addr
+      21 ??                 // invoke-static
+      D8 ?? ?? ??           // add-int
+      44 ?? ?? ??           // aget
+      B7 ??                 // xor-int/2addr
+    }
+
+  condition:
+    any of them
+}
+
+rule dexguard_d : obfuscator
+{
+  meta:
+    description = "DexGuard"
+    url         = "https://www.guardsquare.com/en/products/dexguard"
+    sample      = "423b09d2aec74b1624d5b5c63d24486efc873c9cce75ea9e2f2d699f40ca8f7c"
+
+  strings:
+    // Ldexguard/util/TamperDetection;
+    $dexguard_class = {00 1F 4C 64 65 78 67 75 61 72 64 2F 75 74 69 6C 2F 54 61 6D 70 65 72 44 65 74 65 63 74 69 6F 6E 3B 00}
+    $a_aux_class     = { 00 05 4C (41|61) (55|75) (58|78) 3B 00 }  // L[Aa][Uu][Xx];
+    $a_con_class     = { 00 05 4C (43|63) (4F|6F) (4E|6E) 3B 00 }  // L[Cc][Oo][Nn];
+    $a_if_class      = { 00 ?? 4C [1-4] 24 (49|69) (46|66) 3B 00 } // L???$[iI][fF];
+    $a_inner_unicode = /L([\u0000-\u007F]{1,4}|[^\u0000-\u007F]{1,4})\$[^\u0000-\u007F]{1,4};\x00/
+
+  condition:
+    3 of them
+    or $dexguard_class
+    or (#a_if_class >= 3 and (short_unicode_field_names or short_unicode_method_names))
 }
 
 rule dexprotector : obfuscator
@@ -278,3 +383,56 @@ rule appsuit_b : obfuscator
         is_dex and all of them
 }
 
+rule gemalto_sdk : obfuscator
+{
+  meta:
+    description = "Gemalto"
+    url         = "https://www.gemalto.com/brochures-site/download-site/Documents/eba_ezio_on_mobile.pdf"
+    author      = "Eduardo Novella"
+    sample      = "294f95298189080a25b20ef28295d60ecde27ee12361f93ad2f024fdcb5bdb0b"
+
+  strings:
+    $p1 = "Lcom/gemalto/idp/mobile/"
+    $p2 = "Lcom/gemalto/medl/"
+    $p3 = "Lcom/gemalto/ezio/mobile/sdk/"
+
+  condition:
+    any of them and is_dex
+}
+
+rule kiwi_amazon : obfuscator
+{
+  meta:
+    description = "Kiwi encrypter"
+    sample      = "3e309548f90160e3a4dc6f67621c75d2b66cc3b580da7306ff3dc6d6c25bb8a1"
+    author      = "Eduardo Novella"
+
+  strings:
+    $key   = { 00 19 4B6977695F5F56657273696F6E5F5F4F626675736361746F72 00 } // 00+len+"Kiwi__Version__Obfuscator"+00
+    $class = { 00 19 4B69776956657273696F6E456E637279707465722E6A617661 00 } // 00+len+"KiwiVersionEncrypter.java"+00
+
+  condition:
+    all of them
+}
+
+rule unreadable_field_names : obfuscator
+{
+  meta:
+    description = "unreadable field names"
+    sample      = "afd6da00440ec83d54aefea742f26ba045505ac520f074512207a7bb50aaf9c4"
+
+  condition:
+    short_unicode_field_names
+    and (not dexguard_a and not dexguard_b and not dexguard_c and not dexguard_d)
+}
+
+rule unreadable_method_names : obfuscator
+{
+  meta:
+    description = "unreadable method names"
+    sample      = "afd6da00440ec83d54aefea742f26ba045505ac520f074512207a7bb50aaf9c4"
+
+  condition:
+    short_unicode_method_names
+    and (not dexguard_a and not dexguard_b and not dexguard_c and not dexguard_d)
+}

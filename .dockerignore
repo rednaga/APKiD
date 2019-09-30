@@ -1,8 +1,10 @@
 test-data
 research
 
+apkid.egg-info
 venv
+tests
 
 .idea
 .pytest_cache
-apkid.egg-info
+.mypy_cache

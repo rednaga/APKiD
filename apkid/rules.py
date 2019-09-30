@@ -1,5 +1,5 @@
 """
- Copyright (C) 2018  RedNaga. https://rednaga.io
+ Copyright (C) 2019  RedNaga. https://rednaga.io
  All rights reserved. Contact: rednaga@protonmail.com
 
 
@@ -26,62 +26,52 @@
 
 import hashlib
 import os
+from typing import Dict
+from typing import Optional
 
 import yara
 
-RULES_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'rules')
-RULES_PATH = os.path.join(RULES_DIR, 'rules.yarc')
-RULES_EXT = '.yara'
-RULES = None
 
+class RulesManager(object):
+    def __init__(self, rules_dir=None, rules_ext='.yara'):
+        if not rules_dir:
+            rules_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'rules')
+        self.rules_dir: str = rules_dir
+        self.rules_path: str = os.path.join(self.rules_dir, 'rules.yarc')
+        self.rules_ext: str = rules_ext
+        self.rules: Optional[yara.Rules] = None
+        self.rules_hash: Optional[str] = None
 
-def load():
-    global RULES
-    if not RULES:
-        RULES = yara.load(RULES_PATH)
-    return RULES
+    def load(self) -> yara.Rules:
+        self.rules = yara.load(self.rules_path)
+        return self.rules
 
+    def _collect_yara_files(self) -> Dict[str, str]:
+        files = {}
+        for root, dirnames, filenames in os.walk(self.rules_dir):
+            for filename in filenames:
+                if not filename.lower().endswith(self.rules_ext):
+                    continue
+                path = os.path.join(root, filename)
+                files[path] = path
+        return files
 
-def collect_yara_files():
-    files = {}
-    for root, dirnames, filenames in os.walk(RULES_DIR):
-        for filename in filenames:
-            if not filename.lower().endswith(RULES_EXT):
-                continue
-            path = os.path.join(root, filename)
-            files[path] = path
-    return files
+    def compile(self) -> yara.Rules:
+        yara_files = self._collect_yara_files()
+        self.rules = yara.compile(filepaths=yara_files)
+        return self.rules
 
+    def save(self) -> int:
+        self.rules.save(self.rules_path)
+        rules_count = len(set([r.identifier for r in self.rules]))
+        return rules_count
 
-def compile():
-    yara_files = collect_yara_files()
-    return yara.compile(filepaths=yara_files)
-
-
-def save(rules):
-    rules.save(RULES_PATH)
-    rules_count = sum(1 for _ in rules)
-    return rules_count, RULES_PATH
-
-
-def sha256():
-    hashlib.sha256(open(RULES_PATH, 'rb').read()).hexdigest()
-
-
-def match(file_path, timeout):
-    load()
-    matches = RULES.match(file_path, timeout=timeout)
-    return build_match_dict(matches)
-
-
-def build_match_dict(matches):
-    results = {}
-    for m in matches:
-        tags = ', '.join(sorted(m.tags))
-        description = m.meta.get('description', m)
-        if tags in results:
-            if description not in results[tags]:
-                results[tags].append(description)
-        else:
-            results[tags] = [description]
-    return results
+    @property
+    def hash(self) -> str:
+        if not self.rules_hash:
+            h = hashlib.sha256()
+            for file_path in self._collect_yara_files():
+                with open(file_path, 'rb') as f:
+                    h.update(f.read())
+            self.rules_hash = h.hexdigest()
+        return self.rules_hash

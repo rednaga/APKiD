@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018  RedNaga. https://rednaga.io
+ * Copyright (C) 2019  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -31,7 +31,7 @@ rule pangxie_dex : packer
 {
   meta:
     description = "PangXie"
-    sample = "ea70a5b3f7996e9bfea2d5d99693195fdb9ce86385b7116fd08be84032d43d2c"
+    sample      = "ea70a5b3f7996e9bfea2d5d99693195fdb9ce86385b7116fd08be84032d43d2c"
 
   strings:
     // Lcom/merry/wapper/WapperApplication;
@@ -50,6 +50,7 @@ rule medusah_dex : packer
 {
   meta:
     description = "Medusah"
+    sample      = "b92c0090038f3185908f2fb3b7e927da734040b9332332fc09542e20c615e083"
 
   strings:
     $wrapper = "Lcom/seworks/medusah"
@@ -76,7 +77,7 @@ rule apkguard_dex : packer
   meta:
     description = "APKGuard"
     url         = "http://apkguard.io/"
-    sample     = "d9c98fff427646883ecb457fc2e9d2a8914ba7a9ee194735e0a18f56baa26cca"
+    sample      = "d9c98fff427646883ecb457fc2e9d2a8914ba7a9ee194735e0a18f56baa26cca"
 
   strings:
     $attachBaseContextOpcodes = {
@@ -152,10 +153,9 @@ rule cryptoshell_dex : packer
   meta:
     description = "CryptoShell"
     url         = "http://cryptoshell.io"
-    sample     = "d6745c1533b440c93f7bdfbb106470043b23aafdf91506c52332ed192d7b7003"
+    sample      = "d6745c1533b440c93f7bdfbb106470043b23aafdf91506c52332ed192d7b7003"
 
   strings:
-
     $attachBaseContextOpcodes = {
         120b            // const/4 v11, 0
         6f20 0100 fe00  // invoke-super {v14, v15}, Landroid/app/Application.attachBaseContext(Landroid/content/Context;)V ; 0x1
@@ -230,9 +230,9 @@ rule cryptoshell_dex : packer
 rule jar_pack01 : packer
 {
   meta:
-    // Unknown name, made this one up
+    // Official name unknown
     description = "jar_pack01"
-    sample     = "faf1e85f878ea52a3b3fbb67126132b527f509586706f242f39b8c1fdb4a2065"
+    sample      = "faf1e85f878ea52a3b3fbb67126132b527f509586706f242f39b8c1fdb4a2065"
 
   strings:
     $pre_jar  = { 00 6F 6E 43 72 65 61 74 65 00 28 29 56 00 63 6F 6D 2F 76 } // .onCreate.()V.com/v
@@ -244,5 +244,121 @@ rule jar_pack01 : packer
     ($pre_jar and $jar_data and $post_jar)
 }
 
+rule gaoxor : packer
+{
+  meta:
+    description = "GaoXor"
+    url         = "https://github.com/rednaga/APKiD/issues/71"
+    sample      = "673b3ab2e06f830e7ece1e3106a6a8c5f4bacd31393998fa73f6096b89f2df47"
+    author      = "Eduardo Novella"
 
+  strings:
+    $str_0 = { 11 61 74 74 61 63 68 42 61 73 65 43 6F 6E 74 65 78 74 00 } // "attachBaseContext"
+    $str_1 = { 04 2F 6C 69 62 00 } // "/lib"
+    $str_2 = { 17 4C 6A 61 76 61 2F 6C 61 6E 67 2F 43 6C 61 73 73 4C 6F 61 64 65 72 3B 00 } // Ljava/lang/ClassLoader;
+    $str_3 = { 77 72 69 74 65 64 44 65 78 46 69 6C 65 00 } // writedDexFile
 
+    /**
+      public void attachBaseContext(Context base) {
+          super.attachBaseContext(base);
+          try {
+              getClass().getDeclaredMethod(GaoAoxCoJpRm("MS4zNiguNyIBJCQ9HAU="), new Class[0]).invoke(this, new Object[0]);
+          } catch (Exception e) {
+          }
+      }
+    */
+    $attachBaseContextOpcodes = {
+        // method.public.Lpykqdxlnyt_iytDlJSoOg.Lpykqdxlnyt_iytDlJSoOg.method.attachBaseContext_Landroid_content_Context__V:
+        6f20??004300   // invoke-super {v3, v4}, Landroid/app/Application.attachBaseContext(Landroid/content/Context;)V
+        6e10??000300   // invoke-virtual {v3}, Ljava/lang/Object.getClass()Ljava/lang/Class;
+        0c00           // move-result-object v0
+        1a01??00       // const-string v1, str.MS4zNiguNyIBJCQ9HAU ; 0xdfd
+        6e20??001300   // invoke-virtual {v3, v1}, Lpykqdxlnyt/iytDlJSoOg.GaoAoxCoJpRm(Ljava/lang/String;)Ljava/lang/String;
+        0c01           // move-result-object v1
+        1202           // const/4 v2, 0               ; Protect.java:79
+        2322??00       // new-array v2, v2, [Ljava/lang/Class; ; 0x3b8
+        6e30??001002   // invoke-virtual {v0, v1, v2}, Ljava/lang/Class.getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+        0c00           // move-result-object v0
+        1201           // const/4 v1, 0
+        2311??00       // new-array v1, v1, [Ljava/lang/Object; ; 0x3bc
+        6e30??003001   // invoke-virtual {v0, v3, v1}, Ljava/lang/reflect/Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+        0e00           // return-void
+        0d00           // move-exception v0
+        28fe           // goto 0x00002984
+    }
+
+    /**
+        private byte[] mMuKJXDuYr(byte[] a, byte[] key) {
+            byte[] out = new byte[a.length];
+            for (int i = 0; i < a.length; i++) {
+                out[i] = (byte) (a[i] ^ key[i % key.length]);
+            }
+            return out;
+        }
+    */
+    $xor_key = {
+       21 ?2         //  array-length        v2, p1
+       23 21 17 00   //  new-array           v1, v2, [B
+       12 00         //  const/4             v0, 0
+       21 ?2         //  array-length        v2, p1
+       35 20 10 00   //  if-ge               v0, v2, :2A
+       48 02 0? 00   //  aget-byte           v2, p1, v0
+       21 ?3         //  array-length        v3, p2
+       94 03 00 03   //  rem-int             v3, v0, v3
+       48 03 0? 03   //  aget-byte           v3, p2, v3
+       B7 32         //  xor-int/2addr       v2, v3
+       8D 22         //  int-to-byte         v2, v2
+       4F 02 01 00   //  aput-byte           v2, v1, v0
+       D8 00 00 01   //  add-int/lit8        v0, v0, 1
+       28 F0         //  goto                :8
+       11 01         //  return-object       v1
+    }
+
+  condition:
+    $attachBaseContextOpcodes and $xor_key and is_dex and 3 of ($str_*)
+}
+
+rule appsealing_loader_1_2_2 : packer
+{
+  meta:
+    // Commercial packer
+    description = "AppSealing Loader v1.2.2"
+    url         = "https://www.appsealing.com/"
+    sample      = "61a983b032aee2e56159e682ad1588ad30fa8c3957bf849d1afe6f10e1d9645d"
+    author      = "zeroload"
+
+  strings:
+    $loader_ver = /AppSealingLoader [.]+ v1.2.2/
+    $class = "Lcom/inka/appsealing/AppSealingApplication;"
+
+  condition:
+    is_dex and all of them
+}
+
+rule tencent : packer
+{
+  meta:
+    description = "Mobile Tencent Protect"
+    url         = "https://intl.cloud.tencent.com/product/mtp"
+    sample      = "7c6024abc61b184ddcc9fa49f9fac1a7e5568d1eab09ee748f8c4987844a3f81"
+
+  strings:
+    $libshell_a = { 00 0C 6C 69 62 73 68 65 6C 6C 61 2E 73 6F 00 } // libshella.so
+    $libshell_b = { 00 0C 6C 69 62 73 68 65 6C 6C 62 2E 73 6F 00 } // libshellb.so
+    $libshell_c = { 00 0C 6C 69 62 73 68 65 6C 6C 63 2E 73 6F 00 } // libshellc.so
+    // Lcom/tencent/StubShell/TxAppEntry;
+    $class_app_entry = {
+        00 22 4C 63 6F 6D 2F 74 65 6E 63 65 6E 74 2F 53 74 75 62 53 68 65
+        6C 6C 2F 54 78 41 70 70 45 6E 74 72 79 3B 00
+    }
+    // Lcom/tencent/StubShell/a
+    $class_stubshell = {
+        00 19 4C 63 6F 6D 2F 74 65 6E 63 65 6E 74 2F 53 74 75 62 53 68 65
+        6C 6C 2F 61 3B 00
+    }
+
+  condition:
+    is_dex
+    and 2 of ($libshell_*)
+    or 1 of ($class_*)
+}

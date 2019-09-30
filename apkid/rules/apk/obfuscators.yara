@@ -25,18 +25,41 @@
  *
  **/
 
-import "elf"
+include "common.yara"
 
-rule check_qemu_entropy : anti_vm
+rule arxan_guardit : obfuscator
 {
   meta:
-    description = "Checks for QEMU entropy"
-    url = "https://github.com/Fuzion24/AndroidHostileEnvironmentDetection/blob/master/app/jni/emudetect.c"
+    description = "Arxan GuardIT"
+    url         = "https://www.arxan.com"
+    sample      = "0da79f5202b4c29c4ef43f769d5703a3d4ebfa65e49ea967abb49965d4ac3ba4"
+    author      = "Eduardo Novella"
 
   strings:
-    $a = "atomicallyIncreasingGlobalVarThread"
-    $b = "_qemuFingerPrint"
+    // guardit4j.fin -- in root of apk; contains GuardIT version
+    $cfg = { 00 67 75 61 72 64 69 74 34 6A 2E 66 69 6E }
 
   condition:
-    any of them
+    is_apk and #cfg > 1
+}
+
+rule gemalto_protector : obfuscator
+{
+  meta:
+    description = "Gemalto"
+    url         = "https://www.gemalto.com"
+    author      = "Eduardo Novella"
+    sample      = "294f95298189080a25b20ef28295d60ecde27ee12361f93ad2f024fdcb5bdb0b"
+
+  strings:
+    $l1 = "lib/arm64-v8a/libmedl.so"
+    $l2 = "lib/armeabi-v7a/libmedl.so"
+    $l3 = "lib/armeabi/libmedl.so"
+    $l4 = "lib/mips/libmedl.so"
+    $l5 = "lib/mips64/libmedl.so"
+    $l6 = "lib/x86/libmedl.so"
+    $l7 = "lib/x86_64/libmedl.so"
+
+  condition:
+    any of them and is_apk
 }

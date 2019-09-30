@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018  RedNaga. https://rednaga.io
+ * Copyright (C) 2019  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -25,10 +25,10 @@
  *
  **/
 
-private rule is_dex : internal
+rule is_dex : file_type
 {
   meta:
-    description = "Resembles a DEX file"
+    description = "DEX"
 
   strings:
     $dex = { 64 65 78 0A 30 33 ?? 00 }

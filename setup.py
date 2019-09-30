@@ -21,8 +21,25 @@ def package_files(directory):
 
 
 install_requires = [
-    'yara-python==3.7.0.999',
+    'yara-python==3.10.0',
     'argparse',
+]
+
+dev_requires = [
+    'mypy',
+    'pypandoc',
+]
+
+test_requires = [
+    'delayed-assert',
+    'factory_boy',
+    'mock',
+    'pytest',
+    'pytest-cov',
+    'pytest-factoryboy',
+    'pytest-flask',
+    'pytest-runner',
+    'tox',
 ]
 
 setup(
@@ -41,32 +58,26 @@ setup(
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'License :: Other/Proprietary License',
         'Natural Language :: English',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
         'Topic :: Security',
         'Topic :: Utilities',
     ],
     keywords='android analysis reversing malware apk dex dalvik',
-    packages=find_packages('.', exclude=['docs', 'tests']),
+    packages=find_packages(exclude=['docs', 'tests']),
     package_data={
         'rules': package_files('apkid/rules/'),
     },
     include_package_data=True,
     install_requires=install_requires,
     extras_require={
-        'dev': [
-            'pypandoc'
-        ],
-        'test': [],
+        'dev': dev_requires,
+        'test': test_requires,
     },
     zip_safe=False,
     entry_points={
         'console_scripts': [
-            'apkid=apkid:main',
+            'apkid=apkid.main:main',
         ],
     },
 )

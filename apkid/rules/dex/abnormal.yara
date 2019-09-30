@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018  RedNaga. https://rednaga.io
+ * Copyright (C) 2019  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -37,6 +37,7 @@ rule abnormal_header_size : abnormal
 {
   meta:
     description = "non-standard header size"
+    sample      = "1d97aff8d86d164dc64e81b822c01623940e2f21ab51d2fd42172b364d5e185e"
 
   condition:
     /*
@@ -50,6 +51,7 @@ rule non_zero_link_size : anti_disassembly
 {
   meta:
     description = "non-zero link size"
+    sample      = "ad006e1e152fe298e86bb540d2c56cf474a246885e87c351a3285615c8e8bb42"
 
   condition:
     dex.header.link_size != 0x0
@@ -59,6 +61,7 @@ rule non_zero_link_offset : anti_disassembly
 {
   meta:
     description = "non-zero link offset"
+    sample      = "5882f768d42fe1837f562023e5ea1d7e03c7b56f0c31bcbb4423726c2109faf9"
 
   condition:
     dex.header.link_offset != 0x0
@@ -68,6 +71,7 @@ rule non_little_endian : abnormal
 {
   meta:
     description = "non little-endian format"
+    sample      = "b82d521aa24f4f7c995ba55eaa8db9e2f4e9dd69ac0d9ddea2fb776d49ecd7a4"
 
   condition:
     dex.header.endian_tag != 0x12345678
@@ -86,6 +90,7 @@ rule illegal_class_names : anti_disassembly
 {
   meta:
     description = "illegal class name"
+    sample      = "5e980583904b08732ef7c833351ee45cfe86de55d6411a94a986cacce5b82700"
 
   strings:
     /*

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018  RedNaga. https://rednaga.io
+ * Copyright (C) 2019  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -41,7 +41,7 @@ private rule unsorted_string_pool : internal
      *
      * Note: It's probably only necessary to check the first several strings.
      */
-    for any i in (0..dex.header.string_ids_size - 1) : (dex.string_ids[i].offset + dex.string_ids[i].size + 1 < dex.string_ids[i + 1].offset)
+    for any i in (0..dex.header.string_ids_size - 1) : (dex.string_ids[i + 1].offset < dex.string_ids[i].offset)
 }
 
 private rule dexlib2_map_type_order : internal
@@ -103,6 +103,7 @@ rule jack_4_12 : compiler
 {
   meta:
     description = "Jack 4.12"
+    sample      = "b6a92aec55ab93f2254f12a2ab42f6c53a1b4ba1fbae62623193262e7dc31f26"
 
   strings:
     $jack_emitter = {00 12 65 6D 69 74 74 65 72 3A 20 6A 61 63 6B 2D 34 2E 31 32 00}
@@ -195,9 +196,10 @@ private rule has_javac_anon_methods : internal
 
 rule jack_generic : compiler
 {
-  // http://tools.android.com/tech-docs/jackandjill
+  // New Android compiler: http://tools.android.com/tech-docs/jackandjill
   meta:
     description = "Jack (unknown version)"
+    sample      = "aaa4aed09a3a014c6e045566b86708f964088a0f9c712f02191cdcf61ff06fe8"
 
   condition:
     is_dex
@@ -210,6 +212,7 @@ rule dexlib1 : compiler
 {
   meta:
     description = "dexlib 1.x"
+    sample      = "cf7b06bd339ee68224420dfcaba84a88e51ae6cd07d504fc8b4f2db6c6889971"
 
   condition:
     unsorted_string_pool
@@ -219,6 +222,7 @@ rule dexlib2 : compiler
 {
   meta:
     description = "dexlib 2.x"
+    sample      = "c7c566b1b185c99e338a77865eaf2eed6dc9b2b97793e262208c0b7f38bbf947"
 
   condition:
     not dexlib1 and dexlib2_map_type_order
@@ -228,6 +232,7 @@ rule dexlib2beta : compiler
 {
   meta:
     description = "dexlib 2.x beta"
+    sample      = "8fd8c1e2337a4d2ac8f8f64c13a4fb304589ecf165e41de27ebc656a7475a008"
 
   condition:
     not dexlib1
@@ -239,6 +244,7 @@ rule dx : compiler
 {
   meta:
     description = "dx"
+    sample      = "6ef06bcc9712ec2ef3b71c5c8454af3abdafa628406b4f5629815995470da878"
 
   condition:
     dx_map_type_order
@@ -251,6 +257,7 @@ rule dx_merged : compiler
 {
   meta:
     description = "dx (possible dexmerge)"
+    sample      = "6c31ccd3b10ff2b0fa428e6efa954c37c0d2e641814f63c524c4f8fec9d11e22"
 
   condition:
     dexmerge_map_type_order
@@ -263,6 +270,7 @@ rule dexmerge : manipulator
 {
   meta:
     description = "dexmerge"
+    sample      = "6c31ccd3b10ff2b0fa428e6efa954c37c0d2e641814f63c524c4f8fec9d11e22"
 
   condition:
     dexmerge_map_type_order

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018  RedNaga. https://rednaga.io
+ * Copyright (C) 2019  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -27,12 +27,11 @@
 
 import "elf"
 
-private rule is_elf
+rule is_elf : file_type
 {
-    meta:
-        description = "Identifies an ELF binary based on its magic number"
-        author      = "Eduardo Novella"
+  meta:
+    description = "ELF"
 
-    condition:
-       elf.number_of_sections >= 0
+  condition:
+    elf.number_of_sections >= 0
 }

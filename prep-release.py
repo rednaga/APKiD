@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
- Copyright (C) 2018  RedNaga. https://rednaga.io
+ Copyright (C) 2019  RedNaga. https://rednaga.io
  All rights reserved. Contact: rednaga@protonmail.com
 
 
@@ -28,8 +28,10 @@
 import os
 import sys
 from codecs import open
+from typing import Dict, Set
 
-from apkid import rules
+from apkid.output import colorize_tag
+from apkid.rules import RulesManager
 
 
 def convert_readme():
@@ -38,32 +40,37 @@ def convert_readme():
     rst = pypandoc.convert_file('README.md', 'rst')
     with open('README.rst', 'w+', encoding='utf-8') as f:
         f.write(rst)
-    print("[*] Finished converting to README.rst ({} bytes)".format(len(rst)))
+    print(f"[*] Finished converting to README.rst ({len(rst)} bytes)")
 
 
 if __name__ == '__main__':
     print("[*] Compiling Yara files")
-    rulez = rules.compile()
-    rules_count, rules_path = rules.save(rulez)
-    print("[*] Saved {} rules to {}".format(rules_count, rules_path))
+    rules_manager = RulesManager()
+    rules = rules_manager.compile()
+    rules_count = rules_manager.save()
+    print(f"[*] Saved {rules_count} rules to {rules_manager.rules_path}")
+    print(f"[*] Rules hash: {rules_manager.hash}")
 
-    tag_counts = {}
-    for rule in rules.load():
+    tag_to_identifiers: Dict[str, Set[str]] = {}
+    for rule in rules:
         for t in rule.tags:
-            if t not in tag_counts:
-                tag_counts[t] = 1
-            else:
-                tag_counts[t] += 1
+            if t not in tag_to_identifiers:
+                tag_to_identifiers[t] = set()
+            tag_to_identifiers[t].add(rule.identifier)
+    tag_counts = dict([(k, len(v)) for k, v in tag_to_identifiers.items()])
     print("[*] Rule tag counts:")
     for tag in sorted(tag_counts.keys()):
         count = tag_counts[tag]
-        print(" |-> {}: {}".format(tag, count))
+        if sys.stdout.isatty():
+            print(f" |-> {colorize_tag(tag)}: {count}")
+        else:
+            print(f" |-> {tag}: {count}")
 
     if len(sys.argv) > 1:
         if sys.argv[1] == 'register':
             print("[*] Registering ...")
-            os.system("python setup.py register")
+            os.system('python setup.py register')
         if sys.argv[1] == 'readme':
             convert_readme()
 
-    print("[*] Finished prepping.")
+    print("[*] Finished preparing APKiD for release.")

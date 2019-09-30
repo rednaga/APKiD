@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018  RedNaga. https://rednaga.io
+ * Copyright (C) 2019  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -72,6 +72,7 @@ rule checks_build_fingerprint : anti_vm
 {
   meta:
     description = "Build.FINGERPRINT check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     // FINGERPRINT
@@ -97,6 +98,7 @@ rule checks_debugger_present : anti_debug
 {
   meta:
     description = "Debug.isDebuggerConnected() check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     $debug = "Debug"
@@ -111,6 +113,7 @@ rule checks_build_model : anti_vm
 {
   meta:
     description = "Build.MODEL check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     // MODEL
@@ -135,6 +138,7 @@ rule checks_build_manufacturer : anti_vm
 {
   meta:
     description = "Build.MANUFACTURER check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     // MANUFACTURER
@@ -154,6 +158,7 @@ rule checks_build_brand : anti_vm
 {
   meta:
     description = "Build.BRAND check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     // BRAND
@@ -171,6 +176,7 @@ rule checks_build_device : anti_vm
 {
   meta:
     description = "Build.DEVICE check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     // DEVICE
@@ -188,6 +194,7 @@ rule checks_build_product : anti_vm
 {
   meta:
     description = "Build.PRODUCT check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     // PRODUCT
@@ -207,6 +214,7 @@ rule checks_build_hardware : anti_vm
 {
   meta:
     description = "Build.HARDWARE check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     // HARDWARE
@@ -227,6 +235,7 @@ rule checks_build_board : anti_vm
 {
   meta:
     description = "Build.BOARD check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     // BOARD
@@ -244,6 +253,7 @@ rule checks_build_id : anti_vm
 {
   meta:
     description = "Build.ID check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     // ID
@@ -261,6 +271,7 @@ rule possible_build_serial_check : anti_vm
 {
   meta:
     description = "possible Build.SERIAL check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     // SERIAL
@@ -276,6 +287,7 @@ rule checks_build_tags : anti_vm
 {
   meta:
     description = "Build.TAGS check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     // TAGS
@@ -293,6 +305,7 @@ rule checks_build_user : anti_vm
 {
   meta:
     description = "Build.USER check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     // TAGS
@@ -310,6 +323,7 @@ rule checks_sim_operator : anti_vm
 {
   meta:
     description = "SIM operator check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     // getSimOperator
@@ -326,6 +340,7 @@ rule checks_network_operator : anti_vm
 {
   meta:
     description = "network operator name check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     // getNetworkOperatorName
@@ -342,6 +357,7 @@ rule checks_device_id : anti_vm
 {
   meta:
     description = "device ID check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     // getDeviceId
@@ -358,6 +374,7 @@ rule checks_line1_number : anti_vm
 {
   meta:
     description = "line 1 number check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     // getLine1Number
@@ -374,6 +391,7 @@ rule checks_voicemail_number : anti_vm
 {
   meta:
     description = "voice mail number check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     // getVoiceMailNumber
@@ -390,6 +408,7 @@ rule checks_subscriber_id: anti_vm
 {
   meta:
     description = "subscriber ID check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     // getSubscriberId
@@ -405,6 +424,7 @@ rule checks_network_interface_names: anti_vm
 {
   meta:
     description = "network interface name check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     // Ljava/net/NetworkInterface;
@@ -423,6 +443,7 @@ rule checks_cpuinfo : anti_vm
 {
   meta:
     description = "/proc/cpuinfo check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     $a = "/proc/cpuinfo"
@@ -437,6 +458,7 @@ rule checks_build_type : anti_vm
 {
   meta:
     description = "ro.build.type check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     $a = "ro.build.type"
@@ -451,6 +473,7 @@ rule checks_hardware : anti_vm
 {
   meta:
     description = "ro.hardware check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     $a = "ro.hardware"
@@ -467,6 +490,7 @@ rule checks_product_device : anti_vm
 {
   meta:
     description = "ro.product.device check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     $a = "ro.product.device"
@@ -481,6 +505,7 @@ rule checks_kernel_qemu : anti_vm
 {
   meta:
     description = "ro.kernel.qemu check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     $a = "ro.kernel.qemu"
@@ -494,6 +519,7 @@ rule possible_ro_secure_check : anti_vm
 {
   meta:
     description = "possible ro.secure check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     $a = "ro.secure"
@@ -507,6 +533,7 @@ rule checks_qemu_file : anti_vm
 {
   meta:
     description = "emulator file check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     $a = "/init.goldfish.rc"
@@ -528,7 +555,8 @@ rule checks_qemu_file : anti_vm
 rule possible_vm_check : anti_vm
 {
   meta:
-    description = "possible vm check"
+    description = "possible VM check"
+    sample = "9c6b6392fc30959874eef440b6a83a9f5ef8cc95533037a6f86d0d3d18245224"
 
   strings:
     $a = "isEmulator"

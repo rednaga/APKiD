@@ -1,5 +1,5 @@
 """
- Copyright (C) 2018  RedNaga. https://rednaga.io
+ Copyright (C) 2019  RedNaga. https://rednaga.io
  All rights reserved. Contact: rednaga@protonmail.com
 
 
@@ -25,81 +25,140 @@
 """
 
 import json
+import os
 import sys
+from typing import Dict, List, Union
+
+import yara
+
+from .rules import RulesManager
+
+prt_red = lambda s: f"\033[91m{s}\033[00m"
+prt_green = lambda s: f"\033[92m{s}\033[00m"
+prt_yellow = lambda s: f"\033[93m{s}\033[00m"
+prt_light_purple = lambda s: f"\033[94m{s}\033[00m"
+prt_purple = lambda s: f"\033[95m{s}\033[00m"
+prt_cyan = lambda s: f"\033[36m{s}\033[00m"
+prt_light_cyan = lambda s: f"\033[96m{s}\033[00m"
+prt_light_gray = lambda s: f"\033[97m{s}\033[00m"
+prt_orange = lambda s: f"\033[33m{s}\033[00m"
+prt_pink = lambda s: f"\033[35m{s}\033[00m"
 
 
-def print_matches(key_path, matches):
-    """
-     example matches dict
-    [{
-      'tags': ['foo', 'bar'],
-      'matches': True,
-      'namespace': 'default',
-      'rule': 'my_rule',
-      'meta': {},
-      'strings': [(81L, '$a', 'abc'), (141L, '$b', 'def')]
-    }]
-    """
-    print("[*] {}".format(key_path))
-    for tags in sorted(matches):
-        descriptions = ', '.join(sorted(matches[tags]))
-        if sys.stdout.isatty():
-            tags_str = colorize_tags(tags)
-        else:
-            tags_str = tags
-        print(" |-> {} : {}".format(tags_str, descriptions))
+def colorize_tag(tag) -> str:
+    if tag == 'compiler':
+        return prt_cyan(tag)
+    elif tag == 'manipulator':
+        return prt_light_cyan(tag)
+    elif tag == 'abnormal':
+        return prt_light_gray(tag)
+    elif tag in ['anti_vm', 'anti_disassembly', 'anti_debug']:
+        return prt_purple(tag)
+    elif tag in ['packer', 'protector']:
+        return prt_red(tag)
+    elif tag == 'obfuscator':
+        return prt_yellow(tag)
+    elif tag == 'dropper':
+        return prt_green(tag)
+    elif tag == 'embedded':
+        return prt_light_purple(tag)
+    elif tag == 'file_type':
+        return prt_orange(tag)
+    elif tag == 'internal':
+        return prt_pink(tag)
+    else:
+        return tag
 
 
-def colorize_tags(tags):
-    colored_tags = []
-    for tag in tags.split(', '):
-        if tag == 'compiler':
-            colored_tag = prt_cyan(tag)
-        elif tag == 'manipulator':
-            colored_tag = prt_lightCyan(tag)
-        elif tag == 'abnormal':
-            colored_tag = prt_lightGray(tag)
-        elif tag in ['anti_vm', 'anti_disassembly', 'anti_debug']:
-            colored_tag = prt_purple(tag)
-        elif tag in ['packer', 'protector']:
-            colored_tag = prt_red(tag)
-        elif tag == 'obfuscator':
-            colored_tag = prt_yellow(tag)
-        else:
-            colored_tag = tag
-        colored_tags.append(colored_tag)
-    colored_tags = ', '.join(colored_tags)
-    return colored_tags
+class OutputFormatter(object):
+    def __init__(self, json_output: bool, output_dir: Union[str, None], rules_manager: RulesManager, include_types: bool):
+        from apkid import __version__
+        self.output_dir = output_dir
+        self.json = json_output or output_dir
+        self.version = __version__
+        self.rules_hash = rules_manager.hash
+        self.include_types = include_types
 
-
-def get_json_output(results):
-    from . import __version__, rules
-    output = {
-        'apkid_version': __version__,
-        'rules_sha256': rules.sha256(),
-        'files': [],
-    }
-    for filename in results:
-        result = {
-            'filename': filename,
-            'results': results[filename],
+    def write(self, results: Dict[str, List[yara.Match]]) -> None:
+        """
+         Example yara.Match:
+        {
+          'tags': ['foo', 'bar'],
+          'matches': True,
+          'namespace': 'default',
+          'rule': 'my_rule',
+          'meta': {},
+          'strings': [(81L, '$a', 'abc'), (141L, '$b', 'def')]
         }
-        output['files'].append(result)
-    return output
+        """
 
+        if self.output_dir:
+            if not os.path.exists(self.output_dir):
+                os.makedirs(self.output_dir)
+            output = self.build_json_output(results)
+            out_file = sorted(results.keys(), key=lambda k: len(k))[0]
+            out_path = os.path.join(self.output_dir, out_file)
+            with open(out_path, 'w') as f:
+                f.write(json.dumps(output))
+        else:
+            if self.json:
+                self._print_json(results)
+            else:
+                self._print_console(results)
 
-def print_json_results(results):
-    output = get_json_output(results)
-    print(json.dumps(output))
+    def build_json_output(self, results: Dict[str, List[yara.Match]]):
+        output = {
+            'apkid_version': self.version,
+            'rules_sha256': self.rules_hash,
+            'files': [],
+        }
+        for filename, matches in results.items():
+            match_results = self._build_match_results(matches)
+            if len(match_results) == 0:
+                continue
+            result = {
+                'filename': filename,
+                'matches': match_results,
+            }
+            output['files'].append(result)
+        return output
 
+    def _print_json(self, results: Dict[str, List[yara.Match]]) -> None:
+        output = self.build_json_output(results)
+        print(json.dumps(output, sort_keys=True))
 
-prt_red = lambda s: "\033[91m{}\033[00m".format(s)
-prt_green = lambda s: "\033[92m{}\033[00m".format(s)
-prt_yellow = lambda s: "\033[93m{}\033[00m".format(s)
-prt_lightPurple = lambda s: "\033[94m{}\033[00m".format(s)
-prt_purple = lambda s: "\033[95m{}\033[00m".format(s)
-prt_cyan = lambda s: "\033[36m{}\033[00m".format(s)
-prt_lightCyan = lambda s: "\033[96m{}\033[00m".format(s)
-prt_lightGray = lambda s: "\033[97m{}\033[00m".format(s)
-prt_orange = lambda s: "\033[33m{}\033[00m".format(s)
-prt_pink = lambda s: "'\033[95m'{}\033[00m".format(s)
+    def _print_console(self, results: Dict[str, List[yara.Match]]) -> None:
+        for key, raw_matches in results.items():
+            match_results = self._build_match_results(raw_matches)
+            if len(match_results) == 0:
+                continue
+            print(f"[*] {key}")
+            for tags in sorted(match_results):
+                descriptions = ', '.join(sorted(match_results[tags]))
+                if sys.stdout.isatty():
+                    tags_str = OutputFormatter._colorize_tags(tags)
+                else:
+                    tags_str = tags
+                print(f" |-> {tags_str} : {descriptions}")
+
+    def _build_match_results(self, matches) -> Dict[str, List[str]]:
+        results: Dict[str, List[str]] = {}
+        for m in matches:
+            if 'file_type' in m.tags and not self.include_types:
+                continue
+            tags = ', '.join(sorted(m.tags))
+            description = m.meta.get('description', m)
+            if tags in results:
+                if description not in results[tags]:
+                    results[tags].append(description)
+            else:
+                results[tags] = [description]
+        return results
+
+    @staticmethod
+    def _colorize_tags(tags) -> str:
+        colored_tags = []
+        for tag in tags.split(', '):
+            colored_tag = colorize_tag(tag)
+            colored_tags.append(colored_tag)
+        return ', '.join(colored_tags)

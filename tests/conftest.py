@@ -24,22 +24,29 @@
  requirements will be met.
 """
 
-import warnings
+import yara
+
+import pytest
+
+from apkid.apkid import Scanner, Options
+from apkid.rules import RulesManager
 
 
-def test_rules_compile(rules_manager):
-    rules = rules_manager.compile()
-    assert rules
+@pytest.fixture
+def rules_manager():
+    return RulesManager()
 
 
-def test_lint_rules(rules_manager):
-    for r in rules_manager.compile():
-        if len(r.tags) == 0:
-            warnings.warn(f"rule has no tags: {r.identifier}", stacklevel=0)
+@pytest.fixture
+def options():
+    return Options()
 
-        if 'description' not in r.meta:
-            warnings.warn(f"rule has no description: {r.identifier}", stacklevel=0)
 
-        if ('packer' in r.tags or 'protector' in r.tags or 'obfuscator' in r.tags) \
-                and 'sample' not in r.meta:
-            warnings.warn(f"rule has no reference sample: {r.identifier}", stacklevel=0)
+@pytest.fixture
+def rules():
+    return yara.compile(source='rule dummy { condition: true }')
+
+
+@pytest.fixture
+def scanner(rules: yara.Rules, options):
+    return Scanner(rules=rules, options=options)

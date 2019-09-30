@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018  RedNaga. https://rednaga.io
+ * Copyright (C) 2019  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -26,6 +26,7 @@
  **/
 
 import "elf"
+include "common.yara"
 include "../apk/packers.yara"
 
 private rule upx_elf32_arm_stub : packer
@@ -318,8 +319,8 @@ rule promon : packer
 {
   meta:
     description = "Promon Shield"
-    info        = "https://promon.co/"
-    sample     = "6a3352f54d9f5199e4bf39687224e58df642d1d91f1d32b069acd4394a0c4fe0"
+    url         = "https://promon.co/"
+    sample      = "6a3352f54d9f5199e4bf39687224e58df642d1d91f1d32b069acd4394a0c4fe0"
 
   strings:
     $a = "libshield.so"
@@ -334,4 +335,39 @@ rule promon : packer
   condition:
     ($a and $b and $c and $d) and
     2 of ($s*)
+}
+
+rule appsealing_core_2_10_10 : packer
+{
+  meta:
+    description = "AppSealing CORE VERSION 2.10.10"
+    url         = "https://www.appsealing.com/"
+    sample      = "61a983b032aee2e56159e682ad1588ad30fa8c3957bf849d1afe6f10e1d9645d"
+    author      = "zeroload"
+
+  strings:
+    $core_ver = "APPSEALING-CORE-VERSION_2.10.10"
+
+  condition:
+    $core_ver
+}
+
+rule tencent_elf : packer
+{
+  meta:
+    description = "Mobile Tencent Protect"
+    url         = "https://intl.cloud.tencent.com/product/mtp"
+    sample      = "7c6024abc61b184ddcc9fa49f9fac1a7e5568d1eab09ee748f8c4987844a3f81"
+
+  strings:
+    // getenv liblog.so libz.so libdl.so libc.so libshell.so
+    $libs = {
+      00 67 65 74 65 6E 76 00 6C 69 62 6C 6F 67 2E 73 6F 00 6C 69 62 7A 2E
+      73 6F 00 6C 69 62 64 6C 2E 73 6F 00 6C 69 62 63 2E 73 6F 00 6C 69 62
+      73 68 65 6C 6C 2E 73 6F 00
+    }
+
+  condition:
+    is_elf
+    and any of them
 }
