@@ -550,6 +550,23 @@ rule chornclickers : packer
     is_apk and all of them
 }
 
+rule appsuit_packer : packer
+{
+    meta:
+        description = "AppSuit"
+        url         = "http://www.stealien.com/appsuit.html"
+        sample      = "8dc42cc950617ff51d0409a05809d20ca4c375f05c3fa2324b249e1306758a94"
+        author      = "Eduardo Novella"
+
+    strings:
+        $asset1      = "assets/appsuit/momo"
+        $asset2      = "assets/appsuit/meme"
+        $native_lib2 = "libAppSuit.so"
+
+    condition:
+        is_apk and 2 of them
+}
+
 rule appsealing : packer
 {
   meta:
