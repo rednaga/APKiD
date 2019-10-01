@@ -56,7 +56,7 @@ rule appguard_new : packer
     $d = "libAppGuard-x86.so"
 
   condition:
-    is_apk and 3 of them
+    is_apk and 2 of them
 }
 
 rule dxshield : packer
