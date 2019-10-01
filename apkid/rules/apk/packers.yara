@@ -45,8 +45,7 @@ rule appguard_new : packer
 {
   meta:
     description = "AppGuard"
-    sample1     = "c5195daa5d17ba6e1755f8cb7270ae3a971eb688ee7d650d10c284d7c93b777d"
-    sample2     = "4fc9d4659382b806bbacb4ededcf630dee8c74f04c95c805e8f85f1e81dc2693"
+    sample      = "c5195daa5d17ba6e1755f8cb7270ae3a971eb688ee7d650d10c284d7c93b777d"
     url         = "http://appguard.nprotect.com/en/index.html"
     author      = "Eduardo Novella"
 
@@ -57,7 +56,7 @@ rule appguard_new : packer
     $d = "libAppGuard-x86.so"
 
   condition:
-    is_apk and 2 of them
+    is_apk and 3 of them
 }
 
 rule dxshield : packer
