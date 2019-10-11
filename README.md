@@ -18,26 +18,11 @@ For more information on what this tool can be used for, check out:
 
 # Installing
 
-Installation is unfortunately a bit involved until a [pull request](https://github.com/VirusTotal/yara/pull/1073) is merged in a dependency. Here's how you do it:
-
 ```bash
-git clone --recursive -b "v3.10.0" https://github.com/VirusTotal/yara-python.git /tmp/yara-python
-cd /tmp/yara-python/yara 
-curl https://patch-diff.githubusercontent.com/raw/VirusTotal/yara/pull/1073.patch | git am
-cd ..
-python setup.py build --enable-dex
-python setup.py install
-```
 
-Without this patch to Yara, the dexlib1 detection rule will fail as will any rule relying on string sizes.
-
-If this patch wasn't needed, here's how you'd install. First, install [yara-python](https://github.com/VirusTotal/yara-python) with `--enable-dex` to compile Yara's DEX module:
-
-```bash
-# Don't use this method, for now.
-#pip install --upgrade wheel
-#pip wheel --wheel-dir=/tmp/yara-python --build-option="build" --build-option="--enable-dex" git+https://github.com/VirusTotal/yara-python.git@v3.10.0
-#pip install --no-index --find-links=/tmp/yara-python yara-python
+pip install --upgrade wheel
+pip wheel --wheel-dir=/tmp/yara-python --build-option="build" --build-option="--enable-dex" git+https://github.com/VirusTotal/yara-python.git@v3.11.0
+pip install --no-index --find-links=/tmp/yara-python yara-python
 ```
 
 Finally, install APKiD:
