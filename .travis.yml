@@ -9,7 +9,7 @@ python:
 install:
   - pip install --upgrade pip
   - pip install wheel
-  - pip wheel --wheel-dir=/tmp/yara-python --build-option="build" --build-option="--enable-dex" git+https://github.com/VirusTotal/yara-python.git@v3.10.0
+  - pip wheel --wheel-dir=/tmp/yara-python --build-option="build" --build-option="--enable-dex" git+https://github.com/VirusTotal/yara-python.git@v3.11.0
   - pip install --no-index --find-links=/tmp/yara-python yara-python
   - pip install -e .[dev,test]
   - pip install --upgrade pytest factory_boy
