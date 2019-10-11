@@ -22,6 +22,15 @@ RUN python prep-release.py && \
 RUN mkdir /input
 WORKDIR /input
 
+#Cleanup
+RUN \
+    apt remove --purge -y \
+        git && \
+    apt clean && \
+    apt autoclean && \
+    apt autoremove -y && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /usr/share/doc/* /usr/share/man/* > /dev/null 2>&1
+    
 RUN chown -R appuser:appuser /apkid
 RUN chown -R appuser:appuser /input
 USER appuser
