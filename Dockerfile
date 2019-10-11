@@ -5,9 +5,9 @@ RUN groupadd -g 999 appuser && \
     useradd -r -u 999 -g appuser appuser
 
 RUN apt-get update -qq && \
-    apt-get install -y git build-essential gcc pandoc
+    apt-get install -y git build-essential gcc pandoc curl
 
-RUN pip install --no-cache-dir --upgrade pip setuptools wheel curl && \
+RUN pip install --no-cache-dir --upgrade pip setuptools wheel && \
     pip wheel --quiet --no-cache-dir --wheel-dir=/tmp/yara-python --build-option="build" --build-option="--enable-dex" git+https://github.com/VirusTotal/yara-python.git@v3.11.0 && \
     pip install --quiet --no-cache-dir --no-index --find-links=/tmp/yara-python yara-python && \
     rm -rf /tmp/yara-python
