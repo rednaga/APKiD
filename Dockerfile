@@ -6,11 +6,10 @@ RUN groupadd -g 999 appuser && \
 
 RUN apt-get update -qq && \
     apt-get install -y git build-essential gcc pandoc
-RUN pip install --upgrade pip setuptools wheel curl
 
-RUN pip3 install --quiet --no-cache-dir wheel==0.33.4 && \
-    pip3 wheel --quiet --no-cache-dir --wheel-dir=/tmp/yara-python --build-option="build" --build-option="--enable-dex" git+https://github.com/VirusTotal/yara-python.git@v3.11.0 && \
-    pip3 install --quiet --no-cache-dir --no-index --find-links=/tmp/yara-python yara-python && \
+RUN pip install --no-cache-dir --upgrade pip setuptools wheel curl && \
+    pip wheel --quiet --no-cache-dir --wheel-dir=/tmp/yara-python --build-option="build" --build-option="--enable-dex" git+https://github.com/VirusTotal/yara-python.git@v3.11.0 && \
+    pip install --quiet --no-cache-dir --no-index --find-links=/tmp/yara-python yara-python && \
     rm -rf /tmp/yara-python
 
 WORKDIR /apkid
