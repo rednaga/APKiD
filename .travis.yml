@@ -16,3 +16,4 @@ install:
 script:
   - ./prep-release.py | true
   - python -m pytest -s
+  - docker build . -t rednaga:apkid
