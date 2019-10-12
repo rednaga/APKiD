@@ -1,5 +1,5 @@
 FROM python:3-slim
-LABEL maintainer="Caleb Fenton"
+LABEL maintainer="Caleb Fenton <calebjfenton -at- gmail.com>"
 
 RUN groupadd -g 999 appuser && \
     useradd -r -u 999 -g appuser appuser
@@ -25,7 +25,9 @@ WORKDIR /input
 #Cleanup
 RUN \
     apt remove --purge -y \
-        git && \
+        git \
+        man \
+        gcc && \
     apt clean && \
     apt autoclean && \
     apt autoremove -y && \
