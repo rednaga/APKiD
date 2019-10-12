@@ -1,5 +1,5 @@
 FROM python:3-slim
-LABEL maintainer="Caleb Fenton <calebjfenton -at- gmail.com>"
+LABEL maintainer="RedNaga <rednaga@protonmail.com>"
 
 RUN groupadd -g 999 appuser && \
     useradd -r -u 999 -g appuser appuser
@@ -22,9 +22,8 @@ RUN python prep-release.py && \
 RUN mkdir /input
 WORKDIR /input
 
-#Cleanup
-RUN \
-    apt remove --purge -y \
+# Cleanup
+RUN apt remove --purge -y \
         git \
         man \
         gcc && \
@@ -33,8 +32,8 @@ RUN \
     apt autoremove -y && \
     rm -rf /var/lib/apt/lists/* /tmp/* /usr/share/doc/* /usr/share/man/* > /dev/null 2>&1
     
-RUN chown -R appuser:appuser /apkid
-RUN chown -R appuser:appuser /input
+RUN chown -R appuser:appuser /apkid && \
+    chown -R appuser:appuser /input
 USER appuser
 
 ENTRYPOINT ["apkid"]
