@@ -93,14 +93,14 @@ class OutputFormatter(object):
         """
 
         if self.output_dir:
-            if not os.path.exists(self.output_dir):
-                os.makedirs(self.output_dir)
+            # Result keys are file paths. Shortest key is base file in the case of archives.
+            base_file = sorted(results.keys(), key=lambda k: len(k))[0]
+            out_file = os.path.join(self.output_dir, *base_file.split(os.path.sep))
+            out_path = os.path.dirname(out_file)
+            if not os.path.exists(out_path):
+                os.makedirs(out_path)
             output = self.build_json_output(results)
-            _, out_file = os.path.split(
-                sorted(results.keys(), key=lambda k: len(k))[0]
-            )
-            out_path = os.path.join(self.output_dir, out_file)
-            with open(out_path, 'w') as f:
+            with open(out_file, 'w') as f:
                 f.write(json.dumps(output))
         else:
             if self.json:
