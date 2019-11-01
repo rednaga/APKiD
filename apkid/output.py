@@ -96,7 +96,9 @@ class OutputFormatter(object):
             if not os.path.exists(self.output_dir):
                 os.makedirs(self.output_dir)
             output = self.build_json_output(results)
-            out_file = sorted(results.keys(), key=lambda k: len(k))[0]
+            _, out_file = os.path.split(
+                sorted(results.keys(), key=lambda k: len(k))[0]
+            )
             out_path = os.path.join(self.output_dir, out_file)
             with open(out_path, 'w') as f:
                 f.write(json.dumps(output))
