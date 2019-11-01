@@ -31,7 +31,7 @@ from . import __version__
 
 
 def get_parser():
-    formatter = lambda prog: argparse.HelpFormatter(prog, max_help_position=50, width=100)
+    formatter = lambda prog: argparse.ArgumentDefaultsHelpFormatter(prog, max_help_position=50, width=100)
 
     parser = argparse.ArgumentParser(
         description=f"APKiD - Android Application Identifier v{__version__}",
