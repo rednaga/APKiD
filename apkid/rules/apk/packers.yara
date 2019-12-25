@@ -41,7 +41,7 @@ rule appguard : packer
     is_apk and ($stub and $encrypted_dex)
 }
 
-rule appguard_new : packer
+rule appguard_a : packer
 {
   meta:
     description = "AppGuard"
@@ -57,6 +57,37 @@ rule appguard_new : packer
 
   condition:
     is_apk and 3 of them
+}
+
+rule appguard_b : packer
+{
+  meta:
+    description = "AppGuard (TOAST-NHNent)"
+    url         = "https://docs.toast.com/en/Security/AppGuard/en/Overview/"
+    url2        = "https://www.toast.com/service/security/appguard"
+    sample      = "80ac3e9d3b36613fa82085cf0f5d03b58ce20b72ba29e07f7c744df476aa9a92"
+    samples     = "https://koodous.com/rulesets/5249/apks"
+    author      = "Eduardo Novella"
+
+  strings:
+    // package com.nhnent.appguard;
+    $a1 = "assets/classes.jet"
+    $a2 = "assets/classes.zip"
+    $a3 = "assets/classes2.jet"
+    $a4 = "assets/classes2.zip"
+    $a5 = "assets/classes3.jet"
+    $a6 = "assets/classes3.zip"
+    $b1 = "lib/armeabi-v7a/libloader.so"
+    $b2 = "lib/x86/libloader.so"
+    $b3 = "lib/armeabi-v7a/libdiresu.so"
+    $b4 = "lib/x86/libdiresu.so"
+    $c1 = "assets/m7a"
+    $c2 = "assets/m8a"
+    $c3 = "assets/agconfig"    //appguard cfg?
+    $c4 = "assets/agmetainfo"
+
+  condition:
+    is_apk and (2 of ($a*) and 1 of ($b*) and 1 of ($c*))
 }
 
 rule dxshield : packer
