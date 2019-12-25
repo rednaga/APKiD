@@ -69,7 +69,7 @@ rule appguard_b : packer
     samples     = "https://koodous.com/rulesets/5249/apks"
     author      = "Eduardo Novella"
 
-	strings:
+  strings:
     // package com.nhnent.appguard;
     $a1 = "assets/classes.jet"
     $a2 = "assets/classes.zip"
