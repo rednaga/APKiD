@@ -275,3 +275,14 @@ rule dexmerge : manipulator
   condition:
     dexmerge_map_type_order
 }
+
+rule unknown_compiler : compiler {
+  meta:
+    description = "unknown (please file detection issue!)"
+
+  condition:
+    not ((dexlib1 or dexlib2 or dexlib2beta) or
+    (dx or dx_merged) or
+    (jack_generic or jack_3x or jack_4x or jack_4_12 or jack_5x) or
+    (dexmerge))
+}
