@@ -201,6 +201,24 @@ rule apkprotect : packer
     is_apk and ($key or $dir or $lib)
 }
 
+rule apkprotect_a : packer
+{
+  meta:
+    description = "APKProtect 6.x"
+    url         = "https://play.google.com/store/apps/details?id=com.mcal.dexprotect"
+    sample      = "1c3e09c6e336fef0261a19e546f3686fcf9a00ee23f7426608fef40465d91289"
+    author      = "Eduardo Novella"
+
+  strings:
+    $a1 = /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libapkprotect\.so/
+    $a2 = "assets/apkprotect.bin"
+    $a3 = "assets/apkprotect/classes.dex.bin"
+    $a4 = "apkprotect-build.properties"
+
+  condition:
+    is_apk and 2 of ($a*)
+}
+
 rule bangcle : packer
 {
   meta:
@@ -539,7 +557,7 @@ rule chornclickers : packer
     // This has no name so we made one up from Ch-china,-orn-porn and -clickers
     description = "ChornClickers"
     url         = "https://github.com/rednaga/APKiD/issues/93"
-    sample     = "0c4a26d6b27986775c9c58813407a737657294579b6fd37618b0396d90d3efc3"
+    sample      = "0c4a26d6b27986775c9c58813407a737657294579b6fd37618b0396d90d3efc3"
     author      = "Eduardo Novella"
 
   strings:
@@ -608,9 +626,9 @@ rule secenh : packer
 rule tencent_legu : packer
 {
   meta:
-    description = "Tencent's Legu Packer"
-    sample = "9ff3a53f76c7a6d7e3de3b8567c9606f2cc08ec4aaaae596a27361018d839c58"
-    author = "Mert Arıkan"
+    description = "Tencent's Legu"
+    sample      = "9ff3a53f76c7a6d7e3de3b8567c9606f2cc08ec4aaaae596a27361018d839c58"
+    author      = "Mert Arıkan"
     // Reference article : https://blog.quarkslab.com/a-glimpse-into-tencents-legu-packer.html
 
   strings:
@@ -618,9 +636,10 @@ rule tencent_legu : packer
     $b = "assets/0OO00l111l1l"
     $c = "assets/0OO00oo01l1l"
     $d = "assets/o0oooOO0ooOo.dat"
- 
+
   condition:
     is_apk
-    and $b 
+    and $b
     and ($a or $c or $d)
 }
+
