@@ -557,7 +557,7 @@ rule chornclickers : packer
     // This has no name so we made one up from Ch-china,-orn-porn and -clickers
     description = "ChornClickers"
     url         = "https://github.com/rednaga/APKiD/issues/93"
-    sample     = "0c4a26d6b27986775c9c58813407a737657294579b6fd37618b0396d90d3efc3"
+    sample      = "0c4a26d6b27986775c9c58813407a737657294579b6fd37618b0396d90d3efc3"
     author      = "Eduardo Novella"
 
   strings:
@@ -626,9 +626,9 @@ rule secenh : packer
 rule tencent_legu : packer
 {
   meta:
-    description = "Tencent's Legu Packer"
-    sample = "9ff3a53f76c7a6d7e3de3b8567c9606f2cc08ec4aaaae596a27361018d839c58"
-    author = "Mert Arıkan"
+    description = "Tencent's Legu"
+    sample      = "9ff3a53f76c7a6d7e3de3b8567c9606f2cc08ec4aaaae596a27361018d839c58"
+    author      = "Mert Arıkan"
     // Reference article : https://blog.quarkslab.com/a-glimpse-into-tencents-legu-packer.html
 
   strings:
@@ -642,3 +642,4 @@ rule tencent_legu : packer
     and $b
     and ($a or $c or $d)
 }
+
