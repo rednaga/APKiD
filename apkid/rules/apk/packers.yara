@@ -210,7 +210,7 @@ rule apkprotect_a : packer
     author      = "Eduardo Novella"
 
   strings:
-    $a1 = /lib\/[x86\_64|armeabi\-v7a|arm64\-v8a|x86]\/libapkprotect\.so/
+    $a1 = /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libapkprotect\.so/
     $a2 = "assets/apkprotect.bin"
     $a3 = "assets/apkprotect/classes.dex.bin"
     $a4 = "apkprotect-build.properties"
