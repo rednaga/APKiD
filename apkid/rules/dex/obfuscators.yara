@@ -274,6 +274,37 @@ rule arxan_multidex : obfuscator
     not arxan
 }
 
+rule arxan_b : obfuscator
+{
+  meta:
+    description = "Arxan (b - unconfirmed)"
+    url         = "https://github.com/rednaga/APKiD/issues/160"
+    sample      = "86ade15e885cf7927e5840dd2bf2782905fcd6843be77f898b51b64c2277f3de"
+    author      = "Tim 'diff' Strazzere"
+
+  strings:
+    // Targeting this seemingly static byte sequence used inside the injected obfuscation:
+    // move-result v0 (moving result from own deobfuscation, v2 and v3 are always consts)
+    $deobf = {
+      0A 0?
+      DF 01 03 FF
+      // and-int/2addr v1, v0
+      B5 01
+      // xor-int/lit8 v0, v0, -0x1
+      DF 00 00 FF
+      // and-int/2addr v0, v3
+      B5 30
+      // or-int/2addr v1, v0
+      B6 01
+      // int-to-short v7, v1
+      8F 1?
+    }
+
+  condition:
+    is_dex and
+    $deobf
+}
+
 rule allatori_demo : obfuscator
 {
   meta:
