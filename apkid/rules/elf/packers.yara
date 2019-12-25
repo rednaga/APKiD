@@ -381,7 +381,7 @@ rule crackproof : packer
     samples     = "https://koodous.com/rulesets/5244/apks"
     author      = "Eduardo Novella"
 
-	strings:
+  strings:
     /**
       int __fastcall j_do_asm_syscall(int svc_nr, void *a2, void *a3, void *a4, void *a5, void *a6, void *a7)
       {
