@@ -604,3 +604,20 @@ rule secenh : packer
     and 1 of ($a*)
     and 1 of ($b*)
 }
+
+rule tencent_legu : packer
+{
+  meta:
+    description = "Tencent's Legu Packer"
+    sample = "9ff3a53f76c7a6d7e3de3b8567c9606f2cc08ec4aaaae596a27361018d839c58"
+    author = "Mert Arıkan"
+  strings:
+    $a = "assets/toversion"
+    $b = "assets/0OO00l111l1l"
+    $c = "assets/0OO00oo01l1l"
+    $d = "assets/o0oooOO0ooOo.dat"
+  condition:
+    is_apk
+    and $b 
+    and ($a or $c or $d)
+}
