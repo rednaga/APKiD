@@ -155,10 +155,10 @@ rule ollvm : obfuscator
     not ollvm_v6_0_strenc
 }
 
-rule byteguard : obfuscator
+rule byteguard_0_9_3 : obfuscator
 {
   meta:
-    description = "ByteGuard"
+    description = "ByteGuard 0.9.3"
     sample      = "eed4f7b907fe2173935d307dfb0d6aa7098f69db8dfb65e49affd7b7a6c0a5e4"
     samples     = "https://koodous.com/rulesets/5862/apks"
     author      = "Eduardo Novella"
@@ -167,11 +167,26 @@ rule byteguard : obfuscator
     // clang version 6.0.0 (Byteguard 0.6) (git@sysrepo.byted.org:dingbaozeng/native_obfuscator.git 448f20ff6eb06dd336dd81846d6a7dc8ba8c961b)
     // Apple LLVM version 6.0.0 (ByteGuard 0.9.3-af515063)
     $clang_version = "clang version 6.0.0 (Byteguard 0.6) (git@sysrepo.byted.org:dingbaozeng/native_obfuscator.git "
-    $based_on      = "Apple LLVM version 6.0.0 (ByteGuard 0.9."
-    $joke          = " -_-||| Sorry! You can't touch me any longer ... "
+    $based_on      = "Apple LLVM version 6.0.0 (ByteGuard 0.9.3-af515063)"
 
   condition:
     is_elf and 1 of them
+}
+
+rule byteguard_0_9_2 : obfuscator
+{
+  meta:
+    description = "ByteGuard 0.9.2"
+    sample      = "178b1ef3c4ac563604c8a262f0e3651f56995768c8aa13ccc845f33bd6eb0ac2"
+    samples     = "https://koodous.com/rulesets/5862/apks"
+    author      = "Eduardo Novella"
+
+  strings:
+    // clang version 5.0.2 (Byteguard-0.9.2-255c7b5e)
+    $clang_version = "clang version 5.0.2 (Byteguard-0.9.2-255c7b5e)"
+
+  condition:
+    is_elf and all of them
 }
 
 rule firehash : obfuscator
