@@ -155,6 +155,25 @@ rule ollvm : obfuscator
     not ollvm_v6_0_strenc
 }
 
+rule byteguard : obfuscator
+{
+  meta:
+    description = "ByteGuard 0.9"
+    sample      = "eed4f7b907fe2173935d307dfb0d6aa7098f69db8dfb65e49affd7b7a6c0a5e4"
+    samples     = "https://koodous.com/rulesets/5862/apks"
+    author      = "Eduardo Novella"
+
+  strings:
+    // clang version 6.0.0 (Byteguard 0.6) (git@sysrepo.byted.org:dingbaozeng/native_obfuscator.git 448f20ff6eb06dd336dd81846d6a7dc8ba8c961b)
+    // Apple LLVM version 6.0.0 (ByteGuard 0.9.3-af515063)
+    $clang_version = "clang version 6.0.0 (Byteguard 0.6) (git@sysrepo.byted.org:dingbaozeng/native_obfuscator.git "
+    $based_on      = "Apple LLVM version 6.0.0 (ByteGuard 0.9."
+    $joke          = " -_-||| Sorry! You can't touch me any longer ... "
+
+  condition:
+    is_elf and 2 of them
+}
+
 rule firehash : obfuscator
 {
   meta:
