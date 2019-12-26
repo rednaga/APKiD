@@ -316,10 +316,26 @@ rule allatori_demo : obfuscator
 
   strings:
     // null-prev-str + len + str + null
-    $s = { 00 0D 41 4C 4C 41 54 4F 52 49 78 44 45 4D 4F 00 }  // ALLATORIxDEMO
+    $method = { 00 0D 41 4C 4C 41 54 4F 52 49 78 44 45 4D 4F 00 }  // ALLATORIxDEMO
 
   condition:
-    $s and is_dex
+    $method and is_dex
+}
+
+rule allatori : obfuscator
+{
+  meta:
+    description = "Allatori"
+    url         = "http://www.allatori.com/features.html"
+    author      = "Eduardo Novella"
+    sample      = "c0dd3437035073e3ef0c421c5410b874f6940c8cd7c0d829fb3297c63fa70216"
+
+  strings:
+    // null-prev-str + len + str + null
+    $method = { 00 0A (49|69) (49|69) (49|69) (49|69) (49|69) (49|69) (49|69) (49|69) (49|69) (49|69) 00}
+
+  condition:
+    #method > 10 and is_dex
 }
 
 rule aamo_str_enc : obfuscator
