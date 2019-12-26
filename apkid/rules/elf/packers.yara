@@ -247,6 +247,24 @@ rule upx_elf_ijiami : packer
     $ajm in (filesize - 50 .. filesize) and upx_stub
 }
 
+rule upx_elf_joker : packer
+{
+  meta:
+    description = "Joker (UPX)"
+    sample = "2de03bc5fc110a3bb2e6f4d6d6e558052b5cae3cb117a1a8c2be08576be0ed58"
+
+  strings:
+    // They replace UPX! with ZHSH or TIW°
+    $rename1 = "ZHSH"
+    // TIW°
+    $rename2 = { 54 49 57 B0 }
+
+  condition:
+    ($rename1 in (filesize - 50 .. filesize)) or
+    ($rename2 in (filesize - 50 .. filesize))
+     and upx_stub
+}
+
 private rule upx_unknown_version : packer
 {
   meta:
@@ -257,7 +275,7 @@ private rule upx_unknown_version : packer
     // We could extend this for more comprehensive rules, however lower versions than this should not be
     // appears on arm/android devices
     and not (upx_elf_3_01 or upx_elf_3_02 or upx_elf_3_03 or upx_elf_3_04 or upx_elf_3_07 or upx_elf_3_08 or upx_elf_3_09 or upx_elf_3_91 or upx_elf_3_92 or upx_elf_3_93 or upx_elf_3_94)
-    and not (upx_elf_ijiami or upx_elf_bangcle_secneo or upx_elf_bangcle_secneo_newer)
+    and not (upx_elf_ijiami or upx_elf_joker or upx_elf_bangcle_secneo or upx_elf_bangcle_secneo_newer)
 }
 
 rule upx_embedded_inside_elf : packer dropper
@@ -288,6 +306,7 @@ rule upx_unknown_version_modified : packer
     and not upx_elf_bangcle_secneo
     and not upx_elf_bangcle_secneo_newer
     and not upx_elf_ijiami
+    and not upx_elf_joker
     and not ijiami
     and not upx_sharedlib_unmodifed
     and not upx_embedded_inside_elf
