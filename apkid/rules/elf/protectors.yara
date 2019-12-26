@@ -54,3 +54,30 @@ rule whitecryption_elf : protector
   condition:
     is_elf and (($init_stub or $empty_func) or $init_proc_stub)
 }
+
+rule appdome_elf : protector
+{
+  // https://github.com/rednaga/APKiD/issues/151
+  meta:
+    description = "Appdome (elf)"
+    sample      = "1c6496f1cc8c5799539ee24170c371e8a57547e2eb73c9502c98ff78f44c74cf"
+    url         = "https://www.appdome.com/"
+    author      = "Tim 'diff' Strazzere"
+
+  strings:
+    // Currently these are exported symbols and work across all abi's
+    $ad_start = "__start_adinit"
+    $ad_stop = "__stop_adinit"
+    $hook_start = "__start_hook"
+    $hook_stop = "__stop_hook"
+    $ipcent_start = "__start_ipcent"
+    $ipcent_stop = "__stop_ipcent"
+
+
+  condition:
+    is_elf and (
+      ($ad_start and $ad_stop) or
+      ($hook_start and $hook_stop) or
+      ($ipcent_start and $ipcent_stop)
+    )
+}

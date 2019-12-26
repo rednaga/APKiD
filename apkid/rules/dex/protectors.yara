@@ -69,3 +69,25 @@ rule whitecryption_dex : protector
   condition:
     is_dex and ($loader or $init_stub)
 }
+
+rule appdome_dex : protector
+{
+  // https://github.com/rednaga/APKiD/issues/151
+  meta:
+    description = "Appdome (dex)"
+    sample      = "1c6496f1cc8c5799539ee24170c371e8a57547e2eb73c9502c98ff78f44c74cf"
+    url         = "https://www.appdome.com/"
+    author      = "Tim 'diff' Strazzere"
+
+  strings:
+    // Loader class injected into everything, surrounding null bytes and size
+    // Lruntime/loading/InjectedActivity;
+    $loader = {
+      00 22 4C 72 75 6E 74 69 6D 65 2F 6C 6F 61 64 69
+      6E 67 2F 49 6E 6A 65 63 74 65 64 41 63 74 69 76
+      69 74 79 3B 00
+    }
+
+  condition:
+    is_dex and $loader
+}
