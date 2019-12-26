@@ -170,7 +170,7 @@ rule byteguard_0_9_3 : obfuscator
     $based_on      = "Apple LLVM version 6.0.0 (ByteGuard 0.9.3-af515063)"
 
   condition:
-    is_elf and 1 of them
+    is_elf and any of them
 }
 
 rule byteguard_0_9_2 : obfuscator
