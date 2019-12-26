@@ -194,10 +194,10 @@ rule byteguard_unknown : obfuscator
     author      = "Eduardo Novella"
 
   strings:
-    $clang_version = /clang version \d\.\d\.\d\. \(Byteguard(.*)0\.\d\.\d\-(.*)\)/
+    $clang_version = /clang version \d\.\d\.\d \(Byteguard(.*)0\.\d\.\d\-(.*)\)/
 
   condition:
-    is_elf and all of them and
+    is_elf and $clang_version and
     not byteguard_0_9_2 and
     not byteguard_0_9_3
 }
