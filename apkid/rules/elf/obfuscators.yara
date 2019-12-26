@@ -189,6 +189,21 @@ rule byteguard_0_9_2 : obfuscator
     is_elf and all of them
 }
 
+rule byteguard_unknown : obfuscator
+{
+  meta:
+    description = "ByteGuard unknown version"
+    author      = "Eduardo Novella"
+
+  strings:
+    $clang_version = /clang version \d\.\d\.\d\. \(Byteguard(.*)0\.\d\.\d\-(.*)\)/
+
+  condition:
+    is_elf and all of them and
+    not byteguard_0_9_2 and
+    not byteguard_0_9_3
+}
+
 rule firehash : obfuscator
 {
   meta:
