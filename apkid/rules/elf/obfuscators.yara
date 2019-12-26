@@ -158,7 +158,7 @@ rule ollvm : obfuscator
 rule byteguard : obfuscator
 {
   meta:
-    description = "ByteGuard 0.9"
+    description = "ByteGuard"
     sample      = "eed4f7b907fe2173935d307dfb0d6aa7098f69db8dfb65e49affd7b7a6c0a5e4"
     samples     = "https://koodous.com/rulesets/5862/apks"
     author      = "Eduardo Novella"
