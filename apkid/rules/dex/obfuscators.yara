@@ -332,10 +332,12 @@ rule allatori : obfuscator
 
   strings:
     // null-prev-str + len + str + null
-    $method = { 00 0A (49|69) (49|69) (49|69) (49|69) (49|69) (49|69) (49|69) (49|69) (49|69) (49|69) 00}
+    $method_7  = { 00 07 (49|69|6a|6c|4a|4c) (49|69|6a|6c|4a|4c) (49|69|6a|6c|4a|4c) (49|69|6a|6c|4a|4c) (49|69|6a|6c|4a|4c) (49|69|6a|6c|4a|4c) (49|69|6a|6c|4a|4c) 00}
+    $method_8  = { 00 08 (49|69|6a|6c|4a|4c) (49|69|6a|6c|4a|4c) (49|69|6a|6c|4a|4c) (49|69|6a|6c|4a|4c) (49|69|6a|6c|4a|4c) (49|69|6a|6c|4a|4c) (49|69|6a|6c|4a|4c) (49|69|6a|6c|4a|4c) 00}
+    $method_10 = { 00 0A (49|69|6a|6c|4a|4c) (49|69|6a|6c|4a|4c) (49|69|6a|6c|4a|4c) (49|69|6a|6c|4a|4c) (49|69|6a|6c|4a|4c) (49|69|6a|6c|4a|4c) (49|69|6a|6c|4a|4c) (49|69|6a|6c|4a|4c) (49|69|6a|6c|4a|4c) (49|69|6a|6c|4a|4c) 00}
 
   condition:
-    #method > 10 and is_dex
+    (#method_7 > 10 or #method_8 > 10 or #method_10 > 10) and is_dex
 }
 
 rule aamo_str_enc : obfuscator
