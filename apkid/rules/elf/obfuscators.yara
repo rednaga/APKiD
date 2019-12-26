@@ -255,6 +255,29 @@ rule arxan_native_arm : obfuscator
     (#a > 5 or #b > 5 or #c > 10) and elf.machine == elf.EM_ARM
 }
 
+rule arxan_arm64 : obfuscator
+{
+  meta:
+    description = "Arxan"
+    url         = "https://www.arxan.com/resources/technology/app-code-obfuscation"
+    sample      = "444ae35cea294ca0268adbddf1c39e8a45fcbb4c967c55f23449cf0d1ae6fce6"
+    author      = "Eduardo Novella"
+
+  strings:
+  // Prolog breakage 1 ARM64
+    $a = {
+      09 01 0B 8A   // AND  X9, X8, X11
+      4A 00 80 D2   // MOV  X10, #2
+      29 7D 0A 9B   // MUL  X9, X9, X10
+      08 01 0B CA   // EOR  X8, X8, X11
+      08 01 09 8B   // ADD  X8, X8, X9
+      00 01 1F D6   // BR   X8
+    }
+
+  condition:
+    (#a > 5) and elf.machine == elf.EM_AARCH64
+}
+
 rule alipay : obfuscator
 {
   meta:
