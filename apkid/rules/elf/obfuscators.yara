@@ -171,7 +171,7 @@ rule byteguard : obfuscator
     $joke          = " -_-||| Sorry! You can't touch me any longer ... "
 
   condition:
-    is_elf and 2 of them
+    is_elf and 1 of them
 }
 
 rule firehash : obfuscator
