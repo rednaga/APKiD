@@ -166,7 +166,7 @@ rule byteguard_0_9_3 : obfuscator
   strings:
     // clang version 6.0.0 (Byteguard 0.6) (git@sysrepo.byted.org:dingbaozeng/native_obfuscator.git 448f20ff6eb06dd336dd81846d6a7dc8ba8c961b)
     // Apple LLVM version 6.0.0 (ByteGuard 0.9.3-af515063)
-    $based_on = "Apple LLVM version 6.0.0 (ByteGuard 0.9.3-af515063)"
+    $version = "Apple LLVM version 6.0.0 (ByteGuard 0.9.3-af515063)"
 
   condition:
     is_elf and all of them
