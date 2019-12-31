@@ -281,9 +281,22 @@ rule unknown_compiler : compiler {
     description = "unknown (please file detection issue!)"
 
   condition:
+    is_dex and dex.header.header_size == 112 and
+    not ((dexlib1 or dexlib2 or dexlib2beta) or
+    (dx or dx_merged) or
+    (jack_generic or jack_3x or jack_4x or jack_4_12 or jack_5x) or
+    (dexmerge))
+}
+
+rule yara_module_issue : yara_module_issue {
+  meta:
+    description = "upstream dex module issue in yara, detected dex file locally but yara module failed"
+
+  condition:
     is_dex and
     not ((dexlib1 or dexlib2 or dexlib2beta) or
     (dx or dx_merged) or
     (jack_generic or jack_3x or jack_4x or jack_4_12 or jack_5x) or
     (dexmerge))
+    and not unknown_compiler
 }
