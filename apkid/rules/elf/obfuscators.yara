@@ -264,7 +264,11 @@ rule arxan_arm64 : obfuscator
     author      = "Eduardo Novella"
 
   strings:
-  // Prolog breakage 1 ARM64
+    /*
+     * Prolog breakage 1 ARM64
+     * This is how Arxan breaks the functions in basic blocks' sets making the static reverse engineering task very hard to follow.
+     * This is a updated version of the previous Arxan 32bits rule.
+     */
     $a = {
       09 01 0B 8A   // AND  X9, X8, X11
       4A 00 80 D2   // MOV  X10, #2
