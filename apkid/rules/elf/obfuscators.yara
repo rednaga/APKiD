@@ -113,7 +113,8 @@ rule ollvm_v6_0_strenc : obfuscator
     $strenc        = /\.datadiv_decode[0-9]{18,20}/
 
   condition:
-    is_elf and all of them
+    is_elf and all of them and
+    for any i in (0..elf.symtab_entries): (elf.symtab[i].name contains ".datadiv_decode")
 }
 
 rule ollvm_v6_0 : obfuscator
@@ -130,7 +131,9 @@ rule ollvm_v6_0 : obfuscator
     $based_on      = "(based on Obfuscator-LLVM 6.0."
 
   condition:
-    is_elf and all of them and not ollvm_v6_0_strenc
+    is_elf and
+    all of them and
+    not ollvm_v6_0_strenc
 }
 
 rule ollvm_v9_strenc : obfuscator
@@ -187,7 +190,10 @@ rule ollvm_armariris : obfuscator
     $strenc        = /\.datadiv_decode[0-9]{18,20}/
 
   condition:
-    is_elf and all of them and not ollvm_tll
+    is_elf and
+    all of them and
+    not ollvm_tll and
+    for any i in (0..elf.symtab_entries): (elf.symtab[i].name contains ".datadiv_decode")
 }
 
 rule ollvm_strenc : obfuscator
