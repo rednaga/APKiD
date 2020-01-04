@@ -195,7 +195,7 @@ rule byteguard_unknown : obfuscator
     author      = "Eduardo Novella"
 
   strings:
-    $clang_version = /(Apple LLVM|clang) version \d+\.\d+\.\d+ \(ByteGuard/
+    $clang_version = /(Apple LLVM|clang) version \d+\.\d+\.\d+ \(Byte(G|g)uard/
 
   condition:
     is_elf and $clang_version and
