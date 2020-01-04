@@ -220,7 +220,6 @@ rule dexprotector_b : packer
 
 rule dexpro : packer
 {
-  // Possible newer version
 
   meta:
     description = "DexProtector for AIDE"
