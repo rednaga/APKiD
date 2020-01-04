@@ -218,6 +218,24 @@ rule dexprotector_b : packer
     not dexprotector
 }
 
+rule dexpro : packer
+{
+  // Possible newer version
+
+  meta:
+    description = "DexProtector for AIDE"
+    url         = "https://play.google.com/store/apps/details?id=mph.trunksku.apps.dexpro"
+    sample      = "ccac4f15989a7ee430476d60b3a90ccf6c4ac7f6219f4e06676a69f75c7ce887"
+    author      = "Eduardo Novella"
+
+  strings:
+    $asset_1 = "assets/classes.dex.dat"
+    $asset_2 = "assets/dp-lib/dp.kotlin-v1.lua.mph"
+
+  condition:
+    is_apk and all of them
+}
+
 rule apkprotect : packer
 {
   meta:
