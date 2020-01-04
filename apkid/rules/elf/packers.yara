@@ -129,11 +129,11 @@ rule upx_elf_3_09 : packer
   meta:
     description = "UPX 3.09 (unmodified)"
 
-    strings:
+  strings:
 	  $copyright = "UPX 3.09 Copyright"
 
-    condition:
-      upx_unmodified and $copyright
+  condition:
+    upx_unmodified and $copyright
 }
 
 rule upx_elf_3_08 : packer
@@ -181,7 +181,7 @@ rule upx_elf_3_03 : packer
     $copyright = "UPX 3.03 Copyright"
 
   condition:
-	upx_unmodified and $copyright
+	  upx_unmodified and $copyright
 }
 
 rule upx_elf_3_02 : packer
@@ -369,6 +369,22 @@ rule appsealing_core_2_10_10 : packer
 
   condition:
     $core_ver
+}
+
+rule appsuit_packer_a : packer
+{
+  meta:
+    description = "AppSuit"
+    url         = "http://www.stealien.com/appsuit.html"
+    sample      = "3bcb66444b43d1a225ac2dd59387b8aa2ce921b0595708d65753eef6b0ef2165"
+    author      = "Eduardo Novella"
+
+  strings:
+    $native_lib1 = { 00 6c6962417070537569742e736f   00 } // \0libAppSuit.so\0
+    $native_lib2 = { 00 6c6962556e7061636b65722e736f 00 } // \0libUnpacker.so\0
+
+  condition:
+    is_elf and all of them
 }
 
 rule tencent_elf : packer
