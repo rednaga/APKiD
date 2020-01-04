@@ -220,7 +220,6 @@ rule dexprotector_b : packer
 
 rule dexpro : packer
 {
-
   meta:
     description = "DexProtector for AIDE"
     url         = "https://play.google.com/store/apps/details?id=mph.trunksku.apps.dexpro"
@@ -230,6 +229,24 @@ rule dexpro : packer
   strings:
     $asset_1 = "assets/classes.dex.dat"
     $asset_2 = "assets/dp-lib/dp.kotlin-v1.lua.mph"
+
+  condition:
+    is_apk and all of them
+}
+
+rule dexpro_a : packer
+{
+  meta:
+    description = "DexProtector for AIDE"
+    url         = "https://github.com/rednaga/APKiD/issues/197"
+    sample      = "e113be26d90fe2cb287009345139fba0c550a67b15c3022eb5dc13aa0eb8235a"
+    author      = "Eduardo Novella"
+
+  strings:
+    // pkgname  = mph.dexprotect.a
+    $asset_1    = "assets/dexprotect/classes.dex.dat"
+    $asset_2    = "assets/eprotect.dat"
+    $properties = "dexpro-build.properties"
 
   condition:
     is_apk and all of them
