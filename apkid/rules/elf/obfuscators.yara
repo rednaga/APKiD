@@ -166,7 +166,7 @@ rule byteguard_0_9_3 : obfuscator
   strings:
     // clang version 6.0.0 (Byteguard 0.6) (git@sysrepo.byted.org:dingbaozeng/native_obfuscator.git 448f20ff6eb06dd336dd81846d6a7dc8ba8c961b)
     // Apple LLVM version 6.0.0 (ByteGuard 0.9.3-af515063)
-    $version = "Apple LLVM version 6.0.0 (ByteGuard 0.9.3-af515063)"
+    $version = /(Apple LLVM|clang) version \d+\.\d+\.\d+ \(Byte(G|g)uard(-| )0\.9\.3/
 
   condition:
     is_elf and all of them
@@ -181,7 +181,8 @@ rule byteguard_0_9_2 : obfuscator
     author      = "Eduardo Novella"
 
   strings:
-    $clang_version = "clang version 5.0.2 (Byteguard-0.9.2-255c7b5e)"
+    // clang version 5.0.2 (Byteguard-0.9.2-255c7b5e)
+    $version = /(Apple LLVM|clang) version \d+\.\d+\.\d+ \(Byte(G|g)uard(-| )0\.9\.2/
 
   condition:
     is_elf and all of them
@@ -194,7 +195,7 @@ rule byteguard_unknown : obfuscator
     author      = "Eduardo Novella"
 
   strings:
-    $clang_version = /clang version \d\.\d\.\d \(Byteguard(.*)0\.\d\.\d\-(.*)\)/
+    $clang_version = /(Apple LLVM|clang) version \d+\.\d+\.\d+ \(ByteGuard/
 
   condition:
     is_elf and $clang_version and
