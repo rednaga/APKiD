@@ -218,7 +218,7 @@ rule dexprotector_b : packer
     not dexprotector
 }
 
-rule dexpro : packer
+rule dexpro_aide_a : packer
 {
   meta:
     description = "DexProtector for AIDE"
@@ -234,7 +234,7 @@ rule dexpro : packer
     is_apk and all of them
 }
 
-rule dexpro_a : packer
+rule dexpro_aide_b : packer
 {
   meta:
     description = "DexProtector for AIDE"
