@@ -362,3 +362,27 @@ rule tencent : packer
     and 2 of ($libshell_*)
     or 1 of ($class_*)
 }
+
+rule crazy_dog_wrapper : packer
+{
+  meta:
+    description = "Crazy Dog Wrapper"
+    url         = "https://github.com/rednaga/APKiD/issues/31"
+    sample      = "b1f0143c22a588aea89d3a9c0a53fa6d8cea07dd64dec1f82d905f5599acea94"
+
+  strings:
+    // libhdog-x86.so
+    $lib1 = { 00 0E 6C 69 62 68 64 6F 67 2D 78 38 36 2E 73 6F 00 }
+    // libhdog.so
+    $lib2 = { 00 0A 6C 69 62 68 64 6F 67 2E 73 6F 00 }
+    // Lcom/vdog/VDogApplication;
+    $class1 = { 00 1A 4C 63 6F 6D 2F 76 64 6F 67 2F 56 44 6F 67 41 70 70 6C 69 63 61 74 69 6F 6E 3B 00 }
+    // Lcom/vdog/VLibrary;
+    $class2 = { 00 13 4C 63 6F 6D 2F 76 64 6F 67 2F 56 4C 69 62 72 61 72 79 3B 00 }
+    // /.cache/libvdog.so
+    $str1 = { 00 12 2F 2E 63 61 63 68 65 2F 6C 69 62 76 64 6F 67 2E 73 6F 00 }
+
+  condition:
+    is_dex
+    and 2 of them
+}
