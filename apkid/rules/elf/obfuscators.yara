@@ -110,7 +110,7 @@ rule ollvm_v6_0_strenc : obfuscator
     // "Obfuscator-LLVM clang version 6.0.0 (trunk) (based on Obfuscator-LLVM 6.0.0git-b9ea5776)"
     $clang_version = "Obfuscator-LLVM clang version 6.0."
     $based_on      = "(based on Obfuscator-LLVM 6.0."
-    $strenc        = /\.datadiv_decode[0-9]{18,20}/
+    $strenc        = /\.datadiv_decode[\d]{18,20}/
 
   condition:
     is_elf and all of them and
@@ -145,7 +145,7 @@ rule ollvm_v9_strenc : obfuscator
 
   strings:
     $clang_version = /clang version \d\.\d\.\d /
-    $strenc        = /\.datadiv_decode[0-9]{18,20}/
+    $strenc        = /\.datadiv_decode[\d]{18,20}/
     $ollvm         = "(based on Obfuscator-LLVM 9."
 
   condition:
@@ -156,7 +156,7 @@ rule ollvm_tll : obfuscator
 {
   meta:
     description = "Obfuscator-LLVM TLL (string encryption)"
-    url         = "https://github.com/yazhiwang/ollvm-tll.git"
+    url         = "https://github.com/yazhiwang/ollvm-tll"
     sample      = "1f010330e9ac90f00d11aa37fdca25c437ad6f4b1302f6d7aa48b91ef22cc107"
     author      = "Eduardo Novella"
 
@@ -166,8 +166,8 @@ rule ollvm_tll : obfuscator
       Android clang version 5.0.300080  (based on LLVM 5.0.300080)
       clang version 6.0.0 (tags/RELEASE_600/final) (https://github.com/yazhiwang/ollvm-tll.git a38559e4c13359073102793c0a734bb1add3d5ff)
     */
-    $clang_version = /clang version \d\.\d\.\d \(tags\/RELEASE\_\d{3}\/final\)/
-    $strenc        = /\.datadiv_decode[0-9]{18,20}/
+    $clang_version = /clang version \d\.\d\.\d \(tags\/RELEASE\_\d+\/final\)/
+    $strenc        = /\.datadiv_decode[\d]{18,20}/
     $url           = "https://github.com/yazhiwang/ollvm-tll.git"
 
   condition:
@@ -187,7 +187,7 @@ rule ollvm_armariris : obfuscator
     // clang version 5.0.1 (tags/RELEASE_501/final)
     // .datadiv_decode14660921177804423408
     $clang_version = /clang version \d\.\d\.\d \(tags\/RELEASE\_\d{3}\/final\)/
-    $strenc        = /\.datadiv_decode[0-9]{18,20}/
+    $strenc        = /\.datadiv_decode[\d]{18,20}/
 
   condition:
     is_elf and
@@ -199,12 +199,12 @@ rule ollvm_armariris : obfuscator
 rule ollvm_strenc : obfuscator
 {
   meta:
-    description = "Obfuscator-LLVM alike (string encryption)"
+    description = "Obfuscator-LLVM version unknown (string encryption)"
     sample      = "73f34f7dd5f5c2eff33fc48371c850a2a3ff0355a2bfa014467478ccb30309e3"
     author      = "Eduardo Novella"
 
   strings:
-    $strenc = /\.datadiv_decode[0-9]{18,20}/
+    $strenc = /\.datadiv_decode[\d]{18,20}/
 
   condition:
     is_elf and $strenc and
