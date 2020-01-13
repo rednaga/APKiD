@@ -186,7 +186,7 @@ rule ollvm_armariris : obfuscator
     // clang version 3.9.1 (tags/RELEASE_391/final)
     // clang version 5.0.1 (tags/RELEASE_501/final)
     // .datadiv_decode14660921177804423408
-    $clang_version = /clang version \d\.\d\.\d \(tags\/RELEASE\_\d{3}\/final\)/
+    $clang_version = /clang version \d\.\d\.\d \(tags\/RELEASE\_\d+\/final\)/
     $strenc        = /\.datadiv_decode[\d]{18,20}/
 
   condition:
