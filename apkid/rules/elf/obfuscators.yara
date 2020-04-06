@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019  RedNaga. https://rednaga.io
+ * Copyright (C) 2020  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -113,8 +113,9 @@ rule ollvm_v6_0_strenc : obfuscator
     $strenc        = /\.datadiv_decode[\d]{18,20}/
 
   condition:
-    is_elf and all of them and
-    for any i in (0..elf.symtab_entries): (elf.symtab[i].name contains ".datadiv_decode")
+    is_elf and
+    all of them and
+    for any i in (0..elf.symtab_entries): (elf.symtab[i].name matches /\.datadiv_decode[\d]{18,20}/)
 }
 
 rule ollvm_v6_0 : obfuscator
@@ -193,7 +194,7 @@ rule ollvm_armariris : obfuscator
     is_elf and
     all of them and
     not ollvm_tll and
-    for any i in (0..elf.symtab_entries): (elf.symtab[i].name contains ".datadiv_decode")
+    for any i in (0..elf.symtab_entries): (elf.symtab[i].name matches /\.datadiv_decode[\d]{18,20}/)
 }
 
 rule ollvm_strenc : obfuscator
