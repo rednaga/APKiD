@@ -169,7 +169,7 @@ rule ollvm_tll : obfuscator
     */
     $clang_version = /clang version \d\.\d\.\d \(tags\/RELEASE\_\d+\/final\)/
     $strenc        = /\.datadiv_decode[\d]{18,20}/
-    $url           = "https://github.com/yazhiwang/ollvm-tll.git"
+    $url           = "https://github.com/yazhiwang/ollvm-tll"
 
   condition:
     is_elf and all of them
