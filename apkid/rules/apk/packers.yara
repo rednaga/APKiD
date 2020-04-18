@@ -460,6 +460,21 @@ rule tencent : packer
     is_apk and ($decryptor_lib or $zip_lib or $mix_dex)
 }
 
+rule tencent_apk : packer
+{
+  meta:
+    description = "Mobile Tencent Protect"
+    url         = "https://intl.cloud.tencent.com/product/mtp"
+    sample      = "b1a5d9d4c1916a0acc2d5c3b7c811a39ebeb2f6d42b305036473f7053bbf5fe7"
+    author      = "Eduardo Novella"
+
+  strings:
+    $lib =  /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libshell(a|x)-\d.\d.\d.\d\.so/
+
+  condition:
+    is_apk and all of them
+}
+
 rule ijiami : packer
 {
   meta:
