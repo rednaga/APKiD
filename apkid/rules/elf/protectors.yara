@@ -91,7 +91,6 @@ rule virbox_elf : protector
     author      = "Eduardo Novella"
 
   strings:
-
     $brand = {  5669 7262 6f78 2050 726f 7465 6374 6f72 0000 } // Virbox Protector
 
   condition:

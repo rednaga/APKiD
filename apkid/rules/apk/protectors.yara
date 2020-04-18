@@ -36,7 +36,6 @@ rule virbox_apk : protector
     author      = "Eduardo Novella"
 
   strings:
-
     $libs1 = "libsandhook.so"
     $libs2 = "libsandhook-native.so"
     $libv1 = "libv++_64.so"
