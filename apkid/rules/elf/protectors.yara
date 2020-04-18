@@ -104,11 +104,11 @@ rule vkey_elf : protector
     $vos2       = "********** V-Key %s: V-OS Firmware Version %d.%d.%d.%d *********"
     $vos3       = "********** V-Key %s: V-OS Firmware (%s) Version %d.%d.%d.%d ****"
     $vos4       = "********** V-Key Release SDK: V-OS Processor"
-    $jni1 = "Java_vkey_android_vos_VosWrapper_"
-    $jni2 = "Java_vkey_android_vos_VosWrapper_initVOSJNI"
-    $jni3 = "Java_vkey_android_vos_VosWrapper_getVADefaultPath"
-    $jni4 = "Java_vkey_android_vos_VosWrapper_registerCallback"
-    $jni5 = "Java_vkey_android_vos_VosWrapper_setVADefaultPath"
+    $jni1       = "Java_vkey_android_vos_VosWrapper_"
+    $jni2       = "Java_vkey_android_vos_VosWrapper_initVOSJNI"
+    $jni3       = "Java_vkey_android_vos_VosWrapper_getVADefaultPath"
+    $jni4       = "Java_vkey_android_vos_VosWrapper_registerCallback"
+    $jni5       = "Java_vkey_android_vos_VosWrapper_setVADefaultPath"
 
   condition:
     is_elf and $libname and 1 of ($vos*) and 1 of ($detection*) and 1 of ($jni*)
