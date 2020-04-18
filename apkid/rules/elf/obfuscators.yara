@@ -380,10 +380,10 @@ rule snapprotect : obfuscator
     sample      = "6dcd634e41304e41b91b49a3c77872a3c7ce28777bab016bd37f79bc7bb08274"
     author      = "Eduardo Novella"
 
-	strings:
-		$a = "clang version 7.0.0 (snap.protect version 2.4.0 - df15518f469ca4749b08/93d2c161df4b9b202bce)"
-		$b = /clang version \d.\d.\d \(snap.protect version \d.\d.\d/
-		$c = " (snap.protect version "
+  strings:
+    $a = "clang version 7.0.0 (snap.protect version 2.4.0 - df15518f469ca4749b08/93d2c161df4b9b202bce)"
+    $b = /clang version \d.\d.\d \(snap.protect version \d.\d.\d/
+    $c = " (snap.protect version "
 
   condition:
     is_elf and any of them
