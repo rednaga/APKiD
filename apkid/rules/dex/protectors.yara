@@ -49,7 +49,7 @@ rule whitecryption_dex : protector
 {
   // https://github.com/rednaga/APKiD/issues/177
   meta:
-    description = "WhiteCryption (dex)"
+    description = "WhiteCryption"
     sample      = "6821bce73b3d1146ef7ec9a2d91742a7f6fc2f8206ca9354d3d553e1b5d551a7"
     url         = "https://www.intertrust.com/products/application-shielding/"
     author      = "Tim 'diff' Strazzere"
@@ -68,6 +68,26 @@ rule whitecryption_dex : protector
 
   condition:
     is_dex and ($loader or $init_stub)
+}
+
+rule whitecryption_dex_a : protector
+{
+  meta:
+    description = "WhiteCryption"
+    url         = "https://www.intertrust.com/products/application-shielding/"
+    sample      = "6ca8315fdb3fc2af989dd49806102bc3720b214f2053297b9f1041ab4f2f81b2"
+    author      = "Eduardo Novella"
+
+  strings:
+    $s1 = "http://www.whitecryption.com"
+    $s2 = /\(c\) 20\d{2} whiteCryption/
+    $s3 = "http://www.cryptanium.com"
+    $s4 = "CryptaniumHighSpeedAes"
+    $s5 = "Lcom/cryptanium/skb/"
+    $s6 = "SecureKeyBoxJava"
+
+  condition:
+    is_dex and 3 of ($s*)
 }
 
 rule appdome_dex : protector
