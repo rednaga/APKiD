@@ -669,6 +669,34 @@ rule appsealing : packer
     is_apk and all of them
 }
 
+rule appsealing_a : packer
+{
+  meta:
+    description = "AppSealing"
+    url         = "https://www.appsealing.com/"
+    sample      = "09de88c86182f066b5a1b1b7f0d5553cf6010ef2aed4a12ed5d9bea2e1866bbb"
+    author      = "Eduardo Novella"
+
+  strings:
+    $lib = "libcovault-appsec.so"
+    $a01 = "assets/AppSealing/1"
+    $a02 = "assets/AppSealing/11"
+    $a03 = "assets/AppSealing/a1"
+    $a04 = "assets/AppSealing/a3"
+    $a05 = "assets/AppSealing/aslc"
+    $a06 = "assets/AppSealing/hr"
+    $a07 = "assets/AppSealing/s1"
+    $a08 = "assets/AppSealing/s3"
+    $a09 = "assets/AppSealing/si"
+    $a10 = "assets/AppSealing/x1"
+    $a11 = "assets/AppSealing/x3"
+    $b01 = "assets/aws_classes.dex"
+    $b02 = "assets/sealed1.dex"
+
+  condition:
+    is_apk and $lib and 3 of ($a*) and 1 of ($b*)
+}
+
 rule secenh : packer
 {
   meta:
