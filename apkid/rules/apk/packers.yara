@@ -690,11 +690,11 @@ rule appsealing_a : packer
     $a09 = "assets/AppSealing/si"
     $a10 = "assets/AppSealing/x1"
     $a11 = "assets/AppSealing/x3"
-    $d01 = "assets/aws_classes.dex"
-    $d02 = "assets/sealed1.dex"
+    $a12 = "assets/aws_classes.dex"
+    $a13 = "assets/sealed1.dex"
 
   condition:
-    is_apk and $lib and 3 of ($a*) and 1 of ($d*)
+    is_apk and $lib and 3 of ($a*) and 3 of ($d*)
 }
 
 rule secenh : packer
