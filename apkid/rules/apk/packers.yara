@@ -469,7 +469,7 @@ rule tencent_apk : packer
     author      = "Eduardo Novella"
 
   strings:
-    $lib =  /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libshell(a|x)-\d.\d.\d.\d\.so/
+    $lib =  /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libshell(a|x)-\d\.\d\.\d\.\d\.so/
 
   condition:
     is_apk and all of them
