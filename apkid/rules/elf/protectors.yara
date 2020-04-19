@@ -44,7 +44,7 @@ rule whitecryption_elf : protector
     $empty_func = "SCP_EmptyFunction"
     $init_proc_stub = {
         // PUSH {R0-R2,R4,R11,LR}
-        17 48 2D E9 
+        17 48 2D E9
         // BL sub_B500
         58 00 00 EB
         // BX R0
@@ -80,4 +80,21 @@ rule appdome_elf : protector
       ($hook_start and $hook_stop) or
       ($ipcent_start and $ipcent_stop)
     )
+}
+
+rule metafortress : protector
+{
+  meta:
+    description = "InsideSecure MetaFortress"
+    url         = "https://www.insidesecure.com/Products/Application-Protection/Software-Protection/Code-Protection"
+    sample      = "326632f52eba45609f825ab6746037f2f2b47bfe66fd1aeebd835c8031f4fdb0"
+    author      = "Eduardo Novella"
+
+  strings:
+    $a = { 00 4d65 7461 466f 7274 7265 7373 3a20 2573 0025 733a 2025 730a 00 } // MetaFortress %s.%s: %s
+    $b = { 00 4d65 7461 466f 7274 7265 7373 00 } // MetaFortress
+    $c = { 00 4d45 5441 464f 5249 4300 0000 0000 0000 } // "METAFORIC"
+
+  condition:
+    is_elf and (($a and $b) or $c)
 }
