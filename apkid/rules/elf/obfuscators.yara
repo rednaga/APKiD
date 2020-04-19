@@ -371,3 +371,5 @@ rule dexguard_native : obfuscator
       is_elf
       and any of them
 }
+
+
