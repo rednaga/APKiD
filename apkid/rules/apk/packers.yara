@@ -678,7 +678,7 @@ rule appsealing_a : packer
     author      = "Eduardo Novella"
 
   strings:
-    // asset names at "assets/AppSealing" : 11,a1,a3,aslc,hr,s1,s3,si,x1,x3,
+    // asset names at "assets/AppSealing" : 11,a1,a3,aslc,hr,s1,s3,si,x1,x3
     $lib = "libcovault-appsec.so"
     $a1 = /assets\/AppSealing\/\(.*\)/
     $a2 = "assets/aws_classes.dex"
