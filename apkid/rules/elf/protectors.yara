@@ -94,7 +94,8 @@ rule metafortress : protector
     $a = { 00 4d65 7461 466f 7274 7265 7373 3a20 2573 0025 733a 2025 730a 00 } // MetaFortress %s.%s: %s
     $b = { 00 4d65 7461 466f 7274 7265 7373 00 } // MetaFortress
     $c = { 00 4d45 5441 464f 5249 4300 0000 0000 0000 } // "METAFORIC"
+    $d = { 00 4a61 7661 5f63 6f6d 5f69 6e73 6964 6573 6563 7572 655f 6863 655f } // Java_com_insidesecure_hce_internal_MatrixHCENativeBridge_
 
   condition:
-    is_elf and (($a and $b) or $c)
+    is_elf and (($a and $b) or $c or $d)
 }
