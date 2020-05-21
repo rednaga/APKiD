@@ -677,11 +677,30 @@ rule appsealing : packer
   strings:
     $native_lib_1 = "libcovault.so"
     $native_lib_2 = "libcovault-appsec.so"
-    $stub = "appsealing.dex"
-    $dex = "sealed1.dex"
+    $stub         = "assets/appsealing.dex"
+    $dex          = "assets/sealed1.dex"
 
   condition:
     is_apk and all of them
+}
+
+rule appsealing_a : packer
+{
+  meta:
+    description = "AppSealing"
+    url         = "https://www.appsealing.com/"
+    sample      = "09de88c86182f066b5a1b1b7f0d5553cf6010ef2aed4a12ed5d9bea2e1866bbb"
+    author      = "Eduardo Novella"
+
+  strings:
+    // asset names at "assets/AppSealing" : 11,a1,a3,aslc,hr,s1,s3,si,x1,x3
+    $lib = "libcovault-appsec.so"
+    $a1 = /assets\/AppSealing\/\(.*\)/
+    $b1 = "assets/aws_classes.dex"
+    $b2 = "assets/sealed1.dex"
+
+  condition:
+    is_apk and $lib and $a1 and 1 of ($b*)
 }
 
 rule secenh : packer
