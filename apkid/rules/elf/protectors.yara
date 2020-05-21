@@ -32,7 +32,7 @@ rule whitecryption_elf : protector
 {
   // https://github.com/rednaga/APKiD/issues/177
   meta:
-    description = "WhiteCryption (elf)"
+    description = "WhiteCryption"
     sample      = "6821bce73b3d1146ef7ec9a2d91742a7f6fc2f8206ca9354d3d553e1b5d551a7"
     url         = "https://www.intertrust.com/products/application-shielding/"
     author      = "Tim 'diff' Strazzere"
@@ -55,11 +55,28 @@ rule whitecryption_elf : protector
     is_elf and (($init_stub or $empty_func) or $init_proc_stub)
 }
 
+rule whitecryption_elf_a : protector
+{
+  meta:
+    description = "WhiteCryption"
+    sample      = "a9926158f16d57072940c001a5ef06e4bf600f98d9ca9daeec202f71caa3d7b2"
+    url         = "https://www.intertrust.com/products/application-shielding/"
+    author      = "Eduardo Novella"
+
+  strings:
+    $wcskbox = "whiteCryptionSecureKeyBox"
+    $jni     = "Java_com_whitecryption_skb_"
+    $libname = "libSecureKeyBoxJava.so"
+
+  condition:
+    is_elf and 1 of them
+}
+
 rule appdome_elf : protector
 {
   // https://github.com/rednaga/APKiD/issues/151
   meta:
-    description = "Appdome (elf)"
+    description = "Appdome"
     sample      = "1c6496f1cc8c5799539ee24170c371e8a57547e2eb73c9502c98ff78f44c74cf"
     url         = "https://www.appdome.com/"
     author      = "Tim 'diff' Strazzere"
@@ -72,7 +89,6 @@ rule appdome_elf : protector
     $hook_stop = "__stop_hook"
     $ipcent_start = "__start_ipcent"
     $ipcent_stop = "__stop_ipcent"
-
 
   condition:
     is_elf and (
