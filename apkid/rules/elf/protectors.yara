@@ -32,7 +32,7 @@ rule whitecryption_elf : protector
 {
   // https://github.com/rednaga/APKiD/issues/177
   meta:
-    description = "WhiteCryption (elf)"
+    description = "WhiteCryption"
     sample      = "6821bce73b3d1146ef7ec9a2d91742a7f6fc2f8206ca9354d3d553e1b5d551a7"
     url         = "https://www.intertrust.com/products/application-shielding/"
     author      = "Tim 'diff' Strazzere"
@@ -55,11 +55,28 @@ rule whitecryption_elf : protector
     is_elf and (($init_stub or $empty_func) or $init_proc_stub)
 }
 
+rule whitecryption_elf_a : protector
+{
+  meta:
+    description = "WhiteCryption"
+    sample      = "a9926158f16d57072940c001a5ef06e4bf600f98d9ca9daeec202f71caa3d7b2"
+    url         = "https://www.intertrust.com/products/application-shielding/"
+    author      = "Eduardo Novella"
+
+  strings:
+    $wcskbox = "whiteCryptionSecureKeyBox"
+    $jni     = "Java_com_whitecryption_skb_"
+    $libname = "libSecureKeyBoxJava.so"
+
+  condition:
+    is_elf and 1 of them
+}
+
 rule appdome_elf : protector
 {
   // https://github.com/rednaga/APKiD/issues/151
   meta:
-    description = "Appdome (elf)"
+    description = "Appdome"
     sample      = "1c6496f1cc8c5799539ee24170c371e8a57547e2eb73c9502c98ff78f44c74cf"
     url         = "https://www.appdome.com/"
     author      = "Tim 'diff' Strazzere"
@@ -72,7 +89,6 @@ rule appdome_elf : protector
     $hook_stop = "__stop_hook"
     $ipcent_start = "__start_ipcent"
     $ipcent_stop = "__stop_ipcent"
-
 
   condition:
     is_elf and (
@@ -98,4 +114,36 @@ rule metafortress : protector
 
   condition:
     is_elf and (($a and $b) or $c or $d)
+}
+
+rule vkey_elf : protector
+{
+  meta:
+    description = "Vkey (V-OS App Protection)"
+    url         = "https://www.v-key.com/products/v-os-app-protection/"
+    author      = "Eduardo Novella"
+    sample      = "00b745b7c8314c395afa3b01aa24db6e7453c15f19175b7f987988c8b27faa15"
+
+  strings:
+    $libname    = "libvosWrapperEx.so"
+    $detection1 = "***** FRIDA DETECTED *****"
+    $detection2 = "Error creating frida tcp file scan thread"
+    $detection3 = "GDB detected!"
+    $detection4 = "run_frida_port_scan: reseting map"
+    $detection5 = "Error creating emulator detection thread"
+    $detection6 = "start_debugger_check"
+    $detection7 = "startEmulatorCheck"
+    $detection8 = "app_integrity_check_jni: "
+    $vos1       = "V-OS.debug"
+    $vos2       = "********** V-Key %s: V-OS Firmware Version %d.%d.%d.%d *********"
+    $vos3       = "********** V-Key %s: V-OS Firmware (%s) Version %d.%d.%d.%d ****"
+    $vos4       = "********** V-Key Release SDK: V-OS Processor"
+    $jni1       = "Java_vkey_android_vos_VosWrapper_"
+    $jni2       = "Java_vkey_android_vos_VosWrapper_initVOSJNI"
+    $jni3       = "Java_vkey_android_vos_VosWrapper_getVADefaultPath"
+    $jni4       = "Java_vkey_android_vos_VosWrapper_registerCallback"
+    $jni5       = "Java_vkey_android_vos_VosWrapper_setVADefaultPath"
+
+  condition:
+    is_elf and $libname and 1 of ($vos*) and 1 of ($detection*) and 1 of ($jni*)
 }

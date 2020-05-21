@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019  RedNaga. https://rednaga.io
+ * Copyright (C) 2020  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -40,4 +40,31 @@ rule verymatrix : protector
 
   condition:
     is_apk and $libname
+}
+
+rule vkey_apk : protector
+{
+  meta:
+    description = "Vkey (V-OS App Protection)"
+    url         = "https://www.v-key.com/products/v-os-app-protection/"
+    author      = "Eduardo Novella"
+    sample      = "eb7f7fd8b23ea2b55504b2d22dd6ee7a1214d822a79e848badcf720359ee78d1"
+
+  strings:
+    $lib1    = /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libvosWrapperEx\.so/
+    $lib2    = /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libvtap\.so/
+    $lib3    = /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libloadTA\.so/
+    $lib4    = /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libchecks\.so/
+    $asseta1 = "assets/firmware"
+    $asseta2 = "assets/kernel.bin"
+    $asseta3 = "assets/signature"
+    $assetb1 = "assets/vkeylicensepack"
+    $assetb2 = "assets/vkwbc_ta.bin"
+    $assetb3 = "assets/voscodesign.vky"
+
+  condition:
+    is_apk and
+    2 of ($lib*) and
+    1 of ($asseta*) and
+    1 of ($assetb*)
 }
