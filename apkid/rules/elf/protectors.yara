@@ -44,7 +44,7 @@ rule whitecryption_elf : protector
     $empty_func = "SCP_EmptyFunction"
     $init_proc_stub = {
         // PUSH {R0-R2,R4,R11,LR}
-        17 48 2D E9 
+        17 48 2D E9
         // BL sub_B500
         58 00 00 EB
         // BX R0
@@ -80,4 +80,36 @@ rule appdome_elf : protector
       ($hook_start and $hook_stop) or
       ($ipcent_start and $ipcent_stop)
     )
+}
+
+rule vkey_elf : protector
+{
+  meta:
+    description = "Vkey (V-OS App Protection)"
+    url         = "https://www.v-key.com/products/v-os-app-protection/"
+    author      = "Eduardo Novella"
+    sample      = "00b745b7c8314c395afa3b01aa24db6e7453c15f19175b7f987988c8b27faa15"
+
+  strings:
+    $libname    = "libvosWrapperEx.so"
+    $detection1 = "***** FRIDA DETECTED *****"
+    $detection2 = "Error creating frida tcp file scan thread"
+    $detection3 = "GDB detected!"
+    $detection4 = "run_frida_port_scan: reseting map"
+    $detection5 = "Error creating emulator detection thread"
+    $detection6 = "start_debugger_check"
+    $detection7 = "startEmulatorCheck"
+    $detection8 = "app_integrity_check_jni: "
+    $vos1       = "V-OS.debug"
+    $vos2       = "********** V-Key %s: V-OS Firmware Version %d.%d.%d.%d *********"
+    $vos3       = "********** V-Key %s: V-OS Firmware (%s) Version %d.%d.%d.%d ****"
+    $vos4       = "********** V-Key Release SDK: V-OS Processor"
+    $jni1       = "Java_vkey_android_vos_VosWrapper_"
+    $jni2       = "Java_vkey_android_vos_VosWrapper_initVOSJNI"
+    $jni3       = "Java_vkey_android_vos_VosWrapper_getVADefaultPath"
+    $jni4       = "Java_vkey_android_vos_VosWrapper_registerCallback"
+    $jni5       = "Java_vkey_android_vos_VosWrapper_setVADefaultPath"
+
+  condition:
+    is_elf and $libname and 1 of ($vos*) and 1 of ($detection*) and 1 of ($jni*)
 }

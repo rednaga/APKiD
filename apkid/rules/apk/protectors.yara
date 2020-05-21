@@ -1,0 +1,55 @@
+/*
+ * Copyright (C) 2020  RedNaga. https://rednaga.io
+ * All rights reserved. Contact: rednaga@protonmail.com
+ *
+ *
+ * This file is part of APKiD
+ *
+ *
+ * Commercial License Usage
+ * ------------------------
+ * Licensees holding valid commercial APKiD licenses may use this file
+ * in accordance with the commercial license agreement provided with the
+ * Software or, alternatively, in accordance with the terms contained in
+ * a written agreement between you and RedNaga.
+ *
+ *
+ * GNU General Public License Usage
+ * --------------------------------
+ * Alternatively, this file may be used under the terms of the GNU General
+ * Public License version 3.0 as published by the Free Software Foundation
+ * and appearing in the file LICENSE.GPL included in the packaging of this
+ * file. Please visit http://www.gnu.org/copyleft/gpl.html and review the
+ * information to ensure the GNU General Public License version 3.0
+ * requirements will be met.
+ *
+ **/
+
+include "common.yara"
+
+rule vkey_apk : protector
+{
+  meta:
+    description = "Vkey (V-OS App Protection)"
+    url         = "https://www.v-key.com/products/v-os-app-protection/"
+    author      = "Eduardo Novella"
+    sample      = "eb7f7fd8b23ea2b55504b2d22dd6ee7a1214d822a79e848badcf720359ee78d1"
+
+  strings:
+    $lib1    = /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libvosWrapperEx\.so/
+    $lib2    = /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libvtap\.so/
+    $lib3    = /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libloadTA\.so/
+    $lib4    = /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libchecks\.so/
+    $asseta1 = "assets/firmware"
+    $asseta2 = "assets/kernel.bin"
+    $asseta3 = "assets/signature"
+    $assetb1 = "assets/vkeylicensepack"
+    $assetb2 = "assets/vkwbc_ta.bin"
+    $assetb3 = "assets/voscodesign.vky"
+
+  condition:
+    is_apk and
+    2 of ($lib*) and
+    1 of ($asseta*) and
+    1 of ($assetb*)
+}
