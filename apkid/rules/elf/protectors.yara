@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019  RedNaga. https://rednaga.io
+ * Copyright (C) 2020  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -96,6 +96,21 @@ rule appdome_elf : protector
       ($hook_start and $hook_stop) or
       ($ipcent_start and $ipcent_stop)
     )
+}
+
+rule virbox_elf : protector
+{
+  meta:
+    description = "Virbox"
+    url         = "https://shell.virbox.com"
+    sample      = "dcbe15f9f9e44690e200c04a2aefd15107e5beeafb2eab6d07be85b9f0a42435"
+    author      = "Eduardo Novella"
+
+  strings:
+    $brand = {  5669 7262 6f78 2050 726f 7465 6374 6f72 0000 } // Virbox Protector
+
+  condition:
+    is_elf and $brand
 }
 
 rule vkey_elf : protector
