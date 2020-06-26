@@ -42,6 +42,26 @@ rule verymatrix : protector
     is_apk and $libname
 }
 
+rule virbox_apk : protector
+{
+  meta:
+    description = "Virbox"
+    url         = "https://shell.virbox.com"
+    sample      = "b1a5d9d4c1916a0acc2d5c3b7c811a39ebeb2f6d42b305036473f7053bbf5fe7"
+    author      = "Eduardo Novella"
+
+  strings:
+    $libs1 = "libsandhook.so"
+    $libs2 = "libsandhook-native.so"
+    $libv1 = "libv++_64.so"
+    $libv2 = "libv++.so"
+
+  condition:
+    is_apk and
+    1 of ($libs*) and
+    1 of ($libv*)
+}
+
 rule vkey_apk : protector
 {
   meta:
