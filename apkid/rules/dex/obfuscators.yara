@@ -121,9 +121,10 @@ rule dexguard_c : obfuscator
     sample2     = "db11762886cc24bd4f938002f15f78680b512cf550d15c77b217fc5548b0c939"
 
   strings:
-    $dexguard_pkg1  = "guardsquare/dexguard/runtime"
-    $dexguard_pkg2  = "dexguard/util/TamperDetector"
-    $dexguard_pkg3  = "com/guardsquare/dexguard"
+    $dexguard_pkg1 = "guardsquare/dexguard/runtime"
+    $dexguard_pkg2 = "dexguard/util/TamperDetector"
+    $dexguard_pkg3 = "dexguard/util/CertificateChecker"
+    $dexguard_pkg4 = "com/guardsquare/dexguard"
 
     // Most of some kind of runtime decryption method, signature = a(IIZI[I[[I[I)V
     $decrypt_method = {
