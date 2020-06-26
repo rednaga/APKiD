@@ -98,6 +98,24 @@ rule appdome_elf : protector
     )
 }
 
+rule metafortress : protector
+{
+  meta:
+    description = "InsideSecure MetaFortress"
+    url         = "https://www.insidesecure.com/Products/Application-Protection/Software-Protection/Code-Protection"
+    sample      = "326632f52eba45609f825ab6746037f2f2b47bfe66fd1aeebd835c8031f4fdb0"
+    author      = "Eduardo Novella"
+
+  strings:
+    $a = { 00 4d65 7461 466f 7274 7265 7373 3a20 2573 0025 733a 2025 730a 00 } // MetaFortress %s.%s: %s
+    $b = { 00 4d65 7461 466f 7274 7265 7373 00 } // MetaFortress
+    $c = { 00 4d45 5441 464f 5249 4300 0000 0000 0000 } // "METAFORIC"
+    $d = { 00 4a61 7661 5f63 6f6d 5f69 6e73 6964 6573 6563 7572 655f 6863 655f } // Java_com_insidesecure_hce_internal_MatrixHCENativeBridge_
+
+  condition:
+    is_elf and (($a and $b) or $c or $d)
+}
+
 rule virbox_elf : protector
 {
   meta:
