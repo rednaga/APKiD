@@ -118,9 +118,13 @@ rule dexguard_c : obfuscator
     description = "DexGuard"
     url         = "https://www.guardsquare.com/en/products/dexguard"
     sample      = "de67161a8bd7ebcaa26c9661efd811375b59260924eb0dfd9436d3a47a1c31fe"
+    sample2     = "db11762886cc24bd4f938002f15f78680b512cf550d15c77b217fc5548b0c939"
 
   strings:
-    $dexguard_pkg = "guardsquare/dexguard/runtime"
+    $dexguard_pkg1  = "guardsquare/dexguard/runtime"
+    $dexguard_pkg2  = "dexguard/util/TamperDetector"
+    $dexguard_pkg3  = "com/guardsquare/dexguard"
+
     // Most of some kind of runtime decryption method, signature = a(IIZI[I[[I[I)V
     $decrypt_method = {
       12 01                 // const/4 v1, 0x0
@@ -159,7 +163,7 @@ rule dexguard_d : obfuscator
 
   strings:
     // Ldexguard/util/TamperDetection;
-    $dexguard_class = {00 1F 4C 64 65 78 67 75 61 72 64 2F 75 74 69 6C 2F 54 61 6D 70 65 72 44 65 74 65 63 74 69 6F 6E 3B 00}
+    $dexguard_class  = {00 1F 4C 64 65 78 67 75 61 72 64 2F 75 74 69 6C 2F 54 61 6D 70 65 72 44 65 74 65 63 74 69 6F 6E 3B 00}
     $a_aux_class     = { 00 05 4C (41|61) (55|75) (58|78) 3B 00 }  // L[Aa][Uu][Xx];
     $a_con_class     = { 00 05 4C (43|63) (4F|6F) (4E|6E) 3B 00 }  // L[Cc][Oo][Nn];
     $a_if_class      = { 00 ?? 4C [1-4] 24 (49|69) (46|66) 3B 00 } // L???$[iI][fF];
