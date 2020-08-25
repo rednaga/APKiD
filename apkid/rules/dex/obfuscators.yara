@@ -277,7 +277,7 @@ rule arxan_multidex : obfuscator
 rule arxan_b : obfuscator
 {
   meta:
-    description = "Arxan (b - unconfirmed)"
+    description = "Arxan"
     url         = "https://github.com/rednaga/APKiD/issues/160"
     sample      = "86ade15e885cf7927e5840dd2bf2782905fcd6843be77f898b51b64c2277f3de"
     author      = "Tim 'diff' Strazzere"
