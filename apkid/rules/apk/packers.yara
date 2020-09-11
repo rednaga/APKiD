@@ -156,12 +156,16 @@ rule dexprotector : packer
     $encrptlib_3 = "assets/dp.arm-v8.so.dat"
     $encrptlib_4 = "assets/dp.x86.so.dat"
     $encrptlib_5 = "assets/dp.x86_64.so.dat"
-    $encrptlib_6 = "assets/classes.dex.dat"
 
-    $encrptcustom = "assets/dp.mp3"
+    $asset1 = "assets/classes.dex.dat"
+    $asset2 = "assets/classes1.dex.dat"
+    $asset3 = "assets/classes2.dex.dat"
+    $asset4 = "assets/classes3.dex.dat"
+    $asset5 = "assets/resources.dat"
+    $asset6 = "assets/dp.mp3"
 
   condition:
-    is_apk and 1 of ($encrptlib_*) and $encrptcustom
+    is_apk and 1 of ($encrptlib_*) and 1 of ($asset*)
 }
 
 rule dexprotector_a : packer
@@ -188,7 +192,7 @@ rule dexprotector_a : packer
     $encrptcustom = "assets/dp.mp3"
 
   condition:
-    is_apk and 2 of ($encrptlib_*) and $encrptcustom
+    is_apk and 2 of them
 }
 
 rule dexprotector_b : packer
