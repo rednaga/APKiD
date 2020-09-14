@@ -340,6 +340,7 @@ rule promon : packer
     description = "Promon Shield"
     url         = "https://promon.co/"
     sample      = "6a3352f54d9f5199e4bf39687224e58df642d1d91f1d32b069acd4394a0c4fe0"
+    author      = "Eduardo Novella"
 
   strings:
     $a = "libshield.so"
@@ -354,6 +355,26 @@ rule promon : packer
   condition:
     ($a and $b and $c and $d) and
     2 of ($s*)
+}
+
+rule promon_a : packer
+{
+  meta:
+    description = "Promon Shield"
+    url         = "https://promon.co/"
+    sample      = "0ef06e0b1511872e711cf3e8e53fee097d13755c9572cfea6d153d708906f45d"
+    author      = "Eduardo Novella"
+
+  strings:
+    // libchhjkikihfch.so || libgiompappkhnb.so
+    $rnd_libname = /lib[a-z]{10,12}\.so/
+
+  condition:
+    is_elf and
+    $rnd_libname and
+    for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncu/) and
+    for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncc/) and
+    for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncd/)
 }
 
 rule appsealing_core_2_10_10 : packer
