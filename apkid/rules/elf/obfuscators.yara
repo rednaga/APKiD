@@ -399,7 +399,8 @@ rule safeengine : obfuscator
 
   strings:
     // "Safengine clang version 3.8.0 (trunk 608) (based on LLVM 3.8.0svn)"
-    $clang_version = "Safengine clang version "
+    //$clang_version = \0"Safengine clang version "
+    $clang_version = { 00 53 61 66 65 6e 67 69 6e 65 20 63 6c 61 6e 67 20 76 65 72 73 69 6f 6e 20 }
     $based_on      = "(based on LLVM "
 
   condition:
