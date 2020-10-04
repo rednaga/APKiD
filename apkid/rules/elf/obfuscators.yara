@@ -392,7 +392,7 @@ rule snapprotect : obfuscator
 rule safeengine : obfuscator
 {
   meta:
-    description = "Safeengine"
+    description = "Safeengine LLVM"
     url         = "https://bbs.pediy.com/thread-195327.htm"
     sample      = "93ec9a03b76fa359a7706aed0682003b76bca971e96462540fddad297817049b"
     author      = "horsicq"
