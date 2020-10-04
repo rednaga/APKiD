@@ -403,5 +403,5 @@ rule safeengine : obfuscator
     $based_on      = "(based on LLVM "
 
   condition:
-    all of them
+    all of them and is_elf
 }
