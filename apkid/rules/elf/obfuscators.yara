@@ -388,3 +388,20 @@ rule snapprotect : obfuscator
   condition:
     is_elf and 1 of ($a,$b)
 }
+
+rule safeengine : obfuscator
+{
+  meta:
+    description = "Safeengine"
+    url         = "https://bbs.pediy.com/thread-195327.htm"
+    sample      = "93ec9a03b76fa359a7706aed0682003b76bca971e96462540fddad297817049b"
+    author      = "horsicq"
+
+  strings:
+    // "Safengine clang version 3.8.0 (trunk 608) (based on LLVM 3.8.0svn)"
+    $clang_version = "Safengine clang version "
+    $based_on      = "(based on LLVM "
+
+  condition:
+    all of them
+}
