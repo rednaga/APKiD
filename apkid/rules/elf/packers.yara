@@ -334,7 +334,7 @@ rule upx_unknown_version_unmodified : packer
     not upx_compressed_apk
 }
 
-rule promon : packer
+rule promon_a : packer
 {
   meta:
     description = "Promon Shield"
@@ -357,7 +357,7 @@ rule promon : packer
     2 of ($s*)
 }
 
-rule promon_a : packer
+rule promon_b : packer
 {
   meta:
     description = "Promon Shield"
@@ -372,6 +372,7 @@ rule promon_a : packer
   condition:
     is_elf and
     $rnd_libname and
+    not promon_b and
     for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncu/) and
     for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncc/) and
     for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncd/)
