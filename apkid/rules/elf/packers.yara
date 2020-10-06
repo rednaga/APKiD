@@ -372,7 +372,7 @@ rule promon_b : packer
   condition:
     is_elf and
     $rnd_libname and
-    not promon_b and
+    not promon_a and
     for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncu/) and
     for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncc/) and
     for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncd/)
