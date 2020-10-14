@@ -348,13 +348,16 @@ rule promon_a : packer
     $c = "inflateInit2"
     $d = "crc32"
 
-    $s1 = /.ncc/  // Code segment
-    $s2 = /.ncd/  // Data segment
-    $s3 = /.ncu/  // Another segment
+    // Odd ELF segments found:
+    // .ncc -> Code segment
+    // .ncd -> Data segment
+    // .ncu -> Another segment
 
   condition:
     ($a and $b and $c and $d) and
-    2 of ($s*)
+    for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncu/) and
+    for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncc/) and
+    for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncd/)
 }
 
 rule promon_b : packer
