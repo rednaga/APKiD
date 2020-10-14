@@ -354,7 +354,8 @@ rule promon_a : packer
     // .ncu -> Another segment
 
   condition:
-    ($a and $b and $c and $d) and
+    all of them and
+    // TODO match 2 out 3 ELF segments
     for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncu/) and
     for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncc/) and
     for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncd/)
