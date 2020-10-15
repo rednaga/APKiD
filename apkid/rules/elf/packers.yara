@@ -334,47 +334,35 @@ rule upx_unknown_version_unmodified : packer
     not upx_compressed_apk
 }
 
-rule promon_a : packer
+rule promon : packer
 {
   meta:
     description = "Promon Shield"
     url         = "https://promon.co/"
     sample      = "6a3352f54d9f5199e4bf39687224e58df642d1d91f1d32b069acd4394a0c4fe0"
+    sample2     = "0ef06e0b1511872e711cf3e8e53fee097d13755c9572cfea6d153d708906f45d"
     author      = "Eduardo Novella"
 
   strings:
-    $a = "libshield.so"
+    // Library names
+    $libshield = "libshield.so"
+    $rnd_libname = /lib[a-z]{10,12}\.so/ // libchhjkikihfch.so || libgiompappkhnb.so
+
+    // Symbols
     $b = "deflate"
     $c = "inflateInit2"
     $d = "crc32"
 
-    // Odd ELF segments found:
-    // .ncc -> Code segment
-    // .ncd -> Data segment
-    // .ncu -> Another segment
-
-  condition:
-    all of them and
-    for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncu/) or
-    for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncc/) or
-    for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncd/)
-}
-
-rule promon_b : packer
-{
-  meta:
-    description = "Promon Shield"
-    url         = "https://promon.co/"
-    sample      = "0ef06e0b1511872e711cf3e8e53fee097d13755c9572cfea6d153d708906f45d"
-    author      = "Eduardo Novella"
-
-  strings:
-    // libchhjkikihfch.so || libgiompappkhnb.so
-    $rnd_libname = /lib[a-z]{10,12}\.so/
+    /**
+     Odd ELF segments found:
+      .ncc -> Code segment
+      .ncd -> Data segment
+      .ncu -> Another segment
+    */
 
   condition:
     is_elf and
-    $rnd_libname and
+    (($libshield and $b and $c and $d) or ($rnd_libname and $b and $c and $d)) and
     for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncu/) or
     for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncc/) or
     for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncd/)
