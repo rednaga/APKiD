@@ -355,9 +355,8 @@ rule promon_a : packer
 
   condition:
     all of them and
-    // TODO match 2 out 3 ELF segments
-    for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncu/) and
-    for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncc/) and
+    for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncu/) or
+    for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncc/) or
     for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncd/)
 }
 
@@ -376,9 +375,8 @@ rule promon_b : packer
   condition:
     is_elf and
     $rnd_libname and
-    not promon_a and
-    for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncu/) and
-    for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncc/) and
+    for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncu/) or
+    for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncc/) or
     for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncd/)
 }
 
