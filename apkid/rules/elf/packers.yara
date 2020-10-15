@@ -361,11 +361,11 @@ rule promon : packer
     */
 
   condition:
-    is_elf and
-    (($libshield and $b and $c and $d) or ($rnd_libname and $b and $c and $d)) and
-    for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncu/) or
-    for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncc/) or
-    for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncd/)
+    is_elf and $b and $c and $d and
+    ($libshield or $rnd_libname) and
+    (for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncu/) or
+     for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncc/) or
+     for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncd/))
 }
 
 rule appsealing_core_2_10_10 : packer
