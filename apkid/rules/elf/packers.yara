@@ -345,7 +345,7 @@ rule promon : packer
 
   strings:
     // Library names
-    $libshield = "libshield.so"
+    $libshield   = "libshield.so"
     $rnd_libname = /lib[a-z]{10,12}\.so/ // libchhjkikihfch.so || libgiompappkhnb.so
 
     // Symbols
