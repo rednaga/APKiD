@@ -52,8 +52,9 @@ rule appguard_a : packer
   strings:
     $a = "assets/AppGuard0.jar"
     $b = "assets/AppGuard.dgc"
-    $c = "libAppGuard.so"
-    $d = "libAppGuard-x86.so"
+    $c = "lib/arm64-v8a/libAppGuard.so"
+    $d = "lib/armeabi-v7a/libAppGuard.so"
+    $e = "libAppGuard-x86.so"
 
   condition:
     is_apk and 3 of them
