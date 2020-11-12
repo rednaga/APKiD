@@ -53,6 +53,7 @@ install_requires = [
 dev_requires = [
     'mypy',
     'pypandoc',
+    'twine',
 ]
 
 test_requires = [
