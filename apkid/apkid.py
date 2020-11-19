@@ -26,6 +26,7 @@
 
 import io
 import os
+import sys
 import traceback
 import zipfile
 from typing import Union, IO, List, Dict, Set
@@ -155,7 +156,8 @@ class Scanner(object):
                 self._scan_zip_entry(zf, info, results, depth)
             except Exception as e:
                 stack = traceback.format_exc()
-                print(f"Exception scanning {info.filename} in {zf.filename}, depth={depth}: {stack}")
+                print(f"Exception scanning {info.filename} in {zf.filename}, depth={depth}: {stack}",
+                    file=sys.stderr)
         return results
 
     def _scan_zip_entry(self, zf, info, results, depth) -> None:
