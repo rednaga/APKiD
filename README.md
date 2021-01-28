@@ -19,15 +19,6 @@ For more information on what this tool can be used for, check out:
 ## Installing
 
 ```bash
-
-pip install --upgrade wheel
-pip wheel --wheel-dir=/tmp/yara-python --build-option="build" --build-option="--enable-dex" git+https://github.com/VirusTotal/yara-python.git@v3.11.0
-pip install --no-index --find-links=/tmp/yara-python yara-python
-```
-
-Finally, install APKiD:
-
-```bash
 pip install apkid
 ```
 
@@ -55,7 +46,7 @@ usage: apkid [-h] [-v] [-t TIMEOUT] [-r] [--scan-depth SCAN_DEPTH]
              [-o DIR]
              [FILE [FILE ...]]
 
-APKiD - Android Application Identifier v2.1.0
+APKiD - Android Application Identifier v2.1.2
 
 positional arguments:
   FILE                                       apk, dex, or directory
@@ -121,7 +112,7 @@ Make sure the version has been updated in [apkid/__init__.py](apkid/__init__.py)
 Update the compiled rules, the readme, build the package and upload to PyPI:
 
 ```bash
-./pre-release.py readme
+./prep-release.py readme
 rm -f dist/*
 python setup.py sdist bdist_wheel
 twine upload --repository-url https://upload.pypi.org/legacy/ dist/*

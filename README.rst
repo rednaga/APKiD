@@ -27,15 +27,6 @@ Installing
 
 .. code:: bash
 
-
-   pip install --upgrade wheel
-   pip wheel --wheel-dir=/tmp/yara-python --build-option="build" --build-option="--enable-dex" git+https://github.com/VirusTotal/yara-python.git@v3.11.0
-   pip install --no-index --find-links=/tmp/yara-python yara-python
-
-Finally, install APKiD:
-
-.. code:: bash
-
    pip install apkid
 
 Docker
@@ -67,7 +58,7 @@ Usage
                 [-o DIR]
                 [FILE [FILE ...]]
 
-   APKiD - Android Application Identifier v2.1.0
+   APKiD - Android Application Identifier v2.1.2
 
    positional arguments:
      FILE                                       apk, dex, or directory
@@ -155,7 +146,7 @@ PyPI:
 
 .. code:: bash
 
-   ./pre-release.py readme
+   ./prep-release.py readme
    rm -f dist/*
    python setup.py sdist bdist_wheel
    twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
