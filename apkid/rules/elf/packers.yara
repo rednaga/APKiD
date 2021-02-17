@@ -483,3 +483,149 @@ rule crackproof : packer
   condition:
     is_elf and all of them
 }
+
+rule crackproof_a : packer
+{
+  meta:
+    description = "CrackProof"
+    url         = "https://www.hypertech.co.jp/eng/"
+    sample      = "a296f4c1d48b830bb26c6ca7f2889e47756fb4adf0dd86d193a8b60d3bc4ae7d"
+    author      = "Eduardo Novella"
+
+  strings:
+    /**
+      __int64 __usercall init_proc@<X0>(a1@<X1>,  a2@<X2>,  a3@<X3>,  a4@<X4>,  a5@<X5>,  a6@<X6>,  a7@<X7>,  a8@<X8>)
+      {
+        __int64 v9[30]; // [xsp+0h] [xbp-F0h] BYREF
+
+        v9[28] = a1;
+        v9[29] = a2;
+        v9[26] = a3;
+        v9[27] = a4;
+        v9[24] = a5;
+        v9[25] = a6;
+        v9[22] = a7;
+        v9[23] = a8;
+        return sub_7F4(v9);
+      }
+    */
+    $init_proc = {
+      E1 0B BF A9  //  STP  X1, X2, [SP,#var_10]!
+      E3 13 BF A9  //  STP  X3, X4, [SP,#0x10+var_20]!
+      E5 1B BF A9  //  STP  X5, X6, [SP,#0x20+var_30]!
+      E7 23 BF A9  //  STP  X7, X8, [SP,#0x30+var_40]!
+      E9 2B BF A9  //  STP  X9, X10, [SP,#0x40+var_50]!
+      EB 33 BF A9  //  STP  X11, X12, [SP,#0x50+var_60]!
+      ED 3B BF A9  //  STP  X13, X14, [SP,#0x60+var_70]!
+      EF 43 BF A9  //  STP  X15, X16, [SP,#0x70+var_80]!
+      F1 4B BF A9  //  STP  X17, X18, [SP,#0x80+var_90]!
+      F3 53 BF A9  //  STP  X19, X20, [SP,#0x90+var_A0]!
+      F5 5B BF A9  //  STP  X21, X22, [SP,#0xA0+var_B0]!
+      F7 63 BF A9  //  STP  X23, X24, [SP,#0xB0+var_C0]!
+      F9 6B BF A9  //  STP  X25, X26, [SP,#0xC0+var_D0]!
+      FB 73 BF A9  //  STP  X27, X28, [SP,#0xD0+var_E0]!
+      FD 7B BF A9  //  STP  X29, X30, [SP,#0xE0+var_F0]!
+      E0 03 00 91  //  MOV  X0, SP
+      ?? ?? ?? 97  //  BL   sub_7F4
+      FD 7B C1 A8  //  LDP  X29, X30, [SP+0xF0+var_F0],#0x10
+      FB 73 C1 A8  //  LDP  X27, X28, [SP+0xE0+var_E0],#0x10
+      F9 6B C1 A8  //  LDP  X25, X26, [SP+0xD0+var_D0],#0x10
+      F7 63 C1 A8  //  LDP  X23, X24, [SP+0xC0+var_C0],#0x10
+      F5 5B C1 A8  //  LDP  X21, X22, [SP+0xB0+var_B0],#0x10
+      F3 53 C1 A8  //  LDP  X19, X20, [SP+0xA0+var_A0],#0x10
+      F1 4B C1 A8  //  LDP  X17, X18, [SP+0x90+var_90],#0x10
+      EF 43 C1 A8  //  LDP  X15, X16, [SP+0x80+var_80],#0x10
+      ED 3B C1 A8  //  LDP  X13, X14, [SP+0x70+var_70],#0x10
+      EB 33 C1 A8  //  LDP  X11, X12, [SP+0x60+var_60],#0x10
+      E9 2B C1 A8  //  LDP  X9, X10, [SP+0x50+var_50],#0x10
+      E7 23 C1 A8  //  LDP  X7, X8, [SP+0x40+var_40],#0x10
+      E5 1B C1 A8  //  LDP  X5, X6, [SP+0x30+var_30],#0x10
+      E3 13 C1 A8  //  LDP  X3, X4, [SP+0x20+var_20],#0x10
+      E1 0B C1 A8  //  LDP  X1, X2, [SP+0x10+var_10],#0x10
+      C0 03 5F D6  //  RET
+    }
+
+    /**
+      signed __int64 __fastcall do_asm_syscall(void *a1, void *a2, void *a3, void *a4, void *a5, void *a6, void *a7, signed __int64 svc_nr)
+      {
+        return linux_eabi_syscall(svc_nr, a1, a2, a3, a4, a5, a6, a7);
+      }
+    */
+    $do_asm_syscall = {
+      E1 0B BF A9  //  STP  X1, X2, [SP,#var_10]!
+      E3 13 BF A9  //  STP  X3, X4, [SP,#0x10+var_20]!
+      E5 1B BF A9  //  STP  X5, X6, [SP,#0x20+var_30]!
+      E7 23 BF A9  //  STP  X7, X8, [SP,#0x30+var_40]!
+      E9 7B BF A9  //  STP  X9, X30, [SP,#0x40+var_50]!
+      E8 03 07 AA  //  MOV  X8, X7
+      01 00 00 D4  //  SVC  0
+      E9 7B C1 A8  //  LDP  X9, X30, [SP+0x50+var_50],#0x10
+      E7 23 C1 A8  //  LDP  X7, X8, [SP+0x40+var_40],#0x10
+      E5 1B C1 A8  //  LDP  X5, X6, [SP+0x30+var_30],#0x10
+      E3 13 C1 A8  //  LDP  X3, X4, [SP+0x20+var_20],#0x10
+      E1 0B C1 A8  //  LDP  X1, X2, [SP+0x10+var_10],#0x10
+      C0 03 5F D6  //  RET
+    }
+
+    /**
+      v25 = j_asm_syscall(SYS_mprotect, v32, v29[6], 7LL, 0LL, 0LL, 0LL);
+      if ( v34 != 1 )
+      {
+          v10 = sub_4309D80();
+          v11 = -v25;
+          v12 = sub_430D114(v17);
+          v34 = sub_430E87C(0LL, 0LL, v10, 1LL, 181, 1LL, 5LL, v11, v17, v12);
+      }
+    */
+    $func1 = {
+      E2 03 00 2A  //  MOV             W2, W0
+      E3 7F 94 B9  //  LDRSW           X3, [SP,#0x14C0+var_44]
+      40 1C 80 D2  //  MOV             X0, #0xE2
+      04 00 80 D2  //  MOV             X4, #0
+      05 00 80 D2  //  MOV             X5, #0
+      06 00 80 D2  //  MOV             X6, #0
+      ?? ?? ?? 94  //  BL              j_asm_syscall
+    }
+    $func2 = {
+      00 00 80 D2  //  MOV  X0, #0
+      01 00 80 D2  //  MOV  X1, #0
+      E2 03 14 2A  //  MOV  W2, W20
+      23 00 80 52  //  MOV  W3, #1
+      A4 16 80 52  //  MOV  W4, #0xB5
+      25 00 80 52  //  MOV  W5, #1
+      A6 00 80 52  //  MOV  W6, #5
+      E7 03 13 2A  //  MOV  W7, W19
+      ?? ?? ?? 94  //  BL   sub_430E87C
+    }
+
+    /**
+      sub_430E87C(0LL, 0LL, v13, 1u, 198u, 1u, 6u, 0, 0LL, 0);
+    */
+    $func3 = {
+      00 00 80 D2  //   MOV             X0, #0
+      01 00 80 D2  //   MOV             X1, #0
+      23 00 80 52  //   MOV             W3, #1
+      C4 18 80 52  //   MOV             W4, #0xC6
+      25 00 80 52  //   MOV             W5, #1
+      C6 00 80 52  //   MOV             W6, #6
+      07 00 80 52  //   MOV             W7, #0
+      ?? ?? ?? 94  //   BL              sub_430E87C
+    }
+
+    /**
+      sub_430E87C(0LL, 0LL, v14, 1LL, 199LL, 1LL, 7LL, 0LL, 0LL, 0);
+    */
+    $func4 = {
+      00 00 80 D2   //   MOV  X0, #0
+      01 00 80 D2   //   MOV  X1, #0
+      23 00 80 52   //   MOV  W3, #1
+      E4 18 80 52   //   MOV  W4, #0xC7
+      25 00 80 52   //   MOV  W5, #1
+      E6 00 80 52   //   MOV  W6, #7
+      07 00 80 52   //   MOV  W7, #0
+      ?? ?? ?? 94   //   BL   sub_430E87C
+    }
+
+  condition:
+    is_elf and $init_proc and $do_asm_syscall and 1 of ($func*)
+}
