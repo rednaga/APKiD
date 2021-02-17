@@ -110,7 +110,6 @@ rule ollvm_v6_0_strenc : obfuscator
     // "Obfuscator-LLVM clang version 6.0.0 (trunk) (based on Obfuscator-LLVM 6.0.0git-b9ea5776)"
     $clang_version = "Obfuscator-LLVM clang version 6.0."
     $based_on      = "(based on Obfuscator-LLVM 6.0."
-    $strenc        = /\.datadiv_decode[\d]{18,20}/
 
   condition:
     is_elf and
@@ -188,11 +187,9 @@ rule ollvm_armariris : obfuscator
     // clang version 5.0.1 (tags/RELEASE_501/final)
     // .datadiv_decode14660921177804423408
     $clang_version = /clang version \d\.\d\.\d \(tags\/RELEASE\_\d+\/final\)/
-    $strenc        = /\.datadiv_decode[\d]{18,20}/
 
   condition:
-    is_elf and
-    all of them and
+    is_elf and $clang_version and
     not ollvm_tll and
     for any i in (0..elf.symtab_entries): (elf.symtab[i].name matches /\.datadiv_decode[\d]{18,20}/)
 }
