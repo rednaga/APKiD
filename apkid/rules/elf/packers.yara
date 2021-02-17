@@ -489,7 +489,7 @@ rule crackproof_a : packer
   meta:
     description = "CrackProof"
     url         = "https://www.hypertech.co.jp/eng/"
-    sample      = ""
+    sample      = "a296f4c1d48b830bb26c6ca7f2889e47756fb4adf0dd86d193a8b60d3bc4ae7d"
     author      = "Eduardo Novella"
 
   strings:
