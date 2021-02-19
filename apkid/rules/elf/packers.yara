@@ -340,20 +340,37 @@ rule promon : packer
     description = "Promon Shield"
     url         = "https://promon.co/"
     sample      = "6a3352f54d9f5199e4bf39687224e58df642d1d91f1d32b069acd4394a0c4fe0"
+    sample2     = "0ef06e0b1511872e711cf3e8e53fee097d13755c9572cfea6d153d708906f45d"
+    author      = "Eduardo Novella"
 
   strings:
-    $a = "libshield.so"
+    // Library names
+    $libshield   = "libshield.so"
+    $rnd_libname = /lib[a-z]{10,12}\.so/ // libchhjkikihfch.so || libgiompappkhnb.so
+
+    // Symbols
     $b = "deflate"
     $c = "inflateInit2"
     $d = "crc32"
 
-    $s1 = /.ncc/  // Code segment
-    $s2 = /.ncd/  // Data segment
-    $s3 = /.ncu/  // Another segment
+    /**
+     Odd ELF segments found:
+      .ncc -> Code segment
+      .ncd -> Data segment
+      .ncu -> Another segment
+    */
 
   condition:
-    ($a and $b and $c and $d) and
-    2 of ($s*)
+    is_elf and $b and $c and $d and
+    ($libshield or $rnd_libname) and
+    (   // Match at least two section names from .ncu, .ncc, .ncd
+        (for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncu/)
+            and for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncc/))  or
+        (for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncu/)
+            and for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncd/))  or
+        (for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncc/)
+            and for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncd/))
+    )
 }
 
 rule appsealing_core_2_10_10 : packer
