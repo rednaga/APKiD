@@ -186,7 +186,7 @@ rule ollvm_tll_a : obfuscator
     /**
       clang version 6.0.0 (tags/RELEASE_600/final) (git@github.com:enovella/ollvm-tll.git a38559e4c13359073102793c0a734bb1add3d5ff)
     */
-    $version = /clang version \d+\.\d+\.\d+ \(.*\) \(.*\/ollvm\-tll\.git [0-9a-z]{32,40}\)/
+    $version = /clang version \d+\.\d+\.\d+ \(.*\) \(.*\/ollvm\-tll\.git [0-9a-f]{40}\)/
 
   condition:
     is_elf and all of them and not ollvm_tll
