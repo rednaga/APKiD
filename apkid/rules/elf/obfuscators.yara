@@ -406,3 +406,19 @@ rule safeengine : obfuscator
   condition:
     all of them and is_elf
 }
+
+rule hikari : obfuscator
+{
+  meta:
+    description = "Hikari"
+    sample      = "f6b936ab06ade3de189a0cf11964f77ea3a6ad081cfd8cc4580cc87bcd7dec70"
+    url         = "https://github.com/HikariObfuscator/Hikari"
+    author      = "Eduardo Novella"
+
+  strings:
+    // clang version 8.0.0 (tags/RELEASE_800/final) (https://gitee.com/chenzimo/Hikari.git ecdf30fa1a4635a76c3b528a41eb48d791f4be95)
+    $version = /clang version \d+\.\d+\.\d+ \(.*\) \(.*\/Hikari\.git [0-9a-z]{32,40}\)/
+
+  condition:
+    is_elf and all of them
+}
