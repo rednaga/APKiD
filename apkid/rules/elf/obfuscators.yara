@@ -417,7 +417,7 @@ rule hikari : obfuscator
 
   strings:
     // clang version 8.0.0 (tags/RELEASE_800/final) (https://gitee.com/chenzimo/Hikari.git ecdf30fa1a4635a76c3b528a41eb48d791f4be95)
-    $version = /clang version \d+\.\d+\.\d+ \(.*\) \(.*\/Hikari\.git [0-9a-z]{32,40}\)/
+    $version = /clang version \d+\.\d+\.\d+ \(.*\) \(.*\/Hikari\.git [0-9a-f]{40}\)/
 
   condition:
     is_elf and all of them
