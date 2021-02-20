@@ -174,6 +174,24 @@ rule ollvm_tll : obfuscator
     is_elf and all of them
 }
 
+rule ollvm_tll_a : obfuscator
+{
+  meta:
+    description = "Obfuscator-LLVM TLL (string encryption)"
+    url         = "https://github.com/yazhiwang/ollvm-tll"
+    sample      = "0e5992066f177e2495a2a424201e146c29b78b63a9eb94bce6765691a47e6fd7"
+    author      = "Eduardo Novella"
+
+  strings:
+    /**
+      clang version 6.0.0 (tags/RELEASE_600/final) (git@github.com:enovella/ollvm-tll.git a38559e4c13359073102793c0a734bb1add3d5ff)
+    */
+    $version = /clang version \d+\.\d+\.\d+ \(.*\) \(.*\/ollvm\-tll\.git [0-9a-z]{32,40}\)/
+
+  condition:
+    is_elf and all of them and not ollvm_tll
+}
+
 rule ollvm_armariris : obfuscator
 {
   meta:
