@@ -327,7 +327,7 @@ rule arxan_arm64 : obfuscator
     }
 
   condition:
-    (#a > 5) and elf.machine == elf.EM_AARCH64
+    (#a > 5) and (elf.machine == elf.EM_AARCH64 or is_elf)
 }
 
 rule alipay : obfuscator
