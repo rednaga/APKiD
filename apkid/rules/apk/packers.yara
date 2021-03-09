@@ -218,7 +218,7 @@ rule dexprotector_b : packer
     $encrptcustom = /assets\/[A-Za-z0-9.]{2,50}\.mp3/
 
   condition:
-    is_apk and 2 of ($encrptlib_*) and $encrptcustom and
+    is_apk and 1 of ($encrptlib_*) and $encrptcustom and
     not dexprotector_a and
     not dexprotector
 }
