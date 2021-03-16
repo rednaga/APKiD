@@ -422,3 +422,21 @@ rule hikari : obfuscator
   condition:
     is_elf and all of them
 }
+
+rule dexprotector : obfuscator
+{
+  meta:
+    description = "DexProtector"
+    url         = "https://dexprotector.com/"
+    sample      = "d506e22003798f8b3a3d3c4a1b08af1cbd64667da6f9ed8cf73bc99ded73da44"
+    author      = "Eduardo Novella"
+
+  strings:
+    // - offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
+    // 0x00000000  7f45 4c46 0201 0100 4450 4c46 00e0 0100  .ELF....DPLF....
+    // Possibly DPLF stands for "DexProtector Linkable Format"
+    $dp_elf_header = { 7f45 4c46 0201 0100 4450 4c46 }
+
+  condition:
+    $dp_elf_header at 0
+}

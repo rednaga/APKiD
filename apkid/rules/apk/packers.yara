@@ -205,6 +205,7 @@ rule dexprotector_b : packer
     description = "DexProtector"
     url         = "https://dexprotector.com/"
     sample      = "dca2a0bc0f2605072b9b48579e73711af816b0fa1108b825335d2d1f2418e2a7"
+    sample2     = "353f5fa432208f67cdc106c08b19f2c8644a5f768a7051f7c9043d9931a2a116"
 
   strings:
     //              assets/com.package.name.arm.so.dat
@@ -218,7 +219,7 @@ rule dexprotector_b : packer
     $encrptcustom = /assets\/[A-Za-z0-9.]{2,50}\.mp3/
 
   condition:
-    is_apk and 2 of ($encrptlib_*) and $encrptcustom and
+    is_apk and 1 of ($encrptlib_*) and $encrptcustom and
     not dexprotector_a and
     not dexprotector
 }
