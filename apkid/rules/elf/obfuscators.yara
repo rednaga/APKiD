@@ -434,6 +434,7 @@ rule dexprotector : obfuscator
   strings:
     // - offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
     // 0x00000000  7f45 4c46 0201 0100 4450 4c46 00e0 0100  .ELF....DPLF....
+    // Possibly DPLF stands for "DexProtector Linkable Format"
     $dp_elf_header = { 7f45 4c46 0201 0100 4450 4c46 }
 
   condition:
