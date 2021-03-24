@@ -281,6 +281,30 @@ rule apkprotect_a : packer
     author      = "Eduardo Novella"
 
   strings:
+    /**
+      unzip -l 1c3e09c6e336fef0261a19e546f3686fcf9a00ee23f7426608fef40465d91289.apk
+        Length      Date    Time    Name
+      ---------  ---------- -----   ----
+          1269  2020-05-14 14:56   META-INF/MANIFEST.MF
+          1347  2020-05-14 14:56   META-INF/APKPROTECT.SF
+          1299  2020-05-14 14:56   META-INF/APKPROTECT.RSA
+          6980  2020-05-14 14:56   AndroidManifest.xml
+            36  2020-05-14 14:56   assets/ap.others/apkprotect.bin
+        425126  2020-05-14 14:56   assets/ap.res/a/a.png
+          1464  2020-05-14 14:56   assets/ap.res/b/b.xml
+          1504  2020-05-14 14:56   assets/ap.res/c/b.xml
+          2981  2020-05-14 14:56   assets/ap.res/d/c.png
+          5755  2020-05-14 14:56   assets/ap.res/e/c.png
+          9277  2020-05-14 14:56   assets/ap.res/f/c.png
+          17743  2020-05-14 14:56   assets/ap.res/g/c.png
+        522140  2020-05-14 14:56   assets/ap.src/apkprotect-v1.bin
+        161320  2020-05-14 14:56   classes.dex
+        202880  2020-05-14 14:56   lib/arm64-v8a/libapkprotect.so
+        104088  2020-05-14 14:56   lib/armeabi-v7a/libapkprotect.so
+        198336  2020-05-14 14:56   lib/x86/libapkprotect.so
+        223632  2020-05-14 14:56   lib/x86_64/libapkprotect.so
+          2040  2020-05-14 14:56   resources.arsc
+    */
     $a1 = /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libapkprotect\.so/
     $a2 = "assets/apkprotect.bin"
     $a3 = "assets/apkprotect/classes.dex.bin"
