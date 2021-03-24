@@ -285,9 +285,29 @@ rule apkprotect_a : packer
     $a2 = "assets/apkprotect.bin"
     $a3 = "assets/apkprotect/classes.dex.bin"
     $a4 = "apkprotect-build.properties"
+    $a5 = "META-INF/APKPROTECT.RSA"
+    $a6 = "META-INF/APKPROTECT.SF"
 
   condition:
-    is_apk and 2 of ($a*)
+    is_apk and 4 of ($a*)
+}
+
+rule apkprotect_b : packer
+{
+  meta:
+    description = "APKProtect 9.x"
+    url         = "https://play.google.com/store/apps/details?id=com.mcal.dexprotect"
+    sample      = "65e02abc0a9e9646cea11a1b0d17e4fd080c98d08c755be7a1dec9d7c21de4de"
+    author      = "Eduardo Novella"
+
+  strings:
+    $a1 = /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libapkprotect\.so/
+    $a2 = /assets\/(.*)\/apkprotect(.*)\.bin/
+    $a3 = "META-INF/APKPROTECT.RSA"
+    $a4 = "META-INF/APKPROTECT.SF"
+
+  condition:
+    is_apk and 3 of ($a*) and not apkprotect_a
 }
 
 rule bangcle : packer
