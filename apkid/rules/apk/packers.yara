@@ -302,7 +302,7 @@ rule apkprotect_b : packer
 
   strings:
     /**
-      unzip -l 1c3e09c6e336fef0261a19e546f3686fcf9a00ee23f7426608fef40465d91289.apk
+      unzip -l 65e02abc0a9e9646cea11a1b0d17e4fd080c98d08c755be7a1dec9d7c21de4de.apk
         Length      Date    Time    Name
       ---------  ---------- -----   ----
           1269  2020-05-14 14:56   META-INF/MANIFEST.MF
