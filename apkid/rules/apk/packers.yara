@@ -296,7 +296,7 @@ rule apkprotect_a : packer
           2981  2020-05-14 14:56   assets/ap.res/d/c.png
           5755  2020-05-14 14:56   assets/ap.res/e/c.png
           9277  2020-05-14 14:56   assets/ap.res/f/c.png
-          17743  2020-05-14 14:56   assets/ap.res/g/c.png
+         17743  2020-05-14 14:56   assets/ap.res/g/c.png
         522140  2020-05-14 14:56   assets/ap.src/apkprotect-v1.bin
         161320  2020-05-14 14:56   classes.dex
         202880  2020-05-14 14:56   lib/arm64-v8a/libapkprotect.so
