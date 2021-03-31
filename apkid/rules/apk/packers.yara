@@ -82,6 +82,8 @@ rule appguard_b : packer
     $b2 = "lib/x86/libloader.so"
     $b3 = "lib/armeabi-v7a/libdiresu.so"
     $b4 = "lib/x86/libdiresu.so"
+    $b5 = "lib/arm64-v8a/libloader.so"
+    $b6 = "lib/arm64-v8a/libdiresu.so"
     $c1 = "assets/m7a"
     $c2 = "assets/m8a"
     $c3 = "assets/agconfig"    //appguard cfg?
