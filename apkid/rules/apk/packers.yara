@@ -739,7 +739,7 @@ rule tencent_legu : packer
     author      = "Mert Arıkan"
 
   strings:
-    $a = "assets/toversion"
+    $a = "assets/tosversion"
     $b = "assets/0OO00l111l1l"
     $c = "assets/0OO00oo01l1l"
     $d = "assets/o0oooOO0ooOo.dat"
