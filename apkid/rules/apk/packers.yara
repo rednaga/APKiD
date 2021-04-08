@@ -743,9 +743,10 @@ rule tencent_legu : packer
     $b = "assets/0OO00l111l1l"
     $c = "assets/0OO00oo01l1l"
     $d = "assets/o0oooOO0ooOo.dat"
+    $e = "assets/libshellx-super.2019.so
 
   condition:
     is_apk
     and $b
-    and ($a or $c or $d)
+    and ($a or $c or $d or $e)
 }
