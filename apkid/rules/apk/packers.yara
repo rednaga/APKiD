@@ -762,8 +762,6 @@ rule apkencryptor : packer
     $src1 = "src/2ba5b2615b9b71b48c7694d6489e0171"
     $src2 = "src/2e15f58d32a5ff652706ef41ec85a763"
     $src3 = "src/3676d55f84497cbeadfc614c1b1b62fc"
-    // $sig1 = "META-INF/FLY.RSA"
-    // $sig2 = "META-INF/FLY.SF"
 
   condition:
     is_apk and ($src1 or $src2 or $src3)
