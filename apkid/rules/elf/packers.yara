@@ -348,11 +348,6 @@ rule promon : packer
     $libshield   = "libshield.so"
     $rnd_libname = /lib[a-z]{10,12}\.so/ // libchhjkikihfch.so || libgiompappkhnb.so
 
-    // Symbols
-    $b = "deflate"
-    $c = "inflateInit2"
-    $d = "crc32"
-
     /**
      Odd ELF segments found:
       .ncc -> Code segment
@@ -361,8 +356,7 @@ rule promon : packer
     */
 
   condition:
-    is_elf and $b and $c and $d and
-    ($libshield or $rnd_libname) and
+    is_elf and ($libshield or $rnd_libname) and
     (   // Match at least two section names from .ncu, .ncc, .ncd
         (for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncu/)
             and for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncc/))  or
