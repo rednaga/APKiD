@@ -477,7 +477,7 @@ rule tencent_apk : packer
     author      = "Eduardo Novella"
 
   strings:
-    $lib =  /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libshell(a|x)-\d\.\d\.\d\.\d\.so/
+    $lib =  /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libshell(a|x)(-super)?-\d\.\d\.\d\.\d\.so/
 
   condition:
     is_apk and all of them
@@ -743,10 +743,10 @@ rule tencent_legu : packer
     $b = "assets/0OO00l111l1l"
     $c = "assets/0OO00oo01l1l"
     $d = "assets/o0oooOO0ooOo.dat"
-    $e = "assets/libshellx-super.2019.so
+ 
 
   condition:
     is_apk
     and $b
-    and ($a or $c or $d or $e)
+    and ($a or $c or $d)
 }
