@@ -749,3 +749,20 @@ rule tencent_legu : packer
     and $b
     and ($a or $c or $d)
 }
+
+rule apkencryptor : packer
+{
+  meta:
+    description = "ApkEncryptor"
+    url         = "https://github.com/FlyingYu-Z/ApkEncryptor"
+    sample      = "bc4a8774f4a2b0a72b3ffd4d9e1933913a1d95a8e50082255a167dec9d115a99"
+    author      = "Eduardo Novella"
+
+  strings:
+    $src1 = "src/2ba5b2615b9b71b48c7694d6489e0171"
+    $src2 = "src/2e15f58d32a5ff652706ef41ec85a763"
+    $src3 = "src/3676d55f84497cbeadfc614c1b1b62fc"
+
+  condition:
+    is_apk and ($src1 or $src2 or $src3)
+}

@@ -476,3 +476,20 @@ rule unreadable_method_names : obfuscator
     short_unicode_method_names
     and (not dexguard_a and not dexguard_b and not dexguard_c and not dexguard_d)
 }
+
+rule apkencryptor : obfuscator
+{
+  meta:
+    description = "ApkEncryptor"
+    url         = "https://github.com/FlyingYu-Z/ApkEncryptor"
+    sample      = "26c25dacacd0b4fdd411d7459747021d66cb45e9d57f92743004d190af74acea"
+    author      = "Eduardo Novella"
+
+  strings:
+    $p1 = "Lcn/beingyi/sub/utils/Native"
+    $p2 = "Lcom/beingyi/encrypt/StringPool"
+    $p3 = "Lcn/beingyi/sub/ui/JniAlert"
+
+  condition:
+    any of them and is_dex and unreadable_field_names and unreadable_method_names
+}
