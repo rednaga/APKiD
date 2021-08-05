@@ -744,7 +744,6 @@ rule tencent_legu : packer
     $c = "assets/0OO00oo01l1l"
     $d = "assets/o0oooOO0ooOo.dat"
  
-
   condition:
     is_apk
     and $b
