@@ -394,8 +394,54 @@ rule dexguard_native_a : obfuscator
       and $libdgrt
       and 4 of ($s_*)
       and not dexguard_native
+
 }
 
+rule dexguard_native_arm64 : obfuscator
+{
+  meta:
+    description = "DexGuard 9.x"
+    url         = "https://www.guardsquare.com/en/products/dexguard"
+    sample      = "fc3fae3de64eceab969b7d91e3a5fbc45c7407bb8d1a5d5018caa86947604713"
+    author      = "FrenchYeti"
+
+  strings:
+    // that is how dexguard detects frida into /proc/%d/maps
+    $hook = {
+      0b 1d 00 12  //  and        w11,bf,#0xff
+      48 15 40 38  //  ldrb       bf,[x10], #0x1
+      29 25 1b 53  //  ubfiz      w9,w9,#0x5,#0xa
+      29 01 0b 4a  //  eor        w9,w9,w11
+      88 ff ff 35  //  cbnz       bf,LAB_00106e44
+      e8 c1 86 52  //  mov        bf,#0x360f 
+      3f 01 08 6b  //  cmp        w9,bf
+    }
+    // recurring patterns used into several string decryption
+    $str = {
+      6c 69 69 38  //  ldrb       w12,[x11, x9, LSL ]
+      8c ?? ?? 11  //  add        w12,w12,??
+      6c 69 29 38  //  strb       w12,[x11, x9, LSL ]
+      29 05 00 91  //  add        x9,x9,#0x1
+      3f ?? ?? f1  //  cmp        x9,??
+      ec 17 9f 1a  //  cset       w12,??
+    }
+    $str2 = {
+      30 ?? cc 9b 10 fe ?? d3 10 a6 0d 9b 6f 69 69 38 d0 69 70 38 
+      0f 02 0f 4a 6f 69 29 38 29 05 00 91 3f ?? ?? f1 ef 17 9f 1a
+    }
+    // binaries have always 8 svc instructions
+    $svc = {
+      ?8 ?? ?? d2  //  mov        x8,??
+      01 00 00 d4  //  svc        0x0
+      1f 04 40 b1  //  cmn        x0, #0x1, LSL#12
+      00 94 80 da  //  cneg       x0, x0, hi
+      ?8 ?? ?? 54  //  b.hi       ??
+      c0 03 5f d6  //  ret  
+    }
+
+  condition:
+    elf.machine == elf.EM_AARCH64 and $hook and ($str or $str2) and #svc >= 6
+}
 rule snapprotect : obfuscator
 {
   meta:
