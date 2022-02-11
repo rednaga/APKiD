@@ -318,16 +318,23 @@ rule arxan_arm64 : obfuscator
      * This is a updated version of the previous Arxan 32bits rule.
      */
     $a = {
-      09 01 0B 8A   // AND  X9, X8, X11
+      09 01 0? 8A   // AND  X9, X8, X11/X12
       4A 00 80 D2   // MOV  X10, #2
       29 7D 0A 9B   // MUL  X9, X9, X10
-      08 01 0B CA   // EOR  X8, X8, X11
+      08 01 0? CA   // EOR  X8, X8, X11/X12
       08 01 09 8B   // ADD  X8, X8, X9
       00 01 1F D6   // BR   X8
     }
 
+    $b = {
+      28 00 80 D2   // MOV  X8, #1
+      69 00 00 10   // ADR  X9, loc_XXX
+      28 7D 08 9B   // MUL  X8, X9, X8
+      00 01 1F D6   // BR   X8
+    }
+
   condition:
-    (#a > 5) and elf.machine == elf.EM_AARCH64
+    (#a > 3 or #b > 3) and elf.machine == elf.EM_AARCH64
 }
 
 rule alipay : obfuscator
@@ -394,7 +401,6 @@ rule dexguard_native_a : obfuscator
       and $libdgrt
       and 4 of ($s_*)
       and not dexguard_native
-
 }
 
 rule dexguard_native_arm64 : obfuscator
@@ -440,7 +446,9 @@ rule dexguard_native_arm64 : obfuscator
     }
 
   condition:
-    elf.machine == elf.EM_AARCH64 and not dexguard_native and not dexguard_native_a and $hook and ($str or $str2) and #svc >= 6
+    elf.machine == elf.EM_AARCH64
+    and $hook and ($str or $str2) and #svc >= 6
+    and not dexguard_native and not dexguard_native_a
 }
 
 rule snapprotect : obfuscator
