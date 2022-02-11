@@ -440,8 +440,9 @@ rule dexguard_native_arm64 : obfuscator
     }
 
   condition:
-    elf.machine == elf.EM_AARCH64 and $hook and ($str or $str2) and #svc >= 6
+    elf.machine == elf.EM_AARCH64 and not dexguard_native and not dexguard_native_a and $hook and ($str or $str2) and #svc >= 6 
 }
+
 rule snapprotect : obfuscator
 {
   meta:
