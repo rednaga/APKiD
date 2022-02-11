@@ -372,6 +372,29 @@ rule dexguard_native : obfuscator
       and any of them
 }
 
+rule dexguard_native_a : obfuscator
+{
+  meta:
+    description = "DexGuard v9.x"
+    url         = "https://www.guardsquare.com/en/products/dexguard"
+    sample      = "71b11059820c358fb14a0917430e07cf254e15d5b3337471ad172ad5ceccfa2a"
+    author      = "Eduardo Novella"
+
+    strings:
+      // Library name is libdgrt (probably DexGuard RunTime)
+      $libdgrt  = { 006c 6962 6467 7274 2e73 6f00 } // libdgrt.so
+      $java_o_  = { 00 4a61 7661 5f6f 5f } // Java_o_
+      $jnionlod = { 004a 4e49 5f4f 6e4c 6f61 6400 } // JNI_OnLoad
+      $basename = { 00 6261 7365 6e61 6d65 00 }
+      $mprotect = { 006d 7072 6f74 6563 7400 }
+      $dirname  = { 00 6469 726e 616d 6500 }
+
+    condition:
+      is_elf
+      and 5 of them
+      and not dexguard_native
+}
+
 rule snapprotect : obfuscator
 {
   meta:
