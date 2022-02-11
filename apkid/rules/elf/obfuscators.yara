@@ -382,16 +382,17 @@ rule dexguard_native_a : obfuscator
 
     strings:
       // Library name is libdgrt (probably DexGuard RunTime)
-      $libdgrt  = { 006c 6962 6467 7274 2e73 6f00 } // libdgrt.so
-      $java_o_  = { 00 4a61 7661 5f6f 5f } // Java_o_
-      $jnionlod = { 004a 4e49 5f4f 6e4c 6f61 6400 } // JNI_OnLoad
-      $basename = { 00 6261 7365 6e61 6d65 00 }
-      $mprotect = { 006d 7072 6f74 6563 7400 }
-      $dirname  = { 00 6469 726e 616d 6500 }
+      $libdgrt     = { 006c 6962 6467 7274 2e73 6f00 } // libdgrt.so
+      $s_java_o_   = { 00 4a61 7661 5f6f 5f } // Java_o_
+      $s_jnionload = { 004a 4e49 5f4f 6e4c 6f61 6400 } // JNI_OnLoad
+      $s_basename  = { 00 6261 7365 6e61 6d65 00 }
+      $s_mprotect  = { 006d 7072 6f74 6563 7400 }
+      $s_dirname   = { 00 6469 726e 616d 6500 }
 
     condition:
       is_elf
-      and 5 of them
+      and $libdgrt
+      and 5 of ($s_*)
       and not dexguard_native
 }
 
