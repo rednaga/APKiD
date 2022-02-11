@@ -375,7 +375,7 @@ rule dexguard_native : obfuscator
 rule dexguard_native_a : obfuscator
 {
   meta:
-    description = "DexGuard v9.x"
+    description = "DexGuard 9.x"
     url         = "https://www.guardsquare.com/en/products/dexguard"
     sample      = "71b11059820c358fb14a0917430e07cf254e15d5b3337471ad172ad5ceccfa2a"
     author      = "Eduardo Novella"
@@ -413,7 +413,7 @@ rule dexguard_native_arm64 : obfuscator
       29 25 1b 53  //  ubfiz      w9,w9,#0x5,#0xa
       29 01 0b 4a  //  eor        w9,w9,w11
       88 ff ff 35  //  cbnz       bf,LAB_00106e44
-      e8 c1 86 52  //  mov        bf,#0x360f 
+      e8 c1 86 52  //  mov        bf,#0x360f
       3f 01 08 6b  //  cmp        w9,bf
     }
     // recurring patterns used into several string decryption
@@ -426,7 +426,7 @@ rule dexguard_native_arm64 : obfuscator
       ec 17 9f 1a  //  cset       w12,??
     }
     $str2 = {
-      30 ?? cc 9b 10 fe ?? d3 10 a6 0d 9b 6f 69 69 38 d0 69 70 38 
+      30 ?? cc 9b 10 fe ?? d3 10 a6 0d 9b 6f 69 69 38 d0 69 70 38
       0f 02 0f 4a 6f 69 29 38 29 05 00 91 3f ?? ?? f1 ef 17 9f 1a
     }
     // binaries have always 8 svc instructions
@@ -436,11 +436,11 @@ rule dexguard_native_arm64 : obfuscator
       1f 04 40 b1  //  cmn        x0, #0x1, LSL#12
       00 94 80 da  //  cneg       x0, x0, hi
       ?8 ?? ?? 54  //  b.hi       ??
-      c0 03 5f d6  //  ret  
+      c0 03 5f d6  //  ret
     }
 
   condition:
-    elf.machine == elf.EM_AARCH64 and not dexguard_native and not dexguard_native_a and $hook and ($str or $str2) and #svc >= 6 
+    elf.machine == elf.EM_AARCH64 and not dexguard_native and not dexguard_native_a and $hook and ($str or $str2) and #svc >= 6
 }
 
 rule snapprotect : obfuscator
