@@ -392,7 +392,7 @@ rule dexguard_native_a : obfuscator
     condition:
       is_elf
       and $libdgrt
-      and 5 of ($s_*)
+      and 4 of ($s_*)
       and not dexguard_native
 }
 
