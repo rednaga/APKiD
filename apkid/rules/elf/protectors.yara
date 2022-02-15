@@ -202,5 +202,6 @@ rule verimatrix_arm64 : protector
     }
   
   condition:
-    ELF is Aarch64 and all of them
+    elf.machine == elf.EM_AARCH64 
+    and all of them
 }
