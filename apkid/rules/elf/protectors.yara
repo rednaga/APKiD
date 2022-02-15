@@ -163,7 +163,7 @@ rule vkey_elf : protector
     is_elf and $libname and 1 of ($vos*) and 1 of ($detection*) and 1 of ($jni*)
 }
 
-rule verimatrix_elf_arm64 : protector
+rule verimatrix_arm64 : protector
 {
   meta:
     description = "InsideSecure Verymatrix"
@@ -202,5 +202,5 @@ rule verimatrix_elf_arm64 : protector
     }
   
   condition:
-    is_elf and $seq and $instr and $comm1 and $comm2
+    ELF is Aarch64 and all of them
 }
