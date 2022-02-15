@@ -162,3 +162,45 @@ rule vkey_elf : protector
   condition:
     is_elf and $libname and 1 of ($vos*) and 1 of ($detection*) and 1 of ($jni*)
 }
+
+rule verimatrix_elf_arm64 : protector
+{
+  meta:
+    description = "InsideSecure Verymatrix"
+    url         = "https://www.verimatrix.com/products/app-shield/"
+    sample      = "105a2646e8acf45afcd606f4d47af68a8218e0ae7d8c9646d0048cbf32df7a73"
+    author      = "FrenchYeti"
+    
+  strings:
+    // byte sequence from .data, used into JNI_OnLoad
+    $seq = {
+      ?? ?? ?? ?? 88 98 a8 b8
+      ?? ?? ?? ?? 94 a4 b4 c4
+      ?? ?? ?? ?? 88 98 a8 b8
+      ?? ?? ?? ?? 94 a4 b4 c4
+    }
+    
+    $comm1 =  "Android (7019983 based on r365631c3) clang version 9.0.9 (https://android.googlesource.com/toolchain/llvm-project a2a1e703c0edb03ba29944e529ccbf457742737b) (based on LLVM 9.0.9svn)"
+    $comm2 = "GCC: (GNU) 4.9.x 20150123 (prerelease)"
+    
+    // common pattern
+    $instr = {
+      ?3 ?? ?? 54 //  b.cc    ??
+      29 0d ?0 12 //  and     w9, w9, #0xf
+      49 21 c9 1a //  lsl     w9, w10, w9
+      ea 03 09 cb //  neg     x10, x9
+      ?a 0? ?? 8a //  and     x10, ??, ??
+      5f 01 ?? eb //  cmp     x10, ??
+      9f 3b 03 d5 //  dsb     ISH
+      ?2 ?? ?? 54 //  b.cs    ??
+      2a 75 0b d5 //  ic      x10
+      4a 01 09 8b //  add     x10, x10, x9
+      5f 01 ?? eb //  cmp     x10, ??
+      ?3 ?? ?? 54 //  b.cc    ??
+      [0-4]
+      df 3f 03 d5 //  isb
+    }
+  
+  condition:
+    is_elf and $seq and $instr and $comm1 and $comm2
+}
