@@ -5,113 +5,31 @@ apkid/rules/rules.yarc
 test-data
 research
 
-.mypy_cache
-
-### VirtualEnv template
-# Virtualenv
-# http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
 .Python
-[Bb]in
-[Ii]nclude
-[Ll]ib
-[Ll]ib64
-[Ll]ocal
-[Ss]cripts
 pyvenv.cfg
+venv/
+ENV/
+env/
 .venv
-pip-selfcheck.json
+.python-version
 
-
-# JetBrains Rider
 .idea/
 *.sln.iml
-### Python template
-# Byte-compiled / optimized / DLL files
+.vscode/
+
 __pycache__/
+.mypy_cache
 *.py[cod]
 *$py.class
+.pytest_cache/
 
-# C extensions
-*.so
-
-# Distribution / packaging
 .Python
-env/
 build/
-develop-eggs/
 dist/
 downloads/
 eggs/
 .eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
 *.egg-info/
-.installed.cfg
 *.egg
 
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*,cover
-.hypothesis/
-.pytest_cache/
-
-# Translations
-*.mo
-*.pot
-
-# pyenv
-.python-version
-
-# dotenv
-.env
-
-# virtualenv
-venv/
-ENV/
-
-### OSX template
 *.DS_Store
-.AppleDouble
-.LSOverride
-
-# Icon must end with two \r
-Icon
-
-# Thumbnails
-._*
-
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-.com.apple.timemachine.donotpresent
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
-
