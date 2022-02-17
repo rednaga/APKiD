@@ -8,9 +8,9 @@ RUN apt-get update -qq && \
     apt-get install -y git build-essential gcc pandoc curl
 
 RUN pip install --no-cache-dir --upgrade pip setuptools wheel && \
-    pip wheel --quiet --no-cache-dir --wheel-dir=/tmp/yara-python --build-option="build" --build-option="--enable-dex" git+https://github.com/VirusTotal/yara-python.git@v3.11.0 && \
-    pip install --quiet --no-cache-dir --no-index --find-links=/tmp/yara-python yara-python && \
-    rm -rf /tmp/yara-python
+    pip wheel --quiet --no-cache-dir --wheel-dir=/tmp/yara-python-dex git+https://github.com/MobSF/yara-python-dex.git && \
+    pip install --quiet --no-cache-dir --no-index --find-links=/tmp/yara-python-dex yara-python-dex && \
+    rm -rf /tmp/yara-python-dex
 
 WORKDIR /apkid
 COPY . .
