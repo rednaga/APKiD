@@ -104,11 +104,11 @@ pip install -e .[dev,test] --user
 
 If you update any of the rules, be sure to run `prep-release.py` to recompile them.
 
-## For Maintainers
+## For Package Maintainers
 
-This section is for package maintainers.
+When releasing a new version, make sure the version has been updated in [apkid/__init__.py](apkid/__init__.py).
 
-Make sure the version has been updated in [apkid/__init__.py](apkid/__init__.py)
+As for running tests, check out [.travis.yml](.travis.yml) to see how the dev and test environments are setup and tests are run.
 
 Update the compiled rules, the readme, build the package and upload to PyPI:
 
