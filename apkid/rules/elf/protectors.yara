@@ -180,9 +180,6 @@ rule verimatrix_arm64 : protector
       ?? ?? ?? ?? 94 a4 b4 c4
     }
     
-    $comm1 =  "Android (7019983 based on r365631c3) clang version 9.0.9 (https://android.googlesource.com/toolchain/llvm-project a2a1e703c0edb03ba29944e529ccbf457742737b) (based on LLVM 9.0.9svn)"
-    $comm2 = "GCC: (GNU) 4.9.x 20150123 (prerelease)"
-    
     // common pattern
     $instr = {
       ?3 ?? ?? 54 //  b.cc    ??
