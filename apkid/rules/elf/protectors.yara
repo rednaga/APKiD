@@ -168,7 +168,7 @@ rule verimatrix_arm64 : protector
   meta:
     description = "InsideSecure Verymatrix"
     url         = "https://www.verimatrix.com/products/app-shield/"
-    sample      = "105a2646e8acf45afcd606f4d47af68a8218e0ae7d8c9646d0048cbf32df7a73"
+    sample      = "41aab8bad66ab3ee47d8133488084e87abd271e2865d5715fb36269d967a2571"
     author      = "FrenchYeti"
     
   strings:
