@@ -386,3 +386,50 @@ rule crazy_dog_wrapper : packer
     is_dex
     and 2 of them
 }
+
+rule jsonpacker_dex : packer
+{
+   meta:
+     description = "JsonPacker"
+     sample       = "e23f0a124fdaba30c07a3c40011dd99240af081cec4cdfcb990c811126867e59"
+     author        = "Axelle Apvrille and Eduardo Novella"
+
+   strings:
+     /* typical XOR algo with junk operations */
+     $algo = {
+       b0 9b		// add-int/2addr       v11, v9
+       da 0c 0b 00 	// mul-int/lit8        v12, v11, 0
+       b3 9c 		// div-int/2addr       v12, v9
+       b0 1c 		// add-int/2addr       v12, v1
+       b0 5c		// add-int/2addr       v12, v5
+       93 05 06 06	// div-int             v5, v6, v6
+       d8 05 05 ff 	// add-int/lit8        v5, v5, -1
+       b0 5c 		// add-int/2addr       v12, v5
+       b4 66 		// rem-int/2addr       v6, v6
+       b0 6c 		// add-int/2addr       v12, v6
+       97 05 0c 0a 	// xor-int             v5, v12, v10
+     }
+     $algo2 = {
+        b0 c4		// add-int/2addr       v4, v12
+	da 04 04 00 	// mul-int/lit8        v4, v4, 0
+	b0 94 	 	// add-int/2addr       v4, v9
+	93 09 0c 0c	// div-int             v9, v12, v12
+	b3 69 	 	// div-int/2addr       v9, v6
+	b7 69		//  xor-int/2addr       v9, v6
+	b0 94		// add-int/2addr       v4, v9
+	94 09 0c 0c	// rem-int             v9, v12, v12
+	b0 94 	 	// add-int/2addr       v4, v9
+	b7 b4		// xor-int/2addr       v4, v11
+     }
+     
+     $dexclass = {
+       6e 20 ?? ?? 10 00	// invoke-virtual      {v0, v1}, Ljava/lang/reflect/Constructor;->newInstance([Ljava/lang/Object;)Ljava/lang/Object;
+       ?? ?? 1f 0b    	     	// check-cast          p1, Ldalvik/system/DexClassLoader; 
+       }
+
+   condition:
+     is_dex
+     //and $json
+     and ($algo or $algo2)
+     and $dexclass
+}
