@@ -387,12 +387,12 @@ rule crazy_dog_wrapper : packer
     and 2 of them
 }
 
-rule jsonpacker_dex : packer
+rule jsonpacker : packer
 {
    meta:
      description = "JsonPacker"
-     sample       = "e23f0a124fdaba30c07a3c40011dd99240af081cec4cdfcb990c811126867e59"
-     author        = "Axelle Apvrille and Eduardo Novella"
+     sample      = "e23f0a124fdaba30c07a3c40011dd99240af081cec4cdfcb990c811126867e59"
+     author      = "Axelle Apvrille"
 
    strings:
      /* typical XOR algo with junk operations */
@@ -415,21 +415,40 @@ rule jsonpacker_dex : packer
 	b0 94 	 	// add-int/2addr       v4, v9
 	93 09 0c 0c	// div-int             v9, v12, v12
 	b3 69 	 	// div-int/2addr       v9, v6
-	b7 69		//  xor-int/2addr       v9, v6
+	b7 69		// xor-int/2addr       v9, v6
 	b0 94		// add-int/2addr       v4, v9
 	94 09 0c 0c	// rem-int             v9, v12, v12
 	b0 94 	 	// add-int/2addr       v4, v9
 	b7 b4		// xor-int/2addr       v4, v11
      }
-     
+     $algo3 = {
+        b0 a7		// add-int/2addr       v7, v10
+        da 07 07 00	// mul-int/lit8        v7, v7, 0
+        b0 47		// add-int/2addr       v7, v4
+        93 04 0a 0a	// div-int             v4, v10, v10
+        db 04 04 01	// div-int/lit8        v4, v4, 0x1
+        df 04 04 01	// xor-int/lit8        v4, v4, 0x1
+        b0 47		// add-int/2addr       v7, v4
+        94 04 0a 0a	// rem-int             v4, v10, v10
+        b0 47		// add-int/2addr       v7, v4
+        97 04 07 09	// xor-int             v4, v7, v9
+     }
+     $algo4 = {
+     b0 36
+     dc 07 05 02	// add-int/2addr       v6, v3
+     48 07 02 07	//  rem-int/lit8        v7, v5, 0x2
+     d8 08 06 e5	// aget-byte           v7, v2, v7
+     d8 08 08 26	// add-int/lit8        v8, v6, -27
+     91 03 08 03	// sub-int             v3, v8, v3
+     b7 74    		// xor-int/2addr       v4, v7
+     }
      $dexclass = {
        6e 20 ?? ?? 10 00	// invoke-virtual      {v0, v1}, Ljava/lang/reflect/Constructor;->newInstance([Ljava/lang/Object;)Ljava/lang/Object;
        ?? ?? 1f 0b    	     	// check-cast          p1, Ldalvik/system/DexClassLoader; 
-       }
+      }
 
    condition:
      is_dex
-     //and $json
-     and ($algo or $algo2)
+     and ($algo or $algo2 or $algo3 or $algo4)
      and $dexclass
 }
