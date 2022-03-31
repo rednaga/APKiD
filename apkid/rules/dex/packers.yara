@@ -435,7 +435,8 @@ rule jsonpacker : packer
     }
     $dexclass = {
       6e 20 ?? ?? 10 00   // invoke-virtual      {v0, v1}, Ljava/lang/reflect/Constructor;->newInstance([Ljava/lang/Object;)Ljava/lang/Object;
-      ?? ?? 1f 0b         // check-cast          p1, Ldalvik/system/DexClassLoader; 
+      0c ??               // move-result-object  p1
+      1f 0?               // check-cast          p1, Ldalvik/system/DexClassLoader; 
     }
 
    condition:
