@@ -459,28 +459,6 @@ rule arxan_arm64 : obfuscator
     (#a > 3 or #b > 3) and elf.machine == elf.EM_AARCH64
 }
 
-rule alipay : obfuscator
-{
-  meta:
-    description = "Alipay"
-    url         = "https://www.jianshu.com/p/477af178d7d8"
-    sample      = "cbfec478f4860cb503ecb28711fe4767a68b7819d9a0c17cf51aaa77e11eb19a"
-    author      = "Eduardo Novella"
-
-  strings:
-    /**
-        __obfuscator_version
-        Alipay  Obfuscator (based on LLVM 4.0.1)
-        Alipay clang version 4.0.1  (based on LLVM 4.0.1.Alipay.Obfuscator.Trial)
-    */
-    $a = "Alipay clang version "
-    $b = "Alipay  Obfuscator (based on LLVM "
-    $c = "Alipay.Obfuscator."
-
-  condition:
-    any of them and is_elf
-}
-
 rule dexguard_native : obfuscator
 {
   meta:
