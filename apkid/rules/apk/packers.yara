@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019  RedNaga. https://rednaga.io
+ * Copyright (C) 2022  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -41,7 +41,7 @@ rule appguard : packer
     is_apk and ($stub and $encrypted_dex)
 }
 
-rule appguard_new : packer
+rule appguard_a : packer
 {
   meta:
     description = "AppGuard"
@@ -52,11 +52,45 @@ rule appguard_new : packer
   strings:
     $a = "assets/AppGuard0.jar"
     $b = "assets/AppGuard.dgc"
-    $c = "libAppGuard.so"
-    $d = "libAppGuard-x86.so"
+    $c = "lib/arm64-v8a/libAppGuard.so"
+    $d = "lib/armeabi-v7a/libAppGuard.so"
+    $e = "libAppGuard-x86.so"
 
   condition:
     is_apk and 3 of them
+}
+
+rule appguard_b : packer
+{
+  meta:
+    description = "AppGuard (TOAST-NHNent)"
+    url         = "https://docs.toast.com/en/Security/AppGuard/en/Overview/"
+    url2        = "https://www.toast.com/service/security/appguard"
+    sample      = "80ac3e9d3b36613fa82085cf0f5d03b58ce20b72ba29e07f7c744df476aa9a92"
+    samples     = "https://koodous.com/rulesets/5249/apks"
+    author      = "Eduardo Novella"
+
+  strings:
+    // package com.nhnent.appguard;
+    $a1 = "assets/classes.jet"
+    $a2 = "assets/classes.zip"
+    $a3 = "assets/classes2.jet"
+    $a4 = "assets/classes2.zip"
+    $a5 = "assets/classes3.jet"
+    $a6 = "assets/classes3.zip"
+    $b1 = "lib/armeabi-v7a/libloader.so"
+    $b2 = "lib/x86/libloader.so"
+    $b3 = "lib/armeabi-v7a/libdiresu.so"
+    $b4 = "lib/x86/libdiresu.so"
+    $b5 = "lib/arm64-v8a/libloader.so"
+    $b6 = "lib/arm64-v8a/libdiresu.so"
+    $c1 = "assets/m7a"
+    $c2 = "assets/m8a"
+    $c3 = "assets/agconfig"    //appguard cfg?
+    $c4 = "assets/agmetainfo"
+
+  condition:
+    is_apk and (2 of ($a*) and 1 of ($b*) and 1 of ($c*))
 }
 
 rule dxshield : packer
@@ -125,12 +159,16 @@ rule dexprotector : packer
     $encrptlib_3 = "assets/dp.arm-v8.so.dat"
     $encrptlib_4 = "assets/dp.x86.so.dat"
     $encrptlib_5 = "assets/dp.x86_64.so.dat"
-    $encrptlib_6 = "assets/classes.dex.dat"
 
-    $encrptcustom = "assets/dp.mp3"
+    $asset1 = "assets/classes.dex.dat"
+    $asset2 = "assets/classes1.dex.dat"
+    $asset3 = "assets/classes2.dex.dat"
+    $asset4 = "assets/classes3.dex.dat"
+    $asset5 = "assets/resources.dat"
+    $asset6 = "assets/dp.mp3"
 
   condition:
-    is_apk and 1 of ($encrptlib_*) and $encrptcustom
+    is_apk and 1 of ($encrptlib_*) and 1 of ($asset*)
 }
 
 rule dexprotector_a : packer
@@ -157,7 +195,7 @@ rule dexprotector_a : packer
     $encrptcustom = "assets/dp.mp3"
 
   condition:
-    is_apk and 2 of ($encrptlib_*) and $encrptcustom
+    is_apk and 2 of them
 }
 
 rule dexprotector_b : packer
@@ -169,6 +207,7 @@ rule dexprotector_b : packer
     description = "DexProtector"
     url         = "https://dexprotector.com/"
     sample      = "dca2a0bc0f2605072b9b48579e73711af816b0fa1108b825335d2d1f2418e2a7"
+    sample2     = "353f5fa432208f67cdc106c08b19f2c8644a5f768a7051f7c9043d9931a2a116"
 
   strings:
     //              assets/com.package.name.arm.so.dat
@@ -182,9 +221,43 @@ rule dexprotector_b : packer
     $encrptcustom = /assets\/[A-Za-z0-9.]{2,50}\.mp3/
 
   condition:
-    is_apk and 2 of ($encrptlib_*) and $encrptcustom and
+    is_apk and 1 of ($encrptlib_*) and $encrptcustom and
     not dexprotector_a and
     not dexprotector
+}
+
+rule dexpro_aide_a : packer
+{
+  meta:
+    description = "DexProtector for AIDE"
+    url         = "https://play.google.com/store/apps/details?id=mph.trunksku.apps.dexpro"
+    sample      = "ccac4f15989a7ee430476d60b3a90ccf6c4ac7f6219f4e06676a69f75c7ce887"
+    author      = "Eduardo Novella"
+
+  strings:
+    $asset_1 = "assets/classes.dex.dat"
+    $asset_2 = "assets/dp-lib/dp.kotlin-v1.lua.mph"
+
+  condition:
+    is_apk and all of them
+}
+
+rule dexpro_aide_b : packer
+{
+  meta:
+    description = "DexProtector for AIDE"
+    url         = "https://github.com/rednaga/APKiD/issues/197"
+    sample      = "e113be26d90fe2cb287009345139fba0c550a67b15c3022eb5dc13aa0eb8235a"
+    author      = "Eduardo Novella"
+
+  strings:
+    // pkgname  = mph.dexprotect.a
+    $asset_1    = "assets/dexprotect/classes.dex.dat"
+    $asset_2    = "assets/eprotect.dat"
+    $properties = "dexpro-build.properties"
+
+  condition:
+    is_apk and all of them
 }
 
 rule apkprotect : packer
@@ -199,6 +272,68 @@ rule apkprotect : packer
 
   condition:
     is_apk and ($key or $dir or $lib)
+}
+
+rule apkprotect_a : packer
+{
+  meta:
+    description = "APKProtect 6.x"
+    url         = "https://play.google.com/store/apps/details?id=com.mcal.dexprotect"
+    sample      = "1c3e09c6e336fef0261a19e546f3686fcf9a00ee23f7426608fef40465d91289"
+    author      = "Eduardo Novella"
+
+  strings:
+    $a1 = /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libapkprotect\.so/
+    $a2 = "assets/apkprotect.bin"
+    $a3 = "assets/apkprotect/classes.dex.bin"
+    $a4 = "apkprotect-build.properties"
+    $a5 = "META-INF/APKPROTECT.RSA"
+    $a6 = "META-INF/APKPROTECT.SF"
+
+  condition:
+    is_apk and 4 of ($a*)
+}
+
+rule apkprotect_b : packer
+{
+  meta:
+    description = "APKProtect 9.x"
+    url         = "https://play.google.com/store/apps/details?id=com.mcal.dexprotect"
+    sample      = "65e02abc0a9e9646cea11a1b0d17e4fd080c98d08c755be7a1dec9d7c21de4de"
+    author      = "Eduardo Novella"
+
+  strings:
+    /**
+      unzip -l 65e02abc0a9e9646cea11a1b0d17e4fd080c98d08c755be7a1dec9d7c21de4de.apk
+        Length      Date    Time    Name
+      ---------  ---------- -----   ----
+          1269  2020-05-14 14:56   META-INF/MANIFEST.MF
+          1347  2020-05-14 14:56   META-INF/APKPROTECT.SF
+          1299  2020-05-14 14:56   META-INF/APKPROTECT.RSA
+          6980  2020-05-14 14:56   AndroidManifest.xml
+            36  2020-05-14 14:56   assets/ap.others/apkprotect.bin
+        425126  2020-05-14 14:56   assets/ap.res/a/a.png
+          1464  2020-05-14 14:56   assets/ap.res/b/b.xml
+          1504  2020-05-14 14:56   assets/ap.res/c/b.xml
+          2981  2020-05-14 14:56   assets/ap.res/d/c.png
+          5755  2020-05-14 14:56   assets/ap.res/e/c.png
+          9277  2020-05-14 14:56   assets/ap.res/f/c.png
+         17743  2020-05-14 14:56   assets/ap.res/g/c.png
+        522140  2020-05-14 14:56   assets/ap.src/apkprotect-v1.bin
+        161320  2020-05-14 14:56   classes.dex
+        202880  2020-05-14 14:56   lib/arm64-v8a/libapkprotect.so
+        104088  2020-05-14 14:56   lib/armeabi-v7a/libapkprotect.so
+        198336  2020-05-14 14:56   lib/x86/libapkprotect.so
+        223632  2020-05-14 14:56   lib/x86_64/libapkprotect.so
+          2040  2020-05-14 14:56   resources.arsc
+    */
+    $a1 = /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libapkprotect\.so/
+    $a2 = /assets\/(.*)\/apkprotect(.*)\.bin/
+    $a3 = "META-INF/APKPROTECT.RSA"
+    $a4 = "META-INF/APKPROTECT.SF"
+
+  condition:
+    is_apk and 3 of ($a*) and not apkprotect_a
 }
 
 rule bangcle : packer
@@ -377,6 +512,21 @@ rule tencent : packer
     is_apk and ($decryptor_lib or $zip_lib or $mix_dex)
 }
 
+rule tencent_apk : packer
+{
+  meta:
+    description = "Mobile Tencent Protect"
+    url         = "https://intl.cloud.tencent.com/product/mtp"
+    sample      = "b1a5d9d4c1916a0acc2d5c3b7c811a39ebeb2f6d42b305036473f7053bbf5fe7"
+    author      = "Eduardo Novella"
+
+  strings:
+    $lib =  /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libshell(a|x)-\d\.\d\.\d\.\d\.so/
+
+  condition:
+    is_apk and all of them
+}
+
 rule ijiami : packer
 {
   meta:
@@ -539,7 +689,7 @@ rule chornclickers : packer
     // This has no name so we made one up from Ch-china,-orn-porn and -clickers
     description = "ChornClickers"
     url         = "https://github.com/rednaga/APKiD/issues/93"
-    sample     = "0c4a26d6b27986775c9c58813407a737657294579b6fd37618b0396d90d3efc3"
+    sample      = "0c4a26d6b27986775c9c58813407a737657294579b6fd37618b0396d90d3efc3"
     author      = "Eduardo Novella"
 
   strings:
@@ -579,11 +729,30 @@ rule appsealing : packer
   strings:
     $native_lib_1 = "libcovault.so"
     $native_lib_2 = "libcovault-appsec.so"
-    $stub = "appsealing.dex"
-    $dex = "sealed1.dex"
+    $stub         = "assets/appsealing.dex"
+    $dex          = "assets/sealed1.dex"
 
   condition:
     is_apk and all of them
+}
+
+rule appsealing_a : packer
+{
+  meta:
+    description = "AppSealing"
+    url         = "https://www.appsealing.com/"
+    sample      = "09de88c86182f066b5a1b1b7f0d5553cf6010ef2aed4a12ed5d9bea2e1866bbb"
+    author      = "Eduardo Novella"
+
+  strings:
+    // asset names at "assets/AppSealing" : 11,a1,a3,aslc,hr,s1,s3,si,x1,x3
+    $lib = "libcovault-appsec.so"
+    $a1 = /assets\/AppSealing\/(.*)/
+    $b1 = "assets/aws_classes.dex"
+    $b2 = "assets/sealed1.dex"
+
+  condition:
+    is_apk and $lib and $a1 and 1 of ($b*)
 }
 
 rule secenh : packer
@@ -608,19 +777,36 @@ rule secenh : packer
 rule tencent_legu : packer
 {
   meta:
-    description = "Tencent's Legu Packer"
-    sample = "9ff3a53f76c7a6d7e3de3b8567c9606f2cc08ec4aaaae596a27361018d839c58"
-    author = "Mert Arıkan"
-    // Reference article : https://blog.quarkslab.com/a-glimpse-into-tencents-legu-packer.html
+    description = "Tencent's Legu"
+    url         = "https://blog.quarkslab.com/a-glimpse-into-tencents-legu-packer.html"
+    sample      = "9ff3a53f76c7a6d7e3de3b8567c9606f2cc08ec4aaaae596a27361018d839c58"
+    author      = "Mert Arıkan"
 
   strings:
-    $a = "assets/toversion"
+    $a = "assets/tosversion"
     $b = "assets/0OO00l111l1l"
     $c = "assets/0OO00oo01l1l"
     $d = "assets/o0oooOO0ooOo.dat"
- 
+
   condition:
     is_apk
-    and $b 
+    and $b
     and ($a or $c or $d)
+}
+
+rule apkencryptor : packer
+{
+  meta:
+    description = "ApkEncryptor"
+    url         = "https://github.com/FlyingYu-Z/ApkEncryptor"
+    sample      = "bc4a8774f4a2b0a72b3ffd4d9e1933913a1d95a8e50082255a167dec9d115a99"
+    author      = "Eduardo Novella"
+
+  strings:
+    $src1 = "src/2ba5b2615b9b71b48c7694d6489e0171"
+    $src2 = "src/2e15f58d32a5ff652706ef41ec85a763"
+    $src3 = "src/3676d55f84497cbeadfc614c1b1b62fc"
+
+  condition:
+    is_apk and ($src1 or $src2 or $src3)
 }

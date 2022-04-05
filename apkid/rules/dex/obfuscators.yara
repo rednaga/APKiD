@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019  RedNaga. https://rednaga.io
+ * Copyright (C) 2022  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -118,9 +118,18 @@ rule dexguard_c : obfuscator
     description = "DexGuard"
     url         = "https://www.guardsquare.com/en/products/dexguard"
     sample      = "de67161a8bd7ebcaa26c9661efd811375b59260924eb0dfd9436d3a47a1c31fe"
+    sample2     = "db11762886cc24bd4f938002f15f78680b512cf550d15c77b217fc5548b0c939"
 
   strings:
-    $dexguard_pkg = "guardsquare/dexguard/runtime"
+    $dexguard_pkg1 = "guardsquare/dexguard/runtime/"
+    $dexguard_pkg2 = {
+      001e4c64657867756172642f7574696c2f54616d7065724465746563746f723b00
+    } // Ldexguard/util/TamperDetector;
+    $dexguard_pkg3 = {
+      00224c64657867756172642f7574696c2f4365727469666963617465436865636b65723b00
+    } // Ldexguard/util/CertificateChecker;
+    $dexguard_pkg4 = "com/guardsquare/dexguard/"
+
     // Most of some kind of runtime decryption method, signature = a(IIZI[I[[I[I)V
     $decrypt_method = {
       12 01                 // const/4 v1, 0x0
@@ -159,7 +168,7 @@ rule dexguard_d : obfuscator
 
   strings:
     // Ldexguard/util/TamperDetection;
-    $dexguard_class = {00 1F 4C 64 65 78 67 75 61 72 64 2F 75 74 69 6C 2F 54 61 6D 70 65 72 44 65 74 65 63 74 69 6F 6E 3B 00}
+    $dexguard_class  = {00 1F 4C 64 65 78 67 75 61 72 64 2F 75 74 69 6C 2F 54 61 6D 70 65 72 44 65 74 65 63 74 69 6F 6E 3B 00}
     $a_aux_class     = { 00 05 4C (41|61) (55|75) (58|78) 3B 00 }  // L[Aa][Uu][Xx];
     $a_con_class     = { 00 05 4C (43|63) (4F|6F) (4E|6E) 3B 00 }  // L[Cc][Oo][Nn];
     $a_if_class      = { 00 ?? 4C [1-4] 24 (49|69) (46|66) 3B 00 } // L???$[iI][fF];
@@ -272,6 +281,37 @@ rule arxan_multidex : obfuscator
     $pkg and
     2 of ($m*) and
     not arxan
+}
+
+rule arxan_b : obfuscator
+{
+  meta:
+    description = "Arxan"
+    url         = "https://github.com/rednaga/APKiD/issues/160"
+    sample      = "86ade15e885cf7927e5840dd2bf2782905fcd6843be77f898b51b64c2277f3de"
+    author      = "Tim 'diff' Strazzere"
+
+  strings:
+    // Targeting this seemingly static byte sequence used inside the injected obfuscation:
+    // move-result v0 (moving result from own deobfuscation, v2 and v3 are always consts)
+    $deobf = {
+      0A 0?
+      DF 01 03 FF
+      // and-int/2addr v1, v0
+      B5 01
+      // xor-int/lit8 v0, v0, -0x1
+      DF 00 00 FF
+      // and-int/2addr v0, v3
+      B5 30
+      // or-int/2addr v1, v0
+      B6 01
+      // int-to-short v7, v1
+      8F 1?
+    }
+
+  condition:
+    is_dex and
+    $deobf
 }
 
 rule allatori_demo : obfuscator
@@ -435,4 +475,21 @@ rule unreadable_method_names : obfuscator
   condition:
     short_unicode_method_names
     and (not dexguard_a and not dexguard_b and not dexguard_c and not dexguard_d)
+}
+
+rule apkencryptor : obfuscator
+{
+  meta:
+    description = "ApkEncryptor"
+    url         = "https://github.com/FlyingYu-Z/ApkEncryptor"
+    sample      = "26c25dacacd0b4fdd411d7459747021d66cb45e9d57f92743004d190af74acea"
+    author      = "Eduardo Novella"
+
+  strings:
+    $p1 = "Lcn/beingyi/sub/utils/Native"
+    $p2 = "Lcom/beingyi/encrypt/StringPool"
+    $p3 = "Lcn/beingyi/sub/ui/JniAlert"
+
+  condition:
+    any of them and is_dex and unreadable_field_names and unreadable_method_names
 }

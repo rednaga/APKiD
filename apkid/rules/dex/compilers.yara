@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019  RedNaga. https://rednaga.io
+ * Copyright (C) 2022  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -50,10 +50,8 @@ private rule dexlib2_map_type_order : internal
     description = "dexlib2 map_list type order"
 
   condition:
-    /*
-     * The map_list types are in different orders for DX, dexmerge, and dexlib (1 and 2 are the same)
-     */
-    dex.map_list.map_item[7].type == 0x2002 // TYPE_STRING_DATA_ITEM
+    (dex.map_list.map_item[7].type == 0x2002 and dex.map_list.map_item[8].type == 0x1001)
+    or (dex.map_list.map_item[6].type == 0x2002 and dex.map_list.map_item[7].type == 0x1001)
 }
 
 private rule null_interfaces : internal
@@ -78,12 +76,113 @@ private rule dx_map_type_order : internal
 
   condition:
     /*
-     * The map_list types are in different orders for DX, dexmerge, and dexlib (1 and 2 are the same)
-     * DX order derrived from: http://osxr.org/android/source/dalvik/dx/src/com/android/dx/dex/file/DexFile.java#0111
+     * Different compiler families tend to order the map_list types differently.
+     * DX order derrived from: https://github.com/aosp-mirror/platform_dalvik/blob/2e9d6011fe4f4d2e8c065210d0118e7b9d9f305c/dx/src/com/android/dx/dex/file/DexFile.java#L144
+     * The order starting at offset 7 is:
+     *   0x1002 = TYPE_ANNOTATION_SET_REF_LIST (optional)
+     *   0x1003 = TYPE_ANNOTATION_SET_ITEM (optional)
+     *   0x2001 = TYPE_CODE_ITEM (optional, but very common)
+     *   0x2006 = TYPE_ANNOTATIONS_DIRECTORY_ITEM (optional)
+     *   0x1001 = TYPE_TYPE_LIST (optional, but common)
+     *   0x2002 = TYPE_STRING_DATA_ITEM
+     * Also, for reference:
+     *   0x0000 = TYPE_HEADER_ITEM
+     *   0x0001 = TYPE_STRING_ID_ITEM
+     *   0x0002 = TYPE_TYPE_ID_ITEM
+     *   0x0006 = TYPE_CLASS_DEF_ITEM
+     *   0x1000 = TYPE_MAP_LIST
      */
-    (dex.map_list.map_item[7].type == 0x1002 or // TYPE_ANNOTATION_SET_REF_LIST
-    dex.map_list.map_item[7].type == 0x1003 or  // TYPE_ANNOTATION_SET_ITEM
-    dex.map_list.map_item[7].type == 0x2001)    // TYPE_CODE_ITEM
+    // missing all TYPE_ANNOTATION*, common case
+    (dex.map_list.map_item[7].type == 0x2001 and dex.map_list.map_item[8].type == 0x1001)
+
+    // missing all TYPE_ANNOTATION*, and TYPE_TYPE_LIST so probably very small DEX
+    or (dex.map_list.map_item[7].type == 0x2001 and dex.map_list.map_item[8].type == 0x2002)
+
+    // has all TYPE_ANNOTATION*
+    or (dex.map_list.map_item[7].type == 0x1002 and dex.map_list.map_item[8].type == 0x1003 and dex.map_list.map_item[9].type == 0x2001 and dex.map_list.map_item[10].type == 0x2006 and dex.map_list.map_item[11].type == 0x1001)
+
+    // missing TYPE_ANNOTATION_SET_REF_LIST
+    or (dex.map_list.map_item[7].type == 0x1003 and dex.map_list.map_item[8].type == 0x2001 and dex.map_list.map_item[9].type == 0x2006 and dex.map_list.map_item[10].type == 0x1001)
+
+    // missing TYPE_ANNOTATION_SET_REF_LIST and TYPE_ANNOTATION_SET_ITEM
+    or (dex.map_list.map_item[7].type == 0x2001 and dex.map_list.map_item[8].type == 0x2006 and dex.map_list.map_item[9].type == 0x1001)
+
+    // missing TYPE_ANNOTATION_SET_REF_LIST and TYPE_ANNOTATIONS_DIRECTORY_ITEM
+    or (dex.map_list.map_item[7].type == 0x1003 and dex.map_list.map_item[8].type == 0x2001 and dex.map_list.map_item[9].type == 0x1001)
+
+    // missing TYPE_ANNOTATION_SET_ITEM
+    or (dex.map_list.map_item[7].type == 0x1002 and dex.map_list.map_item[8].type == 0x2001 and dex.map_list.map_item[9].type == 0x2006 and dex.map_list.map_item[10].type == 0x1001)
+
+    // missing TYPE_ANNOTATION_SET_ITEM and TYPE_ANNOTATIONS_DIRECTORY_ITEM
+    or (dex.map_list.map_item[7].type == 0x1002 and dex.map_list.map_item[8].type == 0x2001 and dex.map_list.map_item[9].type == 0x1001)
+
+    // missing TYPE_ANNOTATIONS_DIRECTORY_ITEM
+    or (dex.map_list.map_item[7].type == 0x1002 and dex.map_list.map_item[8].type == 0x1003 and dex.map_list.map_item[9].type == 0x2001 and dex.map_list.map_item[10].type == 0x1001)
+
+    // missing almost everything, VERY tiny dex
+    or (dex.map_list.map_item[1].type == 0x0001 and dex.map_list.map_item[2].type == 0x0002 and dex.map_list.map_item[3].type == 0x0006 and dex.map_list.map_item[4].type == 0x2002 and dex.map_list.map_item[5].type == 0x1000)
+
+    // missing code and (fields | something else), likely small dex
+    or (dex.map_list.map_item[6].type == 0x1003 and dex.map_list.map_item[7].type == 0x2006 and dex.map_list.map_item[8].type == 0x1001 and dex.map_list.map_item[9].type == 0x2002)
+}
+
+private rule ambiguous_tiny_dex_map_type_order : internal
+{
+  meta:
+    description = "ambiguous tiny dex map type order"
+
+  condition:
+    // missing almost everything, dexlib2 and r8 are identical here, impossible to type alone
+    (dex.map_list.map_item[1].type == 0x0001 and dex.map_list.map_item[2].type == 0x0002 and dex.map_list.map_item[3].type == 0x0006 and dex.map_list.map_item[4].type == 0x2002 and dex.map_list.map_item[5].type == 0x1003 and dex.map_list.map_item[6].type == 0x1000)
+}
+
+private rule r8_map_type_order : internal
+{
+  meta:
+    description = "r8 map_list type order"
+
+  condition:
+    /*
+     * R8 order derrived from: https://r8.googlesource.com/r8/+/refs/heads/master/src/main/java/com/android/tools/r8/dex/FileWriter.java#731
+     * The order starting at offset 7 is:
+     *   0x0007 = TYPE_CALL_SITE_ID_ITEM (optional)
+     *   0x0008 = TYPE_METHOD_HANDLE_ITEM (optional)
+     *   0x2001 = TYPE_CODE_ITEM
+     *   0x2003 = TYPE_DEBUG_INFO_ITEM (optional)
+     *   0x1001 = TYPE_TYPE_LIST
+     */
+    // missing TYPE_CALL_SITE_ID_ITEM and TYPE_METHOD_HANDLE_ITEM, common case
+    (dex.map_list.map_item[7].type == 0x2001 and dex.map_list.map_item[8].type == 0x2003 and dex.map_list.map_item[9].type == 0x1001)
+
+    // has everything
+    or (dex.map_list.map_item[7].type == 0x0007 and dex.map_list.map_item[8].type == 0x0008 and dex.map_list.map_item[9].type == 0x2001 and dex.map_list.map_item[10].type == 0x2003 and dex.map_list.map_item[11].type == 0x1001)
+
+    // missing TYPE_CALL_SITE_ID_ITEM
+    or (dex.map_list.map_item[7].type == 0x0008 and dex.map_list.map_item[8].type == 0x2001 and dex.map_list.map_item[9].type == 0x2003 and dex.map_list.map_item[10].type == 0x1001)
+
+    // missing TYPE_METHOD_HANDLE_ITEM
+    or (dex.map_list.map_item[7].type == 0x0007 and dex.map_list.map_item[8].type == 0x2001 and dex.map_list.map_item[9].type == 0x2003 and dex.map_list.map_item[10].type == 0x1001)
+
+    // ignore missing TYPE_CALL_SITE_ID_ITEM, TYPE_METHOD_HANDLE_ITEM, and TYPE_DEBUG_INFO_ITEM is possibly identical to dx map type order
+
+    // missing code and (fields | something else), likely small dex
+    or (dex.map_list.map_item[6].type == 0x1001 and dex.map_list.map_item[7].type == 0x2002 and dex.map_list.map_item[8].type == 0x2004 and dex.map_list.map_item[9].type == 0x2000 and dex.map_list.map_item[10].type == 0x1003)
+}
+
+private rule r8_marker : internal
+{
+  meta:
+    description = "r8 hidden marker"
+
+  strings:
+    // Example: ~~D8{"compilation-mode":"
+    $marker = { 00 [1-2] 7E 7E ( 44 | 52 | 4C ) 38 7B 22 63 6F 6D 70 69 6C 61 74 69 6F 6E 2D 6D 6F 64 65 22 3A 22 }
+
+  condition:
+    /*
+     * Marker logic from: https://r8.googlesource.com/r8/+/refs/heads/master/src/main/java/com/android/tools/r8/dex/Marker.java#18
+     */
+    $marker
 }
 
 private rule dexmerge_map_type_order : internal
@@ -93,8 +192,7 @@ private rule dexmerge_map_type_order : internal
 
   condition:
     /*
-     * The map_list types are in different orders for DX, dexmerge, and dexlib (1 and 2 are the same)
-     * DexMerge order derrived from: http://osxr.org/android/source/dalvik/dx/src/com/android/dx/merge/DexMerger.java#0111
+     * DexMerge order derrived from: https://github.com/aosp-mirror/platform_dalvik/blob/2e9d6011fe4f4d2e8c065210d0118e7b9d9f305c/dx/src/com/android/dx/merge/DexMerger.java#L110
      */
     dex.map_list.map_item[7].type == 0x1000 // TYPE_MAP_LIST
 }
@@ -218,16 +316,6 @@ rule dexlib1 : compiler
     unsorted_string_pool
 }
 
-rule dexlib2 : compiler
-{
-  meta:
-    description = "dexlib 2.x"
-    sample      = "c7c566b1b185c99e338a77865eaf2eed6dc9b2b97793e262208c0b7f38bbf947"
-
-  condition:
-    not dexlib1 and dexlib2_map_type_order
-}
-
 rule dexlib2beta : compiler
 {
   meta:
@@ -236,8 +324,19 @@ rule dexlib2beta : compiler
 
   condition:
     not dexlib1
-    and not dexlib2
     and null_interfaces
+}
+
+rule dexlib2 : compiler
+{
+  meta:
+    description = "dexlib 2.x"
+    sample      = "c7c566b1b185c99e338a77865eaf2eed6dc9b2b97793e262208c0b7f38bbf947"
+
+  condition:
+    not dexlib1
+    and dexlib2_map_type_order
+    and not dexlib2beta
 }
 
 rule dx : compiler
@@ -251,6 +350,7 @@ rule dx : compiler
     and not dexlib1
     and not dexlib2
     and not dexlib2beta
+    and not r8_marker
 }
 
 rule dx_merged : compiler
@@ -264,6 +364,43 @@ rule dx_merged : compiler
     and not dexlib1
     and not dexlib2
     and not dexlib2beta
+    and not r8_marker
+}
+
+rule r8 : compiler
+{
+  meta:
+    description = "r8"
+    sample      = "e45ea01eedfc7bede77669412cce07b7d41b284bc6ffc9dfa27a519270bbe99a"
+    sample2     = "bae4c7c1974fa317ecc8fbbcf7bafa3b1a0d5903fdd3040412c628277cf45258"
+
+  condition:
+    r8_marker
+    and (r8_map_type_order or ambiguous_tiny_dex_map_type_order)
+}
+
+rule r8_merged : compiler
+{
+  meta:
+    description = "r8 (possible dexmerge)"
+    sample      = "ee1e901bb862835b227f7e9cfbaaa357402992ee9760b630a05f9b3423520526"
+
+  condition:
+    r8_marker
+    and dexmerge_map_type_order
+}
+
+rule r8_no_marker : compiler
+{
+  meta:
+    // Hiding the marker is easier than hiding the map type order.
+    description = "r8 without marker (suspicious)"
+    sample      = "f399d833ff54a798d609279bb8a51222c75be9b7fb7b3ab9cc8cb628f7d76257"
+    sample2     = "d8a5545eb3c76d8078d778eb5962398d9f2fefab34f971b19beda35e0e76f6ef"
+
+  condition:
+    not r8_marker
+    and r8_map_type_order
 }
 
 rule dexmerge : manipulator
@@ -274,4 +411,19 @@ rule dexmerge : manipulator
 
   condition:
     dexmerge_map_type_order
+}
+
+rule unknown_compiler : compiler {
+  meta:
+    description = "unknown (please file detection issue!)"
+
+  condition:
+    is_dex
+    and not (
+      (dexlib1 or dexlib2 or dexlib2beta)
+      or (dx or dx_merged)
+      or (r8 or r8_merged or r8_no_marker)
+      or (jack_generic or jack_3x or jack_4x or jack_4_12 or jack_5x)
+      or (dexmerge)
+    )
 }

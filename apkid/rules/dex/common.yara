@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019  RedNaga. https://rednaga.io
+ * Copyright (C) 2022  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -25,6 +25,8 @@
  *
  **/
 
+import "dex"
+
 rule is_dex : file_type
 {
   meta:
@@ -37,4 +39,22 @@ rule is_dex : file_type
   condition:
     $dex at 0 or
     $odex at 0
+}
+
+private rule yara_detected_dex : internal {
+  meta:
+    description = "magic bytes look like a dex but yara disagrees"
+
+  condition:
+    is_dex
+    and dex.header.header_size > 0
+}
+
+rule yara_undetected_dex : yara_issue {
+  meta:
+    description = "yara issue - dex file recognized by apkid but not yara module"
+
+  condition:
+    is_dex
+    and not yara_detected_dex
 }

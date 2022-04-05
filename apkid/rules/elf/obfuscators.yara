@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021  RedNaga. https://rednaga.io
+ * Copyright (C) 2022  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -277,6 +277,54 @@ rule alipay : obfuscator
     any of them and is_elf
 }
 
+rule byteguard_0_9_3 : obfuscator
+{
+  meta:
+    description = "ByteGuard 0.9.3"
+    sample      = "eed4f7b907fe2173935d307dfb0d6aa7098f69db8dfb65e49affd7b7a6c0a5e4"
+    samples     = "https://koodous.com/rulesets/5862/apks"
+    author      = "Eduardo Novella"
+
+  strings:
+    // clang version 6.0.0 (Byteguard 0.6) (git@sysrepo.byted.org:dingbaozeng/native_obfuscator.git 448f20ff6eb06dd336dd81846d6a7dc8ba8c961b)
+    // Apple LLVM version 6.0.0 (ByteGuard 0.9.3-af515063)
+    $version = /(Apple LLVM|clang) version \d+\.\d+\.\d+ \(Byte(G|g)uard(-| )0\.9\.3/
+
+  condition:
+    is_elf and all of them
+}
+
+rule byteguard_0_9_2 : obfuscator
+{
+  meta:
+    description = "ByteGuard 0.9.2"
+    sample      = "178b1ef3c4ac563604c8a262f0e3651f56995768c8aa13ccc845f33bd6eb0ac2"
+    samples     = "https://koodous.com/rulesets/5862/apks"
+    author      = "Eduardo Novella"
+
+  strings:
+    // clang version 5.0.2 (Byteguard-0.9.2-255c7b5e)
+    $version = /(Apple LLVM|clang) version \d+\.\d+\.\d+ \(Byte(G|g)uard(-| )0\.9\.2/
+
+  condition:
+    is_elf and all of them
+}
+
+rule byteguard_unknown : obfuscator
+{
+  meta:
+    description = "ByteGuard unknown version"
+    author      = "Eduardo Novella"
+
+  strings:
+    $clang_version = /(Apple LLVM|clang) version \d+\.\d+\.\d+ \(Byte(G|g)uard/
+
+  condition:
+    is_elf and $clang_version and
+    not byteguard_0_9_2 and
+    not byteguard_0_9_3
+}
+
 rule firehash : obfuscator
 {
   meta:
@@ -317,7 +365,7 @@ rule advobfuscator : obfuscator
     description = "ADVobfuscator"
     url         = "https://github.com/andrivet/ADVobfuscator"
     author      = "Eduardo Novella"
-    sample     = "357f0c2ad6bf5cf60c671b090eab134251db63993f52aef512bde5bfa4a1b598"
+    sample      = "357f0c2ad6bf5cf60c671b090eab134251db63993f52aef512bde5bfa4a1b598"
 
   strings:
     $s_01 = "_ZNK17ObfuscatedAddressIPFiiiPciS0_S0_EE8originalEv"
@@ -377,6 +425,62 @@ rule arxan_arm32 : obfuscator
     (#a > 5 or #b > 5 or #c > 10) and elf.machine == elf.EM_ARM
 }
 
+rule arxan_arm64 : obfuscator
+{
+  meta:
+    description = "Arxan"
+    url         = "https://www.arxan.com/resources/technology/app-code-obfuscation"
+    sample      = "444ae35cea294ca0268adbddf1c39e8a45fcbb4c967c55f23449cf0d1ae6fce6"
+    author      = "Eduardo Novella"
+
+  strings:
+    /*
+     * Prolog breakage 1 ARM64
+     * This is how Arxan breaks the functions in basic blocks' sets making the static reverse engineering task very hard to follow.
+     * This is a updated version of the previous Arxan 32bits rule.
+     */
+    $a = {
+      09 01 0? 8A   // AND  X9, X8, X11/X12
+      4A 00 80 D2   // MOV  X10, #2
+      29 7D 0A 9B   // MUL  X9, X9, X10
+      08 01 0? CA   // EOR  X8, X8, X11/X12
+      08 01 09 8B   // ADD  X8, X8, X9
+      00 01 1F D6   // BR   X8
+    }
+
+    $b = {
+      28 00 80 D2   // MOV  X8, #1
+      69 00 00 10   // ADR  X9, loc_XXX
+      28 7D 08 9B   // MUL  X8, X9, X8
+      00 01 1F D6   // BR   X8
+    }
+
+  condition:
+    (#a > 3 or #b > 3) and elf.machine == elf.EM_AARCH64
+}
+
+rule alipay : obfuscator
+{
+  meta:
+    description = "Alipay"
+    url         = "https://www.jianshu.com/p/477af178d7d8"
+    sample      = "cbfec478f4860cb503ecb28711fe4767a68b7819d9a0c17cf51aaa77e11eb19a"
+    author      = "Eduardo Novella"
+
+  strings:
+    /**
+        __obfuscator_version
+        Alipay  Obfuscator (based on LLVM 4.0.1)
+        Alipay clang version 4.0.1  (based on LLVM 4.0.1.Alipay.Obfuscator.Trial)
+    */
+    $a = "Alipay clang version "
+    $b = "Alipay  Obfuscator (based on LLVM "
+    $c = "Alipay.Obfuscator."
+
+  condition:
+    any of them and is_elf
+}
+
 rule dexguard_native : obfuscator
 {
   meta:
@@ -395,4 +499,145 @@ rule dexguard_native : obfuscator
     condition:
       is_elf
       and any of them
+}
+
+rule dexguard_native_a : obfuscator
+{
+  meta:
+    description = "DexGuard 9.x"
+    url         = "https://www.guardsquare.com/en/products/dexguard"
+    sample      = "71b11059820c358fb14a0917430e07cf254e15d5b3337471ad172ad5ceccfa2a"
+    author      = "Eduardo Novella"
+
+    strings:
+      // Library name is libdgrt (probably DexGuard RunTime)
+      $libdgrt     = { 006c 6962 6467 7274 2e73 6f00 } // libdgrt.so
+      $s_java_o_   = { 00 4a61 7661 5f6f 5f } // Java_o_
+      $s_jnionload = { 004a 4e49 5f4f 6e4c 6f61 6400 } // JNI_OnLoad
+      $s_basename  = { 00 6261 7365 6e61 6d65 00 }
+      $s_mprotect  = { 006d 7072 6f74 6563 7400 }
+      $s_dirname   = { 00 6469 726e 616d 6500 }
+
+    condition:
+      is_elf
+      and $libdgrt
+      and 4 of ($s_*)
+      and not dexguard_native
+}
+
+rule dexguard_native_arm64 : obfuscator
+{
+  meta:
+    description = "DexGuard 9.x"
+    url         = "https://www.guardsquare.com/en/products/dexguard"
+    sample      = "fc3fae3de64eceab969b7d91e3a5fbc45c7407bb8d1a5d5018caa86947604713"
+    author      = "FrenchYeti"
+
+  strings:
+    // that is how dexguard detects frida into /proc/%d/maps
+    $hook = {
+      0b 1d 00 12  //  and        w11,bf,#0xff
+      48 15 40 38  //  ldrb       bf,[x10], #0x1
+      29 25 1b 53  //  ubfiz      w9,w9,#0x5,#0xa
+      29 01 0b 4a  //  eor        w9,w9,w11
+      88 ff ff 35  //  cbnz       bf,LAB_00106e44
+      e8 c1 86 52  //  mov        bf,#0x360f
+      3f 01 08 6b  //  cmp        w9,bf
+    }
+    // recurring patterns used into several string decryption
+    $str = {
+      6c 69 69 38  //  ldrb       w12,[x11, x9, LSL ]
+      8c ?? ?? 11  //  add        w12,w12,??
+      6c 69 29 38  //  strb       w12,[x11, x9, LSL ]
+      29 05 00 91  //  add        x9,x9,#0x1
+      3f ?? ?? f1  //  cmp        x9,??
+      ec 17 9f 1a  //  cset       w12,??
+    }
+    $str2 = {
+      30 ?? cc 9b 10 fe ?? d3 10 a6 0d 9b 6f 69 69 38 d0 69 70 38
+      0f 02 0f 4a 6f 69 29 38 29 05 00 91 3f ?? ?? f1 ef 17 9f 1a
+    }
+    // binaries have always 8 svc instructions
+    $svc = {
+      ?8 ?? ?? d2  //  mov        x8,??
+      01 00 00 d4  //  svc        0x0
+      1f 04 40 b1  //  cmn        x0, #0x1, LSL#12
+      00 94 80 da  //  cneg       x0, x0, hi
+      ?8 ?? ?? 54  //  b.hi       ??
+      c0 03 5f d6  //  ret
+    }
+
+  condition:
+    elf.machine == elf.EM_AARCH64
+    and $hook and ($str or $str2) and #svc >= 6
+    and not dexguard_native and not dexguard_native_a
+}
+
+rule snapprotect : obfuscator
+{
+  meta:
+    description = "SnapProtect"
+    url         = "https://www.snapchat.com/"
+    sample      = "6dcd634e41304e41b91b49a3c77872a3c7ce28777bab016bd37f79bc7bb08274"
+    author      = "Eduardo Novella"
+
+  strings:
+    // "clang version 7.0.0 (snap.protect version 2.4.0 - df15518f469ca4749b08/93d2c161df4b9b202bce)"
+    $a = /clang version \d\.\d\.\d \(snap.protect version \d\.\d\.\d/
+    $b = " (snap.protect version "
+
+  condition:
+    is_elf and 1 of ($a,$b)
+}
+
+rule safeengine : obfuscator
+{
+  meta:
+    description = "Safeengine LLVM"
+    url         = "https://bbs.pediy.com/thread-195327.htm"
+    sample      = "93ec9a03b76fa359a7706aed0682003b76bca971e96462540fddad297817049b"
+    author      = "horsicq"
+
+  strings:
+    // "Safengine clang version 3.8.0 (trunk 608) (based on LLVM 3.8.0svn)"
+    //$clang_version = \0"Safengine clang version "
+    $clang_version = { 00 53 61 66 65 6e 67 69 6e 65 20 63 6c 61 6e 67 20 76 65 72 73 69 6f 6e 20 }
+    $based_on      = "(based on LLVM "
+
+  condition:
+    all of them and is_elf
+}
+
+rule hikari : obfuscator
+{
+  meta:
+    description = "Hikari"
+    sample      = "f6b936ab06ade3de189a0cf11964f77ea3a6ad081cfd8cc4580cc87bcd7dec70"
+    url         = "https://github.com/HikariObfuscator/Hikari"
+    author      = "Eduardo Novella"
+
+  strings:
+    // clang version 8.0.0 (tags/RELEASE_800/final) (https://gitee.com/chenzimo/Hikari.git ecdf30fa1a4635a76c3b528a41eb48d791f4be95)
+    $version = /clang version \d+\.\d+\.\d+ \(.*\) \(.*\/Hikari\.git [0-9a-f]{40}\)/
+
+  condition:
+    is_elf and all of them
+}
+
+rule dexprotector : obfuscator
+{
+  meta:
+    description = "DexProtector"
+    url         = "https://dexprotector.com/"
+    sample      = "d506e22003798f8b3a3d3c4a1b08af1cbd64667da6f9ed8cf73bc99ded73da44"
+    author      = "Eduardo Novella"
+
+  strings:
+    // - offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
+    // 0x00000000  7f45 4c46 0201 0100 4450 4c46 00e0 0100  .ELF....DPLF....
+    // Possibly DPLF stands for "DexProtector Linkable Format"
+    $dp_elf_header = { 7f45 4c46 0201 0100 4450 4c46 }
+
+  condition:
+    $dp_elf_header at 0
 }

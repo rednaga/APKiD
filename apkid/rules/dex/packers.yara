@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019  RedNaga. https://rednaga.io
+ * Copyright (C) 2022  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -361,4 +361,86 @@ rule tencent : packer
     is_dex
     and 2 of ($libshell_*)
     or 1 of ($class_*)
+}
+
+rule crazy_dog_wrapper : packer
+{
+  meta:
+    description = "Crazy Dog Wrapper"
+    url         = "https://github.com/rednaga/APKiD/issues/31"
+    sample      = "b1f0143c22a588aea89d3a9c0a53fa6d8cea07dd64dec1f82d905f5599acea94"
+
+  strings:
+    // libhdog-x86.so
+    $lib1 = { 00 0E 6C 69 62 68 64 6F 67 2D 78 38 36 2E 73 6F 00 }
+    // libhdog.so
+    $lib2 = { 00 0A 6C 69 62 68 64 6F 67 2E 73 6F 00 }
+    // Lcom/vdog/VDogApplication;
+    $class1 = { 00 1A 4C 63 6F 6D 2F 76 64 6F 67 2F 56 44 6F 67 41 70 70 6C 69 63 61 74 69 6F 6E 3B 00 }
+    // Lcom/vdog/VLibrary;
+    $class2 = { 00 13 4C 63 6F 6D 2F 76 64 6F 67 2F 56 4C 69 62 72 61 72 79 3B 00 }
+    // /.cache/libvdog.so
+    $str1 = { 00 12 2F 2E 63 61 63 68 65 2F 6C 69 62 76 64 6F 67 2E 73 6F 00 }
+
+  condition:
+    is_dex
+    and 2 of them
+}
+
+rule jsonpacker : packer
+{
+  meta:
+    description = "JsonPacker"
+    sample      = "e23f0a124fdaba30c07a3c40011dd99240af081cec4cdfcb990c811126867e59"
+    author      = "Axelle Apvrille"
+
+  strings:
+    /* typical XOR algo with junk operations */
+    $algo = {
+      b0 9b               // add-int/2addr       v11, v9
+      da 0? 0? 00         // mul-int/lit8        v12, v11, 0
+      b3 9c               // div-int/2addr       v12, v9
+      b0 1c               // add-int/2addr       v12, v1
+      b0 5c               // add-int/2addr       v12, v5
+      93 0? 0? 0?         // div-int             v5, v6, v6
+      d8 0? 0? ff         // add-int/lit8        v5, v5, -1
+      b0 5c               // add-int/2addr       v12, v5
+      b4 66               // rem-int/2addr       v6, v6
+      b0 6c               // add-int/2addr       v12, v6
+      97 05 0c 0a         // xor-int             v5, v12, v10
+    }
+    $algo2 = {
+      b0 ??                     // add-int/2addr       v4, v12
+      da 0? 0? 00               // mul-int/lit8        v4, v4, 0
+      b0 ??                     // add-int/2addr       v4, v9
+      93 0? 0? 0?               // div-int             v9, v12, v12
+      (b3 69 | db 04 04 01)     // div-int/2addr       v9, v6
+                                // or:  div-int/lit8        v4, v4, 0x1
+      (b7 69 | df 04 04 01)     // xor-int/2addr       v9, v6
+                                // or: xor-int/lit8        v4, v4, 0x1
+      b0 ??                     // add-int/2addr       v4, v9
+      94 0? 0? 0?               // rem-int             v9, v12, v12
+      b0 ??                     // add-int/2addr       v4, v9
+      (b7 b4 | 97 04 07 09 )    // xor-int/2addr       v4, v11
+                                // or: xor-int             v4, v7, v9
+    }
+    $algo3 = {
+      b0 36
+      dc 07 05 02         // add-int/2addr       v6, v3
+      48 07 02 07         // rem-int/lit8        v7, v5, 0x2
+      d8 08 06 e5         // aget-byte           v7, v2, v7
+      d8 08 08 26         // add-int/lit8        v8, v6, -27
+      91 03 08 03         // sub-int             v3, v8, v3
+      b7 74               // xor-int/2addr       v4, v7
+    }
+    $dexclass = {
+      6e 20 ?? ?? 10 00   // invoke-virtual      {v0, v1}, Ljava/lang/reflect/Constructor;->newInstance([Ljava/lang/Object;)Ljava/lang/Object;
+      0c ??               // move-result-object  p1
+      1f 0?               // check-cast          p1, Ldalvik/system/DexClassLoader; 
+    }
+
+   condition:
+     is_dex
+     and ($algo or $algo2 or $algo3)
+     and $dexclass
 }

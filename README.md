@@ -15,23 +15,15 @@ For more information on what this tool can be used for, check out:
 * [Android Compiler Fingerprinting](http://hitcon.org/2016/CMT/slide/day1-r0-e-1.pdf)
 * [Detecting Pirated and Malicious Android Apps with APKiD](http://rednaga.io/2016/07/31/detecting_pirated_and_malicious_android_apps_with_apkid/)
 * [APKiD: PEiD for Android Apps](https://github.com/enovella/cve-bio-enovella/blob/master/slides/bheu18-enovella-APKID.pdf)
+* [APKiD: Fast Identification of AppShielding Products](https://github.com/enovella/cve-bio-enovella/blob/master/slides/APKiD-NowSecure-Connect19-enovella.pdf)
 
-# Installing
-
-```bash
-
-pip install --upgrade wheel
-pip wheel --wheel-dir=/tmp/yara-python --build-option="build" --build-option="--enable-dex" git+https://github.com/VirusTotal/yara-python.git@v3.11.0
-pip install --no-index --find-links=/tmp/yara-python yara-python
-```
-
-Finally, install APKiD:
+## Installing
 
 ```bash
 pip install apkid
 ```
 
-## Docker
+### Docker
 
 You can also run APKiD with [Docker](https://www.docker.com/community-edition)! Of course, this requires that you have git and Docker installed.
 
@@ -47,7 +39,7 @@ docker/apkid.sh ~/reverse/targets/android/example/example.apk
  |-> compiler : dx
 ```
 
-# Usage
+## Usage
 
 ```
 usage: apkid [-h] [-v] [-t TIMEOUT] [-r] [--scan-depth SCAN_DEPTH]
@@ -55,7 +47,7 @@ usage: apkid [-h] [-v] [-t TIMEOUT] [-r] [--scan-depth SCAN_DEPTH]
              [-o DIR]
              [FILE [FILE ...]]
 
-APKiD - Android Application Identifier v2.1.0
+APKiD - Android Application Identifier v2.1.2
 
 positional arguments:
   FILE                                       apk, dex, or directory
@@ -76,7 +68,7 @@ output:
   -o DIR, --output-dir DIR                   write individual results here (implies --json)
 ```
 
-# Submitting New Packers / Compilers / Obfuscators
+## Submitting New Packers / Compilers / Obfuscators
 
 If you come across an APK or DEX which APKiD does not recognize, please open a GitHub issue and tell us:
 
@@ -87,13 +79,13 @@ We are open to any type of concept you might have for "something interesting" to
 
 Pull requests are welcome. If you're submitting a new rule, be sure to include a file hash of the APK / DEX so we can check the rule.
 
-# License
+## License
 
 This tool is available under a dual license: a commercial one suitable for closed source projects and a GPL license that can be used in open source software.
 
 Depending on your needs, you must choose one of them and follow its policies. A detail of the policies and agreements for each license type are available in the [LICENSE.COMMERCIAL](LICENSE.COMMERCIAL) and [LICENSE.GPL](LICENSE.GPL) files.
 
-# Hacking
+## Hacking
 
 If you want to install the latest version in order to make changes, develop your own rules, and so on, simply clone this repository, compile the rules, and install the package in editable mode:
 
@@ -112,35 +104,19 @@ pip install -e .[dev,test] --user
 
 If you update any of the rules, be sure to run `prep-release.py` to recompile them.
 
-# For Maintainers
+## For Package Maintainers
 
-This section is for package maintainers.
+When releasing a new version, make sure the version has been updated in [apkid/__init__.py](apkid/__init__.py).
 
-To update the PyPI package:
+As for running tests, check out [.travis.yml](.travis.yml) to see how the dev and test environments are setup and tests are run.
+
+Update the compiled rules, the readme, build the package and upload to PyPI:
 
 ```bash
 ./prep-release.py readme
 rm -f dist/*
 python setup.py sdist bdist_wheel
 twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
-```
-
-Update the generated `README.rst` until Pandoc learns how to translate Markdown with images that are links into reStructuredText:
-```rst
-.. image:: https://travis-ci.org/rednaga/APKiD.svg?branch=master
-    :target: https://travis-ci.org/rednaga/APKiD
-
-.. image:: https://img.shields.io/pypi/v/apkid.svg
-    :target: https://pypi.python.org/pypi/apkid
-
-.. image:: https://img.shields.io/pypi/pyversions/apkid.svg
-    :target: https://pypi.python.org/pypi/apkid
-
-.. image:: https://img.shields.io/pypi/format/apkid.svg
-    :target: https://pypi.python.org/pypi/apkid
-
-.. image:: https://img.shields.io/pypi/l/apkid.svg
-    :target: https://pypi.python.org/pypi/apkid
 ```
 
 For more information see [Packaging Projects](https://packaging.python.org/tutorials/packaging-projects/).

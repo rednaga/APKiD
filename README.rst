@@ -23,43 +23,14 @@ For more information on what this tool can be used for, check out:
    Apps <https://github.com/enovella/cve-bio-enovella/blob/master/slides/bheu18-enovella-APKID.pdf>`__
 
 Installing
-==========
-
-Installation is unfortunately a bit involved until a `pull
-request <https://github.com/VirusTotal/yara/pull/1073>`__ is merged in a
-dependency. Here’s how you do it:
-
-.. code:: bash
-
-   git clone --recursive -b "v3.10.0" https://github.com/VirusTotal/yara-python.git /tmp/yara-python
-   cd /tmp/yara-python/yara 
-   curl https://patch-diff.githubusercontent.com/raw/VirusTotal/yara/pull/1073.patch | git am
-   cd ..
-   python setup.py build --enable-dex
-   python setup.py install
-
-Without this patch to Yara, the dexlib1 detection rule will fail as will
-any rule relying on string sizes.
-
-If this patch wasn’t needed, here’s how you’d install. First, install
-`yara-python <https://github.com/VirusTotal/yara-python>`__ with
-``--enable-dex`` to compile Yara’s DEX module:
-
-.. code:: bash
-
-   # Don't use this method, for now.
-   #pip install --upgrade wheel
-   #pip wheel --wheel-dir=/tmp/yara-python --build-option="build" --build-option="--enable-dex" git+https://github.com/VirusTotal/yara-python.git@v3.10.0
-   #pip install --no-index --find-links=/tmp/yara-python yara-python
-
-Finally, install APKiD:
+----------
 
 .. code:: bash
 
    pip install apkid
 
 Docker
-------
+~~~~~~
 
 You can also run APKiD with
 `Docker <https://www.docker.com/community-edition>`__! Of course, this
@@ -78,7 +49,7 @@ Here’s how to use Docker:
     |-> compiler : dx
 
 Usage
-=====
+-----
 
 ::
 
@@ -87,7 +58,7 @@ Usage
                 [-o DIR]
                 [FILE [FILE ...]]
 
-   APKiD - Android Application Identifier v2.1.0
+   APKiD - Android Application Identifier v2.1.2
 
    positional arguments:
      FILE                                       apk, dex, or directory
@@ -108,7 +79,7 @@ Usage
      -o DIR, --output-dir DIR                   write individual results here (implies --json)
 
 Submitting New Packers / Compilers / Obfuscators
-================================================
+------------------------------------------------
 
 If you come across an APK or DEX which APKiD does not recognize, please
 open a GitHub issue and tell us:
@@ -125,7 +96,7 @@ Pull requests are welcome. If you’re submitting a new rule, be sure to
 include a file hash of the APK / DEX so we can check the rule.
 
 License
-=======
+-------
 
 This tool is available under a dual license: a commercial one suitable
 for closed source projects and a GPL license that can be used in open
@@ -137,7 +108,7 @@ are available in the `LICENSE.COMMERCIAL <LICENSE.COMMERCIAL>`__ and
 `LICENSE.GPL <LICENSE.GPL>`__ files.
 
 Hacking
-=======
+-------
 
 If you want to install the latest version in order to make changes,
 develop your own rules, and so on, simply clone this repository, compile
@@ -163,11 +134,15 @@ If you update any of the rules, be sure to run ``prep-release.py`` to
 recompile them.
 
 For Maintainers
-===============
+---------------
 
 This section is for package maintainers.
 
-To update the PyPI package:
+Make sure the version has been updated in
+`apkid/init.py <apkid/__init__.py>`__
+
+Update the compiled rules, the readme, build the package and upload to
+PyPI:
 
 .. code:: bash
 
@@ -175,26 +150,6 @@ To update the PyPI package:
    rm -f dist/*
    python setup.py sdist bdist_wheel
    twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
-
-Update the generated ``README.rst`` until Pandoc learns how to translate
-Markdown with images that are links into reStructuredText:
-
-.. code:: rst
-
-   .. image:: https://travis-ci.org/rednaga/APKiD.svg?branch=master
-       :target: https://travis-ci.org/rednaga/APKiD
-
-   .. image:: https://img.shields.io/pypi/v/apkid.svg
-       :target: https://pypi.python.org/pypi/apkid
-
-   .. image:: https://img.shields.io/pypi/pyversions/apkid.svg
-       :target: https://pypi.python.org/pypi/apkid
-
-   .. image:: https://img.shields.io/pypi/format/apkid.svg
-       :target: https://pypi.python.org/pypi/apkid
-
-   .. image:: https://img.shields.io/pypi/l/apkid.svg
-       :target: https://pypi.python.org/pypi/apkid
 
 For more information see `Packaging
 Projects <https://packaging.python.org/tutorials/packaging-projects/>`__.
