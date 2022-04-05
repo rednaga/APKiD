@@ -43,7 +43,7 @@ rule ollvm_v3_4 : obfuscator
     $based_on      = "(based on LLVM 3.4"
 
   condition:
-    all of them
+    is_elf and all of them
 }
 
 rule ollvm_v3_5 : obfuscator
@@ -60,7 +60,7 @@ rule ollvm_v3_5 : obfuscator
     $based_on      = "(based on LLVM 3.5"
 
   condition:
-    all of them
+    is_elf and all of them
 }
 
 rule ollvm_v3_6_1 : obfuscator
@@ -77,7 +77,7 @@ rule ollvm_v3_6_1 : obfuscator
     $based_on      = "(based on Obfuscator-LLVM 3.6.1)"
 
   condition:
-    all of them
+    is_elf and all of them
 }
 
 rule ollvm_v4_0 : obfuscator
@@ -94,7 +94,7 @@ rule ollvm_v4_0 : obfuscator
     $based_on      = "(based on Obfuscator-LLVM 4.0.1)"
 
   condition:
-    all of them
+    is_elf and all of them
 }
 
 rule ollvm_v6_0_strenc : obfuscator
@@ -110,10 +110,11 @@ rule ollvm_v6_0_strenc : obfuscator
     // "Obfuscator-LLVM clang version 6.0.0 (trunk) (based on Obfuscator-LLVM 6.0.0git-b9ea5776)"
     $clang_version = "Obfuscator-LLVM clang version 6.0."
     $based_on      = "(based on Obfuscator-LLVM 6.0."
-    $strenc        = /datadiv_decode[0-9]{18,20}/
 
   condition:
-    all of them
+    is_elf and
+    all of them and
+    for any i in (0..elf.symtab_entries): (elf.symtab[i].name matches /\.datadiv_decode[\d]{18,20}/)
 }
 
 rule ollvm_v6_0 : obfuscator
@@ -130,7 +131,103 @@ rule ollvm_v6_0 : obfuscator
     $based_on      = "(based on Obfuscator-LLVM 6.0."
 
   condition:
-    all of them and not ollvm_v6_0_strenc
+    is_elf and
+    all of them and
+    not ollvm_v6_0_strenc
+}
+
+rule ollvm_v9_strenc : obfuscator
+{
+  meta:
+    description = "Obfuscator-LLVM version 9.x (string encryption)"
+    sample      = "2314ec0053d829d424a82f702188fcb525cefce4feeef096f0855339b897a5d1"
+    author      = "Eduardo Novella"
+
+  strings:
+    $clang_version = /clang version \d\.\d\.\d /
+    $strenc        = /\.datadiv_decode[\d]{18,20}/
+    $ollvm         = "(based on Obfuscator-LLVM 9."
+
+  condition:
+    is_elf and all of them
+}
+
+rule ollvm_tll : obfuscator
+{
+  meta:
+    description = "Obfuscator-LLVM TLL (string encryption)"
+    url         = "https://github.com/yazhiwang/ollvm-tll"
+    sample      = "1f010330e9ac90f00d11aa37fdca25c437ad6f4b1302f6d7aa48b91ef22cc107"
+    author      = "Eduardo Novella"
+
+  strings:
+    /**
+      .datadiv_decode7760209850571766755
+      Android clang version 5.0.300080  (based on LLVM 5.0.300080)
+      clang version 6.0.0 (tags/RELEASE_600/final) (https://github.com/yazhiwang/ollvm-tll.git a38559e4c13359073102793c0a734bb1add3d5ff)
+    */
+    $clang_version = /clang version \d\.\d\.\d \(tags\/RELEASE\_\d+\/final\)/
+    $strenc        = /\.datadiv_decode[\d]{18,20}/
+    $url           = "https://github.com/yazhiwang/ollvm-tll"
+
+  condition:
+    is_elf and all of them
+}
+
+rule ollvm_tll_a : obfuscator
+{
+  meta:
+    description = "Obfuscator-LLVM TLL (string encryption)"
+    url         = "https://github.com/yazhiwang/ollvm-tll"
+    sample      = "0e5992066f177e2495a2a424201e146c29b78b63a9eb94bce6765691a47e6fd7"
+    author      = "Eduardo Novella"
+
+  strings:
+    /**
+      clang version 6.0.0 (tags/RELEASE_600/final) (git@github.com:enovella/ollvm-tll.git a38559e4c13359073102793c0a734bb1add3d5ff)
+    */
+    $version = /clang version \d+\.\d+\.\d+ \(.*\) \(.*\/ollvm\-tll\.git [0-9a-f]{40}\)/
+
+  condition:
+    is_elf and all of them and not ollvm_tll
+}
+
+rule ollvm_armariris : obfuscator
+{
+  meta:
+    description = "Armariris Obfuscator-LLVM (string encryption)"
+    url         = "https://github.com/GoSSIP-SJTU/Armariris"
+    sample      = "d22c2f53bab6fa2ab7bdb4f7acabb419e3ee3163bb758c4f7a013d07a8b09e12" // aka malware Joker
+    author      = "Eduardo Novella"
+
+  strings:
+    // clang version 3.9.1 (tags/RELEASE_391/final)
+    // clang version 5.0.1 (tags/RELEASE_501/final)
+    // .datadiv_decode14660921177804423408
+    $clang_version = /clang version \d\.\d\.\d \(tags\/RELEASE\_\d+\/final\)/
+
+  condition:
+    is_elf and $clang_version and
+    not ollvm_tll and
+    for any i in (0..elf.symtab_entries): (elf.symtab[i].name matches /\.datadiv_decode[\d]{18,20}/)
+}
+
+rule ollvm_strenc : obfuscator
+{
+  meta:
+    description = "Obfuscator-LLVM version unknown (string encryption)"
+    sample      = "73f34f7dd5f5c2eff33fc48371c850a2a3ff0355a2bfa014467478ccb30309e3"
+    author      = "Eduardo Novella"
+
+  strings:
+    $strenc = /\.datadiv_decode[\d]{18,20}/
+
+  condition:
+    is_elf and $strenc and
+    not ollvm_tll and
+    not ollvm_armariris and
+    not ollvm_v6_0_strenc and
+    not ollvm_v9_strenc
 }
 
 rule ollvm : obfuscator
@@ -146,13 +243,38 @@ rule ollvm : obfuscator
     $ollvm3 = "Obfuscator- clang "
 
   condition:
+    is_elf and
     ($ollvm1 or $ollvm2 or $ollvm3) and
     not ollvm_v3_4 and
     not ollvm_v3_5 and
     not ollvm_v3_6_1 and
     not ollvm_v4_0 and
     not ollvm_v6_0 and
-    not ollvm_v6_0_strenc
+    not ollvm_v6_0_strenc and
+    not ollvm_strenc and
+    not ollvm_v9_strenc
+}
+
+rule alipay : obfuscator
+{
+  meta:
+    description = "Alipay"
+    url         = "https://www.jianshu.com/p/477af178d7d8"
+    sample      = "cbfec478f4860cb503ecb28711fe4767a68b7819d9a0c17cf51aaa77e11eb19a"
+    author      = "Eduardo Novella"
+
+  strings:
+    /**
+        __obfuscator_version
+        Alipay  Obfuscator (based on LLVM 4.0.1)
+        Alipay clang version 4.0.1  (based on LLVM 4.0.1.Alipay.Obfuscator.Trial)
+    */
+    $a = "Alipay clang version "
+    $b = "Alipay  Obfuscator (based on LLVM "
+    $c = "Alipay.Obfuscator."
+
+  condition:
+    any of them and is_elf
 }
 
 rule byteguard_0_9_3 : obfuscator
@@ -237,13 +359,13 @@ rule firehash : obfuscator
     elf.machine == elf.EM_ARM and all of them
 }
 
-rule avdobfuscator : obfuscator
+rule advobfuscator : obfuscator
 {
   meta:
     description = "ADVobfuscator"
     url         = "https://github.com/andrivet/ADVobfuscator"
     author      = "Eduardo Novella"
-    sample     = "357f0c2ad6bf5cf60c671b090eab134251db63993f52aef512bde5bfa4a1b598"
+    sample      = "357f0c2ad6bf5cf60c671b090eab134251db63993f52aef512bde5bfa4a1b598"
 
   strings:
     $s_01 = "_ZNK17ObfuscatedAddressIPFiiiPciS0_S0_EE8originalEv"
@@ -263,7 +385,7 @@ rule avdobfuscator : obfuscator
     any of them and is_elf
 }
 
-rule arxan_native_arm : obfuscator
+rule arxan_arm32 : obfuscator
 {
   meta:
     description = "Arxan"
