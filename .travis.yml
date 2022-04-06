@@ -1,5 +1,5 @@
 language: python
-dist: trusty
+dist: focal
 cache:
   pip: true
 #  directories:
