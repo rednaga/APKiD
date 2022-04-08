@@ -1,6 +1,6 @@
 # APKiD
 
-[![Build Status](https://travis-ci.org/rednaga/APKiD.svg?branch=master)](https://travis-ci.org/rednaga/APKiD)
+[![Build Status](https://app.travis-ci.com/rednaga/APKiD.svg?branch=master)](https://app.travis-ci.com/rednaga/APKiD)
 [![PyPI](https://img.shields.io/pypi/v/apkid.svg)](https://pypi.org/project/apkid/)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/apkid.svg)](https://pypi.org/project/apkid/)
 [![PyPI - Format](https://img.shields.io/pypi/format/apkid.svg)](https://pypi.org/project/apkid/)
