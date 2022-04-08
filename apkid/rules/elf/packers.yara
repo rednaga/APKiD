@@ -640,3 +640,24 @@ rule crackproof_a : packer
   condition:
     is_elf and $init_proc and $do_asm_syscall and 1 of ($func*)
 }
+
+rule jiagu : packer
+{
+  meta:
+    description = "Jiagu"
+    sample      = "3e83c34f496bd33457ca0a100c90ed229e2c1a9e39fdcaf5670d32455c5d051e"
+    url         = "http://jiagu.360.cn/"
+    author      = "Govind Sharma"
+
+  strings:
+    $a = "libz.so"
+    $b = "uncompress"
+    $c = "libjiagu"
+    $d = "JIAGU_APP_NAME"
+    $e = "JIAGU_SO_BASE_NAME"
+    $f = "JIAGU_ENCRYPTED_DEX_NAME"
+    $g = "JIAGU_HASH_FILE_NAME"   
+
+  condition:
+    is_elf and ($a and $b and $c) and any of ($d, $e, $f, $g)
+}
