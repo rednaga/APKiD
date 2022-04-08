@@ -487,5 +487,4 @@ rule multidexpacker : packer
      is_dex
      and $multidex_deobfuscation
      and $decrypt_dex 
-
 }
