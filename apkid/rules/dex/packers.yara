@@ -451,6 +451,7 @@ rule multidexpacker : packer
     description = "MultidexPacker"
     sample      = "49d167f8f7427f0340297ae1c89ce4a216a8e64c55294f8e422f1f972732bae7"
     author      = "Axelle Apvrille"
+    url         = "https://cryptax.medium.com/multidex-trick-to-unpack-android-bianlian-ed52eb791e56"
 
   strings:
     /* the strings for the implementation of MultiDex are de-obfuscated */
