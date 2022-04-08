@@ -444,3 +444,47 @@ rule jsonpacker : packer
      and ($algo or $algo2 or $algo3)
      and $dexclass
 }
+
+rule multidexpacker : packer
+{
+  meta:
+    description = "MultidexPacker"
+    sample      = "49d167f8f7427f0340297ae1c89ce4a216a8e64c55294f8e422f1f972732bae7"
+    author      = "Axelle Apvrille"
+
+  strings:
+    /* the strings for the implementation of MultiDex are de-obfuscated */
+    $multidex_deobfuscation = {
+      13 00 58 01         // const/16            v0, 344
+      71 10 ?? ?? 00 00   // invoke-static       b->a(I)String, v0     # DECRYPTED_STRING: "multidex.version"
+      0C 00               // move-result-object  v0
+      69 00 ?? ??         // sput-object         v0, b->e:String
+      13 00 67 01         // const/16            v0, 359
+      71 10 ?? ?? 00 00   // invoke-static       b->a(I)String, v0     # DECRYPTED_STRING: "timestamp" (0x1)
+      0C 00               // move-result-object  v0
+      69 00 ?? ??         // sput-object         v0, b->f:String
+      13 00 76 01         // const/16            v0, 374
+      71 10 ?? ?? 00 00   // invoke-static       b->a(I)String, v0     # DECRYPTED_STRING: "crc" (0x1)
+    }
+
+    /* decrypting the DEX and writing it in classes.dex */
+    $decrypt_dex = {
+      70 20 ?? ?? 40 00   // invoke-direct       ZipEntry-><init>(String)V, v0, v4
+      6E 10 ?? ?? 0? 00   // invoke-virtual      ZipEntry->getTime()J, p1
+      0B 0?               // move-result-wide    v4
+      6E 30 ?? ?? 40 05   // invoke-virtual      ZipEntry->setTime(J)V, v0, v4, v5
+      6E 20 ?? ?? 03 00   // invoke-virtual      ZipOutputStream->putNextEntry(ZipEntry)V, v3, v0
+      62 00 ?? ??         // sget-object         v0, b->decryption_key:String
+      22 04 ?? ??         // new-instance        v4, InflaterInputStream
+      70 20 ?? ?? 14 00   // invoke-direct       InflaterInputStream-><init>(InputStream)V, v4, v1
+      22 05 ?? ??         // new-instance        v5, InflaterOutputStream
+      70 20 ?? ?? 35 00   // invoke-direct       InflaterOutputStream-><init>(OutputStream)V, v5, v3
+      71 30 ?? ?? 40 05   // invoke-static       k->decrypt(String, InputStream, OutputStream)V, v0, v4, v5
+    }
+
+  condition:
+     is_dex
+     and $multidex_deobfuscation
+     and $decrypt_dex 
+
+}
