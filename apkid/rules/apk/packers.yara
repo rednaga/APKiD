@@ -816,7 +816,7 @@ rule epicvm : packer
     meta:
         description = "Epic VM"
         url         = "https://t.me/epic_pro"
-        url         = "https://t.me/epic_pro/12"
+        url2        = "https://t.me/epic_pro/12"
         sample      = "da62478ddde547878294508d428580013e7ffce274ae3756ac260ae7d50640b8"
         author      = "Eduardo Novella"
 
