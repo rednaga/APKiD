@@ -821,7 +821,7 @@ rule epicvm : packer
         author      = "Eduardo Novella"
 
     strings:
-        $lib =  /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libEpic\_Vm.so/
+        $lib =  /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libEpic\_Vm\.so/
 
     condition:
         is_apk and all of them
