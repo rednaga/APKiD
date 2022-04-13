@@ -810,3 +810,19 @@ rule apkencryptor : packer
   condition:
     is_apk and ($src1 or $src2 or $src3)
 }
+
+rule epicvm : packer
+{
+    meta:
+        description = "Epic VM"
+        url         = "https://t.me/epic_pro"
+        url2        = "https://t.me/epic_pro/12"
+        sample      = "da62478ddde547878294508d428580013e7ffce274ae3756ac260ae7d50640b8"
+        author      = "Eduardo Novella"
+
+    strings:
+        $lib =  /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libEpic\_Vm\.so/
+
+    condition:
+        is_apk and all of them
+}
