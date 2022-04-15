@@ -641,7 +641,7 @@ rule crackproof_a : packer
     is_elf and $init_proc and $do_asm_syscall and 1 of ($func*)
 }
 
-rule jiagu_elf : packer
+rule jiagu_native : packer
 {
   meta:
     description = "Jiagu"
