@@ -172,8 +172,8 @@ rule codestage_anticheat_elf : protector
     sample      = "404c618c03040c44950c1678e9fb5399576f146ccfdbf43c0208869831519d35"
 
   strings:
-    $code  = "Code Stage"
-    $code2  = "Anti-Cheat Toolkit"
+    $code        = "Code Stage"
+    $code2       = "Anti-Cheat Toolkit"
     $detection1  = "Obscured Cheating Detector"
     $detection2  = "Speed Hack Detector"
     $detection3  = "Time Cheating Detector"
