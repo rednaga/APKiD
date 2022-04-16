@@ -162,3 +162,28 @@ rule vkey_elf : protector
   condition:
     is_elf and $libname and 1 of ($vos*) and 1 of ($detection*) and 1 of ($jni*)
 }
+
+rule codestage_anticheat_elf : protector
+{
+  meta:
+    description = "CodeStage Anti-Cheat"
+    url         = "http://codestage.net"
+    author      = "Govind Sharma"
+    sample      = "404c618c03040c44950c1678e9fb5399576f146ccfdbf43c0208869831519d35"
+
+  strings:
+    $code  = "Code Stage"
+    $code2  = "Anti-Cheat Toolkit"
+    $detection1  = "Obscured Cheating Detector"
+    $detection2  = "Speed Hack Detector"
+    $detection3  = "Time Cheating Detector"
+    $detection4  = "WallHack Detector"
+    $detection5  = "Injection Detector"
+    $check1      = "walk through the walls"
+    $check2      = "see through the walls"
+    $check3      = "shoot through the walls"
+    $check4      = "http://codestage.net"
+
+  condition:
+    is_elf and $code and $code2 and 1 of ($detection*) and 1 of ($check*)
+}
