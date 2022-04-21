@@ -163,7 +163,7 @@ rule vkey_elf : protector
     is_elf and $libname and 1 of ($vos*) and 1 of ($detection*) and 1 of ($jni*)
 }
 
-rule codestage_anticheat_elf : protector
+rule codestage_anticheat : protector
 {
   meta:
     description = "CodeStage Anti-Cheat"
