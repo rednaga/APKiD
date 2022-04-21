@@ -97,6 +97,25 @@ rule ollvm_v4_0 : obfuscator
     is_elf and all of them
 }
 
+rule ollvm_v5_0_strenc : obfuscator
+{
+  meta:
+    description = "Obfuscator-LLVM version 5.0 (string encryption)"
+    url         = "https://github.com/obfuscator-llvm/obfuscator/wiki"
+    sample      = "a794a080a92987ce5ed9cf5cd872ef87f9bfb9acd4c07653b615f4beaff3ace2"
+    author      = "Eduardo Novella"
+
+  strings:
+    // "Obfuscator-LLVM clang version 5.0.2  (based on Obfuscator-LLVM 5.0.2)"
+    $clang_version = "Obfuscator-LLVM clang version 5.0."
+    $based_on      = "(based on Obfuscator-LLVM 5.0."
+    $strenc        = /\.datadiv_decode[\d]{18,20}/  // Enumerating elf.symtab_entries fails!
+
+  condition:
+    is_elf and
+    all of them
+}
+
 rule ollvm_v6_0_strenc : obfuscator
 {
   meta:
@@ -136,6 +155,23 @@ rule ollvm_v6_0 : obfuscator
     not ollvm_v6_0_strenc
 }
 
+rule ollvm_v9 : obfuscator
+{
+  meta:
+    description = "Obfuscator-LLVM version 9.x"
+    url         = "https://github.com/obfuscator-llvm/obfuscator/wiki"
+    sample      = "a794a080a92987ce5ed9cf5cd872ef87f9bfb9acd4c07653b615f4beaff3ace2"
+    author      = "Eduardo Novella"
+
+  strings:
+    /* Android (dev based on r365631) clang version 9.0.6 (https://android.googlesource.com/toolchain/llvm-project)
+      (based on Obfuscator-LLVM 9.0.6svn) */
+    $ollvm = "(based on Obfuscator-LLVM 9."
+
+  condition:
+    is_elf and all of them
+}
+
 rule ollvm_v9_strenc : obfuscator
 {
   meta:
@@ -149,7 +185,9 @@ rule ollvm_v9_strenc : obfuscator
     $ollvm         = "(based on Obfuscator-LLVM 9."
 
   condition:
-    is_elf and all of them
+    is_elf and
+    not ollvm_v9 and
+    all of them
 }
 
 rule ollvm_tll : obfuscator
@@ -226,6 +264,7 @@ rule ollvm_strenc : obfuscator
     is_elf and $strenc and
     not ollvm_tll and
     not ollvm_armariris and
+    not ollvm_v5_0_strenc and
     not ollvm_v6_0_strenc and
     not ollvm_v9_strenc
 }
@@ -249,9 +288,11 @@ rule ollvm : obfuscator
     not ollvm_v3_5 and
     not ollvm_v3_6_1 and
     not ollvm_v4_0 and
+    not ollvm_v5_0_strenc and
     not ollvm_v6_0 and
     not ollvm_v6_0_strenc and
     not ollvm_strenc and
+    not ollvm_v9 and
     not ollvm_v9_strenc
 }
 
