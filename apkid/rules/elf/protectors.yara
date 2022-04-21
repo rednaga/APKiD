@@ -179,11 +179,11 @@ rule codestage_anticheat : protector
     $detection3  = "Time Cheating Detector"
     $detection4  = "WallHack Detector"
     $detection5  = "Injection Detector"
-    $check1      = "walk through the walls"
-    $check2      = "see through the walls"
-    $check3      = "shoot through the walls"
-    $check4      = "http://codestage.net"
+    $detection6  = "walk through the walls"
+    $detection7  = "see through the walls"
+    $detection8  = "shoot through the walls"
+    $detection9  = "http://codestage.net"
 
   condition:
-    is_elf and $code and $code2 and 1 of ($detection*) and 1 of ($check*)
+    is_elf and $code and $code2 and 2 of ($detection*)
 }
