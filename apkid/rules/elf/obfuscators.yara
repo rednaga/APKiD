@@ -649,13 +649,17 @@ rule dexprotector : obfuscator
     description = "DexProtector"
     url         = "https://dexprotector.com/"
     sample      = "d506e22003798f8b3a3d3c4a1b08af1cbd64667da6f9ed8cf73bc99ded73da44"
+    sample2     = "ed2486674e1cf1dcd9ad7fc17a5c0d50c1790071227ae236c976a1c92386ccff"
     author      = "Eduardo Novella"
 
   strings:
-    // - offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
-    // 0x00000000  7f45 4c46 0201 0100 4450 4c46 00e0 0100  .ELF....DPLF....
-    // Possibly DPLF stands for "DexProtector Linkable Format"
-    $dp_elf_header = { 7f45 4c46 0201 0100 4450 4c46 }
+    /**
+     Possibly DPLF stands for "DexProtector Linkable Format"
+    - offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
+    0x00000000  7f45 4c46 0101 0100 4450 4c46 0000 0000  .ELF....DPLF.... // armeabi_v7a
+    0x00000000  7f45 4c46 0201 0100 4450 4c46 00e0 0100  .ELF....DPLF.... // Aarch64
+    */
+    $dp_elf_header = { 7f45 4c46 (01|02) 01 0100 4450 4c46 }
 
   condition:
     $dp_elf_header at 0
