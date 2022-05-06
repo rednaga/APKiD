@@ -88,3 +88,25 @@ rule vkey_apk : protector
     1 of ($asseta*) and
     1 of ($assetb*)
 }
+
+rule kiwisec : protector
+{
+  meta:
+    description = "KiwiSec ApkProtector"
+    url         = "https://github.com/iKiwiSec/KiwiApkProtect"
+    author      = "Govind Sharma"
+    sample      = "d108652bd1b685765e3ada2b7376e3c3ff67f8162afcf8bad91e0aef79b7b08a"
+
+  strings:
+     $kw1  = "libkwscmm.so"
+     $kw2  = "libkwscr.so"
+     $kw3  = "libkwslinker.so"
+     $kw4  = "libKwProtectSDK.so"
+     $kw5  = "libKwAppGuardSDK.so"
+     $kw6  = "kwmkadp_arm64-v8a"
+     $kw7  = "kwmkadp_armeabi-v7a"
+     $kw8  = "kiwiguard.lic"
+
+  condition:
+    is_apk and any of ($kw*)
+}
