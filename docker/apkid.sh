@@ -10,4 +10,5 @@ TARGET="${@: -1}"
 INPUT_DIR=$(cd $(dirname "$TARGET") && pwd -P)
 INPUT_FILE=$(basename $TARGET)
 
-docker run --rm --volume "$INPUT_DIR":/input:ro -i rednaga:apkid "/input/$INPUT_FILE" "${@:0:$#}";
+DOCKER="${DOCKER:-docker}"
+${DOCKER} run --rm --volume "$INPUT_DIR":/input:ro -i rednaga:apkid "/input/$INPUT_FILE" "${@:0:$#}";
