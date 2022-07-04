@@ -236,16 +236,17 @@ rule dexprotector_c : packer
 
   strings:
     //              assets/dp.arch.so.random.mp3
-    $encrptlib_1 = /assets\dp\.arm\-v7\.so\.[A-Za-z0-9.]{2,8}\.mp3/
-    $encrptlib_2 = /assets\dp\.arm\-v8\.so\.[A-Za-z0-9.]{2,8}\.mp3/
-    $encrptlib_3 = /assets\dp\.x86\.so\.[A-Za-z0-9.]{2,8}\.mp3/
-    $encrptlib_4 = /assets\dp\.x86\_64\.so\.[A-Za-z0-9.]{2,8}\.mp3/
+    $encrptlib_1 = /assets\/dp\.arm-v7\.so\.[A-Za-z0-9]{2,8}\.mp3/
+    $encrptlib_2 = /assets\/dp\.arm-v8\.so\.[A-Za-z0-9]{2,8}\.mp3/
+    $encrptlib_3 = /assets\/dp\.x86\.so\.[A-Za-z0-9]{2,8}\.mp3/
+    $encrptlib_4 = /assets\/dp\.x86\_64\.so\.[A-Za-z0-9]{2,8}\.mp3/
 
-    $encrptcustom = /assets\/[A-Za-z0-9.]{2,8}\.mp3/
+    $encrptcustom = /assets\/[A-Za-z0-9]{2,8}\.mp3/
 
   condition:
     is_apk and 1 of ($encrptlib_*) and $encrptcustom and
-    not dexprotector_a and dexprotector_b and
+    not dexprotector_a and
+    not dexprotector_b and
     not dexprotector
 }
 
