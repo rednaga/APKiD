@@ -245,7 +245,7 @@ rule dexprotector_c : packer
 
   condition:
     is_apk and 1 of ($encrptlib_*) and $encrptcustom and
-    not dexprotector_a and dexprotector_b
+    not dexprotector_a and dexprotector_b and
     not dexprotector
 }
 
