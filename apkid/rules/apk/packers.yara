@@ -232,7 +232,7 @@ rule dexprotector_c : packer
     author      = "Eduardo Novella"
     description = "DexProtector"
     url         = "https://dexprotector.com/"
-    sample      = "ea269eb71e11a13a071cd462da9ec1841a0393e99b2a4da19f860dfba355cf61"
+    sample      = "2a0d410d540d75f0f1d9a217087e5df6e7032399d3c116a324541488a03f12d3"
 
   strings:
     //              assets/dp.arch.so.random.mp3
