@@ -658,6 +658,8 @@ rule dexprotector : obfuscator
     - offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
     0x00000000  7f45 4c46 0101 0100 4450 4c46 0000 0000  .ELF....DPLF.... // armeabi_v7a
     0x00000000  7f45 4c46 0201 0100 4450 4c46 00e0 0100  .ELF....DPLF.... // Aarch64
+    0x00000000  7f45 4c46 0101 0100 4450 4c46 00c0 0100  .ELF....DPLF.... // x86
+    0x00000000  7f45 4c46 0201 0100 4450 4c46 00c0 0100  .ELF....DPLF.... // x86_64
     */
     $dp_elf_header = { 7f45 4c46 (01|02) 01 0100 4450 4c46 }
 

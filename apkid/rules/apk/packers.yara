@@ -226,6 +226,29 @@ rule dexprotector_b : packer
     not dexprotector
 }
 
+rule dexprotector_c : packer
+{
+  meta:
+    author      = "Eduardo Novella"
+    description = "DexProtector"
+    url         = "https://dexprotector.com/"
+    sample      = "ea269eb71e11a13a071cd462da9ec1841a0393e99b2a4da19f860dfba355cf61"
+
+  strings:
+    //              assets/dp.arch.so.random.mp3
+    $encrptlib_1 = /assets\dp\.arm\-v7\.so\.[A-Za-z0-9.]{2,8}\.mp3/
+    $encrptlib_2 = /assets\dp\.arm\-v8\.so\.[A-Za-z0-9.]{2,8}\.mp3/
+    $encrptlib_3 = /assets\dp\.x86\.so\.[A-Za-z0-9.]{2,8}\.mp3/
+    $encrptlib_4 = /assets\dp\.x86\_64\.so\.[A-Za-z0-9.]{2,8}\.mp3/
+
+    $encrptcustom = /assets\/[A-Za-z0-9.]{2,8}\.mp3/
+
+  condition:
+    is_apk and 1 of ($encrptlib_*) and $encrptcustom and
+    not dexprotector_a and dexprotector_b
+    not dexprotector
+}
+
 rule dexpro_aide_a : packer
 {
   meta:
