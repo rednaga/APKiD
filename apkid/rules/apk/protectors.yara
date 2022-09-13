@@ -88,3 +88,21 @@ rule vkey_apk : protector
     1 of ($asseta*) and
     1 of ($assetb*)
 }
+
+rule free_rasp : protector
+{
+  meta:
+    description = "FreeRASP Android Protector"
+    url         = "https://www.talsec.app/freerasp-in-app-protection-security-talsec"
+    sample      = "2b8faa038bf34474075a56e2fda7887a7df9c3c57db8a9f25547dc9374137ec9"
+  
+  strings:
+    $lib1   = /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libsecurity\.so/
+    $lib2   = /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libpolarssl\.so/
+    $asset1 = "assets/talsec"
+  
+  condition:
+    is_apk and
+    2 of ($lib*) and
+    $asset1
+}
