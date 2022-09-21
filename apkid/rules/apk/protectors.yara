@@ -95,14 +95,13 @@ rule free_rasp : protector
     description = "FreeRASP Android Protector"
     url         = "https://www.talsec.app/freerasp-in-app-protection-security-talsec"
     sample      = "2b8faa038bf34474075a56e2fda7887a7df9c3c57db8a9f25547dc9374137ec9"
-  
+    author      = "Fare9"
+
   strings:
-    $lib1   = /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libsecurity\.so/
-    $lib2   = /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libpolarssl\.so/
-    $asset1 = "assets/talsec"
+    $lib1   = /lib\/(arm.*|x86.*)\/libsecurity\.so/
+    $lib2   = /lib\/(arm.*|x86.*)\/libpolarssl\.so/
+    $asset = "assets/talsec"
   
   condition:
-    is_apk and
-    2 of ($lib*) and
-    $asset1
+    is_apk and all of them
 }
