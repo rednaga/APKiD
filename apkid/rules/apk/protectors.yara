@@ -92,7 +92,7 @@ rule vkey_apk : protector
 rule free_rasp : protector
 {
   meta:
-    description = "FreeRASP Android Protector"
+    description = "FreeRASP"
     url         = "https://www.talsec.app/freerasp-in-app-protection-security-talsec"
     sample      = "2b8faa038bf34474075a56e2fda7887a7df9c3c57db8a9f25547dc9374137ec9"
     author      = "Fare9"
