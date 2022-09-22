@@ -111,3 +111,32 @@ rule appdome_dex : protector
   condition:
     is_dex and $loader
 }
+
+rule free_rasp_dex : protector
+{
+  meta:
+    description = "FreeRASP"
+    sample      = "e10b8772fd9b6aaf8ba030c5bcb324fb9b91f34e893a62bdf238629df856e047"
+    url         = "https://www.talsec.app/freerasp-in-app-protection-security-talsec"
+    author      = "Fare9"
+  
+  strings:
+    // Decryption method found in DEX files, since strings will change
+    // and other offsets change, we add ?? to some instructions
+    $decryption = {
+      6e 10 ?? ?? 08 00 0a 00 db 00 00 02 23 01 ?? ??
+      12 02 12 03 12 04 6e 10 ?? ?? 08 00 0a 05 35 53
+      28 00 d8 05 03 01 6e 20 ?? ?? 38 00 0a 03 13 06
+      10 00 71 20 ?? ?? 63 00 0a 03 e0 03 03 04 8d 33
+      4f 03 01 04 48 03 01 04 d8 07 05 01 6e 20 ?? ??
+      58 00 0a 05 71 20 ?? ?? 65 00 0a 05 8d 55 b0 53
+      8d 33 4f 03 01 04 d8 04 04 01 01 73 28 d5 23 08
+      ?? ?? 35 02 12 00 48 03 01 02 62 04 ?? ?? 21 45
+      94 05 02 05 48 04 04 05 b7 43 8d 33 4f 03 08 02
+      d8 02 02 01 28 ef 22 00 ?? ?? 70 20 ?? ?? 80 00
+      11 00
+    }
+
+  condition:
+    is_dex and $decryption
+}
