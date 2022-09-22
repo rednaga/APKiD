@@ -100,7 +100,6 @@ rule free_rasp : protector
   strings:
     $lib1   = /lib\/(arm.*|x86.*)\/libsecurity\.so/
     $lib2   = /lib\/(arm.*|x86.*)\/libpolarssl\.so/
-    $asset = "assets/talsec"
   
   condition:
     is_apk and all of them
