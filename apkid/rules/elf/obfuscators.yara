@@ -155,6 +155,27 @@ rule ollvm_v6_0 : obfuscator
     not ollvm_v6_0_strenc
 }
 
+rule ollvm_v8_strenc : obfuscator
+{
+  meta:
+    description = "Obfuscator-LLVM version 8.x (string encryption)"
+    url         = "https://github.com/obfuscator-llvm/obfuscator/wiki"
+    url2        = "https://github.com/heroims/obfuscator"
+    sample      = "2c720f5ec740f4c8571dbba205eadba483556c5c387fe88ff25192b25552da0f"
+    author      = "Eduardo Novella"
+
+  strings:
+    /*
+      [0x0000a5bc]> izzq~+obfuscator,ollvm,clang
+      0x1 263 262 Android (4751641 based on r328903) clang version 7.0.2 (https://android.googlesource.com/toolchain/clang 003100370607242ddd5815e4a043907ea9004281) (https://android.googlesource.com/toolchain/llvm 1d739ffb0366421d383e04ff80ec2ee591315116) (based on LLVM 7.0.2svn)
+      0x108 155 154 Obfuscator-LLVM clang version 8.0.0  (https://github.com/heroims/obfuscator.git 29d9dc8c1bd662f3a73d1b1b009266af1786b7b8) (based on Obfuscator-LLVM 8.0.0)
+    */
+    $ollvm  = "Obfuscator-LLVM clang version 8."
+    $strenc = /\.datadiv_decode[\d]{18,20}/
+
+  condition:
+    is_elf and all of them
+}
 
 rule ollvm_v8 : obfuscator
 {
@@ -174,9 +195,10 @@ rule ollvm_v8 : obfuscator
     $ollvm = "Obfuscator-LLVM clang version 8."
 
   condition:
-    is_elf and all of them
+    is_elf and
+    all of them and
+    not ollvm_v8_strenc
 }
-
 
 rule ollvm_v9 : obfuscator
 {
@@ -289,6 +311,7 @@ rule ollvm_strenc : obfuscator
     not ollvm_armariris and
     not ollvm_v5_0_strenc and
     not ollvm_v6_0_strenc and
+    not ollvm_v8_strenc and
     not ollvm_v9_strenc
 }
 
@@ -316,6 +339,7 @@ rule ollvm : obfuscator
     not ollvm_v6_0_strenc and
     not ollvm_strenc and
     not ollvm_v8 and
+    not ollvm_v8_strenc and
     not ollvm_v9 and
     not ollvm_v9_strenc
 }
