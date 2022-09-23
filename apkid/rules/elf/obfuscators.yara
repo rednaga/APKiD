@@ -445,6 +445,7 @@ rule advobfuscator : obfuscator
     $s_10 = "_ZNK17ObfuscatedAddressIPFvPcS0_iiEE8originalEv"
     $s_11 = "_ZNK17ObfuscatedAddressIPFvcEE8originalEv"
     $s_12 = "_ZNK17ObfuscatedAddressIPFvPviiEE8originalEv"
+    $s_13 = /\_ZN\dandrivet\d\dADVobfuscator\d\dMetaString.*decryptEv/
 
   condition:
     any of them and is_elf
