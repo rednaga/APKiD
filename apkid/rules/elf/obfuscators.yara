@@ -730,3 +730,24 @@ rule dexprotector : obfuscator
   condition:
     $dp_elf_header at 0
 }
+
+rule dexprotector_alice : obfuscator
+{
+  meta:
+    description = "DexProtector (Alice)"
+    url         = "https://licelus.com/products/dexprotector/docs/android/alice"
+    sample      = "4f48625f1d4d0a1118478f61855ba96818f3907e46fbf96c55d5cebb8afe59a9"
+    author      = "Eduardo Novella"
+
+  strings:
+    /**
+      libalice.so: /Users/receiver/git/dexprotector/12.7.11/alice-core/src/main/jni/../cpp/alice.cpp
+      libalice.so: /Users/receiver/git/dexprotector/12.7.11/alice-core/src/main/jni/../cpp/queue.cpp
+      libalice.so: /Users/receiver/git/dexprotector/12.7.11/alice-core/src/main/jni/../cpp/SendScheduler.cpp
+      libalice.so: /Users/receiver/git/dexprotector/12.7.11/alice-core/src/main/jni/../cpp/utils.cpp
+    */
+    $alice_sdk =  /dexprotector\/.*\/alice-core\/.*.cpp/
+
+  condition:
+    is_elf and all of them
+}
