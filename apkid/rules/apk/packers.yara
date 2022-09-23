@@ -503,14 +503,17 @@ rule liapp : packer
 {
   meta:
     description = "LIAPP"
-    sample = "b5be20d225edf55634621aa17988a6ed3368d4f7632c8a1eb4d3fc3b6a61c325"
+    sample      = "b5be20d225edf55634621aa17988a6ed3368d4f7632c8a1eb4d3fc3b6a61c325"
+    sample2     = "0697d32c80af84fdde536c5eae2a8bf7ddb0504426a6db7ccde6d8d684a6f588"
+    author      = "Caleb & Diff & Eduardo Novella"
 
   strings:
     $dir = "/LIAPPEgg"
     $lib = "LIAPPClient.sc"
+    $ini = "assets/LIAPP.ini"
 
   condition:
-    is_apk and any of ($dir, $lib)
+    is_apk and any of ($dir, $lib, $ini)
 }
 
 rule app_fortify : packer
