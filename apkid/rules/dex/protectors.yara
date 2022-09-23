@@ -111,3 +111,68 @@ rule appdome_dex : protector
   condition:
     is_dex and $loader
 }
+
+rule free_rasp_dex : protector
+{
+  meta:
+    description = "FreeRASP"
+    sample      = "e10b8772fd9b6aaf8ba030c5bcb324fb9b91f34e893a62bdf238629df856e047"
+    url         = "https://www.talsec.app/freerasp-in-app-protection-security-talsec"
+    author      = "Fare9"
+  
+  strings:
+    // Decryption method found in DEX files, since strings will change
+    // and other offsets change, we add ?? to some instructions
+    $decryption = {
+      6e 10 ?? ?? 08 00           // invoke-virtual {v8}, Ljava/lang/String.length()I
+      0a 00                       // move-result v0
+      db 00 00 02                 // div-int/lit8 v0, v0, 0x2
+      23 01 ?? ??                 // new-array v1, v0, [B
+      12 02                       // const/4 v2, 0
+      12 03                       // const/4 v3, 0
+      12 04                       // const/4 v4, 0
+      6e 10 ?? ?? 08 00           // invoke-virtual {v8}, Ljava/lang/String.length()I
+      0a 05                       // move-result v5
+      35 53 28 00                 // if-ge v3, v5, 0x0016c83a
+      d8 05 03 01                 // add-int/lit8 v5, v3, 0x1
+      6e 20 ?? ?? 38 00           // invoke-virtual {v8, v3}, Ljava/lang/String.charAt(I)C
+      0a 03                       // move-result v3
+      13 06 10 00                 // const/16 v6, 0x10
+      71 20 ?? ?? 63 00           // invoke-static {v3, v6}, Ljava/lang/Character.digit(CI)I
+      0a 03                       // move-result v3
+      e0 03 03 04                 // shl-int/lit8 v3, v3, 0x4
+      8d 33                       // int-to-byte v3, v3
+      4f 03 01 04                 // aput-byte v3, v1, v4
+      48 03 01 04                 // aget-byte v3, v1, v4
+      d8 07 05 01                 // add-int/lit8 v7, v5, 0x1
+      6e 20 ?? ?? 58 00           // invoke-virtual {v8, v5}, Ljava/lang/String.charAt(I)C
+      0a 05                       // move-result v5
+      71 20 ?? ?? 65 00           // invoke-static {v5, v6}, Ljava/lang/Character.digit(CI)I
+      0a 05                       // move-result v5
+      8d 55                       // int-to-byte v5, v5
+      b0 53                       // add-int/2addr v3, v5
+      8d 33                       // int-to-byte v3, v3
+      4f 03 01 04                 // aput-byte v3, v1, v4
+      d8 04 04 01                 // add-int/lit8 v4, v4, 0x1
+      01 73                       // move v3, v7
+      28 d5                       // goto 0x0016c7e2
+      23 08 ?? ??                 // new-array v8, v0, [B
+      35 02 12 00                 // if-ge v2, v0, 0x0016c862
+      48 03 01 02                 // aget-byte v3, v1, v2
+      62 04 ?? ??                 // sget-object v4, Lx0/o;->a [B
+      21 45                       // array-length v5, v4
+      94 05 02 05                 // rem-int v5, v2, v5
+      48 04 04 05                 // aget-byte v4, v4, v5
+      b7 43                       // xor-int/2addr v3, v4
+      8d 33                       // int-to-byte v3, v3
+      4f 03 08 02                 // aput-byte v3, v8, v2
+      d8 02 02 01                 // add-int/lit8 v2, v2, 0x1
+      28 ef                       // goto 0x0016c83e
+      22 00 ?? ??                 // new-instance v0, Ljava/lang/String;
+      70 20 ?? ?? 80 00           // invoke-direct {v0, v8}, Ljava/lang/String.<init>([B)V
+      11 00                       // return-object v0
+    }
+
+  condition:
+    is_dex and $decryption
+}
