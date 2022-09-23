@@ -574,10 +574,10 @@ rule dexguard_native_arm64 : obfuscator
     description = "DexGuard 9.x"
     url         = "https://www.guardsquare.com/en/products/dexguard"
     sample      = "fc3fae3de64eceab969b7d91e3a5fbc45c7407bb8d1a5d5018caa86947604713"
-    author      = "FrenchYeti"
+    author      = "FrenchYeti & Eduardo Novella"
 
   strings:
-    // that is how dexguard detects frida into /proc/%d/maps
+    // Frida detection into /proc/%d/maps
     $hook = {
       0b 1d 00 12  //  and        w11,bf,#0xff
       48 15 40 38  //  ldrb       bf,[x10], #0x1
@@ -587,7 +587,22 @@ rule dexguard_native_arm64 : obfuscator
       e8 c1 86 52  //  mov        bf,#0x360f
       3f 01 08 6b  //  cmp        w9,bf
     }
-    // recurring patterns used into several string decryption
+    $hook2 = {
+      6c 1d 00 12  //  and        w12, w11, #0xff
+      4b 15 40 38  //  ldrb       w11, [x10],#1
+      29 25 1b 53  //  ubfiz      w9, w9, #5, #0xa
+      29 01 0c 4a  //  eor        w9, w9, w12
+      8b ff ff 35  //  cbnz       w11, loc_85f4
+      ea c1 86 52  //  mov        w10, #0x360f
+      3f 01 0a 6b  //  cmp        w9, w10
+    }
+    $hook3 = {
+      /* ?? ?? ??*/ // Prolog breakage
+      e? c1 86 52   // mov  w8, #0x360f
+      1f 00 0? 6b   // cmp  w0, w8
+    }
+
+    // Recurring patterns used into several string decryption
     $str = {
       6c 69 69 38  //  ldrb       w12,[x11, x9, LSL ]
       8c ?? ?? 11  //  add        w12,w12,??
@@ -600,7 +615,29 @@ rule dexguard_native_arm64 : obfuscator
       30 ?? cc 9b 10 fe ?? d3 10 a6 0d 9b 6f 69 69 38 d0 69 70 38
       0f 02 0f 4a 6f 69 29 38 29 05 00 91 3f ?? ?? f1 ef 17 9f 1a
     }
-    // binaries have always 8 svc instructions
+
+    // Prolog breakage
+    /**
+      jint JNI_OnLoad(JavaVM *vm, void *reserved)
+      {
+        jint result;
+        __asm { BR              X8 }
+        return result;
+      }
+    */
+    $prolog_breakage = {
+      ea 03 0a 4b  //  neg        w10, w10
+      4b 01 09 4a  //  eor        w11, w10, w9
+      49 01 09 0a  //  and        w9, w10, w9
+      69 05 09 0b  //  add        w9, w11, w9,lsl#1
+      29 7d 40 93  //  sxtw       x9, w9
+      ea 03 7d b2  //  mov        x10, #8
+      28 21 0a 9b  //  madd       x8, x9, x10, x8
+      08 01 40 f9  //  ldr        x8, [x8]
+      00 01 1f d6  //  br         x8
+    }
+
+    // Binaries have usually >= 8 SVC instructions
     $svc = {
       ?8 ?? ?? d2  //  mov        x8,??
       01 00 00 d4  //  svc        0x0
@@ -612,8 +649,11 @@ rule dexguard_native_arm64 : obfuscator
 
   condition:
     elf.machine == elf.EM_AARCH64
-    and $hook and ($str or $str2) and #svc >= 6
-    and not dexguard_native and not dexguard_native_a
+    and 1 of ($hook*)
+    and ($str or $str2 or $prolog_breakage)
+    and #svc >= 6
+    and not dexguard_native
+    and not dexguard_native_a
 }
 
 rule snapprotect : obfuscator
