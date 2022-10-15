@@ -650,7 +650,7 @@ rule dexguard_native_arm64 : obfuscator
         return result;
       }
     */
-    $prolog_breakage = {
+    $prolog_breakage1 = {
       ea 03 0a 4b  //  neg        w10, w10
       4b 01 09 4a  //  eor        w11, w10, w9
       49 01 09 0a  //  and        w9, w10, w9
@@ -662,7 +662,16 @@ rule dexguard_native_arm64 : obfuscator
       00 01 1f d6  //  br         x8
     }
 
-    // Binaries have usually >= 8 SVC instructions
+    // sample 5f0819ab5247ff992bdd3d3878561c4effa32878cf6e69c174b5ed054c52588f
+    $prolog_breakage2 = {
+      (4?|5?) d0 3b d5  //  mrs x9, tpidr_el0
+      29 15 40 f9       //  ldr x9, [x9, 0x28]
+      a9 83 1e f8       //  stur x9, [x29, -0x18]
+      08 ?? 40 f9       //  ldr x8, [x8, 0x70]
+      00 01 1f d6       //  br x8
+    }
+
+    // Binaries have usually >= 6 SVC instructions
     $svc = {
       ?8 ?? ?? d2  //  mov        x8,??
       01 00 00 d4  //  svc        0x0
@@ -675,7 +684,7 @@ rule dexguard_native_arm64 : obfuscator
   condition:
     elf.machine == elf.EM_AARCH64
     and 1 of ($hook*)
-    and ($str or $str2 or $prolog_breakage)
+    and any of ($str, $str2, $prolog_breakage*)
     and #svc >= 6
     and not dexguard_native
     and not dexguard_native_a
