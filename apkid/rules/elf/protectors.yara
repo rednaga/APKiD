@@ -170,7 +170,7 @@ rule verimatrix_arm64 : protector
     url         = "https://www.verimatrix.com/products/app-shield/"
     sample      = "41aab8bad66ab3ee47d8133488084e87abd271e2865d5715fb36269d967a2571"
     author      = "FrenchYeti"
-    
+
   strings:
     // byte sequence from .data, used into JNI_OnLoad
     $seq = {
@@ -179,7 +179,7 @@ rule verimatrix_arm64 : protector
       ?? ?? ?? ?? 88 98 a8 b8
       ?? ?? ?? ?? 94 a4 b4 c4
     }
-    
+
     // common pattern
     $instr = {
       ?3 ?? ?? 54 //  b.cc    ??
@@ -197,8 +197,36 @@ rule verimatrix_arm64 : protector
       [0-4]
       df 3f 03 d5 //  isb
     }
-  
+
   condition:
-    elf.machine == elf.EM_AARCH64 
+    elf.machine == elf.EM_AARCH64
     and all of them
+}
+
+rule verimatrix_arm64_hce : protector
+{
+  meta:
+    description = "InsideSecure Verymatrix"
+    url         = "https://www.verimatrix.com/products/app-shield/"
+    sample      = "88cb73fbc7371a7ef0ef0efc99c0fcaf129d5fc21bfca8bb5c318dff8f227fcc" // Package: com.bcp.bank.bcp v3.0.4
+    author      = "Eduardo Novella"
+
+  strings:
+    // Potential crash via division by zero
+    // Sample contains ~500 break instructions
+    $brk_0_3e8 = {
+      00 7D 20 D4   // BRK  #0x3E8
+    }
+
+    // Inlined syscall with obfuscated _NR_SYSCALL
+    // Sample contains 2.6k inlined syscalls
+    $svc_0 = {
+      01 00 00 D4   // SVC  0
+    }
+
+  condition:
+    elf.machine == elf.EM_AARCH64
+    and #svc_0 >= 100
+    and #brk_0_3e8 >= 100
+    and for any i in (0..elf.number_of_segments): (elf.segments[i].type == elf.PT_LOAD)
 }
