@@ -162,3 +162,43 @@ rule vkey_elf : protector
   condition:
     is_elf and $libname and 1 of ($vos*) and 1 of ($detection*) and 1 of ($jni*)
 }
+
+rule verimatrix_arm64 : protector
+{
+  meta:
+    description = "InsideSecure Verymatrix"
+    url         = "https://www.verimatrix.com/products/app-shield/"
+    sample      = "41aab8bad66ab3ee47d8133488084e87abd271e2865d5715fb36269d967a2571"
+    author      = "FrenchYeti"
+    
+  strings:
+    // byte sequence from .data, used into JNI_OnLoad
+    $seq = {
+      ?? ?? ?? ?? 88 98 a8 b8
+      ?? ?? ?? ?? 94 a4 b4 c4
+      ?? ?? ?? ?? 88 98 a8 b8
+      ?? ?? ?? ?? 94 a4 b4 c4
+    }
+    
+    // common pattern
+    $instr = {
+      ?3 ?? ?? 54 //  b.cc    ??
+      29 0d ?0 12 //  and     w9, w9, #0xf
+      49 21 c9 1a //  lsl     w9, w10, w9
+      ea 03 09 cb //  neg     x10, x9
+      ?a 0? ?? 8a //  and     x10, ??, ??
+      5f 01 ?? eb //  cmp     x10, ??
+      9f 3b 03 d5 //  dsb     ISH
+      ?2 ?? ?? 54 //  b.cs    ??
+      2a 75 0b d5 //  ic      x10
+      4a 01 09 8b //  add     x10, x10, x9
+      5f 01 ?? eb //  cmp     x10, ??
+      ?3 ?? ?? 54 //  b.cc    ??
+      [0-4]
+      df 3f 03 d5 //  isb
+    }
+  
+  condition:
+    elf.machine == elf.EM_AARCH64 
+    and all of them
+}
