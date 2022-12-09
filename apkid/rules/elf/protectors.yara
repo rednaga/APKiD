@@ -256,7 +256,7 @@ rule verimatrix_arm64_a : protector
 rule verimatrix_arm64_b : protector
 {
   meta:
-    description = "InsideSecure Verymatrix (todo)"
+    description = "InsideSecure Verymatrix"
     url         = "https://www.verimatrix.com/products/app-shield/"
     sample      = "41aab8bad66ab3ee47d8133488084e87abd271e2865d5715fb36269d967a2571"
     author      = "FrenchYeti"
