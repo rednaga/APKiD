@@ -166,7 +166,7 @@ rule vkey_elf : protector
 rule verimatrix_arm64 : protector
 {
   meta:
-    description = "InsideSecure Verymatrix"
+    description = "InsideSecure Verimatrix"
     url         = "https://www.verimatrix.com/products/app-shield/"
     sample      = "88cb73fbc7371a7ef0ef0efc99c0fcaf129d5fc21bfca8bb5c318dff8f227fcc" // Package: com.bcp.bank.bcp v3.0.4
     author      = "Eduardo Novella"
@@ -194,7 +194,7 @@ rule verimatrix_arm64 : protector
 rule verimatrix_arm64_a : protector
 {
   meta:
-    description = "InsideSecure Verymatrix"
+    description = "InsideSecure Verimatrix"
     url         = "https://www.verimatrix.com/products/app-shield/"
     sample      = "edb939d77adba5ef5c536c352a4bc25a3a5ff2fe15408c5af9f08b5af583224c" // dk.mitid.app.android v2.3.7
     author      = "Eduardo Novella"
@@ -256,7 +256,7 @@ rule verimatrix_arm64_a : protector
 rule verimatrix_arm64_b : protector
 {
   meta:
-    description = "InsideSecure Verymatrix"
+    description = "InsideSecure Verimatrix"
     url         = "https://www.verimatrix.com/products/app-shield/"
     sample      = "41aab8bad66ab3ee47d8133488084e87abd271e2865d5715fb36269d967a2571"
     author      = "FrenchYeti"
