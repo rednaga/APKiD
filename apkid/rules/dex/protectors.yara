@@ -115,7 +115,7 @@ rule appdome_dex : protector
 rule insidesecure : protector
 {
   meta:
-    description = "InsideSecure Verymatrix"
+    description = "InsideSecure Verimatrix"
     url         = "https://www.verimatrix.com/products/app-shield/"
     sample      = "edb939d77adba5ef5c536c352a4bc25a3a5ff2fe15408c5af9f08b5af583224c" // dk.mitid.app.android v2.3.7
     author      = "Eduardo Novella"

@@ -27,16 +27,16 @@
 
 include "common.yara"
 
-rule verymatrix : protector
+rule verimatrix : protector
 {
   meta:
-    description = "InsideSecure Verymatrix"
+    description = "InsideSecure Verimatrix"
     url         = "https://www.verimatrix.com/solutions/code-protection"
     sample      = "fdd6b324a267cb5287550b1ab2c7e527ad49b5ed4f4542abbc4fb5e8e2c00d3f"
     author      = "Eduardo Novella"
 
   strings:
-    $libname = /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libmfjava\.so/
+    $libname = /lib\/(arm.*|x86.*)\/libmfjava\.so/
 
   condition:
     is_apk and $libname
@@ -100,7 +100,7 @@ rule free_rasp_old : protector
   strings:
     $lib1   = /lib\/(arm.*|x86.*)\/libsecurity\.so/
     $lib2   = /lib\/(arm.*|x86.*)\/libpolarssl\.so/
-  
+
   condition:
     is_apk and all of them
 }
@@ -117,7 +117,7 @@ rule free_rasp_new : protector
     $lib1   = /lib\/(arm.*|x86.*)\/libsecurity\.so/
     $lib2   = /lib\/(arm.*|x86.*)\/libpolarssl\.so/
     $asset  = "assets/talsec"
-  
+
   condition:
     is_apk and all of them
 }
