@@ -112,6 +112,25 @@ rule appdome_dex : protector
     is_dex and $loader
 }
 
+rule insidesecure : protector
+{
+  meta:
+    description = "InsideSecure Verymatrix"
+    url         = "https://www.verimatrix.com/products/app-shield/"
+    sample      = "edb939d77adba5ef5c536c352a4bc25a3a5ff2fe15408c5af9f08b5af583224c" // dk.mitid.app.android v2.3.7
+    author      = "Eduardo Novella"
+
+  strings:
+    // Loader class injected into everything, surrounding null bytes and size
+    // 00 + size + Lcom/insidesecure/core/
+    $class = {
+      00 ?? 4c 636f 6d2f 696e 7369 6465 7365  6375 7265 2f 63 6f72 652f
+    }
+
+  condition:
+    is_dex and all of them
+}
+
 rule free_rasp_dex : protector
 {
   meta:
@@ -119,7 +138,7 @@ rule free_rasp_dex : protector
     sample      = "e10b8772fd9b6aaf8ba030c5bcb324fb9b91f34e893a62bdf238629df856e047"
     url         = "https://www.talsec.app/freerasp-in-app-protection-security-talsec"
     author      = "Fare9"
-  
+
   strings:
     // Decryption method found in DEX files, since strings will change
     // and other offsets change, we add ?? to some instructions

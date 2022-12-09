@@ -168,12 +168,133 @@ rule verimatrix_arm64 : protector
   meta:
     description = "InsideSecure Verymatrix"
     url         = "https://www.verimatrix.com/products/app-shield/"
+    sample      = "88cb73fbc7371a7ef0ef0efc99c0fcaf129d5fc21bfca8bb5c318dff8f227fcc" // Package: com.bcp.bank.bcp v3.0.4
+    author      = "Eduardo Novella"
+
+  strings:
+    // Potential crash via division by zero
+    // Sample contains ~500 break instructions  (other sample ~80)
+    $brk_0_3e8 = {
+      00 7D 20 D4   // BRK  #0x3E8
+    }
+
+    // Inlined syscall with obfuscated _NR_SYSCALL
+    // Payment HCE app sample contains 2.6k inlined syscalls (other sample ~150)
+    $svc_0 = {
+      01 00 00 D4   // SVC  0
+    }
+
+  condition:
+    elf.machine == elf.EM_AARCH64
+    and #svc_0 >= 50
+    and #brk_0_3e8 >= 50
+    and for any i in (0..elf.number_of_segments): (elf.segments[i].type == elf.PT_LOAD)
+}
+
+rule verimatrix_arm64_a : protector
+{
+  meta:
+    description = "InsideSecure Verymatrix"
+    url         = "https://www.verimatrix.com/products/app-shield/"
+    sample      = "edb939d77adba5ef5c536c352a4bc25a3a5ff2fe15408c5af9f08b5af583224c" // dk.mitid.app.android v2.3.7
+    author      = "Eduardo Novella"
+
+  strings:
+    /**
+      .mfrt:0000000000AFCC98             ; Segment type: Pure data
+      .mfrt:0000000000AFCC98                             AREA .mfrt, DATA
+      .mfrt:0000000000AFCC98                             ; ORG 0xAFCC98
+      .mfrt:0000000000AFCC98 04 EC 82 5F+                DCQ 0x4BDB66335F82EC04
+      .mfrt:0000000000AFCCA0 FA 45 E6 0C                 DCD 0xCE645FA
+      .mfrt:0000000000AFCCA0             ; .mfrt         ends
+    */
+
+    // Sample contains 25 inlined syscalls
+    $svc_0 = {
+      01 00 00 D4   // SVC  0
+    }
+
+    /**
+      do
+        {
+          __asm { SYS             #3, c7, c11, #1, X12 }
+          i += c;
+        }
+        while ( i < len );
+      }
+      v30 = (unsigned int)(4 << (StatusReg & 0xF));
+      v31 = v3 & -v30;
+      __dsb(0xBu);
+      for ( ; v31 < len; v31 += v30 )
+        __asm { SYS             #3, c7, c5, #1, X10 }
+      __isb(0xFu);
+      ret = ((__int64 (__fastcall *)(_QWORD *))v3)(v33);
+      linux_eabi_syscall(__NR_munmap, (void *)v3, 0x4000u);
+    */
+    $asm_sys_dsb_isb = {
+      2C 7B 0B D5   // SYS #3, c7, c11, #1, X12
+      [12-64]
+      9F 3B 03 D5   // DSB ISH
+      [0-4]
+      2A 75 0B D5   // SYS #3, c7, c5, #1, X10
+      [12-64]
+      DF 3F 03 D5   // ISB
+    }
+
+    // "libsdfgebg.so"
+    $libname = /lib[a-z]{6,14}\.so/
+
+  condition:
+    elf.machine == elf.EM_AARCH64
+    and $asm_sys_dsb_isb
+    and $libname
+    and #svc_0 >= 15
+    and for any i in (0..elf.number_of_segments): (elf.segments[i].type == elf.PT_LOAD)
+    and for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.mfrt/)
+}
+
+rule verimatrix_arm64_b : protector
+{
+  meta:
+    description = "InsideSecure Verymatrix (todo)"
+    url         = "https://www.verimatrix.com/products/app-shield/"
     sample      = "41aab8bad66ab3ee47d8133488084e87abd271e2865d5715fb36269d967a2571"
     author      = "FrenchYeti"
 
   strings:
-    // byte sequence from .data, used into JNI_OnLoad
-    $seq = {
+    // byte sequence from .rodata, used into JNI_OnLoad
+    /**
+      void sub_AD1468()
+        {
+          _QWORD v0[2]; // [xsp+40h] [xbp-A1480h] BYREF
+          int v1; // [xsp+50h] [xbp-A1470h]
+          int v2; // [xsp+54h] [xbp-A146Ch]
+          _QWORD v3[2]; // [xsp+60h] [xbp-A1460h] BYREF
+          __int64 v4; // [xsp+70h] [xbp-A1450h]
+          _QWORD v5[2]; // [xsp+80h] [xbp-A1440h] BYREF
+          int v6; // [xsp+90h] [xbp-A1430h]
+          int v7; // [xsp+94h] [xbp-A142Ch]
+          char v8[660496]; // [xsp+A8h] [xbp-A1418h] BYREF
+          __int64 v9; // [xsp+A14B8h] [xbp-8h]
+
+          v9 = *(_QWORD *)(_ReadStatusReg(ARM64_SYSREG(3, 3, 13, 0, 2)) + 40);
+          v5[1] = v5;
+          v7 = 0xB8A89888;
+          v5[0] = v5;
+          v4 = 0xB8A89888BCAC9C8BLL;
+          v3[0] = v3;
+          v3[1] = v3;
+          v0[0] = v3;
+          v0[1] = v0;
+          v2 = 0xB8A89888;
+          v6 = 1;
+          v1 = 0;
+          sub_ADCB58(v8, 0LL, 0xA1410LL);
+          LODWORD(v4) = 1;
+          JUMPOUT(0xAD1524LL);
+        }
+    */
+    $rodata_pattern = {
       ?? ?? ?? ?? 88 98 a8 b8
       ?? ?? ?? ?? 94 a4 b4 c4
       ?? ?? ?? ?? 88 98 a8 b8
@@ -181,7 +302,7 @@ rule verimatrix_arm64 : protector
     }
 
     // common pattern
-    $instr = {
+    $opcodes = {
       ?3 ?? ?? 54 //  b.cc    ??
       29 0d ?0 12 //  and     w9, w9, #0xf
       49 21 c9 1a //  lsl     w9, w10, w9
@@ -201,32 +322,5 @@ rule verimatrix_arm64 : protector
   condition:
     elf.machine == elf.EM_AARCH64
     and all of them
-}
-
-rule verimatrix_arm64_hce : protector
-{
-  meta:
-    description = "InsideSecure Verymatrix"
-    url         = "https://www.verimatrix.com/products/app-shield/"
-    sample      = "88cb73fbc7371a7ef0ef0efc99c0fcaf129d5fc21bfca8bb5c318dff8f227fcc" // Package: com.bcp.bank.bcp v3.0.4
-    author      = "Eduardo Novella"
-
-  strings:
-    // Potential crash via division by zero
-    // Sample contains ~500 break instructions
-    $brk_0_3e8 = {
-      00 7D 20 D4   // BRK  #0x3E8
-    }
-
-    // Inlined syscall with obfuscated _NR_SYSCALL
-    // Sample contains 2.6k inlined syscalls
-    $svc_0 = {
-      01 00 00 D4   // SVC  0
-    }
-
-  condition:
-    elf.machine == elf.EM_AARCH64
-    and #svc_0 >= 100
-    and #brk_0_3e8 >= 100
-    and for any i in (0..elf.number_of_segments): (elf.segments[i].type == elf.PT_LOAD)
+    and not verimatrix_arm64_a
 }
