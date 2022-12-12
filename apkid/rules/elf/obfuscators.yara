@@ -414,6 +414,25 @@ rule byteguard_unknown : obfuscator
     not byteguard_0_9_3
 }
 
+rule ollvm_lsposed : obfuscator
+{
+  meta:
+    description = "LSPosed Obfuscator-LLVM (string encryption)"
+    url         = "https://github.com/LSPosed/LSPosed.github.io/releases"
+    sample      = "90ffa13afcf084aa3717a59cf5812517223c6cc4a6265cb191c929ef3a198c95/" // Momo, shamiko, and root hiders
+    author      = "Eduardo Novella"
+
+  strings:
+    // Android (dev, based on r416183c1) clang version 12.0.8 (...)
+    // decrypt.e94930e06527fedf
+    $exports = /decrypt\.[0-9a-f]{14,16}/
+
+  condition:
+    is_elf and
+    #exports > 5
+    // for any i in (0..elf.symtab_entries): (elf.symtab[i].name matches /decrypt\.[0-9a-f]{14,16}/)
+}
+
 rule firehash : obfuscator
 {
   meta:
