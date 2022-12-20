@@ -794,11 +794,9 @@ rule appsealing_a : packer
     // asset names at "assets/AppSealing" : 11,a1,a3,aslc,hr,s1,s3,si,x1,x3
     $lib = "libcovault-appsec.so"
     $a1 = /assets\/AppSealing\/(.*)/
-    $b1 = "assets/aws_classes.dex"
-    $b2 = "assets/sealed1.dex"
 
   condition:
-    is_apk and $lib and $a1 and 1 of ($b*)
+    is_apk and $lib and #a1 > 3
 }
 
 rule secenh : packer
