@@ -622,7 +622,7 @@ rule dexguard_native_arm64 : obfuscator
 
   strings:
     // Frida detection into /proc/%d/maps
-    $hook = {
+    $hook1 = {
       0b 1d 00 12  //  and        w11,bf,#0xff
       48 15 40 38  //  ldrb       bf,[x10], #0x1
       29 25 1b 53  //  ubfiz      w9,w9,#0x5,#0xa
@@ -647,7 +647,7 @@ rule dexguard_native_arm64 : obfuscator
     }
 
     // Recurring patterns used into several string decryption
-    $str = {
+    $str1 = {
       6c 69 69 38  //  ldrb       w12,[x11, x9, LSL ]
       8c ?? ?? 11  //  add        w12,w12,??
       6c 69 29 38  //  strb       w12,[x11, x9, LSL ]
@@ -670,15 +670,18 @@ rule dexguard_native_arm64 : obfuscator
       }
     */
     $prolog_breakage1 = {
-      ea 03 0a 4b  //  neg        w10, w10
-      4b 01 09 4a  //  eor        w11, w10, w9
-      49 01 09 0a  //  and        w9, w10, w9
-      69 05 09 0b  //  add        w9, w11, w9,lsl#1
-      29 7d 40 93  //  sxtw       x9, w9
-      ea 03 7d b2  //  mov        x10, #8
-      28 21 0a 9b  //  madd       x8, x9, x10, x8
-      08 01 40 f9  //  ldr        x8, [x8]
-      00 01 1f d6  //  br         x8
+      ea 03 (0a|09) 4b            // neg w10, w10 | neg w9, w9
+      [4-16]                      // obfuscation
+      (4b 01 09 4a| 29 01 0a 4a)  // eor w11, w10, w9 | eor w9, w9, w10
+      [4-16]                      // obfuscation
+      49 01 09                    // and w9, w10, w9 | sub w9, w10, w9
+      [4-16]                      // obfuscation
+      29 7d 40 93                 // sxtw x9, w9
+      (ea 03 7d b2 | 0a 01 80 d2) // mov x10, #8
+      [0-8]                       // obfuscation
+      28 21 0a 9b                 // madd x8, x9, x10, x8
+      08 01 40 f9                 // ldr x8, [x8]
+      00 01 1f d6                 // br x8
     }
 
     // sample 5f0819ab5247ff992bdd3d3878561c4effa32878cf6e69c174b5ed054c52588f
@@ -700,10 +703,13 @@ rule dexguard_native_arm64 : obfuscator
       c0 03 5f d6  //  ret
     }
 
+    $obf_export = {
+      00 4a617661 5f 6f 5f [1-8] 00 // nullbyte + "Java_o_" + classname + nullbyte
+    }
+
   condition:
     elf.machine == elf.EM_AARCH64
-    and 1 of ($hook*)
-    and any of ($str, $str2, $prolog_breakage*)
+    and any of ($str*, $hook*, $prolog_breakage*, $obf_export)
     and #svc >= 6
     and not dexguard_native
     and not dexguard_native_a
