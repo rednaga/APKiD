@@ -324,3 +324,20 @@ rule verimatrix_arm64_b : protector
     and all of them
     and not verimatrix_arm64_a
 }
+
+rule protectt : protector
+{
+  meta:
+    description = "Protectt"
+    sample      = "c246d85560599f91e9c3ed7e59df2dd4e21aaf667f3f2965c28c43d9842f5e75" // com.rblbank.mobank
+    url         = "https://www.protectt.ai"
+    author      = "Eduardo Novella"
+
+  strings:
+    $lib1 = "libprotectt-native-lib.so"
+    $lib2 = "libprotecttai.so"
+    $lib3 = "libapp-protectt-native-lib.so"
+
+  condition:
+    is_elf and 1 of them
+}
