@@ -341,3 +341,22 @@ rule protectt : protector
   condition:
     is_elf and 1 of them
 }
+
+rule googleIntegrityProtection : protector
+{
+  meta:
+    description = "Google Play Integrity"
+    url         = "https://developer.android.com/games/playgames/integrity"
+    sample      = "607e256868c012dda10aaff07fdd24928d86122c715078406fb21aae7a2b8a44"
+    author      = "Eduardo Novella"
+
+    strings:
+      $export_jnionload      = { 004a 4e49 5f4f 6e4c 6f61 6400 } // JNI_OnLoad
+      $export_jnionunload    = { 004a 4e49 5f4f 6e55 6e6c 6f61 6400 } // JNI_OnUnLoad
+      $export_ExecuteProgram = { 00  4578 6563 7574 6550 726f 6772 616d 00  } // ExecuteProgram
+      $lib_name              = { 00 6c69 6270 6169 7269 7063 6f72  652e 736f 00} // libpairipcore.so
+
+    condition:
+      is_elf and all of them
+}
+
