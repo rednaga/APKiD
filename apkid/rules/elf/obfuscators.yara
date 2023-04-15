@@ -672,14 +672,15 @@ rule dexguard_native_arm64 : obfuscator
     $prolog_breakage1 = {
       ea 03 (0a|09) 4b            // neg w10, w10 | neg w9, w9
       [4-16]                      // obfuscation
-      (4b 01 09 4a| 29 01 0a 4a)  // eor w11, w10, w9 | eor w9, w9, w10
+      ?? 01 0? 4a                 // eor w?, w?, w?
       [4-16]                      // obfuscation
-      49 01 09                    // and w9, w10, w9 | sub w9, w10, w9
+      ?9 01 0?                    // and/sub w?, w1?, w?
       [4-16]                      // obfuscation
       29 7d 40 93                 // sxtw x9, w9
-      (ea 03 7d b2 | 0a 01 80 d2) // mov x10, #8
+      (ea 03 7d b2 | 0a ?? 80 d2) // mov x10, #8 | mov x10, #0x2e0
       [0-8]                       // obfuscation
       28 21 0a 9b                 // madd x8, x9, x10, x8
+      [0-8]                       // obfuscation
       08 01 40 f9                 // ldr x8, [x8]
       00 01 1f d6                 // br x8
     }
@@ -695,21 +696,23 @@ rule dexguard_native_arm64 : obfuscator
 
     // Binaries have usually >= 6 SVC instructions
     $svc = {
-      ?8 ?? ?? d2  //  mov        x8,??
+      ?8 ?? ?? ?2  //  mov        x8,??
+      [4-32]
       01 00 00 d4  //  svc        0x0
-      1f 04 40 b1  //  cmn        x0, #0x1, LSL#12
-      00 94 80 da  //  cneg       x0, x0, hi
-      ?8 ?? ?? 54  //  b.hi       ??
-      c0 03 5f d6  //  ret
     }
 
     $obf_export = {
       00 4a617661 5f 6f 5f [1-8] 00 // nullbyte + "Java_o_" + classname + nullbyte
     }
 
+    $export_jnionload = {
+      004a 4e49 5f4f 6e4c 6f61 6400 // JNI_OnLoad
+    }
+
   condition:
     elf.machine == elf.EM_AARCH64
     and any of ($str*, $hook*, $prolog_breakage*, $obf_export)
+    and $export_jnionload
     and #svc >= 6
     and not dexguard_native
     and not dexguard_native_a
