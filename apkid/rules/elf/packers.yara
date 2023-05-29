@@ -656,8 +656,31 @@ rule jiagu_native : packer
     $d = "JIAGU_APP_NAME"
     $e = "JIAGU_SO_BASE_NAME"
     $f = "JIAGU_ENCRYPTED_DEX_NAME"
-    $g = "JIAGU_HASH_FILE_NAME"   
+    $g = "JIAGU_HASH_FILE_NAME"
 
   condition:
     is_elf and ($a and $b and $c) and any of ($d, $e, $f, $g)
 }
+
+rule blackmod : packer
+{
+  meta:
+    description = "BlackMod"
+    url         = "https://blackmod.net/"
+    sample      = "77b1ff2db51896a2c5a0b1a932283d757f5d2285a8c035d212af09d8d373441a"
+    author      = "Eduardo Novella"
+
+  strings:
+    $libshield   = {00 6c6962626d742e736f 00} //"libbmt.so"
+
+    $svc = {
+      // read_0   ; CODE XREF: j__xd
+      07 C0 A0 E1  //   MOV             R12, R7
+      ?? 7? A0 E3  //   MOV             R7, #3 (read), #4 (write) & #0x142 (openat)
+      00 00 00 EF  //   SVC             0
+    }
+
+  condition:
+    is_elf and all of them
+}
+
