@@ -662,7 +662,7 @@ rule jiagu_native : packer
     is_elf and ($a and $b and $c) and any of ($d, $e, $f, $g)
 }
 
-rule blackmod : packer
+rule blackmod_arm32 : packer
 {
   meta:
     description = "BlackMod"
@@ -671,7 +671,8 @@ rule blackmod : packer
     author      = "Eduardo Novella"
 
   strings:
-    $libshield   = {00 6c6962626d742e736f 00} //"libbmt.so"
+    $libname    = {00 6c6962626d742e736f 00}       // libbmt.so
+    $jni_onload = {00 4a4e 495f 4f6e 4c6f 6164 00} // JNI_OnLoad
 
     $svc = {
       // read_0   ; CODE XREF: j__xd
@@ -681,6 +682,33 @@ rule blackmod : packer
     }
 
   condition:
-    is_elf and all of them
+    elf.machine == elf.EM_ARM and all of them
 }
+
+rule _5play_ru_arm32 : packer
+{
+  meta:
+    description = "5play.ru"
+    url         = "5play.ru"
+    sample      = "b0db6d3a98a2e0e255380e5e04c9b461cc1aac06e9be29150318cf4cfbe06887"
+    author      = "Eduardo Novella"
+
+  strings:
+    $libname    = {00 6c69 6252 4d53 2e73 6f 00}   // libRMS.so
+    $jni_onload = {00 4a4e 495f 4f6e 4c6f 6164 00} // JNI_OnLoad
+
+    $svc = {
+      FF 5F 2D E9   // PUSH  {R0-R12,LR}
+      42 71 00 E3   // MOVW  R7, #0x142
+      01 20 A0 E1   // MOV   R2, R1
+      00 10 A0 E1   // MOV   R1, R0
+      63 00 E0 E3   // MOV   R0, #0xFFFFFF9C
+      00 00 00 EF   // SVC   0
+    }
+
+  condition:
+    elf.machine == elf.EM_ARM and all of them
+}
+
+
 
