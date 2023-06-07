@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022  RedNaga. https://rednaga.io
+ * Copyright (C) 2023  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -662,7 +662,7 @@ rule jiagu_native : packer
     is_elf and ($a and $b and $c) and any of ($d, $e, $f, $g)
 }
 
-rule blackmod_arm32 : packer
+rule blackmod : packer
 {
   meta:
     description = "BlackMod"
@@ -674,22 +674,26 @@ rule blackmod_arm32 : packer
     $libname    = {00 6c6962626d742e736f 00}       // libbmt.so
     $jni_onload = {00 4a4e 495f 4f6e 4c6f 6164 00} // JNI_OnLoad
 
-    $svc = {
+    $svc_arm32 = {
       // read_0   ; CODE XREF: j__xd
-      07 C0 A0 E1  //   MOV             R12, R7
       ?? 7? A0 E3  //   MOV             R7, #3 (read), #4 (write) & #0x142 (openat)
       00 00 00 EF  //   SVC             0
     }
 
+    $svc_arm64 = {
+      ?8 0? 80 D2  //  MOV             X8, #63 (read), #64 (write), & #56 (openat)
+      01 00 00 D4  //  SVC             0
+    }
+
   condition:
-    elf.machine == elf.EM_ARM and all of them
+    is_elf and $libname and $jni_onload and any of ($svc_*)
 }
 
-rule _5play_ru_arm32 : packer
+rule _5play_ru : packer
 {
   meta:
     description = "5play.ru"
-    url         = "5play.ru"
+    url         = "https://5play.ru"
     sample      = "b0db6d3a98a2e0e255380e5e04c9b461cc1aac06e9be29150318cf4cfbe06887"
     author      = "Eduardo Novella"
 
@@ -697,7 +701,7 @@ rule _5play_ru_arm32 : packer
     $libname    = {00 6c69 6252 4d53 2e73 6f 00}   // libRMS.so
     $jni_onload = {00 4a4e 495f 4f6e 4c6f 6164 00} // JNI_OnLoad
 
-    $svc = {
+    $svc_arm32 = {
       FF 5F 2D E9   // PUSH  {R0-R12,LR}
       42 71 00 E3   // MOVW  R7, #0x142
       01 20 A0 E1   // MOV   R2, R1
@@ -706,8 +710,16 @@ rule _5play_ru_arm32 : packer
       00 00 00 EF   // SVC   0
     }
 
+    $svc_arm64 = {
+      08 07 80 D2   // MOV   X8, #56
+      E2 03 01 AA   // MOV   X2, X1
+      E1 03 00 AA   // MOV   X1, X0
+      60 0C 80 12   // MOV   W0, #0xFFFFFF9C
+      01 00 00 D4   // SVC   0
+    }
+
   condition:
-    elf.machine == elf.EM_ARM and all of them
+    is_elf and $libname and $jni_onload and any of ($svc_*)
 }
 
 
