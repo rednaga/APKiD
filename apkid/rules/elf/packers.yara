@@ -686,7 +686,7 @@ rule blackmod : packer
     }
 
   condition:
-    is_elf and $libname and $jni_onload and any of ($svc_*)
+    is_elf and 3 of them
 }
 
 rule _5play_ru : packer
@@ -719,7 +719,7 @@ rule _5play_ru : packer
     }
 
   condition:
-    is_elf and $libname and $jni_onload and any of ($svc_*)
+    is_elf and 3 of them
 }
 
 
