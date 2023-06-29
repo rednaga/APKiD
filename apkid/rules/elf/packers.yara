@@ -722,5 +722,19 @@ rule _5play_ru : packer
     is_elf and 3 of them
 }
 
+rule liapp_elf : packer
+{
+  meta:
+    description = "LIAPP"
+    sample      = "29b8c466148bcbe2ee4d1e9f1cc03ceb7e320cd19e7923e0c5a0b8a062758f0f" // com.teamblind.blind
+    author      = "Eduardo Novella"
+
+  strings:
+    $libname = {  006c 6962 6c69 6170 702e 736f 00 } // libliapp.so
+
+  condition:
+    is_elf and all of them
+}
+
 
 
