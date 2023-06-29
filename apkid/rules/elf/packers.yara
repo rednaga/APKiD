@@ -726,6 +726,7 @@ rule liapp_elf : packer
 {
   meta:
     description = "LIAPP"
+    url         = "https://liapp.lockincomp.com"
     sample      = "29b8c466148bcbe2ee4d1e9f1cc03ceb7e320cd19e7923e0c5a0b8a062758f0f" // com.teamblind.blind
     author      = "Eduardo Novella"
 
