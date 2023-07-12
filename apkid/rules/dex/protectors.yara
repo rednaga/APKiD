@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022  RedNaga. https://rednaga.io
+ * Copyright (C) 2023  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -195,3 +195,23 @@ rule free_rasp_dex : protector
   condition:
     is_dex and $decryption
 }
+
+rule appiron : protector
+{
+    meta:
+        description = "Secucen AppIron"
+        url         = "http://www.secucen.com/app/view/fintech/appIron"
+        sample      = "d4f4a24ce6350bc4e23e2170da5b217dd65161aba5eca775d75514e9cdac4d59"
+        author      = "dustty0 & Eduardo Novella"
+
+    strings:
+      $pkg = {
+             0023 4c63 6f6d 2f62 6172 756e 2f61 //   .#Lcom/barun/a
+        7070 6972 6f6e 2f61 6e64 726f 6964 2f41 // ppiron/android/A
+        7070 4972 6f6e 3b00                     // ppIron;.
+      }
+
+    condition:
+      is_dex and any of them
+}
+

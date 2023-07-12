@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022  RedNaga. https://rednaga.io
+ * Copyright (C) 2023  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -870,3 +870,22 @@ rule epicvm : packer
     condition:
         is_apk and all of them
 }
+
+rule appiron : packer
+{
+    meta:
+        description = "Secucen AppIron"
+        url         = "http://www.secucen.com/app/view/fintech/appIron"
+        sample      = "d4f4a24ce6350bc4e23e2170da5b217dd65161aba5eca775d75514e9cdac4d59"
+        author      = "dustty0 & Eduardo Novella"
+
+    strings:
+      $lib = /lib\/(.*)\/libAppIron-jni_v(.*)\.so/
+      $asset = /assets\/appiron\/(.*)/
+
+    condition:
+      is_apk and any of them
+}
+
+
+
