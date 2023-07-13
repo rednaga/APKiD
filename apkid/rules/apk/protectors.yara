@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022  RedNaga. https://rednaga.io
+ * Copyright (C) 2023  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -120,4 +120,19 @@ rule free_rasp_new : protector
 
   condition:
     is_apk and all of them
+}
+
+rule ahope_appshield : protector
+{
+    meta:
+        description = "Ahope AppShield"
+        url         = "http://www.ahope.net/sub/app-shields"
+        sample      = "42a4d907caf625ff73d5b6fbbf32b59ba14d6d5a72f28b81bdc76c47db516122"
+        author      = "dustty0 & Eduardo Novella"
+
+    strings:
+      $lib = /lib\/(arm.*|x86.*)\/libahope(.*)\.so/
+
+    condition:
+      is_apk and any of them
 }

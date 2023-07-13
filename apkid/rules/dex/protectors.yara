@@ -229,3 +229,31 @@ rule appiron : protector
       is_dex and any of them
 }
 
+rule ahope_appshield : protector
+{
+    meta:
+        description = "Ahope AppShield"
+        url         = "http://www.ahope.net/sub/app-shields"
+        sample      = "42a4d907caf625ff73d5b6fbbf32b59ba14d6d5a72f28b81bdc76c47db516122"
+        author      = "dustty0 & Eduardo Novella"
+
+    strings:
+      $pkg1 = {
+                                00 234c 636f 6d2f //          .#Lcom/
+          6168 6f70 652f 6170 705f 7368 6965 6c64 // ahope/app_shield
+          732f 4275 696c 6443 6f6e 6669 673b 00   // s/BuildConfig;.H
+      }
+
+      $pkg2 = {
+                                00 254c 636f 6d2f //          .%Lcom/
+          6168 6f70 652f 6170 705f 7368 6965 6c64 // ahope/app_shield
+          732f 5075 7265 4170 7043 6c69 656e 743b // s/PureAppClient;
+          00
+      }
+
+    condition:
+      is_dex and any of them
+}
+
+
+
