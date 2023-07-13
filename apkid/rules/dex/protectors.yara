@@ -215,7 +215,7 @@ rule appiron : protector
                                   00 2d4c 636f  //            .-Lco
         6d2f 7365 6375 6365 6e2f 6170 7069 726f // m/secucen/appiro
         6e65 7870 7265 7373 2f41 7070 4972 6f6e // nexpress/AppIron
-        4578 6365 7074 696f 6e3b 00
+        4578 6365 7074 696f 6e3b 00             // Exception;.
       }
 
       $pkg3 = {
