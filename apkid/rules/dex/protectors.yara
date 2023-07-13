@@ -205,10 +205,24 @@ rule appiron : protector
         author      = "dustty0 & Eduardo Novella"
 
     strings:
-      $pkg = {
+      $pkg1 = {
              0023 4c63 6f6d 2f62 6172 756e 2f61 //   .#Lcom/barun/a
         7070 6972 6f6e 2f61 6e64 726f 6964 2f41 // ppiron/android/A
         7070 4972 6f6e 3b00                     // ppIron;.
+      }
+
+      $pkg2 = {
+                                  00 2d4c 636f  //            .-Lco
+        6d2f 7365 6375 6365 6e2f 6170 7069 726f // m/secucen/appiro
+        6e65 7870 7265 7373 2f41 7070 4972 6f6e // nexpress/AppIron
+        4578 6365 7074 696f 6e3b 00
+      }
+
+      $pkg3 = {
+                                 002b 4c63 6f6d //            +Lcom
+        2f73 6563 7563 656e 2f61 7070 6972 6f6e // /secucen/appiron
+        6578 7072 6573 732f 4170 7049 726f 6e45 // express/AppIronE
+        7870 7265 7373 3b00                     // xpress;.
       }
 
     condition:

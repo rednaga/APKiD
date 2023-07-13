@@ -880,11 +880,12 @@ rule appiron : packer
         author      = "dustty0 & Eduardo Novella"
 
     strings:
-      $lib = /lib\/(.*)\/libAppIron-jni_v(.*)\.so/
+      $lib   = /lib\/(.*)\/libAppIron-jni_v(.*)\.so/
+      $lib2  = /libAppIronExpress_v(.*)\.so/
       $asset = /assets\/appiron\/(.*)/
 
     condition:
-      is_apk and any of them
+      is_apk and 2 of them
 }
 
 
