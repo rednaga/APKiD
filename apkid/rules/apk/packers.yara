@@ -888,5 +888,22 @@ rule appiron : packer
       is_apk and 2 of them
 }
 
+rule eversafe : packer
+{
+    meta:
+        description = "Eversafe"
+        url         = "https://everspin.global/products/solutions/eversafe-mobile"
+        sample      = "00dbb346f3ae0540620eb120ccf00a65af81a07baed5adfdcd2fc620a33ed298"
+        author      = "dustty0 & Eduardo Novella"
+
+    strings:
+      $lib1  = /lib\/(.*)\/libeversafe\.so/
+      $lib2  = /lib\/(.*)\/libeversafe-loader\.so/
+      $asset = /assets\/eversafe\/eversafe_(.*)\.data/
+
+    condition:
+      is_apk and 2 of them
+}
+
 
 

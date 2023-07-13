@@ -737,5 +737,21 @@ rule liapp_elf : packer
     is_elf and all of them
 }
 
+rule eversafe_elf : packer
+{
+    meta:
+        description = "Eversafe"
+        url         = "https://everspin.global/products/solutions/eversafe-mobile"
+        sample      = "00dbb346f3ae0540620eb120ccf00a65af81a07baed5adfdcd2fc620a33ed298"
+        author      = "dustty0 & Eduardo Novella"
+
+    strings:
+      $lib = {
+          006c 6962 6576 6572 7361 6665 2e73 6f00 // .libeversafe.so.
+      }
+
+    condition:
+      is_elf and any of them
+}
 
 
