@@ -428,3 +428,22 @@ rule ahope_appshield : protector
     condition:
       is_elf and any of them
 }
+
+
+rule appcamo : protector
+{
+    meta:
+        description = "AppCamo"
+        url         = "http://appcamo.com/s2/s2_1.php"
+        sample      = "b8bf8e44eff2f4557f050d19534624dc3df5053f7793eb409b98c18c475d969b"
+        author      = "dustty0 & Eduardo Novella"
+
+    strings:
+      $log = { 00 6170 7063 616d 6f 00} // .appcamo.
+      $lib = { 00 6c69 6261 6c69 622e 736f 00} // .libalib.so.
+      $lod = { 00 6461 6c76 696b 2f73 7973 7465 6d2f 4465 7843 6c61 7373 4c6f 6164 6572 00} // dalvik/system/DexClassLoader
+
+    condition:
+      is_elf and 2 of them
+}
+
