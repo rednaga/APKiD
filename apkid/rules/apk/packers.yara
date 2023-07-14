@@ -906,4 +906,23 @@ rule eversafe : packer
 }
 
 
+rule appcamo : packer
+{
+    meta:
+        description = "AppCamo"
+        url         = "http://appcamo.com/s2/s2_1.php"
+        sample      = "b8bf8e44eff2f4557f050d19534624dc3df5053f7793eb409b98c18c475d969b"
+        author      = "dustty0 & Eduardo Novella"
+
+    strings:
+      $lib   = /lib\/(.*)\/libalib\.so/
+      $asset = /assets\/[0-9a-f]{32}\/[0-9a-f]{32}\.png/
+      // assets/288426d06828409c8fb4f21080a51aee/d7b00c0c23514d7b9c9a022fcb9ce073.png
+
+    condition:
+      is_apk and all of them
+}
+
+
+
 
