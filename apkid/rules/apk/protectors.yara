@@ -136,3 +136,22 @@ rule ahope_appshield : protector
     condition:
       is_apk and any of them
 }
+
+rule vguard : protector
+{
+  meta:
+    description = "VGuard"
+    url         = "https://www.vguard.co.kr"
+    sample      = "7024bdadb53cbec86a39de845108b182ed2f7b3f0e7c0b876a948e1532ec5b9f"
+    author      = "dustty0"
+
+  strings:
+    $lib    = /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libedex\.so/
+    $asset1 = /assets\/dexsky\.(d|e)b(a|b|x|y)/
+    $asset2 = /assets\/dexsky\.ini/
+    $asset3 = /assets\/dex[a-z0-9]{3}\.zip/
+    $asset4 = /assets\/vguard\.(key|enginehash)/
+
+  condition:
+    is_apk and any of them
+}
