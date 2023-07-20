@@ -146,7 +146,7 @@ rule vguard : protector
     author      = "dustty0"
 
   strings:
-    $lib    = /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libedex\.so/
+    $lib    = /lib\/(arm.*|x86.*)\/libedex\.so/
     $asset1 = /assets\/dexsky\.(d|e)b(a|b|x|y)/
     $asset2 = /assets\/dexsky\.ini/
     $asset3 = /assets\/dex[a-z0-9]{3}\.zip/
