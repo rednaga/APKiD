@@ -792,11 +792,10 @@ rule appsealing_a : packer
 
   strings:
     // asset names at "assets/AppSealing" : 11,a1,a3,aslc,hr,s1,s3,si,x1,x3
-    $lib = "libcovault-appsec.so"
     $a1 = /assets\/AppSealing\/(.*)/
 
   condition:
-    is_apk and $lib and #a1 > 3
+    is_apk and #a1 > 3
 }
 
 rule secenh : packer
