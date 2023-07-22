@@ -255,5 +255,20 @@ rule ahope_appshield : protector
       is_dex and any of them
 }
 
+rule vguard : protector
+{
+  meta:
+    description = "VGuard"
+    url         = "https://www.vguard.co.kr"
+    sample      = "7024bdadb53cbec86a39de845108b182ed2f7b3f0e7c0b876a948e1532ec5b9f"
+    author      = "dustty0"
 
+  strings:
+    $pkg = {
+      001b 4c6b 722f 636f 2f73 646b 2f76 6775 6172 6432 // ..Lkr/co/sdk/vguard2
+      2f45 6465 784a 4e49 3b00                          // /EdexJNI;.
+    }
 
+  condition:
+    is_dex and any of them
+}
