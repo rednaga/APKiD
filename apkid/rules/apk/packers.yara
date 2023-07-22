@@ -926,7 +926,7 @@ rule appcamo : packer
 rule aegis : packer
 {
     meta:
-        description = "AEGIS. Android Republic Mods"
+        description = "Aegis - Android Republic Mods"
         url         = "https://androidrepublic.org"
         sample      = "4ca8c5f8ecfa1c36678b1745a2b58872e3f3f5fd14df6dd5fd65d6b8f2677f53"
         author      = "Yehh22 & Eduardo Novella"

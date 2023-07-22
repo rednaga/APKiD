@@ -754,4 +754,21 @@ rule eversafe_elf : packer
       is_elf and any of them
 }
 
+rule aegis_elf : packer
+{
+    meta:
+        description = "Aegis"
+        url         = "https://androidrepublic.org"
+        sample      = "4ca8c5f8ecfa1c36678b1745a2b58872e3f3f5fd14df6dd5fd65d6b8f2677f53"
+        author      = "Yehh22 & Eduardo Novella"
+
+    strings:
+        $lib1 = { 00 6c69 6261 6567 6973 5f65 2e73 6f00                } // .libaegis_e.so
+        $lib2 = { 00 6c69 6261 6567 6973 5f65 5f61 726d 3634 2E73 6f00 } // .libaegis_e_arm64.so.
+        $lib3 = { 00 6c69 6261 6567 6973 5f65 5f78 3836 2e73 6f00      } // .libaegis_e_x86.so.
+        $url = "https://www.androidrepublic.org"
+
+    condition:
+      is_elf and 2 of them
+}
 
