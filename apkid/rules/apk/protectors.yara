@@ -153,5 +153,5 @@ rule vguard : protector
     $asset4 = /assets\/vguard\.(key|enginehash)/
 
   condition:
-    is_apk and any of them
+    is_apk and 2 of them
 }
