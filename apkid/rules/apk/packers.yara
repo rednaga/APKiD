@@ -104,7 +104,7 @@ rule dxshield : packer
     $res = "assets/DXINFO.XML"
 
   condition:
-    is_apk and ($decryptlib and $res)
+    is_apk and ($decryptlib or $res)
 }
 
 private rule secneo_base
