@@ -447,3 +447,46 @@ rule appcamo : protector
       is_elf and 2 of them
 }
 
+rule appsealing : protector
+{
+    meta:
+        description = "Appsealing"
+        url         = "https://www.appsealing.com/"
+        sample      = "803b7b1e25fa879438ebb31e7f8bbcc7292ecda9750bdd0266e589fe4469bc10" // com.drishti.academy.app
+        author      = "Eduardo Novella"
+
+    strings:
+      // .libcovault-appsec.so.
+      $str1 = { 00 6c69 6263 6f76 6175 6c74 2d61 7070 7365 632e 736f 00 }
+      // .%s/appsealing.dex.
+      $str2 = { 00 2573 2f61 7070 7365 616c 696e 672e 6465 7800 }
+      // .APPSEALING-CORE-VERSION_
+      $str3 = { 00 4150 5053 4541 4c49 4e47 2d43 4f52 452d 5645 5253 494f 4e5f }
+      $str4 = {        00 284c 616e 6472 6f69 642f 636f  //    .(Landroid/co
+                6e74 656e 742f 436f 6e74 6578 743b 4c63  // ntent/Context;Lc
+                6f6d 2f69 6e6b 612f 6170 7073 6561 6c69  // om/inka/appseali
+                6e67 2f41 7070 5365 616c 696e 6741 7070  // ng/AppSealingApp
+                6c69 6361 7469 6f6e 3b4c 6a61 7661 2f6c  // lication;Ljava/l
+                616e 672f 436c 6173 734c 6f61 6465 723b  // ang/ClassLoader;
+                4c61 6e64 726f 6964 2f63 6f6e 7465 6e74  // Landroid/content
+                2f72 6573 2f41 7373 6574 4d61 6e61 6765  // /res/AssetManage
+                723b 4c6a 6176 612f 6c61 6e67 2f53 7472  // r;Ljava/lang/Str
+                696e 673b 4c6a 6176 612f 6c61 6e67 2f53  // ing;Ljava/lang/S
+                7472 696e 673b 4c6a 6176 612f 6c61 6e67  // tring;Ljava/lang
+                2f53 7472 696e 673b 294c 6a61 7661 2f6c  // /String;)Ljava/l
+                616e 672f 5374 7269 6e67 3b00            // ang/String;.
+    }
+    $str5 = {  00 636f 6d2f 696e 6b61 2f61 7070 // ....com/inka/app
+        7365 616c 696e 672f 4170 7053 6561 6c69 // sealing/AppSeali
+        6e67 4170 706c 6963 6174 696f 6e00      // ngApplication...
+    }
+    $str6 = {          49 6e69 7469 6174 6520  //  .......Initiate
+      4170 7053 6561 6c69 6e67 2053 6563 7572  // AppSealing Secur
+      6974 7920 3a20 4152 4d36 3420 2843 6f72  // ity : ARM64 (Cor
+      6520 5665 7273 696f 6e20 3d20 2573 2900  // e Version = %s).
+    }
+
+    condition:
+      is_elf and 2 of them
+}
+
