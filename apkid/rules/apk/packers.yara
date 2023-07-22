@@ -932,18 +932,17 @@ rule aegis : packer
         author      = "Yehh22 & Eduardo Novella"
 
     strings:
-      $asset1 = "assets/aegis/aegis.mf"
-      $asset2 = "assets/aegis/aegis.sig"
-      $asset3 = /assets\/aegis\/aegis[0-9]{1}\.dat/
-      $asset4 = "assets/aegis/nmsscr.nmss"
-      $asset5 = "assets/aegis/nmssey.nmss"
-      $asset6 = "assets/aegis/nmsskc.nmss"
-      $asset7 = "assets/aegis/shield.dat"
+        $asset1 = "assets/aegis/aegis.mf"
+        $asset2 = "assets/aegis/aegis.sig"
+        $asset3 = /assets\/aegis\/aegis[0-9]{1}\.dat/
+        $asset4 = "assets/aegis/nmsscr.nmss"
+        $asset5 = "assets/aegis/nmssey.nmss"
+        $asset6 = "assets/aegis/nmsskc.nmss"
+        $asset7 = "assets/aegis/shield.dat"
 
     condition:
       is_apk and any of them
 }
-
 
 
 
