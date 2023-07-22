@@ -923,5 +923,28 @@ rule appcamo : packer
 }
 
 
+rule aegis : packer
+{
+    meta:
+        description = "AEGIS. Android Republic Mods"
+        url         = "https://androidrepublic.org"
+        sample      = "4ca8c5f8ecfa1c36678b1745a2b58872e3f3f5fd14df6dd5fd65d6b8f2677f53"
+        author      = "Yehh22 & Eduardo Novella"
+
+    strings:
+      $asset1 = "assets/aegis/aegis.mf"
+      $asset2 = "assets/aegis/aegis.sig"
+      $asset3 = /assets\/aegis\/aegis[0-9]{1}\.dat/
+      $asset4 = "assets/aegis/nmsscr.nmss"
+      $asset5 = "assets/aegis/nmssey.nmss"
+      $asset6 = "assets/aegis/nmsskc.nmss"
+      $asset7 = "assets/aegis/shield.dat"
+
+    condition:
+      is_apk and any of them
+}
+
+
+
 
 
