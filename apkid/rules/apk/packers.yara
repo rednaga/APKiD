@@ -944,6 +944,18 @@ rule aegis : packer
       is_apk and any of them
 }
 
+rule kangapack : packer
+{
+    meta:
+        description = "KangaPack"
+        sample      = "2c05efa757744cb01346fe6b39e9ef8ea2582d27481a441eb885c5c4dcd2b65b"
+        sample2     = "1ac9044146fa1ff7fcf73cd31f7a940838983792e2a849cb66eed5a1d9c997dd"
+        author      = "Axelle Apvrille"
+        url         = "https://cryptax.medium.com/inside-kangapack-the-kangaroo-packer-with-native-decryption-3e7e054679c4"
 
+    strings:
+        $lib  = /lib\/(arm.*|x86.*)\/libapksadfsalkwes.so/
 
-
+    condition:
+        is_apk and all of them
+}
