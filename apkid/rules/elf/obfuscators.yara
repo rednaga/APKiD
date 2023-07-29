@@ -816,3 +816,21 @@ rule dexprotector_alice : obfuscator
   condition:
     is_elf and any of them
 }
+
+rule androidrepublic : obfuscator
+{
+  meta:
+    description = "AndroidRepublic"
+    url         = "https://androidrepublic.org/"
+    sample      = "b893b45852ccfe4e037a356348042e613c47ae56e554943d8b3998c0cbb3ffb9"
+    author      = "Eduardo Novella"
+
+  strings:
+    $str1 = { 00 6c 69 62 65 6d 74 72 65 70 75 62 6c 69 63 76 33 2e 73 6f 00 } // .libemtrepublicv3.so.
+    $str2 = { 00 61 6e 64 72 6f 69 64 72 65 70 75 62 6c 69 63 2e 6f 72 67 00 } // .androidrepublic.org.
+    $str3 = "We are Android Republic, while you snoop around trying to imitate, we are inovating the latest in Android Game modifications www.androidrepublic.org the oldest, the best and the future."
+
+  condition:
+    is_elf and 2 of them
+}
+

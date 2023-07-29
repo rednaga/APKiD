@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022  RedNaga. https://rednaga.io
+ * Copyright (C) 2023  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -62,4 +62,27 @@ rule gemalto_protector : obfuscator
 
   condition:
     any of them and is_apk
+}
+
+rule androidrepublic : obfuscator
+{
+  meta:
+    description = "AndroidRepublic"
+    url         = "https://androidrepublic.org/"
+    sample      = "b893b45852ccfe4e037a356348042e613c47ae56e554943d8b3998c0cbb3ffb9"
+    author      = "Eduardo Novella"
+
+  strings:
+    $asset1 = "assets/emt.androidrepublic/config.png"
+    $asset2 = "assets/emt.androidrepublic/monkey.png"
+    $asset3 = "assets/emt.androidrepublic/system.png"
+    $asset4 = "assets/emt.androidrepublic/system_000.png"
+    $asset5 = "assets/emt.androidrepublic/system_001.png"
+    $asset6 = "assets/emt.androidrepublic/system_002.png"
+    $asset7 = "assets/emt.androidrepublic/system_003.png"
+    $asset8 = "assets/emt.androidrepublic/system_004.png"
+    $asset9 = "assets/emt.androidrepublic/system_005.png"
+
+  condition:
+    is_apk and any of them
 }
