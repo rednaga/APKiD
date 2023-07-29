@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022  RedNaga. https://rednaga.io
+ * Copyright (C) 2023  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -809,7 +809,10 @@ rule dexprotector_alice : obfuscator
       libalice.so: /Users/receiver/git/dexprotector/12.7.11/alice-core/src/main/jni/../cpp/utils.cpp
     */
     $alice_sdk =  /dexprotector\/.*\/alice-core\/.*.cpp/
+    $dp_log    = {
+      2e64 6578 705f 6372 6173 685f 7469 6d65 7200 6465 7870 5f63 7261 7368 5f00   // dexp_crash_timer.dexp_crash_.
+    }
 
   condition:
-    is_elf and all of them
+    is_elf and any of them
 }
