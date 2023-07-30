@@ -834,3 +834,19 @@ rule androidrepublic : obfuscator
     is_elf and 2 of them
 }
 
+rule androidrepublic_vip : obfuscator
+{
+  meta:
+    description = "AndroidRepublic VIP"
+    url         = "https://androidrepublic.org/"
+    sample      = "ea1c69b7ba4f43ddcfb615e3fc5ff87d599232e6df089845a0e663d4bea761e0"
+    author      = "Eduardo Novella"
+
+  strings:
+    $lib = {
+      006c 6962 616e 6472 6f69 6472 6570 7562 6c69 632e 736f 00 // .libandroidrepublic.so.
+     }
+
+  condition:
+    is_elf and all of them
+}

@@ -86,3 +86,18 @@ rule androidrepublic : obfuscator
   condition:
     is_apk and any of them
 }
+
+rule androidrepublic_vip : obfuscator
+{
+  meta:
+    description = "AndroidRepublic VIP"
+    url         = "https://androidrepublic.org/"
+    sample      = "ea1c69b7ba4f43ddcfb615e3fc5ff87d599232e6df089845a0e663d4bea761e0"
+    author      = "Eduardo Novella"
+
+  strings:
+    $asset1 = /assets\/androidrepublic\.org\/(.*)\.png/
+
+  condition:
+    is_apk and all of them
+}
