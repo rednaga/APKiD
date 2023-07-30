@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
- Copyright (C) 2022  RedNaga. https://rednaga.io
+ Copyright (C) 2023  RedNaga. https://rednaga.io
  All rights reserved. Contact: rednaga@protonmail.com
 
 

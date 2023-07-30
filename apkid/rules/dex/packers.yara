@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022  RedNaga. https://rednaga.io
+ * Copyright (C) 2023  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -436,7 +436,7 @@ rule jsonpacker : packer
     $dexclass = {
       6e 20 ?? ?? 10 00   // invoke-virtual      {v0, v1}, Ljava/lang/reflect/Constructor;->newInstance([Ljava/lang/Object;)Ljava/lang/Object;
       0c ??               // move-result-object  p1
-      1f 0?               // check-cast          p1, Ldalvik/system/DexClassLoader; 
+      1f 0?               // check-cast          p1, Ldalvik/system/DexClassLoader;
     }
 
    condition:
@@ -486,5 +486,5 @@ rule multidexpacker : packer
   condition:
      is_dex
      and $multidex_deobfuscation
-     and $decrypt_dex 
+     and $decrypt_dex
 }
