@@ -14,8 +14,9 @@ For more information on what this tool can be used for, check out:
 
 * [Android Compiler Fingerprinting](http://hitcon.org/2016/CMT/slide/day1-r0-e-1.pdf)
 * [Detecting Pirated and Malicious Android Apps with APKiD](http://rednaga.io/2016/07/31/detecting_pirated_and_malicious_android_apps_with_apkid/)
-* [APKiD: PEiD for Android Apps](https://github.com/enovella/cve-bio-enovella/blob/master/slides/bheu18-enovella-APKID.pdf)
+* [APKiD: PEiD for Android Apps (BlackHat EU/UK Arsenal 2018)](https://github.com/enovella/cve-bio-enovella/blob/master/slides/bheu18-enovella-APKID.pdf)
 * [APKiD: Fast Identification of AppShielding Products](https://github.com/enovella/cve-bio-enovella/blob/master/slides/APKiD-NowSecure-Connect19-enovella.pdf)
+* [APKiD: Fast Identification of Mobile RASP SDKs (BlackHat USA Arsenal 2023)](https://github.com/enovella/cve-bio-enovella/blob/master/slides/bheu23-enovella-APKID.pdf)
 
 ## Installing
 
