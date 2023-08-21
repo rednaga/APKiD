@@ -72,25 +72,16 @@ rule appguard_b : packer
 
   strings:
     // package com.nhnent.appguard;
-    $a1 = "assets/classes.jet"
-    $a2 = "assets/classes.zip"
-    $a3 = "assets/classes2.jet"
-    $a4 = "assets/classes2.zip"
-    $a5 = "assets/classes3.jet"
-    $a6 = "assets/classes3.zip"
-    $b1 = "lib/armeabi-v7a/libloader.so"
-    $b2 = "lib/x86/libloader.so"
-    $b3 = "lib/armeabi-v7a/libdiresu.so"
-    $b4 = "lib/x86/libdiresu.so"
-    $b5 = "lib/arm64-v8a/libloader.so"
-    $b6 = "lib/arm64-v8a/libdiresu.so"
+    $a1 = /assets\/classes[1-9]{0,1}\.(jet|zip)/
+    $b1 = /lib\/(arm.*|x86.*)\/libloader\.so/
+    $b2 = /lib\/(arm.*|x86.*)\/libdiresu\.so/
     $c1 = "assets/m7a"
     $c2 = "assets/m8a"
     $c3 = "assets/agconfig"    //appguard cfg?
     $c4 = "assets/agmetainfo"
 
   condition:
-    is_apk and (2 of ($a*) and 1 of ($b*) and 1 of ($c*))
+    is_apk and 1 of ($b*) and (1 of ($a*) or 1 of ($c*))
 }
 
 rule dxshield : packer
