@@ -155,3 +155,18 @@ rule vguard : protector
   condition:
     is_apk and 2 of them
 }
+
+rule appdefence : protector
+{
+  meta:
+    description = "ExTrus AppDefence"
+    url         = "https://www.extrus.co.kr/eng/m/product_01_05.html"
+    sample      = "e080380673479d2e182ad7eff5130bb72fe9a228c0a5de9852df23c4e98113b2"
+    author      = "dustty0"
+
+  strings:
+    $asset = "assets/appdefence_xml"
+
+  condition:
+    is_apk and all of them
+}

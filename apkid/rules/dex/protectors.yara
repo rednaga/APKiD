@@ -272,3 +272,23 @@ rule vguard : protector
   condition:
     is_dex and any of them
 }
+
+rule appdefence : protector
+{
+  meta:
+    description = "ExTrus AppDefence"
+    url         = "https://www.extrus.co.kr/eng/m/product_01_05.html"
+    sample      = "e080380673479d2e182ad7eff5130bb72fe9a228c0a5de9852df23c4e98113b2"
+    author      = "dustty0"
+
+  strings:
+    $pkg = {
+           003e 4c6e 6574 2f65 7874 7275 732f 6578 6166 //   .>Lnet/extrus/exaf
+      652f 6170 7064 6566 656e 6365 2f6d 6f64 756c 652f // e/appdefence/module/
+      6170 7064 6566 656e 6365 2f44 6566 656e 6365 4170 // appdefence/DefenceAp
+      6949 6d70 6c3b 00                                 // iImpl;.
+    }
+
+  condition:
+    is_dex and all of them
+}
