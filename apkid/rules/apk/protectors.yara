@@ -160,9 +160,9 @@ rule appdefence : protector
 {
   meta:
     description = "ExTrus AppDefence"
-    url = "https://www.extrus.co.kr/eng/m/product_01_05.html"
-    sample = "e080380673479d2e182ad7eff5130bb72fe9a228c0a5de9852df23c4e98113b2"
-    author = "dustty0"
+    url         = "https://www.extrus.co.kr/eng/m/product_01_05.html"
+    sample      = "e080380673479d2e182ad7eff5130bb72fe9a228c0a5de9852df23c4e98113b2"
+    author      = "dustty0"
 
   strings:
     $asset = "assets/appdefence_xml"
