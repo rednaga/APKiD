@@ -772,3 +772,17 @@ rule aegis_elf : packer
       is_elf and 2 of them
 }
 
+rule appguard_elf : packer
+{
+  meta:
+    description = "AppGuard"
+    url         = "http://appguard.nprotect.com/en/index.html"
+    sample      = "a6e9c876be2b8b936ab9bfe2699811524b8ad3c11305099b34194bb8aad79f1e"
+    author      = "Eduardo Novella"
+
+  strings:
+    $a = { 00 6C 69 62 41 70 70 47 75  61 72 64 2E 73 6F 00 }  // .libAppGuard.so.
+
+  condition:
+    is_elf and any of them
+}
