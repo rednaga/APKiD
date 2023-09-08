@@ -670,11 +670,11 @@ rule dexguard_native_arm64 : obfuscator
       }
     */
     $prolog_breakage1 = {
-      ea 03 (0a|09) 4b            // neg w10, w10 | neg w9, w9
+      e? 03 (0a|09) 4b            // neg w10, w10 | neg w9, w9
       [4-16]                      // obfuscation
       ?? 01 0? 4a                 // eor w?, w?, w?
       [4-16]                      // obfuscation
-      ?9 01 0?                    // and/sub w?, w1?, w?
+      ?9 01 0? ??                 // and/sub w?, w1?, w?
       [4-16]                      // obfuscation
       29 7d 40 93                 // sxtw x9, w9
       (ea 03 7d b2 | 0a ?? 80 d2) // mov x10, #8 | mov x10, #0x2e0
