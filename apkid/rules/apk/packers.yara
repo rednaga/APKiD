@@ -31,14 +31,14 @@ rule appguard : packer
 {
   meta:
     description = "AppGuard"
-    url = "http://appguard.nprotect.com/en/index.html"
+    url         = "http://appguard.nprotect.com/en/index.html"
 
   strings:
-    $stub = "assets/appguard/"
+    $stub          = "assets/appguard/"
     $encrypted_dex = "assets/classes.sox"
 
   condition:
-    is_apk and ($stub and $encrypted_dex)
+    is_apk and all of them
 }
 
 rule appguard_a : packer
@@ -52,15 +52,29 @@ rule appguard_a : packer
   strings:
     $a = "assets/AppGuard0.jar"
     $b = "assets/AppGuard.dgc"
-    $c = "lib/arm64-v8a/libAppGuard.so"
-    $d = "lib/armeabi-v7a/libAppGuard.so"
-    $e = "libAppGuard-x86.so"
+    $c = /lib\/(arm.*|x86.*)\/libAppGuard\.so/
+    $d = "libAppGuard-x86.so"
 
   condition:
-    is_apk and 3 of them
+    is_apk and any of them
 }
 
 rule appguard_b : packer
+{
+  meta:
+    description = "AppGuard"
+    sample      = "c5195daa5d17ba6e1755f8cb7270ae3a971eb688ee7d650d10c284d7c93b777d"
+    url         = "http://appguard.nprotect.com/en/index.html"
+    author      = "Eduardo Novella"
+
+  strings:
+    $stub = "assets/appguard/"
+
+  condition:
+    is_apk and any of them and not appguard
+}
+
+rule appguard_c : packer
 {
   meta:
     description = "AppGuard (TOAST-NHNent)"
