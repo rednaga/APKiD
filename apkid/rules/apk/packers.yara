@@ -63,7 +63,7 @@ rule appguard_b : packer
 {
   meta:
     description = "AppGuard"
-    sample      = "c5195daa5d17ba6e1755f8cb7270ae3a971eb688ee7d650d10c284d7c93b777d"
+    sample      = "23cd2af10d46459065ea65b2d40fb706fd4847a1f8ef195cbebf1c6d8d54a48a"
     url         = "http://appguard.nprotect.com/en/index.html"
     author      = "Eduardo Novella"
 

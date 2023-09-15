@@ -488,3 +488,26 @@ rule multidexpacker : packer
      and $multidex_deobfuscation
      and $decrypt_dex
 }
+
+rule appguard_dex : packer
+{
+  meta:
+    description = "AppGuard"
+    url         = "http://appguard.nprotect.com/en/index.html"
+    sample      = "23cd2af10d46459065ea65b2d40fb706fd4847a1f8ef195cbebf1c6d8d54a48a"
+    author      = "Eduardo Novella"
+
+  strings:
+    $class1 = { 001e 4c63 6f6d 2f69 6e63 612f 7365 6375 7269 7479 2f
+               (49|69) (49|69) (49|69) (49|69) (49|69) (49|69) (49|69)
+               [0-10] 3b 00} // Lcom/inca/security/IIIiiiiIii;
+    $class2 = { 00 254c 636f 6d2f 696e 6361 2f73 6563
+                7572 6974 792f 5072 6f78 792f 4a4e 4953
+                6f78 5072 6f78 793b 00} // .%Lcom/inca/security/Proxy/JNISoxProxy;.
+    $class3 = { 00 2b4c 636f 6d2f 696e 6361 2f73 6563
+                7572 6974 792f 5365 7276 6963 652f 4170
+                7047 7561 7264 5365 7276 6963 653b 00} // .+Lcom/inca/security/Service/AppGuardService;.
+
+  condition:
+    is_dex and any of them
+}
