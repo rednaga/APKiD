@@ -498,9 +498,9 @@ rule appguard_dex : packer
     author      = "Eduardo Novella"
 
   strings:
-    $class1 = { 001e 4c63 6f6d 2f69 6e63 612f 7365 6375 7269 7479 2f
+    $class1 = { 00?? 4c63 6f6d 2f69 6e63 612f 7365 6375 7269 7479 2f
                (49|69) (49|69) (49|69) (49|69) (49|69) (49|69) (49|69)
-               [0-10] 00} // Lcom/inca/security/IIIiiiiIii;
+               [0-10] 3b 00} // Lcom/inca/security/IIIiiiiIii;
     $class2 = { 00 254c 636f 6d2f 696e 6361 2f73 6563
                 7572 6974 792f 5072 6f78 792f 4a4e 4953
                 6f78 5072 6f78 793b 00} // .%Lcom/inca/security/Proxy/JNISoxProxy;.
