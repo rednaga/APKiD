@@ -688,7 +688,7 @@ rule kony : packer
 rule approov : packer
 {
   meta:
-    description = "Aproov"
+    description = "Approov"
     url = "https://www.approov.io/"
 
   strings:
