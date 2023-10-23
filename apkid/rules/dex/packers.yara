@@ -524,47 +524,57 @@ rule CustomMultiDexPacker : packer
 	 
  strings:
 
-	$cipher = {
+$cipher = {
 
-		1a00 ????		     //const-string v0, "UTF-8" // string@023c
-		7110 ???? 0000	 //invoke-static {v0}, Ljava/nio/charset/Charset;.forName:(Ljava/lang/String;)Ljava/nio/charset/Charset; // method@016d
-		0c00			       //move-result-object v0
-		6900 ????		     //sput-object v0, Lˆʿⁱᐧʾﹶ/ˑᵢـיـˉ/ـⁱᵔᵎᵎʾ/ˈⁱᐧᐧˊᐧ/ᴵᵎʾˑﹶﹶ;.defaultCharset:Ljava/nio/charset/Charset; // field@0115
-		1a00 ????		     //const-string v0, "ⁱʻʽⁱˈˈᵢᵔˈᴵٴʼᐧˈˋʽᵢʽᴵᐧיʾʽﹶˊﾞˉʾⁱʼⁱʿʽיⁱᐧˎʾˈ" // string@047d
-		7110 ???? 0000	 // invoke-static {v0}, Lˆʿⁱᐧʾﹶ/ˑᵢـיـˉ/ـⁱᵔᵎᵎʾ/ˈⁱᐧᐧˊᐧ/ᴵᵎʾˑﹶﹶ;.encodePass:(Ljava/lang/String;)Ljava/lang/String; // method@01f4
-		0c00			       //move-result-object v0
-		6900 ????		     //sput-object v0, Lˆʿⁱᐧʾﹶ/ˑᵢـיـˉ/ـⁱᵔᵎᵎʾ/ˈⁱᐧᐧˊᐧ/ᴵᵎʾˑﹶﹶ;.globalPass:Ljava/lang/String; // field@0116
-		0e00			      //return-void
-		1201			      //const/4 v1, #int 0 // #0
-		2203 ????		    //new-instance v3, Ljavax/crypto/spec/SecretKeySpec; // type@006a
-		6e10 ???? 0700	//invoke-virtual {v7}, Ljava/lang/String;.getBytes:()[B // method@004f
-		0c04			      //move-result-object v4
-		1a05 ????		    //const-string v5, "AES" // string@001e
-		7030 ???? 4305	//invoke-direct {v3, v4, v5}, Ljavax/crypto/spec/SecretKeySpec;.<init>:([BLjava/lang/String;)V // method@0072
-		1a04 ????		    //const-string v4, "AES" // string@001e
-		7110 ???? 0400	//invoke-static {v4}, Ljavax/crypto/Cipher;.getInstance:(Ljava/lang/String;)Ljavax/crypto/Cipher; // method@0070
-		0c00		      	//move-result-object v0
-		1224			      //const/4 v4, #int 2 // #2
-		6e30 ???? 4003	//invoke-virtual {v0, v4, v3}, Ljavax/crypto/Cipher;.init:(ILjava/security/Key;)V // method@0071
-		6e20 ???? 6000	//invoke-virtual {v0, v6}, Ljavax/crypto/Cipher;.doFinal:([B)[B // method@006f
-		0c01			      //move-result-object v1
-		1101		      	//return-object v1
-		0d02		      	//move-exception v2
-		6e10 ???? 0200	//invoke-virtual {v2}, Ljava/lang/Exception;.printStackTrace:()V // method@0043
-		28fb			      //goto 001a // -0005
-		7110 ???? 0300	//invoke-static {v3}, Lᵔˎʻᐧـˏ/יﹳﹶˆˆ/ˊﾞᵔٴʼי/ᴵˆᵔᵎˑʾ/ʼˈˏﾞˎˉ;.encodeToMD5:(Ljava/lang/String;)Ljava/lang/String; // method@0084
-		0c00			      //move-result-object v0
-		1301 0800		    //const/16 v1, #int 8 // #8
-		1302 1800		    //const/16 v2, #int 24 // #18
-		6e30 ???? 1002	//invoke-virtual {v0, v1, v2}, Ljava/lang/String;.substring:(II)Ljava/lang/String; // method@0055
-		0c00			      //move-result-object v0
-		1100			      //return-object v0
+		1a00 ????      		    //const-string v0, "UTF-8" // string@00c9    
+		7110 ???? 0000              //invoke-static {v0}, Ljava/nio/charset/Charset;.forName:(Ljava/lang/String;)Ljava/nio/charset/Charset; // method@0067
+		0c00                        //move-result-object v0
+		6900 ????                   //sput-object v0, Lᵔˎʻᐧـˏ/יﹳﹶˆˆ/ˊﾞᵔٴʼי/ᴵˆᵔᵎˑʾ/ʼˈˏﾞˎˉ;.defaultCharset:Ljava/nio/charset/Charset; // field@0069
+		1a00 ????                   //const-string v0, "ﾞﹳﾞـⁱᐧʿـʿʿⁱᵎﹶʽʾﾞʽٴיᵎﹶʼʼʽˑˉᵎʼٴיˋᵎʼـʿʿʼˈʽᵔ" // string@01a2
+		7110 ???? 0000              //invoke-static {v0}, Lᵔˎʻᐧـˏ/יﹳﹶˆˆ/ˊﾞᵔٴʼי/ᴵˆᵔᵎˑʾ/ʼˈˏﾞˎˉ;.encodePass:(Ljava/lang/String;)Ljava/lang/String; // method@0082
+		0c00                        //move-result-object v0
+		6900 ????                   //sput-object v0, Lᵔˎʻᐧـˏ/יﹳﹶˆˆ/ˊﾞᵔٴʼי/ᴵˆᵔᵎˑʾ/ʼˈˏﾞˎˉ;.globalPass:Ljava/lang/String; // field@006a
+		0e00                        //return-void
+	
+	}	
 
-}	
+	$cipher2 = {
 
-condition:
+		1201         		    //const/4 v1, #int 0 // #0 
+		2203 ????                   //new-instance v3, Ljavax/crypto/spec/SecretKeySpec; // type@006a
+		6e10 ???? 0700              //invoke-virtual {v7}, Ljava/lang/String;.getBytes:()[B // method@004f
+		0c04                        //move-result-object v4
+		1a05 ????                   //const-string v5, "AES" // string@001e
+		7030 ???? 4305              //invoke-direct {v3, v4, v5}, Ljavax/crypto/spec/SecretKeySpec;.<init>:([BLjava/lang/String;)V // method@0072
+		1a04 ????                   //const-string v4, "AES" // string@001e
+		7110 ???? 0400              //invoke-static {v4}, Ljavax/crypto/Cipher;.getInstance:(Ljava/lang/String;)Ljavax/crypto/Cipher; // method@0070
+		0c00                        //move-result-object v0
+		1224                        //const/4 v4, #int 2 // #2
+		6e30 ???? 4003              //invoke-virtual {v0, v4, v3}, Ljavax/crypto/Cipher;.init:(ILjava/security/Key;)V // method@0071
+		6e20 ???? 6000              //invoke-virtual {v0, v6}, Ljavax/crypto/Cipher;.doFinal:([B)[B // method@006f
+		0c01                        //move-result-object v1
+		1101                        //return-object v1
+		0d02                        //move-exception v2
+		6e10 ???? 0200              //invoke-virtual {v2}, Ljava/lang/Exception;.printStackTrace:()V // method@0043
+		28fb                        //goto 001a // -0005
 
-	is_dex and $cipher
+	
+	}	
+	
+	$cipher3 = {
+
+		7110 ???? 0100 	             //invoke-static {v1}, Lᵔˎʻᐧـˏ/יﹳﹶˆˆ/ˊﾞᵔٴʼי/ᴵˆᵔᵎˑʾ/ʼˈˏﾞˎˉ;.encodeToMD516:(Ljava/lang/String;)Ljava/lang/String; // method@0085
+		0c00                        //move-result-object v0
+		6e10 ???? 0000              //invoke-virtual {v0}, Ljava/lang/String;.toLowerCase:()Ljava/lang/String; // method@0056
+		0c00                        //move-result-object v0
+		1100                        //return-object v0
+
+	
+	}
+	
+	condition:
+
+		is_dex and $cipher and $cipher2 and $cipher3
 }
 
 rule Flutter_Custom_Packer : packer 
