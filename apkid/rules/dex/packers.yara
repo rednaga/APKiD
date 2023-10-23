@@ -585,7 +585,7 @@ rule Flutter_Custom_Packer : packer
 		0c00            // move-result-object v0
 		1a01 0100       // const-string v1, "3662583155221358" // string@0001
 		1a02 0200       // const-string v2, "7243279461549821" // string@0002
-		7140 0600 2140  // invoke-static {v1, v2, v0, v4}, Lcom/zzWrgZUeZn;.DgQYvfuzRk:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;[B)[B // method@0006
+		7140 ???? 2140  // invoke-static {v1, v2, v0, v4}, Lcom/zzWrgZUeZn;.DgQYvfuzRk:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;[B)[B // method@0006
 		0c04            // move-result-object v4
 		1104            // return-object v4
 }	
