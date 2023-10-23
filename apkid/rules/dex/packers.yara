@@ -511,3 +511,85 @@ rule appguard_dex : packer
   condition:
     is_dex and any of them
 }
+
+rule CustomMultiDexPacker : packer
+{
+ 
+  meta:
+
+	description = "CustomMultiDexPacker"
+	sample1     = "b8f8948187846371eb32b2d7ef4f537c94997329e08d762b9ac6b3bfcbc86993"
+	sample2     = "fdf5b6930d38da33ec117d7c0f83f142db1c33013d020f0ab4801d1fd781f552"
+	author      = "ReBensk"
+	 
+ strings:
+
+	$cipher = {
+
+		1a00 ????		     //const-string v0, "UTF-8" // string@023c
+		7110 ???? 0000	 //invoke-static {v0}, Ljava/nio/charset/Charset;.forName:(Ljava/lang/String;)Ljava/nio/charset/Charset; // method@016d
+		0c00			       //move-result-object v0
+		6900 ????		     //sput-object v0, Lˆʿⁱᐧʾﹶ/ˑᵢـיـˉ/ـⁱᵔᵎᵎʾ/ˈⁱᐧᐧˊᐧ/ᴵᵎʾˑﹶﹶ;.defaultCharset:Ljava/nio/charset/Charset; // field@0115
+		1a00 ????		     //const-string v0, "ⁱʻʽⁱˈˈᵢᵔˈᴵٴʼᐧˈˋʽᵢʽᴵᐧיʾʽﹶˊﾞˉʾⁱʼⁱʿʽיⁱᐧˎʾˈ" // string@047d
+		7110 ???? 0000	 // invoke-static {v0}, Lˆʿⁱᐧʾﹶ/ˑᵢـיـˉ/ـⁱᵔᵎᵎʾ/ˈⁱᐧᐧˊᐧ/ᴵᵎʾˑﹶﹶ;.encodePass:(Ljava/lang/String;)Ljava/lang/String; // method@01f4
+		0c00			       //move-result-object v0
+		6900 ????		     //sput-object v0, Lˆʿⁱᐧʾﹶ/ˑᵢـיـˉ/ـⁱᵔᵎᵎʾ/ˈⁱᐧᐧˊᐧ/ᴵᵎʾˑﹶﹶ;.globalPass:Ljava/lang/String; // field@0116
+		0e00			      //return-void
+		1201			      //const/4 v1, #int 0 // #0
+		2203 ????		    //new-instance v3, Ljavax/crypto/spec/SecretKeySpec; // type@006a
+		6e10 ???? 0700	//invoke-virtual {v7}, Ljava/lang/String;.getBytes:()[B // method@004f
+		0c04			      //move-result-object v4
+		1a05 ????		    //const-string v5, "AES" // string@001e
+		7030 ???? 4305	//invoke-direct {v3, v4, v5}, Ljavax/crypto/spec/SecretKeySpec;.<init>:([BLjava/lang/String;)V // method@0072
+		1a04 ????		    //const-string v4, "AES" // string@001e
+		7110 ???? 0400	//invoke-static {v4}, Ljavax/crypto/Cipher;.getInstance:(Ljava/lang/String;)Ljavax/crypto/Cipher; // method@0070
+		0c00		      	//move-result-object v0
+		1224			      //const/4 v4, #int 2 // #2
+		6e30 ???? 4003	//invoke-virtual {v0, v4, v3}, Ljavax/crypto/Cipher;.init:(ILjava/security/Key;)V // method@0071
+		6e20 ???? 6000	//invoke-virtual {v0, v6}, Ljavax/crypto/Cipher;.doFinal:([B)[B // method@006f
+		0c01			      //move-result-object v1
+		1101		      	//return-object v1
+		0d02		      	//move-exception v2
+		6e10 ???? 0200	//invoke-virtual {v2}, Ljava/lang/Exception;.printStackTrace:()V // method@0043
+		28fb			      //goto 001a // -0005
+		7110 ???? 0300	//invoke-static {v3}, Lᵔˎʻᐧـˏ/יﹳﹶˆˆ/ˊﾞᵔٴʼי/ᴵˆᵔᵎˑʾ/ʼˈˏﾞˎˉ;.encodeToMD5:(Ljava/lang/String;)Ljava/lang/String; // method@0084
+		0c00			      //move-result-object v0
+		1301 0800		    //const/16 v1, #int 8 // #8
+		1302 1800		    //const/16 v2, #int 24 // #18
+		6e30 ???? 1002	//invoke-virtual {v0, v1, v2}, Ljava/lang/String;.substring:(II)Ljava/lang/String; // method@0055
+		0c00			      //move-result-object v0
+		1100			      //return-object v0
+
+}	
+
+condition:
+
+	is_dex and $cipher
+}
+
+rule Flutter_Custom_Packer : packer 
+{ 
+ meta:
+
+		description = "Flutter Custom packer"
+		sample1     = "d91a793d7a63ca6279da81ea5986ba51663f0762399ce122d85b09a020521a0c"
+		sample2     = "130f9d4c200f8c45df48e49360eb422710db8999f3dc571f10cfb04b139ed0d0"
+		author      = "ReBensk"
+		
+ strings:
+
+	$Cipher = {
+
+		1a00 ????       // const-string v0, "WATEPSY/cEDCnBZ/jPdKNCNSL5GPjawdmdkiWnzg" // string@00b2 // AES/ECB/PKCS5Padding
+		7110 ???? 0000  // invoke-static {v0}, Lcom/zzWrgZUeZn;.reewRNuvCn:(Ljava/lang/String;)Ljava/lang/String; // method@0012
+		0c00            // move-result-object v0
+		1a01 0100       // const-string v1, "3662583155221358" // string@0001
+		1a02 0200       // const-string v2, "7243279461549821" // string@0002
+		7140 0600 2140  // invoke-static {v1, v2, v0, v4}, Lcom/zzWrgZUeZn;.DgQYvfuzRk:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;[B)[B // method@0006
+		0c04            // move-result-object v4
+		1104            // return-object v4
+}	
+ condition:
+
+	  is_dex and $Cipher
+}
