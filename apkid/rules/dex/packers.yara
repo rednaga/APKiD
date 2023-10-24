@@ -512,7 +512,7 @@ rule appguard_dex : packer
     is_dex and any of them
 }
 
-rule Custom multidex packer : packer
+rule custom_multidex : packer
 {
   meta:
 	description = "Custom multidex packer"
@@ -560,18 +560,36 @@ rule Custom multidex packer : packer
 	}
 	
 	condition:
-		is_dex and $cipher and $cipher2 and $cipher3
+		is_dex and all of them
 }
 
 rule custom_flutter : packer 
 { 
  meta:
-		description = "custom_flutter"
-		sample1     = "d91a793d7a63ca6279da81ea5986ba51663f0762399ce122d85b09a020521a0c"
-		sample2     = "130f9d4c200f8c45df48e49360eb422710db8999f3dc571f10cfb04b139ed0d0"
-		author      = "ReBensk"
+	description = "custom_flutter"
+	sample1     = "d91a793d7a63ca6279da81ea5986ba51663f0762399ce122d85b09a020521a0c"
+	sample2     = "130f9d4c200f8c45df48e49360eb422710db8999f3dc571f10cfb04b139ed0d0"
+	author      = "ReBensk"
 		
  strings:
+	$attachBaseContextOpcodes = {
+		6f20 0100 ba00  // invoke-super {v10, v11}, Landroid/app/Application;.attachBaseContext:(Landroid/content/Context;)V // method@0001
+		1a0b ????       // const-string v11, "AppasyOlsoNaMdq_XoCdqeMx" // string@0005
+		7110 ???? 0b00  // invoke-static {v11}, Lcom/zzWrgZUeZn;.reewRNuvCn:(Ljava/lang/String;)Ljava/lang/String; // method@0012
+		0c0b            // move-result-object v11
+		1203            // const/4 v3, #int 0 // #0
+		6e30 ???? ba03  // invoke-virtual {v10, v11, v3}, Lcom/zzWrgZUeZn;.getDir:(Ljava/lang/String;I)Ljava/io/File; // method@000e
+		0c0b            // move-result-object v11
+		1a04 ????       // const-string v4, "ipwaIyIlxoxajdm_VdNeDx" // string@00f3
+		7110 ???? 0400  // invoke-static {v4}, Lcom/zzWrgZUeZn;.reewRNuvCn:(Ljava/lang/String;)Ljava/lang/String; // method@0012
+		0c04            // move-result-object v4
+		6e30 ???? 4a03  // invoke-virtual {v10, v4, v3}, Lcom/zzWrgZUeZn;.getDir:(Ljava/lang/String;I)Ljava/io/File; // method@000e
+		0c04            // move-result-object v4
+		6e10 2000 0400  // invoke-virtual {v4}, Ljava/io/File;.listFiles:()[Ljava/io/File; // method@0020
+		0c05            // move-result-object v5
+		2155            // array-length v5, v5
+		3905 0d00       // if-nez v5, 0030 // +000d
+	    }
 	$cipher = {
 		1a00 ????       // const-string v0, "WATEPSY/cEDCnBZ/jPdKNCNSL5GPjawdmdkiWnzg" // string@00b2 // AES/ECB/PKCS5Padding
 		7110 ???? 0000  // invoke-static {v0}, Lcom/zzWrgZUeZn;.reewRNuvCn:(Ljava/lang/String;)Ljava/lang/String; // method@0012
@@ -584,5 +602,5 @@ rule custom_flutter : packer
 }	
 
 condition:
-	  is_dex and $cipher
+	  is_dex and all of them
 }
