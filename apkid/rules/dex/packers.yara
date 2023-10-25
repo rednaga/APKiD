@@ -564,12 +564,12 @@ rule custom_multidex : packer
 }
 
 rule custom_flutter : packer 
-{ 
- meta:
-   description = "custom_flutter"
-   sample1     = "d91a793d7a63ca6279da81ea5986ba51663f0762399ce122d85b09a020521a0c"
-   sample2     = "130f9d4c200f8c45df48e49360eb422710db8999f3dc571f10cfb04b139ed0d0"
-   author      = "ReBensk"
+{
+  meta:
+    description = "custom_flutter"
+    sample1     = "d91a793d7a63ca6279da81ea5986ba51663f0762399ce122d85b09a020521a0c"
+    sample2     = "130f9d4c200f8c45df48e49360eb422710db8999f3dc571f10cfb04b139ed0d0"
+    author      = "ReBensk"
 		
  strings:
    $attachBaseContextOpcodes = {
