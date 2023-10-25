@@ -515,10 +515,10 @@ rule appguard_dex : packer
 rule custom_multidex : packer
 {
   meta:
-	description = "Custom multidex packer"
-	sample1     = "b8f8948187846371eb32b2d7ef4f537c94997329e08d762b9ac6b3bfcbc86993"
-	sample2     = "fdf5b6930d38da33ec117d7c0f83f142db1c33013d020f0ab4801d1fd781f552"
-	author      = "ReBensk"
+    description = "Custom multidex"
+    sample1     = "b8f8948187846371eb32b2d7ef4f537c94997329e08d762b9ac6b3bfcbc86993"
+    sample2     = "fdf5b6930d38da33ec117d7c0f83f142db1c33013d020f0ab4801d1fd781f552"
+    author      = "ReBensk"
 	 
   strings:
     $cipher = {
@@ -566,10 +566,10 @@ rule custom_multidex : packer
 rule custom_flutter : packer 
 { 
  meta:
-	description = "custom_flutter"
-	sample1     = "d91a793d7a63ca6279da81ea5986ba51663f0762399ce122d85b09a020521a0c"
-	sample2     = "130f9d4c200f8c45df48e49360eb422710db8999f3dc571f10cfb04b139ed0d0"
-	author      = "ReBensk"
+   description = "custom_flutter"
+   sample1     = "d91a793d7a63ca6279da81ea5986ba51663f0762399ce122d85b09a020521a0c"
+   sample2     = "130f9d4c200f8c45df48e49360eb422710db8999f3dc571f10cfb04b139ed0d0"
+   author      = "ReBensk"
 		
  strings:
    $attachBaseContextOpcodes = {
