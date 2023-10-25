@@ -531,7 +531,7 @@ rule custom_multidex : packer
       0c00            // move-result-object v0
       6900 ????       // sput-object v0 Lᵔˎʻᐧـˏ/יﹳﹶˆˆ/ˊﾞᵔٴʼי/ᴵˆᵔᵎˑʾ/ʼˈˏﾞˎˉ;.globalPass:Ljava/lang/String; // field@006a
       0e00            // return-void
-    }	
+    }
     $cipher2 = {
       1201            // const/4 v1, #int 0 // #0 
       2203 ????       // new-instance v3, Ljavax/crypto/spec/SecretKeySpec; // type@006a
@@ -550,7 +550,7 @@ rule custom_multidex : packer
       0d02            // move-exception v2
       6e10 ???? 0200  // invoke-virtual {v2}, Ljava/lang/Exception;.printStackTrace:()V // method@0043
       28fb            // goto 001a // -0005
-    }	
+    }
     $cipher3 = {
       7110 ???? 0100  // invoke-static {v1}, Lᵔˎʻᐧـˏ/יﹳﹶˆˆ/ˊﾞᵔٴʼי/ᴵˆᵔᵎˑʾ/ʼˈˏﾞˎˉ;.encodeToMD516:(Ljava/lang/String;)Ljava/lang/String; // method@0085
       0c00            // move-result-object v0 
@@ -560,7 +560,7 @@ rule custom_multidex : packer
     }
 
   condition:
-     is_dex and all of them
+    is_dex and all of them
 }
 
 rule custom_flutter : packer 
@@ -589,7 +589,7 @@ rule custom_flutter : packer
       0c05            // move-result-object v5
       2155            // array-length v5, v5
       3905 0d00       // if-nez v5, 0030 // +000d
-    }  
+    }
     $cipher = {
       1a00 ????       // const-string v0, "WATEPSY/cEDCnBZ/jPdKNCNSL5GPjawdmdkiWnzg" // string@00b2 // AES/ECB/PKCS5Padding
       7110 ???? 0000  // invoke-static {v0}, Lcom/zzWrgZUeZn;.reewRNuvCn:(Ljava/lang/String;)Ljava/lang/String; // method@0012
@@ -599,8 +599,8 @@ rule custom_flutter : packer
       7140 ???? 2140  // invoke-static {v1, v2, v0, v4}, Lcom/zzWrgZUeZn;.DgQYvfuzRk:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;[B)[B // method@0006
       0c04            // move-result-object v4
       1104            // return-object v4
-    }	
+    }
 
   condition:
-     is_dex and all of them
+    is_dex and all of them
 }
