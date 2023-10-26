@@ -585,7 +585,7 @@ rule custom_flutter : packer
       0c04            // move-result-object v4
       6e30 ???? 4a03  // invoke-virtual {v10, v4, v3}, Lcom/zzWrgZUeZn;.getDir:(Ljava/lang/String;I)Ljava/io/File; // method@000e
       0c04            // move-result-object v4
-      6e10 2000 0400  // invoke-virtual {v4}, Ljava/io/File;.listFiles:()[Ljava/io/File; // method@0020
+      6e10 ???? 0400  // invoke-virtual {v4}, Ljava/io/File;.listFiles:()[Ljava/io/File; // method@0020
       0c05            // move-result-object v5
       2155            // array-length v5, v5
       3905 0d00       // if-nez v5, 0030 // +000d
@@ -594,8 +594,8 @@ rule custom_flutter : packer
       1a00 ????       // const-string v0, "WATEPSY/cEDCnBZ/jPdKNCNSL5GPjawdmdkiWnzg" // string@00b2 // AES/ECB/PKCS5Padding
       7110 ???? 0000  // invoke-static {v0}, Lcom/zzWrgZUeZn;.reewRNuvCn:(Ljava/lang/String;)Ljava/lang/String; // method@0012
       0c00            // move-result-object v0
-      1a01 0100       // const-string v1, "3662583155221358" // string@0001
-      1a02 0200       // const-string v2, "7243279461549821" // string@0002
+      1a01 ????       // const-string v1, "3662583155221358" // string@0001
+      1a02 ????       // const-string v2, "7243279461549821" // string@0002
       7140 ???? 2140  // invoke-static {v1, v2, v0, v4}, Lcom/zzWrgZUeZn;.DgQYvfuzRk:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;[B)[B // method@0006
       0c04            // move-result-object v4
       1104            // return-object v4
