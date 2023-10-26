@@ -515,7 +515,7 @@ rule appguard_dex : packer
 rule custom_multidex : packer
 {
   meta:
-    description = "Custom multidex"
+    description = "Custom Multidex"
     sample1     = "b8f8948187846371eb32b2d7ef4f537c94997329e08d762b9ac6b3bfcbc86993"
     sample2     = "fdf5b6930d38da33ec117d7c0f83f142db1c33013d020f0ab4801d1fd781f552"
     author      = "ReBensk"
