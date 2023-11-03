@@ -604,3 +604,75 @@ rule custom_flutter : packer
   condition:
     is_dex and all of them
 }
+
+rule jiagu_k : packer
+{
+  meta:
+    description = "Jiagu K"
+    sample1     = "aa666b75ffb3588dd41c8e546d53e353cda67cf278b167c7737b1169262856bb"
+    sample2     = "d9baf66e7ac116a8c68599ef16fae5397ac4fd0847e2fcfe3ee2c155ecf4f850"
+    author      = "ReBensk"
+
+  strings:
+    $attachBaseContextOpcodes = {
+      7502 0100 1700   //invoke-super/range {v23, v24}, Landroid/app/Application;.attachBaseContext:(Landroid/content/Context;)V // method@0001
+      6901 ????        //sput-object v1, Lv45e7a802/l45e7a802;.i:Landroid/content/Context; // field@000c
+      7401 ???? 1800   //invoke-virtual/range {v24}, Landroid/content/Context;.getFilesDir:()Ljava/io/File; // method@0008
+      0c03             //move-result-object v3
+      6e10 ???? 0300   //invoke-virtual {v3}, Ljava/io/File;.getAbsolutePath:()Ljava/lang/String; // method@001b
+      0c03             //move-result-object v3
+      2204 ????        //new-instance v4, Ljava/io/File; // type@0015
+      7020 ???? 3400   //invoke-direct {v4, v3}, Ljava/io/File;.<init>:(Ljava/lang/String;)V // method@0018
+      6e10 ???? 0400   //invoke-virtual {v4}, Ljava/io/File;.exists:()Z // method@001a
+      0a05             //move-result v5
+      3905 0500        //if-nez v5, 0021 // +0005
+      6e10 ???? 0400   //invoke-virtual {v4}, Ljava/io/File;.mkdir:()Z // method@001c
+      2204 ????        //new-instance v4, Ljava/lang/StringBuilder; // type@0025
+      7010 ???? 0400   //invoke-direct {v4}, Ljava/lang/StringBuilder;.<init>:()V // method@003c
+      6e20 ???? 3400   //invoke-virtual {v4, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@003d
+      1243             //const/4 v3, #int 4 // #4
+      2335 ????        //new-array v5, v3, [B // type@0036
+      2605 ???? 0000   //fill-array-data v5, 0000075a // +0000072e
+      7110 ???? 0500   //invoke-static {v5}, Lv45e7a802/l45e7a802;.h:([B)Ljava/lang/String; // method@0067
+      0c05             //move-result-object v5
+      6e20 ???? 5400   //invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@003d
+      6e10 ???? 0400   //invoke-virtual {v4}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@003e
+      0c04             //move-result-object v4
+      2205 ????        //new-instance v5, Ljava/io/File; // type@0015
+      7020 ???? 4500   //invoke-direct {v5, v4}, Ljava/io/File;.<init>:(Ljava/lang/String;)V // method@0018
+      6e10 ???? 0500   //invoke-virtual {v5}, Ljava/io/File;.exists:()Z // method@001a
+      0a06             //move-result v6
+      3906 0500        //if-nez v6, 0048 // +0005
+      6e10 ???? 0500   //invoke-virtual {v5}, Ljava/io/File;.mkdir:()Z // method@001c
+      7401 0500 1700   //invoke-virtual/range {v23}, Landroid/app/Application;.getPackageName:()Ljava/lang/String; // method@0005
+      0c05             //move-result-object v5  
+    }
+ 
+    /**    
+        public static String h(byte[] bArr) {
+            for (int i2 = 0; i2 < bArr.length; i2++) {
+                 bArr[i2] = (byte) (bArr[i2] ^ 105);
+            }
+            return new String(bArr, 0, bArr.length);
+        }
+    */
+    $xor_key = {
+      1200             //const/4 v0, #int 0 // #0 
+      1201             //const/4 v1, #int 0 // #0
+      2132             //array-length v2, v3
+      3521 0c00        //if-ge v1, v2, 000f // +000c
+      4802 0301        //aget-byte v2, v3, v1
+      df02 0269        //xor-int/lit8 v2, v2, #int 105 // #69
+      8d22             //int-to-byte v2, v2
+      4f02 0301        //aput-byte v2, v3, v1
+      d801 0101        //add-int/lit8 v1, v1, #int 1 // #01
+      28f4             //goto 0002 // -000c
+      2201 ????        //new-instance v1, Ljava/lang/String; // type@0024
+      2132             //array-length v2, v3
+      7040 ???? 3120   //invoke-direct {v1, v3, v0, v2}, Ljava/lang/String;.<init>:([BII)V // method@0035
+      1101             //return-object v1
+    }
+  
+  condition:
+    is_dex and all of them
+}
