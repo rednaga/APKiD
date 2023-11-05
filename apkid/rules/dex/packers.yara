@@ -614,6 +614,28 @@ rule jiagu_k : packer
     author      = "ReBensk"
 
   strings:
+    $classNameStrings = { 4C 76 69 72 62 6F 78 2F 53 74 75 62 41 70 70 } // Lvirbox/StubApp
+
+    /**
+        public void attachBaseContext(Context context0) {
+            int v5;
+            l16f56f57 l16f56f570 = this;
+            Context context1 = context0;
+            super.attachBaseContext(context0);
+            l16f56f57.i = context1;
+            String s = context0.getFilesDir().getAbsolutePath();
+            File file0 = new File(s);
+            if(!file0.exists()) {
+                file0.mkdir();
+            }
+       
+            String s1 = s + l16f56f57.h(new byte[]{70, 71, 26, 26});
+            File file1 = new File(s1);
+            if(!file1.exists()) {
+                file1.mkdir();
+            }
+        }
+    */
     $attachBaseContextOpcodes = {
       7502 0100 1700   //invoke-super/range {v23, v24}, Landroid/app/Application;.attachBaseContext:(Landroid/content/Context;)V // method@0001
       6901 ????        //sput-object v1, Lv45e7a802/l45e7a802;.i:Landroid/content/Context; // field@000c
@@ -656,13 +678,13 @@ rule jiagu_k : packer
             return new String(bArr, 0, bArr.length);
         }
     */
-    $xor_key = {
+    $xorKeyOpcodes = {
       1200             //const/4 v0, #int 0 // #0 
       1201             //const/4 v1, #int 0 // #0
       2132             //array-length v2, v3
       3521 0c00        //if-ge v1, v2, 000f // +000c
       4802 0301        //aget-byte v2, v3, v1
-      df02 0269        //xor-int/lit8 v2, v2, #int 105 // #69
+      df02 02??        //xor-int/lit8 v2, v2, #int 105 // #69
       8d22             //int-to-byte v2, v2
       4f02 0301        //aput-byte v2, v3, v1
       d801 0101        //add-int/lit8 v1, v1, #int 1 // #01
@@ -672,7 +694,7 @@ rule jiagu_k : packer
       7040 ???? 3120   //invoke-direct {v1, v3, v0, v2}, Ljava/lang/String;.<init>:([BII)V // method@0035
       1101             //return-object v1
     }
-  
+   
   condition:
-    is_dex and all of them
+    is_dex and (dex.header.data_size + dex.header.data_offset) < dex.header.file_size and all of them
 }
