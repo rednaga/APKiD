@@ -696,5 +696,5 @@ rule jiagu_k : packer
     }
    
   condition:
-    is_dex and (dex.header.data_size + dex.header.data_offset) < dex.header.file_size and $classNameString
+    is_dex and (dex.header.data_size + dex.header.data_offset) < dex.header.file_size and $classNameString and $attachBaseContextOpcodes and $xorKeyOpcodes
 }
