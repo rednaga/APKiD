@@ -614,7 +614,7 @@ rule jiagu_k : packer
     author      = "ReBensk"
 
   strings:
-    $classNameStrings = { 4C 76 69 72 62 6F 78 2F 53 74 75 62 41 70 70 } // Lvirbox/StubApp
+    $classNameString = { 00 10 4C 76 69 72 62 6F 78 2F 53 74 75 62 41 70 70 3B 00 } // Lvirbox/StubApp;
 
     /**
         public void attachBaseContext(Context context0) {
@@ -696,5 +696,5 @@ rule jiagu_k : packer
     }
    
   condition:
-    is_dex and (dex.header.data_size + dex.header.data_offset) < dex.header.file_size and all of them
+    is_dex and (dex.header.data_size + dex.header.data_offset) < dex.header.file_size and $classNameString
 }
