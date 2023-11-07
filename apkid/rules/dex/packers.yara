@@ -617,5 +617,5 @@ rule jiagu_k : packer
     $classNameString = { 00 10 4C 76 69 72 62 6F 78 2F 53 74 75 62 41 70 70 3B 00 } // Lvirbox/StubApp;
    
   condition:
-    is_dex and $classNameString and (dex.header.data_size + dex.header.data_offset) < dex.header.file_size
+    is_dex and all of them and (dex.header.data_size + dex.header.data_offset) < dex.header.file_size
 }
