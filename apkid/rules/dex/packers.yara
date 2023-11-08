@@ -604,3 +604,18 @@ rule custom_flutter : packer
   condition:
     is_dex and all of them
 }
+
+rule jiagu_k : packer
+{
+  meta:
+    description = "Jiagu K"
+    sample1     = "aa666b75ffb3588dd41c8e546d53e353cda67cf278b167c7737b1169262856bb"
+    sample2     = "d9baf66e7ac116a8c68599ef16fae5397ac4fd0847e2fcfe3ee2c155ecf4f850"
+    author      = "ReBensk"
+
+  strings:
+    $classNameString = { 00 10 4C 76 69 72 62 6F 78 2F 53 74 75 62 41 70 70 3B 00 } // Lvirbox/StubApp;
+   
+  condition:
+    is_dex and all of them and (dex.header.data_size + dex.header.data_offset) < dex.header.file_size
+}
