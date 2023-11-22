@@ -98,6 +98,21 @@ rule appdome_elf : protector
     )
 }
 
+rule appdome_elf_a : protector
+{
+  meta:
+    description = "Appdome"
+    sample      = "0143ddce30b16890180cfa71c49520bde4cce706762f4da756e8c4d06283a481"
+    url         = "https://www.appdome.com/"
+    author      = "Eduardo Novella"
+
+  condition:
+    is_elf and not appdome_elf and
+      // Match at least 2 section names from hook,.hookname,adinit,.adi,ipcent,ipcsel
+      for 2 i in (0..elf.number_of_sections):
+        (elf.sections[i].name matches /(hook|\.hookname|adinit|\.adi|ipcent|ipcsel)/)
+}
+
 rule metafortress : protector
 {
   meta:
