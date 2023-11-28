@@ -850,3 +850,19 @@ rule androidrepublic_vip : obfuscator
   condition:
     is_elf and all of them
 }
+
+rule ay : obfuscator
+{
+  meta:
+    description = "AY"
+    url         = "https://github.com/adamyaxley/Obfuscate"
+    sample      = "35b451d7cb3ad93ece0cc1c9119356b7f11876ef116051fa1343bf88f0e2ef75"
+    author      = "Eduardo Novella"
+
+  strings:
+    $export = /\_ZN2ay\d\dobfuscated_dataILy(.*)decryptEv/
+
+  condition:
+    is_elf and all of them
+}
+
