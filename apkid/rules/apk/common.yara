@@ -48,10 +48,14 @@ private rule is_signed_apk : internal
     $ext_rsa = ".RSA"
     $ext_dsa = ".DSA"
     $ext_ec = ".EC"
+    $apk_sig_block_footer = { 41 50 4B 20 53 69 67 20 42 6C 6F 63 6B 20 34 32 50 4B 01 02 }
 
   condition:
     is_apk and
-    for all of ($meta_inf*) : ($ext_rsa or $ext_dsa or $ext_ec in (@ + 9..@ + 9 + 100))
+    (
+      for all of ($meta_inf*) : ($ext_rsa or $ext_dsa or $ext_ec in (@ + 9..@ + 9 + 100)) or
+      $apk_sig_block_footer
+    )
 }
 
 private rule is_unsigned_apk : internal
