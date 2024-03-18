@@ -790,3 +790,19 @@ rule appguard_elf : packer
   condition:
     is_elf and any of them
 }
+
+rule dxshield_elf : packer
+{
+  meta:
+    description = "DxShield"
+    url         = "http://www.nshc.net/wp/portfolio-item/dxshield_eng/"
+    sample      = "64351853f9f1bcaa32598b6d2ecf97097a00989213defa31fb9b3abbba52a445" // com.wemade.nightcrowsglobal v1.0.28
+    author      = "Eduardo Novella"
+
+  strings:
+    $lib = { 00 6C 69 62 64 78 62 61 73 65 2E 73 6F 00 4C 49 42 43 00 }  // libdxbase.so
+
+  condition:
+    is_elf and all of them
+}
+
