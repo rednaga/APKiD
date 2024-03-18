@@ -795,7 +795,7 @@ rule dxshield_elf : packer
 {
   meta:
     description = "DxShield"
-    url         = "http://www.nshc.net/wp/portfolio-item/dxshield_eng/"
+    url         = "https://www.nshc.net/home/mobile-security/gxshield/"
     sample      = "64351853f9f1bcaa32598b6d2ecf97097a00989213defa31fb9b3abbba52a445" // com.wemade.nightcrowsglobal v1.0.28
     author      = "Eduardo Novella"
 
