@@ -793,6 +793,33 @@ rule dexprotector : obfuscator
     $dp_elf_header at 0
 }
 
+rule dexprotector_a : obfuscator
+{
+  meta:
+    description = "DexProtector"
+    url         = "https://dexprotector.com/"
+    sample      = "f2a646f10545810f4aa079565b4d1e508acd143644492f5eec6cfe1406d33035"
+    author      = "Eduardo Novella"
+
+  strings:
+    /**
+     Possibly DPLF stands for "DexProtector Linkable Format"
+    - offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
+    0x0000d000  4450 4c46 1125 014c b8c5 9972 4631 3e30  DPLF.%.L...rF1>0
+    0x0000d010  79d6 681a f96b 84bc 2073 6db2 1ec5 16f2  y.h..k.. sm.....
+    */
+    $dplf_header = { 44 50 4c 46 } // DPLF
+
+  condition:
+   is_elf and all of them and
+   for any i in (0..elf.number_of_segments):
+    (
+      elf.segments[i].type == elf.PT_LOAD and
+      elf.segments[i].flags == elf.PF_R | elf.PF_W and
+      $dplf_header at elf.segments[i].offset
+    )
+ }
+
 rule dexprotector_alice : obfuscator
 {
   meta:
