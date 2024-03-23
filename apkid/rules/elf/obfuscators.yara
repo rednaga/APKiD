@@ -804,6 +804,10 @@ rule dexprotector_a : obfuscator
   strings:
     /**
      Possibly DPLF stands for "DexProtector Linkable Format"
+
+     Segments:
+     4   0x00005000  0x51000 0x0000d000  0x51000 -rw- MAP  LOAD3
+
     - offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
     0x0000d000  4450 4c46 1125 014c b8c5 9972 4631 3e30  DPLF.%.L...rF1>0
     0x0000d010  79d6 681a f96b 84bc 2073 6db2 1ec5 16f2  y.h..k.. sm.....
