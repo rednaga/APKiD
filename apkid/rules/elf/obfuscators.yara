@@ -815,7 +815,7 @@ rule dexprotector_a : obfuscator
     $dplf_header = { 44 50 4c 46 } // DPLF
 
   condition:
-   is_elf and all of them and
+   is_elf and
    for any i in (0..elf.number_of_segments):
     (
       elf.segments[i].type == elf.PT_LOAD and
