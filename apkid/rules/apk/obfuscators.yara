@@ -101,3 +101,18 @@ rule androidrepublic_vip : obfuscator
   condition:
     is_apk and all of them
 }
+
+rule obfuscapk_libencryption : obfuscator
+{
+  meta:
+    description = "Obfuscapk - LibEncryption plugin"
+    url         = "https://github.com/ClaudiuGeorgiu/Obfuscapk"
+    author      = "Simone Aonzo - https://twitter.com/packm4d"
+    sample      = "4957d9c1b423ae045f27d97b1d0b1f32ba6a2ce56525a2e93bda7172ec18ad0c"
+
+  strings:
+    $lib_arm = /assets\/lib\.arm(eabi|64)-v[0-9a-zA-Z]{2}\.[!-~]+\.so/
+    $lib_x86 = /assets\/lib\.x86(_64)?\.[!-~]+\.so/
+  condition:
+    any of them and is_apk
+}
