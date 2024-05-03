@@ -123,6 +123,21 @@ private rule secneo_base
     is_apk and any of ($encrypted_dex, $encryptlib2, $encryptlib1)
 }
 
+rule secneo_c : packer
+{
+  meta:
+    description = "SecNeo.C"
+    url = "http://www.secneo.com"
+    sample = "9267b90fdbf2280f38e1bb4b23262514f71b3dd1c1dad750d8f7f56a831247bc"
+    author = "jcase"
+
+  strings:
+    $lib1 = "libdatajar.so"
+
+  condition:
+    secneo_base and $lib1
+}
+
 rule secneo_b : packer
 {
   meta:
@@ -147,6 +162,7 @@ rule secneo_a : packer
   condition:
     secneo_base
     and not secneo_b
+    and not secneo_c
 }
 
 rule dexprotector : packer
