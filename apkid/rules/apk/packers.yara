@@ -127,23 +127,23 @@ rule secneo_c : packer
 {
   meta:
     description = "SecNeo.C"
-    url = "http://www.secneo.com"
-    sample = "9267b90fdbf2280f38e1bb4b23262514f71b3dd1c1dad750d8f7f56a831247bc"
-    author = "jcase"
+    url         = "http://www.secneo.com"
+    sample      = "9267b90fdbf2280f38e1bb4b23262514f71b3dd1c1dad750d8f7f56a831247bc"
+    author      = "jcase"
 
   strings:
-    $lib1 = "libdatajar.so"
+    $lib = "libdatajar.so"
 
   condition:
-    secneo_base and $lib1
+    secneo_base and $lib
 }
 
 rule secneo_b : packer
 {
   meta:
     description = "SecNeo.B"
-    url = "http://www.secneo.com"
-    sample = "f5d7985e2add50fce74c99511512084845558ac996ce66f45e633c9495d78400"
+    url         = "http://www.secneo.com"
+    sample      = "f5d7985e2add50fce74c99511512084845558ac996ce66f45e633c9495d78400"
 
   strings:
     $lib1 = "libdexjni.so"
@@ -157,7 +157,7 @@ rule secneo_a : packer
 {
   meta:
     description = "SecNeo.A"
-    url = "http://www.secneo.com"
+    url         = "http://www.secneo.com"
 
   condition:
     secneo_base
