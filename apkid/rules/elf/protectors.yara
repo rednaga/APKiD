@@ -515,8 +515,40 @@ rule zimperium_zdefend : protector
 
     strings:
       $lib = { 00 6c69 625a 4465 6665 6e64 2e73 6f00 } // .libZDefend.so.
+      $zimperium = "zimperium"
 
     condition:
-      is_elf and all of them
+      is_elf and $lib and #zimperium > 10
 }
 
+rule zimperium_z9 : protector
+{
+    meta:
+        description = "Zimperium (z9)"
+        url         = "https://www.zimperium.com/machine-learning-z9-technology/"
+        sample      = "ed2f6935a4420034ec8dade23ec458ef1440c5021402c142e0b020308e0145fc" // com.chase.sig.android v4.484
+        author      = "Eduardo Novella"
+
+    strings:
+      $lib = { 00 6c69 627a 392e73 6f00 } // .libz9.so.
+      $zimperium = "zimperium"
+
+    condition:
+      is_elf and $lib and #zimperium > 10
+}
+
+rule zimperium_zcloud : protector
+{
+    meta:
+        description = "Zimperium (zcloud)"
+        url         = "https:/-z9-technology/"
+        sample      = "ed2f6935a4420034ec8dade23ec458ef1440c5021402c142e0b020308e0145fc" // com.chase.sig.android v4.484
+        author      = "Eduardo Novella"
+
+    strings:
+      $lib = { 006c 6962 7a63 6c6f 7564 2e73  6f00 } // .libzcloud.so.
+      $zimperium = "zimperium"
+
+    condition:
+      is_elf and $lib and #zimperium > 10
+}
