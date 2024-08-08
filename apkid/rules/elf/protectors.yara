@@ -525,7 +525,7 @@ rule zimperium_z9 : protector
 {
     meta:
         description = "Zimperium (z9)"
-        url         = "https://www.zimperium.com/machine-learning-z9-technology/"
+        url         = "https://www.zimperium.com/machine-learning-z9-technology"
         sample      = "ed2f6935a4420034ec8dade23ec458ef1440c5021402c142e0b020308e0145fc" // com.chase.sig.android v4.484
         author      = "Eduardo Novella"
 
@@ -541,7 +541,7 @@ rule zimperium_zcloud : protector
 {
     meta:
         description = "Zimperium (zcloud)"
-        url         = "https:/-z9-technology/"
+        url         = "https://www.zimperium.com/zdefend"
         sample      = "ed2f6935a4420034ec8dade23ec458ef1440c5021402c142e0b020308e0145fc" // com.chase.sig.android v4.484
         author      = "Eduardo Novella"
 
