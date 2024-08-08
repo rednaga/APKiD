@@ -505,3 +505,18 @@ rule appsealing : protector
       is_elf and 2 of them
 }
 
+rule zimperium_zdefend : protector
+{
+    meta:
+        description = "Zimperium (zDefend)"
+        url         = "https://www.zimperium.com/zdefend/"
+        sample      = "9512c46d99cdca1914a9f86870aa1c49845701abe1c63365ba2681d658c19941" // com.dbs.dbspaylah.apk v6.2.0
+        author      = "Eduardo Novella"
+
+    strings:
+      $lib = { 00 6c69 625a 4465 6665 6e64 2e73 6f00 } // .libZDefend.so.
+
+    condition:
+      is_elf and all of them
+}
+
