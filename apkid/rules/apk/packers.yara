@@ -613,7 +613,6 @@ rule tencent_b : packer
     is_apk and all of them
 }
 
-
 rule tencent_legu : packer
 {
   meta:
