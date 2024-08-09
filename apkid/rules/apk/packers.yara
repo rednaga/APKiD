@@ -863,7 +863,7 @@ rule tencent_legu_VMP : packer
   meta:
     description = "Tencent's Legu (VMP)"
     url         = "https://github.com/rednaga/APKiD/issues/390"
-    sample      = "95ca638cfb80ebbb21e97c202f9c06f7306c6fc9696b4760a401afa9293000f7"
+    sample      = "95ca638cfb80ebbb21e97c202f9c06f7306c6fc9696b4760a401afa9293000f7" // com.youwan.aoao v2.9.2
     author      = "Eduardo Novella"
 
   strings:
