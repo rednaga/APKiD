@@ -858,6 +858,24 @@ rule tencent_legu : packer
     and ($a or $c or $d)
 }
 
+rule tencent_legu_VMP : packer
+{
+  meta:
+    description = "Tencent's Legu (VMP)"
+    url         = "https://github.com/rednaga/APKiD/issues/390"
+    sample      = "95ca638cfb80ebbb21e97c202f9c06f7306c6fc9696b4760a401afa9293000f7"
+    author      = "Eduardo Novella"
+
+  strings:
+    $a = /assets\/libwsDataEncryption\_AZAPP.*\.so/
+    $b = /assets\/wslib\/(arm.*|x86.*)\/libWSSec(V?)\.so/
+    $c = "assets/wsDal.jar"
+    $d = /assets\/WSSEC(A|B|C|D)\.jar/
+
+  condition:
+    is_apk and all of them
+}
+
 rule apkencryptor : packer
 {
   meta:
@@ -925,7 +943,6 @@ rule eversafe : packer
       is_apk and 2 of them
 }
 
-
 rule appcamo : packer
 {
     meta:
@@ -942,7 +959,6 @@ rule appcamo : packer
     condition:
       is_apk and all of them
 }
-
 
 rule aegis : packer
 {
