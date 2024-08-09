@@ -996,3 +996,25 @@ rule kangapack : packer
     condition:
         is_apk and all of them
 }
+
+rule tongfu_shield : packer
+{
+    meta:
+        description = "Tongfu shield"
+        url         = "https://www.tongfudun.com"
+        url2        = "https://www.payegis.com/"
+        sample      = "af27533557a47ff6795b0df77ea863bbefafa4974ce2dbf9604a79ce7196d080"
+        author      = "Eduardo Novella"
+
+    strings:
+        $asset1 = "assets/mode"
+        $asset2 = "assets/PK"
+        $asset3 = "assets/virtual"
+        $asset4 = "assets/libegis.a"
+        $lib    = /lib\/(arm.*|x86.*)\/libegis.so/
+
+    condition:
+      is_apk and $lib and any of ($asset*)
+}
+
+

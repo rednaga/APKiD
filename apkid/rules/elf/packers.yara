@@ -433,6 +433,25 @@ rule tencent_legu_VMP_elf : packer
     is_elf and all of them
 }
 
+rule tongfu_shield_elf : packer
+{
+    meta:
+        description = "Tongfu shield"
+        url         = "https://www.tongfudun.com"
+        url2        = "https://www.payegis.com/"
+        sample      = "af27533557a47ff6795b0df77ea863bbefafa4974ce2dbf9604a79ce7196d080"
+        author      = "Eduardo Novella"
+
+    strings:
+        $libname = { 00 6c69 6265 6769 732e 736f 00 } // .libegis.so.
+        $asset   = { 6173 7365 7473 2f6c 6962 6567 6973 2e61 00 } // assets/libegis.a.
+        $class   = { 00 636f 6d2f 7061 7965 6769 732f 4669
+                     7273 7441 7070 6c69 6361 7469 6f6e 00 } // .com/payegis/FirstApplication.
+
+    condition:
+      is_elf and any of them
+}
+
 rule crackproof : packer
 {
   meta:
