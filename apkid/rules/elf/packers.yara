@@ -418,6 +418,21 @@ rule tencent_elf : packer
     and any of them
 }
 
+rule tencent_legu_VMP_elf : packer
+{
+  meta:
+    description = "Tencent's Legu (VMP)"
+    url         = "https://github.com/rednaga/APKiD/issues/390"
+    sample      = "95ca638cfb80ebbb21e97c202f9c06f7306c6fc9696b4760a401afa9293000f7"
+    author      = "Eduardo Novella"
+
+  strings:
+    $lib = { 00 6c69 6278 6756 6970 5365 6375 7269 7479 2e73 6f00 } // .libxgVipSecurity.so.
+
+  condition:
+    is_elf and all of them
+}
+
 rule crackproof : packer
 {
   meta:
