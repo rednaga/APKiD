@@ -571,15 +571,15 @@ rule tencent : packer
     sample      = "7c6024abc61b184ddcc9fa49f9fac1a7e5568d1eab09ee748f8c4987844a3f81"
 
   strings:
-    $decryptor_lib = "lib/armeabi/libshell.so"
-    $zip_lib = "lib/armeabi/libmobisecy.so"
-    $mix_dex = "/mix.dex"
+    $decryptor_lib = /lib\/(arm.*|x86.*)\/libshell\.so/
+    $zip_lib       = /lib\/(arm.*|x86.*)\/libmobisecy\.so/
+    $mix_dex       = "/mix.dex"
 
   condition:
-    is_apk and ($decryptor_lib or $zip_lib or $mix_dex)
+    is_apk and any of them
 }
 
-rule tencent_apk : packer
+rule tencent_a : packer
 {
   meta:
     description = "Mobile Tencent Protect"
@@ -588,7 +588,68 @@ rule tencent_apk : packer
     author      = "Eduardo Novella"
 
   strings:
-    $lib =  /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libshell(a|x)-\d\.\d\.\d\.\d\.so/
+    $lib =  /lib\/(arm.*|x86.*)\/libshell(a|x)-\d\.\d\.\d\.\d\.so/
+
+  condition:
+    is_apk and all of them
+}
+
+rule tencent_b : packer
+{
+  meta:
+    description = "Tencent Security Enterprise Edition"
+    url         = "https://cloud.tencent.com/product/ms"
+    url2        = "http://www.fron.com.cn/yaq/"
+    sample      = "49dddbde640fa5e46bf5e427564f6a75599a87e391699e20b0380869b7c4ad83" // com.qidian.QDReader v7.9.352
+    author      = "Eduardo Novella"
+
+  strings:
+    // lib/arm/libshell-supervbasic.2019.so and lib/arm/libshell-superv.2019.so
+    $lib = /lib\/(arm.*|x86.*)\/libshell\-superv(.*)\.\d{4}\.so/
+    // assets/dexMethod_00oo1l1l.dat
+    $asset = /assets\/dexMethod.*\.dat/
+
+  condition:
+    is_apk and all of them
+}
+
+
+rule tencent_legu : packer
+{
+  meta:
+    description = "Tencent's Legu"
+    url         = "https://blog.quarkslab.com/a-glimpse-into-tencents-legu-packer.html"
+    sample      = "9ff3a53f76c7a6d7e3de3b8567c9606f2cc08ec4aaaae596a27361018d839c58"
+    author      = "Mert Arıkan"
+
+  strings:
+    $a = "assets/tosversion"
+    $b = "assets/0OO00l111l1l"
+    $c = "assets/0OO00oo01l1l"
+    $d = "assets/o0oooOO0ooOo.dat"
+
+  condition:
+    is_apk
+    and $b
+    and ($a or $c or $d)
+    and not tencent
+    and not tencent_a
+    and not tencent_b
+}
+
+rule tencent_legu_VMP : packer
+{
+  meta:
+    description = "Tencent's Legu (VMP)"
+    url         = "https://github.com/rednaga/APKiD/issues/390"
+    sample      = "95ca638cfb80ebbb21e97c202f9c06f7306c6fc9696b4760a401afa9293000f7" // com.youwan.aoao v2.9.2
+    author      = "Eduardo Novella"
+
+  strings:
+    $a = /assets\/libwsDataEncryption\_AZAPP.*\.so/
+    $b = /assets\/wslib\/(arm.*|x86.*)\/libWSSec(V?)\.so/
+    $c = "assets/wsDal.jar"
+    $d = /assets\/WSSEC(A|B|C|D)\.jar/
 
   condition:
     is_apk and all of them
@@ -836,44 +897,6 @@ rule secenh : packer
     is_apk
     and 1 of ($a*)
     and 1 of ($b*)
-}
-
-rule tencent_legu : packer
-{
-  meta:
-    description = "Tencent's Legu"
-    url         = "https://blog.quarkslab.com/a-glimpse-into-tencents-legu-packer.html"
-    sample      = "9ff3a53f76c7a6d7e3de3b8567c9606f2cc08ec4aaaae596a27361018d839c58"
-    author      = "Mert Arıkan"
-
-  strings:
-    $a = "assets/tosversion"
-    $b = "assets/0OO00l111l1l"
-    $c = "assets/0OO00oo01l1l"
-    $d = "assets/o0oooOO0ooOo.dat"
-
-  condition:
-    is_apk
-    and $b
-    and ($a or $c or $d)
-}
-
-rule tencent_legu_VMP : packer
-{
-  meta:
-    description = "Tencent's Legu (VMP)"
-    url         = "https://github.com/rednaga/APKiD/issues/390"
-    sample      = "95ca638cfb80ebbb21e97c202f9c06f7306c6fc9696b4760a401afa9293000f7" // com.youwan.aoao v2.9.2
-    author      = "Eduardo Novella"
-
-  strings:
-    $a = /assets\/libwsDataEncryption\_AZAPP.*\.so/
-    $b = /assets\/wslib\/(arm.*|x86.*)\/libWSSec(V?)\.so/
-    $c = "assets/wsDal.jar"
-    $d = /assets\/WSSEC(A|B|C|D)\.jar/
-
-  condition:
-    is_apk and all of them
 }
 
 rule apkencryptor : packer
