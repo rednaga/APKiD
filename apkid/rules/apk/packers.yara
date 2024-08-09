@@ -1003,7 +1003,7 @@ rule tongfu_shield : packer
         description = "Tongfu shield"
         url         = "https://www.tongfudun.com"
         url2        = "https://www.payegis.com/"
-        sample      = "af27533557a47ff6795b0df77ea863bbefafa4974ce2dbf9604a79ce7196d080"
+        sample      = "af27533557a47ff6795b0df77ea863bbefafa4974ce2dbf9604a79ce7196d080" // com.kingdee.zhihuiji v6.25.22
         author      = "Eduardo Novella"
 
     strings:
