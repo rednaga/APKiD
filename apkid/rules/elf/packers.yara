@@ -367,6 +367,33 @@ rule promon : packer
     )
 }
 
+rule promon_a : packer
+{
+  meta:
+    description = "Promon Shield"
+    url         = "https://promon.co/"
+    sample      = "77df1956a6842a4e5db65bb9758e46d61eda3592905d3576736b276907b4651b" // com.starfinanz.mobile.android.pushtan
+    author      = "Eduardo Novella"
+
+    /**
+     Odd ELF segments found:
+      .ncc -> Code segment
+      .ncd -> Data segment
+      .ncu -> Another segment
+    */
+
+  condition:
+    is_elf and not promon and
+    (   // Match at least two section names from .ncu, .ncc, .ncd
+        (for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncu/)
+            and for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncc/))  or
+        (for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncu/)
+            and for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncd/))  or
+        (for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncc/)
+            and for any i in (0..elf.number_of_sections): (elf.sections[i].name matches /\.ncd/))
+    )
+}
+
 rule appsealing_core_2_10_10 : packer
 {
   meta:
