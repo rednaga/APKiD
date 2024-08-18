@@ -1039,4 +1039,32 @@ rule tongfu_shield : packer
       is_apk and $lib and any of ($asset*)
 }
 
+rule zimperium_zshield_apk : packer
+{
+  meta:
+    description = "Zimperium (zShield)"
+    url         = "https://www.zimperium.com/zshield"
+    sample      = "9512c46d99cdca1914a9f86870aa1c49845701abe1c63365ba2681d658c19941" // com.dbs.dbspaylah v6.2.0
+    author      = "Eduardo Novella"
+
+  strings:
+    /**
+      assets/jkhybtvppg.szip
+      assets/jkhybtvppg/0.odex
+      assets/jkhybtvppg/1.odex
+      lib/$arch/libjkhybtvppg.so
+
+      assets/ztest.szip
+      assets/ztest/0.odex
+      lib/$arch/libztest.so
+    */
+    $lib    = /lib\/(arm.*|x86.*)\/lib.*\.so/
+    $asset1 = /assets\/.*\/0\.odex/
+    $asset2 = /assets\/.*\.szip/
+
+  condition:
+    is_apk and all of them
+}
+
+
 

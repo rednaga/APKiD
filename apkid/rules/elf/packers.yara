@@ -867,3 +867,75 @@ rule dxshield_elf : packer
     is_elf and all of them
 }
 
+rule zimperium_zshield : packer
+{
+  meta:
+    description = "Zimperium (zShield)"
+    url         = "https://www.zimperium.com/zshield"
+    sample      = "9512c46d99cdca1914a9f86870aa1c49845701abe1c63365ba2681d658c19941" // com.dbs.dbspaylah v6.2.0
+    author      = "Eduardo Novella"
+
+  strings:
+    /**
+        while ( linux_eabi_syscall(__NR_mprotect, v7, v203, 5) == -4 )
+
+        do
+            v96 = linux_eabi_syscall(v95, v218, v252, (void *)(int)(v91 + 209), v92, v93, v94, (void *)0xC4A0A48FLL);
+        while ( v96 == -4 );
+
+        do
+            v114 = (unsigned int *)linux_eabi_syscall(__NR_mmap, 0LL, v113, 3, 34, -1, 0LL);
+        while ( v114 == (unsigned int *)-4LL );
+    */
+    $svc = {
+          01 00 00 D4   // SVC             0
+          1F 10 00 B1   // CMN             X0, #4
+    }
+
+    /**
+        void init_proc()
+        {
+        __int64 v0;
+
+        v0 = sub_F208();
+        __asm { BR              X0 }
+        }
+    */
+    $init_proc = {
+          FE 77 BD A9    //    STP             X30, X29, [SP,#var_30]!
+          E0 07 01 A9    //    STP             X0, X1, [SP,#0x30+var_20]
+          E2 4F 02 A9    //    STP             X2, X19, [SP,#0x30+var_10]
+          ?? 00 00 94    //    BL              sub_F208
+          00 00 1F D6    //    BR              X0
+    }
+
+    /**
+      while ( linux_eabi_syscall(__NR_mprotect, (void *)address, length, 5) == M_MMAP_MAX )
+        ;
+      ...
+      for ( i = 4 << (StatusReg & 0xF); v33 < v31; v33 += v32 )
+        __asm { DC              CVAU, X13 }
+      __dsb(0xBu);
+      for ( j = address & -(__int64)i; j < v31; j += i )
+        __asm { IC              IVAU, X12 }
+      __dsb(0xBu);
+      __isb(0xFu);
+    */
+    $asm_opcodes = {
+        ?? 7B 0B D5    //  DC              CVAU, X12
+        ?? ?? ?? 8B    //  ADD             X12, X12, X11
+        ?? ?? ?? EB    //  CMP             X12, X8
+        ?? ?? ?? 54    //  B.CC            loc_4A924
+        [4-32]
+        9F 3B 03 D5    // DSB             ISH
+        [20-64]
+        ?? 75 0B D5    // IC              IVAU, X9
+        [12-24]
+        9F 3B 03 D5    // DSB             ISH
+        DF 3F 03 D5    // ISB
+    }
+
+  condition:
+    is_elf and all of them
+}
+
