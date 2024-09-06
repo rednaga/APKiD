@@ -292,3 +292,21 @@ rule appdefence : protector
   condition:
     is_dex and all of them
 }
+
+rule xiaomi_xsof_sdk : protector
+{
+  meta:
+    description = "Xiaomi Security Open Service Client SDK"
+    url         = "https://dev.mi.com/distribute/doc/details?pId=1746"
+    sample      = "3a01186dbb3cb550d4b6139c8d82e39e74f7b3cc74966a27232e91c164817fe1"
+    author      = "aviraxp"
+
+  strings:
+    // .?com.xiaomi.security.xsof.?
+    $s = {
+      00 ?? 636f 6d2e 7869 616f 6d69 2e73 6563 7572 6974 792e 7873 6f66 2e [64] 00 
+    }
+
+  condition:
+    is_dex and #s >3
+}
