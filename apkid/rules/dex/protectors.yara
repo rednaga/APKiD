@@ -304,9 +304,9 @@ rule xiaomi_xsof_sdk : protector
   strings:
     // .?com.xiaomi.security.xsof.?
     $s = {
-      00 ?? 636f 6d2e 7869 616f 6d69 2e73 6563 7572 6974 792e 7873 6f66 2e [64] 00 
+      00 ?? 636f 6d2e 7869 616f 6d69 2e73 6563 7572 6974 792e 7873 6f66 2e [1-128] 00
     }
 
   condition:
-    is_dex and #s >3
+    is_dex and #s >= 1
 }
