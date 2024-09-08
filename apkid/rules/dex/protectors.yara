@@ -308,5 +308,5 @@ rule xiaomi_xsof_sdk : protector
     }
 
   condition:
-    is_dex and #s >= 1
+    is_dex and #s > 1
 }
