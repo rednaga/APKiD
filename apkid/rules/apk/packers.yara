@@ -786,9 +786,11 @@ rule yidun : packer
     $entry_point = "Lcom/netease/nis/wrapper/Entry"
     $jni_func = "Lcom/netease/nis/wrapper/MyJni"
     $lib = "libnesec.so"
+    $nedata = "assets/nedata.db"
+    $nedig = "assets/nedig.properties"
 
   condition:
-    is_apk and (#lib > 1) or ($anti_trick and $entry_point and $jni_func)
+    is_apk and (#lib > 1 or ($anti_trick and $entry_point and $jni_func) or ($nedata and $nedig))
 }
 
 rule apkpacker : packer
