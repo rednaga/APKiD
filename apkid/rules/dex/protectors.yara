@@ -310,3 +310,19 @@ rule xiaomi_xsof_sdk : protector
   condition:
     is_dex and #s > 1
 }
+
+rule dpt_shell : protector
+{
+  meta:
+    description = "DPT Shell"
+    url         = "https://github.com/luoyesiqiu/dpt-shell"
+    sample      = "0c4341700f4e685cafc9c86c9112098b75057580ba1f7163bc971347af3712ad"
+    author      = "Abhi"
+
+  strings:
+    $s1 = { 00 ?? 4C 63 6F 6D 2F 6C 75 6F 79 65 2F 64 70 74 } // .??Lcom/luoye/dpt
+    $s2 = { 00 ?? 4C 63 6F 6D 2F 6C 75 6F 79 65 73 69 71 69 75 2F 73 68 65 6C 6C } // .??Lcom/luoyesiqiu/shell
+
+  condition:
+    any of them
+}
