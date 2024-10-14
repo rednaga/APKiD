@@ -324,5 +324,5 @@ rule dpt_shell : protector
     $s2 = { 00 ?? 4C 63 6F 6D 2F 6C 75 6F 79 65 73 69 71 69 75 2F 73 68 65 6C 6C } // .??Lcom/luoyesiqiu/shell
 
   condition:
-    any of them
+    is_dex and any of them
 }
