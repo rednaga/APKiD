@@ -180,7 +180,7 @@ rule dpt_shell : protector
     author      = "Abhi"
 
 	strings:
-		$asset = "asset/app_name"
+		$asset = "assets/app_name"
 		$assetlib = /assets\/(.*)\/(arm.*|x86.*)\/libdpt.so/
 	
 	condition:
