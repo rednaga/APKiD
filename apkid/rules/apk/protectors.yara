@@ -173,16 +173,16 @@ rule appdefence : protector
 
 rule dpt_shell : protector
 {
-	meta:
+  meta:
     description = "DPT Shell"
     url         = "https://github.com/luoyesiqiu/dpt-shell"
     sample      = "0c4341700f4e685cafc9c86c9112098b75057580ba1f7163bc971347af3712ad"
     author      = "Abhi"
 
-	strings:
-		$asset = "assets/app_name"
-		$assetlib = /assets\/(.*)\/(arm.*|x86.*)\/libdpt.so/
-	
-	condition:
-		is_apk and all of them
+  strings:
+    $asset = "assets/app_name"
+	$assetlib = /assets\/(.*)\/(arm.*|x86.*)\/libdpt\.so/
+
+  condition:
+    is_apk and all of them
 }
