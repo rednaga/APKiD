@@ -180,9 +180,10 @@ rule dpt_shell : protector
     author      = "Abhi"
 
   strings:
-    $asset = "assets/app_name"
-	$assetlib = /assets\/(.*)\/(arm.*|x86.*)\/libdpt\.so/
+    $app = "assets/app_name"
+    $app_acf = "assets/app_acf"
+    $assetlib = /assets\/(.*)\/(arm.*|x86.*)\/libdpt\.so/
 
   condition:
-    is_apk and all of them
+    is_apk and $assetlib and any of ($app*)
 }
