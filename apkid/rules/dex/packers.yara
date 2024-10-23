@@ -623,15 +623,15 @@ rule jiagu_k : packer
 rule nesun_dex : packer
 {
   meta:
-    description = "Nesun加固(reinforcement)"
+    description = "Nesun"
     url         = "http://nesun.cn"
     sample      = "13735b73994231e25393a1847e1111c9741cc112315b3f0d4f775a62ab58ae5d"
-    author      = "Eduardo Novella & Abhi"
+    author      = "Abhi"
 
   strings:
-    $versionString = { 00 08 7a 56 65 72 73 69 6f 6e 00 } // ..zVersion.
-    $libString = { 00 08 7A 70 72 6F 74 65 63 74 00 00 } // ..zprotect..
-    $class = { 4c 63 6f 6d 2f 6e 65 73 75 6e 2f 73 74 75 62 2f 5a 41 50 3b } // Lcom/nesun/stub/ZAP;
+    $versionString = { 00 ?? 7a 56 65 72 73 69 6f 6e 00 } // ..zVersion.
+    $libString = { 00 ?? 7A 70 72 6F 74 65 63 74 00 } // ..zprotect.
+    $class = { 00 ?? 4c 63 6f 6d 2f 6e 65 73 75 6e 2f 73 74 75 62 2f 5a 41 50 3b 00 } // Lcom/nesun/stub/ZAP;
    
   condition:
     is_dex and all of them

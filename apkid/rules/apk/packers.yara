@@ -1071,10 +1071,10 @@ rule zimperium_zshield_apk : packer
 rule nesun_apk : packer
 {
   meta:
-    description = "Nesun加固(reinforcement)"
+    description = "Nesun"
     url         = "http://nesun.cn"
     sample      = "13735b73994231e25393a1847e1111c9741cc112315b3f0d4f775a62ab58ae5d"
-    author      = "Eduardo Novella & Abhi"
+    author      = "Abhi"
 
   strings:
     $lib    = /lib\/(arm.*|x86.*)\/libzprotect\.so/
