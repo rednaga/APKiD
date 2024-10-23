@@ -939,3 +939,19 @@ rule zimperium_zshield : packer
     is_elf and all of them
 }
 
+rule nesun_elf : packer
+{
+  meta:
+    description = "Nesun"
+    url         = "http://nesun.cn"
+    sample      = "13735b73994231e25393a1847e1111c9741cc112315b3f0d4f775a62ab58ae5d"
+    author      = "Abhi"
+
+  strings:
+    $origin = { 00 2F 64 61 74 61 2F 64 61 74 61 2F 25 73 2F 2E 7A 70 72 6F 74 65 63 74 2F 25 73 2F 6F 72 69 67 69 6E 2E 61 70 6B 00 }  // /data/data/%s/.zprotect/%s/origin.apk
+    $data_path = { 00 2F 64 61 74 61 2F 64 61 74 61 2F 25 73 2F 2E 7A 70 72 6F 74 65 63 74 00 } // /data/data/%s/.zprotect
+    $name = { 00 2E 7A 70 72 6F 74 65 63 74 00 } // .zprotect
+
+  condition:
+    is_elf and all of them
+}
