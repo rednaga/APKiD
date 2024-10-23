@@ -629,8 +629,8 @@ rule nesun_dex : packer
     author      = "Eduardo Novella & Abhi"
 
   strings:
-	$versionString = { 00 08 7a 56 65 72 73 69 6f 6e 00 } // ..zVersion.
-	$libString = { 00 08 7A 70 72 6F 74 65 63 74 00 00 } // ..zprotect..
+    $versionString = { 00 08 7a 56 65 72 73 69 6f 6e 00 } // ..zVersion.
+    $libString = { 00 08 7A 70 72 6F 74 65 63 74 00 00 } // ..zprotect..
     $class = { 4c 63 6f 6d 2f 6e 65 73 75 6e 2f 73 74 75 62 2f 5a 41 50 3b } // Lcom/nesun/stub/ZAP;
    
   condition:
