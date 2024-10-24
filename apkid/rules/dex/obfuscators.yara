@@ -501,13 +501,24 @@ rule blackobfuscator : obfuscator
     url           = "https://github.com/CodingGay/BlackObfuscator"
     sample        = "26c25dacacd0b4fdd411d7459747021d66cb45e9d57f92743004d190af74acea" // com.plus.currencyconverter
     sample2       = "1730a1244ed5b01bf14426ff464042976c79796d8b6361648f6ed98c30d77997" // com.abhi.myapplication with depth 1
-    sample3       = "1730a1244ed5b01bf14426ff464042976c79796d8b6361648f6ed98c30d77997" // com.abhi.myapplication with depth 2
+    sample3       = "a01550f444063d7a96f48d7f276c88b9f0ac277fd8409586f370f189d347ad30" // com.abhi.myapplication with depth 2
     sample4       = "6f1e14a590b73848871d6f5331c395086b1334e7d04e0f78d4211476c5b966e0" // com.abhi.myapplication with depth 5
     author        = "Abhi"
 
   strings:
+    /**
+      protected void onCreate(Bundle bundle) {
+        String str = "ۖۨ";
+        while (true) {
+            switch ((str.hashCode() ^ 9) ^ (-1279807116)) {
+                case -2084167413:
+                    ....
+            }
+        }
+    }
+    */
     $opcodes = { 
-      1A 00 ?? ??                    // const-string v0, "random_wierd_string"
+      1A 00 ?? ??                    // const-string v0, "random_weird_string"
       6E 10 21 AC 00 00              // invoke-virtual {v0}, Ljava/lang/String.hashCode()I
       0A ??                          // move-result v(\d)
       13 02 ?? ??                    // const/16 v(\d), 0x(\d+)
