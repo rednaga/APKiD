@@ -514,7 +514,17 @@ rule blackobfuscator : obfuscator
       (14 0? ?? ?? ?? ?? | B7 ??) // const v(\d), 0x(\d+) or xor-int/2addr v(\d), v(\d)
       (B7 ?? | D7 ?? ?? ??) // xor-int/2addr v(\d), v(\d) or xor-int/lit16 v(\d), v(\d), 0x(\d+)
       }
+    $movnop = {
+      00 00 // nop
+      2F ?? ?? ?? // cmpl-double v(\d), v(\d), v(\d)
+      (10 ?? | 16 ?? ?? ?? | 01 ??) // return-wide or const-wide/16 v(\d), 0x(\d+) or move v(\d), v(\d)
+      (00 00 | 01 ??) // nop or move v(\d), v(\d)
+      (16 ?? ?? ?? | 01 ??) // const-wide/16 v(\d), 0x(\d+) or move v(\d), v(\d)
+      (00 00 | 07 ??) // nop or move-object v(\d), v(\d)
+      00 00 // nop
+      00 00 // nop
+    }
 
   condition:
-    is_dex and #opcodes >= 2
+    is_dex and #opcodes >= 2 and #movnop > 10
 }
