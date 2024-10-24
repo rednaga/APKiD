@@ -524,7 +524,7 @@ rule blackobfuscator : obfuscator
       13 02 ?? ??                    // const/16 v(\d), 0x(\d+)
       (14 0? ?? ?? ?? ?? | B7 ??)    // const v(\d), 0x(\d+) or xor-int/2addr v(\d), v(\d)
       (B7 ?? | D7 ?? ?? ??)          // xor-int/2addr v(\d), v(\d) or xor-int/lit16 v(\d), v(\d), 0x(\d+)
-      }
+    }
     $movnop = {
       00 00                           // nop
       2F ?? ?? ??                     // cmpl-double v(\d), v(\d), v(\d)
