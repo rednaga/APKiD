@@ -493,3 +493,28 @@ rule apkencryptor : obfuscator
   condition:
     any of them and is_dex and unreadable_field_names and unreadable_method_names
 }
+
+rule blackobfuscator : obfuscator
+{
+  meta:
+    description = "BlackObfuscator"
+    url         = "https://github.com/CodingGay/BlackObfuscator"
+    sample      = "26c25dacacd0b4fdd411d7459747021d66cb45e9d57f92743004d190af74acea" // com.plus.currencyconverter
+    sample2      = "1730a1244ed5b01bf14426ff464042976c79796d8b6361648f6ed98c30d77997" // com.abhi.myapplication with depth 1
+    sample3      = "1730a1244ed5b01bf14426ff464042976c79796d8b6361648f6ed98c30d77997" // com.abhi.myapplication with depth 2
+    sample4      = "6f1e14a590b73848871d6f5331c395086b1334e7d04e0f78d4211476c5b966e0" // com.abhi.myapplication with depth 5
+    author      = "Abhi"
+
+  strings:
+    $opcodes = { 
+      1A 00 ?? ?? // const-string v0, "random_wierd_string"
+      6E 10 21 AC 00 00 // invoke-virtual {v0}, Ljava/lang/String.hashCode()I
+      0A ?? // move-result v(\d)
+      13 02 ?? ?? // const/16 v(\d), 0x(\d+)
+      (14 0? ?? ?? ?? ?? | B7 ??) // const v(\d), 0x(\d+) or xor-int/2addr v(\d), v(\d)
+      (B7 ?? | D7 ?? ?? ??) // xor-int/2addr v(\d), v(\d) or xor-int/lit16 v(\d), v(\d), 0x(\d+)
+      }
+
+  condition:
+    is_dex and #opcodes >= 2
+}
