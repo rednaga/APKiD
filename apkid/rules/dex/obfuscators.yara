@@ -499,7 +499,7 @@ rule blackobfuscator : obfuscator
   meta:
     description   = "BlackObfuscator"
     url           = "https://github.com/CodingGay/BlackObfuscator"
-    sample        = "26c25dacacd0b4fdd411d7459747021d66cb45e9d57f92743004d190af74acea" // com.plus.currencyconverter
+    sample        = "92ae23580c83642ad0e50f19979b9d2122f28d8b3a9d4b17539ce125ae8d93eb" // com.plus.currencyconverter
     sample2       = "1730a1244ed5b01bf14426ff464042976c79796d8b6361648f6ed98c30d77997" // com.abhi.myapplication with depth 1
     sample3       = "a01550f444063d7a96f48d7f276c88b9f0ac277fd8409586f370f189d347ad30" // com.abhi.myapplication with depth 2
     sample4       = "6f1e14a590b73848871d6f5331c395086b1334e7d04e0f78d4211476c5b966e0" // com.abhi.myapplication with depth 5
@@ -511,7 +511,6 @@ rule blackobfuscator : obfuscator
         String str = "ۖۨ";
         while (true) {
             switch ((str.hashCode() ^ 9) ^ (-1279807116)) {
-                case -2084167413:
                     ....
             }
         }
@@ -525,17 +524,26 @@ rule blackobfuscator : obfuscator
       (14 0? ?? ?? ?? ?? | B7 ??)    // const v(\d), 0x(\d+) or xor-int/2addr v(\d), v(\d)
       (B7 ?? | D7 ?? ?? ??)          // xor-int/2addr v(\d), v(\d) or xor-int/lit16 v(\d), v(\d), 0x(\d+)
     }
-    $movnop = {
-      00 00                           // nop
-      2F ?? ?? ??                     // cmpl-double v(\d), v(\d), v(\d)
-      (10 ?? | 16 ?? ?? ?? | 01 ??)   // return-wide or const-wide/16 v(\d), 0x(\d+) or move v(\d), v(\d)
-      (00 00 | 01 ??)                 // nop or move v(\d), v(\d)
-      (16 ?? ?? ?? | 01 ??)           // const-wide/16 v(\d), 0x(\d+) or move v(\d), v(\d)
-      (00 00 | 07 ??)                 // nop or move-object v(\d), v(\d)
-      00 00                           // nop
-      00 00                           // nop
+    /**
+            switch (...) {
+                case -2084167413:
+                    ....
+                case -2084167413:
+                    ....
+                case -2084167413:
+                    ....
+                ...
+            }
+    */
+    $switch = { 
+      2C ?? ?? ?? ?? ??   // sparse-switch v(\d), 0x(\d+)
+      28 ??               // goto 0x(\d+)
+      1A 00 ?? ??         // const-string v0, "random_weird_string"
+      28 ??               // goto 0x(\d+)
+      1A 00 ?? ??         // const-string v0, "random_weird_string"
+      28 ??               // goto 0x(\d+)
     }
 
   condition:
-    is_dex and #opcodes >= 2 and #movnop > 10
+    is_dex and (#opcodes >= 2 and #switch >= 2)
 }
