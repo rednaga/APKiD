@@ -552,3 +552,19 @@ rule zimperium_zcloud : protector
     condition:
       is_elf and $lib and #zimperium > 10
 }
+
+rule msa_sdk : protector
+{
+  meta:
+      description = "MSA SDK"
+      url         = "http://msa-alliance.cn"
+      sample      = "fe4afda0c51fa08237859c3b14c2b35bd2c2a65d098a57857454f0ace354ad45" // tv.danmaku.bili
+      author      = "Abhi"
+
+  strings:
+    $string  = "mprotect"
+    $libs    = { 00 6C 69 62 6D 73 61 6F 61 69 64 (61 75 74 68 | 73 65 63 ) 2E 73 6F 00 }  // .libmsaoaidauth.so. || .libmsaoaidsec.so.
+
+  condition:
+    is_elf and all of them
+}
