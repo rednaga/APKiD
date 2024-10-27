@@ -42,5 +42,5 @@ rule mtprotector_res : obfuscator
     }
 
   condition:
-    is_res and $sign
+    is_res and all of them
 }
