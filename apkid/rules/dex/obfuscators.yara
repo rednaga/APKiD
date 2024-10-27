@@ -516,7 +516,7 @@ rule blackobfuscator : obfuscator
         }
     }
     */
-    $opcodes = { 
+    $opcodes = {
       1A 00 ?? ??                    // const-string v0, "random_weird_string"
       6E 10 21 AC 00 00              // invoke-virtual {v0}, Ljava/lang/String.hashCode()I
       0A ??                          // move-result v(\d)
@@ -535,7 +535,7 @@ rule blackobfuscator : obfuscator
                 ...
             }
     */
-    $switch = { 
+    $switch = {
       2C ?? ?? ?? ?? ??   // sparse-switch v(\d), 0x(\d+)
       28 ??               // goto 0x(\d+)
       1A 00 ?? ??         // const-string v0, "random_weird_string"
@@ -547,3 +547,20 @@ rule blackobfuscator : obfuscator
   condition:
     is_dex and (#opcodes >= 2 and #switch >= 2)
 }
+
+rule mtprotector_dex : protector
+{
+  meta:
+    description = "MT Protector"
+    url         = "https://mt2.cn/download/"
+    sample      = "7fd0657a9d7a3b8f44e9a8938669439db8ef90585259d24aad31b9cc1599a419"
+    author      = "Eduardo Novella"
+
+  strings:
+    $classname = { 00 204c 6269 6e2f 6d74 2f61 6e6e 6f74 6174 696f 6e73 2f4d 5450 726f 7465 6374 6f72 3b00 } // Lbin/mt/annotations/MTProtector;
+
+  condition:
+    is_dex and any of them
+}
+
+
