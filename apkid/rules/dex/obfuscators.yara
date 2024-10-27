@@ -548,7 +548,7 @@ rule blackobfuscator : obfuscator
     is_dex and (#opcodes >= 2 and #switch >= 2)
 }
 
-rule mtprotector_dex : protector
+rule mtprotector_dex : obfuscator
 {
   meta:
     description = "MT Protector"

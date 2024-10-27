@@ -27,7 +27,7 @@
 
 include "common.yara"
 
-rule mtprotector_res : protector
+rule mtprotector_res : obfuscator
 {
   meta:
     description = "MT Protector"
