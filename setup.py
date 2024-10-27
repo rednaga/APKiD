@@ -47,8 +47,8 @@ def package_files(directory):
 
 
 install_requires = [
-    'yara-python-dex>=1.0.1',
-]
+    "yara-python-dex @ git+https://github.com/MobSF/yara-python-dex.git"
+],
 
 dev_requires = [
     'mypy',
