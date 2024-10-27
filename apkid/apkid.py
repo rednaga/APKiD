@@ -1,5 +1,5 @@
 """
- Copyright (C) 2023  RedNaga. https://rednaga.io
+ Copyright (C) 2024  RedNaga. https://rednaga.io
  All rights reserved. Contact: rednaga@protonmail.com
 
 
@@ -40,6 +40,7 @@ SCANNABLE_FILE_MAGICS: Dict[str, Set[bytes]] = {
     'zip': {b'PK\x03\x04', b'PK\x05\x06', b'PK\x07\x08'},
     'dex': {b'dex\n', b'dey\n'},
     'elf': {b'\x7fELF'},
+    'res': {b'\x02\x00\x0c\x00'},
     # TODO: implement axml yara module
     # 'axml': set(),
 }
@@ -212,7 +213,8 @@ class Scanner(object):
                    or name.startswith('lib/') \
                    or name.endswith('.so') \
                    or name.endswith('.dex') \
-                   or name.endswith('.apk')
+                   or name.endswith('.apk') \
+                   or name.endswith('.arsc')
         return True
 
     def _yield_file_paths(self, dir_path: str):
