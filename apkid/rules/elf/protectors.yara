@@ -563,9 +563,8 @@ rule msa_sdk : protector
 
   strings:
     $string  = "mprotect"
-    $libsec  = { 00 6C 69 62 6D 73 61 6F 61 69 64 73 65 63 2E 73 6F 00 }    // .libmsaoaidsec.so.
-    $libauth = { 00 6C 69 62 6D 73 61 6F 61 69 64 61 75 74 68 2E 73 6F 00 } // .libmsaoaidauth.so.
+    $libs    = { (00 6C 69 62 6D 73 61 6F 61 69 64 73 65 63 2E 73 6F 00 | 00 6C 69 62 6D 73 61 6F 61 69 64 61 75 74 68 2E 73 6F 00) }  // .libmsaoaidauth.so. || .libmsaoaidsec.so.
 
   condition:
-    is_elf and $string and ($libsec or $libauth)
+    is_elf and all of them
 }
