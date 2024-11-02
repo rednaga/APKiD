@@ -568,3 +568,22 @@ rule msa_sdk : protector
   condition:
     is_elf and all of them
 }
+
+rule nhn_appguard : protector
+{
+  meta:
+      description = "NHN AppGuard"
+      url         = "https://www.nhncloud.com/kr/service/security/nhn-appguard"
+      sample      = "bafa2a9acf4af696b92e0a1ddcf7f470d49a7f3bc27b5c1b1e3ecbdf17049285" // jp.pjfb
+      author      = "Abhi"
+
+  strings:
+    $payload = { (00 ?? | ??) 61 70 70 67 75 61 72 64 5F 68 65 61 64 65 72 2D 3E 47 65 74 (45 6E 63 72 79 70 74 65 64 | 4F 72 69 67 69 6E 61 6C) 50 61 79 6C 6F 61 64 4C 65 6E 67 74 68 28 29 } // appguard_header->Get(Encrypted|Original)PayloadLength()
+    $class   = { ?? ?? 43 6F 6D 4E 68 6E 65 6E 74 41 70 70 67 75 61 72 64 41 70 70 67 75 61 72 64 4A 61 76 61 43 6C 61 73 73 (49 6D 70 6C | 00 00 00 00) 00 } // ??ComNhnentAppguardAppguardJavaClass
+    $class2  = { ?? ?? 41 70 70 47 75 61 72 64 43 61 6C 6C 62 61 63 6B 4A 61 76 61 43 6C 61 73 73 (49 6D 70 6C | 00 00 00 00) 00 } // ??AppGuardCallbackJavaClass(Impl|....).
+    $app     = { 28 28 61 70 70 67 75 61 72 64 5F 61 70 70 6C 69 63 61 74 69 6F 6E 5F 29 29 20 (3D | 21) 3D 20 28 6E 75 6C 6C 70 74 72 29 } // .((appguard_application_)) (=|!)= (nullptr).
+    $lib     = { (00 | 00 2F) 6C 69 62 6C 6F 61 64 65 72 2E 73 6F 00 } // .[0-1]/libloader.so.
+
+  condition:
+    is_elf and all of ($class*) and $lib or ( $app or $payload )
+}
