@@ -579,12 +579,13 @@ rule nhn_appguard : protector
 
   strings:
     $payload = { (00 ?? | ??) 61 70 70 67 75 61 72 64 5F 68 65 61 64 65
-                  72 2D 3E 47 65 74 (45 6E 63 72 79 70 74 65 64 | 4F 72
+                 72 2D 3E 47 65 74 (45 6E 63 72 79 70 74 65 64 | 4F 72
                  69 67 69 6E 61 6C) 50 61 79 6C 6F 61 64 4C 65 6E 67 74
                  68 28 29 } // appguard_header->Get(Encrypted|Original)PayloadLength()
-    $class   = /\d{2}ComNhnentAppguardAppguardJavaClass(Impl)?\x00/ // ??ComNhnentAppguardAppguardJavaClass(Impl).
-    $class2  = /\d{2}AppGuardCallbackJavaClass(Impl)?\x00/          // ??AppGuardCallbackJavaClass(Impl).
-    $str_app = { 00 28 28 61 70 70 67 75 61 72 64 5F 61 70 70 6C 69 63 61 74 69 6F 6E 5F 29 29 20 (3D | 21) 3D 20 28 6E 75 6C 6C 70 74 72 29 } // .((appguard_application_)) (=|!)= (nullptr)
+    $class   = /\d{2}ComNhnentAppguardAppguardJavaClass(Impl)?\x00/
+    $class2  = /\d{2}AppGuardCallbackJavaClass(Impl)?\x00/
+    $str_app = { 00 28 28 61 70 70 67 75 61 72 64 5F 61 70 70 6C 69 63 61 74 
+                 69 6F 6E 5F 29 29 20 (3D | 21) 3D 20 28 6E 75 6C 6C 70 74 72 29 } // .((appguard_application_)) (=|!)= (nullptr)
     $lib     = { 00 6C 69 62 6C 6F 61 64 65 72 2E 73 6F 00 } // .libloader.so.
 
   condition:
