@@ -336,8 +336,8 @@ rule nhn_appguard_dex : protector
     author      = "Abhi"
 
   strings:
-    $package = { 00 ?? 4C 63 6F 6D 2F 6E 68 6E (63 6C 6F 75 64 | 65 6E 74) 2F 61 70 70 67 75 61 72 64 } // .??Lcom/nhn(cloud|ent)/appguard
+    $package = { 00 ?? 4C 63 6F 6D 2F 6E 68 6E (63 6C 6F 75 64 | 65 6E 74) 2F 61 70 70 67 75 61 72 64 2F } // .??Lcom/nhn(cloud|ent)/appguard/
 
   condition:
-    is_dex and $package
+    is_dex and all of them
 }
