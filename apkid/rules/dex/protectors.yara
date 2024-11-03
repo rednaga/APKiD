@@ -326,3 +326,18 @@ rule dpt_shell : protector
   condition:
     is_dex and any of them
 }
+
+rule nhn_appguard_dex : protector
+{
+  meta:
+    description = "NHN AppGuard"
+    url         = "https://www.nhncloud.com/kr/service/security/nhn-appguard"
+    sample      = "bafa2a9acf4af696b92e0a1ddcf7f470d49a7f3bc27b5c1b1e3ecbdf17049285" // jp.pjfb
+    author      = "Abhi"
+
+  strings:
+    $package = { 00 ?? 4C 63 6F 6D 2F 6E 68 6E (63 6C 6F 75 64 | 65 6E 74) 2F 61 70 70 67 75 61 72 64 2F } // .??Lcom/nhn(cloud|ent)/appguard/
+
+  condition:
+    is_dex and all of them
+}
