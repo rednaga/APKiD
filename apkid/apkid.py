@@ -41,6 +41,7 @@ SCANNABLE_FILE_MAGICS: Dict[str, Set[bytes]] = {
     'dex': {b'dex\n', b'dey\n'},
     'elf': {b'\x7fELF'},
     'res': {b'\x02\x00\x0c\x00'},
+    'dll': {b'MZ\x90\x00'},
     # TODO: implement axml yara module
     # 'axml': set(),
 }
@@ -214,7 +215,8 @@ class Scanner(object):
                    or name.endswith('.so') \
                    or name.endswith('.dex') \
                    or name.endswith('.apk') \
-                   or name.endswith('.arsc')
+                   or name.endswith('.arsc') \
+                   or name.endswith('.dll')
         return True
 
     def _yield_file_paths(self, dir_path: str):
