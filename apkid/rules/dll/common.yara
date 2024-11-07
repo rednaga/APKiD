@@ -25,19 +25,14 @@
  *
  **/
 
+import "pe"
+
 rule is_dll : file_type
 {
   meta:
     description = "DLL"
 
-  strings:
-    $pe_head = "MZ"
-    $pe_signature = "PE\x00\x00"
-    $dotnet_meta = "BSJB\x01\x00"
-
   condition:
-    $pe_head at 0
-    and $pe_signature at 0x80
-    and $dotnet_meta
+    pe.characteristics and pe.DLL
 }
 
