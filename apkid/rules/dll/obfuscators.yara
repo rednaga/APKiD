@@ -30,13 +30,13 @@ include "common.yara"
 rule beebyte : obfuscator
 {
   meta:
-    description = "Beebyte Obfuscator"
+    description = "Beebyte"
     url         = "https://www.beebyte.co.uk/"
     sample      = "53fa7054f7112197cfe3ab8adc1afe825c6e6b4a696404f75f75eb894ae77456"
     author      = "Abhi"
   
   strings:
-    $name = "Beebyte.Obfuscator"
+    $name = "\x00Beebyte.Obfuscator\x00"
 
   condition:
     is_dll and all of them
