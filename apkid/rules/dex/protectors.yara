@@ -341,3 +341,18 @@ rule nhn_appguard_dex : protector
   condition:
     is_dex and all of them
 }
+
+rule protectt_dex : protector
+{
+  meta:
+    description = "Protectt"
+    sample      = "c246d85560599f91e9c3ed7e59df2dd4e21aaf667f3f2965c28c43d9842f5e75" // com.rblbank.mobank
+    url         = "https://www.protectt.ai"
+    author      = "Abhi"
+
+  strings:
+    $class = { 4C 61 69 2F 70 72 6F 74 65 63 74 74 2F 61 70 70 2F 73 65 63 75 72 69 74 79 2F } // Lai/protectt/app/security/
+
+  condition:
+    is_dex and all of them
+}
