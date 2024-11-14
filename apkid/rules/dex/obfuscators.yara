@@ -314,6 +314,24 @@ rule arxan_b : obfuscator
     $deobf
 }
 
+rule arxan_c : obfuscator
+{
+  meta:
+    description = "Arxan"
+    url         = "https://digital.ai/products/application-security/"
+    sample      = "7bd1139b5f860d48e0c35a3f117f980564f45c177a6ef480588b5b5c8165f47e"
+    author      = "Abhi"
+
+  strings:
+    // Example: .9Lcom/arxan/guardit4j/util/PackageNameEnumeratorException;.
+    $pkg = { 00 ?? 4C 63 6F 6D 2F 61 72 78 61 6E 2F 67 75 61 72 64 69 74 } // .??Lcom/arxan/guardit
+
+  condition:
+    is_dex and
+    $pkg and
+    not (arxan or arxan_multidex or arxan_b)
+}
+
 rule allatori_demo : obfuscator
 {
   meta:
