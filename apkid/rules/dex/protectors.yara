@@ -351,7 +351,7 @@ rule protectt_dex : protector
     author      = "Abhi"
 
   strings:
-    $class = { 4C 61 69 2F 70 72 6F 74 65 63 74 74 2F 61 70 70 2F 73 65 63 75 72 69 74 79 2F } // Lai/protectt/app/security/
+    $class = { 00 1C 4C 61 69 2F 70 72 6F 74 65 63 74 74 2F 61 70 70 2F 73 65 63 75 72 69 74 79 2F 52 3B 00 } // ..Lai/protectt/app/security/R;.
 
   condition:
     is_dex and all of them
