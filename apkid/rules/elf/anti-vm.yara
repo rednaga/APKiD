@@ -38,5 +38,5 @@ rule check_qemu_entropy : anti_vm
     $b = "_qemuFingerPrint"
 
   condition:
-    any of them
+    is_elf and any of them
 }

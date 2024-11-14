@@ -406,7 +406,7 @@ rule appsealing_core_2_10_10 : packer
     $core_ver = "APPSEALING-CORE-VERSION_2.10.10"
 
   condition:
-    $core_ver
+    is_elf and $core_ver
 }
 
 rule appsuit_packer_a : packer
