@@ -156,7 +156,8 @@ rule dexguard_c : obfuscator
     }
 
   condition:
-    any of them
+    is_dex
+    and any of them
 }
 
 rule dexguard_d : obfuscator
@@ -346,7 +347,7 @@ rule allatori_demo : obfuscator
     $s = { 00 0D 41 4C 4C 41 54 4F 52 49 78 44 45 4D 4F 00 }  // ALLATORIxDEMO
 
   condition:
-    $s and is_dex
+    is_dex and $s
 }
 
 rule aamo_str_enc : obfuscator
@@ -402,7 +403,7 @@ rule aamo_str_enc : obfuscator
     $b = { 00 14 67 65 74 53 74 6f 72 61 67 65 45 6e 63 72 79 70 74 69 6f 6e 00 } //getStorageEncryption
 
   condition:
-    1 of ($opcodes*) and all of ($a, $b)
+    is_dex and 1 of ($opcodes*) and all of ($a, $b)
 }
 
 rule appsuit_a : obfuscator
@@ -455,7 +456,7 @@ rule gemalto_sdk : obfuscator
     $p3 = "Lcom/gemalto/ezio/mobile/sdk/"
 
   condition:
-    any of them and is_dex
+    is_dex and any of them
 }
 
 rule kiwi_amazon : obfuscator
@@ -470,7 +471,7 @@ rule kiwi_amazon : obfuscator
     $class = { 00 19 4B69776956657273696F6E456E637279707465722E6A617661 00 } // 00+len+"KiwiVersionEncrypter.java"+00
 
   condition:
-    all of them
+    is_dex and all of them
 }
 
 rule unreadable_field_names : obfuscator
