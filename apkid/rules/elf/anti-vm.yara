@@ -26,6 +26,7 @@
  **/
 
 import "elf"
+include "common.yara"
 
 rule check_qemu_entropy : anti_vm
 {
