@@ -641,6 +641,7 @@ rule dingxiang_dex : packer
 {
   meta:
     description = "DingXiang"
+    url         = "https://www.dingxiang-inc.com/business/android"
     sample      = "788ebabd9b5464c5e86b3832e4a7b6e7c91cce5603ff17f214429400ba3bb2b9" // net.crigh.cgsport
     author      = "Abhi"
 
