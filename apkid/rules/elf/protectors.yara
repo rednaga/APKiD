@@ -591,3 +591,20 @@ rule nhn_appguard : protector
   condition:
     is_elf and any of ($class*) and ( $lib or $str_app or $payload )
 }
+
+rule easyprotector : protector
+{
+  meta:
+      description = "EasyProtector"
+      url         = "https://github.com/lamster2018/EasyProtector"
+      sample      = "788ebabd9b5464c5e86b3832e4a7b6e7c91cce5603ff17f214429400ba3bb2b9" // net.crigh.cgsport
+      author      = "Abhi"
+
+  strings:
+    $lib  = "\x00libantitrace.so\x00"
+    $log  = "\x00I was be traced...trace pid:%d\x00"
+    $log2 = "\x00ptrace myself...\x00"
+  
+  condition:
+    is_elf and all of them
+}
