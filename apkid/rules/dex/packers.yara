@@ -636,3 +636,47 @@ rule nesun_dex : packer
   condition:
     is_dex and all of them
 }
+
+rule dingxiang_dex : packer
+{
+  meta:
+    description = "DingXiang"
+    sample      = "788ebabd9b5464c5e86b3832e4a7b6e7c91cce5603ff17f214429400ba3bb2b9" // net.crigh.cgsport
+    author      = "Abhi"
+
+  strings:
+    $class  = { 00 50 4C [32] 2F 63 6F 6D 2F 64 69
+                6E 67 78 69 61 6E 67 2F 6D 6F 62 69
+                6C 65 2F 72 65 73 65 6E 2F 53 74 72
+                69 6E 67 45 6E 63 72 79 70 74 55 74
+                69 6C 73 3B 00 } // L[32]/com/dingxiang/mobile/resen/StringEncryptUtils;
+    $class2 = { 00 1E 4C 63 6F 6D 2F 73 65 63 75 72
+                69 74 79 2F 69 6E 6E 65 72 2F 73 74
+                75 62 30 30 30 2F [1] 3B 00 } // Lcom/security/inner/stub000/x;
+    $class3 = { 00 20 4C 70 6E 66 2F 74 68 69 73 2F
+                6F 62 6A 65 63 74 2F 64 6F 65 73 2F
+                6E 6F 74 2F 45 78 69 73 74 3B 00 } // Lcom/pnf/this/object/does/not/Exist;
+    
+    /* Older versions starts with hash + class name
+    E.g.: L377f1c444f7bd22614205e1a99a24ee1/com/mobile/streng/BuildConfig; */
+    $hash_code = { 00 40 4C [32] 2F 63 6F 6D 2F 6D 6F 62 69 6C 65 2F 73 74
+                   72 65 6E 63 2F 42 75 69 6C 64 43 6F 6E 66 69 67 3B 00 }
+
+    /* Newer Versions check for hash directly
+    E.g.: String trim = ("5404f0525edfb68c1abc06e6f6d468f3" == 0 ? "" : "5404f0525edfb68c1abc06e6f6d468f3").trim(); */
+    $hash_code2 = { 
+      71 00 ?? 01 00 00 // invoke-static {}, Lpnf/this/object/does/not/Exist;->started()V
+      63 00 4? 00       // sget-boolean v0, Lpnf/this/object/does/not/Exist;->enabled:Z
+      67 00 4? 00       // sput v0, Lpnf/this/object/does/not/Exist;->started:I
+      1A 00 ?? ??       // const-string v0, "hash"
+      39 00 ?? ??       // if-nez v0, :cond_x
+      1A 00 ?? ??       // const-string v0, ""
+      6E 10 ?? 00 00 00 // invoke-virtual {v0}, Ljava/lang/String;->trim()Ljava/lang/String;
+      0C 00             // move-result-object v0
+    }
+
+  condition:
+    is_dex
+    and 2 of ($class*)
+    and any of ($hash_code*)
+}
