@@ -957,7 +957,7 @@ rule nesun_elf : packer
     is_elf and any of them
 }
 
-rule gpresto_elf : packer
+rule gpresto_elf : anti_cheat
 {
   meta:
     description = "G-Presto"

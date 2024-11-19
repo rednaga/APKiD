@@ -1083,7 +1083,7 @@ rule nesun_apk : packer
     is_apk and $lib
 }
 
-rule gpresto_apk : packer
+rule gpresto_apk : anti_cheat
 {
   meta:
     description = "G-Presto"
@@ -1092,8 +1092,8 @@ rule gpresto_apk : packer
     author      = "Abhi"
 
   strings:
-    $lib    = /lib\/(arm.*|x86.*)\/libATG_L\.so/
-    $assets = /assets\/ATG_E.*\.sec/
+    $lib       = /lib\/(arm.*|x86.*)\/libATG_L\.so/
+    $assets    = /assets\/ATG_E.*\.sec/
     $assetslib = /assets\/libData\.so/
 
   condition:

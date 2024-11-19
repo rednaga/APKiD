@@ -637,7 +637,7 @@ rule nesun_dex : packer
     is_dex and all of them
 }
 
-rule gpresto_dex : packer
+rule gpresto_dex : anti_cheat
 {
   meta:
     description = "G-Presto"
