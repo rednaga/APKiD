@@ -637,6 +637,26 @@ rule nesun_dex : packer
     is_dex and all of them
 }
 
+rule gpresto_dex : packer
+{
+  meta:
+    description = "G-Presto (anti-cheat)"
+    url         = "https://www.largosoft.co.kr/"
+    sample      = "44558c6c758b1ecf42ecda9981240d50c32f42e0d2be4693e37e39f8eb3a3488"
+    author      = "Abhi"
+  
+  strings:
+    $class = { 00 22 4C 63 6F 6D 2F 62 69 73 68 6F 70 73 6F 66 74 2F 50 72 65 73 74 6F 2F 53 44 4B 2F 50 72 65 73 74 6F 3B 00 } // ."Lcom/bishopsoft/Presto/SDK/Presto;.
+
+    // code segment of the injected methods plus junk opcodes
+    $code_segment = {
+	  02 00 01 00 00 00 00 00 ?? ?? ?? ?? 11 00 00 00 00 (1? | 2? | 3? | 4? | 5? | 6? | 7? | 8? | 9? | a? | b? | c0 | c1 | c2 | c3 | c4 | c5 | c6 | c7)
+    }
+  
+  condition:
+    is_dex and all of them
+}
+
 rule dingxiang_dex : packer
 {
   meta:

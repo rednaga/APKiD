@@ -956,3 +956,26 @@ rule nesun_elf : packer
   condition:
     is_elf and any of them
 }
+
+rule gpresto_elf : packer
+{
+  meta:
+    description = "G-Presto (anti-cheat)"
+    url         = "https://www.largosoft.co.kr/"
+    sample      = "44558c6c758b1ecf42ecda9981240d50c32f42e0d2be4693e37e39f8eb3a3488"
+    author      = "Abhi"
+  
+  strings:
+    $class = { 00 [0-2] 4C 63 6F 6D 2F 62 69 73 68 6F 70
+               73 6F 66 74 2F 50 72 65 73 74 6F 2F 53 44 4B
+               2F 50 72 65 73 74 6F 3B 00 } // .()Lcom/bishopsoft/Presto/SDK/Presto;.
+    $name  = { 00 6C 69 62 41 54 47 5F 4C 2E 73 6F 00 } // libATG_L.so
+    $name2 = { (00 | 20) 47 2D 50 72 65 73 74 6F (20 | 00) } // G-Presto
+    $name3 = "\x00<Presto_E>\x00"
+    $name4 = "\x00largosoft.co.kr\x00"
+  
+  condition:
+    is_elf
+    and $class
+    and 2 of ($name*)
+}
