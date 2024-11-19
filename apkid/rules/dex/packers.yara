@@ -646,7 +646,7 @@ rule gpresto_dex : packer
     author      = "Abhi"
   
   strings:
-    $class = { 00 ?? 4C 63 6F 6D 2F 62 69 73 68 6F 70 73 6F 66 74 2F 50 72 65 73 74 6F 2F 53 44 4B 2F 50 72 65 73 74 6F 3B 00 } // ."Lcom/bishopsoft/Presto/SDK/Presto;.
+    $class = { 00 22 4C 63 6F 6D 2F 62 69 73 68 6F 70 73 6F 66 74 2F 50 72 65 73 74 6F 2F 53 44 4B 2F 50 72 65 73 74 6F 3B 00 } // ."Lcom/bishopsoft/Presto/SDK/Presto;.
 
     // code segment of the injected methods plus junk opcodes
     $code_segment = {

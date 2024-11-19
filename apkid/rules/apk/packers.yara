@@ -1094,7 +1094,7 @@ rule gpresto_apk : packer
   strings:
     $lib       = /lib\/(arm.*|x86.*)\/libATG_L\.so/
     $assets    = /assets\/ATG_E.*\.sec/
-    $assetslib = /assets\/libData\.so/
+    $assetslib = "assets/libData.so"
 
   condition:
     is_apk and 2 of them

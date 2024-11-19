@@ -970,7 +970,7 @@ rule gpresto_elf : packer
                73 6F 66 74 2F 50 72 65 73 74 6F 2F 53 44 4B
                2F 50 72 65 73 74 6F 3B 00 } // .()Lcom/bishopsoft/Presto/SDK/Presto;.
     $name  = { 00 6C 69 62 41 54 47 5F 4C 2E 73 6F 00 } // libATG_L.so
-    $name2 = "G-Presto"
+    $name2 = { (00 | 20) 47 2D 50 72 65 73 74 6F (20 | 00) } // G-Presto
     $name3 = "\x00<Presto_E>\x00"
     $name4 = "\x00largosoft.co.kr\x00"
   
