@@ -989,7 +989,7 @@ rule kiwisec_elf : packer
     author      = "Abhi"
   
   strings:
-    $string = "kiwisec"
+    $string  = "kiwisec"
     $string2 = "kiwicrash"
     $string3 = "\x00kiwi_dumper\x00"
     $string4 = "\x00libKwProtectSDK.so\x00"
