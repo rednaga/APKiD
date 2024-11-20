@@ -701,3 +701,23 @@ rule dingxiang_dex : packer
     and 2 of ($class*)
     and any of ($hash_code*)
 }
+
+rule kiwisec_dex : packer
+{
+  meta:
+    description = "KiwiSec"
+    url         = "https://en.kiwisec.com/"
+    sample      = "d108652bd1b685765e3ada2b7376e3c3ff67f8162afcf8bad91e0aef79b7b08a"
+    author      = "Abhi"
+  
+  strings:
+    $class = { 00 1E 4C 63 6F 6D 2F 6B 69 77 69 73 65 63
+               2F 63 72 61 73 68 2F 43 72 61 73 68 55 74
+               69 6C 73 3B 00 } // Lcom/kiwisec/crash/CrashUtils;
+    $class2 = { 00 25 4C 63 6F 6D 2F 6B 69 77 69 76 6D 2F
+                73 65 63 75 72 69 74 79 2F 53 74 75 62 41
+                70 70 6C 69 63 61 74 69 6F 6E 3B 00 } // Lcom/kiwivm/security/StubApplication;
+  
+  condition:
+    is_dex and any of them
+}
