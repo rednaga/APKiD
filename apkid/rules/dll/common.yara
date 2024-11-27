@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  RedNaga. https://rednaga.io
+ * Copyright (C) 2024  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -25,19 +25,14 @@
  *
  **/
 
-import "elf"
-include "common.yara"
+import "pe"
 
-rule check_qemu_entropy : anti_vm
+rule is_dll : file_type
 {
   meta:
-    description = "Checks for QEMU entropy"
-    url = "https://github.com/Fuzion24/AndroidHostileEnvironmentDetection/blob/master/app/jni/emudetect.c"
-
-  strings:
-    $a = "atomicallyIncreasingGlobalVarThread"
-    $b = "_qemuFingerPrint"
+    description = "DLL"
 
   condition:
-    is_elf and any of them
+    pe.characteristics and pe.DLL
 }
+

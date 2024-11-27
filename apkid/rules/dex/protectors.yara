@@ -326,3 +326,33 @@ rule dpt_shell : protector
   condition:
     is_dex and any of them
 }
+
+rule nhn_appguard_dex : protector
+{
+  meta:
+    description = "NHN AppGuard"
+    url         = "https://www.nhncloud.com/kr/service/security/nhn-appguard"
+    sample      = "bafa2a9acf4af696b92e0a1ddcf7f470d49a7f3bc27b5c1b1e3ecbdf17049285" // jp.pjfb
+    author      = "Abhi"
+
+  strings:
+    $package = { 00 ?? 4C 63 6F 6D 2F 6E 68 6E (63 6C 6F 75 64 | 65 6E 74) 2F 61 70 70 67 75 61 72 64 2F } // .??Lcom/nhn(cloud|ent)/appguard/
+
+  condition:
+    is_dex and all of them
+}
+
+rule protectt_dex : protector
+{
+  meta:
+    description = "Protectt"
+    sample      = "c246d85560599f91e9c3ed7e59df2dd4e21aaf667f3f2965c28c43d9842f5e75" // com.rblbank.mobank
+    url         = "https://www.protectt.ai"
+    author      = "Abhi"
+
+  strings:
+    $class = { 00 1C 4C 61 69 2F 70 72 6F 74 65 63 74 74 2F 61 70 70 2F 73 65 63 75 72 69 74 79 2F 52 3B 00 } // ..Lai/protectt/app/security/R;.
+
+  condition:
+    is_dex and all of them
+}

@@ -156,7 +156,8 @@ rule dexguard_c : obfuscator
     }
 
   condition:
-    any of them
+    is_dex
+    and any of them
 }
 
 rule dexguard_d : obfuscator
@@ -314,6 +315,24 @@ rule arxan_b : obfuscator
     $deobf
 }
 
+rule arxan_c : obfuscator
+{
+  meta:
+    description = "Arxan"
+    url         = "https://digital.ai/products/application-security/"
+    sample      = "7bd1139b5f860d48e0c35a3f117f980564f45c177a6ef480588b5b5c8165f47e"
+    author      = "Abhi"
+
+  strings:
+    // Example: .9Lcom/arxan/guardit4j/util/PackageNameEnumeratorException;.
+    $pkg = { 00 ?? 4C 63 6F 6D 2F 61 72 78 61 6E 2F 67 75 61 72 64 69 74 } // .??Lcom/arxan/guardit
+
+  condition:
+    is_dex and
+    $pkg and
+    not (arxan or arxan_multidex or arxan_b)
+}
+
 rule allatori_demo : obfuscator
 {
   meta:
@@ -328,7 +347,7 @@ rule allatori_demo : obfuscator
     $s = { 00 0D 41 4C 4C 41 54 4F 52 49 78 44 45 4D 4F 00 }  // ALLATORIxDEMO
 
   condition:
-    $s and is_dex
+    is_dex and $s
 }
 
 rule aamo_str_enc : obfuscator
@@ -384,7 +403,7 @@ rule aamo_str_enc : obfuscator
     $b = { 00 14 67 65 74 53 74 6f 72 61 67 65 45 6e 63 72 79 70 74 69 6f 6e 00 } //getStorageEncryption
 
   condition:
-    1 of ($opcodes*) and all of ($a, $b)
+    is_dex and 1 of ($opcodes*) and all of ($a, $b)
 }
 
 rule appsuit_a : obfuscator
@@ -437,7 +456,7 @@ rule gemalto_sdk : obfuscator
     $p3 = "Lcom/gemalto/ezio/mobile/sdk/"
 
   condition:
-    any of them and is_dex
+    is_dex and any of them
 }
 
 rule kiwi_amazon : obfuscator
@@ -452,7 +471,7 @@ rule kiwi_amazon : obfuscator
     $class = { 00 19 4B69776956657273696F6E456E637279707465722E6A617661 00 } // 00+len+"KiwiVersionEncrypter.java"+00
 
   condition:
-    all of them
+    is_dex and all of them
 }
 
 rule unreadable_field_names : obfuscator
@@ -516,13 +535,13 @@ rule blackobfuscator : obfuscator
         }
     }
     */
-    $opcodes = { 
-      1A 00 ?? ??                    // const-string v0, "random_weird_string"
-      6E 10 21 AC 00 00              // invoke-virtual {v0}, Ljava/lang/String.hashCode()I
-      0A ??                          // move-result v(\d)
-      13 02 ?? ??                    // const/16 v(\d), 0x(\d+)
-      (14 0? ?? ?? ?? ?? | B7 ??)    // const v(\d), 0x(\d+) or xor-int/2addr v(\d), v(\d)
-      (B7 ?? | D7 ?? ?? ??)          // xor-int/2addr v(\d), v(\d) or xor-int/lit16 v(\d), v(\d), 0x(\d+)
+    $opcodes = {
+      1A 00 ?? ??                      // const-string v0, "random_weird_string"
+      6E 10 (21 | AC) (AC | 00) 00 00  // invoke-virtual {v0}, Ljava/lang/String.hashCode()I
+      0A ??                            // move-result v(\d)
+      13 02 ?? ??                      // const/16 v(\d), 0x(\d+)
+      (14 0? ?? ?? ?? ?? | B7 ??)      // const v(\d), 0x(\d+) or xor-int/2addr v(\d), v(\d)
+      (B7 ?? | D7 ?? ?? ??)            // xor-int/2addr v(\d), v(\d) or xor-int/lit16 v(\d), v(\d), 0x(\d+)
     }
     /**
             switch (...) {
@@ -535,7 +554,7 @@ rule blackobfuscator : obfuscator
                 ...
             }
     */
-    $switch = { 
+    $switch = {
       2C ?? ?? ?? ?? ??   // sparse-switch v(\d), 0x(\d+)
       28 ??               // goto 0x(\d+)
       1A 00 ?? ??         // const-string v0, "random_weird_string"
@@ -547,3 +566,20 @@ rule blackobfuscator : obfuscator
   condition:
     is_dex and (#opcodes >= 2 and #switch >= 2)
 }
+
+rule mtprotector_dex : obfuscator
+{
+  meta:
+    description = "MT Protector"
+    url         = "https://mt2.cn/download/"
+    sample      = "7fd0657a9d7a3b8f44e9a8938669439db8ef90585259d24aad31b9cc1599a419"
+    author      = "Eduardo Novella"
+
+  strings:
+    $classname = { 00 204c 6269 6e2f 6d74 2f61 6e6e 6f74 6174 696f 6e73 2f4d 5450 726f 7465 6374 6f72 3b00 } // Lbin/mt/annotations/MTProtector;
+
+  condition:
+    is_dex and any of them
+}
+
+

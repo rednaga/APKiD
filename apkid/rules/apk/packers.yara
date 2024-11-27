@@ -1082,3 +1082,20 @@ rule nesun_apk : packer
   condition:
     is_apk and $lib
 }
+
+rule gpresto_apk : packer
+{
+  meta:
+    description = "G-Presto (anti-cheat)"
+    url         = "https://www.largosoft.co.kr/"
+    sample      = "44558c6c758b1ecf42ecda9981240d50c32f42e0d2be4693e37e39f8eb3a3488"
+    author      = "Abhi"
+
+  strings:
+    $lib       = /lib\/(arm.*|x86.*)\/libATG_L\.so/
+    $assets    = /assets\/ATG_E.*\.sec/
+    $assetslib = "assets/libData.so"
+
+  condition:
+    is_apk and 2 of them
+}

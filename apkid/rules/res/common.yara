@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  RedNaga. https://rednaga.io
+ * Copyright (C) 2024  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -25,19 +25,19 @@
  *
  **/
 
-import "elf"
-include "common.yara"
-
-rule check_qemu_entropy : anti_vm
+rule is_res : file_type
 {
   meta:
-    description = "Checks for QEMU entropy"
-    url = "https://github.com/Fuzion24/AndroidHostileEnvironmentDetection/blob/master/app/jni/emudetect.c"
+    description = "RES"
 
   strings:
-    $a = "atomicallyIncreasingGlobalVarThread"
-    $b = "_qemuFingerPrint"
+    // Common patterns in resources.arsc (package ID, resource type,..)
+    $magic = { 02 00 0C 00 }
+    $type1 = { 01 00 1C 00 }
+    $type2 = { 03 00 00 00 }
+    $type3 = { 00 02 00 00 }
 
   condition:
-    is_elf and any of them
+    $magic at 0 and 1 of ($type*)
 }
+

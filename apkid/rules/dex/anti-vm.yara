@@ -169,7 +169,7 @@ rule checks_build_brand : anti_vm
   condition:
     uses_build_class
     and $prop
-    and 1 of ($str_*)
+    and $str_1
 }
 
 rule checks_build_device : anti_vm
@@ -187,7 +187,7 @@ rule checks_build_device : anti_vm
   condition:
     uses_build_class
     and $prop
-    and 1 of ($str_*)
+    and $str_1
 }
 
 rule checks_build_product : anti_vm
@@ -246,7 +246,7 @@ rule checks_build_board : anti_vm
   condition:
     uses_build_class
     and $prop
-    and 1 of ($str_*)
+    and $str_1
 }
 
 rule checks_build_id : anti_vm
@@ -264,7 +264,7 @@ rule checks_build_id : anti_vm
   condition:
     uses_build_class
     and $prop
-    and 1 of ($str_*)
+    and $str_1
 }
 
 rule possible_build_serial_check : anti_vm
@@ -298,7 +298,7 @@ rule checks_build_tags : anti_vm
   condition:
     uses_build_class
     and $prop
-    and 1 of ($str_*)
+    and $str_1
 }
 
 rule checks_build_user : anti_vm
@@ -316,7 +316,7 @@ rule checks_build_user : anti_vm
   condition:
     uses_build_class
     and $prop
-    and 1 of ($str_*)
+    and $str_1
 }
 
 rule checks_sim_operator : anti_vm
@@ -549,7 +549,8 @@ rule checks_qemu_file : anti_vm
     $i = "/dev/socket/baseband_genyd"
 
   condition:
-    1 of them
+    is_dex
+    and 1 of them
 }
 
 rule possible_vm_check : anti_vm
@@ -562,5 +563,6 @@ rule possible_vm_check : anti_vm
     $a = "isEmulator"
 
   condition:
-    any of them
+    is_dex
+    and all of them
 }

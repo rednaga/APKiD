@@ -552,3 +552,59 @@ rule zimperium_zcloud : protector
     condition:
       is_elf and $lib and #zimperium > 10
 }
+
+rule msa_sdk : protector
+{
+  meta:
+      description = "MSA SDK"
+      url         = "http://msa-alliance.cn"
+      sample      = "fe4afda0c51fa08237859c3b14c2b35bd2c2a65d098a57857454f0ace354ad45" // tv.danmaku.bili
+      author      = "Abhi"
+
+  strings:
+    $string  = "mprotect"
+    $libs    = { 00 6C 69 62 6D 73 61 6F 61 69 64 (61 75 74 68 | 73 65 63 ) 2E 73 6F 00 }  // .libmsaoaidauth.so. || .libmsaoaidsec.so.
+
+  condition:
+    is_elf and all of them
+}
+
+rule nhn_appguard : protector
+{
+  meta:
+      description = "NHN AppGuard"
+      url         = "https://www.nhncloud.com/kr/service/security/nhn-appguard"
+      sample      = "bafa2a9acf4af696b92e0a1ddcf7f470d49a7f3bc27b5c1b1e3ecbdf17049285" // jp.pjfb
+      author      = "Abhi"
+
+  strings:
+    $payload = { (00 ?? | ??) 61 70 70 67 75 61 72 64 5F 68 65 61 64 65
+                 72 2D 3E 47 65 74 (45 6E 63 72 79 70 74 65 64 | 4F 72
+                 69 67 69 6E 61 6C) 50 61 79 6C 6F 61 64 4C 65 6E 67 74
+                 68 28 29 } // appguard_header->Get(Encrypted|Original)PayloadLength()
+    $class   = /\d{2}ComNhnentAppguardAppguardJavaClass(Impl)?\x00/
+    $class2  = /\d{2}AppGuardCallbackJavaClass(Impl)?\x00/
+    $str_app = { 00 28 28 61 70 70 67 75 61 72 64 5F 61 70 70 6C 69 63 61 74 
+                 69 6F 6E 5F 29 29 20 (3D | 21) 3D 20 28 6E 75 6C 6C 70 74 72 29 } // .((appguard_application_)) (=|!)= (nullptr)
+    $lib     = { 00 6C 69 62 6C 6F 61 64 65 72 2E 73 6F 00 } // .libloader.so.
+
+  condition:
+    is_elf and any of ($class*) and ( $lib or $str_app or $payload )
+}
+
+rule easyprotector : protector
+{
+  meta:
+      description = "EasyProtector"
+      url         = "https://github.com/lamster2018/EasyProtector"
+      sample      = "788ebabd9b5464c5e86b3832e4a7b6e7c91cce5603ff17f214429400ba3bb2b9" // net.crigh.cgsport
+      author      = "Abhi"
+
+  strings:
+    $lib  = "\x00libantitrace.so\x00"
+    $log  = "\x00I was be traced...trace pid:%d\x00"
+    $log2 = "\x00ptrace myself...\x00"
+  
+  condition:
+    is_elf and all of them
+}

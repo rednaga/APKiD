@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  RedNaga. https://rednaga.io
+ * Copyright (C) 2024  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -25,19 +25,19 @@
  *
  **/
 
-import "elf"
 include "common.yara"
 
-rule check_qemu_entropy : anti_vm
+rule beebyte : obfuscator
 {
   meta:
-    description = "Checks for QEMU entropy"
-    url = "https://github.com/Fuzion24/AndroidHostileEnvironmentDetection/blob/master/app/jni/emudetect.c"
-
+    description = "Beebyte"
+    url         = "https://www.beebyte.co.uk/"
+    sample      = "53fa7054f7112197cfe3ab8adc1afe825c6e6b4a696404f75f75eb894ae77456"
+    author      = "Abhi"
+  
   strings:
-    $a = "atomicallyIncreasingGlobalVarThread"
-    $b = "_qemuFingerPrint"
+    $name = "\x00Beebyte.Obfuscator\x00"
 
   condition:
-    is_elf and any of them
+    is_dll and all of them
 }

@@ -790,7 +790,7 @@ rule dexprotector : obfuscator
     $dp_elf_header = { 7f45 4c46 (01|02) 01 0100 4450 4c46 }
 
   condition:
-    $dp_elf_header at 0
+    is_elf and $dp_elf_header at 0
 }
 
 rule dexprotector_a : obfuscator

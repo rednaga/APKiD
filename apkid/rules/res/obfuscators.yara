@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  RedNaga. https://rednaga.io
+ * Copyright (C) 2024  RedNaga. https://rednaga.io
  * All rights reserved. Contact: rednaga@protonmail.com
  *
  *
@@ -25,19 +25,22 @@
  *
  **/
 
-import "elf"
 include "common.yara"
 
-rule check_qemu_entropy : anti_vm
+rule mtprotector_res : obfuscator
 {
   meta:
-    description = "Checks for QEMU entropy"
-    url = "https://github.com/Fuzion24/AndroidHostileEnvironmentDetection/blob/master/app/jni/emudetect.c"
+    description = "MT Protector"
+    url         = "https://mt2.cn/download/"
+    sample      = "462475fb14ef7b979d1102a61d334cffcdcfc24183be37af868d1dc681bc7126"
+    author      = "Eduardo Novella"
 
   strings:
-    $a = "atomicallyIncreasingGlobalVarThread"
-    $b = "_qemuFingerPrint"
+    $sign = {
+      0000 0c0c                         // extra bytes
+      4d54 5f50 726f 7465 6374 6f72 00  // ..MT_Protector.
+    }
 
   condition:
-    is_elf and any of them
+    is_res and all of them
 }
