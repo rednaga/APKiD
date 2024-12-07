@@ -989,15 +989,17 @@ rule kiwisec_elf : packer
     author      = "Abhi"
   
   strings:
-    $string  = "kiwisec"
-    $string2 = "kiwicrash"
-    $string3 = "\x00kiwi_dumper\x00"
-    $string4 = "\x00libKwProtectSDK.so\x00"
-    $string5 = "\x00libkwsdataenc.so\x00"
-    $string6 = "\x00libkiwicrash.so\x00"
+    $string  = "\x00kiwi_dumper\x00"
+    $string2 = "\x00libKwProtectSDK.so\x00"
+    $string3 = "\x00libkwsdataenc.so\x00"
+    $string4 = "\x00libkiwicrash.so\x00"
 
-    $class = { 00 63 6F 6D 2F 6B 69 77 69 73 65 63 2F 63 72 61 73 68 2F 4E 61 74 69 76 65 48 61 6E 64 6C 65 72 00 } // com/kiwisec/crash/NativeHandler
+    $class  = { 00 63 6F 6D 2F 6B 69 77 69 73 65 63 2F 63 72 61 73
+                68 2F 4E 61 74 69 76 65 48 61 6E 64 6C 65 72 00 } // com/kiwisec/crash/NativeHandler
+    $class2 = { 00 63 6F 6D 2F 6B 69 77 69 73 65 63 2F 63 72 61 73
+                68 2F 43 72 61 73 68 55 74 69 6C 73 00 } // com/kiwisec/crash/CrashUtils
   
   condition:
-    is_elf and any of them
+    is_elf
+    and any of them
 }
