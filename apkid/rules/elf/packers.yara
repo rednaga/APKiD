@@ -979,3 +979,27 @@ rule gpresto_elf : packer
     and $class
     and 2 of ($name*)
 }
+
+rule kiwisec_elf : packer
+{
+  meta:
+    description = "KiwiSec"
+    url         = "https://en.kiwisec.com/"
+    sample      = "d108652bd1b685765e3ada2b7376e3c3ff67f8162afcf8bad91e0aef79b7b08a"
+    author      = "Abhi"
+  
+  strings:
+    $string  = "\x00kiwi_dumper\x00"
+    $string2 = "\x00libKwProtectSDK.so\x00"
+    $string3 = "\x00libkwsdataenc.so\x00"
+    $string4 = "\x00libkiwicrash.so\x00"
+
+    $class  = { 00 63 6F 6D 2F 6B 69 77 69 73 65 63 2F 63 72 61 73
+                68 2F 4E 61 74 69 76 65 48 61 6E 64 6C 65 72 00 } // com/kiwisec/crash/NativeHandler
+    $class2 = { 00 63 6F 6D 2F 6B 69 77 69 73 65 63 2F 63 72 61 73
+                68 2F 43 72 61 73 68 55 74 69 6C 73 00 } // com/kiwisec/crash/CrashUtils
+  
+  condition:
+    is_elf
+    and any of them
+}

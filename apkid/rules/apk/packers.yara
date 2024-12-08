@@ -1099,3 +1099,23 @@ rule gpresto_apk : packer
   condition:
     is_apk and 2 of them
 }
+
+rule kiwisec_apk : packer
+{
+  meta:
+    description = "KiwiSec"
+    url         = "https://en.kiwisec.com/"
+    sample      = "d108652bd1b685765e3ada2b7376e3c3ff67f8162afcf8bad91e0aef79b7b08a"
+    author      = "Abhi"
+  
+  strings:
+    $lib  = /lib\/(arm.*|x86.*)\/libkiwicrash\.so/
+    $lib2 = /lib\/(arm.*|x86.*)\/libkiwi_dumper\.so/
+    $lib3 = /lib\/(arm.*|x86.*)\/libKwProtectSDK\.so/
+    $lib4 = /lib\/(arm.*|x86.*)\/libkwsdataenc\.so/
+    $lib5 = /lib\/(arm.*|x86.*)\/libkadp\.so/
+    $lib6 = /lib\/(arm.*|x86.*)\/libwhite-box\.so/
+
+  condition:
+    is_apk and 2 of them
+}
