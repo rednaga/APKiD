@@ -360,7 +360,7 @@ rule protectt_dex : protector
 rule flutter_security_checker : protector
 {
   meta:
-    description = "FlutterSecurityChecker"
+    description = "Flutter Security Checker"
     url         = "https://pub.dev/packages/flutter_security_checker"
     sample      = "045d548cfd282d1aa8993efd22846ff49b0c48d99590cc36e3cf6c633dd85bcc" // com.swisssign.swissid.mobile
     author      = "Abhi"
@@ -377,7 +377,7 @@ rule flutter_security_checker : protector
 rule flutterjailbreakdetection : anti_root
 {
   meta:
-    description = "flutter_jailbreak_detection (RootBeer)"
+    description = "Flutter Jailbreak Detection (RootBeer)"
     url         = "https://pub.dev/packages/flutter_jailbreak_detection"
     sample      = "045d548cfd282d1aa8993efd22846ff49b0c48d99590cc36e3cf6c633dd85bcc" // com.swisssign.swissid.mobile
     author      = "Abhi"

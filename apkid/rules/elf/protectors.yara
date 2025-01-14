@@ -608,3 +608,22 @@ rule easyprotector : protector
   condition:
     is_elf and all of them
 }
+
+rule rootbeer: anti_root
+{
+  meta:
+    description = "RootBeer"
+    url         = "https://github.com/scottyab/rootbeer.git"
+    sample      = "607ec962ba93cc9817129cb693ff0f335f500a297b5a297e71fbb998d0f6849c" // com.scottyab.rootbeer.sample
+    author      = "Abhi"
+  
+  strings:
+    $class = { 00 4A 61 76 61 5F 63 6F 6D 5F 73 63 6F 74 74 79 61 62 5F
+               72 6F 6F 74 62 65 65 72 5F 52 6F 6F 74 42 65 65 72 4E 61
+               74 69 76 65 5F 63 68 65 63 6B 46 6F 72 52 6F 6F 74 00 } // Java_com_scottyab_rootbeer_RootBeerNative_checkForRoot
+    $lib   = { 00 6C 69 62 74 6F 6F 6C 43 68 65 63 6B 65 72 2E 73 6F 00 } // libtoolChecker.so
+    $name  = { 00 52 6F 6F 74 42 65 65 72 00 } // RootBeer
+  
+  condition:
+    is_elf and all of them
+}
