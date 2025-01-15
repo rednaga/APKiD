@@ -52,7 +52,7 @@ def colorize_tag(tag) -> str:
         return prt_light_cyan(tag)
     elif tag == 'abnormal':
         return prt_light_gray(tag)
-    elif tag in ['anti_vm', 'anti_disassembly', 'anti_debug']:
+    elif tag in ['anti_vm', 'anti_disassembly', 'anti_debug', 'anti_root']:
         return prt_purple(tag)
     elif tag in ['packer', 'protector']:
         return prt_red(tag)

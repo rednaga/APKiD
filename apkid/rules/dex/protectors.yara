@@ -356,3 +356,53 @@ rule protectt_dex : protector
   condition:
     is_dex and all of them
 }
+
+rule flutter_security_checker : protector
+{
+  meta:
+    description = "Flutter Security Checker"
+    url         = "https://pub.dev/packages/flutter_security_checker"
+    sample      = "045d548cfd282d1aa8993efd22846ff49b0c48d99590cc36e3cf6c633dd85bcc" // com.swisssign.swissid.mobile
+    author      = "Abhi"
+
+  strings:
+    $class = { 00 43 4C 63 6F 6D 2F 70 72 61 76 65 72 61 2F 66 6C 75 74 74 65 72 5F
+               73 65 63 75 72 69 74 79 5F 63 68 65 63 6B 65 72 2F 46 6C 75 74 74 65
+               72 53 65 63 75 72 69 74 79 43 68 65 63 6B 65 72 50 6C 75 67 69 6E 3B 00 } // Lcom/pravera/flutter_security_checker/FlutterSecurityCheckerPlugin;
+
+  condition:
+    is_dex and all of them
+}
+
+rule flutterjailbreakdetection : anti_root
+{
+  meta:
+    description = "Flutter Jailbreak Detection (RootBeer)"
+    url         = "https://pub.dev/packages/flutter_jailbreak_detection"
+    sample      = "045d548cfd282d1aa8993efd22846ff49b0c48d99590cc36e3cf6c633dd85bcc" // com.swisssign.swissid.mobile
+    author      = "Abhi"
+
+  strings:
+    $class = { 00 46 4C 61 70 70 6D 69 72 65 2F 62 65 2F 66 6C 75 74 74 65 72 6A 61 69
+               6C 62 72 65 61 6B 64 65 74 65 63 74 69 6F 6E 2F 46 6C 75 74 74 65 72 4A
+               61 69 6C 62 72 65 61 6B 44 65 74 65 63 74 69 6F 6E 50 6C 75 67 69 6E 3B 00 } // Lappmire/be/flutterjailbreakdetection/FlutterJailbreakDetectionPlugin;
+
+  condition:
+    is_dex and all of them
+}
+
+rule rootbeer: anti_root
+{
+  meta:
+    description = "RootBeer"
+    url         = "https://github.com/scottyab/rootbeer.git"
+    sample      = "607ec962ba93cc9817129cb693ff0f335f500a297b5a297e71fbb998d0f6849c" // com.scottyab.rootbeer.sample
+    author      = "Abhi"
+  
+  strings:
+    $class = { 00 20 4C 63 6F 6D 2F 73 63 6F 74 74 79 61 62 2F 72
+               6F 6F 74 62 65 65 72 2F 52 6F 6F 74 42 65 65 72 3B 00 } // Lcom/scottyab/rootbeer/RootBeer;
+  
+  condition:
+    is_dex and all of them
+}
