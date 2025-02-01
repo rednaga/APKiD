@@ -413,7 +413,7 @@ rule build38 : protector
     description = "Build38 Mobile Security"
     url         = "https://build38.com"
     sample      = "cfbbfca598a9877a381583a7ae2f9e8cde92e7314b21152658bcba5a4e3a0fff" // com.esignus.hashwalletmanager
-    author      = "Abhi"
+    author      = "Abhi, ApkUnpacker"
 
   strings:
     $class        = { 00 15 4C 63 6F 6D 2F 62 75 69 6C 64 33 38 2F 74 61 6B 2F 54 41 4B 3B 00 } // Lcom/build38/tak/TAK;

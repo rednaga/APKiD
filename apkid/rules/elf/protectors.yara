@@ -634,6 +634,7 @@ rule build38 : protector
     description = "Build38 Mobile Security"
     url         = "https://build38.com"
     sample      = "cfbbfca598a9877a381583a7ae2f9e8cde92e7314b21152658bcba5a4e3a0fff" // com.esignus.hashwalletmanager
+    author      = "Abhi"
 
   strings:
     $lib = { 00 6C 69 62 74 61 6B 2E 73 6F 00 } // libtak.so
