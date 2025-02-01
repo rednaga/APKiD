@@ -641,5 +641,5 @@ rule build38 : protector
     $class = { 4C 63 6F 6D 2F 62 75 69 6C 64 33 38 2F 74 61 6B 2F 4E 61 74 69 76 65 52 65 73 70 6F 6E 73 65 3B 00 } // Lcom/build38/tak/NativeResponse;
 
   condition:
-    is_elf and all of them
+    is_elf and any of them
 }
