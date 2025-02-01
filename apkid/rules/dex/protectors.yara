@@ -391,7 +391,7 @@ rule flutterjailbreakdetection : anti_root
     is_dex and all of them
 }
 
-rule rootbeer: anti_root
+rule rootbeer : anti_root
 {
   meta:
     description = "RootBeer"
@@ -405,4 +405,22 @@ rule rootbeer: anti_root
   
   condition:
     is_dex and all of them
+}
+
+rule build38 : protector
+{
+  meta:
+    description = "Build38 Mobile Security"
+    url         = "https://build38.com"
+    sample      = "cfbbfca598a9877a381583a7ae2f9e8cde92e7314b21152658bcba5a4e3a0fff" // com.esignus.hashwalletmanager
+    author      = "Abhi"
+
+  strings:
+    $class        = { 00 15 4C 63 6F 6D 2F 62 75 69 6C 64 33 38 2F 74 61 6B 2F 54 41 4B 3B 00 } // Lcom/build38/tak/TAK;
+    $package_name = { 00 0F 63 6F 6D 2E 62 75 69 6C 64 33 38 2E 74 61 6B 00 } // com.build38.tak
+    $module_class = { 00 25 4C 63 6F 6D 2F 68 61 73 68 77 61 6C 6C 65 74 6D
+                      61 6E 61 67 65 72 2F 42 75 69 6C 64 33 38 4D 6F 64 75 6C 65 3B 00 } // Lcom/hashwalletmanager/Build38Module;
+
+  condition:
+    is_dex and any of them
 }

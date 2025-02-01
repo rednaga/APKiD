@@ -627,3 +627,18 @@ rule rootbeer: anti_root
   condition:
     is_elf and all of them
 }
+
+rule build38 : protector
+{
+  meta:
+    description = "Build38 Mobile Security"
+    url         = "https://build38.com"
+    sample      = "cfbbfca598a9877a381583a7ae2f9e8cde92e7314b21152658bcba5a4e3a0fff" // com.esignus.hashwalletmanager
+
+  strings:
+    $lib = { 00 6C 69 62 74 61 6B 2E 73 6F 00 } // libtak.so
+    $class = { 4C 63 6F 6D 2F 62 75 69 6C 64 33 38 2F 74 61 6B 2F 4E 61 74 69 76 65 52 65 73 70 6F 6E 73 65 3B 00 } // Lcom/build38/tak/NativeResponse;
+
+  condition:
+    is_elf and all of them
+}
