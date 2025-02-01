@@ -418,8 +418,8 @@ rule build38 : protector
   strings:
     $class        = { 00 15 4C 63 6F 6D 2F 62 75 69 6C 64 33 38 2F 74 61 6B 2F 54 41 4B 3B 00 } // Lcom/build38/tak/TAK;
     $package_name = { 00 0F 63 6F 6D 2E 62 75 69 6C 64 33 38 2E 74 61 6B 00 } // com.build38.tak
-    $module_class = { 00 25 4C 63 6F 6D 2F 68 61 73 68 77 61 6C 6C 65 74 6D
-                      61 6E 61 67 65 72 2F 42 75 69 6C 64 33 38 4D 6F 64 75 6C 65 3B 00 } // Lcom/hashwalletmanager/Build38Module;
+    $module_class = { 00 0D 42 75 69 6C 64 33 38 4D 6F 64 75 6C 65 00 } // Build38Module
+    $license_name = { 00 0B 6C 69 63 65 6E 73 65 2E 74 61 6B 00 } // license.tak
 
   condition:
     is_dex and any of them
