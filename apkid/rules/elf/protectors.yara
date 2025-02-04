@@ -631,7 +631,7 @@ rule rootbeer: anti_root
 rule build38 : protector
 {
   meta:
-    description = "Build38 Mobile Security"
+    description = "Build38"
     url         = "https://build38.com"
     sample      = "cfbbfca598a9877a381583a7ae2f9e8cde92e7314b21152658bcba5a4e3a0fff" // com.esignus.hashwalletmanager
     author      = "Abhi"
