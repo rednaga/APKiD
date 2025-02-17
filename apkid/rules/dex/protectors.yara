@@ -314,17 +314,15 @@ rule xiaomi_xsof_sdk : protector
 rule dpt_shell : protector
 {
   meta:
-    description = "DPT Shell"
+    description = "dpt-shell"
     url         = "https://github.com/luoyesiqiu/dpt-shell"
-    sample      = "0c4341700f4e685cafc9c86c9112098b75057580ba1f7163bc971347af3712ad"
-    author      = "Abhi"
+    sample      = "e5bf54c845007cd902c4523bd24c0089662d0bd041ac736bfdf870162ab097b0"
 
   strings:
-    $s1 = { 00 ?? 4C 63 6F 6D 2F 6C 75 6F 79 65 2F 64 70 74 } // .??Lcom/luoye/dpt
-    $s2 = { 00 ?? 4C 63 6F 6D 2F 6C 75 6F 79 65 73 69 71 69 75 2F 73 68 65 6C 6C } // .??Lcom/luoyesiqiu/shell
+    $package    = { 00 ?? 4c 63 6f 6d 2f 6e 61 73 68 73 69 71 69 75 2f 73 68 65 6c 6c 2f 50 72 6f 78 79 41 70 70 6c 69 63 61 74 69 6f 6e } // .??Lcom/nashsiqiu/shell/ProxyApplication
 
   condition:
-    is_dex and any of them
+    is_dex and $package
 }
 
 rule nhn_appguard_dex : protector

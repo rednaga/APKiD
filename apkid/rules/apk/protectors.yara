@@ -174,18 +174,19 @@ rule appdefence : protector
 rule dpt_shell : protector
 {
   meta:
-    description = "DPT Shell"
+    description = "dpt-shell"
     url         = "https://github.com/luoyesiqiu/dpt-shell"
-    sample      = "0c4341700f4e685cafc9c86c9112098b75057580ba1f7163bc971347af3712ad"
-    author      = "Abhi"
+    sample      = "e5bf54c845007cd902c4523bd24c0089662d0bd041ac736bfdf870162ab097b0"
 
   strings:
-    $app = "assets/app_name"
-    $app_acf = "assets/app_acf"
-    $assetlib = /assets\/(.*)\/(arm.*|x86.*)\/libdpt\.so/
+    $assetLib   = "\/assets\/vwwwwwvwww\/(arm.*|x86.*)\/libdpt.so"
+    $asset2     = "\/assets\/app_name"
+    $asset3     =  "\/assets\/app_acf"
+    $asset4     = "\/assets\/OoooooOooo"
+    $package    = { 00 ?? 4c 63 6f 6d 2f 6e 61 73 68 73 69 71 69 75 2f 73 68 65 6c 6c 2f 50 72 6f 78 79 41 70 70 6c 69 63 61 74 69 6f 6e } // .??Lcom/nashsiqiu/shell/ProxyApplication
 
   condition:
-    is_apk and $assetlib and any of ($app*)
+    is_dex and any of them
 }
 
 rule build38 : protector
