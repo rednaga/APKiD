@@ -322,6 +322,9 @@ rule dpt_shell : protector
   strings:
     $s1 = { 00 ?? 4C 63 6F 6D 2F 6C 75 6F 79 65 2F 64 70 74 } // .??Lcom/luoye/dpt
     $s2 = { 00 ?? 4C 63 6F 6D 2F 6C 75 6F 79 65 73 69 71 69 75 2F 73 68 65 6C 6C } // .??Lcom/luoyesiqiu/shell
+    $s3 = { 00 08 64 70 74 2D 6C 69 62 73 00 } // dpt-libs
+    $s4 = { 00 0D 64 70 74 5F 4A 6E 69 42 72 69 64 67 65 00 } // dpt_JniBridge
+    $s5 = { 00 09 6C 69 62 64 70 74 2E 73 6F 00 } // libdpt.so
 
   condition:
     is_dex and any of them
