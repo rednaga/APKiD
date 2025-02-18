@@ -176,7 +176,8 @@ private rule r8_marker : internal
 
   strings:
     // Example: ~~D8{"compilation-mode":"
-    $marker = { 00 [1-2] 7E 7E ( 44 | 52 | 4C ) 38 7B 22 63 6F 6D 70 69 6C 61 74 69 6F 6E 2D 6D 6F 64 65 22 3A 22 }
+    // OR: ~~D8{"backend":"dex","compilation-mode":"
+    $marker = { 00 [1-2] 7E 7E ( 44 | 52 | 4C ) 38 7B 22 [0-16] 63 6F 6D 70 69 6C 61 74 69 6F 6E 2D 6D 6F 64 65 22 3A 22 }
 
   condition:
     /*
