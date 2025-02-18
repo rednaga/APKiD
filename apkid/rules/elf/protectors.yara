@@ -643,3 +643,23 @@ rule build38 : protector
   condition:
     is_elf and any of them
 }
+
+rule dpt_shell : protector
+{
+  meta:
+    description = "DPT Shell"
+    url         = "https://github.com/luoyesiqiu/dpt-shell"
+    sample      = "0c4341700f4e685cafc9c86c9112098b75057580ba1f7163bc971347af3712ad"
+    author      = "Abhi"
+
+  strings:
+    $libname = "\x00libdpt.so\x00"
+    $bhook   = "\x00bytehook_tag\x00"
+
+  condition:
+    is_elf and
+    any of them and
+    for any i in (0 .. elf.number_of_sections): (
+      elf.sections[i].name == ".bitcode"
+    )
+}
