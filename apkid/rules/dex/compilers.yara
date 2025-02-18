@@ -414,68 +414,6 @@ rule dexmerge : manipulator
     dexmerge_map_type_order
 }
 
-rule d8_debug_unsigned : compiler
-{
-  meta:
-    description = "d8 debug (unsigned & possible d8 jar/class2dex)"
-
-  strings:
-    // Example: ~~D8{"backend":"dex","compilation-mode":"debug","has-checksums":false
-    $marker = { 64 65 62 75 67 22 2C 22 68 61 73 2D 63 68 65 63 6B 73 75 6D 73 22 3A 66 61 6C 73 65 }
-    $backend = { 7E 7E 44 38 7B 22 62 61 63 6B 65 6E 64 22 3A 22 64 65 78 22 } // ~~D8{"backend":"dex"
-
-  condition:
-    r8_marker
-    and all of them
-}
-
-rule d8_debug_signed : compiler
-{
-  meta:
-    description = "d8 debug (signed)"
-
-  strings:
-    // Example: ~~D8{"backend":"dex","compilation-mode":"debug","has-checksums":true
-    $marker = { 64 65 62 75 67 22 2C 22 68 61 73 2D 63 68 65 63 6B 73 75 6D 73 22 3A 74 72 75 65 }
-    $backend = { 7E 7E 44 38 7B 22 62 61 63 6B 65 6E 64 22 3A 22 64 65 78 22 } // ~~D8{"backend":"dex"
-
-  condition:
-    r8_marker
-    and all of them
-}
-
-rule d8_release_unsigned : compiler
-{
-  meta:
-    description = "d8 release (unsigned)"
-
-  strings:
-    // Example: ~~D8{"backend":"dex","compilation-mode":"release","has-checksums":false
-    $marker = { 72 65 6C 65 61 73 65 22 2C 22 68 61 73 2D 63 68 65 63 6B 73 75 6D 73 22 3A 66 61 6C 73 65 }
-    $backend = { 7E 7E 44 38 7B 22 62 61 63 6B 65 6E 64 22 3A 22 64 65 78 22 } // ~~D8{"backend":"dex"
-
-  condition:
-    r8_marker
-    and not (r8_map_type_order or ambiguous_tiny_dex_map_type_order)
-    and all of them
-}
-
-rule d8_release_signed : compiler
-{
-  meta:
-    description = "d8 release (signed)"
-
-  strings:
-    // Example: ~~D8{"backend":"dex","compilation-mode":"release","has-checksums":true
-    $marker = { 72 65 6C 65 61 73 65 22 2C 22 68 61 73 2D 63 68 65 63 6B 73 75 6D 73 22 3A 74 72 75 65 }
-    $backend = { 7E 7E 44 38 7B 22 62 61 63 6B 65 6E 64 22 3A 22 64 65 78 22 } // ~~D8{"backend":"dex"
-
-  condition:
-    r8_marker
-    and not (r8_map_type_order or ambiguous_tiny_dex_map_type_order)
-    and all of them
-}
-
 rule unknown_compiler : compiler {
   meta:
     description = "unknown (please file detection issue!)"
@@ -488,7 +426,5 @@ rule unknown_compiler : compiler {
       or (r8 or r8_merged or r8_no_marker)
       or (jack_generic or jack_3x or jack_4x or jack_4_12 or jack_5x)
       or (dexmerge)
-      or (d8_debug_unsigned or d8_debug_signed)
-      or (d8_release_unsigned or d8_release_signed)
     )
 }
