@@ -187,3 +187,20 @@ rule dpt_shell : protector
   condition:
     is_apk and $assetlib and any of ($app*)
 }
+
+rule build38 : protector
+{
+  meta:
+    description = "Build38"
+    url         = "https://build38.com"
+    sample      = "cfbbfca598a9877a381583a7ae2f9e8cde92e7314b21152658bcba5a4e3a0fff" // com.esignus.hashwalletmanager
+    author      = "Abhi"
+
+  strings:
+    $lib      = /lib\/(arm.*|x86.*)\/libtak\.so/
+    $license  = "__license.tak"
+    $license2 = "license.tak"
+
+  condition:
+    is_apk and 2 of them
+}
