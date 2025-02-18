@@ -637,8 +637,8 @@ rule dpt_shell : protector
     author      = "Abhi"
 
   strings:
-    $bhook = "\x00bytehook_tag\x00"
     $libname = "\x00libdpt.so\x00"
+    $bhook   = "\x00bytehook_tag\x00"
 
   condition:
     is_elf and
