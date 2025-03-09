@@ -537,7 +537,7 @@ rule blackobfuscator : obfuscator
     */
     $opcodes = {
       1A 00 ?? ??                      // const-string v0, "random_weird_string"
-      6E 10 (21 | AC) (AC | 00) 00 00  // invoke-virtual {v0}, Ljava/lang/String.hashCode()I
+      6E 10 ?? (AC | 00) 00 00  // invoke-virtual {v0}, Ljava/lang/String.hashCode()I
       0A ??                            // move-result v(\d)
       13 02 ?? ??                      // const/16 v(\d), 0x(\d+)
       (14 0? ?? ?? ?? ?? | B7 ??)      // const v(\d), 0x(\d+) or xor-int/2addr v(\d), v(\d)
