@@ -44,6 +44,17 @@ prt_light_gray = lambda s: f"\033[97m{s}\033[00m"
 prt_orange = lambda s: f"\033[33m{s}\033[00m"
 prt_pink = lambda s: f"\033[35m{s}\033[00m"
 
+def is_windows_cmd():
+    """
+    Check if the current environment is a Windows command prompt.
+
+    Returns:
+        bool: True if the operating system is Windows and the SESSIONNAME 
+              environment variable is not set, indicating a command prompt.
+    """
+    return os.name == 'nt' and (
+        os.getenv('SESSIONNAME') is None
+    )
 
 def colorize_tag(tag) -> str:
     if tag == 'compiler':
@@ -137,7 +148,7 @@ class OutputFormatter(object):
             print(f"[*] {key}")
             for tags in sorted(match_results):
                 descriptions = ', '.join(sorted(match_results[tags]))
-                if sys.stdout.isatty():
+                if sys.stdout.isatty() and not is_windows_cmd():
                     tags_str = OutputFormatter._colorize_tags(tags)
                 else:
                     tags_str = tags
