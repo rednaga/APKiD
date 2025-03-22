@@ -98,6 +98,24 @@ rule appguard_c : packer
     is_apk and 1 of ($b*) and (1 of ($a*) or 1 of ($c*))
 }
 
+rule appguard_d : packer
+{
+  meta:
+    description = "AppGuard"
+    sample      = "94454b39eb50b677afec136b1eaea90895f07a735ae2801618baca16e6a2a19f"
+    url         = "http://appguard.nprotect.com/en/index.html"
+    author      = "Moolakarapaiyan"
+
+  strings:
+    $dircheck = "assets/appguard/"
+    $libcheck1 = /lib\/(arm.*|x86.*)\/libcompatible\.so/
+    $libcheck2 = /lib\/(arm.*|x86.*)\/libcompatible_x86\.so/
+
+  condition:
+    is_apk and $dircheck and ($libcheck1 or $libcheck2)
+}
+
+
 rule dxshield : packer
 {
   meta:
