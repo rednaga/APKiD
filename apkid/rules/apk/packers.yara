@@ -107,7 +107,7 @@ rule appguard_d : packer
     author      = "Moolakarapaiyan"
 
   strings:
-    $dircheck = "assets/appguard/"
+    $dircheck  = "assets/appguard/"
     $libcheck1 = /lib\/(arm.*|x86.*)\/libcompatible\.so/
     $libcheck2 = /lib\/(arm.*|x86.*)\/libcompatible_x86\.so/
 
