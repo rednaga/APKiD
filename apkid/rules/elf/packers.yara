@@ -852,6 +852,25 @@ rule appguard_elf : packer
     is_elf and any of them
 }
 
+rule appguard_elf_b : packer
+{
+  meta:
+    description = "AppGuard"
+    url         = "http://appguard.nprotect.com/en/index.html"
+    sample      = "94454b39eb50b677afec136b1eaea90895f07a735ae2801618baca16e6a2a19f"  
+    author      = "Moolakarapaiyan"
+
+  strings:
+    $a = { 00 6C 69 62 63 6F 6D 70 61 74 69 62 6C 65 2E 73 6F 00 }  // libcompatible.so
+    $b = { 00 ?? 4C 63 6F 6D 2F 69 6E 63 61 2F 73 65 63 75
+           72 69 74 79 2F 41 70 70 47 75 61 72 64 2F 78 43
+           6C 61 73 73 3B 00 } // #Lcom/inca/security/AppGuard/xClass;
+
+  condition:
+    is_elf and any of them
+}
+
+
 rule dxshield_elf : packer
 {
   meta:
@@ -1003,3 +1022,4 @@ rule kiwisec_elf : packer
     is_elf
     and any of them
 }
+
