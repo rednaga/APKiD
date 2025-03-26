@@ -98,6 +98,7 @@ rule appguard_c : packer
     is_apk and 1 of ($b*) and (1 of ($a*) or 1 of ($c*))
 }
 
+
 rule appguard_d : packer
 {
   meta:
@@ -107,13 +108,13 @@ rule appguard_d : packer
     author      = "Moolakarapaiyan"
 
   strings:
-    $dircheck  = "assets/appguard/"
-    $libcheck1 = /lib\/(arm.*|x86.*)\/libcompatible\.so/
-    $libcheck2 = /lib\/(arm.*|x86.*)\/libcompatible_x86\.so/
+    $dircheck = "assets/appguard/"
+    $libcheck = /lib\/(arm.*|x86.*)\/libcompatible(_x86)?\.so/
 
   condition:
-    is_apk and $dircheck and ($libcheck1 or $libcheck2)
+    is_apk and all of them
 }
+
 
 
 rule dxshield : packer
@@ -1137,3 +1138,4 @@ rule kiwisec_apk : packer
   condition:
     is_apk and 2 of them
 }
+
