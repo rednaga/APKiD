@@ -330,6 +330,22 @@ rule dpt_shell : protector
     is_dex and any of them
 }
 
+rule ahnlab_v3_engine : anti_root
+{
+  meta:
+    description = "Ahnlab V3 Engine"
+    url         = "https://www.ahnlab.com/en"
+    sample      = "638bad9c6336049f43ac88d7db65c743d9703d732f86f2dc094999b195d63aa2"
+    author      = "whoa-mi"
+
+  strings:
+    $class = { 63 6f 6d 2f 61 68 6e 6c 61 62 2f 65 6e 67 69 6e 65 73 64  // com/ahnlab/enginesdk
+            }
+
+  condition:
+    is_dex and all of them
+}
+
 rule nhn_appguard_dex : protector
 {
   meta:

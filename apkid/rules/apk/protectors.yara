@@ -105,6 +105,24 @@ rule free_rasp_old : protector
     is_apk and all of them
 }
 
+rule ahnlab_v3_engine : protector
+{
+  meta:
+    description = "Ahnlab V3 engine"
+    url         = "https://www.ahnlab.com/en"
+    author      = "whoa-mi"
+    sample      = "638bad9c6336049f43ac88d7db65c743d9703d732f86f2dc094999b195d63aa2"
+
+  strings:
+    $binary1 = /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libEngineManager\.so/
+    $binary2 = /assets\/ahnlab\/engine\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/librcengine/
+    $binary3 = /assets\/ahnlab\/engine\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libavengine/
+    $binary4 = "assets/ahnlab/engine/rootchecker2.rcd"
+
+  condition:
+    is_apk and 3 of ($binary*)
+}
+
 rule free_rasp_new : protector
 {
   meta:
