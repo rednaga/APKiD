@@ -119,7 +119,7 @@ rule ahnlab_v3_engine : protector
     $binary3 = "assets/ahnlab/engine/rootchecker2.rcd"
 
   condition:
-    is_apk and 3 of ($binary*)
+    is_apk and 2 of ($binary*)
 }
 
 rule free_rasp_new : protector
