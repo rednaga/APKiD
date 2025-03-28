@@ -115,9 +115,8 @@ rule ahnlab_v3_engine : protector
 
   strings:
     $binary1 = /lib\/(arm|x86).*\/libEngineManager\.so/
-    $binary2 = /assets\/ahnlab\/engine\/(arm|x86).*\/librcengine/
-    $binary3 = /assets\/ahnlab\/engine\/(arm|x86).*\/libavengine/
-    $binary4 = "assets/ahnlab/engine/rootchecker2.rcd"
+    $binary2 = /assets\/ahnlab\/engine\/(arm|x86).*\/lib(rc|av)engine/
+    $binary3 = "assets/ahnlab/engine/rootchecker2.rcd"
 
   condition:
     is_apk and 3 of ($binary*)
