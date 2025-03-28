@@ -114,9 +114,9 @@ rule ahnlab_v3_engine : protector
     sample      = "638bad9c6336049f43ac88d7db65c743d9703d732f86f2dc094999b195d63aa2"
 
   strings:
-    $binary1 = /lib\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libEngineManager\.so/
-    $binary2 = /assets\/ahnlab\/engine\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/librcengine/
-    $binary3 = /assets\/ahnlab\/engine\/(x86\_64|armeabi\-v7a|arm64\-v8a|x86)\/libavengine/
+    $binary1 = /lib\/(arm|x86).*\/libEngineManager\.so/
+    $binary2 = /assets\/ahnlab\/engine\/(arm|x86).*\/librcengine/
+    $binary3 = /assets\/ahnlab\/engine\/(arm|x86).*\/libavengine/
     $binary4 = "assets/ahnlab/engine/rootchecker2.rcd"
 
   condition:
