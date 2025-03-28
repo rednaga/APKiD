@@ -339,11 +339,9 @@ rule ahnlab_v3_engine : anti_root
     author      = "whoa-mi"
 
   strings:
-    $class = { 0000 636f 6d2f 61686e 6c61 622f 656e 6769 6e65 7364 6b2f [1-256] 2e 636c 6173 73 // .com/ahnlab/enginesdk/(.*).class
-            }
-
+    $class = "Lcom/ahnlab/enginesdk"
   condition:
-    is_dex and all of them
+    is_dex and #class > 10
 }
 
 rule nhn_appguard_dex : protector
