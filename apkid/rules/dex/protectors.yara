@@ -339,7 +339,7 @@ rule ahnlab_v3_engine : anti_root
     author      = "whoa-mi"
 
   strings:
-    $class = { 63 6f 6d 2f 61 68 6e 6c 61 62 2f 65 6e 67 69 6e 65 73 64  // com/ahnlab/enginesdk
+    $class = { 00 ?? 63 6f 6d 2f 61 68 6e 6c 61 62 2f 65 6e 67 69 6e 65 73 64  // com/ahnlab/enginesdk
             }
 
   condition:
