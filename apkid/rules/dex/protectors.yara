@@ -339,7 +339,7 @@ rule ahnlab_v3_engine : anti_root
     author      = "whoa-mi"
 
   strings:
-    $class = "Lcom/ahnlab/enginesdk"
+    $class = "Lcom/ahnlab/enginesdk/"
   condition:
     is_dex and #class > 10
 }
