@@ -72,6 +72,23 @@ rule whitecryption_elf_a : protector
     is_elf and 1 of them
 }
 
+rule ahnlab_v3_engine : anti_root
+{
+  meta:
+    description  = "Ahnlab V3 Engine"
+    sample1      = "638bad9c6336049f43ac88d7db65c743d9703d732f86f2dc094999b195d63aa2"
+    sample2      = "87487409f9fb2f8a2c086f3476a5020c12bea4f18356b45e89c09007791c62fb"
+    sample3      = "fc48d65f27b3231db4c068ddc4a63c5ca68843c42b2e989dd626ea6aa2f52b66"
+    url          = "https://www.ahnlab.com/en"
+    author       = "whoa-mi"
+
+  strings:
+    $entry = "engmgr_startRootCheck"
+
+  condition:
+    is_elf and all of them
+}
+
 rule appdome_elf : protector
 {
   // https://github.com/rednaga/APKiD/issues/151
