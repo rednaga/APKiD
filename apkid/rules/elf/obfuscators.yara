@@ -897,3 +897,18 @@ rule ay : obfuscator
     is_elf and all of them
 }
 
+rule octopus_codevo : obfuscator
+{
+  meta:
+    description = "Octopus SDK (Codevo)"
+    url         = "https://codevo.com.tr/portfolio/"
+    sample      = "886777034851adef9068b28c9ea54c52545dc68a7e692abffbc2d90807ead402" // com.garantiemeklilik.cepsube
+    author      = "Eduardo Novella"
+
+  strings:
+    // octopus_obf::obfuscated_data<10ull,10751603028664370595ull>::~obfuscated_data()
+    $export = /\_ZN\d{1,2}octopus_obf\d{1,2}obfuscated_dataILy(.*)Ev/
+
+  condition:
+    is_elf and all of them
+}
