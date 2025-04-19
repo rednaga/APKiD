@@ -127,7 +127,7 @@ rule appdome_elf_a : protector
     is_elf and not appdome_elf and
       // Match at least 2 section names from hook,.hookname,adinit,.adi,ipcent,ipcsel
       for 2 i in (0..elf.number_of_sections):
-        (elf.sections[i].name matches /(hook|\.hookname|adinit|\.adi|ipcent|ipcsel)/)
+        (elf.sections[i].name matches /(hook|\.hookname|adinit|\.adi|ipcent|ipcsel|\.rhash|.imtab)/)
 }
 
 rule metafortress : protector
@@ -601,7 +601,7 @@ rule nhn_appguard : protector
                  68 28 29 } // appguard_header->Get(Encrypted|Original)PayloadLength()
     $class   = /\d{2}ComNhnentAppguardAppguardJavaClass(Impl)?\x00/
     $class2  = /\d{2}AppGuardCallbackJavaClass(Impl)?\x00/
-    $str_app = { 00 28 28 61 70 70 67 75 61 72 64 5F 61 70 70 6C 69 63 61 74 
+    $str_app = { 00 28 28 61 70 70 67 75 61 72 64 5F 61 70 70 6C 69 63 61 74
                  69 6F 6E 5F 29 29 20 (3D | 21) 3D 20 28 6E 75 6C 6C 70 74 72 29 } // .((appguard_application_)) (=|!)= (nullptr)
     $lib     = { 00 6C 69 62 6C 6F 61 64 65 72 2E 73 6F 00 } // .libloader.so.
 
@@ -621,7 +621,7 @@ rule easyprotector : protector
     $lib  = "\x00libantitrace.so\x00"
     $log  = "\x00I was be traced...trace pid:%d\x00"
     $log2 = "\x00ptrace myself...\x00"
-  
+
   condition:
     is_elf and all of them
 }
@@ -633,14 +633,14 @@ rule rootbeer: anti_root
     url         = "https://github.com/scottyab/rootbeer.git"
     sample      = "607ec962ba93cc9817129cb693ff0f335f500a297b5a297e71fbb998d0f6849c" // com.scottyab.rootbeer.sample
     author      = "Abhi"
-  
+
   strings:
     $class = { 00 4A 61 76 61 5F 63 6F 6D 5F 73 63 6F 74 74 79 61 62 5F
                72 6F 6F 74 62 65 65 72 5F 52 6F 6F 74 42 65 65 72 4E 61
                74 69 76 65 5F 63 68 65 63 6B 46 6F 72 52 6F 6F 74 00 } // Java_com_scottyab_rootbeer_RootBeerNative_checkForRoot
     $lib   = { 00 6C 69 62 74 6F 6F 6C 43 68 65 63 6B 65 72 2E 73 6F 00 } // libtoolChecker.so
     $name  = { 00 52 6F 6F 74 42 65 65 72 00 } // RootBeer
-  
+
   condition:
     is_elf and all of them
 }

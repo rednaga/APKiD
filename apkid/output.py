@@ -49,7 +49,7 @@ def is_windows_cmd():
     Check if the current environment is a Windows command prompt.
 
     Returns:
-        bool: True if the operating system is Windows and the SESSIONNAME 
+        bool: True if the operating system is Windows and the SESSIONNAME
               environment variable is not set, indicating a command prompt.
     """
     return os.name == 'nt' and (
@@ -65,7 +65,7 @@ def colorize_tag(tag) -> str:
         return prt_light_gray(tag)
     elif tag in ['anti_vm', 'anti_disassembly', 'anti_debug', 'anti_root']:
         return prt_purple(tag)
-    elif tag in ['packer', 'protector']:
+    elif tag in ['packer', 'protector', 'anticheat']:
         return prt_red(tag)
     elif tag == 'obfuscator':
         return prt_yellow(tag)
