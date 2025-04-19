@@ -441,3 +441,28 @@ rule build38 : protector
   condition:
     is_dex and any of them
 }
+
+rule shield_sdk : protector
+{
+  meta:
+    description = "Shield SDK"
+    url         = "https://shield.com/"
+    sample      = "fb4b7f033658b3898e0448955491b448a2c78e1a2325c65fece6ad64f6f6b6d0" // com.mpl.androidapp
+    author      = "Abhi"
+
+  strings:
+    $class  = { 00 1B 4C 63 6F 6D 2F 73 68 69 65 6C 64 2F 61 6E 64
+                72 6F 69 64 2F 53 68 69 65 6C 64 3B 00 } // Lcom/shield/android/Shield;
+    $class2 = { 00 29 4C 63 6F 6D 2F 73 68 69 65 6C 64 2F 61 6E 64
+                72 6F 69 64 2F 69 6E 74 65 72 6E 61 6C 2F 4E 61 74
+                69 76 65 55 74 69 6C 73 3B 00 } // Lcom/shield/android/internal/NativeUtils;
+    $class3 = { 00 27 4C 63 6F 6D 2F 73 68 69 65 6C 64 2F 61 6E 64
+                72 6F 69 64 2F 63 6F 6D 6D 6F 6E 2F 42 75 69 6C 64
+                43 6F 6E 66 69 67 3B 00 } // Lcom/shield/android/common/BuildConfig;
+    $class4 = { 00 28 4C 63 6F 6D 2F 73 68 69 65 6C 64 2F 61 6E 64
+                72 6F 69 64 2F 63 6F 6D 6D 6F 6E 2F 53 68 69 65 6C
+                64 4D 6F 64 75 6C 65 3B 00 } // Lcom/shield/android/common/ShieldModule;
+
+  condition:
+    is_dex and any of them
+}
