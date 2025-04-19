@@ -35,3 +35,20 @@ rule is_elf : file_type
   condition:
     elf.number_of_sections >= 0
 }
+
+rule is_dart : file_type
+{
+  meta:
+    description = "Dart"
+
+    strings:
+        $s1   = "dart:core" ascii
+        $s2   = "dart:async" ascii
+        $s3   = "_kDartVmSnapshotData" ascii
+        $s4   = "_kDartVmSnapshotInstructions" ascii
+        $s5   = "flutter_assets" ascii
+        $ksnl = { 4B 53 4E 4C } // "KSNL" in hex
+
+  condition:
+        is_elf and 2 of ($s*) or $ksnl
+}

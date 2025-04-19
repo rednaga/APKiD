@@ -680,3 +680,24 @@ rule dpt_shell : protector
       elf.sections[i].name == ".bitcode"
     )
 }
+
+rule free_rasp_dart : protector
+{
+  meta:
+    description = "FreeRASP"
+    url         = "https://www.talsec.app/freerasp-in-app-protection-security-talsec"
+    sample      = "b1f8b110ef85e6a90b000ec625be2a51e6bf7fa8d17859f158f06bfe0078beb4" // net.corepass.app
+    author      = "Eduardo Novella"
+
+  strings:
+    $s1 = "\x00package:freerasp/src/errors/talsec_exception.dart\x00"
+    $s2 = "\x00package:freerasp/src/models/talsec_config.dart\x00"
+    $s3 = "\x00package:freerasp/src/talsec.dart\x00"
+    $s4 = "\x00talsec-failure\x00"
+    $s5 = "\x00TalsecException\x00"
+    $s6 = "\x00TalsecController\x00"
+
+  condition:
+    is_dart and any of them
+}
+
