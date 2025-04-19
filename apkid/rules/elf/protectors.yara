@@ -102,8 +102,10 @@ rule appguard_rasp_a : anti_root
                69 6e 67 3a 3a 73 74 61 72 74 41 6e 74 69 44 65  // ing::startAntiDe
                62 75 67 67 69 6e 67                             // bugging
              }
+    $libname = { 00 6c 69 62 63 6f 6d 70 61 74 69 62 6c 65 2e 73 6f 00 } // .libcompatible.so.
+
   condition:
-    is_elf and any of them
+    is_elf and all of them
 }
 
 rule appdome_elf : protector
