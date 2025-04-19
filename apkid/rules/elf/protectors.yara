@@ -127,7 +127,7 @@ rule appdome_elf_a : protector
     is_elf and not appdome_elf and
       // Match at least 2 section names from hook,.hookname,adinit,.adi,ipcent,ipcsel
       for 2 i in (0..elf.number_of_sections):
-        (elf.sections[i].name matches /(hook|\.hookname|adinit|\.adi|ipcent|ipcsel|\.rhash|.imtab)/)
+        (elf.sections[i].name matches /(hook|\.hookname|adinit|\.adi|ipcent|ipcsel|\.rhash|\.imtab)/)
 }
 
 rule metafortress : protector
