@@ -290,58 +290,6 @@ rule verimatrix_arm64_b : protector
   meta:
     description = "InsideSecure Verimatrix"
     url         = "https://www.verimatrix.com/products/app-shield/"
-    sample      = "f5847f60f012a922a3a4a0cc5a445ec5646ee744f160784b180234050857a440"
-    author      = "Eduardo Novella"
-
-  strings:
-    // Sample contains 2 inlined syscalls (mmap & munmap)
-    $svc_0 = {
-      01 00 00 D4   // SVC  0
-    }
-
-    // Unpacking code in JNI_OnLoad
-    /**
-      v4 = (unsigned __int64)linux_eabi_syscall(__NR_mmap, 0LL, 0x4000u, 7, 34, -1, 0LL);
-      ...
-      if ( v14 < v4 + 0x3FFF )
-      {
-        do
-        {
-          __asm { SYS             #3, c7, c11, #1, X12 }
-          v14 += v12;
-        }
-        while ( v14 < v13 );
-      }
-      __dsb(0xBu);
-      v19 = (unsigned int)(4 << (StatusReg & 0xF));
-      for ( j = v4 & -v19; j < v13; j += v19 )
-        __asm { SYS             #3, c7, c5, #1, X10 }
-      __isb(0xFu);
-      v3 = ((__int64 (__fastcall *)(__int64 *))v4)(v22);
-      linux_eabi_syscall(__NR_munmap, v5, 0x4000u);
-    */
-    $asm_sys_dsb_isb = {
-      2C 7B 0B D5   // SYS #3, c7, c11, #1, X12
-      [12-64]
-      9F 3B 03 D5   // DSB ISH
-      [0-32]
-      2A 75 0B D5   // SYS #3, c7, c5, #1, X10
-      [12-64]
-      DF 3F 03 D5   // ISB
-    }
-
-  condition:
-    elf.machine == elf.EM_AARCH64
-    and $asm_sys_dsb_isb
-    and #svc_0 >= 2
-    and for any i in (0..elf.number_of_segments): (elf.segments[i].type == elf.PT_LOAD)
-}
-
-rule verimatrix_arm64_c : protector
-{
-  meta:
-    description = "InsideSecure Verimatrix"
-    url         = "https://www.verimatrix.com/products/app-shield/"
     sample      = "41aab8bad66ab3ee47d8133488084e87abd271e2865d5715fb36269d967a2571"
     author      = "FrenchYeti"
 
