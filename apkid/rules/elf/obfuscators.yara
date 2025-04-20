@@ -912,3 +912,38 @@ rule octopus_codevo : obfuscator
   condition:
     is_elf and all of them
 }
+
+rule epona : protector
+{
+    meta:
+        description = "Quarks AppShield (Epona)"
+        url         = "https://www.quarkslab.com/white-box-cryptography/"
+        sample      = "db42bc905f5a3e6f67d1726ce358475614627f8356515ba79fc2b0cabbb65522" // euro.pccw.view 5.5.0
+        author      = "Eduardo Novella"
+
+    strings:
+      $whitebox_crypto = {
+        0D 04 40 39   // LDRB  W13, [X0,#1]
+        0E 08 40 39   // LDRB  W14, [X0,#2]
+        0F 0C 40 39   // LDRB  W15, [X0,#3]
+        02 14 40 39   // LDRB  W2, [X0,#5]
+        04 1C 40 39   // LDRB  W4, [X0,#7]
+        0C 00 40 39   // LDRB  W12, [X0]
+        10 10 40 39   // LDRB  W16, [X0,#4]
+        03 18 40 39   // LDRB  W3, [X0,#6]
+        05 20 40 39   // LDRB  W5, [X0,#8]
+        06 24 40 39   // LDRB  W6, [X0,#9]
+        07 28 40 39   // LDRB  W7, [X0,#0xA]
+        13 2C 40 39   // LDRB  W19, [X0,#0xB]
+        14 30 40 39   // LDRB  W20, [X0,#0xC]
+        15 34 40 39   // LDRB  W21, [X0,#0xD]
+        16 38 40 39   // LDRB  W22, [X0,#0xE]
+        00 3C 40 39   // LDRB  W0, [X0,#0xF]
+      }
+
+    condition:
+      is_elf and any of them
+}
+
+
+
