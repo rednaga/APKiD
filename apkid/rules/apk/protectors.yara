@@ -221,3 +221,18 @@ rule build38 : protector
   condition:
     is_apk and 2 of them
 }
+
+rule shield_sdk : protector
+{
+  meta:
+    description = "Shield SDK"
+    url         = "https://shield.com/"
+    sample      = "fb4b7f033658b3898e0448955491b448a2c78e1a2325c65fece6ad64f6f6b6d0" // com.mpl.androidapp
+    author      = "Abhi"
+
+  strings:
+    $lib = /lib\/(arm.*|x86.*)\/libcashshieldabc-native-lib\.so/
+
+  condition:
+    is_apk and all of them
+}

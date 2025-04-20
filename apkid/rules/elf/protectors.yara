@@ -654,7 +654,7 @@ rule build38 : protector
     author      = "Abhi"
 
   strings:
-    $lib = { 00 6C 69 62 74 61 6B 2E 73 6F 00 } // libtak.so
+    $lib   = { 00 6C 69 62 74 61 6B 2E 73 6F 00 } // libtak.so
     $class = { 4C 63 6F 6D 2F 62 75 69 6C 64 33 38 2F 74 61 6B 2F 4E 61 74 69 76 65 52 65 73 70 6F 6E 73 65 3B 00 } // Lcom/build38/tak/NativeResponse;
 
   condition:
@@ -701,3 +701,21 @@ rule free_rasp_dart : protector
     is_dart and any of them
 }
 
+rule shield_sdk : protector
+{
+  meta:
+    description = "Shield SDK"
+    url         = "https://shield.com/"
+    sample      = "fb4b7f033658b3898e0448955491b448a2c78e1a2325c65fece6ad64f6f6b6d0" // com.mpl.androidapp
+    author      = "Abhi"
+
+  strings:
+    $lib   = { 00 6C 69 62 63 61 73 68 73 68 69 65 6C 64 61 62
+               63 2D 6E 61 74 69 76 65 2D 6C 69 62 2E 73 6F 00 } // libcashshieldabc-native-lib.so
+    $class = { 00 63 6F 6D 2F 73 68 69 65 6C 64 2F 61 6E 64 72
+               6F 69 64 2F 69 6E 74 65 72 6E 61 6C 2F 4E 61 74
+               69 76 65 55 74 69 6C 73 00 } // com/shield/android/internal/NativeUtils
+
+  condition:
+    is_elf and all of them
+}
