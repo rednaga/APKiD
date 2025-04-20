@@ -89,6 +89,25 @@ rule ahnlab_v3_engine : anti_root
     is_elf and all of them
 }
 
+rule appguard_rasp_a : anti_root
+{
+  meta:
+    description = "AppGuard AntiDebugging Checker"
+    sample      = "67f67326a36a3dee5be8315b54ac5f4e4328cc1d8397720d4af7b0b1d2d1bf6a"
+    url         = "http://appguard.nprotect.com/en/index.html"
+    author      = "whoa-mi"
+
+  strings:
+    $entry = { 41 6e 74 69 44 65 62 75 67 67                    // AntiDebugg
+               69 6e 67 3a 3a 73 74 61 72 74 41 6e 74 69 44 65  // ing::startAntiDe
+               62 75 67 67 69 6e 67                             // bugging
+             }
+    $libname = { 00 6c 69 62 63 6f 6d 70 61 74 69 62 6c 65 2e 73 6f 00 } // .libcompatible.so.
+
+  condition:
+    is_elf and all of them
+}
+
 rule appdome_elf : protector
 {
   // https://github.com/rednaga/APKiD/issues/151
