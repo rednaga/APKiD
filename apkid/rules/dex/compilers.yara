@@ -143,16 +143,20 @@ private rule r8_map_type_order : internal
 
   condition:
     /*
-     * R8 order derrived from: https://r8.googlesource.com/r8/+/refs/heads/master/src/main/java/com/android/tools/r8/dex/FileWriter.java#731
+     * R8 order derrived from: https://r8.googlesource.com/r8/+/refs/heads/master/src/main/java/com/android/tools/r8/dex/FileWriter.java#1215
      * The order starting at offset 7 is:
      *   0x0007 = TYPE_CALL_SITE_ID_ITEM (optional)
      *   0x0008 = TYPE_METHOD_HANDLE_ITEM (optional)
      *   0x2001 = TYPE_CODE_ITEM
      *   0x2003 = TYPE_DEBUG_INFO_ITEM (optional)
      *   0x1001 = TYPE_TYPE_LIST
+     *   0x2002 = TYPE_STRING_DATA_ITEM
      */
     // missing TYPE_CALL_SITE_ID_ITEM and TYPE_METHOD_HANDLE_ITEM, common case
     (dex.map_list.map_item[7].type == 0x2001 and dex.map_list.map_item[8].type == 0x2003 and dex.map_list.map_item[9].type == 0x1001)
+
+    // missing TYPE_DEBUG_INFO_ITEM
+    or (dex.map_list.map_item[7].type == 0x2001 and dex.map_list.map_item[8].type == 0x1001 and dex.map_list.map_item[9].type == 0x2002)
 
     // has everything
     or (dex.map_list.map_item[7].type == 0x0007 and dex.map_list.map_item[8].type == 0x0008 and dex.map_list.map_item[9].type == 0x2001 and dex.map_list.map_item[10].type == 0x2003 and dex.map_list.map_item[11].type == 0x1001)
