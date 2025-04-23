@@ -290,6 +290,73 @@ rule verimatrix_arm64_b : protector
   meta:
     description = "InsideSecure Verimatrix"
     url         = "https://www.verimatrix.com/products/app-shield/"
+    sample      = "e5acdf85e32675bed3cb8aa43fdfbc42117d7bee74f180db86db23e09895db9d" // dk.mitid.app.android
+    author      = "Eduardo Novella"
+
+  strings:
+    /**
+    if ( v14 < v3 + 0x3FFF )
+    {
+      do
+      {
+        __asm { DC              CVAU, X12 }
+        v14 += v12;
+      }
+      while ( v14 < (unsigned __int64)v13 );
+    }
+    __dsb(0xBu);
+    v19 = (unsigned int)(4 << (StatusReg & 0xF));
+    for ( j = v3 & -v19; j < (unsigned __int64)v13; j += v19 )
+      __asm { IC              IVAU, X10 }
+    __dsb(0xBu);
+    __isb(0xFu);
+    v4 = ((__int64 (__fastcall *)(_QWORD *))v3)(v23);
+    v21 = linux_eabi_syscall(__NR_munmap, v5, 0x4000u);
+    */
+    $asm_dc_dsb_ic_isb = {
+      2C 7B 0B D5  // DC   CVAU, X12
+      [12-32]
+      9F 3B 03 D5  // DSB  ISH
+      [12-32]
+      2A 75 0B D5  // IC   IVAU, X10
+      [12-32]
+      DF 3F 03 D5  // ISB
+    }
+
+    /**
+        v3 = (unsigned __int64)linux_eabi_syscall(__NR_mmap, 0, 0x4000u, 7, 34, -1, 0);
+    */
+    $svc_mmap = {
+        ?? 03 1F AA // MOV  X11, XZR
+        ?? 1B 80 52 // MOV  W12, #0xDE
+        ?? 00 88 52 // MOV  W13, #0x4000
+        ?? 00 80 52 // MOV  W14, #7
+        ?? 04 80 52 // MOV  W15, #0x22
+        [4-32]
+        01 00 00 D4 // SVC 0
+    }
+    /**
+        linux_eabi_syscall(__NR_munmap, v5, 0x4000u);
+    */
+    $svc_munmap = {
+        ?? 1A 80 52  //  MOV   W11, #0xD7
+        ?? 00 88 52  //  MOV   W12, #0x4000
+        [4-32]
+        01 00 00 D4  //  SVC   0
+    }
+
+    $s_jnionload = { 004a 4e49 5f4f 6e4c 6f61 6400 } // JNI_OnLoad
+
+  condition:
+    elf.machine == elf.EM_AARCH64 and all of them
+    and for any i in (0..elf.number_of_segments): (elf.segments[i].type == elf.PT_LOAD)
+}
+
+rule verimatrix_arm64_c : protector
+{
+  meta:
+    description = "InsideSecure Verimatrix"
+    url         = "https://www.verimatrix.com/products/app-shield/"
     sample      = "41aab8bad66ab3ee47d8133488084e87abd271e2865d5715fb36269d967a2571"
     author      = "FrenchYeti"
 
