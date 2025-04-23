@@ -857,7 +857,7 @@ rule appguard_elf_b : packer
   meta:
     description = "AppGuard"
     url         = "http://appguard.nprotect.com/en/index.html"
-    sample      = "94454b39eb50b677afec136b1eaea90895f07a735ae2801618baca16e6a2a19f"  
+    sample      = "94454b39eb50b677afec136b1eaea90895f07a735ae2801618baca16e6a2a19f"
     author      = "Moolakarapaiyan"
 
   strings:
@@ -947,15 +947,104 @@ rule zimperium_zshield : packer
         ?? ?? ?? 54    //  B.CC            loc_4A924
         [4-32]
         9F 3B 03 D5    // DSB             ISH
-        [20-64]
+        [4-64]
         ?? 75 0B D5    // IC              IVAU, X9
-        [12-24]
+        [4-32]
         9F 3B 03 D5    // DSB             ISH
         DF 3F 03 D5    // ISB
     }
 
   condition:
-    is_elf and all of them
+    elf.machine == elf.EM_AARCH64 and all of them
+}
+
+rule zimperium_zshield_a : packer
+{
+  meta:
+    description = "Zimperium (zShield)"
+    url         = "https://www.zimperium.com/zshield"
+    sample      = "967d78d489363eee74e86f1b3e2b04d5614dd1d50437ba36b0f898ad802f290d" // com.medtronic.diabetes.minimedmobile.eu
+    author      = "Eduardo Novella"
+
+  strings:
+    /**
+        while ( linux_eabi_syscall(__NR_mprotect, v7, v203, 5) == -4 )
+
+        do
+            v96 = linux_eabi_syscall(v95, v218, v252, (void *)(int)(v91 + 209), v92, v93, v94, (void *)0xC4A0A48FLL);
+        while ( v96 == -4 );
+
+        do
+            v114 = (unsigned int *)linux_eabi_syscall(__NR_mmap, 0LL, v113, 3, 34, -1, 0LL);
+        while ( v114 == (unsigned int *)-4LL );
+    */
+    $svc = {
+          01 00 00 D4   // SVC             0
+          1F 10 00 B1   // CMN             X0, #4
+    }
+
+    /**
+        do
+            v11 = linux_eabi_syscall(__NR_getpid);
+        while ( v11 == -4 );
+        do
+            v13 = linux_eabi_syscall(__NR_socket, 1, 0x80001, 0);
+        while ( v13 == -4 );
+    */
+    $inline_svc = {
+        E0 03 1F AA  //  MOV             X0, XZR
+        88 15 80 52  //  MOV             W8, #__NR_getpid
+        E1 03 1F AA  //  MOV             X1, XZR
+        E2 03 1F AA  //  MOV             X2, XZR
+        E3 03 1F AA  //  MOV             X3, XZR
+        E4 03 1F AA  //  MOV             X4, XZR
+        E5 03 1F AA  //  MOV             X5, XZR
+        01 00 00 D4  //  SVC             0
+        1F 10 00 B1  //  CMN             X0, #4
+        [0-8]        //  B.EQ            loc_197BDC
+        E9 03 00 AA  //  MOV             X9, X0
+        21 00 80 52  //  MOV             W1, #1
+        20 00 80 52  //  MOV             W0, #1
+        C8 18 80 52  //  MOV             W8, #__NR_socket
+        [4]          //  MOVK            W1, #8,LSL#16
+        E2 03 1F AA  //  MOV             X2, XZR
+        E3 03 1F AA  //  MOV             X3, XZR
+        E4 03 1F AA  //  MOV             X4, XZR
+        E5 03 1F AA  //  MOV             X5, XZR
+        01 00 00 D4  //  SVC             0
+        1F 10 00 B1  //  CMN             X0, #4
+    }
+
+    /**
+    case 26:
+        v17 = v65 - 1922710401;
+        v18 = v63 ^ 0x8D57AB8A;
+        a4 = v64 - 2041001190;
+        a5 = v64 + 1700658760;
+        a6 = (void *)(v63 - 1055835315);
+        v19 = (void *)(int)(v63 ^ 0x8D57ABBC);
+        a2 = (int)(v65 - 1922710401);
+        do
+        {
+          a3 = (__int64)v61;
+          a1 = linux_eabi_syscall(v18, v19, (void *)v17, v61, (void *)a4, (void *)a5, a6, a7);
+        }
+        while ( a1 == -4 );
+
+    */
+    $obf_svc = {
+        ?? ?? ?? 93  //  SXTW            X9, W8
+        ?? ?? ?? 93  //  SXTW            X1, W12
+        ?? ?? ?? 93  //  SXTW            X8, W11
+        [0-24]
+        E0 03 09 AA  // MOV             X0, X9
+        [0-8]
+        01 00 00 D4  //  SVC             0
+        1F 10 00 B1  //  CMN             X0, #4
+    }
+
+  condition:
+    elf.machine == elf.EM_AARCH64 and ( $inline_svc or $obf_svc) and #svc > 50
 }
 
 rule nesun_elf : packer
@@ -983,7 +1072,7 @@ rule gpresto_elf : packer
     url         = "https://www.largosoft.co.kr/"
     sample      = "44558c6c758b1ecf42ecda9981240d50c32f42e0d2be4693e37e39f8eb3a3488"
     author      = "Abhi"
-  
+
   strings:
     $class = { 00 [0-2] 4C 63 6F 6D 2F 62 69 73 68 6F 70
                73 6F 66 74 2F 50 72 65 73 74 6F 2F 53 44 4B
@@ -992,7 +1081,7 @@ rule gpresto_elf : packer
     $name2 = { (00 | 20) 47 2D 50 72 65 73 74 6F (20 | 00) } // G-Presto
     $name3 = "\x00<Presto_E>\x00"
     $name4 = "\x00largosoft.co.kr\x00"
-  
+
   condition:
     is_elf
     and $class
@@ -1006,7 +1095,7 @@ rule kiwisec_elf : packer
     url         = "https://en.kiwisec.com/"
     sample      = "d108652bd1b685765e3ada2b7376e3c3ff67f8162afcf8bad91e0aef79b7b08a"
     author      = "Abhi"
-  
+
   strings:
     $string  = "\x00kiwi_dumper\x00"
     $string2 = "\x00libKwProtectSDK.so\x00"
@@ -1017,7 +1106,7 @@ rule kiwisec_elf : packer
                 68 2F 4E 61 74 69 76 65 48 61 6E 64 6C 65 72 00 } // com/kiwisec/crash/NativeHandler
     $class2 = { 00 63 6F 6D 2F 6B 69 77 69 73 65 63 2F 63 72 61 73
                 68 2F 43 72 61 73 68 55 74 69 6C 73 00 } // com/kiwisec/crash/CrashUtils
-  
+
   condition:
     is_elf
     and any of them
