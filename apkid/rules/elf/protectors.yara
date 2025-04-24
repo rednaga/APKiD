@@ -650,14 +650,14 @@ rule rootbeer: anti_root
     author      = "Abhi"
 
   strings:
-    $class = { 00 4A 61 76 61 5F 63 6F 6D 5F 73 63 6F 74 74 79 61 62 5F
+    $class = { 00 4A 61 76 61 5F 63 6F 6D 5F [-] 5F
                72 6F 6F 74 62 65 65 72 5F 52 6F 6F 74 42 65 65 72 4E 61
                74 69 76 65 5F 63 68 65 63 6B 46 6F 72 52 6F 6F 74 00 } // Java_com_scottyab_rootbeer_RootBeerNative_checkForRoot
     $lib   = { 00 6C 69 62 74 6F 6F 6C 43 68 65 63 6B 65 72 2E 73 6F 00 } // libtoolChecker.so
     $name  = { 00 52 6F 6F 74 42 65 65 72 00 } // RootBeer
 
   condition:
-    is_elf and all of them
+    is_elf and 2 of them
 }
 
 rule build38 : protector
