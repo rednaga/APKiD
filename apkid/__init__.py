@@ -26,7 +26,7 @@
 """
 
 __title__ = 'apkid'
-__version__ = '2.1.5'
+__version__ = '3.0.0'
 __author__ = 'Caleb Fenton & Tim Strazzere'
 __license__ = 'GPL & Commercial'
-__copyright__ = 'Copyright (C) 2023 RedNaga'
+__copyright__ = 'Copyright (C) 2025 RedNaga'
