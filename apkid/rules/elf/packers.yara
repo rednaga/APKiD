@@ -1116,7 +1116,7 @@ rule tso_trusteer_sdk : packer
 {
   meta:
     description = "Trusteer SDK (TSO) (to be verified!)"
-    url         = "https://github.com/MobileFirst-Platform-Developer-Center/DevCenter/blob/master/tutorials/en/product-integration/7.1/trusteer-android.md"
+    url         = "https://www.ibm.com/products/trusteer-mobile-sdk"
     sample      = "0cfebe91e6579b292c5ac58f0be6f129eff71f74282ccabb1c4578e341c01388" // uk.co.santander.santanderUK v5.18
     author      = "Eduardo Novella"
 
