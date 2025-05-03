@@ -1112,3 +1112,17 @@ rule kiwisec_elf : packer
     and any of them
 }
 
+rule tso_trusteer_sdk : packer
+{
+  meta:
+    description = "Trusteer SDK (TSO) (to be verified!)"
+    url         = "https://github.com/MobileFirst-Platform-Developer-Center/DevCenter/blob/master/tutorials/en/product-integration/7.1/trusteer-android.md"
+    sample      = "0cfebe91e6579b292c5ac58f0be6f129eff71f74282ccabb1c4578e341c01388" // uk.co.santander.santanderUK v5.18
+    author      = "Eduardo Novella"
+
+  condition:
+    is_elf
+        and for any i in (0..elf.number_of_segments): (elf.segments[i].type == elf.PT_LOAD)
+        and for 2 i in (0..elf.number_of_sections):
+            (elf.sections[i].name matches /(\.tsotext|\.tsodata|\.gnu\.version\_x|\.gnu\.version\_y)/)
+}
