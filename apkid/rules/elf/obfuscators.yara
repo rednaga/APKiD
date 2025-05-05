@@ -206,15 +206,37 @@ rule ollvm_v9 : obfuscator
     description = "Obfuscator-LLVM version 9.x"
     url         = "https://github.com/obfuscator-llvm/obfuscator/wiki"
     sample      = "a794a080a92987ce5ed9cf5cd872ef87f9bfb9acd4c07653b615f4beaff3ace2"
+    sample2     = "198bee8db8765c3e2db35a65ac0ba3232f361b344c3fb74879cbf2f163bafe5a"
     author      = "Eduardo Novella"
 
   strings:
     /* Android (dev based on r365631) clang version 9.0.6 (https://android.googlesource.com/toolchain/llvm-project)
-      (based on Obfuscator-LLVM 9.0.6svn) */
-    $ollvm = "(based on Obfuscator-LLVM 9."
+      (based on Obfuscator-LLVM 9.0.6svn)
+
+      Android (ollvm based on r365631c3) clang version 9.0.9 (https://android.googlesource.com/toolchain/llvm-project a2a1e703c0edb03ba29944e529ccbf457742737b) (based on OLLVM 9.0.9svn)
+      */
+    $ollvm = /\(based on (Obfuscator-LLVM|OLLVM) 9\./
 
   condition:
     is_elf and all of them
+}
+
+rule ollvm_v9_a : obfuscator
+{
+  meta:
+    description = "Obfuscator-LLVM version 9.x"
+    url         = "https://github.com/o2e/OLLVM-9.0.1"
+    sample      = "198bee8db8765c3e2db35a65ac0ba3232f361b344c3fb74879cbf2f163bafe5a"
+    author      = "Eduardo Novella"
+
+  strings:
+    // clang version 9.0.1 (https://github.com/o2e/OLLVM-9.0.1.git 769bcbf3fe6a7d865a7afa9a70dbe907ad905cfb)
+    $clang_version = /clang version \d\.\d\.\d (.*)OLLVM(.*)9\./
+
+  condition:
+    is_elf and
+    any of them and
+    not ollvm_v9
 }
 
 rule ollvm_v9_strenc : obfuscator
@@ -315,6 +337,25 @@ rule ollvm_strenc : obfuscator
     not ollvm_v9_strenc
 }
 
+rule ollvm_v_regex : obfuscator
+{
+  meta:
+    description = "Obfuscator-LLVM"
+    url         = "https://github.com/o2e/OLLVM-9.0.1"
+    sample      = "198bee8db8765c3e2db35a65ac0ba3232f361b344c3fb74879cbf2f163bafe5a"
+    author      = "Eduardo Novella"
+
+  strings:
+    // clang version 9.0.1 (https://github.com/o2e/OLLVM-9.0.1.git 769bcbf3fe6a7d865a7afa9a70dbe907ad905cfb)
+    $clang_version = /clang version \d\.\d\.\d (.*)OLLVM/
+
+  condition:
+    is_elf and
+    any of them and
+    not ollvm_v9 and
+    not ollvm_v9_a
+}
+
 rule ollvm : obfuscator
 {
   meta:
@@ -329,7 +370,7 @@ rule ollvm : obfuscator
 
   condition:
     is_elf and
-    ($ollvm1 or $ollvm2 or $ollvm3) and
+    any of them and
     not ollvm_v3_4 and
     not ollvm_v3_5 and
     not ollvm_v3_6_1 and
@@ -341,7 +382,8 @@ rule ollvm : obfuscator
     not ollvm_v8 and
     not ollvm_v8_strenc and
     not ollvm_v9 and
-    not ollvm_v9_strenc
+    not ollvm_v9_strenc and
+    not ollvm_v_regex
 }
 
 rule alipay : obfuscator
