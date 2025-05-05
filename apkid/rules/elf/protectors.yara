@@ -221,6 +221,8 @@ rule verimatrix_arm64 : protector
     and #svc_0 >= 50
     and #brk_0_3e8 >= 50
     and for any i in (0..elf.number_of_segments): (elf.segments[i].type == elf.PT_LOAD)
+    and for any i in (0..elf.number_of_segments): (elf.segments[i].type == elf.PT_NULL)
+    and not for any i in (0..elf.number_of_sections): (elf.sections[i].name == ".text")
 }
 
 rule verimatrix_arm64_a : protector
