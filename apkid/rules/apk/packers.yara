@@ -1139,3 +1139,21 @@ rule kiwisec_apk : packer
     is_apk and 2 of them
 }
 
+rule dingxiang_apk : packer
+{
+  meta:
+    description = "DingXiang"
+    url         = "https://www.dingxiang-inc.com/business/android"
+    sample      = "788ebabd9b5464c5e86b3832e4a7b6e7c91cce5603ff17f214429400ba3bb2b9" // net.crigh.cgsport
+    author      = "Abhi"
+  
+  strings:
+    $lib      = /lib\/(arm.*|x86.*)\/libsys_misc\.so/
+    $assets   = /assets\/__param\.data/
+    $assets2  = /assets\/__version\.data/
+    $assets3  = /assets\/csn.*\.data\d?/
+    $dsnstub  = /dsnstub000\.vd/
+  
+  condition:
+    is_apk and 2 of them
+}
