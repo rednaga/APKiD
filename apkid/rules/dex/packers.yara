@@ -692,14 +692,33 @@ rule dingxiang_dex : packer
       1A 00 ?? ??       // const-string v0, "hash"
       39 00 ?? ??       // if-nez v0, :cond_x
       1A 00 ?? ??       // const-string v0, ""
-      6E 10 ?? 00 00 00 // invoke-virtual {v0}, Ljava/lang/String;->trim()Ljava/lang/String;
+      6E 10 ?? ?? 00 00 // invoke-virtual {v0}, Ljava/lang/String;->trim()Ljava/lang/String;
       0C 00             // move-result-object v0
     }
 
+    /* File file2 = new File(file, String.format("libdsn_hold_%s.jar", "56cc9cd75dfe4dff177b9b4de6908cba".trim())); */
+    $hash_code3 = {
+      22 ?? 40 00       // new-instance v1, Ljava/io/File;
+      1A 00 ?? ??       // const-string v0, "hash"
+      6E 10 ?? ?? 00 00 // invoke-virtual {v0}, Ljava/lang/String;->trim()Ljava/lang/String;
+      0C 00             // move-result-object v0
+      23 ?? 7A 00       // new-array v2, v10, [Ljava/lang/Object;
+      4D 00 ?? ??       // aput-object v0, v2, v9
+      1A 00 ?? ??       // const-string v0, "libdsn_hold_%s.jar" | "libdsn_%s.jar"
+      71 ?? 0F ?? ?? ?? // invoke-static {v0, v2}, Ljava/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+      0C 00             // move-result-object v0
+    }
+
+    $string  = { 00 04 64 73 6E 30 00 } // dsn0
+    $string2 = { 00 07 73 74 75 62 30 30 30 00 } // stub000
+    $string3 = { 00 0D 6C 69 62 73 74 75 62 30 30 30 2E 73 6F 00 } // libstub000.so
+    $string4 = { 00 0F 63 6F 64 65 5F 63 61 63 68 65 2F 64 73 6E 30 00 } // code_cache/dsn0
+
   condition:
     is_dex
-    and 2 of ($class*)
     and any of ($hash_code*)
+    and any of ($string*)
+    or 2 of ($class*)
 }
 
 rule kiwisec_dex : packer
