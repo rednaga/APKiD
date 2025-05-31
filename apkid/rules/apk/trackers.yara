@@ -695,7 +695,6 @@ rule facebook_audience : tracker
 
     strings:
         $code_signature    = /com\.facebook\.audiencenetwork/
-        $network_signature = /\.facebook\.com/
         $code_signature2   = /com\/facebook\/audiencenetwork/
 
     condition:
@@ -967,7 +966,6 @@ rule facebook_ads : tracker
 
     strings:
         $code_signature    = /com\.facebook\.ads/
-        $network_signature = /\.facebook\.com/
         $code_signature2   = /com\/facebook\/ads/
 
     condition:
@@ -983,7 +981,6 @@ rule facebook_analytics : tracker
 
     strings:
         $code_signature    = /com\.facebook\.appevents|com\.facebook\.marketing\.|com\.facebook\.CampaignTrackingReceiver/
-        $network_signature = /\.facebook\.com/
         $code_signature2   = /com\/facebook\/appevents|com\/facebook\/marketing\/|com\/facebook\/CampaignTrackingReceiver/
 
     condition:
@@ -999,7 +996,6 @@ rule facebook_login : tracker
 
     strings:
         $code_signature    = /com\.facebook\.login/
-        $network_signature = /\.facebook\.com/
         $code_signature2   = /com\/facebook\/login/
 
     condition:
@@ -1015,7 +1011,6 @@ rule facebook_notifications : tracker
 
     strings:
         $code_signature    = /com\.facebook\.notifications/
-        $network_signature = /\.facebook\.com/
         $code_signature2   = /com\/facebook\/notifications/
 
     condition:
@@ -1031,7 +1026,6 @@ rule facebook_places : tracker
 
     strings:
         $code_signature    = /com\.facebook\.places/
-        $network_signature = /\.facebook\.com/
         $code_signature2   = /com\/facebook\/places/
 
     condition:
@@ -1047,7 +1041,6 @@ rule facebook_share : tracker
 
     strings:
         $code_signature    = /com\.facebook\.share/
-        $network_signature = /\.facebook\.com/
         $code_signature2   = /com\/facebook\/share/
 
     condition:
@@ -1062,10 +1055,8 @@ rule google_ads : tracker
         url         = "https://developers.google.com/admob/android"
 
     strings:
-
-        $network_signature = /\.google\.com/
-            $admob_sig     = /com\.google\.android\.gms\.ads\.identifier/
-            $admob_sig2    = /com\/google\/android\/gms\/ads\/identifier/
+        $code_signature    = /com\.google\.android\.gms\.ads\.identifier/
+        $code_signature2   = /com\/google\/android\/gms\/ads\/identifier/
 
     condition:
         is_apk and any of them
