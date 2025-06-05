@@ -247,7 +247,7 @@ rule bugsmirror : protector
   
   strings:
     $lib  = /lib\/(arm.*|x86.*)\/libdefender\.so/
-    $xml  = /res\/xml\/com_bugsmirror_defender_authenticator\.xml/
+    $xml  = /res\/xml\/(com_bugsmirror_)?(defender|bugsmirror)_authenticator\.xml/
     $lib2 = /lib\/(arm.*|x86.*)\/libsettings\.so/
   
   condition:
