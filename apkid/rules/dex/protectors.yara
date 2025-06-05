@@ -466,3 +466,40 @@ rule shield_sdk : protector
   condition:
     is_dex and any of them
 }
+
+rule bugsmirror : protector
+{
+  meta:
+    description = "BugsMirror"
+    url         = "https://www.bugsmirror.com/"
+    sample      = "c9bbf66ac86bf02663b7bc28a735881d4aeaa8d90e9b8b752e9cf337a26f0bdd"
+    author      = "Abhi"
+  
+  strings:
+    $tag      = { 00 12 42 75 67 73 6D 69 72 72 6F 72 44 65 66 65 6E
+                  64 65 72 00 } // BugsMirrorDefender
+    $pkg_name = { 00 16 63 6F 6D 2E 62 75 67 73 6D 69 72 72 6F 72 64
+                  65 66 65 6E 64 65 72 00 } // com.bugsmirrordefender
+    $service  = { 00 35 42 75 67 73 6D 69 72 72 6F 72 44 65 66 65 6E
+                  64 65 72 53 65 72 76 69 63 65 73 2E 42 75 67 73 6D
+                  69 72 72 6F 72 44 65 66 65 6E 64 65 72 53 65 72 76
+                  69 63 65 73 00 } // BugsmirrorDefenderServices.BugsmirrorDefenderServices
+    $filter   = { 00 19 63 6F 6D 2E 62 75 67 73 6D 69 72 72 6F 72 2E
+                  6D 69 74 69 67 61 74 69 6F 6E 00 } // com.bugsmirror.mitigation
+    $class    = { 00 22 4C 63 6F 6D 2F 62 75 67 73 6D 69 72 72 6F 72
+                  2F 64 65 66 65 6E 64 65 72 2F 44 65 66 65 6E 64 65
+                  72 3B 00 } // Lcom/bugsmirror/defender/Defender;
+    $class2   = { 3B 00 1B 4C 63 6F 6D 2F 62 75 67 73 6D 69 72 72 6F
+                  72 2F 64 65 66 65 6E 64 65 72 2F 52 3B 00 } // com/bugsmirror/defender/R;
+    $class3   = { 00 24 4C 63 6F 6D 2F 62 75 67 73 6D 69 72 72 6F 72
+                  64 65 66 65 6E 64 65 72 2F 42 75 69 6C 64 43 6F 6E
+                  66 69 67 3B 00 } // Lcom/bugsmirrordefender/BuildConfig;
+    $class4   = { 00 45 4C 63 6F 6D 2F 62 75 67 73 6D 69 72 72 6F 72
+                  2F 64 65 66 65 6E 64 65 72 61 70 69 2F 67 65 6E 65
+                  72 61 74 65 64 2F 42 75 67 73 6D 69 72 72 6F 72 44
+                  65 66 65 6E 64 65 72 53 65 72 76 69 63 65 73 47 72
+                  70 63 3B 00 } // Lcom/bugsmirror/defenderapi/generated/BugsmirrorDefenderServicesGrpc;
+  
+  condition:
+   is_dex and any of them
+} 
