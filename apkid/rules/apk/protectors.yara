@@ -240,14 +240,14 @@ rule shield_sdk : protector
 rule andres : manipulator
 {
     meta:
-    description = "Resources Confusion"
-    url         = "https://github.com/shwenzhang/AndResGuard"
-    sample      = "45610fcb6ba935db0bf1bd94d672a848852ee9665cebaab7b3d4d7497d8e730f"
-    author      = "Abhi"
+      description = "Resources Confusion"
+      url         = "https://github.com/shwenzhang/AndResGuard"
+      sample      = "45610fcb6ba935db0bf1bd94d672a848852ee9665cebaab7b3d4d7497d8e730f"
+      author      = "Abhi"
 
     strings:
-        $res = /res\/[^\/]+\.xml/
+      $res = /res\/[^\/]+\.xml/
 
     condition:
-        is_apk and #res > 10
+      is_apk and #res > 10
 }
