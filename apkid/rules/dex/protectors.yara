@@ -474,7 +474,7 @@ rule bugsmirror : protector
     url         = "https://www.bugsmirror.com/"
     sample      = "c9bbf66ac86bf02663b7bc28a735881d4aeaa8d90e9b8b752e9cf337a26f0bdd"
     author      = "Abhi"
-  
+
   strings:
     $tag      = { 00 12 42 75 67 73 6D 69 72 72 6F 72 44 65 66 65 6E
                   64 65 72 00 } // BugsMirrorDefender
@@ -499,7 +499,7 @@ rule bugsmirror : protector
                   72 61 74 65 64 2F 42 75 67 73 6D 69 72 72 6F 72 44
                   65 66 65 6E 64 65 72 53 65 72 76 69 63 65 73 47 72
                   70 63 3B 00 } // Lcom/bugsmirror/defenderapi/generated/BugsmirrorDefenderServicesGrpc;
-  
+
   condition:
    is_dex and any of them
 } 

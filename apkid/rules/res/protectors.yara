@@ -34,13 +34,13 @@ rule bugsmirror : protector
       url         = "https://www.bugsmirror.com/"
       sample      = "c9bbf66ac86bf02663b7bc28a735881d4aeaa8d90e9b8b752e9cf337a26f0bdd"
       author      = "Abhi"
-    
+
     strings:
-        $comment  = { 00 ?? ?? 53 65 63 75 72 65 64 20 62 79 20
-                      42 75 67 73 6D 69 72 72 6F 72 00 } // Secured by Bugsmirror
-        $comment2 = { ?? 73 65 63 75 72 65 64 5F 62 79 5F 62 75
-                      67 73 6D 69 72 72 6F 72 00 } // secured_by_bugsmirror
-    
+      $comment  = { 00 ?? ?? 53 65 63 75 72 65 64 20 62 79 20
+                    42 75 67 73 6D 69 72 72 6F 72 00 } // Secured by Bugsmirror
+      $comment2 = { ?? 73 65 63 75 72 65 64 5F 62 79 5F 62 75
+                    67 73 6D 69 72 72 6F 72 00 } // secured_by_bugsmirror
+
     condition:
-        is_res and any of them
+      is_res and any of them
 }

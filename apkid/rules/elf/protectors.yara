@@ -744,11 +744,11 @@ rule bugsmirror : protector
     url         = "https://www.bugsmirror.com/"
     sample      = "c9bbf66ac86bf02663b7bc28a735881d4aeaa8d90e9b8b752e9cf337a26f0bdd"
     author      = "Abhi"
-  
+
   strings:
     // libdefender.so as dependency of libsettings.so doesn't starts with null-byte
     $name  = { 6C 69 62 64 65 66 65 6E 64 65 72 2E 73 6F 00 } // libdefender.so
-  
+
   condition:
     is_elf and
     all of them and

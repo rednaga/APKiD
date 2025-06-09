@@ -244,12 +244,12 @@ rule bugsmirror : protector
     url         = "https://www.bugsmirror.com/"
     sample      = "c9bbf66ac86bf02663b7bc28a735881d4aeaa8d90e9b8b752e9cf337a26f0bdd"
     author      = "Abhi"
-  
+
   strings:
     $lib  = /lib\/(arm.*|x86.*)\/libdefender\.so/
     $xml  = /res\/xml\/(com_bugsmirror_)?(defender|bugsmirror)_authenticator\.xml/
     $lib2 = /lib\/(arm.*|x86.*)\/libsettings\.so/
-  
+
   condition:
     is_apk and 2 of them
 }
