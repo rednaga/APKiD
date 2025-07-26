@@ -236,3 +236,35 @@ rule shield_sdk : protector
   condition:
     is_apk and all of them
 }
+
+rule andres : manipulator
+{
+    meta:
+      description = "Resources Confusion"
+      url         = "https://github.com/shwenzhang/AndResGuard"
+      sample      = "45610fcb6ba935db0bf1bd94d672a848852ee9665cebaab7b3d4d7497d8e730f"
+      author      = "Abhi"
+
+    strings:
+      $res = /res\/[^\/]+\.xml/
+
+    condition:
+      is_apk and #res > 10
+}
+
+rule bugsmirror : protector
+{
+  meta:
+    description = "BugsMirror"
+    url         = "https://www.bugsmirror.com/"
+    sample      = "c9bbf66ac86bf02663b7bc28a735881d4aeaa8d90e9b8b752e9cf337a26f0bdd"
+    author      = "Abhi"
+
+  strings:
+    $lib  = /lib\/(arm.*|x86.*)\/libdefender\.so/
+    $xml  = /res\/xml\/(com_bugsmirror_)?(defender|bugsmirror)_authenticator\.xml/
+    $lib2 = /lib\/(arm.*|x86.*)\/libsettings\.so/
+
+  condition:
+    is_apk and 2 of them
+}
