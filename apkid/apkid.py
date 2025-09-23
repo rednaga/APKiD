@@ -180,7 +180,7 @@ class Scanner(object):
                 entry_buffer.write(entry.read())
         except NotImplementedError:
             # XZ-compression
-            if info.compress_type == 95:
+            if info.compress_type == XZ_COMPRESSION_TYPE:
                 with open(zf.filename, 'rb') as raw_zip:
                     raw_zip.seek(info.header_offset + ZIP_LFH_FIELDS_SIZE)
                     filename_len = struct.unpack('<H', raw_zip.read(2))[0]
