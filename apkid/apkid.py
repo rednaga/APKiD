@@ -192,7 +192,7 @@ class Scanner(object):
                         decompressed_data = lzma.decompress(compressed_data)
                         entry_buffer = io.BytesIO(decompressed_data)
                     except Exception as e:
-                        print(f"Failed to decompress {info.filename}: {e}")
+                        print(f"[E] Failed to decompress {info.filename}: {e}")
                         return
             else:
                 print(f"[E] Unsupported compression method {info.compress_type} for {info.filename}")
