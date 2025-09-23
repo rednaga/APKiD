@@ -25,7 +25,9 @@
 """
 
 import io
+import lzma
 import os
+import struct
 import sys
 import traceback
 import zipfile
@@ -45,6 +47,10 @@ SCANNABLE_FILE_MAGICS: Dict[str, Set[bytes]] = {
     # TODO: implement axml yara module
     # 'axml': set(),
 }
+XZ_COMPRESSION_TYPE = 95
+ZIP_LFH_SIG_SIZE = 4
+ZIP_LFH_FIELDS_SIZE = 26
+ZIP_LFH_HEADER_SIZE = ZIP_LFH_SIG_SIZE + ZIP_LFH_FIELDS_SIZE
 
 
 class Options(object):
@@ -163,14 +169,35 @@ class Scanner(object):
         return results
 
     def _scan_zip_entry(self, zf, info, results, depth) -> None:
-        with zf.open(info) as entry:
-            # Python 3.6 zip entries are not seek'able :(
-            entry_buffer: IO = io.BytesIO(entry.read(4))
-            entry_buffer.seek(0)
-            if not self._should_scan(entry_buffer, info.filename):
+        try:
+            with zf.open(info) as entry:
+                # Python 3.6 zip entries are not seek'able :(
+                entry_buffer: IO = io.BytesIO(entry.read(4))
+                entry_buffer.seek(0)
+                if not self._should_scan(entry_buffer, info.filename):
+                    return
+                entry_buffer.seek(4)
+                entry_buffer.write(entry.read())
+        except NotImplementedError:
+            # XZ-compression
+            if info.compress_type == XZ_COMPRESSION_TYPE:
+                with open(zf.filename, 'rb') as raw_zip:
+                    raw_zip.seek(info.header_offset + ZIP_LFH_FIELDS_SIZE)
+                    filename_len = struct.unpack('<H', raw_zip.read(2))[0]
+                    extra_len = struct.unpack('<H', raw_zip.read(2))[0]
+                    data_offset = info.header_offset + ZIP_LFH_HEADER_SIZE + filename_len + extra_len
+                    raw_zip.seek(data_offset)
+                    compressed_data = raw_zip.read(info.compress_size)
+                    try:
+                        decompressed_data = lzma.decompress(compressed_data)
+                        entry_buffer = io.BytesIO(decompressed_data)
+                    except Exception as e:
+                        print(f"[E] Failed to decompress {info.filename}: {e}")
+                        return
+            else:
+                print(f"[E] Unsupported compression method {info.compress_type} for {info.filename}")
                 return
-            entry_buffer.seek(4)
-            entry_buffer.write(entry.read())
+
 
         entry_buffer.seek(0)
         matches = self.rules.match(data=entry_buffer.read(), timeout=self.options.timeout)
