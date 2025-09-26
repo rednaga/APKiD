@@ -41,7 +41,10 @@ def gen_rule():
     """Generate YARA rules from Exodus API."""
 
     url = "https://reports.exodus-privacy.eu.org/api/trackers"
-    response = requests.get(url)
+    try:
+        response = requests.get(url)
+    except requests.exceptions.ConnectionError:
+        return
     data = response.json()
 
     trackers = data.get("trackers")
