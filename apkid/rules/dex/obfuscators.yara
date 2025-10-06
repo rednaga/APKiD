@@ -582,4 +582,21 @@ rule mtprotector_dex : obfuscator
     is_dex and any of them
 }
 
+rule stringfog : obfuscator
+{
+  meta:
+    description = "StringFog"
+    url         = "https://github.com/MegatronKing/StringFog"
+    sample      = "1b89174083b22d97979537dc00dc91473243155d2d23654f40958577c4641185"
+    author      = "Abhi"
+
+  strings:
+    $classname = { 00 2E 4C 63 6F 6D 2F 67 69 74 68 75 62 2F 6D 65 67
+                   61 74 72 6F 6E 6B 69 6E 67 2F 73 74 72 69 6E 67 66
+                   6F 67 2F 49 53 74 72 69 6E 67 46 6F 67 3B 00 } // Lcom/github/megatronking/stringfog/IStringFog;
+
+  condition:
+    is_dex and any of them
+}
+
 
