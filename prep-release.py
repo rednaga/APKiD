@@ -25,13 +25,14 @@ information to ensure the GNU General Public License version 3.0
 requirements will be met.
 """
 
+import json
 import os
 import re
 import sys
+import urllib.error
+import urllib.request
 from codecs import open
 from typing import Dict, Set
-
-import requests
 
 from apkid.output import colorize_tag
 from apkid.rules import RulesManager
@@ -42,10 +43,12 @@ def gen_rule():
 
     url = "https://reports.exodus-privacy.eu.org/api/trackers"
     try:
-        response = requests.get(url)
-    except requests.exceptions.ConnectionError:
+        with urllib.request.urlopen(url) as response:
+            data_bytes = response.read()
+            data = json.loads(data_bytes)
+    except urllib.error.URLError:
+        print(f"Error connecting to {url}. Skipping rule generation.", file=sys.stderr)
         return
-    data = response.json()
 
     trackers = data.get("trackers")
 
