@@ -37,9 +37,13 @@ from typing import Dict, Set
 from apkid.output import colorize_tag
 from apkid.rules import RulesManager
 
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def gen_rule():
     """Generate YARA rules from Exodus API."""
+
+    def get_rule_path(file_type):
+        return os.path.join(SCRIPT_DIR, "apkid", "rules", file_type, "trackers.yara")
 
     url = "https://reports.exodus-privacy.eu.org/api/trackers"
     try:
@@ -138,15 +142,16 @@ rule {rule_name} : tracker
 """
 
         for file_type, yara_rule in yara_rules.items():
+            rule_path = get_rule_path(file_type)
             existing_rules = ""
-            if not os.path.exists(f"apkid/rules/{file_type}/trackers.yara"):
-                with open(f"apkid/rules/{file_type}/trackers.yara", "w") as f:
+            if not os.path.exists(rule_path):
+                with open(rule_path, "w") as f:
                     f.write('include "common.yara"\n')
-            if os.path.exists(f"apkid/rules/{file_type}/trackers.yara"):
-                with open(f"apkid/rules/{file_type}/trackers.yara", "r") as f:
+            if os.path.exists(rule_path):
+                with open(rule_path, "r") as f:
                     existing_rules = f.read()
             if rule_name not in existing_rules:
-                with open(f"apkid/rules/{file_type}/trackers.yara", "a") as f:
+                with open(rule_path, "a") as f:
                     f.write(yara_rule)
             else:
                 print(f"\rDuplicate rule name found: {rule_name}. Skipping.", end="")
@@ -156,8 +161,11 @@ def convert_readme():
     print("[*] Converting Markdown README to reStructuredText")
     import pypandoc
 
-    rst = pypandoc.convert_file("README.md", "rst")
-    with open("README.rst", "w+", encoding="utf-8") as f:
+    readme_md_path = os.path.join(SCRIPT_DIR, "README.md")
+    readme_rst_path = os.path.join(SCRIPT_DIR, "README.rst")
+
+    rst = pypandoc.convert_file(readme_md_path, "rst")
+    with open(readme_rst_path, "w+", encoding="utf-8") as f:
         f.write(rst)
     print(f"[*] Finished converting to README.rst ({len(rst)} bytes)")
 
