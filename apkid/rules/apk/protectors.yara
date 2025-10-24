@@ -268,3 +268,18 @@ rule bugsmirror : protector
   condition:
     is_apk and 2 of them
 }
+
+rule bshield : protector
+{
+  meta:
+    description = "BShield"
+    url         = "https://bshield.io/"
+    sample      = "f54fa5cfcd9a5d14a947bbd93bc7bb59e8c2b1b23cc5bcc84c66ad0143e55201"
+    author      = "Abhi"
+
+  strings:
+    $asset = "assets/bshield.dat"
+
+  condition:
+    is_apk and all of them
+}

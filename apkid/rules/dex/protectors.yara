@@ -503,3 +503,18 @@ rule bugsmirror : protector
   condition:
    is_dex and any of them
 } 
+
+rule bshield : protector
+{
+  meta:
+    description = "BShield"
+    url         = "https://bshield.io/"
+    sample      = "f54fa5cfcd9a5d14a947bbd93bc7bb59e8c2b1b23cc5bcc84c66ad0143e55201"
+    author      = "Abhi"
+
+  strings:
+    $dat = { 00 0B 42 53 48 49 45 4C 44 5F 44 41 54 00 } // BSHIELD_DAT
+
+  condition:
+    is_dex and all of them
+}
