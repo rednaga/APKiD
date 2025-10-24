@@ -756,3 +756,23 @@ rule bugsmirror : protector
       elf.sections[i].name == ".crypted"
     )
 }
+
+rule bshield : protector
+{
+  meta:
+    description = "BShield"
+    url         = "https://bshield.io/"
+    sample      = "f54fa5cfcd9a5d14a947bbd93bc7bb59e8c2b1b23cc5bcc84c66ad0143e55201"
+    author      = "Abhi"
+
+  strings:
+    $class  = { 00 4C 69 6F 2F 62 73 68 69 65 6C 64 2F 63 61 6C
+                6C 62 61 63 6B 2F 53 68 69 65 6C 64 44 61 74 61
+                50 72 6F 74 65 63 74 69 6F 6E 3B 00 } // Lio/bshield/callback/ShieldDataProtection;
+    $class2 = { 00 69 6F 2F 62 73 68 69 65 6C 64 2F 63 61 6C 6C
+                62 61 63 6B 2F 53 68 69 65 6C 64 44 61 74 61 50
+                72 6F 74 65 63 74 69 6F 6E 00 } // io/bshield/callback/ShieldDataProtection
+
+  condition:
+    is_elf and any of them
+}
