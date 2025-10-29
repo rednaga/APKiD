@@ -1163,7 +1163,7 @@ rule manxi_sec : packer
   meta:
     description = "Manxi Security"
     url         = "https://www.manxi-inc.com/en/"
-    sample      = "TODO"
+    sample      = "TODO" // cn.dict.android.pro (6.1.37)
     author      = "Abhi"
 
   strings:
