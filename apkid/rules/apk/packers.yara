@@ -1157,3 +1157,22 @@ rule dingxiang_apk : packer
   condition:
     is_apk and 2 of them
 }
+
+rule manxi_sec : packer
+{
+  meta:
+    description = "Manxi Security"
+    url         = "https://www.manxi-inc.com/en/"
+    sample      = "TODO" // cn.dict.android.pro (6.1.37)
+    author      = "Abhi"
+
+  strings:
+    $a1 = /assets\/mxsafe\/(arm.*|x86.*)\/libdSafeShell\.so/
+    $a2 = /assets\/mx\/(arm.*|x86.*)\/libmxacc\.so/
+    $a3 = "assets/mxsafe.data"
+    $a4 = "assets/mxsafe.config"
+    $a5 = "assets/mxsafe.jar"
+
+  condition:
+    is_apk and any of them
+}
