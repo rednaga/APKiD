@@ -43,6 +43,8 @@ prt_light_cyan = lambda s: f"\033[96m{s}\033[00m"
 prt_light_gray = lambda s: f"\033[97m{s}\033[00m"
 prt_orange = lambda s: f"\033[33m{s}\033[00m"
 prt_pink = lambda s: f"\033[35m{s}\033[00m"
+prt_tracker = lambda s: f"\033[38;5;208m{s}\033[00m"
+prt_file = lambda s: f"\033[48;5;240m{s}\033[00m"
 
 def is_windows_cmd():
     """
@@ -77,6 +79,8 @@ def colorize_tag(tag) -> str:
         return prt_orange(tag)
     elif tag == 'internal':
         return prt_pink(tag)
+    elif tag == 'tracker':
+        return prt_tracker(tag)
     else:
         return tag
 
@@ -145,7 +149,7 @@ class OutputFormatter(object):
             match_results = self._build_match_results(raw_matches)
             if len(match_results) == 0:
                 continue
-            print(f"[*] {key}")
+            print(f"[*] {prt_file(key)}")
             for tags in sorted(match_results):
                 descriptions = ', '.join(sorted(match_results[tags]))
                 if sys.stdout.isatty() and not is_windows_cmd():
