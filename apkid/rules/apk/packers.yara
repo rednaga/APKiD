@@ -1174,5 +1174,5 @@ rule manxi_sec : packer
     $a5 = "assets/mxsafe.jar"
 
   condition:
-    is_apk and 2 of them
+    is_apk and any of them
 }
