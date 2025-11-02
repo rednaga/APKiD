@@ -205,10 +205,10 @@ if __name__ == "__main__":
             print(f" |-> {tag}: {count}")
 
     if len(sys.argv) > 1:
-        if sys.argv[1] == "register":
+        if sys.argv[1] == 'register':
             print("[*] Registering ...")
-            os.system("python setup.py register")
-        if sys.argv[1] == "readme":
+            os.system('python setup.py register')
+        if sys.argv[1] == 'readme':
             convert_readme()
 
     print("[*] Finished preparing APKiD for release.")
