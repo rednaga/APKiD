@@ -82,7 +82,7 @@ rule {rule_name} : tracker
 {{
     meta:
         description = "{info.get("name").replace("Google", "G.").replace("Facebook", "FB.").replace("Notifications", "Notifs")}"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "{info.get("website")}"
 
     strings:
@@ -92,7 +92,7 @@ rule {rule_name} : tracker
 {{
     meta:
         description = "{info.get("name").replace("Google", "G.").replace("Facebook", "FB.").replace("Notifications", "Notifs")}"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "{info.get("website")}"
 
     strings:
@@ -102,7 +102,7 @@ rule {rule_name} : tracker
 {{
     meta:
         description = "{info.get("name").replace("Google", "G.").replace("Facebook", "FB.").replace("Notifications", "Notifs")}"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "{info.get("website")}"
 
     strings:
@@ -174,15 +174,23 @@ if __name__ == "__main__":
     print("[*] Updating trackers rules")
     gen_rule()
     print()
-    print("[*] Compiling Yara files")
-    rules_manager = RulesManager()
+    print("[*] Compiling Yara files without trackers")
+    rules_manager = RulesManager(include_trackers=False)
     rules = rules_manager.compile()
     rules_count = rules_manager.save()
     print(f"[*] Saved {rules_count} rules to {rules_manager.rules_path}")
     print(f"[*] Rules hash: {rules_manager.hash}")
 
+    print()
+    print("[*] Compiling Yara files with trackers")
+    rules_manager = RulesManager(include_trackers=True)
+    rulest = rules_manager.compile()
+    rules_count = rules_manager.save()
+    print(f"[*] Saved {rules_count} rules to {rules_manager.rules_path}")
+    print(f"[*] Rules hash: {rules_manager.hash}")
+
     tag_to_identifiers: Dict[str, Set[str]] = {}
-    for rule in rules:
+    for rule in list(rules) + list(rulest):
         for t in rule.tags:
             if t not in tag_to_identifiers:
                 tag_to_identifiers[t] = set()

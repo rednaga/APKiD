@@ -4,7 +4,7 @@ rule teemo : tracker
 {
     meta:
         description = "Teemo"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.teemo.co"
 
     strings:
@@ -20,7 +20,7 @@ rule fidzup : tracker
 {
     meta:
         description = "FidZup"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.fidzup.com"
 
     strings:
@@ -36,7 +36,7 @@ rule audience_studio_krux : tracker
 {
     meta:
         description = "Audience Studio (Krux)"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.salesforce.com/products/marketing-cloud/data-management/?mc=DMP"
 
     strings:
@@ -52,7 +52,7 @@ rule ad_screen : tracker
 {
     meta:
         description = "Ad4Screen"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.ad4screen.com"
 
     strings:
@@ -68,7 +68,7 @@ rule google_doubleclick : tracker
 {
     meta:
         description = "G. DoubleClick"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.doubleclickbygoogle.com/"
 
     strings:
@@ -83,7 +83,7 @@ rule weborama : tracker
 {
     meta:
         description = "Weborama"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.weborama.com"
 
     strings:
@@ -99,7 +99,7 @@ rule smart : tracker
 {
     meta:
         description = "Smart"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://smartadserver.com/"
 
     strings:
@@ -115,7 +115,7 @@ rule jw_player : tracker
 {
     meta:
         description = "JW Player"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://jwplayer.com"
 
     strings:
@@ -131,7 +131,7 @@ rule loggly : tracker
 {
     meta:
         description = "Loggly"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://loggly.com/"
 
     strings:
@@ -147,7 +147,7 @@ rule outbrain : tracker
 {
     meta:
         description = "OutBrain"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.outbrain.com/"
 
     strings:
@@ -163,7 +163,7 @@ rule appsflyer : tracker
 {
     meta:
         description = "AppsFlyer"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://AppsFlyer.com"
 
     strings:
@@ -179,7 +179,7 @@ rule ligatus : tracker
 {
     meta:
         description = "Ligatus"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://ligatus.com"
 
     strings:
@@ -195,7 +195,7 @@ rule widespace : tracker
 {
     meta:
         description = "Widespace"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://widespace.com"
 
     strings:
@@ -211,7 +211,7 @@ rule appnexus : tracker
 {
     meta:
         description = "AppNexus"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.appnexus.com/"
 
     strings:
@@ -227,7 +227,7 @@ rule localytics : tracker
 {
     meta:
         description = "Localytics"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://localytics.com"
 
     strings:
@@ -243,7 +243,7 @@ rule braze_formerly_appboy : tracker
 {
     meta:
         description = "Braze (formerly Appboy)"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.braze.com"
 
     strings:
@@ -259,7 +259,7 @@ rule mparticle : tracker
 {
     meta:
         description = "mParticle"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://mparticle.com"
 
     strings:
@@ -275,7 +275,7 @@ rule s_m : tracker
 {
     meta:
         description = "S4M"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.s4m.io/"
 
     strings:
@@ -291,7 +291,7 @@ rule sizmek : tracker
 {
     meta:
         description = "Sizmek"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.sizmek.com"
 
     strings:
@@ -307,7 +307,7 @@ rule batch : tracker
 {
     meta:
         description = "Batch"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://batch.com"
 
     strings:
@@ -323,7 +323,7 @@ rule sync_ad : tracker
 {
     meta:
         description = "Sync2Ad"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.sync2ad.com/"
 
     strings:
@@ -339,7 +339,7 @@ rule flurry : tracker
 {
     meta:
         description = "Flurry"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.flurry.com"
 
     strings:
@@ -355,7 +355,7 @@ rule hockeyapp : tracker
 {
     meta:
         description = "HockeyApp"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://hockeyapp.net"
 
     strings:
@@ -371,7 +371,7 @@ rule google_crashlytics : tracker
 {
     meta:
         description = "G. CrashLytics"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://crashlytics.com"
 
     strings:
@@ -387,7 +387,7 @@ rule leanplum : tracker
 {
     meta:
         description = "LeanPlum"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.leanplum.com/"
 
     strings:
@@ -403,7 +403,7 @@ rule tinder_analytics : tracker
 {
     meta:
         description = "Tinder Analytics"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://tinder.com"
 
     strings:
@@ -419,7 +419,7 @@ rule schibsted : tracker
 {
     meta:
         description = "Schibsted"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.schibsted.com/en/ir/"
 
     strings:
@@ -435,7 +435,7 @@ rule atinternet : tracker
 {
     meta:
         description = "ATInternet"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.atinternet.com/en/"
 
     strings:
@@ -451,7 +451,7 @@ rule tealium : tracker
 {
     meta:
         description = "Tealium"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://tealium.com/"
 
     strings:
@@ -467,7 +467,7 @@ rule nexage : tracker
 {
     meta:
         description = "Nexage"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://nexage.com/"
 
     strings:
@@ -483,7 +483,7 @@ rule ogury_presage : tracker
 {
     meta:
         description = "Ogury Presage"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.presage.io/"
 
     strings:
@@ -499,7 +499,7 @@ rule twitter_mopub : tracker
 {
     meta:
         description = "Twitter MoPub"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.mopub.com/"
 
     strings:
@@ -515,7 +515,7 @@ rule add_apt_tr : tracker
 {
     meta:
         description = "Add Apt Tr"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.addapptr.com"
 
     strings:
@@ -531,7 +531,7 @@ rule vectaury : tracker
 {
     meta:
         description = "Vectaury"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://vectaury.io/"
 
     strings:
@@ -547,7 +547,7 @@ rule tune : tracker
 {
     meta:
         description = "Tune"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.tune.com"
 
     strings:
@@ -563,7 +563,7 @@ rule pushwoosh : tracker
 {
     meta:
         description = "Pushwoosh"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.pushwoosh.com/"
 
     strings:
@@ -579,7 +579,7 @@ rule demdex : tracker
 {
     meta:
         description = "Demdex"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.adobe.com/data-analytics-cloud/audience-manager.html"
 
     strings:
@@ -595,7 +595,7 @@ rule adswizz : tracker
 {
     meta:
         description = "AdsWizz"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.adswizz.com/"
 
     strings:
@@ -611,7 +611,7 @@ rule exacttarget : tracker
 {
     meta:
         description = "ExactTarget"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://help.exacttarget.com/en/technical_library/API_Overview/"
 
     strings:
@@ -627,7 +627,7 @@ rule omniture : tracker
 {
     meta:
         description = "Omniture"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.adobe.com/analytics/adobe-analytics-features.html"
 
     strings:
@@ -643,7 +643,7 @@ rule openlocate : tracker
 {
     meta:
         description = "OpenLocate"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.safegraph.com/"
 
     strings:
@@ -659,7 +659,7 @@ rule tagcommander_commanders_act : tracker
 {
     meta:
         description = "TagCommander (Commanders Act.)"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.commandersact.com/"
 
     strings:
@@ -675,7 +675,7 @@ rule crowdtangle : tracker
 {
     meta:
         description = "CrowdTangle"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.crowdtangle.com/"
 
     strings:
@@ -690,7 +690,7 @@ rule facebook_audience : tracker
 {
     meta:
         description = "FB. Audience"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://developers.facebook.com/docs/android/"
 
     strings:
@@ -705,7 +705,7 @@ rule google_analytics : tracker
 {
     meta:
         description = "G. Analytics"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.google.com/analytics/"
 
     strings:
@@ -721,7 +721,7 @@ rule google_firebase_analytics : tracker
 {
     meta:
         description = "G. Firebase Analytics"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://firebase.google.com/"
 
     strings:
@@ -737,7 +737,7 @@ rule eulerian : tracker
 {
     meta:
         description = "Eulerian"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.eulerian.com/en/"
 
     strings:
@@ -753,7 +753,7 @@ rule adjust : tracker
 {
     meta:
         description = "Adjust"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.adjust.com/"
 
     strings:
@@ -769,7 +769,7 @@ rule chartboost : tracker
 {
     meta:
         description = "ChartBoost"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://answers.chartboost.com/en-us/"
 
     strings:
@@ -785,7 +785,7 @@ rule backelite : tracker
 {
     meta:
         description = "Backelite"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.backelite.com/"
 
     strings:
@@ -801,7 +801,7 @@ rule areametrics : tracker
 {
     meta:
         description = "Areametrics"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://areametrics.com/"
 
     strings:
@@ -817,7 +817,7 @@ rule comscore : tracker
 {
     meta:
         description = "ComScore"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://comscore.com/"
 
     strings:
@@ -833,7 +833,7 @@ rule cuebiq : tracker
 {
     meta:
         description = "Cuebiq"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.cuebiq.com/"
 
     strings:
@@ -849,7 +849,7 @@ rule helpshift : tracker
 {
     meta:
         description = "HelpShift"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.helpshift.com"
 
     strings:
@@ -865,7 +865,7 @@ rule kontakt : tracker
 {
     meta:
         description = "Kontakt"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://kontakt.io/"
 
     strings:
@@ -881,7 +881,7 @@ rule locuslabs : tracker
 {
     meta:
         description = "Locuslabs"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://locuslabs.com"
 
     strings:
@@ -897,7 +897,7 @@ rule moat : tracker
 {
     meta:
         description = "Moat"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://moat.com/analytics"
 
     strings:
@@ -913,7 +913,7 @@ rule segment : tracker
 {
     meta:
         description = "Segment"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://segment.com/"
 
     strings:
@@ -929,7 +929,7 @@ rule mobile_engagement : tracker
 {
     meta:
         description = "Mobile Engagement"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://docs.microsoft.com/en-us/azure/mobile-engagement/mobile-engagement-android-sdk-overview"
 
     strings:
@@ -945,7 +945,7 @@ rule colocator : tracker
 {
     meta:
         description = "Colocator"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://developers.colocator.net"
 
     strings:
@@ -961,7 +961,7 @@ rule facebook_ads : tracker
 {
     meta:
         description = "FB. Ads"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://developers.facebook.com/docs/android"
 
     strings:
@@ -976,7 +976,7 @@ rule facebook_analytics : tracker
 {
     meta:
         description = "FB. Analytics"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://developers.facebook.com/docs/android"
 
     strings:
@@ -991,7 +991,7 @@ rule facebook_login : tracker
 {
     meta:
         description = "FB. Login"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://developers.facebook.com/docs/android"
 
     strings:
@@ -1006,7 +1006,7 @@ rule facebook_notifications : tracker
 {
     meta:
         description = "FB. Notifs"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://developers.facebook.com/docs/android"
 
     strings:
@@ -1021,7 +1021,7 @@ rule facebook_places : tracker
 {
     meta:
         description = "FB. Places"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://developers.facebook.com/docs/android"
 
     strings:
@@ -1036,7 +1036,7 @@ rule facebook_share : tracker
 {
     meta:
         description = "FB. Share"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://developers.facebook.com/docs/android"
 
     strings:
@@ -1051,7 +1051,7 @@ rule google_ads : tracker
 {
     meta:
         description = "G. Ads"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://developers.google.com/admob/android"
 
     strings:
@@ -1066,7 +1066,7 @@ rule applovin_max_and_sparklabs : tracker
 {
     meta:
         description = "AppLovin (MAX and SparkLabs)"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.applovin.com/"
 
     strings:
@@ -1082,7 +1082,7 @@ rule glispa_connect_formerly_avocarrot : tracker
 {
     meta:
         description = "Glispa Connect (Formerly Avocarrot)"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.glispa.com"
 
     strings:
@@ -1098,7 +1098,7 @@ rule nativex : tracker
 {
     meta:
         description = "NativeX"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.nativex.com/"
 
     strings:
@@ -1114,7 +1114,7 @@ rule baidu_maps : tracker
 {
     meta:
         description = "Baidu Maps"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://map.baidu.com"
 
     strings:
@@ -1130,7 +1130,7 @@ rule wechat_location : tracker
 {
     meta:
         description = "WeChat Location"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://wechat.com"
 
     strings:
@@ -1146,7 +1146,7 @@ rule hypertrack : tracker
 {
     meta:
         description = "HyperTrack"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://hypertrack.com"
 
     strings:
@@ -1162,7 +1162,7 @@ rule uber_analytics : tracker
 {
     meta:
         description = "Uber Analytics"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://uber.com"
 
     strings:
@@ -1178,7 +1178,7 @@ rule lisnr : tracker
 {
     meta:
         description = "Lisnr"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://lisnr.com"
 
     strings:
@@ -1194,7 +1194,7 @@ rule silverpush : tracker
 {
     meta:
         description = "SilverPush"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://silverpush.co"
 
     strings:
@@ -1210,7 +1210,7 @@ rule shopkick : tracker
 {
     meta:
         description = "Shopkick"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://shopkick.com"
 
     strings:
@@ -1226,7 +1226,7 @@ rule alphonso : tracker
 {
     meta:
         description = "Alphonso"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://alphonso.tv"
 
     strings:
@@ -1242,7 +1242,7 @@ rule smaato : tracker
 {
     meta:
         description = "Smaato"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://smaato.com"
 
     strings:
@@ -1258,7 +1258,7 @@ rule scandit : tracker
 {
     meta:
         description = "Scandit"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://scandit.com"
 
     strings:
@@ -1274,7 +1274,7 @@ rule inrix : tracker
 {
     meta:
         description = "Inrix"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://inrix.com/"
 
     strings:
@@ -1290,7 +1290,7 @@ rule signal_ : tracker
 {
     meta:
         description = "Signal360"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.signal360.com"
 
     strings:
@@ -1306,7 +1306,7 @@ rule telequid : tracker
 {
     meta:
         description = "TeleQuid"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.telequid.com/"
 
     strings:
@@ -1322,7 +1322,7 @@ rule retency : tracker
 {
     meta:
         description = "Retency"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://retency.com"
 
     strings:
@@ -1337,7 +1337,7 @@ rule madvertise : tracker
 {
     meta:
         description = "MAdvertise"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://madvertise.com"
 
     strings:
@@ -1353,7 +1353,7 @@ rule adcolony : tracker
 {
     meta:
         description = "AdColony"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://adcolony.com/"
 
     strings:
@@ -1369,7 +1369,7 @@ rule accountkit : tracker
 {
     meta:
         description = "AccountKit"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.accountkit.com/"
 
     strings:
@@ -1385,7 +1385,7 @@ rule amazon_advertisement : tracker
 {
     meta:
         description = "Amazon Advertisement"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://developer.amazon.com/public/apis/earn/mobile-ads/docs/quick-start"
 
     strings:
@@ -1400,7 +1400,7 @@ rule amazon_mobile_associates : tracker
 {
     meta:
         description = "Amazon Mobile Associates"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://developer.amazon.com/mobile-associates"
 
     strings:
@@ -1415,7 +1415,7 @@ rule radius_networks : tracker
 {
     meta:
         description = "Radius Networks"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.radiusnetworks.com/"
 
     strings:
@@ -1431,7 +1431,7 @@ rule amazon_analytics_amazon_insights : tracker
 {
     meta:
         description = "Amazon Analytics (Amazon insights)"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://developer.amazon.com/docs/apps-and-games/sdk-downloads.html"
 
     strings:
@@ -1447,7 +1447,7 @@ rule baidu_appx : tracker
 {
     meta:
         description = "Baidu APPX"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://app.baidu.com/"
 
     strings:
@@ -1462,7 +1462,7 @@ rule baidu_location : tracker
 {
     meta:
         description = "Baidu Location"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://developer.baidu.com/"
 
     strings:
@@ -1477,7 +1477,7 @@ rule baidu_mobile_ads : tracker
 {
     meta:
         description = "Baidu Mobile Ads"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://developer.baidu.com/"
 
     strings:
@@ -1492,7 +1492,7 @@ rule baidu_mobile_stat : tracker
 {
     meta:
         description = "Baidu Mobile Stat"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://developer.baidu.com/"
 
     strings:
@@ -1507,7 +1507,7 @@ rule estimote : tracker
 {
     meta:
         description = "Estimote"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://estimote.com/"
 
     strings:
@@ -1523,7 +1523,7 @@ rule baidu_navigation : tracker
 {
     meta:
         description = "Baidu Navigation"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://lbsyun.baidu.com/index.php?title=android-navsdk"
 
     strings:
@@ -1538,7 +1538,7 @@ rule fyber : tracker
 {
     meta:
         description = "Fyber"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.fyber.com/"
 
     strings:
@@ -1554,7 +1554,7 @@ rule google_tag_manager : tracker
 {
     meta:
         description = "G. Tag Manager"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.google.com/analytics/tag-manager/"
 
     strings:
@@ -1570,7 +1570,7 @@ rule inmobi : tracker
 {
     meta:
         description = "Inmobi"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://inmobi.com"
 
     strings:
@@ -1586,7 +1586,7 @@ rule millennial_media : tracker
 {
     meta:
         description = "Millennial Media"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.millennialmedia.com/"
 
     strings:
@@ -1602,7 +1602,7 @@ rule snowplow : tracker
 {
     meta:
         description = "Snowplow"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://snowplowanalytics.com/"
 
     strings:
@@ -1617,7 +1617,7 @@ rule fyber_sponsorpay : tracker
 {
     meta:
         description = "Fyber SponsorPay"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.sponsorpay.com"
 
     strings:
@@ -1633,7 +1633,7 @@ rule supersonic_ads : tracker
 {
     meta:
         description = "Supersonic Ads"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.supersonic.com/"
 
     strings:
@@ -1649,7 +1649,7 @@ rule carnival : tracker
 {
     meta:
         description = "Carnival"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://carnival.io/"
 
     strings:
@@ -1665,7 +1665,7 @@ rule tencent_map_lbs : tracker
 {
     meta:
         description = "Tencent Map LBS"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://lbs.qq.com/"
 
     strings:
@@ -1680,7 +1680,7 @@ rule tencent_mobwin : tracker
 {
     meta:
         description = "Tencent MobWin"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.tencent.com/en-us/"
 
     strings:
@@ -1695,7 +1695,7 @@ rule tencent_mta : tracker
 {
     meta:
         description = "Tencent MTA"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://mta.qq.com/"
 
     strings:
@@ -1710,7 +1710,7 @@ rule apptentive : tracker
 {
     meta:
         description = "Apptentive"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.apptentive.com/"
 
     strings:
@@ -1726,7 +1726,7 @@ rule tencent_stats : tracker
 {
     meta:
         description = "Tencent Stats"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://stat.qq.com/"
 
     strings:
@@ -1741,7 +1741,7 @@ rule tencent_weiyun : tracker
 {
     meta:
         description = "Tencent Weiyun"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.weiyun.com"
 
     strings:
@@ -1756,7 +1756,7 @@ rule mixpanel : tracker
 {
     meta:
         description = "MixPanel"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://mixpanel.com/"
 
     strings:
@@ -1772,7 +1772,7 @@ rule umeng_analytics : tracker
 {
     meta:
         description = "Umeng Analytics"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.umeng.com/analytics"
 
     strings:
@@ -1788,7 +1788,7 @@ rule umeng_feedback : tracker
 {
     meta:
         description = "Umeng Feedback"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://dev.umeng.com/feedback"
 
     strings:
@@ -1804,7 +1804,7 @@ rule unity_d_ads : tracker
 {
     meta:
         description = "Unity3d Ads"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://unity3d.com/"
 
     strings:
@@ -1820,7 +1820,7 @@ rule countly : tracker
 {
     meta:
         description = "Countly"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://count.ly/"
 
     strings:
@@ -1835,7 +1835,7 @@ rule urbanairship : tracker
 {
     meta:
         description = "Urbanairship"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.urbanairship.com/"
 
     strings:
@@ -1851,7 +1851,7 @@ rule yandex_ad : tracker
 {
     meta:
         description = "Yandex Ad"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.yandex.com/"
 
     strings:
@@ -1867,7 +1867,7 @@ rule amplitude : tracker
 {
     meta:
         description = "Amplitude"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.amplitude.com"
 
     strings:
@@ -1883,7 +1883,7 @@ rule appsee : tracker
 {
     meta:
         description = "AppSee"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.appsee.com/"
 
     strings:
@@ -1899,7 +1899,7 @@ rule kochava : tracker
 {
     meta:
         description = "Kochava"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.kochava.com/"
 
     strings:
@@ -1915,7 +1915,7 @@ rule webtrends : tracker
 {
     meta:
         description = "Webtrends"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.webtrends.com/"
 
     strings:
@@ -1931,7 +1931,7 @@ rule new_relic : tracker
 {
     meta:
         description = "New Relic"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.newrelic.com"
 
     strings:
@@ -1947,7 +1947,7 @@ rule appanalytics : tracker
 {
     meta:
         description = "AppAnalytics"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://appanalytics.io/"
 
     strings:
@@ -1962,7 +1962,7 @@ rule applause : tracker
 {
     meta:
         description = "Applause"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.applause.com"
 
     strings:
@@ -1977,7 +1977,7 @@ rule quantcast : tracker
 {
     meta:
         description = "Quantcast"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.quantcast.com"
 
     strings:
@@ -1993,7 +1993,7 @@ rule apptimize : tracker
 {
     meta:
         description = "Apptimize"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.apptimize.com"
 
     strings:
@@ -2009,7 +2009,7 @@ rule appbrain : tracker
 {
     meta:
         description = "AppBrain"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.appbrain.com/info/help/sdk/index.html"
 
     strings:
@@ -2025,7 +2025,7 @@ rule dynatrace : tracker
 {
     meta:
         description = "Dynatrace"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.dynatrace.com"
 
     strings:
@@ -2041,7 +2041,7 @@ rule matomo_piwik : tracker
 {
     meta:
         description = "Matomo (Piwik)"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://matomo.org/mobile"
 
     strings:
@@ -2057,7 +2057,7 @@ rule singlespot : tracker
 {
     meta:
         description = "Singlespot"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.singlespot.com/"
 
     strings:
@@ -2073,7 +2073,7 @@ rule sensoro : tracker
 {
     meta:
         description = "Sensoro"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.sensoro.com/"
 
     strings:
@@ -2088,7 +2088,7 @@ rule sense_ : tracker
 {
     meta:
         description = "Sense360"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://sense360.com/"
 
     strings:
@@ -2104,7 +2104,7 @@ rule rubicon_project : tracker
 {
     meta:
         description = "Rubicon Project"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://rubiconproject.com"
 
     strings:
@@ -2120,7 +2120,7 @@ rule ironsource : tracker
 {
     meta:
         description = "ironSource"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.ironsrc.com"
 
     strings:
@@ -2135,7 +2135,7 @@ rule heyzap_bought_by_fyber : tracker
 {
     meta:
         description = "Heyzap (bought by Fyber)"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.heyzap.com"
 
     strings:
@@ -2151,7 +2151,7 @@ rule sap_cdc_gigya : tracker
 {
     meta:
         description = "SAP CDC (Gigya)"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.sap.com/products/crm/customer-data-management.html"
 
     strings:
@@ -2167,7 +2167,7 @@ rule foresee : tracker
 {
     meta:
         description = "Foresee"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.foresee.com"
 
     strings:
@@ -2183,7 +2183,7 @@ rule fiksu : tracker
 {
     meta:
         description = "Fiksu"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://fiksu.com"
 
     strings:
@@ -2199,7 +2199,7 @@ rule ensighten : tracker
 {
     meta:
         description = "Ensighten"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.ensighten.com"
 
     strings:
@@ -2215,7 +2215,7 @@ rule dynamic_yield : tracker
 {
     meta:
         description = "Dynamic Yield"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.dynamicyield.com"
 
     strings:
@@ -2231,7 +2231,7 @@ rule bluekai_acquired_by_oracle : tracker
 {
     meta:
         description = "BlueKai (acquired by Oracle)"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://bluekai.com/registry/"
 
     strings:
@@ -2247,7 +2247,7 @@ rule blueconic : tracker
 {
     meta:
         description = "BlueConic"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.blueconic.com"
 
     strings:
@@ -2262,7 +2262,7 @@ rule apteligent_by_vmware_formerly_crittercism : tracker
 {
     meta:
         description = "Apteligent by VMWare (formerly Crittercism)"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.apteligent.com"
 
     strings:
@@ -2278,7 +2278,7 @@ rule adfit_daum : tracker
 {
     meta:
         description = "AdFit (Daum)"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.daum.net"
 
     strings:
@@ -2294,7 +2294,7 @@ rule adform : tracker
 {
     meta:
         description = "Adform"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://site.adform.com"
 
     strings:
@@ -2310,7 +2310,7 @@ rule adfurikun : tracker
 {
     meta:
         description = "Adfurikun"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://adfurikun.jp/adfurikun/"
 
     strings:
@@ -2326,7 +2326,7 @@ rule mobvista : tracker
 {
     meta:
         description = "Mobvista"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.mobvista.com/"
 
     strings:
@@ -2342,7 +2342,7 @@ rule placed : tracker
 {
     meta:
         description = "Placed"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://placed.com/"
 
     strings:
@@ -2357,7 +2357,7 @@ rule adot : tracker
 {
     meta:
         description = "Adot"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://we-are-adot.com/"
 
     strings:
@@ -2373,7 +2373,7 @@ rule appodeal : tracker
 {
     meta:
         description = "Appodeal"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.appodeal.com"
 
     strings:
@@ -2389,7 +2389,7 @@ rule appmonet : tracker
 {
     meta:
         description = "AppMonet"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://appmonet.com"
 
     strings:
@@ -2404,7 +2404,7 @@ rule soomla : tracker
 {
     meta:
         description = "Soomla"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://soomla.com/"
 
     strings:
@@ -2420,7 +2420,7 @@ rule adincube : tracker
 {
     meta:
         description = "Adincube"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.adincube.com/"
 
     strings:
@@ -2436,7 +2436,7 @@ rule persona_ly : tracker
 {
     meta:
         description = "Persona.ly"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://persona.ly/"
 
     strings:
@@ -2452,7 +2452,7 @@ rule branch : tracker
 {
     meta:
         description = "Branch"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://branch.io/"
 
     strings:
@@ -2468,7 +2468,7 @@ rule cheetah_ads : tracker
 {
     meta:
         description = "Cheetah Ads"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.cmcm.com/"
 
     strings:
@@ -2484,7 +2484,7 @@ rule vungle : tracker
 {
     meta:
         description = "Vungle"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://vungle.com"
 
     strings:
@@ -2500,7 +2500,7 @@ rule criteo : tracker
 {
     meta:
         description = "Criteo"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.criteo.com/"
 
     strings:
@@ -2516,7 +2516,7 @@ rule mapbox : tracker
 {
     meta:
         description = "Mapbox"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.mapbox.com/"
 
     strings:
@@ -2532,7 +2532,7 @@ rule optimizely : tracker
 {
     meta:
         description = "Optimizely"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.optimizely.com/"
 
     strings:
@@ -2548,7 +2548,7 @@ rule taboola : tracker
 {
     meta:
         description = "Taboola"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.taboola.com/"
 
     strings:
@@ -2564,7 +2564,7 @@ rule clevertap : tracker
 {
     meta:
         description = "CleverTap"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://clevertap.com/"
 
     strings:
@@ -2580,7 +2580,7 @@ rule mytracker : tracker
 {
     meta:
         description = "myTracker"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://tracker.my.com/"
 
     strings:
@@ -2596,7 +2596,7 @@ rule cloudmobi : tracker
 {
     meta:
         description = "Cloudmobi"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.cloudmobi.net/"
 
     strings:
@@ -2612,7 +2612,7 @@ rule adlib : tracker
 {
     meta:
         description = "ADLIB"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://adlibr.com"
 
     strings:
@@ -2628,7 +2628,7 @@ rule brightcove : tracker
 {
     meta:
         description = "Brightcove"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.brightcove.com"
 
     strings:
@@ -2644,7 +2644,7 @@ rule dov_e : tracker
 {
     meta:
         description = "DOV-E"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.dov-e.com/"
 
     strings:
@@ -2660,7 +2660,7 @@ rule inmarket : tracker
 {
     meta:
         description = "InMarket"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://inmarket.com/"
 
     strings:
@@ -2676,7 +2676,7 @@ rule pilgrim_by_foursquare : tracker
 {
     meta:
         description = "Pilgrim by Foursquare"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://enterprise.foursquare.com/products/pilgrim"
 
     strings:
@@ -2692,7 +2692,7 @@ rule otherlevels : tracker
 {
     meta:
         description = "OtherLevels"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.otherlevels.com/"
 
     strings:
@@ -2708,7 +2708,7 @@ rule pubnative : tracker
 {
     meta:
         description = "PubNative"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://pubnative.net/"
 
     strings:
@@ -2724,7 +2724,7 @@ rule appnext : tracker
 {
     meta:
         description = "Appnext"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.appnext.com/"
 
     strings:
@@ -2740,7 +2740,7 @@ rule mobfox : tracker
 {
     meta:
         description = "MobFox"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.mobfox.com/"
 
     strings:
@@ -2755,7 +2755,7 @@ rule shallwead : tracker
 {
     meta:
         description = "ShallWeAD"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.shallwead.com"
 
     strings:
@@ -2770,7 +2770,7 @@ rule deltadna : tracker
 {
     meta:
         description = "deltaDNA"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://deltadna.com/"
 
     strings:
@@ -2786,7 +2786,7 @@ rule display : tracker
 {
     meta:
         description = "Display"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.display.io/en/"
 
     strings:
@@ -2802,7 +2802,7 @@ rule hyprmx : tracker
 {
     meta:
         description = "HyprMX"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.hyprmx.com"
 
     strings:
@@ -2818,7 +2818,7 @@ rule bugly : tracker
 {
     meta:
         description = "Bugly"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://bugly.qq.com/v2/"
 
     strings:
@@ -2834,7 +2834,7 @@ rule duapps : tracker
 {
     meta:
         description = "Duapps"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://ad.duapps.com/"
 
     strings:
@@ -2850,7 +2850,7 @@ rule swrve : tracker
 {
     meta:
         description = "Swrve"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.swrve.com/"
 
     strings:
@@ -2866,7 +2866,7 @@ rule onesignal : tracker
 {
     meta:
         description = "OneSignal"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://onesignal.com/"
 
     strings:
@@ -2882,7 +2882,7 @@ rule appdynamics : tracker
 {
     meta:
         description = "Appdynamics"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.appdynamics.com/"
 
     strings:
@@ -2898,7 +2898,7 @@ rule startapp : tracker
 {
     meta:
         description = "Startapp"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.startapp.com"
 
     strings:
@@ -2914,7 +2914,7 @@ rule aerserv : tracker
 {
     meta:
         description = "AerServ"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.aerserv.com/"
 
     strings:
@@ -2930,7 +2930,7 @@ rule infonline : tracker
 {
     meta:
         description = "INFOnline"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.infonline.de"
 
     strings:
@@ -2946,7 +2946,7 @@ rule mytarget : tracker
 {
     meta:
         description = "myTarget"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://target.my.com/"
 
     strings:
@@ -2962,7 +2962,7 @@ rule tapjoy : tracker
 {
     meta:
         description = "Tapjoy"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.tapjoy.com/"
 
     strings:
@@ -2978,7 +2978,7 @@ rule mintegral : tracker
 {
     meta:
         description = "Mintegral"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.mintegral.com/en/"
 
     strings:
@@ -2994,7 +2994,7 @@ rule gimbal : tracker
 {
     meta:
         description = "Gimbal"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://gimbal.com/"
 
     strings:
@@ -3010,7 +3010,7 @@ rule conviva : tracker
 {
     meta:
         description = "Conviva"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.conviva.com/"
 
     strings:
@@ -3026,7 +3026,7 @@ rule auditude : tracker
 {
     meta:
         description = "Auditude"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.adobe.com/privacy/policies/auditude.html"
 
     strings:
@@ -3042,7 +3042,7 @@ rule instreamatic_adman : tracker
 {
     meta:
         description = "Instreamatic (Adman)"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://instreamatic.com/"
 
     strings:
@@ -3058,7 +3058,7 @@ rule gameanalytics : tracker
 {
     meta:
         description = "GameAnalytics"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://gameanalytics.com/features"
 
     strings:
@@ -3073,7 +3073,7 @@ rule instabug : tracker
 {
     meta:
         description = "Instabug"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://instabug.com/crash-reporting"
 
     strings:
@@ -3088,7 +3088,7 @@ rule bugsnag : tracker
 {
     meta:
         description = "Bugsnag"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.bugsnag.com/"
 
     strings:
@@ -3103,7 +3103,7 @@ rule moodmedia : tracker
 {
     meta:
         description = "Moodmedia"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://us.moodmedia.com/"
 
     strings:
@@ -3119,7 +3119,7 @@ rule houndify : tracker
 {
     meta:
         description = "Houndify"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.houndify.com/"
 
     strings:
@@ -3135,7 +3135,7 @@ rule openx : tracker
 {
     meta:
         description = "OpenX"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.openx.com/"
 
     strings:
@@ -3151,7 +3151,7 @@ rule taplytics : tracker
 {
     meta:
         description = "Taplytics"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://taplytics.com"
 
     strings:
@@ -3167,7 +3167,7 @@ rule yinzcam_sobek : tracker
 {
     meta:
         description = "Yinzcam Sobek"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.yinzcam.com/"
 
     strings:
@@ -3183,7 +3183,7 @@ rule ooyala : tracker
 {
     meta:
         description = "Ooyala"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.ooyala.com/"
 
     strings:
@@ -3199,7 +3199,7 @@ rule kiip : tracker
 {
     meta:
         description = "Kiip"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.ninthdecimal.com/"
 
     strings:
@@ -3215,7 +3215,7 @@ rule mobpower : tracker
 {
     meta:
         description = "MobPower"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://home.mobpowertech.com/"
 
     strings:
@@ -3231,7 +3231,7 @@ rule adbuddiz : tracker
 {
     meta:
         description = "AdBuddiz"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.adbuddiz.com/abuse?hl=fr"
 
     strings:
@@ -3247,7 +3247,7 @@ rule integral_ad_science : tracker
 {
     meta:
         description = "Integral Ad Science"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://integralads.com"
 
     strings:
@@ -3263,7 +3263,7 @@ rule altbeacon : tracker
 {
     meta:
         description = "AltBeacon"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://altbeacon.org"
 
     strings:
@@ -3279,7 +3279,7 @@ rule salesforce_marketing_cloud : tracker
 {
     meta:
         description = "Salesforce Marketing Cloud"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.salesforce.com/products/marketing-cloud/"
 
     strings:
@@ -3294,7 +3294,7 @@ rule mozilla_telemetry : tracker
 {
     meta:
         description = "Mozilla Telemetry"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://wiki.mozilla.org/Telemetry"
 
     strings:
@@ -3309,7 +3309,7 @@ rule nend : tracker
 {
     meta:
         description = "nend"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://nend.net/en/"
 
     strings:
@@ -3324,7 +3324,7 @@ rule pusher : tracker
 {
     meta:
         description = "Pusher"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://pusher.com/"
 
     strings:
@@ -3339,7 +3339,7 @@ rule freewheel : tracker
 {
     meta:
         description = "FreeWheel"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://freewheel.tv/"
 
     strings:
@@ -3355,7 +3355,7 @@ rule tnk_factory : tracker
 {
     meta:
         description = "TNK Factory"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.tnkfactory.com"
 
     strings:
@@ -3370,7 +3370,7 @@ rule axonix : tracker
 {
     meta:
         description = "Axonix"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://axonix.com/"
 
     strings:
@@ -3386,7 +3386,7 @@ rule gemius_heatmap : tracker
 {
     meta:
         description = "Gemius HeatMap"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://heatmap.gemius.com"
 
     strings:
@@ -3402,7 +3402,7 @@ rule youappi : tracker
 {
     meta:
         description = "YouAppi"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.youappi.com"
 
     strings:
@@ -3417,7 +3417,7 @@ rule adobe_experience_cloud : tracker
 {
     meta:
         description = "Adobe Experience Cloud"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.adobe.com/experience-cloud.html"
 
     strings:
@@ -3432,7 +3432,7 @@ rule teads : tracker
 {
     meta:
         description = "Teads"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.teads.tv"
 
     strings:
@@ -3448,7 +3448,7 @@ rule in_loco : tracker
 {
     meta:
         description = "In Loco"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://inloco.com.br"
 
     strings:
@@ -3464,7 +3464,7 @@ rule iqzone : tracker
 {
     meta:
         description = "IQzone"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://iqzone.com"
 
     strings:
@@ -3479,7 +3479,7 @@ rule bugfender : tracker
 {
     meta:
         description = "Bugfender"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://bugfender.com/"
 
     strings:
@@ -3494,7 +3494,7 @@ rule wootric : tracker
 {
     meta:
         description = "Wootric"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://wootric.com"
 
     strings:
@@ -3510,7 +3510,7 @@ rule kidoz : tracker
 {
     meta:
         description = "KIDOZ"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://kidoz.net/kidoz-sdk/"
 
     strings:
@@ -3525,7 +3525,7 @@ rule pubmatic : tracker
 {
     meta:
         description = "PubMatic"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://pubmatic.com/"
 
     strings:
@@ -3541,7 +3541,7 @@ rule kissmetrics : tracker
 {
     meta:
         description = "Kissmetrics"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.kissmetricshq.com/"
 
     strings:
@@ -3556,7 +3556,7 @@ rule microsoft_visual_studio_app_center_crashes : tracker
 {
     meta:
         description = "Microsoft Visual Studio App Center Crashes"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://appcenter.ms/"
 
     strings:
@@ -3571,7 +3571,7 @@ rule webtrekk : tracker
 {
     meta:
         description = "Webtrekk"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.webtrekk.com/"
 
     strings:
@@ -3586,7 +3586,7 @@ rule google_analytics_plugin_cordova : tracker
 {
     meta:
         description = "G. Analytics Plugin (Cordova)"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://analytics.withgoogle.com/"
 
     strings:
@@ -3601,7 +3601,7 @@ rule bugsee : tracker
 {
     meta:
         description = "Bugsee"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.bugsee.com/"
 
     strings:
@@ -3616,7 +3616,7 @@ rule splunk_mint : tracker
 {
     meta:
         description = "Splunk MINT"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://mint.splunk.com/"
 
     strings:
@@ -3631,7 +3631,7 @@ rule microsoft_visual_studio_app_center_analytics : tracker
 {
     meta:
         description = "Microsoft Visual Studio App Center Analytics"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://appcenter.ms/"
 
     strings:
@@ -3646,7 +3646,7 @@ rule nielsen : tracker
 {
     meta:
         description = "Nielsen"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.nielsen.com"
 
     strings:
@@ -3661,7 +3661,7 @@ rule reveal_mobile : tracker
 {
     meta:
         description = "Reveal Mobile"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://revealmobile.com/"
 
     strings:
@@ -3676,7 +3676,7 @@ rule repro : tracker
 {
     meta:
         description = "Repro"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://repro.io/"
 
     strings:
@@ -3691,7 +3691,7 @@ rule sensors_analytics : tracker
 {
     meta:
         description = "Sensors Analytics"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.sensorsdata.cn"
 
     strings:
@@ -3706,7 +3706,7 @@ rule tenjin : tracker
 {
     meta:
         description = "Tenjin"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.tenjin.com/"
 
     strings:
@@ -3721,7 +3721,7 @@ rule tapstream : tracker
 {
     meta:
         description = "Tapstream"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.tapstream.com/"
 
     strings:
@@ -3736,7 +3736,7 @@ rule singular : tracker
 {
     meta:
         description = "Singular"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://singular.net/"
 
     strings:
@@ -3751,7 +3751,7 @@ rule calldorado : tracker
 {
     meta:
         description = "CallDorado"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://calldorado.com"
 
     strings:
@@ -3766,7 +3766,7 @@ rule uxcam : tracker
 {
     meta:
         description = "UXCam"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://uxcam.com/"
 
     strings:
@@ -3782,7 +3782,7 @@ rule upsight : tracker
 {
     meta:
         description = "Upsight"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.upsight.com/"
 
     strings:
@@ -3797,7 +3797,7 @@ rule appcelerator_analytics : tracker
 {
     meta:
         description = "Appcelerator Analytics"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.appcelerator.com"
 
     strings:
@@ -3813,7 +3813,7 @@ rule adbrix : tracker
 {
     meta:
         description = "Adbrix"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://ad-brix.com/"
 
     strings:
@@ -3829,7 +3829,7 @@ rule cauly : tracker
 {
     meta:
         description = "Cauly"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.cauly.net"
 
     strings:
@@ -3845,7 +3845,7 @@ rule tapdaq : tracker
 {
     meta:
         description = "Tapdaq"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.tapdaq.com/"
 
     strings:
@@ -3861,7 +3861,7 @@ rule verve : tracker
 {
     meta:
         description = "Verve"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.verve.com"
 
     strings:
@@ -3876,7 +3876,7 @@ rule apsalar : tracker
 {
     meta:
         description = "Apsalar"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://singular.net"
 
     strings:
@@ -3892,7 +3892,7 @@ rule pingstart : tracker
 {
     meta:
         description = "PingStart"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://pingstart.com"
 
     strings:
@@ -3908,7 +3908,7 @@ rule keen : tracker
 {
     meta:
         description = "Keen"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://keen.io"
 
     strings:
@@ -3924,7 +3924,7 @@ rule revmob : tracker
 {
     meta:
         description = "Revmob"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.crunchbase.com/organization/revmob"
 
     strings:
@@ -3939,7 +3939,7 @@ rule emarsys_predict : tracker
 {
     meta:
         description = "Emarsys Predict"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://help.emarsys.com/hc/categories/115000670425-Predict"
 
     strings:
@@ -3955,7 +3955,7 @@ rule lotame : tracker
 {
     meta:
         description = "Lotame"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.lotame.com/"
 
     strings:
@@ -3971,7 +3971,7 @@ rule followanalytics : tracker
 {
     meta:
         description = "FollowAnalytics"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.followanalytics.com"
 
     strings:
@@ -3987,7 +3987,7 @@ rule chartbeat : tracker
 {
     meta:
         description = "Chartbeat"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://chartbeat.com/"
 
     strings:
@@ -4003,7 +4003,7 @@ rule moengage : tracker
 {
     meta:
         description = "MoEngage"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.moengage.com/"
 
     strings:
@@ -4019,7 +4019,7 @@ rule altamob : tracker
 {
     meta:
         description = "Altamob"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.altamob.com/en/index.html"
 
     strings:
@@ -4035,7 +4035,7 @@ rule tealeaf : tracker
 {
     meta:
         description = "Tealeaf"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://acoustic.co/products/experience-analytics/"
 
     strings:
@@ -4050,7 +4050,7 @@ rule amoad : tracker
 {
     meta:
         description = "AMoAd"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.amoad.com"
 
     strings:
@@ -4065,7 +4065,7 @@ rule adadapted : tracker
 {
     meta:
         description = "AdAdapted"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.adadapted.com"
 
     strings:
@@ -4081,7 +4081,7 @@ rule admuing : tracker
 {
     meta:
         description = "AdMuing"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://github.com/admuing"
 
     strings:
@@ -4096,7 +4096,7 @@ rule adcash : tracker
 {
     meta:
         description = "Adcash"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://adcash.com"
 
     strings:
@@ -4111,7 +4111,7 @@ rule admixer : tracker
 {
     meta:
         description = "Admixer"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://admixer.co.kr/"
 
     strings:
@@ -4127,7 +4127,7 @@ rule admost : tracker
 {
     meta:
         description = "Admost"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://admost.com/"
 
     strings:
@@ -4143,7 +4143,7 @@ rule alohalytics : tracker
 {
     meta:
         description = "Alohalytics"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://github.com/biodranik/Alohalytics"
 
     strings:
@@ -4158,7 +4158,7 @@ rule amobee : tracker
 {
     meta:
         description = "Amobee"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://amobee.com"
 
     strings:
@@ -4174,7 +4174,7 @@ rule anagog : tracker
 {
     meta:
         description = "Anagog"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://anagog.com"
 
     strings:
@@ -4189,7 +4189,7 @@ rule bazaarvoice : tracker
 {
     meta:
         description = "Bazaarvoice"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.bazaarvoice.com/"
 
     strings:
@@ -4204,7 +4204,7 @@ rule beaconsinspace_fysical : tracker
 {
     meta:
         description = "BeaconsInSpace (Fysical)"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://beaconsinspace.com"
 
     strings:
@@ -4219,7 +4219,7 @@ rule conversant : tracker
 {
     meta:
         description = "Conversant"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.conversantmedia.com"
 
     strings:
@@ -4235,7 +4235,7 @@ rule glympse : tracker
 {
     meta:
         description = "Glympse"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://glympse.com"
 
     strings:
@@ -4251,7 +4251,7 @@ rule herow : tracker
 {
     meta:
         description = "Herow"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://herow.io/"
 
     strings:
@@ -4266,7 +4266,7 @@ rule placer : tracker
 {
     meta:
         description = "Placer"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://placer.io/"
 
     strings:
@@ -4281,7 +4281,7 @@ rule pushspring : tracker
 {
     meta:
         description = "PushSpring"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.pushspring.com/"
 
     strings:
@@ -4297,7 +4297,7 @@ rule pyze : tracker
 {
     meta:
         description = "Pyze"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://pyze.com/"
 
     strings:
@@ -4313,7 +4313,7 @@ rule radar : tracker
 {
     meta:
         description = "Radar"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://radar.io/"
 
     strings:
@@ -4328,7 +4328,7 @@ rule sentiance : tracker
 {
     meta:
         description = "Sentiance"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.sentiance.com/"
 
     strings:
@@ -4344,7 +4344,7 @@ rule smartlook : tracker
 {
     meta:
         description = "SmartLook"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.smartlook.com/"
 
     strings:
@@ -4360,7 +4360,7 @@ rule square_metrics : tracker
 {
     meta:
         description = "Square Metrics"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.squaremetrics.com"
 
     strings:
@@ -4376,7 +4376,7 @@ rule talkingdata : tracker
 {
     meta:
         description = "TalkingData"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.talkingdata.com/"
 
     strings:
@@ -4392,7 +4392,7 @@ rule flymob : tracker
 {
     meta:
         description = "flymob"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://flymob.com/"
 
     strings:
@@ -4407,7 +4407,7 @@ rule adfalcon : tracker
 {
     meta:
         description = "AdFalcon"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://adfalcon.com"
 
     strings:
@@ -4422,7 +4422,7 @@ rule bitly : tracker
 {
     meta:
         description = "Bitly"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://bitly.com/"
 
     strings:
@@ -4437,7 +4437,7 @@ rule enhance : tracker
 {
     meta:
         description = "Enhance"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://enhance.co"
 
     strings:
@@ -4453,7 +4453,7 @@ rule esri_arcgis : tracker
 {
     meta:
         description = "Esri ArcGIS"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.arcgis.com/"
 
     strings:
@@ -4468,7 +4468,7 @@ rule giphy_analytics : tracker
 {
     meta:
         description = "GIPHY Analytics"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://giphy.com/"
 
     strings:
@@ -4484,7 +4484,7 @@ rule heap : tracker
 {
     meta:
         description = "Heap"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://heap.io/"
 
     strings:
@@ -4500,7 +4500,7 @@ rule inneractive : tracker
 {
     meta:
         description = "Inneractive"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.crunchbase.com/organization/inneractive"
 
     strings:
@@ -4515,7 +4515,7 @@ rule mdotm : tracker
 {
     meta:
         description = "MDOTM"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://mdotm.com/"
 
     strings:
@@ -4531,7 +4531,7 @@ rule metaps : tracker
 {
     meta:
         description = "Metaps"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.metaps.com"
 
     strings:
@@ -4546,7 +4546,7 @@ rule parse_ly : tracker
 {
     meta:
         description = "Parse.ly"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.parse.ly/"
 
     strings:
@@ -4561,7 +4561,7 @@ rule pollfish : tracker
 {
     meta:
         description = "Pollfish"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.pollfish.com"
 
     strings:
@@ -4576,7 +4576,7 @@ rule qualtrics : tracker
 {
     meta:
         description = "Qualtrics"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.qualtrics.com/"
 
     strings:
@@ -4592,7 +4592,7 @@ rule tamoco : tracker
 {
     meta:
         description = "Tamoco"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.tamoco.com/"
 
     strings:
@@ -4608,7 +4608,7 @@ rule vpon : tracker
 {
     meta:
         description = "Vpon"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.vpon.com/"
 
     strings:
@@ -4623,7 +4623,7 @@ rule yume : tracker
 {
     meta:
         description = "YuMe"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.appbrain.com/stats/libraries/details/yume/yume"
 
     strings:
@@ -4638,7 +4638,7 @@ rule zapr : tracker
 {
     meta:
         description = "Zapr"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.zapr.in/"
 
     strings:
@@ -4654,7 +4654,7 @@ rule mediba : tracker
 {
     meta:
         description = "mediba"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.mediba.jp"
 
     strings:
@@ -4669,7 +4669,7 @@ rule google_admob : tracker
 {
     meta:
         description = "G. AdMob"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://admob.google.com"
 
     strings:
@@ -4685,7 +4685,7 @@ rule unacast_pure : tracker
 {
     meta:
         description = "Unacast Pure"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.unacast.com/"
 
     strings:
@@ -4700,7 +4700,7 @@ rule factual : tracker
 {
     meta:
         description = "Factual"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.factual.com"
 
     strings:
@@ -4716,7 +4716,7 @@ rule footmarks : tracker
 {
     meta:
         description = "Footmarks"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.footmarks.com"
 
     strings:
@@ -4731,7 +4731,7 @@ rule oztam : tracker
 {
     meta:
         description = "OzTAM"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://oztam.com.au/"
 
     strings:
@@ -4747,7 +4747,7 @@ rule receptiv_formerly_mediabrix : tracker
 {
     meta:
         description = "Receptiv (formerly Mediabrix)"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.receptiv.com/"
 
     strings:
@@ -4762,7 +4762,7 @@ rule tutela : tracker
 {
     meta:
         description = "Tutela"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.tutela.com/"
 
     strings:
@@ -4777,7 +4777,7 @@ rule twine_data : tracker
 {
     meta:
         description = "Twine Data"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.truedata.co/"
 
     strings:
@@ -4792,7 +4792,7 @@ rule verizon_ads : tracker
 {
     meta:
         description = "Verizon Ads"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.verizonmedia.com/"
 
     strings:
@@ -4807,7 +4807,7 @@ rule adpopcorn : tracker
 {
     meta:
         description = "adPOPcorn"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://adpopcorn.com/"
 
     strings:
@@ -4822,7 +4822,7 @@ rule maio_by_i_mobile : tracker
 {
     meta:
         description = "maio by i-mobile"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://adpf-info.i-mobile.co.jp/en/"
 
     strings:
@@ -4837,7 +4837,7 @@ rule __dialog : tracker
 {
     meta:
         description = "360Dialog"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.360dialog.com"
 
     strings:
@@ -4852,7 +4852,7 @@ rule abtasty : tracker
 {
     meta:
         description = "ABTasty"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.abtasty.com"
 
     strings:
@@ -4868,7 +4868,7 @@ rule acrcloud : tracker
 {
     meta:
         description = "ACRCloud"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://acrcloud.com/"
 
     strings:
@@ -4884,7 +4884,7 @@ rule aarki : tracker
 {
     meta:
         description = "Aarki"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.aarki.com"
 
     strings:
@@ -4899,7 +4899,7 @@ rule actv_me : tracker
 {
     meta:
         description = "Actv8me"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.actv8me.com/"
 
     strings:
@@ -4915,7 +4915,7 @@ rule iab_open_measurement : tracker
 {
     meta:
         description = "IAB Open Measurement"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://iabtechlab.com/"
 
     strings:
@@ -4930,7 +4930,7 @@ rule huawei_mobile_services_hms_core : tracker
 {
     meta:
         description = "Huawei Mobile Services (HMS) Core"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://developer.huawei.com/consumer/en/hms"
 
     strings:
@@ -4946,7 +4946,7 @@ rule akamai_map : tracker
 {
     meta:
         description = "Akamai MAP"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.akamai.com/"
 
     strings:
@@ -4961,7 +4961,7 @@ rule mail_ru : tracker
 {
     meta:
         description = "Mail.ru"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://mail.ru"
 
     strings:
@@ -4976,7 +4976,7 @@ rule airpush : tracker
 {
     meta:
         description = "Airpush"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://airpush.com/"
 
     strings:
@@ -4992,7 +4992,7 @@ rule alimama_formerly_adsmogo : tracker
 {
     meta:
         description = "Alimama (formerly AdsMogo)"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.alimama.com/"
 
     strings:
@@ -5008,7 +5008,7 @@ rule anysdk : tracker
 {
     meta:
         description = "AnySDK"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.anysdk.com/"
 
     strings:
@@ -5023,7 +5023,7 @@ rule button : tracker
 {
     meta:
         description = "Button"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.usebutton.com"
 
     strings:
@@ -5039,7 +5039,7 @@ rule carto_formerly_nutiteq : tracker
 {
     meta:
         description = "Carto (formerly Nutiteq)"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://carto.com"
 
     strings:
@@ -5054,7 +5054,7 @@ rule didomi : tracker
 {
     meta:
         description = "Didomi"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.didomi.io/"
 
     strings:
@@ -5069,7 +5069,7 @@ rule jiguang_aurora_mobile_jpush : tracker
 {
     meta:
         description = "JiGuang Aurora Mobile JPush"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://ir.jiguang.cn/corporate-profile"
 
     strings:
@@ -5085,7 +5085,7 @@ rule jumio : tracker
 {
     meta:
         description = "Jumio"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.jumio.com/"
 
     strings:
@@ -5101,7 +5101,7 @@ rule lenddo : tracker
 {
     meta:
         description = "Lenddo"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.lenddo.com/"
 
     strings:
@@ -5117,7 +5117,7 @@ rule pokkt : tracker
 {
     meta:
         description = "POKKT"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.pokkt.com"
 
     strings:
@@ -5132,7 +5132,7 @@ rule prebid_mobile : tracker
 {
     meta:
         description = "Prebid Mobile"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://prebid.org"
 
     strings:
@@ -5148,7 +5148,7 @@ rule sk_planet_tad : tracker
 {
     meta:
         description = "SK planet Tad"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.skplanet.com/eng"
 
     strings:
@@ -5163,7 +5163,7 @@ rule split : tracker
 {
     meta:
         description = "Split"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.split.io/"
 
     strings:
@@ -5179,7 +5179,7 @@ rule exponea : tracker
 {
     meta:
         description = "Exponea"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://exponea.com"
 
     strings:
@@ -5195,7 +5195,7 @@ rule ipqualityscore : tracker
 {
     meta:
         description = "IPQualityScore"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.ipqualityscore.com"
 
     strings:
@@ -5211,7 +5211,7 @@ rule opensignal : tracker
 {
     meta:
         description = "Opensignal"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.opensignal.com"
 
     strings:
@@ -5226,7 +5226,7 @@ rule signalframe : tracker
 {
     meta:
         description = "SignalFrame"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://signalframe.com/"
 
     strings:
@@ -5241,7 +5241,7 @@ rule x_mode : tracker
 {
     meta:
         description = "X-Mode"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://xmode.io/"
 
     strings:
@@ -5257,7 +5257,7 @@ rule oneaudience : tracker
 {
     meta:
         description = "OneAudience"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.oneaudience.com/"
 
     strings:
@@ -5272,7 +5272,7 @@ rule openback : tracker
 {
     meta:
         description = "OpenBack"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.openback.com"
 
     strings:
@@ -5287,7 +5287,7 @@ rule predicio : tracker
 {
     meta:
         description = "PredicIO"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.predic.io/"
 
     strings:
@@ -5303,7 +5303,7 @@ rule adlocus : tracker
 {
     meta:
         description = "AdLocus"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://adlocus.com"
 
     strings:
@@ -5318,7 +5318,7 @@ rule adcenix : tracker
 {
     meta:
         description = "Adcenix"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://adcenix.com"
 
     strings:
@@ -5333,7 +5333,7 @@ rule admitad : tracker
 {
     meta:
         description = "Admitad"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.admitad.com"
 
     strings:
@@ -5349,7 +5349,7 @@ rule autonavi__amap : tracker
 {
     meta:
         description = "AutoNavi / Amap"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://mobile.amap.com/"
 
     strings:
@@ -5365,7 +5365,7 @@ rule ibm_digital_analytics : tracker
 {
     meta:
         description = "IBM Digital Analytics"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.ibm.com/customer-engagement/coremetrics-software"
 
     strings:
@@ -5381,7 +5381,7 @@ rule pangle : tracker
 {
     meta:
         description = "Pangle"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.pangleglobal.com"
 
     strings:
@@ -5396,7 +5396,7 @@ rule yoc_vis_x : tracker
 {
     meta:
         description = "YOC VIS.X"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://yoc.com"
 
     strings:
@@ -5412,7 +5412,7 @@ rule ad_generation : tracker
 {
     meta:
         description = "Ad Generation"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://supership.jp/business/adgeneration/"
 
     strings:
@@ -5427,7 +5427,7 @@ rule adjoe : tracker
 {
     meta:
         description = "Adjoe"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://adjoe.io/"
 
     strings:
@@ -5442,7 +5442,7 @@ rule appvador : tracker
 {
     meta:
         description = "AppVador"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.appvador.com/"
 
     strings:
@@ -5457,7 +5457,7 @@ rule appodeal_stack : tracker
 {
     meta:
         description = "Appodeal Stack"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://appodealstack.com/about/"
 
     strings:
@@ -5472,7 +5472,7 @@ rule appsgeyser : tracker
 {
     meta:
         description = "AppsGeyser"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://appsgeyser.com/"
 
     strings:
@@ -5487,7 +5487,7 @@ rule bidmachine : tracker
 {
     meta:
         description = "BidMachine"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://bidmachine.io/"
 
     strings:
@@ -5502,7 +5502,7 @@ rule bugsense : tracker
 {
     meta:
         description = "BugSense"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.bugsense.com/"
 
     strings:
@@ -5517,7 +5517,7 @@ rule buzzad_benefit : tracker
 {
     meta:
         description = "BuzzAd Benefit"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://buzzvil.atlassian.net/wiki/spaces/BDG/pages/486834313/BuzzAd-Benefit+Android+SDK"
 
     strings:
@@ -5532,7 +5532,7 @@ rule gom_factory_adpie : tracker
 {
     meta:
         description = "GOM Factory AdPie"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.gomfactory.com"
 
     strings:
@@ -5547,7 +5547,7 @@ rule jumptap : tracker
 {
     meta:
         description = "JumpTap"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.millennialmedia.com"
 
     strings:
@@ -5562,7 +5562,7 @@ rule loopme : tracker
 {
     meta:
         description = "LoopMe"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://loopme.com/"
 
     strings:
@@ -5577,7 +5577,7 @@ rule raygun : tracker
 {
     meta:
         description = "Raygun"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://raygun.com"
 
     strings:
@@ -5592,7 +5592,7 @@ rule rjfun : tracker
 {
     meta:
         description = "RjFun"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://rjfun.github.io/"
 
     strings:
@@ -5607,7 +5607,7 @@ rule superawesome : tracker
 {
     meta:
         description = "SuperAwesome"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.superawesome.com/"
 
     strings:
@@ -5622,7 +5622,7 @@ rule tapresearch : tracker
 {
     meta:
         description = "TapResearch"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.tapresearch.com/"
 
     strings:
@@ -5637,7 +5637,7 @@ rule tappx : tracker
 {
     meta:
         description = "Tappx"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.tappx.com/"
 
     strings:
@@ -5652,7 +5652,7 @@ rule thinkingdata_analytics : tracker
 {
     meta:
         description = "ThinkingData Analytics"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.thinkingdata.cn/"
 
     strings:
@@ -5667,7 +5667,7 @@ rule vkontakte_sdk : tracker
 {
     meta:
         description = "VKontakte SDK"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://vksdk.github.io/vk-sdk-android/"
 
     strings:
@@ -5682,7 +5682,7 @@ rule virgo_mobile : tracker
 {
     meta:
         description = "Virgo Mobile"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://virgomobile.com/"
 
     strings:
@@ -5697,7 +5697,7 @@ rule zoho_analytics : tracker
 {
     meta:
         description = "Zoho Analytics"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://analytics.zoho.com/"
 
     strings:
@@ -5712,7 +5712,7 @@ rule fineboost : tracker
 {
     meta:
         description = "fineboost"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.yifants.cn/"
 
     strings:
@@ -5727,7 +5727,7 @@ rule acuant : tracker
 {
     meta:
         description = "Acuant"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.acuantcorp.com"
 
     strings:
@@ -5743,7 +5743,7 @@ rule anvato_a_google_company : tracker
 {
     meta:
         description = "Anvato (A G. Company)"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://cloud.google.com/solutions/media-entertainment/?a=2"
 
     strings:
@@ -5759,7 +5759,7 @@ rule blesh : tracker
 {
     meta:
         description = "Blesh"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.blesh.com/"
 
     strings:
@@ -5774,7 +5774,7 @@ rule bluecats : tracker
 {
     meta:
         description = "Bluecats"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.bluecats.com/"
 
     strings:
@@ -5789,7 +5789,7 @@ rule cooladata : tracker
 {
     meta:
         description = "CoolaData"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.cooladata.com/"
 
     strings:
@@ -5804,7 +5804,7 @@ rule fluzo : tracker
 {
     meta:
         description = "FLUZO"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.fluzo.com/"
 
     strings:
@@ -5819,7 +5819,7 @@ rule facebook_flipper : tracker
 {
     meta:
         description = "FB. Flipper"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://fbflipper.com"
 
     strings:
@@ -5834,7 +5834,7 @@ rule gpshopper : tracker
 {
     meta:
         description = "GPShopper"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.crunchbase.com/organization/gpshopper"
 
     strings:
@@ -5850,7 +5850,7 @@ rule indooratlas : tracker
 {
     meta:
         description = "IndoorAtlas"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.indooratlas.com/"
 
     strings:
@@ -5866,7 +5866,7 @@ rule janrain : tracker
 {
     meta:
         description = "Janrain"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://en.wikipedia.org/wiki/Janrain"
 
     strings:
@@ -5881,7 +5881,7 @@ rule moca : tracker
 {
     meta:
         description = "MOCA"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.mocaplatform.com/"
 
     strings:
@@ -5897,7 +5897,7 @@ rule point_inside : tracker
 {
     meta:
         description = "Point Inside"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.pointinside.com/"
 
     strings:
@@ -5912,7 +5912,7 @@ rule proximi_io : tracker
 {
     meta:
         description = "Proximi.io"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://proximi.io/"
 
     strings:
@@ -5928,7 +5928,7 @@ rule scoreloop : tracker
 {
     meta:
         description = "ScoreLoop"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.scoreloop.com"
 
     strings:
@@ -5943,7 +5943,7 @@ rule alooma : tracker
 {
     meta:
         description = "Alooma"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.alooma.com"
 
     strings:
@@ -5959,7 +5959,7 @@ rule analytics_by_npaw_youbora_suite : tracker
 {
     meta:
         description = "Analytics by NPAW (Youbora Suite)"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://nicepeopleatwork.com/"
 
     strings:
@@ -5974,7 +5974,7 @@ rule beintoo : tracker
 {
     meta:
         description = "Beintoo"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://beintoo.com/"
 
     strings:
@@ -5989,7 +5989,7 @@ rule bolts : tracker
 {
     meta:
         description = "Bolts"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://github.com/BoltsFramework/Bolts-Android"
 
     strings:
@@ -6004,7 +6004,7 @@ rule cedexis_radar : tracker
 {
     meta:
         description = "Cedexis Radar"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.cedexis.com/"
 
     strings:
@@ -6020,7 +6020,7 @@ rule cifrasoft : tracker
 {
     meta:
         description = "Cifrasoft"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://cifrasoft.com"
 
     strings:
@@ -6036,7 +6036,7 @@ rule flowsense : tracker
 {
     meta:
         description = "Flowsense"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://flowsense.com.br/"
 
     strings:
@@ -6051,7 +6051,7 @@ rule geniee : tracker
 {
     meta:
         description = "Geniee"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://geniee.co.jp/"
 
     strings:
@@ -6066,7 +6066,7 @@ rule huq_sourcekit : tracker
 {
     meta:
         description = "Huq Sourcekit"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://huq.io/"
 
     strings:
@@ -6081,7 +6081,7 @@ rule insider : tracker
 {
     meta:
         description = "Insider"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://useinsider.com/"
 
     strings:
@@ -6096,7 +6096,7 @@ rule mopinion : tracker
 {
     meta:
         description = "Mopinion"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://mopinion.com"
 
     strings:
@@ -6111,7 +6111,7 @@ rule offertoro : tracker
 {
     meta:
         description = "OfferToro"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.offertoro.com/"
 
     strings:
@@ -6126,7 +6126,7 @@ rule opentelemetry_opencensus_opentracing : tracker
 {
     meta:
         description = "OpenTelemetry (OpenCensus, OpenTracing)"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://opentelemetry.io/"
 
     strings:
@@ -6141,7 +6141,7 @@ rule snapchat_login_kit : tracker
 {
     meta:
         description = "Snapchat Login Kit"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://kit.snapchat.com/docs/login-kit"
 
     strings:
@@ -6156,7 +6156,7 @@ rule zendrive : tracker
 {
     meta:
         description = "Zendrive"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.zendrive.com/"
 
     strings:
@@ -6171,7 +6171,7 @@ rule fullstory : tracker
 {
     meta:
         description = "fullstory"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.fullstory.com/"
 
     strings:
@@ -6186,7 +6186,7 @@ rule pendo : tracker
 {
     meta:
         description = "Pendo"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.pendo.io"
 
     strings:
@@ -6201,7 +6201,7 @@ rule plexure : tracker
 {
     meta:
         description = "Plexure"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.plexure.com/"
 
     strings:
@@ -6216,7 +6216,7 @@ rule swirl : tracker
 {
     meta:
         description = "Swirl"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://swirl.com/"
 
     strings:
@@ -6232,7 +6232,7 @@ rule treasure_data : tracker
 {
     meta:
         description = "Treasure Data"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.treasuredata.com/product/"
 
     strings:
@@ -6247,7 +6247,7 @@ rule ibm_mobile_marketing_acoustic : tracker
 {
     meta:
         description = "IBM Mobile Marketing (Acoustic)"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://acoustic.co/"
 
     strings:
@@ -6263,7 +6263,7 @@ rule solar_d_corona : tracker
 {
     meta:
         description = "Solar2D (Corona)"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://solar2d.com/"
 
     strings:
@@ -6278,7 +6278,7 @@ rule amazon_mobile_analytics_amplify : tracker
 {
     meta:
         description = "Amazon Mobile Analytics (Amplify)"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://aws.amazon.com/amplify/"
 
     strings:
@@ -6293,7 +6293,7 @@ rule ad_x : tracker
 {
     meta:
         description = "AD(X)"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://adxcorp.kr/"
 
     strings:
@@ -6308,7 +6308,7 @@ rule adgatemedia : tracker
 {
     meta:
         description = "AdGateMedia"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://adgatemedia.com/"
 
     strings:
@@ -6323,7 +6323,7 @@ rule admarvel : tracker
 {
     meta:
         description = "AdMarvel"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.crunchbase.com/organization/admarvel"
 
     strings:
@@ -6338,7 +6338,7 @@ rule adtiming : tracker
 {
     meta:
         description = "AdTiming"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.adtiming.com/"
 
     strings:
@@ -6353,7 +6353,7 @@ rule adjust_unbotify : tracker
 {
     meta:
         description = "Adjust Unbotify"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.adjust.com/product/unbotify/"
 
     strings:
@@ -6368,7 +6368,7 @@ rule lotadata : tracker
 {
     meta:
         description = "LotaData"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://lotadata.com"
 
     strings:
@@ -6383,7 +6383,7 @@ rule marketo_an_adobe_company : tracker
 {
     meta:
         description = "Marketo (an Adobe Company)"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://marketo.com"
 
     strings:
@@ -6399,7 +6399,7 @@ rule playtestcloud_event_tracking : tracker
 {
     meta:
         description = "PlaytestCloud Event Tracking"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.playtestcloud.com"
 
     strings:
@@ -6414,7 +6414,7 @@ rule rollbar : tracker
 {
     meta:
         description = "Rollbar"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://rollbar.com"
 
     strings:
@@ -6429,7 +6429,7 @@ rule snap_ad_kit : tracker
 {
     meta:
         description = "Snap Ad Kit"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://kit.snapchat.com/docs/ad-kit"
 
     strings:
@@ -6444,7 +6444,7 @@ rule synerise : tracker
 {
     meta:
         description = "Synerise"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://synerise.com"
 
     strings:
@@ -6460,7 +6460,7 @@ rule userexperior : tracker
 {
     meta:
         description = "UserExperior"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.userexperior.com/"
 
     strings:
@@ -6475,7 +6475,7 @@ rule vdopia : tracker
 {
     meta:
         description = "Vdopia"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://chocolateplatform.com/"
 
     strings:
@@ -6490,7 +6490,7 @@ rule adgem : tracker
 {
     meta:
         description = "AdGem"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://adgem.com/"
 
     strings:
@@ -6505,7 +6505,7 @@ rule adtrial : tracker
 {
     meta:
         description = "AdTrial"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://adtrial.com/"
 
     strings:
@@ -6520,7 +6520,7 @@ rule pincrux : tracker
 {
     meta:
         description = "Pincrux"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.pincrux.com/"
 
     strings:
@@ -6535,7 +6535,7 @@ rule tutucloud : tracker
 {
     meta:
         description = "Tutucloud"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://tutucloud.com"
 
     strings:
@@ -6551,7 +6551,7 @@ rule veloxity : tracker
 {
     meta:
         description = "Veloxity"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "http://www.veloxity.net/"
 
     strings:
@@ -6566,7 +6566,7 @@ rule yoadx : tracker
 {
     meta:
         description = "Yoadx"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://yoadx.com/"
 
     strings:
@@ -6581,7 +6581,7 @@ rule coulus_coelib : tracker
 {
     meta:
         description = "Coulus Coelib"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://measurementsys.com/index.php#appdev"
 
     strings:
@@ -6596,7 +6596,7 @@ rule acra : tracker
 {
     meta:
         description = "ACRA"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://www.acra.ch/"
 
     strings:
@@ -6611,7 +6611,7 @@ rule backtrace : tracker
 {
     meta:
         description = "Backtrace"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://backtrace.io"
 
     strings:
@@ -6627,7 +6627,7 @@ rule sentry : tracker
 {
     meta:
         description = "Sentry"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://sentry.io/"
 
     strings:
@@ -6642,7 +6642,7 @@ rule yueying_crash_sdk : tracker
 {
     meta:
         description = "Yueying Crash SDK"
-        author      = "Abhi"
+        author      = "Abhi & Exodus API"
         url         = "https://yueying-docs.effirst.com/"
 
     strings:

@@ -57,7 +57,7 @@ class Options(object):
 
     def __init__(self, timeout: int = 10, verbose: bool = False, json: bool = False, output_dir: Union[str, None] = None,
                  typing: Union[str, None] = 'magic', entry_max_scan_size: int = 0, scan_depth=2, recursive: bool = False,
-                 include_types: bool = False):
+                 include_trackers: bool = False, include_types: bool = False):
         """Scan options.
         Holds user-supplied options governing how APKiD behaves.
 
@@ -89,6 +89,8 @@ class Options(object):
             If 0, don't recurse into nested archives.
             Note: It's possible to construct a malicious ZIP which can be infinitely nested. It's therefore necessary to limit the scan depth.
             Don't get cheeky and think you can set this value to 1000 and scan random malware without blowing up your memory.
+        include_trackers : boolean, optional (default=False)
+            If true, scans for embedded trackers using rules from exodus.
         recursive : boolean, optional (default=True)
             If true, when scanning a directory, will recurse into subdirectories.
         """
@@ -97,13 +99,15 @@ class Options(object):
         self.typing = typing
         self.entry_max_scan_size = entry_max_scan_size
         self.scan_depth = scan_depth
+        self.include_trackers = include_trackers
         self.recursive = recursive
-        self.rules_manager = RulesManager()
+        self.rules_manager = RulesManager(include_trackers=include_trackers)
         self.output = OutputFormatter(
             json_output=json,
             output_dir=output_dir,
             rules_manager=self.rules_manager,
-            include_types=include_types
+            include_types=include_types,
+            include_trackers=include_trackers
         )
 
 
