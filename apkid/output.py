@@ -86,7 +86,7 @@ def colorize_tag(tag) -> str:
 
 
 class OutputFormatter(object):
-    def __init__(self, json_output: bool, output_dir: Union[str, None], rules_manager: RulesManager, include_types: bool, include_trackers: bool):
+    def __init__(self, json_output: bool, output_dir: Union[str, None], rules_manager: RulesManager, include_types: bool, include_trackers: bool = False):
         from apkid import __version__
         self.output_dir = output_dir
         self.json = json_output or output_dir
