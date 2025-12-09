@@ -94,7 +94,7 @@ rule appdome_dex : protector
 {
   // https://github.com/rednaga/APKiD/issues/151
   meta:
-    description = "Appdome (dex)"
+    description = "Appdome"
     sample      = "1c6496f1cc8c5799539ee24170c371e8a57547e2eb73c9502c98ff78f44c74cf"
     url         = "https://www.appdome.com/"
     author      = "Tim 'diff' Strazzere"
@@ -415,11 +415,11 @@ rule rootbeer : anti_root
     url         = "https://github.com/scottyab/rootbeer.git"
     sample      = "607ec962ba93cc9817129cb693ff0f335f500a297b5a297e71fbb998d0f6849c" // com.scottyab.rootbeer.sample
     author      = "Abhi"
-  
+
   strings:
     $class = { 00 20 4C 63 6F 6D 2F 73 63 6F 74 74 79 61 62 2F 72
                6F 6F 74 62 65 65 72 2F 52 6F 6F 74 42 65 65 72 3B 00 } // Lcom/scottyab/rootbeer/RootBeer;
-  
+
   condition:
     is_dex and all of them
 }
@@ -502,7 +502,7 @@ rule bugsmirror : protector
 
   condition:
    is_dex and any of them
-} 
+}
 
 rule bshield : protector
 {
