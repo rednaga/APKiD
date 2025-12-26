@@ -1176,3 +1176,21 @@ rule manxi_sec : packer
   condition:
     is_apk and any of them
 }
+
+rule dexprotectx : packer
+{
+  meta:
+    description = "DexProtect X (DexShellx)"
+    url         = "https://dexprotectx.pro"
+    url2        = "https://t.me/DexShell_x"
+    sample      = "72e8685df3168c947190a4ccb76ca26de3762bfe5560549545e935b09c8893df" // com.x.dexprotectx
+    author      = "Abhi"
+
+  strings:
+    $a1 = /assets\/libVMDexShellx\.so/
+    $a2 = /assets\/dexshell\/(arm.*|x86.*)\/libdexshell\.so/
+    $a3 = /assets\/DexShell\.mp3/
+
+  condition:
+    is_apk and any of them
+}
