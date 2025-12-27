@@ -1,5 +1,6 @@
 # precompiled rules included in dist but not source
 apkid/rules/rules.yarc
+apkid/rules/trackers.yarc
 
 # APKs and DEX files for local testing
 test-data

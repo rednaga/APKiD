@@ -3,3 +3,4 @@ include LICENSE.COMMERCIAL
 include LICENSE.GPL
 
 include apkid/rules/rules.yarc
+include apkid/rules/trackers.yarc

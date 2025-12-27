@@ -43,6 +43,8 @@ prt_light_cyan = lambda s: f"\033[96m{s}\033[00m"
 prt_light_gray = lambda s: f"\033[97m{s}\033[00m"
 prt_orange = lambda s: f"\033[33m{s}\033[00m"
 prt_pink = lambda s: f"\033[35m{s}\033[00m"
+prt_tracker = lambda s: f"\033[38;5;208m{s}\033[00m"
+prt_file = lambda s: f"\033[48;5;240m{s}\033[00m"
 
 def is_windows_cmd():
     """
@@ -77,18 +79,21 @@ def colorize_tag(tag) -> str:
         return prt_orange(tag)
     elif tag == 'internal':
         return prt_pink(tag)
+    elif tag == 'tracker':
+        return prt_tracker(tag)
     else:
         return tag
 
 
 class OutputFormatter(object):
-    def __init__(self, json_output: bool, output_dir: Union[str, None], rules_manager: RulesManager, include_types: bool):
+    def __init__(self, json_output: bool, output_dir: Union[str, None], rules_manager: RulesManager, include_types: bool, include_trackers: bool = False):
         from apkid import __version__
         self.output_dir = output_dir
         self.json = json_output or output_dir
         self.version = __version__
         self.rules_hash = rules_manager.hash
         self.include_types = include_types
+        self.include_trackers = include_trackers
 
     def write(self, results: Dict[str, List[yara.Match]]) -> None:
         """
@@ -145,7 +150,7 @@ class OutputFormatter(object):
             match_results = self._build_match_results(raw_matches)
             if len(match_results) == 0:
                 continue
-            print(f"[*] {key}")
+            print(f"[*] {prt_file(key)}")
             for tags in sorted(match_results):
                 descriptions = ', '.join(sorted(match_results[tags]))
                 if sys.stdout.isatty() and not is_windows_cmd():
@@ -158,6 +163,8 @@ class OutputFormatter(object):
         results: Dict[str, List[str]] = {}
         for m in matches:
             if 'file_type' in m.tags and not self.include_types:
+                continue
+            if 'tracker' in m.tags and not self.include_trackers:
                 continue
             tags = ', '.join(sorted(m.tags))
             description = m.meta.get('description', m)
