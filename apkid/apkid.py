@@ -178,6 +178,13 @@ class Scanner(object):
                     return
                 entry_buffer.seek(4)
                 entry_buffer.write(entry.read())
+        except zipfile.BadZipFile as e:
+            if "Overlapped entries" in str(e) or "possible zip bomb" in str(e):
+                if self.options.verbose:
+                    print(f"[W] Skipping overlapped entry {info.filename} (possible zip bomb)")
+                return
+            else:
+                raise
         except NotImplementedError:
             # XZ-compression
             if info.compress_type == XZ_COMPRESSION_TYPE:
