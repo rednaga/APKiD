@@ -31,6 +31,7 @@ import struct
 import sys
 import traceback
 import zipfile
+import zlib
 from typing import Union, IO, List, Dict, Set
 
 import yara
@@ -178,9 +179,12 @@ class Scanner(object):
                     return
                 entry_buffer.seek(4)
                 entry_buffer.write(entry.read())
-        except NotImplementedError:
-            # XZ-compression
-            if info.compress_type == XZ_COMPRESSION_TYPE:
+        except (NotImplementedError, zipfile.BadZipFile) as e:
+            # XZ-compression or overlapped entries (zip bombs)
+            if isinstance(e, zipfile.BadZipFile):
+                if not ("Overlapped entries" in str(e) or "possible zip bomb" in str(e)):
+                    raise
+            try:
                 with open(zf.filename, 'rb') as raw_zip:
                     raw_zip.seek(info.header_offset + ZIP_LFH_FIELDS_SIZE)
                     filename_len = struct.unpack('<H', raw_zip.read(2))[0]
@@ -188,14 +192,22 @@ class Scanner(object):
                     data_offset = info.header_offset + ZIP_LFH_HEADER_SIZE + filename_len + extra_len
                     raw_zip.seek(data_offset)
                     compressed_data = raw_zip.read(info.compress_size)
-                    try:
+                    if info.compress_type == zipfile.ZIP_STORED:
+                        decompressed_data = compressed_data
+                    elif info.compress_type == zipfile.ZIP_DEFLATED:
+                        decompressed_data = zlib.decompress(compressed_data, - zlib.MAX_WBITS)
+                    elif info.compress_type == XZ_COMPRESSION_TYPE:
                         decompressed_data = lzma.decompress(compressed_data)
-                        entry_buffer = io.BytesIO(decompressed_data)
-                    except Exception as e:
-                        print(f"[E] Failed to decompress {info.filename}: {e}")
+                    else:
+                        print(f"[E] Unsupported compression method {info.compress_type} for {info.filename}")
                         return
-            else:
-                print(f"[E] Unsupported compression method {info.compress_type} for {info.filename}")
+
+                    entry_buffer = io.BytesIO(decompressed_data)
+                    entry_buffer.seek(0)
+                    if not self._should_scan(entry_buffer, info.filename):
+                        return
+            except Exception as err:
+                print(f"[E] Failed to extract {info.filename}: {err}")
                 return
 
 
