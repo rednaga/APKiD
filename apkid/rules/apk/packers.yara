@@ -1188,9 +1188,9 @@ rule dexprotectx : packer
     author      = "Abhi"
 
   strings:
-    $a1 = /assets\/libVMDexShellx\.so/
+    $a1 = "assets/libVMDexShellx.so"
     $a2 = /assets\/dexshell\/(arm.*|x86.*)\/libdexshell\.so/
-    $a3 = /assets\/DexShell\.mp3/
+    $a3 = "assets/DexShell.mp3"
 
   condition:
     is_apk and any of them
