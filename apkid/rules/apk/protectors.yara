@@ -283,3 +283,19 @@ rule bshield : protector
   condition:
     is_apk and all of them
 }
+
+rule denuvo_apk : protector
+{
+  meta:
+    description = "Denuvo"
+    url         = "https://irdeto.com/denuvo/anti-tamper"
+    sample      = "f7d1cd97b5d61da16b804daf6cd1199fe822745f9066596988d30a934441f6fc"
+    author      = "Abhi"
+
+  strings:
+    $tid     = "assets/tid"
+    $libvmpc = "\x00libvmpc.so\x00"
+
+  condition:
+    is_apk and all of them
+}
