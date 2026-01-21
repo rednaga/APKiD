@@ -1163,15 +1163,16 @@ rule manxi_sec : packer
   meta:
     description = "Manxi Security"
     url         = "https://www.manxi-inc.com/en/"
-    sample      = "TODO" // cn.dict.android.pro (6.1.37)
+    sample      = "9803121e89d5609215dc736b11cf5cf0a7d56ddfe5ac9ab71eb2b2883f427ac2" // cn.dict.android.pro (6.1.37)
     author      = "Abhi"
 
   strings:
     $a1 = /assets\/mxsafe\/(arm.*|x86.*)\/libdSafeShell\.so/
     $a2 = /assets\/mx\/(arm.*|x86.*)\/libmxacc\.so/
-    $a3 = "assets/mxsafe.data"
-    $a4 = "assets/mxsafe.config"
-    $a5 = "assets/mxsafe.jar"
+    $a3 = /lib\/(arm.*|x86.*)\/libmanxi\.so/
+    $a4 = "assets/mxsafe.data"
+    $a5 = "assets/mxsafe.config"
+    $a6 = "assets/mxsafe.jar"
 
   condition:
     is_apk and any of them
@@ -1187,9 +1188,9 @@ rule dexprotectx : packer
     author      = "Abhi"
 
   strings:
-    $a1 = /assets\/libVMDexShellx\.so/
+    $a1 = "assets/libVMDexShellx.so"
     $a2 = /assets\/dexshell\/(arm.*|x86.*)\/libdexshell\.so/
-    $a3 = /assets\/DexShell\.mp3/
+    $a3 = "assets/DexShell.mp3"
 
   condition:
     is_apk and any of them
