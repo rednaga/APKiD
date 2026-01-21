@@ -1170,9 +1170,9 @@ rule manxi_sec : packer
     $a1 = /assets\/mxsafe\/(arm.*|x86.*)\/libdSafeShell\.so/
     $a2 = /assets\/mx\/(arm.*|x86.*)\/libmxacc\.so/
     $a3 = /lib\/(arm.*|x86.*)\/libmanxi\.so/
-    $a3 = "assets/mxsafe.data"
-    $a4 = "assets/mxsafe.config"
-    $a5 = "assets/mxsafe.jar"
+    $a4 = "assets/mxsafe.data"
+    $a5 = "assets/mxsafe.config"
+    $a6 = "assets/mxsafe.jar"
 
   condition:
     is_apk and any of them
