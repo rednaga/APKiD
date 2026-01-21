@@ -294,7 +294,7 @@ rule denuvo_apk : protector
 
   strings:
     $tid     = "assets/tid"
-    $libvmpc = "\x00libvmpc.so\x00"
+    $libvmpc = "libvmpc.so"
 
   condition:
     is_apk and all of them
