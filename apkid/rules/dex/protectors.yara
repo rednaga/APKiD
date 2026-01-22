@@ -529,7 +529,7 @@ rule alibaba_sec : protector
 
   strings:
     $class = { 00 1D 4C 63 6F 6D 2F 61 6C 69 2F 6D 6F 62 69 73 65
-                63 65 6E 68 61 6E 63 65 2F 49 6E 69 74 3B 00 } // Lcom/ali/mobisecenhance/Init;
+               63 65 6E 68 61 6E 63 65 2F 49 6E 69 74 3B 00 } // Lcom/ali/mobisecenhance/Init;
 
   condition:
     is_dex and all of them
