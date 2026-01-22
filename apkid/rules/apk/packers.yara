@@ -1126,7 +1126,7 @@ rule kiwisec_apk : packer
     url         = "https://en.kiwisec.com/"
     sample      = "d108652bd1b685765e3ada2b7376e3c3ff67f8162afcf8bad91e0aef79b7b08a"
     author      = "Abhi"
-  
+
   strings:
     $lib  = /lib\/(arm.*|x86.*)\/libkiwicrash\.so/
     $lib2 = /lib\/(arm.*|x86.*)\/libkiwi_dumper\.so/
@@ -1146,14 +1146,14 @@ rule dingxiang_apk : packer
     url         = "https://www.dingxiang-inc.com/business/android"
     sample      = "788ebabd9b5464c5e86b3832e4a7b6e7c91cce5603ff17f214429400ba3bb2b9" // net.crigh.cgsport
     author      = "Abhi"
-  
+
   strings:
     $lib      = /lib\/(arm.*|x86.*)\/libsys_misc\.so/
-    $assets   = /assets\/__param\.data/
-    $assets2  = /assets\/__version\.data/
-    $assets3  = /assets\/csn.*\.data\d?/
-    $dsnstub  = /dsnstub000\.vd/
-  
+    $assets   = /assets\/csn.*\.data\d?/
+    $assets2  = "assets/__param.data"
+    $assets3  = "assets/__version.txt"
+    $dsnstub  = "dsnstub000.vd"
+
   condition:
     is_apk and 2 of them
 }

@@ -165,9 +165,9 @@ rule vguard : protector
   strings:
     $lib    = /lib\/(arm.*|x86.*)\/libedex\.so/
     $asset1 = /assets\/dexsky\.(d|e)b(a|b|x|y)/
-    $asset2 = /assets\/dexsky\.ini/
-    $asset3 = /assets\/dex[a-z0-9]{3}\.zip/
-    $asset4 = /assets\/vguard\.(key|enginehash)/
+    $asset2 = /assets\/dex[a-z0-9]{3}\.zip/
+    $asset3 = /assets\/vguard\.(key|enginehash)/
+    $asset4 = "assets/dexsky.ini"
 
   condition:
     is_apk and 2 of them
