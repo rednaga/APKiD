@@ -1151,6 +1151,7 @@ rule dingxiang_apk : packer
     $lib      = /lib\/(arm.*|x86.*)\/libsys_misc\.so/
     $assets   = /assets\/csn.*\.data\d?/
     $assets2  = "assets/__param.data"
+    $assets3  = "assets/__version.txt"
     $dsnstub  = "dsnstub000.vd"
 
   condition:
