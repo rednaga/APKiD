@@ -299,3 +299,19 @@ rule denuvo_apk : protector
   condition:
     is_apk and all of them
 }
+
+rule alibaba_sec : protector
+{
+  meta:
+    description = "Alibaba Security SDK"
+    url         = "https://www.alibabacloud.com/zh/product/mpaas"
+    sample      = "4590673ad6320d9a091d33e5b3b9b652479ddced573bde9c3ded8acba0451d53"
+    author      = "Abhi"
+
+  strings:
+    $lib   = /lib\/(arm.*|x86.*)\/lib(alisecuritysdk|demolish(data)?|reverify1)\.so/
+    $asset = "assets/ali_sec.dat"
+
+  condition:
+    is_apk and any of them
+}
