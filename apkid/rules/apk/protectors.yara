@@ -309,10 +309,7 @@ rule alibaba_sec : protector
     author      = "Abhi"
 
   strings:
-    $lib   = /lib\/(arm.*|x86.*)\/libalisecuritysdk\.so/
-    $lib2  = /lib\/(arm.*|x86.*)\/libdemolish\.so/
-    $lib3  = /lib\/(arm.*|x86.*)\/libdemolishdata\.so/
-    $lib4  = /lib\/(arm.*|x86.*)\/libpreverify1\.so/
+    $lib   = /lib\/(arm.*|x86.*)\/lib(alisecuritysdk|demolish(data)?|reverify1)\.so/
     $asset = "assets/ali_sec.dat"
 
   condition:
