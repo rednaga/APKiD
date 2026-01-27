@@ -534,3 +534,26 @@ rule alibaba_sec : protector
   condition:
     is_dex and all of them
 }
+
+rule bureau : protector
+{
+  meta:
+    description = "Bureau"
+    url         = "https://bureau.id"
+    sample      = "484d8d0f4eb2c2ed66770edfa0ab89bf76f9b84227faea3889ce74b2af8cbbc4"
+    author      = "Abhi, ApkUnpacker"
+
+  strings:
+    $string = /api\.(stg\.)?bureau\.id/
+    $class  = { 00 28 4C 63 6F 6D 2F 62 75 72 65 61 75 2F 64 65 76 69
+                63 65 66 69 6E 67 65 72 70 72 69 6E 74 2F 42 75 72
+                65 61 75 41 50 49 3B 00 } // Lcom/bureau/devicefingerprint/BureauAPI;
+    $class2 = { 00 25 4C 63 6F 6D 2F 62 75 72 65 61 75 2F 62 61 73
+                65 2F 6D 6F 64 65 6C 73 2F 42 75 72 65 61 75 43 6F
+                6E 66 69 67 3B 00 } // Lcom/bureau/base/models/BureauConfig;
+    $class3 = { 00 21 4C 63 6F 6D 2F 62 75 72 65 61 75 2F 63 68 65 63
+                6B 52 6F 6F 74 2F 56 65 72 69 66 79 52 6F 6F 74 3B 00 } // Lcom/bureau/checkRoot/VerifyRoot;
+
+  condition:
+    is_dex and any of them
+}
