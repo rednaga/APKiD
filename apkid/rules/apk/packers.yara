@@ -693,10 +693,12 @@ rule naga : packer
     description = "Naga"
 
   strings:
-    $lib = "libddog.so"
+    // libedog | libfdog | libvdog etc. - lib name changes a/c to edition
+    $lib  = /lib.dog\.so/
+    $lib2 = "libchaosvmp.so"
 
   condition:
-    is_apk and $lib
+    is_apk and any of them
 }
 
 rule alibaba : packer
