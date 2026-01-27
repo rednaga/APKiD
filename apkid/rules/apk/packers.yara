@@ -694,8 +694,10 @@ rule naga : packer
 
   strings:
     // libedog | libfdog | libvdog etc. - lib name changes a/c to edition
-    $lib  = /lib.dog\.so/
-    $lib2 = "libchaosvmp.so"
+    $lib   = /lib.dog\.so/
+    $lib2  = "libchaosvmp.so"
+    $lib3  = "libxloader.so"
+    $asset = "assets/maindata/fake_classes.dex"
 
   condition:
     is_apk and any of them
