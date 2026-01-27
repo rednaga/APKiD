@@ -330,3 +330,19 @@ rule bureau : protector
   condition:
     is_apk and all of them
 }
+
+rule haiyun : protector
+{
+  meta:
+    description = "Haiyun'an Security"
+    url         = "https://www.secidea.com/services/appprotect.html" // dead url now
+    sample      = "TODO"
+    author      = "Abhi"
+
+  strings:
+    $lib   = /lib\/(arm.*|x86.*)\/libitsec\.so/
+    $asset = "assets/itse"
+
+  condition:
+    is_apk and all of them
+}
