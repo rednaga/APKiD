@@ -792,3 +792,30 @@ rule denuvo_elf : protector
   condition:
     is_elf and all of them
 }
+
+rule bureau : protector
+{
+  meta:
+    description = "Bureau"
+    url         = "https://bureau.id"
+    sample      = "484d8d0f4eb2c2ed66770edfa0ab89bf76f9b84227faea3889ce74b2af8cbbc4"
+    author      = "Abhi, ApkUnpacker"
+
+  strings:
+    $lib  = /lib(bureau\-.*|secure_keys|ndkdatacollector)\.so/
+    $cm   = { 00 4A 61 76 61 5F 63 6F 6D 5F 62 75 72 65 61 75 5F
+              63 68 65 63 6B 52 6F 6F 74 5F 56 65 72 69 66 79 52
+              6F 6F 74 4E 61 74 69 76 65 5F 63 68 65 63 6B 46 6F
+              72 52 6F 6F 74 00 } // Java_com_bureau_checkRoot_VerifyRootNative_checkForRoot
+    $cm2  = { 00 4A 61 76 61 5F 63 6F 6D 5F 62 75 72 65 61 75 5F
+              64 65 76 69 63 65 66 69 6E 67 65 72 70 72 69 6E 74
+              5F 73 65 63 75 72 69 74 79 5F 53 65 63 75 72 65 4A
+              4E 49 5F 67 65 74 4B 65 79 00 } // Java_com_bureau_devicefingerprint_security_SecureJNI_getKey
+    $cm3  = { 00 4A 61 76 61 5F 63 6F 6D 5F 62 75 72 65 61 75 5F
+              64 65 76 69 63 65 66 69 6E 67 65 72 70 72 69 6E 74
+              5F 74 6F 6F 6C 73 5F 4E 44 4B 4D 61 70 70 65 72 73
+              5F 63 68 65 63 6B 46 72 69 64 61 00 } // Java_com_bureau_devicefingerprint_tools_NDKMappers_checkFrida
+
+  condition:
+    is_elf and any of them
+}

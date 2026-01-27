@@ -315,3 +315,18 @@ rule alibaba_sec : protector
   condition:
     is_apk and any of them
 }
+
+rule bureau : protector
+{
+  meta:
+    description = "Bureau"
+    url         = "https://bureau.id"
+    sample      = "484d8d0f4eb2c2ed66770edfa0ab89bf76f9b84227faea3889ce74b2af8cbbc4"
+    author      = "Abhi, ApkUnpacker"
+
+  strings:
+    $lib  = /lib\/(arm.*|x86.*)\/libbureau\-.*\.so/
+
+  condition:
+    is_apk and all of them
+}
