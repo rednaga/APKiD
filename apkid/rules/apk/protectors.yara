@@ -340,9 +340,9 @@ rule oppo_protect : protector
     author      = "Abhi, ApkCheckPack"
 
   strings:
-    $lib   = /lib\/(arm.*|x86.*)\/libOPPOProtect(2019)?\.so/
-    $lib   = /lib\/(arm.*|x86.*)\/libomesStdSco\.so/
+    $lib    = /lib\/(arm.*|x86.*)\/libOPPOProtect(2019)?\.so/
+    $lib2   = /lib\/(arm.*|x86.*)\/libomesStdSco\.so/
 
   condition:
-    is_apk and all of them
+    is_apk and any of them
 }
