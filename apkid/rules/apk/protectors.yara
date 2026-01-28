@@ -330,3 +330,19 @@ rule bureau : protector
   condition:
     is_apk and all of them
 }
+
+rule oppo_protect : protector
+{
+  meta:
+    description = "OPPO Protect SDK"
+    url         = "https://open.oppomobile.com/product/page?page_name=environmentdetect"
+    sample      = "TODO"
+    author      = "Abhi, ApkCheckPack"
+
+  strings:
+    $lib   = /lib\/(arm.*|x86.*)\/libOPPOProtect(2019)?\.so/
+    $lib   = /lib\/(arm.*|x86.*)\/libomesStdSco\.so/
+
+  condition:
+    is_apk and all of them
+}
