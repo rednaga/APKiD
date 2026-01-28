@@ -1197,3 +1197,18 @@ rule dexprotectx : packer
   condition:
     is_apk and any of them
 }
+
+rule venustech : packer
+{
+  meta:
+    description = "Venustech"
+    url         = "https://www.venustech.com.cn/new_type/ydyyaqjg/"
+    sample      = "TODO"
+    author      = "Abhi, ApkCheckPack"
+
+  strings:
+    $lib = /lib\/(arm.*|x86.*)\/libven(Sec|ustech)\.so/
+
+  condition:
+    is_apk and all of them
+}
