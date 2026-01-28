@@ -53,6 +53,8 @@ def get_parser():
                           help="max zip entry size to scan in bytes, 0 = no limit")
     scanning.add_argument('--typing', choices=('magic', 'filename', 'none'), default='magic',
                           help="method to decide which files to scan")
+    scanning.add_argument('-st', '--scan-trackers', action='store_true', default=False,
+                          help="scans for embedded trackers")
 
     output = parser.add_argument_group('output')
     output.add_argument('-j', '--json', action='store_true',
@@ -74,6 +76,7 @@ def build_options(args) -> Options:
         typing=args.typing,
         entry_max_scan_size=args.entry_max_scan_size,
         scan_depth=args.scan_depth,
+        include_trackers=args.scan_trackers,
         recursive=args.recursive,
         include_types=args.include_types,
     )
