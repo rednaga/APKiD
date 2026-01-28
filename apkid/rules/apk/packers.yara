@@ -680,11 +680,13 @@ rule ijiami : packer
 
   strings:
     $old_dat = "assets/ijiami.dat"
-    $new_ajm = "ijiami.ajm"
+    $new_ajm = /ijiami(3)?\.ajm/
     $ijm_lib = "assets/ijm_lib/"
+    $new_dat = "assets/IJMDal.Data"
+    $new_lib = "assets/libijmDataEncryption.so"
 
   condition:
-    is_apk and ($old_dat or $new_ajm or $ijm_lib)
+    is_apk and any of them
 }
 
 rule naga : packer
