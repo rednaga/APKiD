@@ -143,7 +143,7 @@ rule appdome_elf_b : protector
     $ver = "\x00LIBLOADER_VERSION="
 
   condition:
-    is_elf and not $(appdome_*)
+    is_elf and not (appdome_elf or appdome_elf_a)
     and any of them
     and for any i in (0..elf.number_of_sections) : (
         elf.sections[i].name matches /^(hook|\.hookname|adinit|\.adi|ipcent|ipcsel|\.rhash|\.imtab)$/
