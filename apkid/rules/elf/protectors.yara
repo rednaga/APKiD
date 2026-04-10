@@ -130,6 +130,26 @@ rule appdome_elf_a : protector
         (elf.sections[i].name matches /^(hook|\.hookname|adinit|\.adi|ipcent|ipcsel|\.rhash|\.imtab)$/)
 }
 
+rule appdome_elf_b : protector
+{
+  meta:
+    description = "Appdome"
+    sample      = "495b5215c9d2dd8a469075eafce2f773526746ee17d9ea075e71cd90f20ed5d0"
+    url         = "https://www.appdome.com/"
+    author      = "Eduardo Novella, ApkUnpacker"
+
+  strings:
+    $lib = "\x00libloader.so\x00"
+    $ver = "\x00LIBLOADER_VERSION="
+
+  condition:
+    is_elf and not $(appdome_*)
+    and any of them
+    and for any i in (0..elf.number_of_sections) : (
+        elf.sections[i].name matches /^(hook|\.hookname|adinit|\.adi|ipcent|ipcsel|\.rhash|\.imtab)$/
+    )
+}
+
 rule metafortress : protector
 {
   meta:
