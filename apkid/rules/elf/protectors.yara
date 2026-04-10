@@ -136,7 +136,7 @@ rule appdome_elf_b : protector
     description = "Appdome"
     sample      = "495b5215c9d2dd8a469075eafce2f773526746ee17d9ea075e71cd90f20ed5d0"
     url         = "https://www.appdome.com/"
-    author      = "Eduardo Novella, ApkUnpacker"
+    author      = "Abhi, ApkUnpacker"
 
   strings:
     $lib = "\x00libloader.so\x00"
