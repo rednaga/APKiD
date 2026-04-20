@@ -561,7 +561,7 @@ rule bureau : protector
 rule google_automatic_integrity_protection_install_check : protector
 {
   meta:
-    description = "Google Automatic Integrity Protection (Installer check only)"
+    description = "Google AIP (Installer check)"
     url         = "https://support.google.com/googleplay/android-developer/answer/10183279?sjid=8716010463058243647-EU"
     sample      = "f09336a3473597e794f9b5775d80a578685cde5ef39018b0578c2b894d6b0674" // com.chessbar.apk
     author      = "Ivan Baheux"
