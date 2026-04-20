@@ -466,8 +466,8 @@ rule protectt : protector
 rule googleIntegrityProtection : protector
 {
   meta:
-    description = "Google Play Integrity"
-    url         = "https://developer.android.com/games/playgames/integrity"
+    description = "Google Automatic Integrity Protection (Tamper protection and device check only)"
+    url         = "https://support.google.com/googleplay/android-developer/answer/10183279?sjid=8716010463058243647-EU"
     sample      = "607e256868c012dda10aaff07fdd24928d86122c715078406fb21aae7a2b8a44"
     author      = "Eduardo Novella"
 
