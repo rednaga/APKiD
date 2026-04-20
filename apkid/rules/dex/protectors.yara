@@ -557,3 +557,57 @@ rule bureau : protector
   condition:
     is_dex and any of them
 }
+
+rule google_automatic_integrity_protection_install_check : protector
+{
+  meta:
+    description = "Google AIP (Installer check)"
+    url         = "https://support.google.com/googleplay/android-developer/answer/10183279?sjid=8716010463058243647-EU"
+    sample      = "f09336a3473597e794f9b5775d80a578685cde5ef39018b0578c2b894d6b0674" // com.chessbar.apk
+    author      = "Ivan Baheux"
+
+  strings:
+    $class = { 00 30 4C 63 6F 6D 2F 70 61 69 72 69 70 2F 6C 69 63 65 6E 73 65 63
+               68 65 63 6B 2F 4C 69 63 65 6E 73 65 43 6F 6E 74 65 6E 74 50 72 6F
+               76 69 64 65 72 3B 00 } // Lcom/pairip/licensecheck/LicenseContentProvider;
+
+  condition:
+    is_dex and $class
+}
+
+rule google_integrity_api : protector
+{
+  meta:
+    description = "Google Integrity API"
+    url         = "https://developer.android.com/google/play/integrity/overview"
+    sample      = "f09336a3473597e794f9b5775d80a578685cde5ef39018b0578c2b894d6b0674" // com.chessbar.apk
+    author      = "Ivan Baheux"
+
+  strings:
+    $class = { 00 39 4C 63 6F 6D 2F 67 6F 6F 67 6C 65 2F 61 6E 64 72 6F 69 64 2F
+               70 6C 61 79 2F 63 6F 72 65 2F 69 6E 74 65 67 72 69 74 79 2F 49
+               6E 74 65 67 72 69 74 79 4D 61 6E 61 67 65 72 3B 00 } // Lcom/google/android/play/core/integrity/IntegrityManager;
+    $class2 = { 00 40 4C 63 6F 6D 2F 67 6F 6F 67 6C 65 2F 61 6E 64 72 6F 69 64 2F
+                70 6C 61 79 2F 63 6F 72 65 2F 69 6E 74 65 67 72 69 74 79 2F 49
+                6E 74 65 67 72 69 74 79 4D 61 6E 61 67 65 72 46 61 63 74 6F 72
+                79 3B 00 } // Lcom/google/android/play/core/integrity/IntegrityManagerFactory;
+    $class3 = { 00 42 4C 63 6F 6D 2F 67 6F 6F 67 6C 65 2F 61 6E 64 72 6F 69 64 2F
+                70 6C 61 79 2F 63 6F 72 65 2F 69 6E 74 65 67 72 69 74 79 2F 49
+                6E 74 65 67 72 69 74 79 53 65 72 76 69 63 65 45 78 63 65 70 74
+                69 6F 6E 3B 00 } // Lcom/google/android/play/core/integrity/IntegrityServiceException;
+    $class4 = { 00 3E 4C 63 6F 6D 2F 67 6F 6F 67 6C 65 2F 61 6E 64 72 6F 69 64 2F
+                70 6C 61 79 2F 63 6F 72 65 2F 69 6E 74 65 67 72 69 74 79 2F 49
+                6E 74 65 67 72 69 74 79 54 6F 6B 65 6E 52 65 71 75 65 73 74 3B
+                00 } // Lcom/google/android/play/core/integrity/IntegrityTokenRequest;
+    $class5 = { 00 3F 4C 63 6F 6D 2F 67 6F 6F 67 6C 65 2F 61 6E 64 72 6F 69 64 2F
+                70 6C 61 79 2F 63 6F 72 65 2F 69 6E 74 65 67 72 69 74 79 2F 49
+                6E 74 65 67 72 69 74 79 54 6F 6B 65 6E 52 65 73 70 6F 6E 73 65
+                3B 00 } // Lcom/google/android/play/core/integrity/IntegrityTokenResponse;
+    $class6 = { 00 41 4C 63 6F 6D 2F 67 6F 6F 67 6C 65 2F 61 6E 64 72 6F 69 64 2F
+                70 6C 61 79 2F 63 6F 72 65 2F 69 6E 74 65 67 72 69 74 79 2F 6D
+                6F 64 65 6C 2F 49 6E 74 65 67 72 69 74 79 45 72 72 6F 72 43 6F
+                64 65 3B 00 } // Lcom/google/android/play/core/integrity/model/IntegrityErrorCode;
+
+  condition:
+    is_dex and any of them
+}
