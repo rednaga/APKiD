@@ -463,11 +463,11 @@ rule protectt : protector
     is_elf and 1 of them
 }
 
-rule googleIntegrityProtection : protector
+rule google_AIP_Advanced : protector
 {
   meta:
-    description = "Google AIP (Tamper and device check)"
-    url         = "https://support.google.com/googleplay/android-developer/answer/10183279?sjid=8716010463058243647-EU"
+    description = "Google AIP (Tamper and device check)" // Google Automatic Integrity Protection
+    url         = "https://support.google.com/googleplay/android-developer/answer/10183279"
     sample      = "607e256868c012dda10aaff07fdd24928d86122c715078406fb21aae7a2b8a44"
     author      = "Eduardo Novella"
 
