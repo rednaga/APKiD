@@ -133,7 +133,7 @@ private rule ambiguous_tiny_dex_map_type_order : internal
 
   condition:
     // missing almost everything, dexlib2 and r8 are identical here, impossible to type alone
-    (dex.map_list.map_item[1].type == 0x0001 and dex.map_list.map_item[2].type == 0x0002 and dex.map_list.map_item[3].type == 0x0006 and dex.map_list.map_item[4].type == 0x2002 and dex.map_list.map_item[5].type == 0x1003 and dex.map_list.map_item[6].type == 0x1000)
+    (uint16(uint32(52) + 4 + 1 * 12) == 0x0001 and uint16(uint32(52) + 4 + 2 * 12) == 0x0002 and uint16(uint32(52) + 4 + 3 * 12) == 0x0006 and uint16(uint32(52) + 4 + 4 * 12) == 0x2002 and uint16(uint32(52) + 4 + 5 * 12) == 0x1003 and uint16(uint32(52) + 4 + 6 * 12) == 0x1000)
 }
 
 private rule r8_map_type_order : internal
@@ -153,24 +153,24 @@ private rule r8_map_type_order : internal
      *   0x2002 = TYPE_STRING_DATA_ITEM
      */
     // missing TYPE_CALL_SITE_ID_ITEM and TYPE_METHOD_HANDLE_ITEM, common case
-    (dex.map_list.map_item[7].type == 0x2001 and dex.map_list.map_item[8].type == 0x2003 and dex.map_list.map_item[9].type == 0x1001)
+    (uint16(uint32(52) + 4 + 7 * 12) == 0x2001 and uint16(uint32(52) + 4 + 8 * 12) == 0x2003 and uint16(uint32(52) + 4 + 9 * 12) == 0x1001)
 
     // missing TYPE_DEBUG_INFO_ITEM
-    or (dex.map_list.map_item[7].type == 0x2001 and dex.map_list.map_item[8].type == 0x1001 and dex.map_list.map_item[9].type == 0x2002)
+    or (uint16(uint32(52) + 4 + 7 * 12) == 0x2001 and uint16(uint32(52) + 4 + 8 * 12) == 0x1001 and uint16(uint32(52) + 4 + 9 * 12) == 0x2002)
 
     // has everything
-    or (dex.map_list.map_item[7].type == 0x0007 and dex.map_list.map_item[8].type == 0x0008 and dex.map_list.map_item[9].type == 0x2001 and dex.map_list.map_item[10].type == 0x2003 and dex.map_list.map_item[11].type == 0x1001)
+    or (uint16(uint32(52) + 4 + 7 * 12) == 0x0007 and uint16(uint32(52) + 4 + 8 * 12) == 0x0008 and uint16(uint32(52) + 4 + 9 * 12) == 0x2001 and uint16(uint32(52) + 4 + 10 * 12) == 0x2003 and uint16(uint32(52) + 4 + 11 * 12) == 0x1001)
 
     // missing TYPE_CALL_SITE_ID_ITEM
-    or (dex.map_list.map_item[7].type == 0x0008 and dex.map_list.map_item[8].type == 0x2001 and dex.map_list.map_item[9].type == 0x2003 and dex.map_list.map_item[10].type == 0x1001)
+    or (uint16(uint32(52) + 4 + 7 * 12) == 0x0008 and uint16(uint32(52) + 4 + 8 * 12) == 0x2001 and uint16(uint32(52) + 4 + 9 * 12) == 0x2003 and uint16(uint32(52) + 4 + 10 * 12) == 0x1001)
 
     // missing TYPE_METHOD_HANDLE_ITEM
-    or (dex.map_list.map_item[7].type == 0x0007 and dex.map_list.map_item[8].type == 0x2001 and dex.map_list.map_item[9].type == 0x2003 and dex.map_list.map_item[10].type == 0x1001)
+    or (uint16(uint32(52) + 4 + 7 * 12) == 0x0007 and uint16(uint32(52) + 4 + 8 * 12) == 0x2001 and uint16(uint32(52) + 4 + 9 * 12) == 0x2003 and uint16(uint32(52) + 4 + 10 * 12) == 0x1001)
 
     // ignore missing TYPE_CALL_SITE_ID_ITEM, TYPE_METHOD_HANDLE_ITEM, and TYPE_DEBUG_INFO_ITEM is possibly identical to dx map type order
 
     // missing code and (fields | something else), likely small dex
-    or (dex.map_list.map_item[6].type == 0x1001 and dex.map_list.map_item[7].type == 0x2002 and dex.map_list.map_item[8].type == 0x2004 and dex.map_list.map_item[9].type == 0x2000 and dex.map_list.map_item[10].type == 0x1003)
+    or (uint16(uint32(52) + 4 + 6 * 12) == 0x1001 and uint16(uint32(52) + 4 + 7 * 12) == 0x2002 and uint16(uint32(52) + 4 + 8 * 12) == 0x2004 and uint16(uint32(52) + 4 + 9 * 12) == 0x2000 and uint16(uint32(52) + 4 + 10 * 12) == 0x1003)
 }
 
 private rule r8_marker : internal
