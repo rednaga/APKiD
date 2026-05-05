@@ -33,11 +33,12 @@ import yara
 
 
 class RulesManager(object):
-    def __init__(self, rules_dir=None, rules_ext='.yara'):
+    def __init__(self, rules_dir=None, rules_ext='.yara', include_trackers=False):
         if not rules_dir:
             rules_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'rules')
         self.rules_dir: str = rules_dir
-        self.rules_path: str = os.path.join(self.rules_dir, 'rules.yarc')
+        self.include_trackers: bool = include_trackers
+        self.rules_path: str = os.path.join(self.rules_dir, f'{"trackers.yarc" if self.include_trackers else "rules.yarc"}')
         self.rules_ext: str = rules_ext
         self.rules: Optional[yara.Rules] = None
         self.rules_hash: Optional[str] = None
@@ -51,6 +52,8 @@ class RulesManager(object):
         for root, dirnames, filenames in os.walk(self.rules_dir):
             for filename in filenames:
                 if not filename.lower().endswith(self.rules_ext):
+                    continue
+                if not self.include_trackers and filename.lower() == 'trackers.yara':
                     continue
                 path = os.path.join(root, filename)
                 files[path] = path
