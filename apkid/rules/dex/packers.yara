@@ -740,3 +740,22 @@ rule kiwisec_dex : packer
   condition:
     is_dex and any of them
 }
+
+rule manxi_sec : packer
+{
+  meta:
+    description = "Manxi Security"
+    url         = "https://www.manxi-inc.com/en/"
+    sample      = "9803121e89d5609215dc736b11cf5cf0a7d56ddfe5ac9ab71eb2b2883f427ac2" // cn.dict.android.pro (6.1.37)
+    author      = "Abhi"
+
+  strings:
+    $class  = { 00 18 4C 63 6F 6D 2F 6D 61 6E 78 69 2F 73
+                68 65 6C 6C 2F 48 65 6C 70 65 72 3B 00 } // Lcom/manxi/shell/Helper;
+    $class2 = { 00 1F 4C 63 6F 6D 2F 6D 61 6E 78 69 2F 73
+                68 65 6C 6C 2F 4D 58 41 70 70 6C 69 63 61
+                74 69 6F 6E 3B 00 } // Lcom/manxi/shell/MXApplication;
+
+  condition:
+    is_dex and any of them
+}

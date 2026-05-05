@@ -127,7 +127,27 @@ rule appdome_elf_a : protector
     is_elf and not appdome_elf and
       // Match at least 2 section names from hook,.hookname,adinit,.adi,ipcent,ipcsel
       for 2 i in (0..elf.number_of_sections):
-        (elf.sections[i].name matches /(hook|\.hookname|adinit|\.adi|ipcent|ipcsel|\.rhash|\.imtab)/)
+        (elf.sections[i].name matches /^(hook|\.hookname|adinit|\.adi|ipcent|ipcsel|\.rhash|\.imtab)$/)
+}
+
+rule appdome_elf_b : protector
+{
+  meta:
+    description = "Appdome"
+    sample      = "495b5215c9d2dd8a469075eafce2f773526746ee17d9ea075e71cd90f20ed5d0"
+    url         = "https://www.appdome.com/"
+    author      = "Abhi, ApkUnpacker"
+
+  strings:
+    $lib = "\x00libloader.so\x00"
+    $ver = "\x00LIBLOADER_VERSION="
+
+  condition:
+    is_elf and not (appdome_elf or appdome_elf_a)
+    and any of them
+    and for any i in (0..elf.number_of_sections) : (
+        elf.sections[i].name matches /^(hook|\.hookname|adinit|\.adi|ipcent|ipcsel|\.rhash|\.imtab)$/
+    )
 }
 
 rule metafortress : protector
@@ -755,4 +775,67 @@ rule bugsmirror : protector
     for any i in (0 .. elf.number_of_sections): (
       elf.sections[i].name == ".crypted"
     )
+}
+
+rule bshield : protector
+{
+  meta:
+    description = "BShield"
+    url         = "https://bshield.io/"
+    sample      = "f54fa5cfcd9a5d14a947bbd93bc7bb59e8c2b1b23cc5bcc84c66ad0143e55201"
+    author      = "Abhi"
+
+  strings:
+    $class  = { 00 4C 69 6F 2F 62 73 68 69 65 6C 64 2F 63 61 6C
+                6C 62 61 63 6B 2F 53 68 69 65 6C 64 44 61 74 61
+                50 72 6F 74 65 63 74 69 6F 6E 3B 00 } // Lio/bshield/callback/ShieldDataProtection;
+    $class2 = { 00 69 6F 2F 62 73 68 69 65 6C 64 2F 63 61 6C 6C
+                62 61 63 6B 2F 53 68 69 65 6C 64 44 61 74 61 50
+                72 6F 74 65 63 74 69 6F 6E 00 } // io/bshield/callback/ShieldDataProtection
+
+  condition:
+    is_elf and any of them
+}
+
+rule denuvo_elf : protector
+{
+  meta:
+    description = "Denuvo"
+    url         = "https://irdeto.com/denuvo/anti-tamper"
+    sample      = "f7d1cd97b5d61da16b804daf6cd1199fe822745f9066596988d30a934441f6fc"
+    author      = "Abhi"
+
+
+  strings:
+    $libvmpc = "\x00libvmpc.so\x00"
+
+  condition:
+    is_elf and all of them
+}
+
+rule bureau : protector
+{
+  meta:
+    description = "Bureau"
+    url         = "https://bureau.id"
+    sample      = "484d8d0f4eb2c2ed66770edfa0ab89bf76f9b84227faea3889ce74b2af8cbbc4"
+    author      = "Abhi, ApkUnpacker"
+
+  strings:
+    $lib  = /lib(bureau\-.*|secure_keys|ndkdatacollector)\.so/
+    $cm   = { 00 4A 61 76 61 5F 63 6F 6D 5F 62 75 72 65 61 75 5F
+              63 68 65 63 6B 52 6F 6F 74 5F 56 65 72 69 66 79 52
+              6F 6F 74 4E 61 74 69 76 65 5F 63 68 65 63 6B 46 6F
+              72 52 6F 6F 74 00 } // Java_com_bureau_checkRoot_VerifyRootNative_checkForRoot
+    $cm2  = { 00 4A 61 76 61 5F 63 6F 6D 5F 62 75 72 65 61 75 5F
+              64 65 76 69 63 65 66 69 6E 67 65 72 70 72 69 6E 74
+              5F 73 65 63 75 72 69 74 79 5F 53 65 63 75 72 65 4A
+              4E 49 5F 67 65 74 4B 65 79 00 } // Java_com_bureau_devicefingerprint_security_SecureJNI_getKey
+    $cm3  = { 00 4A 61 76 61 5F 63 6F 6D 5F 62 75 72 65 61 75 5F
+              64 65 76 69 63 65 66 69 6E 67 65 72 70 72 69 6E 74
+              5F 74 6F 6F 6C 73 5F 4E 44 4B 4D 61 70 70 65 72 73
+              5F 63 68 65 63 6B 46 72 69 64 61 00 } // Java_com_bureau_devicefingerprint_tools_NDKMappers_checkFrida
+
+  condition:
+    is_elf and any of them
 }

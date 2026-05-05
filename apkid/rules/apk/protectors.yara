@@ -165,9 +165,9 @@ rule vguard : protector
   strings:
     $lib    = /lib\/(arm.*|x86.*)\/libedex\.so/
     $asset1 = /assets\/dexsky\.(d|e)b(a|b|x|y)/
-    $asset2 = /assets\/dexsky\.ini/
-    $asset3 = /assets\/dex[a-z0-9]{3}\.zip/
-    $asset4 = /assets\/vguard\.(key|enginehash)/
+    $asset2 = /assets\/dex[a-z0-9]{3}\.zip/
+    $asset3 = /assets\/vguard\.(key|enginehash)/
+    $asset4 = "assets/dexsky.ini"
 
   condition:
     is_apk and 2 of them
@@ -268,3 +268,98 @@ rule bugsmirror : protector
   condition:
     is_apk and 2 of them
 }
+
+rule bshield : protector
+{
+  meta:
+    description = "BShield"
+    url         = "https://bshield.io/"
+    sample      = "f54fa5cfcd9a5d14a947bbd93bc7bb59e8c2b1b23cc5bcc84c66ad0143e55201"
+    author      = "Abhi"
+
+  strings:
+    $asset = "assets/bshield.dat"
+
+  condition:
+    is_apk and all of them
+}
+
+rule denuvo_apk : protector
+{
+  meta:
+    description = "Denuvo"
+    url         = "https://irdeto.com/denuvo/anti-tamper"
+    sample      = "f7d1cd97b5d61da16b804daf6cd1199fe822745f9066596988d30a934441f6fc"
+    author      = "Abhi"
+
+  strings:
+    $tid     = "assets/tid"
+    $libvmpc = "libvmpc.so"
+
+  condition:
+    is_apk and all of them
+}
+
+rule alibaba_sec : protector
+{
+  meta:
+    description = "Alibaba Security SDK"
+    url         = "https://www.alibabacloud.com/zh/product/mpaas"
+    sample      = "4590673ad6320d9a091d33e5b3b9b652479ddced573bde9c3ded8acba0451d53"
+    author      = "Abhi"
+
+  strings:
+    $lib   = /lib\/(arm.*|x86.*)\/lib(alisecuritysdk|demolish(data)?|reverify1)\.so/
+    $asset = "assets/ali_sec.dat"
+
+  condition:
+    is_apk and any of them
+}
+
+rule bureau : protector
+{
+  meta:
+    description = "Bureau"
+    url         = "https://bureau.id"
+    sample      = "484d8d0f4eb2c2ed66770edfa0ab89bf76f9b84227faea3889ce74b2af8cbbc4"
+    author      = "Abhi, ApkUnpacker"
+
+  strings:
+    $lib  = /lib\/(arm.*|x86.*)\/libbureau\-.*\.so/
+
+  condition:
+    is_apk and all of them
+}
+
+rule haiyun : protector
+{
+  meta:
+    description = "Haiyun'an Security"
+    url         = "https://www.secidea.com/services/appprotect.html" // dead url now
+    sample      = "TODO"
+    author      = "Abhi"
+
+  strings:
+    $lib   = /lib\/(arm.*|x86.*)\/libitsec\.so/
+    $asset = "assets/itse"
+
+  condition:
+    is_apk and all of them
+}
+
+rule oppo_protect : protector
+{
+  meta:
+    description = "OPPO Protect SDK"
+    url         = "https://open.oppomobile.com/product/page?page_name=environmentdetect"
+    sample      = "TODO"
+    author      = "Abhi, ApkCheckPack"
+
+  strings:
+    $lib    = /lib\/(arm.*|x86.*)\/libOPPOProtect(2019)?\.so/
+    $lib2   = /lib\/(arm.*|x86.*)\/libomesStdSco\.so/
+
+  condition:
+    is_apk and any of them
+}
+

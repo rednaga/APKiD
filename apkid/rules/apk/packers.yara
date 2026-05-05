@@ -680,11 +680,13 @@ rule ijiami : packer
 
   strings:
     $old_dat = "assets/ijiami.dat"
-    $new_ajm = "ijiami.ajm"
+    $new_ajm = /ijiami(3)?\.ajm/
     $ijm_lib = "assets/ijm_lib/"
+    $new_dat = "assets/IJMDal.Data"
+    $new_lib = "assets/libijmDataEncryption.so"
 
   condition:
-    is_apk and ($old_dat or $new_ajm or $ijm_lib)
+    is_apk and any of them
 }
 
 rule naga : packer
@@ -693,10 +695,14 @@ rule naga : packer
     description = "Naga"
 
   strings:
-    $lib = "libddog.so"
+    // libedog | libfdog | libvdog etc. - lib name changes a/c to edition
+    $lib   = /lib(e|d|f|v)dog\.so/
+    $lib2  = "libchaosvmp.so"
+    $lib3  = "libxloader.so"
+    $asset = "assets/maindata/fake_classes.dex"
 
   condition:
-    is_apk and $lib
+    is_apk and any of them
 }
 
 rule alibaba : packer
@@ -1126,7 +1132,7 @@ rule kiwisec_apk : packer
     url         = "https://en.kiwisec.com/"
     sample      = "d108652bd1b685765e3ada2b7376e3c3ff67f8162afcf8bad91e0aef79b7b08a"
     author      = "Abhi"
-  
+
   strings:
     $lib  = /lib\/(arm.*|x86.*)\/libkiwicrash\.so/
     $lib2 = /lib\/(arm.*|x86.*)\/libkiwi_dumper\.so/
@@ -1146,14 +1152,67 @@ rule dingxiang_apk : packer
     url         = "https://www.dingxiang-inc.com/business/android"
     sample      = "788ebabd9b5464c5e86b3832e4a7b6e7c91cce5603ff17f214429400ba3bb2b9" // net.crigh.cgsport
     author      = "Abhi"
-  
+
   strings:
     $lib      = /lib\/(arm.*|x86.*)\/libsys_misc\.so/
-    $assets   = /assets\/__param\.data/
-    $assets2  = /assets\/__version\.data/
-    $assets3  = /assets\/csn.*\.data\d?/
-    $dsnstub  = /dsnstub000\.vd/
-  
+    $assets   = /assets\/csn.*\.data\d?/
+    $assets2  = "assets/__param.data"
+    $assets3  = "assets/__version.txt"
+    $dsnstub  = "dsnstub000.vd"
+
   condition:
     is_apk and 2 of them
+}
+
+rule manxi_sec : packer
+{
+  meta:
+    description = "Manxi Security"
+    url         = "https://www.manxi-inc.com/en/"
+    sample      = "9803121e89d5609215dc736b11cf5cf0a7d56ddfe5ac9ab71eb2b2883f427ac2" // cn.dict.android.pro (6.1.37)
+    author      = "Abhi"
+
+  strings:
+    $a1 = /assets\/mxsafe\/(arm.*|x86.*)\/libdSafeShell\.so/
+    $a2 = /assets\/mx\/(arm.*|x86.*)\/libmxacc\.so/
+    $a3 = /lib\/(arm.*|x86.*)\/libmanxi\.so/
+    $a4 = "assets/mxsafe.data"
+    $a5 = "assets/mxsafe.config"
+    $a6 = "assets/mxsafe.jar"
+
+  condition:
+    is_apk and any of them
+}
+
+rule dexprotectx : packer
+{
+  meta:
+    description = "DexProtect X (DexShellx)"
+    url         = "https://dexprotectx.pro"
+    url2        = "https://t.me/DexShell_x"
+    sample      = "72e8685df3168c947190a4ccb76ca26de3762bfe5560549545e935b09c8893df" // com.x.dexprotectx
+    author      = "Abhi"
+
+  strings:
+    $a1 = "assets/libVMDexShellx.so"
+    $a2 = /assets\/dexshell\/(arm.*|x86.*)\/libdexshell\.so/
+    $a3 = "assets/DexShell.mp3"
+
+  condition:
+    is_apk and any of them
+}
+
+rule venustech : packer
+{
+  meta:
+    description = "Venustech"
+    url         = "https://www.venustech.com.cn/new_type/ydyyaqjg/"
+    sample      = "TODO"
+    author      = "Abhi, ApkCheckPack"
+
+  strings:
+    $lib = /lib\/(arm.*|x86.*)\/libven(Sec|ustech)\.so/
+
+  condition:
+    is_apk and all of them
 }

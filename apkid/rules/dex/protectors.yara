@@ -94,7 +94,7 @@ rule appdome_dex : protector
 {
   // https://github.com/rednaga/APKiD/issues/151
   meta:
-    description = "Appdome (dex)"
+    description = "Appdome"
     sample      = "1c6496f1cc8c5799539ee24170c371e8a57547e2eb73c9502c98ff78f44c74cf"
     url         = "https://www.appdome.com/"
     author      = "Tim 'diff' Strazzere"
@@ -415,11 +415,11 @@ rule rootbeer : anti_root
     url         = "https://github.com/scottyab/rootbeer.git"
     sample      = "607ec962ba93cc9817129cb693ff0f335f500a297b5a297e71fbb998d0f6849c" // com.scottyab.rootbeer.sample
     author      = "Abhi"
-  
+
   strings:
     $class = { 00 20 4C 63 6F 6D 2F 73 63 6F 74 74 79 61 62 2F 72
                6F 6F 74 62 65 65 72 2F 52 6F 6F 74 42 65 65 72 3B 00 } // Lcom/scottyab/rootbeer/RootBeer;
-  
+
   condition:
     is_dex and all of them
 }
@@ -502,4 +502,58 @@ rule bugsmirror : protector
 
   condition:
    is_dex and any of them
-} 
+}
+
+rule bshield : protector
+{
+  meta:
+    description = "BShield"
+    url         = "https://bshield.io/"
+    sample      = "f54fa5cfcd9a5d14a947bbd93bc7bb59e8c2b1b23cc5bcc84c66ad0143e55201"
+    author      = "Abhi"
+
+  strings:
+    $dat = { 00 0B 42 53 48 49 45 4C 44 5F 44 41 54 00 } // BSHIELD_DAT
+
+  condition:
+    is_dex and all of them
+}
+
+rule alibaba_sec : protector
+{
+  meta:
+    description = "Alibaba Security SDK"
+    url         = "https://www.alibabacloud.com/zh/product/mpaas"
+    sample      = "4590673ad6320d9a091d33e5b3b9b652479ddced573bde9c3ded8acba0451d53"
+    author      = "Abhi"
+
+  strings:
+    $class = { 00 1D 4C 63 6F 6D 2F 61 6C 69 2F 6D 6F 62 69 73 65
+               63 65 6E 68 61 6E 63 65 2F 49 6E 69 74 3B 00 } // Lcom/ali/mobisecenhance/Init;
+
+  condition:
+    is_dex and all of them
+}
+
+rule bureau : protector
+{
+  meta:
+    description = "Bureau"
+    url         = "https://bureau.id"
+    sample      = "484d8d0f4eb2c2ed66770edfa0ab89bf76f9b84227faea3889ce74b2af8cbbc4"
+    author      = "Abhi, ApkUnpacker"
+
+  strings:
+    $string = /api\.(stg\.)?bureau\.id/
+    $class  = { 00 28 4C 63 6F 6D 2F 62 75 72 65 61 75 2F 64 65 76 69
+                63 65 66 69 6E 67 65 72 70 72 69 6E 74 2F 42 75 72
+                65 61 75 41 50 49 3B 00 } // Lcom/bureau/devicefingerprint/BureauAPI;
+    $class2 = { 00 25 4C 63 6F 6D 2F 62 75 72 65 61 75 2F 62 61 73
+                65 2F 6D 6F 64 65 6C 73 2F 42 75 72 65 61 75 43 6F
+                6E 66 69 67 3B 00 } // Lcom/bureau/base/models/BureauConfig;
+    $class3 = { 00 21 4C 63 6F 6D 2F 62 75 72 65 61 75 2F 63 68 65 63
+                6B 52 6F 6F 74 2F 56 65 72 69 66 79 52 6F 6F 74 3B 00 } // Lcom/bureau/checkRoot/VerifyRoot;
+
+  condition:
+    is_dex and any of them
+}
