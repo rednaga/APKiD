@@ -587,7 +587,7 @@ rule google_playintegrity_api : protector
   strings:
     $class_prefix = { 00 [1-5] 4C 63 6F 6D 2F 67 6F 6F 67 6C 65 2F 61 6E 64 72 6F
                       69 64 2F 70 6C 61 79 2F 63 6F 72 65 2F 69 6E 74 65 67 72 69
-                      74 79 2F} // Lcom/google/android/play/core/integrity
+                      74 79 2F} // Lcom/google/android/play/core/integrity/
 
   condition:
     is_dex and all of them
