@@ -558,11 +558,12 @@ rule bureau : protector
     is_dex and any of them
 }
 
-rule google_AIP_Installer_Check : protector
+rule google_aip_installer_check : protector
 {
   meta:
-    description = "Google AIP (Installer check)" // Google Automatic Integrity Protection
-    url         = "https://support.google.com/googleplay/android-developer/answer/10183279"
+    description = "Google Automatic Integrity (Installer check)" // Google Automatic Integrity Protection
+    url         = "https://developer.android.com/google/play/integrity/overview"
+    url2        = "https://support.google.com/googleplay/android-developer/answer/10183279"
     sample      = "f09336a3473597e794f9b5775d80a578685cde5ef39018b0578c2b894d6b0674" // com.chessbar.apk
     author      = "Ivan Baheux"
 
@@ -572,7 +573,7 @@ rule google_AIP_Installer_Check : protector
                76 69 64 65 72 3B 00 } // Lcom/pairip/licensecheck/LicenseContentProvider;
 
   condition:
-    is_dex and any of them
+    is_dex and all of them
 }
 
 rule google_playintegrity_api : protector
@@ -586,8 +587,8 @@ rule google_playintegrity_api : protector
   strings:
     $class_prefix = { 00 [1-5] 4C 63 6F 6D 2F 67 6F 6F 67 6C 65 2F 61 6E 64 72 6F
                       69 64 2F 70 6C 61 79 2F 63 6F 72 65 2F 69 6E 74 65 67 72 69
-                      74 79 } // Lcom/google/android/play/core/integrity
+                      74 79 2F} // Lcom/google/android/play/core/integrity
 
   condition:
-    is_dex and any of them
+    is_dex and all of them
 }
