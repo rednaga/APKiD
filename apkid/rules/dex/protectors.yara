@@ -579,7 +579,7 @@ rule google_aip_installer_check : protector
 rule google_playintegrity_api : protector
 {
   meta:
-    description = "Google Play Integrity API"
+    description = "Play Integrity API"
     url         = "https://developer.android.com/google/play/integrity/overview"
     sample      = "f09336a3473597e794f9b5775d80a578685cde5ef39018b0578c2b894d6b0674" // com.chessbar.apk
     author      = "Ivan Baheux"
