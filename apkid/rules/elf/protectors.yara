@@ -463,7 +463,7 @@ rule protectt : protector
     is_elf and 1 of them
 }
 
-rule google_aip_advanced : protector
+rule google_aip_elf : protector
 {
   meta:
     description = "Google Automatic Integrity" // Google Automatic Integrity Protection
