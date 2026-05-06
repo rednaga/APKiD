@@ -463,12 +463,12 @@ rule protectt : protector
     is_elf and 1 of them
 }
 
-rule googleIntegrityProtection : protector
+rule google_aip_elf : protector
 {
   meta:
-    description = "Google Play Integrity"
-    url         = "https://developer.android.com/games/playgames/integrity"
-    sample      = "607e256868c012dda10aaff07fdd24928d86122c715078406fb21aae7a2b8a44"
+    description = "Google Automatic Integrity" // Google Automatic Integrity Protection
+    url         = "https://developer.android.com/google/play/integrity/overview"
+    url2        = "https://support.google.com/googleplay/android-developer/answer/10183279"    sample      = "607e256868c012dda10aaff07fdd24928d86122c715078406fb21aae7a2b8a44"
     author      = "Eduardo Novella"
 
     strings:

@@ -557,3 +557,38 @@ rule bureau : protector
   condition:
     is_dex and any of them
 }
+
+rule google_aip_installer_check : protector
+{
+  meta:
+    description = "Google Automatic Integrity (Installer check)" // Google Automatic Integrity Protection
+    url         = "https://developer.android.com/google/play/integrity/overview"
+    url2        = "https://support.google.com/googleplay/android-developer/answer/10183279"
+    sample      = "f09336a3473597e794f9b5775d80a578685cde5ef39018b0578c2b894d6b0674" // com.chessbar.apk
+    author      = "Ivan Baheux"
+
+  strings:
+    $class = { 00 30 4C 63 6F 6D 2F 70 61 69 72 69 70 2F 6C 69 63 65 6E 73 65 63
+               68 65 63 6B 2F 4C 69 63 65 6E 73 65 43 6F 6E 74 65 6E 74 50 72 6F
+               76 69 64 65 72 3B 00 } // Lcom/pairip/licensecheck/LicenseContentProvider;
+
+  condition:
+    is_dex and all of them
+}
+
+rule google_playintegrity_api : protector
+{
+  meta:
+    description = "Play Integrity API"
+    url         = "https://developer.android.com/google/play/integrity/overview"
+    sample      = "f09336a3473597e794f9b5775d80a578685cde5ef39018b0578c2b894d6b0674" // com.chessbar.apk
+    author      = "Ivan Baheux"
+
+  strings:
+    $class_prefix = { 00 [1-5] 4C 63 6F 6D 2F 67 6F 6F 67 6C 65 2F 61 6E 64 72 6F
+                      69 64 2F 70 6C 61 79 2F 63 6F 72 65 2F 69 6E 74 65 67 72 69
+                      74 79 2F} // Lcom/google/android/play/core/integrity/
+
+  condition:
+    is_dex and all of them
+}
