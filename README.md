@@ -105,11 +105,11 @@ pip install -e .[dev,test] --user
 
 If you update any of the rules, be sure to run `prep-release.py` to recompile them.
 
-If you are using Windows, install Yara 3.11.0 and yara-python-dex before compiling
+If you are using Windows, uninstall any previous versions of Yara and install Yara 3.11.0 and yara-python-dex before compiling
 
 ```bash
-pip install yara-python==3.11.0
-pip install wheel
+pip uninstall -y yara-python yara-python-dex
+pip install yara-python==3.11.0 wheel
 pip wheel --wheel-dir=yara-python-dex git+https://github.com/MobSF/yara-python-dex.git
 pip install --no-index --find-links=yara-python-dex yara-python-dex
 ```
