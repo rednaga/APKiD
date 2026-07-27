@@ -451,6 +451,7 @@ rule protectt : protector
   meta:
     description = "Protectt"
     sample      = "c246d85560599f91e9c3ed7e59df2dd4e21aaf667f3f2965c28c43d9842f5e75" // com.rblbank.mobank
+    sample2     = "c496a8155bee6475d16fc4274979731dc400d88fe38fae86037f7af3aeb5f98e" // com.equitas.elevate
     url         = "https://www.protectt.ai"
     author      = "Eduardo Novella"
 
@@ -458,9 +459,11 @@ rule protectt : protector
     $lib1 = "libprotectt-native-lib.so"
     $lib2 = "libprotecttai.so"
     $lib3 = "libapp-protectt-native-lib.so"
+    $str  = "\x00app_protectt_jwt_token\x00"
+    $str2 = "\x00AppProtectt\x00"
 
   condition:
-    is_elf and 1 of them
+    is_elf and any of them
 }
 
 rule google_aip_elf : protector
