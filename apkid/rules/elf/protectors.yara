@@ -453,7 +453,7 @@ rule protectt : protector
     sample      = "c246d85560599f91e9c3ed7e59df2dd4e21aaf667f3f2965c28c43d9842f5e75" // com.rblbank.mobank
     sample2     = "c496a8155bee6475d16fc4274979731dc400d88fe38fae86037f7af3aeb5f98e" // com.equitas.elevate
     url         = "https://www.protectt.ai"
-    author      = "Eduardo Novella"
+    author      = "Eduardo Novella & Abhi"
 
   strings:
     $lib1 = "libprotectt-native-lib.so"
