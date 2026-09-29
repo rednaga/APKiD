@@ -866,7 +866,7 @@ rule dexprotector_a_elf : obfuscator
     )
  }
 
-rule dexprotector_b : obfuscator
+rule dexprotector_b_elf : obfuscator
 {
   meta:
     description = "DexProtector"
