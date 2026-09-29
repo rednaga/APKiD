@@ -27,7 +27,7 @@
 
 include "common.yara"
 
-rule bugsmirror : protector
+rule bugsmirror_res : protector
 {
     meta:
       description = "BugsMirror"

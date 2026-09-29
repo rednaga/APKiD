@@ -33,7 +33,7 @@ import traceback
 import zipfile
 from typing import Union, IO, List, Dict, Set
 
-import yara
+import yara_x
 
 from .output import OutputFormatter
 from .rules import RulesManager
@@ -113,9 +113,28 @@ class Options(object):
 
 class Scanner(object):
 
-    def __init__(self, rules: yara.Rules, options: Options):
+    def __init__(self, rules: yara_x.Rules, options: Options):
         self.rules = rules
         self.options = options
+        self.scanner = yara_x.Scanner(self.rules)
+        try:
+            self.scanner.set_timeout(self.options.timeout)
+        except Exception:
+            pass
+
+    def _scan_data(self, data: bytes):
+        # yara-x raises TimeoutError on timeout (unlike yara which returns
+        # partial matches). Treat timeout as no matches to keep scanning.
+        try:
+            return self.scanner.scan(data).matching_rules
+        except yara_x.TimeoutError:
+            if self.options.verbose:
+                print("[W] YARA-X scan timed out", file=sys.stderr)
+            return []
+        except yara_x.ScanError as e:
+            if self.options.verbose:
+                print(f"[W] YARA-X scan error: {e}", file=sys.stderr)
+            return []
 
     def scan(self, path: str) -> None:
         if os.path.isfile(path):
@@ -129,11 +148,11 @@ class Scanner(object):
         for file_path in self._yield_file_paths(dir_path):
             self.scan(file_path)
 
-    def scan_file(self, file_path: str) -> Dict[str, List[yara.Match]]:
+    def scan_file(self, file_path: str) -> Dict[str, list]:
         results = []
         with open(file_path, 'rb') as f:
             try:
-                results: Dict[str, List[yara.Match]] = self.scan_file_obj(f, file_path)
+                results: Dict[str, list] = self.scan_file_obj(f, file_path)
             except Exception as e:
                 stack = traceback.format_exc()
                 print(f"Exception scanning {file_path}: {stack}")
@@ -145,13 +164,13 @@ class Scanner(object):
         else:
             file_name = os.path.basename(file_path)
 
-        results: Dict[str, List[yara.Match]] = {}
+        results: Dict[str, list] = {}
         if not self._should_scan(file, file_name):
             return results
 
-        matches: List[yara.Matches] = self.rules.match(data=file.read(), timeout=self.options.timeout)
+        matches = self._scan_data(file.read())
         if len(matches) > 0:
-            results[file_path] = matches
+            results[file_path] = list(matches)
         if self._is_zipfile(file, file_name):
             with zipfile.ZipFile(file) as zf:
                 zip_results = self._scan_zip(zf)
@@ -159,8 +178,8 @@ class Scanner(object):
                 results[f'{file_path}!{entry_name}'] = entry_matches
         return results
 
-    def _scan_zip(self, zf: zipfile.ZipFile, depth=0) -> Dict[str, List[yara.Match]]:
-        results: Dict[str, List[yara.Match]] = {}
+    def _scan_zip(self, zf: zipfile.ZipFile, depth=0) -> Dict[str, list]:
+        results: Dict[str, list] = {}
         for info in zf.infolist():
             if info.is_dir():
                 continue
@@ -211,10 +230,10 @@ class Scanner(object):
 
 
         entry_buffer.seek(0)
-        matches = self.rules.match(data=entry_buffer.read(), timeout=self.options.timeout)
+        matches = self._scan_data(entry_buffer.read())
 
         if len(matches) > 0:
-            results[info.filename] = matches
+            results[info.filename] = list(matches)
 
         if depth < self.options.scan_depth and self._is_zipfile(entry_buffer, info.filename):
             with zipfile.ZipFile(entry_buffer) as zip_entry:

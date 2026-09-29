@@ -1,0 +1,3 @@
+[submodule "yarax_patches"]
+	path = yarax_patches
+	url = https://github.com/AbhiTheModder/yarax_patches.git

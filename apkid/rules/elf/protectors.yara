@@ -72,7 +72,7 @@ rule whitecryption_elf_a : protector
     is_elf and 1 of them
 }
 
-rule ahnlab_v3_engine : anti_root
+rule ahnlab_v3_engine_elf : anti_root
 {
   meta:
     description  = "Ahnlab V3 Engine"
@@ -485,7 +485,7 @@ rule google_aip_elf : protector
       is_elf and all of them
 }
 
-rule ahope_appshield : protector
+rule ahope_appshield_elf : protector
 {
     meta:
         description = "Ahope AppShield"
@@ -503,7 +503,7 @@ rule ahope_appshield : protector
 }
 
 
-rule appcamo : protector
+rule appcamo_elf : protector
 {
     meta:
         description = "AppCamo"
@@ -520,7 +520,7 @@ rule appcamo : protector
       is_elf and 2 of them
 }
 
-rule appsealing : protector
+rule appsealing_elf : protector
 {
     meta:
         description = "Appsealing"
@@ -667,7 +667,7 @@ rule easyprotector : protector
     is_elf and all of them
 }
 
-rule rootbeer: anti_root
+rule rootbeer_elf: anti_root
 {
   meta:
     description = "RootBeer"
@@ -686,7 +686,7 @@ rule rootbeer: anti_root
     is_elf and 2 of them
 }
 
-rule build38 : protector
+rule build38_elf : protector
 {
   meta:
     description = "Build38"
@@ -702,7 +702,7 @@ rule build38 : protector
     is_elf and any of them
 }
 
-rule dpt_shell : protector
+rule dpt_shell_elf : protector
 {
   meta:
     description = "DPT Shell"
@@ -742,7 +742,7 @@ rule free_rasp_dart : protector
     is_dart and any of them
 }
 
-rule shield_sdk : protector
+rule shield_sdk_elf : protector
 {
   meta:
     description = "Shield SDK"
@@ -761,7 +761,7 @@ rule shield_sdk : protector
     is_elf and all of them
 }
 
-rule bugsmirror : protector
+rule bugsmirror_elf : protector
 {
   meta:
     description = "BugsMirror"
@@ -781,7 +781,7 @@ rule bugsmirror : protector
     )
 }
 
-rule bshield : protector
+rule bshield_elf : protector
 {
   meta:
     description = "BShield"
@@ -817,7 +817,7 @@ rule denuvo_elf : protector
     is_elf and all of them
 }
 
-rule bureau : protector
+rule bureau_elf : protector
 {
   meta:
     description = "Bureau"

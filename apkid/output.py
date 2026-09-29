@@ -29,8 +29,6 @@ import os
 import sys
 from typing import Dict, List, Union
 
-import yara
-
 from .rules import RulesManager
 
 prt_red = lambda s: f"\033[91m{s}\033[00m"
@@ -95,16 +93,14 @@ class OutputFormatter(object):
         self.include_types = include_types
         self.include_trackers = include_trackers
 
-    def write(self, results: Dict[str, List[yara.Match]]) -> None:
+    def write(self, results: Dict[str, list]) -> None:
         """
-         Example yara.Match:
+         Example yara-x Rule (matching_rules entry):
         {
-          'tags': ['foo', 'bar'],
-          'matches': True,
+          'identifier': 'my_rule',
           'namespace': 'default',
-          'rule': 'my_rule',
-          'meta': {},
-          'strings': [(81L, '$a', 'abc'), (141L, '$b', 'def')]
+          'tags': ('foo', 'bar'),
+          'metadata': (('description', '...'),),
         }
         """
 
@@ -124,7 +120,7 @@ class OutputFormatter(object):
             else:
                 self._print_console(results)
 
-    def build_json_output(self, results: Dict[str, List[yara.Match]]):
+    def build_json_output(self, results: Dict[str, list]):
         output = {
             'apkid_version': self.version,
             'rules_sha256': self.rules_hash,
@@ -141,11 +137,11 @@ class OutputFormatter(object):
             output['files'].append(result)
         return output
 
-    def _print_json(self, results: Dict[str, List[yara.Match]]) -> None:
+    def _print_json(self, results: Dict[str, list]) -> None:
         output = self.build_json_output(results)
         print(json.dumps(output, sort_keys=True))
 
-    def _print_console(self, results: Dict[str, List[yara.Match]]) -> None:
+    def _print_console(self, results: Dict[str, list]) -> None:
         for key, raw_matches in results.items():
             match_results = self._build_match_results(raw_matches)
             if len(match_results) == 0:
@@ -162,17 +158,27 @@ class OutputFormatter(object):
     def _build_match_results(self, matches) -> Dict[str, List[str]]:
         results: Dict[str, List[str]] = {}
         for m in matches:
-            if 'file_type' in m.tags and not self.include_types:
+            tags = getattr(m, 'tags', ())
+            if 'file_type' in tags and not self.include_types:
                 continue
-            if 'tracker' in m.tags and not self.include_trackers:
+            if 'tracker' in tags and not self.include_trackers:
                 continue
-            tags = ', '.join(sorted(m.tags))
-            description = m.meta.get('description', m)
-            if tags in results:
-                if description not in results[tags]:
-                    results[tags].append(description)
+            tags_str = ', '.join(sorted(tags))
+            # yara-x: metadata is tuple of (name, value) pairs.
+            # legacy yara: meta dict.
+            if hasattr(m, 'metadata'):
+                try:
+                    meta = dict(m.metadata)
+                except Exception:
+                    meta = {}
+                description = meta.get('description', getattr(m, 'identifier', m))
             else:
-                results[tags] = [description]
+                description = getattr(m, 'meta', {}).get('description', m)
+            if tags_str in results:
+                if description not in results[tags_str]:
+                    results[tags_str].append(description)
+            else:
+                results[tags_str] = [description]
         return results
 
     @staticmethod

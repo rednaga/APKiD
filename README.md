@@ -107,14 +107,33 @@ pip install -e .[dev,test] --user
 
 If you update any of the rules, be sure to run `prep-release.py` to recompile them.
 
-If you are using Windows, uninstall any previous versions of Yara and install Yara 3.11.0 and yara-python-dex before compiling
+APKiD uses [yara-x](https://github.com/VirusTotal/yara-x) (Rust). For full DEX
+support we build from our fork, included as the `./yarax_patches` submodule
+([yarax_patches](https://github.com/AbhiTheModder/yarax_patches), patched with
+restored proto fields):
 
 ```bash
-pip uninstall -y yara-python yara-python-dex
-pip install yara-python==3.11.0 wheel
-pip wheel --wheel-dir=yara-python-dex git+https://github.com/MobSF/yara-python-dex.git
-pip install --no-index --find-links=yara-python-dex yara-python-dex
+git clone --recursive https://github.com/rednaga/APKiD
+cd APKiD
+git submodule update --init --recursive
+cd yarax_patches && make patch && cd ..
+pip install maturin
+cd yarax_patches/yara-x/py
+maturin build --release --no-default-features \
+  --features dex-module,elf-module,pe-module,hash-module
+pip install <built-wheel>
 ```
+
+The Rust dependency is configured with minimal features:
+
+```toml
+yara-x = { path = "./yarax_patches/yara-x/lib", default-features = false, features = ["dex-module", "hash-module", "crypto", "pe-module", "elf-module", "generate-proto-code"] }
+```
+
+Note: yara-x requires globally unique rule names. Protector/packer rules that
+previously existed in multiple files (e.g. `dpt_shell` in apk/dex/elf) are now
+suffixed per file type (`dpt_shell_apk`, `dpt_shell_dex`, `dpt_shell_elf`, ...),
+including tracker rules (`teemo_apk`, `teemo_dex`, `teemo_elf`).
 
 ## For Package Maintainers
 

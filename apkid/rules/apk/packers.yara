@@ -184,7 +184,7 @@ rule secneo_a : packer
     and not secneo_c
 }
 
-rule dexprotector : packer
+rule dexprotector_apk : packer
 {
   // DexProtector v6.x.x :- Demo, Standard, Business Edition
 
@@ -211,7 +211,7 @@ rule dexprotector : packer
     is_apk and 1 of ($encrptlib_*) and 1 of ($asset*)
 }
 
-rule dexprotector_a : packer
+rule dexprotector_a_apk : packer
 {
   // Possible older version
 
@@ -262,8 +262,8 @@ rule dexprotector_b : packer
 
   condition:
     is_apk and 1 of ($encrptlib_*) and 1 of ($encrptcustom_*) and
-    not dexprotector_a and
-    not dexprotector
+    not dexprotector_a_apk and
+    not dexprotector_apk
 }
 
 rule dexprotector_c : packer
@@ -281,9 +281,9 @@ rule dexprotector_c : packer
 
   condition:
     is_apk and all of them and
-    not dexprotector_a and
+    not dexprotector_a_apk and
     not dexprotector_b and
-    not dexprotector
+    not dexprotector_apk
 }
 
 rule dexprotector_d : packer
@@ -303,10 +303,10 @@ rule dexprotector_d : packer
 
   condition:
     is_apk and 1 of ($encrpt*) and 1 of ($lib*) and
-    not dexprotector_a and
+    not dexprotector_a_apk and
     not dexprotector_b and
     not dexprotector_c and
-    not dexprotector
+    not dexprotector_apk
 }
 
 rule dexpro_aide_a : packer
@@ -582,7 +582,7 @@ rule nqshield : packer
     is_apk and any of ($lib, $lib_sec1, $lib_sec2)
 }
 
-rule tencent : packer
+rule tencent_apk : packer
 {
   meta:
     description = "Mobile Tencent Protect"
@@ -650,7 +650,7 @@ rule tencent_legu : packer
     is_apk
     and $b
     and ($a or $c or $d)
-    and not tencent
+    and not tencent_apk
     and not tencent_a
     and not tencent_b
 }
@@ -871,7 +871,7 @@ rule appsuit_packer : packer
         is_apk and 2 of them
 }
 
-rule appsealing : packer
+rule appsealing_apk : packer
 {
   meta:
     // Commercial packer
@@ -925,7 +925,7 @@ rule secenh : packer
     and 1 of ($b*)
 }
 
-rule apkencryptor : packer
+rule apkencryptor_apk : packer
 {
   meta:
     description = "ApkEncryptor"
@@ -958,7 +958,7 @@ rule epicvm : packer
         is_apk and all of them
 }
 
-rule appiron : packer
+rule appiron_apk : packer
 {
     meta:
         description = "Secucen AppIron"
@@ -992,7 +992,7 @@ rule eversafe : packer
       is_apk and 2 of them
 }
 
-rule appcamo : packer
+rule appcamo_apk : packer
 {
     meta:
         description = "AppCamo"
@@ -1164,7 +1164,7 @@ rule dingxiang_apk : packer
     is_apk and 2 of them
 }
 
-rule manxi_sec : packer
+rule manxi_sec_apk : packer
 {
   meta:
     description = "Manxi Security"
