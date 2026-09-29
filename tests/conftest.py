@@ -24,7 +24,7 @@
  requirements will be met.
 """
 
-import yara
+import yara_x
 
 import pytest
 
@@ -44,9 +44,9 @@ def options():
 
 @pytest.fixture
 def rules():
-    return yara.compile(source='rule dummy { condition: true }')
+    return yara_x.compile('rule dummy { condition: true }')
 
 
 @pytest.fixture
-def scanner(rules: yara.Rules, options):
+def scanner(rules: yara_x.Rules, options):
     return Scanner(rules=rules, options=options)

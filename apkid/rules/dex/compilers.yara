@@ -50,8 +50,8 @@ private rule dexlib2_map_type_order : internal
     description = "dexlib2 map_list type order"
 
   condition:
-    (dex.map_list.map_item[7].type == 0x2002 and dex.map_list.map_item[8].type == 0x1001)
-    or (dex.map_list.map_item[6].type == 0x2002 and dex.map_list.map_item[7].type == 0x1001)
+    (dex.map_list.items[7].type == 0x2002 and dex.map_list.items[8].type == 0x1001)
+    or (dex.map_list.items[6].type == 0x2002 and dex.map_list.items[7].type == 0x1001)
 }
 
 private rule null_interfaces : internal
@@ -61,12 +61,12 @@ private rule null_interfaces : internal
 
   condition:
     /*
-     * Dexlib2 adds a non-zero interfaces_offset to every class_def_item, even if the class doesn't implement an
+     * Dexlib2 adds a non-zero interfaces_off to every class_def_item, even if the class doesn't implement an
      * interface. It points to 4 null bytes right after string pool. DEX documentation says the value for
-     * interfaces_offset should be 0 if there is no interface, which is what DX does. It's enough to check
+     * interfaces_off should be 0 if there is no interface, which is what DX does. It's enough to check
      * if a single class has an interface which points to null bytes since no one else does this.
      */
-    for any i in (0..dex.header.class_defs_size) : (dex.class_defs[i].interfaces_offset > 0 and uint32(dex.class_defs[i].interfaces_offset) == 0)
+    for any i in (0..dex.header.class_defs_size) : (dex.class_defs[i].interfaces_off > 0 and uint32(dex.class_defs[i].interfaces_off) == 0)
 }
 
 private rule dx_map_type_order : internal
@@ -93,37 +93,37 @@ private rule dx_map_type_order : internal
      *   0x1000 = TYPE_MAP_LIST
      */
     // missing all TYPE_ANNOTATION*, common case
-    (dex.map_list.map_item[7].type == 0x2001 and dex.map_list.map_item[8].type == 0x1001)
+    (dex.map_list.items[7].type == 0x2001 and dex.map_list.items[8].type == 0x1001)
 
     // missing all TYPE_ANNOTATION*, and TYPE_TYPE_LIST so probably very small DEX
-    or (dex.map_list.map_item[7].type == 0x2001 and dex.map_list.map_item[8].type == 0x2002)
+    or (dex.map_list.items[7].type == 0x2001 and dex.map_list.items[8].type == 0x2002)
 
     // has all TYPE_ANNOTATION*
-    or (dex.map_list.map_item[7].type == 0x1002 and dex.map_list.map_item[8].type == 0x1003 and dex.map_list.map_item[9].type == 0x2001 and dex.map_list.map_item[10].type == 0x2006 and dex.map_list.map_item[11].type == 0x1001)
+    or (dex.map_list.items[7].type == 0x1002 and dex.map_list.items[8].type == 0x1003 and dex.map_list.items[9].type == 0x2001 and dex.map_list.items[10].type == 0x2006 and dex.map_list.items[11].type == 0x1001)
 
     // missing TYPE_ANNOTATION_SET_REF_LIST
-    or (dex.map_list.map_item[7].type == 0x1003 and dex.map_list.map_item[8].type == 0x2001 and dex.map_list.map_item[9].type == 0x2006 and dex.map_list.map_item[10].type == 0x1001)
+    or (dex.map_list.items[7].type == 0x1003 and dex.map_list.items[8].type == 0x2001 and dex.map_list.items[9].type == 0x2006 and dex.map_list.items[10].type == 0x1001)
 
     // missing TYPE_ANNOTATION_SET_REF_LIST and TYPE_ANNOTATION_SET_ITEM
-    or (dex.map_list.map_item[7].type == 0x2001 and dex.map_list.map_item[8].type == 0x2006 and dex.map_list.map_item[9].type == 0x1001)
+    or (dex.map_list.items[7].type == 0x2001 and dex.map_list.items[8].type == 0x2006 and dex.map_list.items[9].type == 0x1001)
 
     // missing TYPE_ANNOTATION_SET_REF_LIST and TYPE_ANNOTATIONS_DIRECTORY_ITEM
-    or (dex.map_list.map_item[7].type == 0x1003 and dex.map_list.map_item[8].type == 0x2001 and dex.map_list.map_item[9].type == 0x1001)
+    or (dex.map_list.items[7].type == 0x1003 and dex.map_list.items[8].type == 0x2001 and dex.map_list.items[9].type == 0x1001)
 
     // missing TYPE_ANNOTATION_SET_ITEM
-    or (dex.map_list.map_item[7].type == 0x1002 and dex.map_list.map_item[8].type == 0x2001 and dex.map_list.map_item[9].type == 0x2006 and dex.map_list.map_item[10].type == 0x1001)
+    or (dex.map_list.items[7].type == 0x1002 and dex.map_list.items[8].type == 0x2001 and dex.map_list.items[9].type == 0x2006 and dex.map_list.items[10].type == 0x1001)
 
     // missing TYPE_ANNOTATION_SET_ITEM and TYPE_ANNOTATIONS_DIRECTORY_ITEM
-    or (dex.map_list.map_item[7].type == 0x1002 and dex.map_list.map_item[8].type == 0x2001 and dex.map_list.map_item[9].type == 0x1001)
+    or (dex.map_list.items[7].type == 0x1002 and dex.map_list.items[8].type == 0x2001 and dex.map_list.items[9].type == 0x1001)
 
     // missing TYPE_ANNOTATIONS_DIRECTORY_ITEM
-    or (dex.map_list.map_item[7].type == 0x1002 and dex.map_list.map_item[8].type == 0x1003 and dex.map_list.map_item[9].type == 0x2001 and dex.map_list.map_item[10].type == 0x1001)
+    or (dex.map_list.items[7].type == 0x1002 and dex.map_list.items[8].type == 0x1003 and dex.map_list.items[9].type == 0x2001 and dex.map_list.items[10].type == 0x1001)
 
     // missing almost everything, VERY tiny dex
-    or (dex.map_list.map_item[1].type == 0x0001 and dex.map_list.map_item[2].type == 0x0002 and dex.map_list.map_item[3].type == 0x0006 and dex.map_list.map_item[4].type == 0x2002 and dex.map_list.map_item[5].type == 0x1000)
+    or (dex.map_list.items[1].type == 0x0001 and dex.map_list.items[2].type == 0x0002 and dex.map_list.items[3].type == 0x0006 and dex.map_list.items[4].type == 0x2002 and dex.map_list.items[5].type == 0x1000)
 
     // missing code and (fields | something else), likely small dex
-    or (dex.map_list.map_item[6].type == 0x1003 and dex.map_list.map_item[7].type == 0x2006 and dex.map_list.map_item[8].type == 0x1001 and dex.map_list.map_item[9].type == 0x2002)
+    or (dex.map_list.items[6].type == 0x1003 and dex.map_list.items[7].type == 0x2006 and dex.map_list.items[8].type == 0x1001 and dex.map_list.items[9].type == 0x2002)
 }
 
 private rule ambiguous_tiny_dex_map_type_order : internal
@@ -133,7 +133,7 @@ private rule ambiguous_tiny_dex_map_type_order : internal
 
   condition:
     // missing almost everything, dexlib2 and r8 are identical here, impossible to type alone
-    (dex.map_list.map_item[1].type == 0x0001 and dex.map_list.map_item[2].type == 0x0002 and dex.map_list.map_item[3].type == 0x0006 and dex.map_list.map_item[4].type == 0x2002 and dex.map_list.map_item[5].type == 0x1003 and dex.map_list.map_item[6].type == 0x1000)
+    (dex.map_list.items[1].type == 0x0001 and dex.map_list.items[2].type == 0x0002 and dex.map_list.items[3].type == 0x0006 and dex.map_list.items[4].type == 0x2002 and dex.map_list.items[5].type == 0x1003 and dex.map_list.items[6].type == 0x1000)
 }
 
 private rule r8_map_type_order : internal
@@ -153,24 +153,24 @@ private rule r8_map_type_order : internal
      *   0x2002 = TYPE_STRING_DATA_ITEM
      */
     // missing TYPE_CALL_SITE_ID_ITEM and TYPE_METHOD_HANDLE_ITEM, common case
-    (dex.map_list.map_item[7].type == 0x2001 and dex.map_list.map_item[8].type == 0x2003 and dex.map_list.map_item[9].type == 0x1001)
+    (dex.map_list.items[7].type == 0x2001 and dex.map_list.items[8].type == 0x2003 and dex.map_list.items[9].type == 0x1001)
 
     // missing TYPE_DEBUG_INFO_ITEM
-    or (dex.map_list.map_item[7].type == 0x2001 and dex.map_list.map_item[8].type == 0x1001 and dex.map_list.map_item[9].type == 0x2002)
+    or (dex.map_list.items[7].type == 0x2001 and dex.map_list.items[8].type == 0x1001 and dex.map_list.items[9].type == 0x2002)
 
     // has everything
-    or (dex.map_list.map_item[7].type == 0x0007 and dex.map_list.map_item[8].type == 0x0008 and dex.map_list.map_item[9].type == 0x2001 and dex.map_list.map_item[10].type == 0x2003 and dex.map_list.map_item[11].type == 0x1001)
+    or (dex.map_list.items[7].type == 0x0007 and dex.map_list.items[8].type == 0x0008 and dex.map_list.items[9].type == 0x2001 and dex.map_list.items[10].type == 0x2003 and dex.map_list.items[11].type == 0x1001)
 
     // missing TYPE_CALL_SITE_ID_ITEM
-    or (dex.map_list.map_item[7].type == 0x0008 and dex.map_list.map_item[8].type == 0x2001 and dex.map_list.map_item[9].type == 0x2003 and dex.map_list.map_item[10].type == 0x1001)
+    or (dex.map_list.items[7].type == 0x0008 and dex.map_list.items[8].type == 0x2001 and dex.map_list.items[9].type == 0x2003 and dex.map_list.items[10].type == 0x1001)
 
     // missing TYPE_METHOD_HANDLE_ITEM
-    or (dex.map_list.map_item[7].type == 0x0007 and dex.map_list.map_item[8].type == 0x2001 and dex.map_list.map_item[9].type == 0x2003 and dex.map_list.map_item[10].type == 0x1001)
+    or (dex.map_list.items[7].type == 0x0007 and dex.map_list.items[8].type == 0x2001 and dex.map_list.items[9].type == 0x2003 and dex.map_list.items[10].type == 0x1001)
 
     // ignore missing TYPE_CALL_SITE_ID_ITEM, TYPE_METHOD_HANDLE_ITEM, and TYPE_DEBUG_INFO_ITEM is possibly identical to dx map type order
 
     // missing code and (fields | something else), likely small dex
-    or (dex.map_list.map_item[6].type == 0x1001 and dex.map_list.map_item[7].type == 0x2002 and dex.map_list.map_item[8].type == 0x2004 and dex.map_list.map_item[9].type == 0x2000 and dex.map_list.map_item[10].type == 0x1003)
+    or (dex.map_list.items[6].type == 0x1001 and dex.map_list.items[7].type == 0x2002 and dex.map_list.items[8].type == 0x2004 and dex.map_list.items[9].type == 0x2000 and dex.map_list.items[10].type == 0x1003)
 }
 
 private rule r8_marker : internal
@@ -199,7 +199,7 @@ private rule dexmerge_map_type_order : internal
     /*
      * DexMerge order derrived from: https://github.com/aosp-mirror/platform_dalvik/blob/2e9d6011fe4f4d2e8c065210d0118e7b9d9f305c/dx/src/com/android/dx/merge/DexMerger.java#L110
      */
-    dex.map_list.map_item[7].type == 0x1000 // TYPE_MAP_LIST
+    dex.map_list.items[7].type == 0x1000 // TYPE_MAP_LIST
 }
 
 rule jack_4_12 : compiler

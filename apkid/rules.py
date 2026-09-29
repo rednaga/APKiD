@@ -26,10 +26,11 @@
 
 import hashlib
 import os
+import re
 from typing import Dict
 from typing import Optional
 
-import yara
+import yara_x
 
 
 class RulesManager(object):
@@ -40,11 +41,12 @@ class RulesManager(object):
         self.include_trackers: bool = include_trackers
         self.rules_path: str = os.path.join(self.rules_dir, f'{"trackers.yarc" if self.include_trackers else "rules.yarc"}')
         self.rules_ext: str = rules_ext
-        self.rules: Optional[yara.Rules] = None
+        self.rules: Optional[yara_x.Rules] = None
         self.rules_hash: Optional[str] = None
 
-    def load(self) -> yara.Rules:
-        self.rules = yara.load(self.rules_path)
+    def load(self) -> yara_x.Rules:
+        with open(self.rules_path, 'rb') as f:
+            self.rules = yara_x.Rules.deserialize_from(f)
         return self.rules
 
     def _collect_yara_files(self) -> Dict[str, str]:
@@ -59,13 +61,33 @@ class RulesManager(object):
                 files[path] = path
         return files
 
-    def compile(self) -> yara.Rules:
+    @staticmethod
+    def _strip_includes(source: str) -> str:
+        return re.sub(r'^\s*include\s+"[^"]+"\s*\n?', '', source, flags=re.M)
+
+    def compile(self) -> yara_x.Rules:
         yara_files = self._collect_yara_files()
-        self.rules = yara.compile(filepaths=yara_files)
+        # Compile common.yara first so is_* helpers are defined before use,
+        # then everything else deterministically sorted for stable builds.
+        def _sort_key(p: str):
+            return (0 if os.path.basename(p) == 'common.yara' else 1, p)
+        sorted_paths = sorted(yara_files.keys(), key=_sort_key)
+        # relaxed_re_syntax allows legacy yara regexes that yara-x strict
+        # mode would reject (e.g. unescaped chars, invalid escapes treated
+        # as literals in yara). APKiD rules were written for yara.
+        compiler = yara_x.Compiler(relaxed_re_syntax=True)
+        for path in sorted_paths:
+            with open(path, 'r', encoding='utf-8') as f:
+                src = f.read()
+            src = self._strip_includes(src)
+            compiler.add_source(src, origin=path)
+        self.rules = compiler.build()
         return self.rules
 
     def save(self) -> int:
-        self.rules.save(self.rules_path)
+        assert self.rules is not None, "no rules to save, call compile() or load() first"
+        with open(self.rules_path, 'wb') as f:
+            self.rules.serialize_into(f)
         rules_count = len(set([r.identifier for r in self.rules]))
         return rules_count
 
@@ -73,7 +95,7 @@ class RulesManager(object):
     def hash(self) -> str:
         if not self.rules_hash:
             h = hashlib.sha256()
-            for file_path in self._collect_yara_files():
+            for file_path in sorted(self._collect_yara_files()):
                 with open(file_path, 'rb') as f:
                     h.update(f.read())
             self.rules_hash = h.hexdigest()

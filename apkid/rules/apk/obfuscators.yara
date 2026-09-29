@@ -64,7 +64,7 @@ rule gemalto_protector : obfuscator
     any of them and is_apk
 }
 
-rule androidrepublic : obfuscator
+rule androidrepublic_apk : obfuscator
 {
   meta:
     description = "AndroidRepublic"
@@ -87,7 +87,7 @@ rule androidrepublic : obfuscator
     is_apk and any of them
 }
 
-rule androidrepublic_vip : obfuscator
+rule androidrepublic_vip_apk : obfuscator
 {
   meta:
     description = "AndroidRepublic VIP"
