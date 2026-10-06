@@ -47,6 +47,8 @@ rule is_dart : file_type
         $s3   = "_kDartVmSnapshotData" ascii
         $s4   = "_kDartVmSnapshotInstructions" ascii
         $s5   = "flutter_assets" ascii
+        $s6   = "_kDartSnapshotData" ascii
+        $s7   = "_kDartSnapshotText" ascii
         $ksnl = { 4B 53 4E 4C } // "KSNL" in hex
 
   condition:
