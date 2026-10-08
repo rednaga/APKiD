@@ -30,7 +30,7 @@ import re
 from typing import Dict
 from typing import Optional
 
-import yara_x
+import yara_x as yara
 
 
 class RulesManager(object):
@@ -41,12 +41,12 @@ class RulesManager(object):
         self.include_trackers: bool = include_trackers
         self.rules_path: str = os.path.join(self.rules_dir, f'{"trackers.yarc" if self.include_trackers else "rules.yarc"}')
         self.rules_ext: str = rules_ext
-        self.rules: Optional[yara_x.Rules] = None
+        self.rules: Optional[yara.Rules] = None
         self.rules_hash: Optional[str] = None
 
-    def load(self) -> yara_x.Rules:
+    def load(self) -> yara.Rules:
         with open(self.rules_path, 'rb') as f:
-            self.rules = yara_x.Rules.deserialize_from(f)
+            self.rules = yara.Rules.deserialize_from(f)
         return self.rules
 
     def _collect_yara_files(self) -> Dict[str, str]:
@@ -65,7 +65,7 @@ class RulesManager(object):
     def _strip_includes(source: str) -> str:
         return re.sub(r'^\s*include\s+"[^"]+"\s*\n?', '', source, flags=re.M)
 
-    def compile(self) -> yara_x.Rules:
+    def compile(self) -> yara.Rules:
         yara_files = self._collect_yara_files()
         # Compile common.yara first so is_* helpers are defined before use,
         # then everything else deterministically sorted for stable builds.
@@ -75,7 +75,7 @@ class RulesManager(object):
         # relaxed_re_syntax allows legacy yara regexes that yara-x strict
         # mode would reject (e.g. unescaped chars, invalid escapes treated
         # as literals in yara). APKiD rules were written for yara.
-        compiler = yara_x.Compiler(relaxed_re_syntax=True)
+        compiler = yara.Compiler(relaxed_re_syntax=True)
         for path in sorted_paths:
             with open(path, 'r', encoding='utf-8') as f:
                 src = f.read()
