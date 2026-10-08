@@ -811,7 +811,7 @@ rule hikari : obfuscator
     is_elf and all of them
 }
 
-rule dexprotector : obfuscator
+rule dexprotector_elf : obfuscator
 {
   meta:
     description = "DexProtector"
@@ -835,7 +835,7 @@ rule dexprotector : obfuscator
     is_elf and $dp_elf_header at 0
 }
 
-rule dexprotector_a : obfuscator
+rule dexprotector_a_elf : obfuscator
 {
   meta:
     description = "DexProtector"
@@ -866,7 +866,7 @@ rule dexprotector_a : obfuscator
     )
  }
 
-rule dexprotector_b : obfuscator
+rule dexprotector_b_elf : obfuscator
 {
   meta:
     description = "DexProtector"
@@ -906,7 +906,7 @@ rule dexprotector_alice : obfuscator
     is_elf and any of them
 }
 
-rule androidrepublic : obfuscator
+rule androidrepublic_elf : obfuscator
 {
   meta:
     description = "AndroidRepublic"
@@ -923,7 +923,7 @@ rule androidrepublic : obfuscator
     is_elf and 2 of them
 }
 
-rule androidrepublic_vip : obfuscator
+rule androidrepublic_vip_elf : obfuscator
 {
   meta:
     description = "AndroidRepublic VIP"

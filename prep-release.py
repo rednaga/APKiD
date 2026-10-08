@@ -78,7 +78,7 @@ def gen_rule():
 
         yara_rules = {
             "dex": f"""
-rule {rule_name} : tracker
+rule {rule_name}_dex : tracker
 {{
     meta:
         description = "{info.get("name").replace("Google", "G.").replace("Facebook", "FB.").replace("Notifications", "Notifs")}"
@@ -88,7 +88,7 @@ rule {rule_name} : tracker
     strings:
 """,
             "apk": f"""
-rule {rule_name} : tracker
+rule {rule_name}_apk : tracker
 {{
     meta:
         description = "{info.get("name").replace("Google", "G.").replace("Facebook", "FB.").replace("Notifications", "Notifs")}"
@@ -98,7 +98,7 @@ rule {rule_name} : tracker
     strings:
 """,
             "elf": f"""
-rule {rule_name} : tracker
+rule {rule_name}_elf : tracker
 {{
     meta:
         description = "{info.get("name").replace("Google", "G.").replace("Facebook", "FB.").replace("Notifications", "Notifs")}"
@@ -143,6 +143,7 @@ rule {rule_name} : tracker
 
         for file_type, yara_rule in yara_rules.items():
             rule_path = get_rule_path(file_type)
+            suffixed_name = f"{rule_name}_{file_type}"
             existing_rules = ""
             if not os.path.exists(rule_path):
                 with open(rule_path, "w") as f:
@@ -150,11 +151,11 @@ rule {rule_name} : tracker
             if os.path.exists(rule_path):
                 with open(rule_path, "r") as f:
                     existing_rules = f.read()
-            if rule_name not in existing_rules:
+            if suffixed_name not in existing_rules and rule_name not in existing_rules:
                 with open(rule_path, "a") as f:
                     f.write(yara_rule)
             else:
-                print(f"\rDuplicate rule name found: {rule_name}. Skipping.", end="")
+                print(f"\rDuplicate rule name found: {suffixed_name}. Skipping.", end="")
 
 
 def convert_readme():

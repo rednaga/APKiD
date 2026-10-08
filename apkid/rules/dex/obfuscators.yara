@@ -35,7 +35,7 @@ private rule short_unicode_field_names : internal
 
   condition:
     is_dex and
-    for 3 i in (0..dex.header.field_ids_size) : (dex.field[i].name matches /[^\x00-\x7F]{1,4}/)
+    for 3 i in (0..dex.header.field_ids_size) : (dex.fields[i].name matches /[^\x00-\x7F]{1,4}/)
 }
 
 private rule short_unicode_method_names : internal
@@ -45,7 +45,7 @@ private rule short_unicode_method_names : internal
 
   condition:
     is_dex and
-    for 3 i in (0..dex.header.method_ids_size) : (dex.method[i].name matches /[^\x00-\x7F]{1,4}/)
+    for 3 i in (0..dex.header.method_ids_size) : (dex.methods[i].name matches /[^\x00-\x7F]{1,4}/)
 }
 
 rule dexguard_a : obfuscator
@@ -85,7 +85,7 @@ rule dexguard_a : obfuscator
     is_dex and
     $opcodes and
     all of ($a, $b, $c) and
-    uint32(dex.header.data_offset + dex.header.data_size - 4) == 0
+    uint32(dex.header.data_off + dex.header.data_size - 4) == 0
 }
 
 rule dexguard_b : obfuscator
@@ -181,7 +181,7 @@ rule dexguard_d : obfuscator
     or (#a_if_class >= 3 and (short_unicode_field_names or short_unicode_method_names))
 }
 
-rule dexprotector : obfuscator
+rule dexprotector_dex : obfuscator
 {
   meta:
     description = "DexProtector"
@@ -496,7 +496,7 @@ rule unreadable_method_names : obfuscator
     and (not dexguard_a and not dexguard_b and not dexguard_c and not dexguard_d)
 }
 
-rule apkencryptor : obfuscator
+rule apkencryptor_dex : obfuscator
 {
   meta:
     description = "ApkEncryptor"
