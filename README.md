@@ -97,7 +97,9 @@ python prep-release.py
 pip install -e .[dev,test]
 ```
 
-The command `python prep-release.py` above requires the packages `yara-python` and `yara-python-dex` to be already installed. 
+The command `python prep-release.py` above requires the `yara-x` package to be
+already installed (upstream's `yara-python` references are pre-migration; APKiD
+now uses yara-x, see the yara-x build instructions below).
 
 If the above doesn't work, due to permission errors dependent on your local machine and where Python has been installed, try specifying the `--user` flag. This is likely needed if you're not using a virtual environment:
 

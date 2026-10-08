@@ -33,7 +33,7 @@ import traceback
 import zipfile
 from typing import Union, IO, List, Dict, Set
 
-import yara_x
+import yara_x as yara
 
 from .output import OutputFormatter
 from .rules import RulesManager
@@ -113,10 +113,10 @@ class Options(object):
 
 class Scanner(object):
 
-    def __init__(self, rules: yara_x.Rules, options: Options):
+    def __init__(self, rules: yara.Rules, options: Options):
         self.rules = rules
         self.options = options
-        self.scanner = yara_x.Scanner(self.rules)
+        self.scanner = yara.Scanner(self.rules)
         try:
             self.scanner.set_timeout(self.options.timeout)
         except Exception:
@@ -127,11 +127,11 @@ class Scanner(object):
         # partial matches). Treat timeout as no matches to keep scanning.
         try:
             return self.scanner.scan(data).matching_rules
-        except yara_x.TimeoutError:
+        except yara.TimeoutError:
             if self.options.verbose:
                 print("[W] YARA-X scan timed out", file=sys.stderr)
             return []
-        except yara_x.ScanError as e:
+        except yara.ScanError as e:
             if self.options.verbose:
                 print(f"[W] YARA-X scan error: {e}", file=sys.stderr)
             return []
