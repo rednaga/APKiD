@@ -27,7 +27,7 @@
 import json
 import os
 import sys
-from typing import Dict, List, Union
+from typing import Dict, List, Union, Optional, Set, Tuple
 
 import yara
 
@@ -45,6 +45,22 @@ prt_orange = lambda s: f"\033[33m{s}\033[00m"
 prt_pink = lambda s: f"\033[35m{s}\033[00m"
 prt_tracker = lambda s: f"\033[38;5;208m{s}\033[00m"
 prt_file = lambda s: f"\033[48;5;240m{s}\033[00m"
+
+
+PrintFilter = Optional[Tuple[Set[str], Set[str]]]
+
+def parse_print_filter(value: Optional[str]) -> PrintFilter:
+    if value is None:
+        return None
+    include, exclude = set(), set()
+    for tok in (t.strip() for t in value.split(',')):
+        if not tok:
+            continue
+        if tok[0] == '-':
+            exclude.add(tok[1:])
+        else:
+            include.add(tok[1:] if tok[0] == '+' else tok)
+    return include, exclude
 
 def is_windows_cmd():
     """
