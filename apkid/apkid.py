@@ -217,14 +217,16 @@ class Scanner(object):
         matches = self.rules.match(data=entry_buffer.read(), timeout=self.options.timeout)
 
         if len(matches) > 0:
-            self._print_matches(f"{zf.filename}!{info.filename}", matches)
             results[info.filename] = matches
 
         if depth < self.options.scan_depth and self._is_zipfile(entry_buffer, info.filename):
             with zipfile.ZipFile(entry_buffer) as zip_entry:
                 nested_results = self._scan_zip(zip_entry, depth=depth + 1)
                 for nested_name, nested_matches in nested_results.items():
+                    self._print_matches(f"{zf.filename}!{nested_name}", nested_matches)
                     results[f'{info.filename}!{nested_name}'] = nested_matches
+        elif len(matches) > 0:
+            self._print_matches(f"{zf.filename}!{info.filename}", matches)
 
     @staticmethod
     def _type_file(file: IO) -> Union[None, str]:
