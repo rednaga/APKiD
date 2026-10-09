@@ -35,7 +35,7 @@ from typing import Union, IO, List, Dict, Set
 
 import yara
 
-from .output import OutputFormatter
+from .output import OutputFormatter, PrintFilter
 from .rules import RulesManager
 
 SCANNABLE_FILE_MAGICS: Dict[str, Set[bytes]] = {
@@ -57,7 +57,7 @@ class Options(object):
 
     def __init__(self, timeout: int = 10, verbose: bool = False, json: bool = False, output_dir: Union[str, None] = None,
                  typing: Union[str, None] = 'magic', entry_max_scan_size: int = 0, scan_depth=2, recursive: bool = False,
-                 include_trackers: bool = False, include_types: bool = False):
+                 include_trackers: bool = False, include_types: bool = False, print_filter: PrintFilter = None):
         """Scan options.
         Holds user-supplied options governing how APKiD behaves.
 
@@ -93,6 +93,7 @@ class Options(object):
             If true, scans for embedded trackers using rules from exodus.
         recursive : boolean, optional (default=True)
             If true, when scanning a directory, will recurse into subdirectories.
+        print_filter : tuple of strings, optional (default=None)
         """
         self.timeout = timeout
         self.verbose = verbose
@@ -109,6 +110,7 @@ class Options(object):
             include_types=include_types,
             include_trackers=include_trackers
         )
+        self.print_matches = print_filter
 
 
 class Scanner(object):
@@ -151,6 +153,7 @@ class Scanner(object):
 
         matches: List[yara.Matches] = self.rules.match(data=file.read(), timeout=self.options.timeout)
         if len(matches) > 0:
+            self._print_matches(file_name, matches)
             results[file_path] = matches
         if self._is_zipfile(file, file_name):
             with zipfile.ZipFile(file) as zf:
@@ -220,7 +223,10 @@ class Scanner(object):
             with zipfile.ZipFile(entry_buffer) as zip_entry:
                 nested_results = self._scan_zip(zip_entry, depth=depth + 1)
                 for nested_name, nested_matches in nested_results.items():
+                    self._print_matches(f"{zf.filename}!{nested_name}", nested_matches)
                     results[f'{info.filename}!{nested_name}'] = nested_matches
+        elif len(matches) > 0:
+            self._print_matches(f"{zf.filename}!{info.filename}", matches)
 
     @staticmethod
     def _type_file(file: IO) -> Union[None, str]:
@@ -268,3 +274,21 @@ class Scanner(object):
                 if os.path.isdir(full_path):
                     continue
                 yield full_path
+
+    def _print_matches(self, name: str, matches) -> None:
+        f = self.options.print_matches
+        if f is None:
+            return
+        include, exclude = f
+        for match in matches:
+            if match.rule in exclude or (include and match.rule not in include):
+                continue
+            lines = [f"[{match.rule}] in '{name}':"]
+            for s in match.strings:
+                if isinstance(s, tuple):  # yara-python < 4.3 (yara-python-dex 1.1.0 = 3.11)
+                    off, ident, data = s
+                    lines.append(f"\t0x{off:08x} {ident} {data!r}")
+                else:  # yara-python >= 4.3: StringMatch
+                    for inst in s.instances:
+                        lines.append(f"\t0x{inst.offset:08x} {s.identifier} {inst.matched_data!r}")
+            print('\n'.join(lines) + '\n')
