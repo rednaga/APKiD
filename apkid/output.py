@@ -49,19 +49,6 @@ prt_file = lambda s: f"\033[48;5;240m{s}\033[00m"
 
 PrintFilter = Optional[Tuple[Set[str], Set[str]]]
 
-def parse_print_filter(value: Optional[str]) -> PrintFilter:
-    if value is None:
-        return None
-    include, exclude = set(), set()
-    for tok in (t.strip() for t in value.split(',')):
-        if not tok:
-            continue
-        if tok[0] == '-':
-            exclude.add(tok[1:])
-        else:
-            include.add(tok[1:] if tok[0] == '+' else tok)
-    return include, exclude
-
 def is_windows_cmd():
     """
     Check if the current environment is a Windows command prompt.
