@@ -1216,3 +1216,19 @@ rule venustech : packer
   condition:
     is_apk and all of them
 }
+
+rule dexguard_packer : packer
+{
+  meta:
+    description = "DexGuard"
+    url         = "https://www.guardsquare.com/en/products/dexguard"
+    author      = "FrenchYeti"
+
+  strings:
+    $enc_class           = /\x00[^\x00\x20]*\/([a-z0-9]+\/)*([a-zA-Z]{1,32})-\x00/
+    $enc_path          = /([a-z0-9]+\/)*\/[a-z0-9][a-z0-9]{0,32}-\x00/
+    $enc_asset2          = /assets\/([a-z0-9]+\/)*[a-z0-9][a-z0-9]{0,32}-\x00/
+
+  condition:
+    is_apk and any of them
+}

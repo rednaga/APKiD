@@ -100,6 +100,7 @@ rule dexguard_b : obfuscator
     $a_aux_class     = { 00 07 4C 6F 2F (41|61) (55|75) (58|78) 3B 00 }  // Lo/[Aa][Uu][Xx];
     $a_con_class     = { 00 07 4C 6F 2F (43|63) (4F|6F) (4E|6E) 3B 00 }  // Lo/[Cc][Oo][Nn];
     $a_if_class      = { 00 ?? 4C 6F 2F [1-4] 24 (49|69) (46|66) 3B 00 } // Lo/???$[iI][fF];
+    // from dexguard_d: $a_if2_class = { 00 ?? 4C [1-4] 24 (49|69) (46|66) 3B 00 } // L???$[iI][fF];
     // A single unicode code point may take 1 or more bytes depending on encoding.
     // Normally only see one code point worth, but not sure how many bytes it might be in some variants.
     // Also note the trailing null byte in the regex so this  is less of a naked string.
@@ -121,6 +122,7 @@ rule dexguard_c : obfuscator
     sample2     = "db11762886cc24bd4f938002f15f78680b512cf550d15c77b217fc5548b0c939"
 
   strings:
+    $dexguard_class  = {00 1F 4C 64 65 78 67 75 61 72 64 2F 75 74 69 6C 2F 54 61 6D 70 65 72 44 65 74 65 63 74 69 6F 6E 3B 00 } // Ldexguard/util/TamperDetection;
     $dexguard_pkg1 = "guardsquare/dexguard/runtime/"
     $dexguard_pkg2 = {
       001e4c64657867756172642f7574696c2f54616d7065724465746563746f723b00
@@ -158,27 +160,6 @@ rule dexguard_c : obfuscator
   condition:
     is_dex
     and any of them
-}
-
-rule dexguard_d : obfuscator
-{
-  meta:
-    description = "DexGuard"
-    url         = "https://www.guardsquare.com/en/products/dexguard"
-    sample      = "423b09d2aec74b1624d5b5c63d24486efc873c9cce75ea9e2f2d699f40ca8f7c"
-
-  strings:
-    // Ldexguard/util/TamperDetection;
-    $dexguard_class  = {00 1F 4C 64 65 78 67 75 61 72 64 2F 75 74 69 6C 2F 54 61 6D 70 65 72 44 65 74 65 63 74 69 6F 6E 3B 00}
-    $a_aux_class     = { 00 05 4C (41|61) (55|75) (58|78) 3B 00 }  // L[Aa][Uu][Xx];
-    $a_con_class     = { 00 05 4C (43|63) (4F|6F) (4E|6E) 3B 00 }  // L[Cc][Oo][Nn];
-    $a_if_class      = { 00 ?? 4C [1-4] 24 (49|69) (46|66) 3B 00 } // L???$[iI][fF];
-    $a_inner_unicode = /L([\u0000-\u007F]{1,4}|[^\u0000-\u007F]{1,4})\$[^\u0000-\u007F]{1,4};\x00/
-
-  condition:
-    3 of them
-    or $dexguard_class
-    or (#a_if_class >= 3 and (short_unicode_field_names or short_unicode_method_names))
 }
 
 rule dexprotector : obfuscator
@@ -482,7 +463,7 @@ rule unreadable_field_names : obfuscator
 
   condition:
     short_unicode_field_names
-    and (not dexguard_a and not dexguard_b and not dexguard_c and not dexguard_d)
+    and (not dexguard_a and not dexguard_b and not dexguard_c)
 }
 
 rule unreadable_method_names : obfuscator
@@ -493,7 +474,7 @@ rule unreadable_method_names : obfuscator
 
   condition:
     short_unicode_method_names
-    and (not dexguard_a and not dexguard_b and not dexguard_c and not dexguard_d)
+    and (not dexguard_a and not dexguard_b and not dexguard_c)
 }
 
 rule apkencryptor : obfuscator
