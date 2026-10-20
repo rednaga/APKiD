@@ -26,7 +26,9 @@
 
 import argparse
 
+from typing import Optional
 from apkid.apkid import Scanner, Options
+from apkid.output import PrintFilter
 from . import __version__
 
 
@@ -61,11 +63,29 @@ def get_parser():
                         help="output scan results in JSON format", )
     output.add_argument('-o', '--output-dir', metavar='DIR', default=None,
                         help="write individual results here (implies --json)")
+    output.add_argument('-m', '--print-matches', action='store_true', default=False,
+                        help="print matched rules and strings to stdout")
+    output.add_argument('--print-filter', metavar='RULES', default='',
+                        help="filter printed matches: comma-separated rule names to include ('+' or no prefix) "
+                             "or exclude ('-' prefix). Implies --print-matches. "
+                             "Use '=' when the value starts with '-', e.g. --print-filter=-is_apk,-is_signed_apk")
     output.add_argument('--include-types', action='store_true', default=False,
                         help="include file type info for matched files")
 
     return parser
 
+def parse_print_filter(value: Optional[str]) -> PrintFilter:
+    if value is None:
+        return None
+    include, exclude = set(), set()
+    for tok in (t.strip() for t in value.split(',')):
+        if not tok:
+            continue
+        if tok[0] == '-':
+            exclude.add(tok[1:])
+        else:
+            include.add(tok[1:] if tok[0] == '+' else tok)
+    return include, exclude
 
 def build_options(args) -> Options:
     return Options(
@@ -79,6 +99,7 @@ def build_options(args) -> Options:
         include_trackers=args.scan_trackers,
         recursive=args.recursive,
         include_types=args.include_types,
+        print_filter=parse_print_filter(args.print_filter) if (args.print_matches or args.print_filter) else None
     )
 
 
