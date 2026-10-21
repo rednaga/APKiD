@@ -19,8 +19,12 @@ For more information on what this tool can be used for, check out:
    Fingerprinting <http://hitcon.org/2016/CMT/slide/day1-r0-e-1.pdf>`__
 -  `Detecting Pirated and Malicious Android Apps with
    APKiD <http://rednaga.io/2016/07/31/detecting_pirated_and_malicious_android_apps_with_apkid/>`__
--  `APKiD: PEiD for Android
-   Apps <https://github.com/enovella/cve-bio-enovella/blob/master/slides/bheu18-enovella-APKID.pdf>`__
+-  `APKiD: PEiD for Android Apps (BlackHat EU/UK Arsenal
+   2018) <https://github.com/enovella/cve-bio-enovella/blob/master/slides/bheu18-enovella-APKID.pdf>`__
+-  `APKiD: Fast Identification of AppShielding
+   Products <https://github.com/enovella/cve-bio-enovella/blob/master/slides/APKiD-NowSecure-Connect19-enovella.pdf>`__
+-  `APKiD: Fast Identification of Mobile RASP SDKs (BlackHat USA Arsenal
+   2023) <https://github.com/enovella/cve-bio-enovella/blob/master/slides/bheu23-enovella-APKID.pdf>`__
 
 Installing
 ----------
@@ -52,31 +56,42 @@ Usage
 -----
 
 ::
+    usage: apkid [-h] [-v] [-t TIMEOUT] [-r] [--scan-depth SCAN_DEPTH]
+                [--entry-max-scan-size ENTRY_MAX_SCAN_SIZE] [--typing {magic,filename,none}] [-st] [-j]
+                [-o DIR] [-m] [--print-filter RULES] [--include-types]
+                [FILE ...]
 
-   usage: apkid [-h] [-v] [-t TIMEOUT] [-r] [--scan-depth SCAN_DEPTH]
-                [--entry-max-scan-size ENTRY_MAX_SCAN_SIZE] [--typing {magic,filename,none}] [-j]
-                [-o DIR]
-                [FILE [FILE ...]]
+    APKiD - Android Application Identifier v3.2.0
 
-   APKiD - Android Application Identifier v2.1.2
+    positional arguments:
+    FILE                                       apk, dex, or directory (default: None)
 
-   positional arguments:
-     FILE                                       apk, dex, or directory
+    options:
+    -h, --help                                 show this help message and exit
+    -v, --verbose                              log debug messages (default: False)
 
-   optional arguments:
-     -h, --help                                 show this help message and exit
-     -v, --verbose                              log debug messages
+    scanning:
+    -t TIMEOUT, --timeout TIMEOUT              Yara scan timeout (in seconds) (default: 30)
+    -r, --recursive                            recurse into subdirectories (default: False)
+    --scan-depth SCAN_DEPTH                    how deep to go when scanning nested zips (default: 2)
+    --entry-max-scan-size ENTRY_MAX_SCAN_SIZE  max zip entry size to scan in bytes, 0 = no limit
+                                                (default: 104857600)
+    --typing {magic,filename,none}             method to decide which files to scan (default: magic)
+    -st, --scan-trackers                       scans for embedded trackers (default: False)
 
-   scanning:
-     -t TIMEOUT, --timeout TIMEOUT              Yara scan timeout (in seconds)
-     -r, --recursive                            recurse into subdirectories
-     --scan-depth SCAN_DEPTH                    how deep to go when scanning nested zips
-     --entry-max-scan-size ENTRY_MAX_SCAN_SIZE  max zip entry size to scan in bytes, 0 = no limit
-     --typing {magic,filename,none}             method to decide which files to scan
-
-   output:
-     -j, --json                                 output scan results in JSON format
-     -o DIR, --output-dir DIR                   write individual results here (implies --json)
+    output:
+    -j, --json                                 output scan results in JSON format (default: False)
+    -o DIR, --output-dir DIR                   write individual results here (implies --json)
+                                                (default: None)
+    -m, --print-matches                        print matched rules and strings to stdout (default:
+                                                False)
+    --print-filter RULES                       filter printed matches: comma-separated rule names to
+                                                include ('+' or no prefix) or exclude ('-' prefix).
+                                                Implies --print-matches. Use '=' when the value starts
+                                                with '-', e.g. --print-filter=-is_apk,-is_signed_apk
+                                                (default: )
+    --include-types                            include file type info for matched files (default:
+                                                False)
 
 Submitting New Packers / Compilers / Obfuscators
 ------------------------------------------------
@@ -118,7 +133,7 @@ the rules, and install the package in editable mode:
 
    git clone https://github.com/rednaga/APKiD
    cd APKiD
-   ./prep-release.py
+   python prep-release.py
    pip install -e .[dev,test]
 
 If the above doesn’t work, due to permission errors dependent on your
@@ -133,13 +148,24 @@ environment:
 If you update any of the rules, be sure to run ``prep-release.py`` to
 recompile them.
 
-For Maintainers
----------------
+If you are using Windows, install Yara 3.11.0 and yara-python-dex before
+compiling
 
-This section is for package maintainers.
+.. code:: bash
 
-Make sure the version has been updated in
-`apkid/init.py <apkid/__init__.py>`__
+   pip install yara-python==3.11.0
+   pip install wheel
+   pip wheel --wheel-dir=yara-python-dex git+https://github.com/MobSF/yara-python-dex.git
+   pip install --no-index --find-links=yara-python-dex yara-python-dex
+
+For Package Maintainers
+-----------------------
+
+When releasing a new version, make sure the version has been updated in
+`apkid/init.py <apkid/__init__.py>`__.
+
+As for running tests, check out `.travis.yml <.travis.yml>`__ to see how
+the dev and test environments are setup and tests are run.
 
 Update the compiled rules, the readme, build the package and upload to
 PyPI:
@@ -154,8 +180,8 @@ PyPI:
 For more information see `Packaging
 Projects <https://packaging.python.org/tutorials/packaging-projects/>`__.
 
-.. |Build Status| image:: https://travis-ci.org/rednaga/APKiD.svg?branch=master
-   :target: https://travis-ci.org/rednaga/APKiD
+.. |Build Status| image:: https://app.travis-ci.com/rednaga/APKiD.svg?branch=master
+   :target: https://app.travis-ci.com/rednaga/APKiD
 .. |PyPI| image:: https://img.shields.io/pypi/v/apkid.svg
    :target: https://pypi.org/project/apkid/
 .. |PyPI - Python Version| image:: https://img.shields.io/pypi/pyversions/apkid.svg

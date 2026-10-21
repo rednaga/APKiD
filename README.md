@@ -35,7 +35,7 @@ git clone https://github.com/rednaga/APKiD
 cd APKiD/
 docker build . -t rednaga:apkid
 docker/apkid.sh ~/reverse/targets/android/example/example.apk
-[+] APKiD 2.1.0 :: from RedNaga :: rednaga.io
+[+] APKiD 3.1.0 :: from RedNaga :: rednaga.io
 [*] example.apk!classes.dex
  |-> compiler : dx
 ```
@@ -44,29 +44,41 @@ docker/apkid.sh ~/reverse/targets/android/example/example.apk
 
 ```
 usage: apkid [-h] [-v] [-t TIMEOUT] [-r] [--scan-depth SCAN_DEPTH]
-             [--entry-max-scan-size ENTRY_MAX_SCAN_SIZE] [--typing {magic,filename,none}] [-j]
-             [-o DIR]
-             [FILE [FILE ...]]
+             [--entry-max-scan-size ENTRY_MAX_SCAN_SIZE] [--typing {magic,filename,none}] [-st] [-j]
+             [-o DIR] [-m] [--print-filter RULES] [--include-types]
+             [FILE ...]
 
-APKiD - Android Application Identifier v2.1.2
+APKiD - Android Application Identifier v3.2.0
 
 positional arguments:
-  FILE                                       apk, dex, or directory
+  FILE                                       apk, dex, or directory (default: None)
 
-optional arguments:
+options:
   -h, --help                                 show this help message and exit
-  -v, --verbose                              log debug messages
+  -v, --verbose                              log debug messages (default: False)
 
 scanning:
-  -t TIMEOUT, --timeout TIMEOUT              Yara scan timeout (in seconds)
-  -r, --recursive                            recurse into subdirectories
-  --scan-depth SCAN_DEPTH                    how deep to go when scanning nested zips
+  -t TIMEOUT, --timeout TIMEOUT              Yara scan timeout (in seconds) (default: 30)
+  -r, --recursive                            recurse into subdirectories (default: False)
+  --scan-depth SCAN_DEPTH                    how deep to go when scanning nested zips (default: 2)
   --entry-max-scan-size ENTRY_MAX_SCAN_SIZE  max zip entry size to scan in bytes, 0 = no limit
-  --typing {magic,filename,none}             method to decide which files to scan
+                                             (default: 104857600)
+  --typing {magic,filename,none}             method to decide which files to scan (default: magic)
+  -st, --scan-trackers                       scans for embedded trackers (default: False)
 
 output:
-  -j, --json                                 output scan results in JSON format
+  -j, --json                                 output scan results in JSON format (default: False)
   -o DIR, --output-dir DIR                   write individual results here (implies --json)
+                                             (default: None)
+  -m, --print-matches                        print matched rules and strings to stdout (default:
+                                             False)
+  --print-filter RULES                       filter printed matches: comma-separated rule names to
+                                             include ('+' or no prefix) or exclude ('-' prefix).
+                                             Implies --print-matches. Use '=' when the value starts
+                                             with '-', e.g. --print-filter=-is_apk,-is_signed_apk
+                                             (default: )
+  --include-types                            include file type info for matched files (default:
+                                             False)
 ```
 
 ## Submitting New Packers / Compilers / Obfuscators
@@ -97,7 +109,7 @@ python prep-release.py
 pip install -e .[dev,test]
 ```
 
-The command `python prep-release.py` above requires the packages `yara-python` and `yara-python-dex` to be already installed. 
+The command `python prep-release.py` above requires the packages `yara-python` and `yara-python-dex` to be already installed.
 
 If the above doesn't work, due to permission errors dependent on your local machine and where Python has been installed, try specifying the `--user` flag. This is likely needed if you're not using a virtual environment:
 
