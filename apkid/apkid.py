@@ -33,7 +33,7 @@ import traceback
 import zipfile
 from typing import Union, IO, List, Dict, Set
 
-import yara
+import yara_x as yara
 
 from .output import OutputFormatter, PrintFilter
 from .rules import RulesManager
@@ -118,6 +118,25 @@ class Scanner(object):
     def __init__(self, rules: yara.Rules, options: Options):
         self.rules = rules
         self.options = options
+        self.scanner = yara.Scanner(self.rules)
+        try:
+            self.scanner.set_timeout(self.options.timeout)
+        except Exception:
+            pass
+
+    def _scan_data(self, data: bytes):
+        # yara-x raises TimeoutError on timeout (unlike yara which returns
+        # partial matches). Treat timeout as no matches to keep scanning.
+        try:
+            return self.scanner.scan(data).matching_rules
+        except yara.TimeoutError:
+            if self.options.verbose:
+                print("[W] YARA-X scan timed out", file=sys.stderr)
+            return []
+        except yara.ScanError as e:
+            if self.options.verbose:
+                print(f"[W] YARA-X scan error: {e}", file=sys.stderr)
+            return []
 
     def scan(self, path: str) -> None:
         if os.path.isfile(path):
@@ -131,11 +150,11 @@ class Scanner(object):
         for file_path in self._yield_file_paths(dir_path):
             self.scan(file_path)
 
-    def scan_file(self, file_path: str) -> Dict[str, List[yara.Match]]:
+    def scan_file(self, file_path: str) -> Dict[str, list]:
         results = []
         with open(file_path, 'rb') as f:
             try:
-                results: Dict[str, List[yara.Match]] = self.scan_file_obj(f, file_path)
+                results: Dict[str, list] = self.scan_file_obj(f, file_path)
             except Exception as e:
                 stack = traceback.format_exc()
                 print(f"Exception scanning {file_path}: {stack}")
@@ -147,35 +166,38 @@ class Scanner(object):
         else:
             file_name = os.path.basename(file_path)
 
-        results: Dict[str, List[yara.Match]] = {}
+        results: Dict[str, list] = {}
         if not self._should_scan(file, file_name):
             return results
 
-        matches: List[yara.Matches] = self.rules.match(data=file.read(), timeout=self.options.timeout)
+        data = file.read()
+        matches = self._scan_data(data)
         if len(matches) > 0:
-            self._print_matches(file_name, matches)
-            results[file_path] = matches
+            self._print_matches(file_name, matches, data)
+            results[file_path] = list(matches)
         if self._is_zipfile(file, file_name):
             with zipfile.ZipFile(file) as zf:
-                zip_results = self._scan_zip(zf)
+                # Thread the parent file path so nested entries are printed
+                # as 'path!entry!...' instead of 'None!...'.
+                zip_results = self._scan_zip(zf, prefix=f'{file_path}!')
             for entry_name, entry_matches in zip_results.items():
                 results[f'{file_path}!{entry_name}'] = entry_matches
         return results
 
-    def _scan_zip(self, zf: zipfile.ZipFile, depth=0) -> Dict[str, List[yara.Match]]:
-        results: Dict[str, List[yara.Match]] = {}
+    def _scan_zip(self, zf: zipfile.ZipFile, depth=0, prefix='') -> Dict[str, list]:
+        results: Dict[str, list] = {}
         for info in zf.infolist():
             if info.is_dir():
                 continue
             try:
-                self._scan_zip_entry(zf, info, results, depth)
+                self._scan_zip_entry(zf, info, results, depth, prefix)
             except Exception as e:
                 stack = traceback.format_exc()
                 print(f"Exception scanning {info.filename} in {zf.filename}, depth={depth}: {stack}",
                     file=sys.stderr)
         return results
 
-    def _scan_zip_entry(self, zf, info, results, depth) -> None:
+    def _scan_zip_entry(self, zf, info, results, depth, prefix='') -> None:
         try:
             with zf.open(info) as entry:
                 # Python 3.6 zip entries are not seek'able :(
@@ -214,19 +236,20 @@ class Scanner(object):
 
 
         entry_buffer.seek(0)
-        matches = self.rules.match(data=entry_buffer.read(), timeout=self.options.timeout)
+        data = entry_buffer.read()
+        matches = self._scan_data(data)
 
         if len(matches) > 0:
-            results[info.filename] = matches
+            # Print exactly once, here, even when the entry itself is a
+            # nested archive (the old `elif` suppressed these matches).
+            results[info.filename] = list(matches)
+            self._print_matches(f'{prefix}{info.filename}', matches, data)
 
         if depth < self.options.scan_depth and self._is_zipfile(entry_buffer, info.filename):
             with zipfile.ZipFile(entry_buffer) as zip_entry:
-                nested_results = self._scan_zip(zip_entry, depth=depth + 1)
+                nested_results = self._scan_zip(zip_entry, depth=depth + 1, prefix=f'{prefix}{info.filename}!')
                 for nested_name, nested_matches in nested_results.items():
-                    self._print_matches(f"{zf.filename}!{nested_name}", nested_matches)
                     results[f'{info.filename}!{nested_name}'] = nested_matches
-        elif len(matches) > 0:
-            self._print_matches(f"{zf.filename}!{info.filename}", matches)
 
     @staticmethod
     def _type_file(file: IO) -> Union[None, str]:
@@ -275,20 +298,35 @@ class Scanner(object):
                     continue
                 yield full_path
 
-    def _print_matches(self, name: str, matches) -> None:
+    def _print_matches(self, name: str, matches, data: Union[bytes, None] = None) -> None:
+        """
+        Print matched rules and the patterns that hit, honoring
+        --print-matches / --print-filter (include/exclude rule filter).
+
+        Adapted for yara-x: a Rule exposes `identifier` and `patterns`
+        (each Pattern has `identifier` and `matches` with offset/length /
+        xor_key, but not the matched bytes), so the matched data is sliced
+        from the scanned buffer and de-XORed when the pattern used `xor`.
+        """
         f = self.options.print_matches
         if f is None:
             return
         include, exclude = f
+        # Raw prints must not corrupt JSON on stdout when -j/-o is active.
+        out = sys.stderr if self.options.output.json else sys.stdout
         for match in matches:
-            if match.rule in exclude or (include and match.rule not in include):
+            rule = match.identifier
+            if rule in exclude or (include and rule not in include):
                 continue
-            lines = [f"[{match.rule}] in '{name}':"]
-            for s in match.strings:
-                if isinstance(s, tuple):  # yara-python < 4.3 (yara-python-dex 1.1.0 = 3.11)
-                    off, ident, data = s
-                    lines.append(f"\t0x{off:08x} {ident} {data!r}")
-                else:  # yara-python >= 4.3: StringMatch
-                    for inst in s.instances:
-                        lines.append(f"\t0x{inst.offset:08x} {s.identifier} {inst.matched_data!r}")
-            print('\n'.join(lines) + '\n')
+            lines = [f"[{rule}] in '{name}':"]
+            for pattern in match.patterns:
+                for pm in pattern.matches:
+                    offset, length = pm.offset, pm.length
+                    if data is not None:
+                        matched = data[offset:offset + length]
+                        if pm.xor_key is not None:
+                            matched = bytes(b ^ pm.xor_key for b in matched)
+                    else:
+                        matched = f'<{length} bytes>'
+                    lines.append(f"\t0x{offset:08x} {pattern.identifier} {matched!r}")
+            print('\n'.join(lines) + '\n', file=out)

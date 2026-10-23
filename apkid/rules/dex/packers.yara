@@ -335,7 +335,7 @@ rule appsealing_loader_1_2_2 : packer
     is_dex and all of them
 }
 
-rule tencent : packer
+rule tencent_dex : packer
 {
   meta:
     description = "Mobile Tencent Protect"
@@ -617,7 +617,7 @@ rule jiagu_k : packer
     $classNameString = { 00 10 4C 76 69 72 62 6F 78 2F 53 74 75 62 41 70 70 3B 00 } // Lvirbox/StubApp;
    
   condition:
-    is_dex and all of them and (dex.header.data_size + dex.header.data_offset) < dex.header.file_size
+    is_dex and all of them and (dex.header.data_size + dex.header.data_off) < dex.header.file_size
 }
 
 rule nesun_dex : packer
@@ -741,7 +741,7 @@ rule kiwisec_dex : packer
     is_dex and any of them
 }
 
-rule manxi_sec : packer
+rule manxi_sec_dex : packer
 {
   meta:
     description = "Manxi Security"
