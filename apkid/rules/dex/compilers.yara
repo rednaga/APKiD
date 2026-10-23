@@ -171,6 +171,31 @@ private rule r8_map_type_order : internal
 
     // missing code and (fields | something else), likely small dex
     or (dex.map_list.items[6].type == 0x1001 and dex.map_list.items[7].type == 0x2002 and dex.map_list.items[8].type == 0x2004 and dex.map_list.items[9].type == 0x2000 and dex.map_list.items[10].type == 0x1003)
+
+    // D8 "debug" compilation-mode (e.g. D8 9.0.32): CODE_ITEM then STRING_DATA_ITEM
+    // directly followed by ANNOTATION_ITEM, CLASS_DATA_ITEM and ENCODED_ARRAY_ITEM,
+    // with no TYPE_DEBUG_INFO_ITEM nor TYPE_TYPE_LIST item next to CODE_ITEM.
+    // Sample: classes10.dex of a flutter debug APK (b'dex\n037\x00',
+    // D8 marker: ~~D8{"backend":"dex","compilation-mode":"debug","has-checksums":true,"min-api":24,"version":"9.0.32"})
+    or (dex.map_list.items[7].type == 0x2001 and dex.map_list.items[8].type == 0x2002 and dex.map_list.items[9].type == 0x2004 and dex.map_list.items[10].type == 0x2000)
+
+    // D8 "debug" compilation-mode without TYPE_FIELD_ID_ITEM (hence CODE_ITEM lands
+    // at items[6]) and without TYPE_TYPE_LIST: TYPE_CODE_ITEM, TYPE_DEBUG_INFO_ITEM,
+    // TYPE_STRING_DATA_ITEM, TYPE_ANNOTATION_ITEM, TYPE_CLASS_DATA_ITEM.
+    // Sample: classes12.dex of a flutter debug APK (b'dex\n039\x00',
+    // D8 marker: ~~D8{"backend":"dex","compilation-mode":"debug","has-checksums":true,"min-api":24,"version":"9.0.32"})
+    or (dex.map_list.items[6].type == 0x2001 and dex.map_list.items[7].type == 0x2003 and dex.map_list.items[8].type == 0x2002 and dex.map_list.items[9].type == 0x2004 and dex.map_list.items[10].type == 0x2000)
+
+    // D8 without TYPE_FIELD_ID_ITEM and without TYPE_ANNOTATION_ITEM: the common-case
+    // order (CODE, DEBUG, TYPE_LIST) shifted left by one: CODE at items[6].
+    // Sample: classes.dex of InputDevices.apk (b'dex\n039\x00', D8 marker present)
+    or (dex.map_list.items[6].type == 0x2001 and dex.map_list.items[7].type == 0x2003 and dex.map_list.items[8].type == 0x1001 and dex.map_list.items[9].type == 0x2002 and dex.map_list.items[10].type == 0x2000)
+
+    // D8 "debug" compilation-mode without TYPE_CODE_ITEM nor TYPE_DEBUG_INFO_ITEM:
+    // CLASS_DEF_ITEM, TYPE_TYPE_LIST, STRING_DATA_ITEM, ANNOTATION_ITEM, CLASS_DATA_ITEM.
+    // Sample: classes13.dex of a flutter debug APK (b'dex\n039\x00',
+    // D8 marker: ~~D8{"backend":"dex","compilation-mode":"debug","has-checksums":true,"min-api":24,"version":"9.0.32"})
+    or (dex.map_list.items[6].type == 0x0006 and dex.map_list.items[7].type == 0x1001 and dex.map_list.items[8].type == 0x2002 and dex.map_list.items[9].type == 0x2004 and dex.map_list.items[10].type == 0x2000)
 }
 
 private rule r8_marker : internal
