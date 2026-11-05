@@ -109,9 +109,8 @@ python prep-release.py
 pip install -e .[dev,test]
 ```
 
-The command `python prep-release.py` above requires the `yara-x` package to be
-already installed (upstream's `yara-python` references are pre-migration; APKiD
-now uses yara-x, see the yara-x build instructions below).
+The command `python prep-release.py` above requires `yarax-python-dex` to be
+already installed (APKiD uses yara-x; see below).
 
 If the above doesn't work, due to permission errors dependent on your local machine and where Python has been installed, try specifying the `--user` flag. This is likely needed if you're not using a virtual environment:
 
@@ -121,30 +120,12 @@ pip install -e .[dev,test] --user
 
 If you update any of the rules, be sure to run `prep-release.py` to recompile them.
 
-APKiD uses [yara-x](https://github.com/VirusTotal/yara-x) (Rust). For full DEX
-support we build from our fork, included as the `./yarax_patches` submodule
-([yarax_patches](https://github.com/AbhiTheModder/yarax_patches), patched with
-restored proto fields):
-
-```bash
-git clone --recursive https://github.com/rednaga/APKiD
-cd APKiD
-git submodule update --init --recursive
-cd yarax_patches && make patch && cd ..
-pip install maturin
-cd yarax_patches/yara-x/py
-maturin build --release --no-default-features \
-  --features dex-module,elf-module,pe-module,hash-module
-pip install <built-wheel>
-```
-
-The Rust dependency is configured with minimal features:
-
-```toml
-yara-x = { path = "./yarax_patches/yara-x/lib", default-features = false, features = ["dex-module", "hash-module", "crypto", "pe-module", "elf-module", "generate-proto-code"] }
-```
-
-
+APKiD uses [yara-x](https://github.com/VirusTotal/yara-x) (Rust). Stock yara-x
+removed DEX proto fields that APKiD rules need, so APKiD depends on the patched
+build published as **`yarax-python-dex`** on PyPI (source:
+[yarax_patches](https://github.com/AbhiTheModder/yarax_patches)). It is installed
+automatically by `pip install apkid`, pinned to an exact version because compiled
+`.yarc` rules are tied to the engine build that produced them.
 
 ## For Package Maintainers
 

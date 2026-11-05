@@ -47,7 +47,10 @@ def package_files(directory):
 
 
 install_requires = [
-    'yara-x>=1.20.0',
+    # Patched YARA-X build published as its own wheel; stock yara-x lacks the
+    # restored DEX proto fields (string_ids[].offset, map_off, ...) APKiD rules
+    # rely on. Pinned: compiled rules are tied to the exact engine build.
+    'yarax-python-dex==1.20.0',
 ]
 
 dev_requires = [
