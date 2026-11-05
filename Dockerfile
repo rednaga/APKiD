@@ -11,8 +11,6 @@ RUN python -m venv --copies /opt/venv
 
 ENV PATH="/opt/venv/bin:$PATH"
 
-# yara-x bindings come from the pinned yarax-python-dex wheel on PyPI
-# (installed as a dependency of apkid); no Rust toolchain needed here.
 RUN python -m pip install . \
     && python prep-release.py
 
