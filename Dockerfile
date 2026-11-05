@@ -11,9 +11,8 @@ RUN python -m venv --copies /opt/venv
 
 ENV PATH="/opt/venv/bin:$PATH"
 
-RUN python -m pip install yara-python-dex>=1.0.5 \
-    && python prep-release.py \
-    && python -m pip install .
+RUN python -m pip install . \
+    && python prep-release.py
 
 # Place to bind a mount point to for scratch pad work
 RUN mkdir /input

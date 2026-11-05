@@ -29,7 +29,7 @@ import os
 from typing import Dict
 from typing import Optional
 
-import yara
+import yara_x as yara
 
 
 class RulesManager(object):
@@ -44,7 +44,8 @@ class RulesManager(object):
         self.rules_hash: Optional[str] = None
 
     def load(self) -> yara.Rules:
-        self.rules = yara.load(self.rules_path)
+        with open(self.rules_path, 'rb') as f:
+            self.rules = yara.Rules.deserialize_from(f)
         return self.rules
 
     def _collect_yara_files(self) -> Dict[str, str]:
@@ -61,11 +62,22 @@ class RulesManager(object):
 
     def compile(self) -> yara.Rules:
         yara_files = self._collect_yara_files()
-        self.rules = yara.compile(filepaths=yara_files)
+        # relaxed_re_syntax allows legacy yara regexes that yara-x strict
+        # mode would reject (e.g. unescaped chars, invalid escapes treated
+        # as literals in yara). APKiD rules were written for yara.
+        compiler = yara.Compiler(relaxed_re_syntax=True)
+        compiler.add_include_dir(self.rules_dir)
+        for path in sorted(yara_files.keys()):
+            rel = os.path.relpath(path, self.rules_dir).replace(os.sep, '/')
+            compiler.new_namespace(rel)
+            compiler.add_source(f'include "{rel}"', origin=path)
+        self.rules = compiler.build()
         return self.rules
 
     def save(self) -> int:
-        self.rules.save(self.rules_path)
+        assert self.rules is not None, "no rules to save, call compile() or load() first"
+        with open(self.rules_path, 'wb') as f:
+            self.rules.serialize_into(f)
         rules_count = len(set([r.identifier for r in self.rules]))
         return rules_count
 
@@ -73,7 +85,7 @@ class RulesManager(object):
     def hash(self) -> str:
         if not self.rules_hash:
             h = hashlib.sha256()
-            for file_path in self._collect_yara_files():
+            for file_path in sorted(self._collect_yara_files()):
                 with open(file_path, 'rb') as f:
                     h.update(f.read())
             self.rules_hash = h.hexdigest()

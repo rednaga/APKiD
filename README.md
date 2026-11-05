@@ -109,7 +109,8 @@ python prep-release.py
 pip install -e .[dev,test]
 ```
 
-The command `python prep-release.py` above requires the packages `yara-python` and `yara-python-dex` to be already installed.
+The command `python prep-release.py` above requires `yarax-python-dex` to be
+already installed (APKiD uses yara-x; see below).
 
 If the above doesn't work, due to permission errors dependent on your local machine and where Python has been installed, try specifying the `--user` flag. This is likely needed if you're not using a virtual environment:
 
@@ -119,14 +120,12 @@ pip install -e .[dev,test] --user
 
 If you update any of the rules, be sure to run `prep-release.py` to recompile them.
 
-If you are using Windows, uninstall any previous versions of Yara and install Yara 3.11.0 and yara-python-dex before compiling
-
-```bash
-pip uninstall -y yara-python yara-python-dex
-pip install yara-python==3.11.0 wheel
-pip wheel --wheel-dir=yara-python-dex git+https://github.com/MobSF/yara-python-dex.git
-pip install --no-index --find-links=yara-python-dex yara-python-dex
-```
+APKiD uses [yara-x](https://github.com/VirusTotal/yara-x) (Rust). Stock yara-x
+removed DEX proto fields that APKiD rules need, so APKiD depends on the patched
+build published as **`yarax-python-dex`** on PyPI (source:
+[yarax_patches](https://github.com/AbhiTheModder/yarax_patches)). It is installed
+automatically by `pip install apkid`, pinned to an exact version because compiled
+`.yarc` rules are tied to the engine build that produced them.
 
 ## For Package Maintainers
 

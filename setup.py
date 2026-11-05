@@ -47,7 +47,8 @@ def package_files(directory):
 
 
 install_requires = [
-    'yara-python-dex>=1.0.1',
+    # Pinned: compiled rules are tied to the exact engine build.
+    'yarax-python-dex==1.20.1',
 ]
 
 dev_requires = [

@@ -37,9 +37,14 @@ def test_lint_rules(rules_manager):
         if len(r.tags) == 0:
             warnings.warn(f"rule has no tags: {r.identifier}", stacklevel=0)
 
-        if 'description' not in r.meta:
+        try:
+            meta = dict(r.metadata)
+        except Exception:
+            meta = getattr(r, 'meta', {})
+
+        if 'description' not in meta:
             warnings.warn(f"rule has no description: {r.identifier}", stacklevel=0)
 
         if ('packer' in r.tags or 'protector' in r.tags or 'obfuscator' in r.tags) \
-                and 'sample' not in r.meta:
+                and 'sample' not in meta:
             warnings.warn(f"rule has no reference sample: {r.identifier}", stacklevel=0)

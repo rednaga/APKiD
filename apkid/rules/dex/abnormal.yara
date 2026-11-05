@@ -64,7 +64,7 @@ rule non_zero_link_offset : anti_disassembly
     sample      = "5882f768d42fe1837f562023e5ea1d7e03c7b56f0c31bcbb4423726c2109faf9"
 
   condition:
-    dex.header.link_offset != 0x0
+    dex.header.link_off != 0x0
 }
 
 rule non_little_endian : abnormal
@@ -83,7 +83,7 @@ rule data_injected_after_map : dropper
     description = "injected data after map section"
 
   condition:
-    dex.header.file_size < dex.header.map_offset + (dex.map_list.size * 12) + 4
+    dex.header.file_size < dex.header.map_off + (dex.map_list.size * 12) + 4
 }
 
 rule illegal_class_names : anti_disassembly
