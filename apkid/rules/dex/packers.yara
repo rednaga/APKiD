@@ -335,7 +335,7 @@ rule appsealing_loader_1_2_2 : packer
     is_dex and all of them
 }
 
-rule tencent_dex : packer
+rule tencent : packer
 {
   meta:
     description = "Mobile Tencent Protect"
@@ -741,7 +741,7 @@ rule kiwisec_dex : packer
     is_dex and any of them
 }
 
-rule manxi_sec_dex : packer
+rule manxi_sec : packer
 {
   meta:
     description = "Manxi Security"

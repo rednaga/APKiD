@@ -105,7 +105,7 @@ rule free_rasp_old : protector
     is_apk and all of them
 }
 
-rule ahnlab_v3_engine_apk : protector
+rule ahnlab_v3_engine : protector
 {
   meta:
     description = "Ahnlab V3 engine"
@@ -139,7 +139,7 @@ rule free_rasp_new : protector
     is_apk and all of them
 }
 
-rule ahope_appshield_apk : protector
+rule ahope_appshield : protector
 {
     meta:
         description = "Ahope AppShield"
@@ -154,7 +154,7 @@ rule ahope_appshield_apk : protector
       is_apk and any of them
 }
 
-rule vguard_apk : protector
+rule vguard : protector
 {
   meta:
     description = "VGuard"
@@ -173,7 +173,7 @@ rule vguard_apk : protector
     is_apk and 2 of them
 }
 
-rule appdefence_apk : protector
+rule appdefence : protector
 {
   meta:
     description = "ExTrus AppDefence"
@@ -188,7 +188,7 @@ rule appdefence_apk : protector
     is_apk and all of them
 }
 
-rule dpt_shell_apk : protector
+rule dpt_shell : protector
 {
   meta:
     description = "DPT Shell"
@@ -205,7 +205,7 @@ rule dpt_shell_apk : protector
     is_apk and $assetlib and any of ($app*)
 }
 
-rule build38_apk : protector
+rule build38 : protector
 {
   meta:
     description = "Build38"
@@ -222,7 +222,7 @@ rule build38_apk : protector
     is_apk and 2 of them
 }
 
-rule shield_sdk_apk : protector
+rule shield_sdk : protector
 {
   meta:
     description = "Shield SDK"
@@ -252,7 +252,7 @@ rule andres : manipulator
       is_apk and #res > 10
 }
 
-rule bugsmirror_apk : protector
+rule bugsmirror : protector
 {
   meta:
     description = "BugsMirror"
@@ -269,7 +269,7 @@ rule bugsmirror_apk : protector
     is_apk and 2 of them
 }
 
-rule bshield_apk : protector
+rule bshield : protector
 {
   meta:
     description = "BShield"
@@ -300,7 +300,7 @@ rule denuvo_apk : protector
     is_apk and all of them
 }
 
-rule alibaba_sec_apk : protector
+rule alibaba_sec : protector
 {
   meta:
     description = "Alibaba Security SDK"
@@ -316,7 +316,7 @@ rule alibaba_sec_apk : protector
     is_apk and any of them
 }
 
-rule bureau_apk : protector
+rule bureau : protector
 {
   meta:
     description = "Bureau"

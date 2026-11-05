@@ -196,7 +196,7 @@ rule free_rasp_dex : protector
     is_dex and $decryption
 }
 
-rule appiron_dex : protector
+rule appiron : protector
 {
     meta:
         description = "Secucen AppIron"
@@ -229,7 +229,7 @@ rule appiron_dex : protector
       is_dex and any of them
 }
 
-rule ahope_appshield_dex : protector
+rule ahope_appshield : protector
 {
     meta:
         description = "Ahope AppShield"
@@ -255,7 +255,7 @@ rule ahope_appshield_dex : protector
       is_dex and any of them
 }
 
-rule vguard_dex : protector
+rule vguard : protector
 {
   meta:
     description = "VGuard"
@@ -273,7 +273,7 @@ rule vguard_dex : protector
     is_dex and any of them
 }
 
-rule appdefence_dex : protector
+rule appdefence : protector
 {
   meta:
     description = "ExTrus AppDefence"
@@ -311,7 +311,7 @@ rule xiaomi_xsof_sdk : protector
     is_dex and #s > 1
 }
 
-rule dpt_shell_dex : protector
+rule dpt_shell : protector
 {
   meta:
     description = "DPT Shell"
@@ -330,7 +330,7 @@ rule dpt_shell_dex : protector
     is_dex and any of them
 }
 
-rule ahnlab_v3_engine_dex : anti_root
+rule ahnlab_v3_engine : anti_root
 {
   meta:
     description = "Ahnlab V3 Engine"
@@ -408,7 +408,7 @@ rule flutterjailbreakdetection : anti_root
     is_dex and all of them
 }
 
-rule rootbeer_dex : anti_root
+rule rootbeer : anti_root
 {
   meta:
     description = "RootBeer"
@@ -424,7 +424,7 @@ rule rootbeer_dex : anti_root
     is_dex and all of them
 }
 
-rule build38_dex : protector
+rule build38 : protector
 {
   meta:
     description = "Build38"
@@ -442,7 +442,7 @@ rule build38_dex : protector
     is_dex and any of them
 }
 
-rule shield_sdk_dex : protector
+rule shield_sdk : protector
 {
   meta:
     description = "Shield SDK"
@@ -467,7 +467,7 @@ rule shield_sdk_dex : protector
     is_dex and any of them
 }
 
-rule bugsmirror_dex : protector
+rule bugsmirror : protector
 {
   meta:
     description = "BugsMirror"
@@ -504,7 +504,7 @@ rule bugsmirror_dex : protector
    is_dex and any of them
 }
 
-rule bshield_dex : protector
+rule bshield : protector
 {
   meta:
     description = "BShield"
@@ -519,7 +519,7 @@ rule bshield_dex : protector
     is_dex and all of them
 }
 
-rule alibaba_sec_dex : protector
+rule alibaba_sec : protector
 {
   meta:
     description = "Alibaba Security SDK"
@@ -535,7 +535,7 @@ rule alibaba_sec_dex : protector
     is_dex and all of them
 }
 
-rule bureau_dex : protector
+rule bureau : protector
 {
   meta:
     description = "Bureau"

@@ -1,6 +1,6 @@
 include "common.yara"
 
-rule teemo_dex : tracker
+rule teemo : tracker
 {
     meta:
         description = "Teemo"
@@ -16,7 +16,7 @@ rule teemo_dex : tracker
         is_dex and any of them
 }
 
-rule fidzup_dex : tracker
+rule fidzup : tracker
 {
     meta:
         description = "FidZup"
@@ -32,7 +32,7 @@ rule fidzup_dex : tracker
         is_dex and any of them
 }
 
-rule audience_studio_krux_dex : tracker
+rule audience_studio_krux : tracker
 {
     meta:
         description = "Audience Studio (Krux)"
@@ -48,7 +48,7 @@ rule audience_studio_krux_dex : tracker
         is_dex and any of them
 }
 
-rule ad_screen_dex : tracker
+rule ad_screen : tracker
 {
     meta:
         description = "Ad4Screen"
@@ -64,7 +64,7 @@ rule ad_screen_dex : tracker
         is_dex and any of them
 }
 
-rule google_doubleclick_dex : tracker
+rule google_doubleclick : tracker
 {
     meta:
         description = "G. DoubleClick"
@@ -79,7 +79,7 @@ rule google_doubleclick_dex : tracker
         is_dex and any of them
 }
 
-rule weborama_dex : tracker
+rule weborama : tracker
 {
     meta:
         description = "Weborama"
@@ -95,7 +95,7 @@ rule weborama_dex : tracker
         is_dex and any of them
 }
 
-rule smart_dex : tracker
+rule smart : tracker
 {
     meta:
         description = "Smart"
@@ -111,7 +111,7 @@ rule smart_dex : tracker
         is_dex and any of them
 }
 
-rule jw_player_dex : tracker
+rule jw_player : tracker
 {
     meta:
         description = "JW Player"
@@ -127,7 +127,7 @@ rule jw_player_dex : tracker
         is_dex and any of them
 }
 
-rule loggly_dex : tracker
+rule loggly : tracker
 {
     meta:
         description = "Loggly"
@@ -143,7 +143,7 @@ rule loggly_dex : tracker
         is_dex and any of them
 }
 
-rule outbrain_dex : tracker
+rule outbrain : tracker
 {
     meta:
         description = "OutBrain"
@@ -159,7 +159,7 @@ rule outbrain_dex : tracker
         is_dex and any of them
 }
 
-rule appsflyer_dex : tracker
+rule appsflyer : tracker
 {
     meta:
         description = "AppsFlyer"
@@ -175,7 +175,7 @@ rule appsflyer_dex : tracker
         is_dex and any of them
 }
 
-rule ligatus_dex : tracker
+rule ligatus : tracker
 {
     meta:
         description = "Ligatus"
@@ -191,7 +191,7 @@ rule ligatus_dex : tracker
         is_dex and any of them
 }
 
-rule widespace_dex : tracker
+rule widespace : tracker
 {
     meta:
         description = "Widespace"
@@ -207,7 +207,7 @@ rule widespace_dex : tracker
         is_dex and any of them
 }
 
-rule appnexus_dex : tracker
+rule appnexus : tracker
 {
     meta:
         description = "AppNexus"
@@ -223,7 +223,7 @@ rule appnexus_dex : tracker
         is_dex and any of them
 }
 
-rule localytics_dex : tracker
+rule localytics : tracker
 {
     meta:
         description = "Localytics"
@@ -239,7 +239,7 @@ rule localytics_dex : tracker
         is_dex and any of them
 }
 
-rule braze_formerly_appboy_dex : tracker
+rule braze_formerly_appboy : tracker
 {
     meta:
         description = "Braze (formerly Appboy)"
@@ -255,7 +255,7 @@ rule braze_formerly_appboy_dex : tracker
         is_dex and any of them
 }
 
-rule mparticle_dex : tracker
+rule mparticle : tracker
 {
     meta:
         description = "mParticle"
@@ -271,7 +271,7 @@ rule mparticle_dex : tracker
         is_dex and any of them
 }
 
-rule s_m_dex : tracker
+rule s_m : tracker
 {
     meta:
         description = "S4M"
@@ -287,7 +287,7 @@ rule s_m_dex : tracker
         is_dex and any of them
 }
 
-rule sizmek_dex : tracker
+rule sizmek : tracker
 {
     meta:
         description = "Sizmek"
@@ -303,7 +303,7 @@ rule sizmek_dex : tracker
         is_dex and any of them
 }
 
-rule batch_dex : tracker
+rule batch : tracker
 {
     meta:
         description = "Batch"
@@ -319,7 +319,7 @@ rule batch_dex : tracker
         is_dex and any of them
 }
 
-rule sync_ad_dex : tracker
+rule sync_ad : tracker
 {
     meta:
         description = "Sync2Ad"
@@ -335,7 +335,7 @@ rule sync_ad_dex : tracker
         is_dex and any of them
 }
 
-rule flurry_dex : tracker
+rule flurry : tracker
 {
     meta:
         description = "Flurry"
@@ -351,7 +351,7 @@ rule flurry_dex : tracker
         is_dex and any of them
 }
 
-rule hockeyapp_dex : tracker
+rule hockeyapp : tracker
 {
     meta:
         description = "HockeyApp"
@@ -367,7 +367,7 @@ rule hockeyapp_dex : tracker
         is_dex and any of them
 }
 
-rule google_crashlytics_dex : tracker
+rule google_crashlytics : tracker
 {
     meta:
         description = "G. CrashLytics"
@@ -383,7 +383,7 @@ rule google_crashlytics_dex : tracker
         is_dex and any of them
 }
 
-rule leanplum_dex : tracker
+rule leanplum : tracker
 {
     meta:
         description = "LeanPlum"
@@ -399,7 +399,7 @@ rule leanplum_dex : tracker
         is_dex and any of them
 }
 
-rule tinder_analytics_dex : tracker
+rule tinder_analytics : tracker
 {
     meta:
         description = "Tinder Analytics"
@@ -415,7 +415,7 @@ rule tinder_analytics_dex : tracker
         is_dex and any of them
 }
 
-rule schibsted_dex : tracker
+rule schibsted : tracker
 {
     meta:
         description = "Schibsted"
@@ -431,7 +431,7 @@ rule schibsted_dex : tracker
         is_dex and any of them
 }
 
-rule atinternet_dex : tracker
+rule atinternet : tracker
 {
     meta:
         description = "ATInternet"
@@ -447,7 +447,7 @@ rule atinternet_dex : tracker
         is_dex and any of them
 }
 
-rule tealium_dex : tracker
+rule tealium : tracker
 {
     meta:
         description = "Tealium"
@@ -463,7 +463,7 @@ rule tealium_dex : tracker
         is_dex and any of them
 }
 
-rule nexage_dex : tracker
+rule nexage : tracker
 {
     meta:
         description = "Nexage"
@@ -479,7 +479,7 @@ rule nexage_dex : tracker
         is_dex and any of them
 }
 
-rule ogury_presage_dex : tracker
+rule ogury_presage : tracker
 {
     meta:
         description = "Ogury Presage"
@@ -495,7 +495,7 @@ rule ogury_presage_dex : tracker
         is_dex and any of them
 }
 
-rule twitter_mopub_dex : tracker
+rule twitter_mopub : tracker
 {
     meta:
         description = "Twitter MoPub"
@@ -511,7 +511,7 @@ rule twitter_mopub_dex : tracker
         is_dex and any of them
 }
 
-rule add_apt_tr_dex : tracker
+rule add_apt_tr : tracker
 {
     meta:
         description = "Add Apt Tr"
@@ -527,7 +527,7 @@ rule add_apt_tr_dex : tracker
         is_dex and any of them
 }
 
-rule vectaury_dex : tracker
+rule vectaury : tracker
 {
     meta:
         description = "Vectaury"
@@ -543,7 +543,7 @@ rule vectaury_dex : tracker
         is_dex and any of them
 }
 
-rule tune_dex : tracker
+rule tune : tracker
 {
     meta:
         description = "Tune"
@@ -559,7 +559,7 @@ rule tune_dex : tracker
         is_dex and any of them
 }
 
-rule pushwoosh_dex : tracker
+rule pushwoosh : tracker
 {
     meta:
         description = "Pushwoosh"
@@ -575,7 +575,7 @@ rule pushwoosh_dex : tracker
         is_dex and any of them
 }
 
-rule demdex_dex : tracker
+rule demdex : tracker
 {
     meta:
         description = "Demdex"
@@ -591,7 +591,7 @@ rule demdex_dex : tracker
         is_dex and any of them
 }
 
-rule adswizz_dex : tracker
+rule adswizz : tracker
 {
     meta:
         description = "AdsWizz"
@@ -607,7 +607,7 @@ rule adswizz_dex : tracker
         is_dex and any of them
 }
 
-rule exacttarget_dex : tracker
+rule exacttarget : tracker
 {
     meta:
         description = "ExactTarget"
@@ -623,7 +623,7 @@ rule exacttarget_dex : tracker
         is_dex and any of them
 }
 
-rule omniture_dex : tracker
+rule omniture : tracker
 {
     meta:
         description = "Omniture"
@@ -639,7 +639,7 @@ rule omniture_dex : tracker
         is_dex and any of them
 }
 
-rule openlocate_dex : tracker
+rule openlocate : tracker
 {
     meta:
         description = "OpenLocate"
@@ -655,7 +655,7 @@ rule openlocate_dex : tracker
         is_dex and any of them
 }
 
-rule tagcommander_commanders_act_dex : tracker
+rule tagcommander_commanders_act : tracker
 {
     meta:
         description = "TagCommander (Commanders Act.)"
@@ -671,7 +671,7 @@ rule tagcommander_commanders_act_dex : tracker
         is_dex and any of them
 }
 
-rule crowdtangle_dex : tracker
+rule crowdtangle : tracker
 {
     meta:
         description = "CrowdTangle"
@@ -686,7 +686,7 @@ rule crowdtangle_dex : tracker
         is_dex and any of them
 }
 
-rule facebook_audience_dex : tracker
+rule facebook_audience : tracker
 {
     meta:
         description = "FB. Audience"
@@ -701,7 +701,7 @@ rule facebook_audience_dex : tracker
         is_dex and any of them
 }
 
-rule google_analytics_dex : tracker
+rule google_analytics : tracker
 {
     meta:
         description = "G. Analytics"
@@ -717,7 +717,7 @@ rule google_analytics_dex : tracker
         is_dex and any of them
 }
 
-rule google_firebase_analytics_dex : tracker
+rule google_firebase_analytics : tracker
 {
     meta:
         description = "G. Firebase Analytics"
@@ -733,7 +733,7 @@ rule google_firebase_analytics_dex : tracker
         is_dex and any of them
 }
 
-rule eulerian_dex : tracker
+rule eulerian : tracker
 {
     meta:
         description = "Eulerian"
@@ -749,7 +749,7 @@ rule eulerian_dex : tracker
         is_dex and any of them
 }
 
-rule adjust_dex : tracker
+rule adjust : tracker
 {
     meta:
         description = "Adjust"
@@ -765,7 +765,7 @@ rule adjust_dex : tracker
         is_dex and any of them
 }
 
-rule chartboost_dex : tracker
+rule chartboost : tracker
 {
     meta:
         description = "ChartBoost"
@@ -781,7 +781,7 @@ rule chartboost_dex : tracker
         is_dex and any of them
 }
 
-rule backelite_dex : tracker
+rule backelite : tracker
 {
     meta:
         description = "Backelite"
@@ -797,7 +797,7 @@ rule backelite_dex : tracker
         is_dex and any of them
 }
 
-rule areametrics_dex : tracker
+rule areametrics : tracker
 {
     meta:
         description = "Areametrics"
@@ -813,7 +813,7 @@ rule areametrics_dex : tracker
         is_dex and any of them
 }
 
-rule comscore_dex : tracker
+rule comscore : tracker
 {
     meta:
         description = "ComScore"
@@ -829,7 +829,7 @@ rule comscore_dex : tracker
         is_dex and any of them
 }
 
-rule cuebiq_dex : tracker
+rule cuebiq : tracker
 {
     meta:
         description = "Cuebiq"
@@ -845,7 +845,7 @@ rule cuebiq_dex : tracker
         is_dex and any of them
 }
 
-rule helpshift_dex : tracker
+rule helpshift : tracker
 {
     meta:
         description = "HelpShift"
@@ -861,7 +861,7 @@ rule helpshift_dex : tracker
         is_dex and any of them
 }
 
-rule kontakt_dex : tracker
+rule kontakt : tracker
 {
     meta:
         description = "Kontakt"
@@ -877,7 +877,7 @@ rule kontakt_dex : tracker
         is_dex and any of them
 }
 
-rule locuslabs_dex : tracker
+rule locuslabs : tracker
 {
     meta:
         description = "Locuslabs"
@@ -893,7 +893,7 @@ rule locuslabs_dex : tracker
         is_dex and any of them
 }
 
-rule moat_dex : tracker
+rule moat : tracker
 {
     meta:
         description = "Moat"
@@ -909,7 +909,7 @@ rule moat_dex : tracker
         is_dex and any of them
 }
 
-rule segment_dex : tracker
+rule segment : tracker
 {
     meta:
         description = "Segment"
@@ -925,7 +925,7 @@ rule segment_dex : tracker
         is_dex and any of them
 }
 
-rule mobile_engagement_dex : tracker
+rule mobile_engagement : tracker
 {
     meta:
         description = "Mobile Engagement"
@@ -941,7 +941,7 @@ rule mobile_engagement_dex : tracker
         is_dex and any of them
 }
 
-rule colocator_dex : tracker
+rule colocator : tracker
 {
     meta:
         description = "Colocator"
@@ -957,7 +957,7 @@ rule colocator_dex : tracker
         is_dex and any of them
 }
 
-rule facebook_ads_dex : tracker
+rule facebook_ads : tracker
 {
     meta:
         description = "FB. Ads"
@@ -972,7 +972,7 @@ rule facebook_ads_dex : tracker
         is_dex and any of them
 }
 
-rule facebook_analytics_dex : tracker
+rule facebook_analytics : tracker
 {
     meta:
         description = "FB. Analytics"
@@ -987,7 +987,7 @@ rule facebook_analytics_dex : tracker
         is_dex and any of them
 }
 
-rule facebook_login_dex : tracker
+rule facebook_login : tracker
 {
     meta:
         description = "FB. Login"
@@ -1002,7 +1002,7 @@ rule facebook_login_dex : tracker
         is_dex and any of them
 }
 
-rule facebook_notifications_dex : tracker
+rule facebook_notifications : tracker
 {
     meta:
         description = "FB. Notifs"
@@ -1017,7 +1017,7 @@ rule facebook_notifications_dex : tracker
         is_dex and any of them
 }
 
-rule facebook_places_dex : tracker
+rule facebook_places : tracker
 {
     meta:
         description = "FB. Places"
@@ -1032,7 +1032,7 @@ rule facebook_places_dex : tracker
         is_dex and any of them
 }
 
-rule facebook_share_dex : tracker
+rule facebook_share : tracker
 {
     meta:
         description = "FB. Share"
@@ -1047,7 +1047,7 @@ rule facebook_share_dex : tracker
         is_dex and any of them
 }
 
-rule google_ads_dex : tracker
+rule google_ads : tracker
 {
     meta:
         description = "G. Ads"
@@ -1062,7 +1062,7 @@ rule google_ads_dex : tracker
         is_dex and any of them
 }
 
-rule applovin_max_and_sparklabs_dex : tracker
+rule applovin_max_and_sparklabs : tracker
 {
     meta:
         description = "AppLovin (MAX and SparkLabs)"
@@ -1078,7 +1078,7 @@ rule applovin_max_and_sparklabs_dex : tracker
         is_dex and any of them
 }
 
-rule glispa_connect_formerly_avocarrot_dex : tracker
+rule glispa_connect_formerly_avocarrot : tracker
 {
     meta:
         description = "Glispa Connect (Formerly Avocarrot)"
@@ -1094,7 +1094,7 @@ rule glispa_connect_formerly_avocarrot_dex : tracker
         is_dex and any of them
 }
 
-rule nativex_dex : tracker
+rule nativex : tracker
 {
     meta:
         description = "NativeX"
@@ -1110,7 +1110,7 @@ rule nativex_dex : tracker
         is_dex and any of them
 }
 
-rule baidu_maps_dex : tracker
+rule baidu_maps : tracker
 {
     meta:
         description = "Baidu Maps"
@@ -1126,7 +1126,7 @@ rule baidu_maps_dex : tracker
         is_dex and any of them
 }
 
-rule wechat_location_dex : tracker
+rule wechat_location : tracker
 {
     meta:
         description = "WeChat Location"
@@ -1142,7 +1142,7 @@ rule wechat_location_dex : tracker
         is_dex and any of them
 }
 
-rule hypertrack_dex : tracker
+rule hypertrack : tracker
 {
     meta:
         description = "HyperTrack"
@@ -1158,7 +1158,7 @@ rule hypertrack_dex : tracker
         is_dex and any of them
 }
 
-rule uber_analytics_dex : tracker
+rule uber_analytics : tracker
 {
     meta:
         description = "Uber Analytics"
@@ -1174,7 +1174,7 @@ rule uber_analytics_dex : tracker
         is_dex and any of them
 }
 
-rule lisnr_dex : tracker
+rule lisnr : tracker
 {
     meta:
         description = "Lisnr"
@@ -1190,7 +1190,7 @@ rule lisnr_dex : tracker
         is_dex and any of them
 }
 
-rule silverpush_dex : tracker
+rule silverpush : tracker
 {
     meta:
         description = "SilverPush"
@@ -1206,7 +1206,7 @@ rule silverpush_dex : tracker
         is_dex and any of them
 }
 
-rule shopkick_dex : tracker
+rule shopkick : tracker
 {
     meta:
         description = "Shopkick"
@@ -1222,7 +1222,7 @@ rule shopkick_dex : tracker
         is_dex and any of them
 }
 
-rule alphonso_dex : tracker
+rule alphonso : tracker
 {
     meta:
         description = "Alphonso"
@@ -1238,7 +1238,7 @@ rule alphonso_dex : tracker
         is_dex and any of them
 }
 
-rule smaato_dex : tracker
+rule smaato : tracker
 {
     meta:
         description = "Smaato"
@@ -1254,7 +1254,7 @@ rule smaato_dex : tracker
         is_dex and any of them
 }
 
-rule scandit_dex : tracker
+rule scandit : tracker
 {
     meta:
         description = "Scandit"
@@ -1270,7 +1270,7 @@ rule scandit_dex : tracker
         is_dex and any of them
 }
 
-rule inrix_dex : tracker
+rule inrix : tracker
 {
     meta:
         description = "Inrix"
@@ -1286,7 +1286,7 @@ rule inrix_dex : tracker
         is_dex and any of them
 }
 
-rule signal__dex : tracker
+rule signal_ : tracker
 {
     meta:
         description = "Signal360"
@@ -1302,7 +1302,7 @@ rule signal__dex : tracker
         is_dex and any of them
 }
 
-rule telequid_dex : tracker
+rule telequid : tracker
 {
     meta:
         description = "TeleQuid"
@@ -1318,7 +1318,7 @@ rule telequid_dex : tracker
         is_dex and any of them
 }
 
-rule retency_dex : tracker
+rule retency : tracker
 {
     meta:
         description = "Retency"
@@ -1333,7 +1333,7 @@ rule retency_dex : tracker
         is_dex and any of them
 }
 
-rule madvertise_dex : tracker
+rule madvertise : tracker
 {
     meta:
         description = "MAdvertise"
@@ -1349,7 +1349,7 @@ rule madvertise_dex : tracker
         is_dex and any of them
 }
 
-rule adcolony_dex : tracker
+rule adcolony : tracker
 {
     meta:
         description = "AdColony"
@@ -1365,7 +1365,7 @@ rule adcolony_dex : tracker
         is_dex and any of them
 }
 
-rule accountkit_dex : tracker
+rule accountkit : tracker
 {
     meta:
         description = "AccountKit"
@@ -1381,7 +1381,7 @@ rule accountkit_dex : tracker
         is_dex and any of them
 }
 
-rule amazon_advertisement_dex : tracker
+rule amazon_advertisement : tracker
 {
     meta:
         description = "Amazon Advertisement"
@@ -1396,7 +1396,7 @@ rule amazon_advertisement_dex : tracker
         is_dex and any of them
 }
 
-rule amazon_mobile_associates_dex : tracker
+rule amazon_mobile_associates : tracker
 {
     meta:
         description = "Amazon Mobile Associates"
@@ -1411,7 +1411,7 @@ rule amazon_mobile_associates_dex : tracker
         is_dex and any of them
 }
 
-rule radius_networks_dex : tracker
+rule radius_networks : tracker
 {
     meta:
         description = "Radius Networks"
@@ -1427,7 +1427,7 @@ rule radius_networks_dex : tracker
         is_dex and any of them
 }
 
-rule amazon_analytics_amazon_insights_dex : tracker
+rule amazon_analytics_amazon_insights : tracker
 {
     meta:
         description = "Amazon Analytics (Amazon insights)"
@@ -1443,7 +1443,7 @@ rule amazon_analytics_amazon_insights_dex : tracker
         is_dex and any of them
 }
 
-rule baidu_appx_dex : tracker
+rule baidu_appx : tracker
 {
     meta:
         description = "Baidu APPX"
@@ -1458,7 +1458,7 @@ rule baidu_appx_dex : tracker
         is_dex and any of them
 }
 
-rule baidu_location_dex : tracker
+rule baidu_location : tracker
 {
     meta:
         description = "Baidu Location"
@@ -1473,7 +1473,7 @@ rule baidu_location_dex : tracker
         is_dex and any of them
 }
 
-rule baidu_mobile_ads_dex : tracker
+rule baidu_mobile_ads : tracker
 {
     meta:
         description = "Baidu Mobile Ads"
@@ -1488,7 +1488,7 @@ rule baidu_mobile_ads_dex : tracker
         is_dex and any of them
 }
 
-rule baidu_mobile_stat_dex : tracker
+rule baidu_mobile_stat : tracker
 {
     meta:
         description = "Baidu Mobile Stat"
@@ -1503,7 +1503,7 @@ rule baidu_mobile_stat_dex : tracker
         is_dex and any of them
 }
 
-rule estimote_dex : tracker
+rule estimote : tracker
 {
     meta:
         description = "Estimote"
@@ -1519,7 +1519,7 @@ rule estimote_dex : tracker
         is_dex and any of them
 }
 
-rule baidu_navigation_dex : tracker
+rule baidu_navigation : tracker
 {
     meta:
         description = "Baidu Navigation"
@@ -1534,7 +1534,7 @@ rule baidu_navigation_dex : tracker
         is_dex and any of them
 }
 
-rule fyber_dex : tracker
+rule fyber : tracker
 {
     meta:
         description = "Fyber"
@@ -1550,7 +1550,7 @@ rule fyber_dex : tracker
         is_dex and any of them
 }
 
-rule google_tag_manager_dex : tracker
+rule google_tag_manager : tracker
 {
     meta:
         description = "G. Tag Manager"
@@ -1566,7 +1566,7 @@ rule google_tag_manager_dex : tracker
         is_dex and any of them
 }
 
-rule inmobi_dex : tracker
+rule inmobi : tracker
 {
     meta:
         description = "Inmobi"
@@ -1582,7 +1582,7 @@ rule inmobi_dex : tracker
         is_dex and any of them
 }
 
-rule millennial_media_dex : tracker
+rule millennial_media : tracker
 {
     meta:
         description = "Millennial Media"
@@ -1598,7 +1598,7 @@ rule millennial_media_dex : tracker
         is_dex and any of them
 }
 
-rule snowplow_dex : tracker
+rule snowplow : tracker
 {
     meta:
         description = "Snowplow"
@@ -1613,7 +1613,7 @@ rule snowplow_dex : tracker
         is_dex and any of them
 }
 
-rule fyber_sponsorpay_dex : tracker
+rule fyber_sponsorpay : tracker
 {
     meta:
         description = "Fyber SponsorPay"
@@ -1629,7 +1629,7 @@ rule fyber_sponsorpay_dex : tracker
         is_dex and any of them
 }
 
-rule supersonic_ads_dex : tracker
+rule supersonic_ads : tracker
 {
     meta:
         description = "Supersonic Ads"
@@ -1645,7 +1645,7 @@ rule supersonic_ads_dex : tracker
         is_dex and any of them
 }
 
-rule carnival_dex : tracker
+rule carnival : tracker
 {
     meta:
         description = "Carnival"
@@ -1661,7 +1661,7 @@ rule carnival_dex : tracker
         is_dex and any of them
 }
 
-rule tencent_map_lbs_dex : tracker
+rule tencent_map_lbs : tracker
 {
     meta:
         description = "Tencent Map LBS"
@@ -1676,7 +1676,7 @@ rule tencent_map_lbs_dex : tracker
         is_dex and any of them
 }
 
-rule tencent_mobwin_dex : tracker
+rule tencent_mobwin : tracker
 {
     meta:
         description = "Tencent MobWin"
@@ -1691,7 +1691,7 @@ rule tencent_mobwin_dex : tracker
         is_dex and any of them
 }
 
-rule tencent_mta_dex : tracker
+rule tencent_mta : tracker
 {
     meta:
         description = "Tencent MTA"
@@ -1706,7 +1706,7 @@ rule tencent_mta_dex : tracker
         is_dex and any of them
 }
 
-rule apptentive_dex : tracker
+rule apptentive : tracker
 {
     meta:
         description = "Apptentive"
@@ -1722,7 +1722,7 @@ rule apptentive_dex : tracker
         is_dex and any of them
 }
 
-rule tencent_stats_dex : tracker
+rule tencent_stats : tracker
 {
     meta:
         description = "Tencent Stats"
@@ -1737,7 +1737,7 @@ rule tencent_stats_dex : tracker
         is_dex and any of them
 }
 
-rule tencent_weiyun_dex : tracker
+rule tencent_weiyun : tracker
 {
     meta:
         description = "Tencent Weiyun"
@@ -1752,7 +1752,7 @@ rule tencent_weiyun_dex : tracker
         is_dex and any of them
 }
 
-rule mixpanel_dex : tracker
+rule mixpanel : tracker
 {
     meta:
         description = "MixPanel"
@@ -1768,7 +1768,7 @@ rule mixpanel_dex : tracker
         is_dex and any of them
 }
 
-rule umeng_analytics_dex : tracker
+rule umeng_analytics : tracker
 {
     meta:
         description = "Umeng Analytics"
@@ -1784,7 +1784,7 @@ rule umeng_analytics_dex : tracker
         is_dex and any of them
 }
 
-rule umeng_feedback_dex : tracker
+rule umeng_feedback : tracker
 {
     meta:
         description = "Umeng Feedback"
@@ -1800,7 +1800,7 @@ rule umeng_feedback_dex : tracker
         is_dex and any of them
 }
 
-rule unity_d_ads_dex : tracker
+rule unity_d_ads : tracker
 {
     meta:
         description = "Unity3d Ads"
@@ -1816,7 +1816,7 @@ rule unity_d_ads_dex : tracker
         is_dex and any of them
 }
 
-rule countly_dex : tracker
+rule countly : tracker
 {
     meta:
         description = "Countly"
@@ -1831,7 +1831,7 @@ rule countly_dex : tracker
         is_dex and any of them
 }
 
-rule urbanairship_dex : tracker
+rule urbanairship : tracker
 {
     meta:
         description = "Urbanairship"
@@ -1847,7 +1847,7 @@ rule urbanairship_dex : tracker
         is_dex and any of them
 }
 
-rule yandex_ad_dex : tracker
+rule yandex_ad : tracker
 {
     meta:
         description = "Yandex Ad"
@@ -1863,7 +1863,7 @@ rule yandex_ad_dex : tracker
         is_dex and any of them
 }
 
-rule amplitude_dex : tracker
+rule amplitude : tracker
 {
     meta:
         description = "Amplitude"
@@ -1879,7 +1879,7 @@ rule amplitude_dex : tracker
         is_dex and any of them
 }
 
-rule appsee_dex : tracker
+rule appsee : tracker
 {
     meta:
         description = "AppSee"
@@ -1895,7 +1895,7 @@ rule appsee_dex : tracker
         is_dex and any of them
 }
 
-rule kochava_dex : tracker
+rule kochava : tracker
 {
     meta:
         description = "Kochava"
@@ -1911,7 +1911,7 @@ rule kochava_dex : tracker
         is_dex and any of them
 }
 
-rule webtrends_dex : tracker
+rule webtrends : tracker
 {
     meta:
         description = "Webtrends"
@@ -1927,7 +1927,7 @@ rule webtrends_dex : tracker
         is_dex and any of them
 }
 
-rule new_relic_dex : tracker
+rule new_relic : tracker
 {
     meta:
         description = "New Relic"
@@ -1943,7 +1943,7 @@ rule new_relic_dex : tracker
         is_dex and any of them
 }
 
-rule appanalytics_dex : tracker
+rule appanalytics : tracker
 {
     meta:
         description = "AppAnalytics"
@@ -1958,7 +1958,7 @@ rule appanalytics_dex : tracker
         is_dex and any of them
 }
 
-rule applause_dex : tracker
+rule applause : tracker
 {
     meta:
         description = "Applause"
@@ -1973,7 +1973,7 @@ rule applause_dex : tracker
         is_dex and any of them
 }
 
-rule quantcast_dex : tracker
+rule quantcast : tracker
 {
     meta:
         description = "Quantcast"
@@ -1989,7 +1989,7 @@ rule quantcast_dex : tracker
         is_dex and any of them
 }
 
-rule apptimize_dex : tracker
+rule apptimize : tracker
 {
     meta:
         description = "Apptimize"
@@ -2005,7 +2005,7 @@ rule apptimize_dex : tracker
         is_dex and any of them
 }
 
-rule appbrain_dex : tracker
+rule appbrain : tracker
 {
     meta:
         description = "AppBrain"
@@ -2021,7 +2021,7 @@ rule appbrain_dex : tracker
         is_dex and any of them
 }
 
-rule dynatrace_dex : tracker
+rule dynatrace : tracker
 {
     meta:
         description = "Dynatrace"
@@ -2037,7 +2037,7 @@ rule dynatrace_dex : tracker
         is_dex and any of them
 }
 
-rule matomo_piwik_dex : tracker
+rule matomo_piwik : tracker
 {
     meta:
         description = "Matomo (Piwik)"
@@ -2053,7 +2053,7 @@ rule matomo_piwik_dex : tracker
         is_dex and any of them
 }
 
-rule singlespot_dex : tracker
+rule singlespot : tracker
 {
     meta:
         description = "Singlespot"
@@ -2069,7 +2069,7 @@ rule singlespot_dex : tracker
         is_dex and any of them
 }
 
-rule sensoro_dex : tracker
+rule sensoro : tracker
 {
     meta:
         description = "Sensoro"
@@ -2084,7 +2084,7 @@ rule sensoro_dex : tracker
         is_dex and any of them
 }
 
-rule sense__dex : tracker
+rule sense_ : tracker
 {
     meta:
         description = "Sense360"
@@ -2100,7 +2100,7 @@ rule sense__dex : tracker
         is_dex and any of them
 }
 
-rule rubicon_project_dex : tracker
+rule rubicon_project : tracker
 {
     meta:
         description = "Rubicon Project"
@@ -2116,7 +2116,7 @@ rule rubicon_project_dex : tracker
         is_dex and any of them
 }
 
-rule ironsource_dex : tracker
+rule ironsource : tracker
 {
     meta:
         description = "ironSource"
@@ -2131,7 +2131,7 @@ rule ironsource_dex : tracker
         is_dex and any of them
 }
 
-rule heyzap_bought_by_fyber_dex : tracker
+rule heyzap_bought_by_fyber : tracker
 {
     meta:
         description = "Heyzap (bought by Fyber)"
@@ -2147,7 +2147,7 @@ rule heyzap_bought_by_fyber_dex : tracker
         is_dex and any of them
 }
 
-rule sap_cdc_gigya_dex : tracker
+rule sap_cdc_gigya : tracker
 {
     meta:
         description = "SAP CDC (Gigya)"
@@ -2163,7 +2163,7 @@ rule sap_cdc_gigya_dex : tracker
         is_dex and any of them
 }
 
-rule foresee_dex : tracker
+rule foresee : tracker
 {
     meta:
         description = "Foresee"
@@ -2179,7 +2179,7 @@ rule foresee_dex : tracker
         is_dex and any of them
 }
 
-rule fiksu_dex : tracker
+rule fiksu : tracker
 {
     meta:
         description = "Fiksu"
@@ -2195,7 +2195,7 @@ rule fiksu_dex : tracker
         is_dex and any of them
 }
 
-rule ensighten_dex : tracker
+rule ensighten : tracker
 {
     meta:
         description = "Ensighten"
@@ -2211,7 +2211,7 @@ rule ensighten_dex : tracker
         is_dex and any of them
 }
 
-rule dynamic_yield_dex : tracker
+rule dynamic_yield : tracker
 {
     meta:
         description = "Dynamic Yield"
@@ -2227,7 +2227,7 @@ rule dynamic_yield_dex : tracker
         is_dex and any of them
 }
 
-rule bluekai_acquired_by_oracle_dex : tracker
+rule bluekai_acquired_by_oracle : tracker
 {
     meta:
         description = "BlueKai (acquired by Oracle)"
@@ -2243,7 +2243,7 @@ rule bluekai_acquired_by_oracle_dex : tracker
         is_dex and any of them
 }
 
-rule blueconic_dex : tracker
+rule blueconic : tracker
 {
     meta:
         description = "BlueConic"
@@ -2258,7 +2258,7 @@ rule blueconic_dex : tracker
         is_dex and any of them
 }
 
-rule apteligent_by_vmware_formerly_crittercism_dex : tracker
+rule apteligent_by_vmware_formerly_crittercism : tracker
 {
     meta:
         description = "Apteligent by VMWare (formerly Crittercism)"
@@ -2274,7 +2274,7 @@ rule apteligent_by_vmware_formerly_crittercism_dex : tracker
         is_dex and any of them
 }
 
-rule adfit_daum_dex : tracker
+rule adfit_daum : tracker
 {
     meta:
         description = "AdFit (Daum)"
@@ -2290,7 +2290,7 @@ rule adfit_daum_dex : tracker
         is_dex and any of them
 }
 
-rule adform_dex : tracker
+rule adform : tracker
 {
     meta:
         description = "Adform"
@@ -2306,7 +2306,7 @@ rule adform_dex : tracker
         is_dex and any of them
 }
 
-rule adfurikun_dex : tracker
+rule adfurikun : tracker
 {
     meta:
         description = "Adfurikun"
@@ -2322,7 +2322,7 @@ rule adfurikun_dex : tracker
         is_dex and any of them
 }
 
-rule mobvista_dex : tracker
+rule mobvista : tracker
 {
     meta:
         description = "Mobvista"
@@ -2338,7 +2338,7 @@ rule mobvista_dex : tracker
         is_dex and any of them
 }
 
-rule placed_dex : tracker
+rule placed : tracker
 {
     meta:
         description = "Placed"
@@ -2353,7 +2353,7 @@ rule placed_dex : tracker
         is_dex and any of them
 }
 
-rule adot_dex : tracker
+rule adot : tracker
 {
     meta:
         description = "Adot"
@@ -2369,7 +2369,7 @@ rule adot_dex : tracker
         is_dex and any of them
 }
 
-rule appodeal_dex : tracker
+rule appodeal : tracker
 {
     meta:
         description = "Appodeal"
@@ -2385,7 +2385,7 @@ rule appodeal_dex : tracker
         is_dex and any of them
 }
 
-rule appmonet_dex : tracker
+rule appmonet : tracker
 {
     meta:
         description = "AppMonet"
@@ -2400,7 +2400,7 @@ rule appmonet_dex : tracker
         is_dex and any of them
 }
 
-rule soomla_dex : tracker
+rule soomla : tracker
 {
     meta:
         description = "Soomla"
@@ -2416,7 +2416,7 @@ rule soomla_dex : tracker
         is_dex and any of them
 }
 
-rule adincube_dex : tracker
+rule adincube : tracker
 {
     meta:
         description = "Adincube"
@@ -2432,7 +2432,7 @@ rule adincube_dex : tracker
         is_dex and any of them
 }
 
-rule persona_ly_dex : tracker
+rule persona_ly : tracker
 {
     meta:
         description = "Persona.ly"
@@ -2448,7 +2448,7 @@ rule persona_ly_dex : tracker
         is_dex and any of them
 }
 
-rule branch_dex : tracker
+rule branch : tracker
 {
     meta:
         description = "Branch"
@@ -2464,7 +2464,7 @@ rule branch_dex : tracker
         is_dex and any of them
 }
 
-rule cheetah_ads_dex : tracker
+rule cheetah_ads : tracker
 {
     meta:
         description = "Cheetah Ads"
@@ -2480,7 +2480,7 @@ rule cheetah_ads_dex : tracker
         is_dex and any of them
 }
 
-rule vungle_dex : tracker
+rule vungle : tracker
 {
     meta:
         description = "Vungle"
@@ -2496,7 +2496,7 @@ rule vungle_dex : tracker
         is_dex and any of them
 }
 
-rule criteo_dex : tracker
+rule criteo : tracker
 {
     meta:
         description = "Criteo"
@@ -2512,7 +2512,7 @@ rule criteo_dex : tracker
         is_dex and any of them
 }
 
-rule mapbox_dex : tracker
+rule mapbox : tracker
 {
     meta:
         description = "Mapbox"
@@ -2528,7 +2528,7 @@ rule mapbox_dex : tracker
         is_dex and any of them
 }
 
-rule optimizely_dex : tracker
+rule optimizely : tracker
 {
     meta:
         description = "Optimizely"
@@ -2544,7 +2544,7 @@ rule optimizely_dex : tracker
         is_dex and any of them
 }
 
-rule taboola_dex : tracker
+rule taboola : tracker
 {
     meta:
         description = "Taboola"
@@ -2560,7 +2560,7 @@ rule taboola_dex : tracker
         is_dex and any of them
 }
 
-rule clevertap_dex : tracker
+rule clevertap : tracker
 {
     meta:
         description = "CleverTap"
@@ -2576,7 +2576,7 @@ rule clevertap_dex : tracker
         is_dex and any of them
 }
 
-rule mytracker_dex : tracker
+rule mytracker : tracker
 {
     meta:
         description = "myTracker"
@@ -2592,7 +2592,7 @@ rule mytracker_dex : tracker
         is_dex and any of them
 }
 
-rule cloudmobi_dex : tracker
+rule cloudmobi : tracker
 {
     meta:
         description = "Cloudmobi"
@@ -2608,7 +2608,7 @@ rule cloudmobi_dex : tracker
         is_dex and any of them
 }
 
-rule adlib_dex : tracker
+rule adlib : tracker
 {
     meta:
         description = "ADLIB"
@@ -2624,7 +2624,7 @@ rule adlib_dex : tracker
         is_dex and any of them
 }
 
-rule brightcove_dex : tracker
+rule brightcove : tracker
 {
     meta:
         description = "Brightcove"
@@ -2640,7 +2640,7 @@ rule brightcove_dex : tracker
         is_dex and any of them
 }
 
-rule dov_e_dex : tracker
+rule dov_e : tracker
 {
     meta:
         description = "DOV-E"
@@ -2656,7 +2656,7 @@ rule dov_e_dex : tracker
         is_dex and any of them
 }
 
-rule inmarket_dex : tracker
+rule inmarket : tracker
 {
     meta:
         description = "InMarket"
@@ -2672,7 +2672,7 @@ rule inmarket_dex : tracker
         is_dex and any of them
 }
 
-rule pilgrim_by_foursquare_dex : tracker
+rule pilgrim_by_foursquare : tracker
 {
     meta:
         description = "Pilgrim by Foursquare"
@@ -2688,7 +2688,7 @@ rule pilgrim_by_foursquare_dex : tracker
         is_dex and any of them
 }
 
-rule otherlevels_dex : tracker
+rule otherlevels : tracker
 {
     meta:
         description = "OtherLevels"
@@ -2704,7 +2704,7 @@ rule otherlevels_dex : tracker
         is_dex and any of them
 }
 
-rule pubnative_dex : tracker
+rule pubnative : tracker
 {
     meta:
         description = "PubNative"
@@ -2720,7 +2720,7 @@ rule pubnative_dex : tracker
         is_dex and any of them
 }
 
-rule appnext_dex : tracker
+rule appnext : tracker
 {
     meta:
         description = "Appnext"
@@ -2736,7 +2736,7 @@ rule appnext_dex : tracker
         is_dex and any of them
 }
 
-rule mobfox_dex : tracker
+rule mobfox : tracker
 {
     meta:
         description = "MobFox"
@@ -2751,7 +2751,7 @@ rule mobfox_dex : tracker
         is_dex and any of them
 }
 
-rule shallwead_dex : tracker
+rule shallwead : tracker
 {
     meta:
         description = "ShallWeAD"
@@ -2766,7 +2766,7 @@ rule shallwead_dex : tracker
         is_dex and any of them
 }
 
-rule deltadna_dex : tracker
+rule deltadna : tracker
 {
     meta:
         description = "deltaDNA"
@@ -2782,7 +2782,7 @@ rule deltadna_dex : tracker
         is_dex and any of them
 }
 
-rule display_dex : tracker
+rule display : tracker
 {
     meta:
         description = "Display"
@@ -2798,7 +2798,7 @@ rule display_dex : tracker
         is_dex and any of them
 }
 
-rule hyprmx_dex : tracker
+rule hyprmx : tracker
 {
     meta:
         description = "HyprMX"
@@ -2814,7 +2814,7 @@ rule hyprmx_dex : tracker
         is_dex and any of them
 }
 
-rule bugly_dex : tracker
+rule bugly : tracker
 {
     meta:
         description = "Bugly"
@@ -2830,7 +2830,7 @@ rule bugly_dex : tracker
         is_dex and any of them
 }
 
-rule duapps_dex : tracker
+rule duapps : tracker
 {
     meta:
         description = "Duapps"
@@ -2846,7 +2846,7 @@ rule duapps_dex : tracker
         is_dex and any of them
 }
 
-rule swrve_dex : tracker
+rule swrve : tracker
 {
     meta:
         description = "Swrve"
@@ -2862,7 +2862,7 @@ rule swrve_dex : tracker
         is_dex and any of them
 }
 
-rule onesignal_dex : tracker
+rule onesignal : tracker
 {
     meta:
         description = "OneSignal"
@@ -2878,7 +2878,7 @@ rule onesignal_dex : tracker
         is_dex and any of them
 }
 
-rule appdynamics_dex : tracker
+rule appdynamics : tracker
 {
     meta:
         description = "Appdynamics"
@@ -2894,7 +2894,7 @@ rule appdynamics_dex : tracker
         is_dex and any of them
 }
 
-rule startapp_dex : tracker
+rule startapp : tracker
 {
     meta:
         description = "Startapp"
@@ -2910,7 +2910,7 @@ rule startapp_dex : tracker
         is_dex and any of them
 }
 
-rule aerserv_dex : tracker
+rule aerserv : tracker
 {
     meta:
         description = "AerServ"
@@ -2926,7 +2926,7 @@ rule aerserv_dex : tracker
         is_dex and any of them
 }
 
-rule infonline_dex : tracker
+rule infonline : tracker
 {
     meta:
         description = "INFOnline"
@@ -2942,7 +2942,7 @@ rule infonline_dex : tracker
         is_dex and any of them
 }
 
-rule mytarget_dex : tracker
+rule mytarget : tracker
 {
     meta:
         description = "myTarget"
@@ -2958,7 +2958,7 @@ rule mytarget_dex : tracker
         is_dex and any of them
 }
 
-rule tapjoy_dex : tracker
+rule tapjoy : tracker
 {
     meta:
         description = "Tapjoy"
@@ -2974,7 +2974,7 @@ rule tapjoy_dex : tracker
         is_dex and any of them
 }
 
-rule mintegral_dex : tracker
+rule mintegral : tracker
 {
     meta:
         description = "Mintegral"
@@ -2990,7 +2990,7 @@ rule mintegral_dex : tracker
         is_dex and any of them
 }
 
-rule gimbal_dex : tracker
+rule gimbal : tracker
 {
     meta:
         description = "Gimbal"
@@ -3006,7 +3006,7 @@ rule gimbal_dex : tracker
         is_dex and any of them
 }
 
-rule conviva_dex : tracker
+rule conviva : tracker
 {
     meta:
         description = "Conviva"
@@ -3022,7 +3022,7 @@ rule conviva_dex : tracker
         is_dex and any of them
 }
 
-rule auditude_dex : tracker
+rule auditude : tracker
 {
     meta:
         description = "Auditude"
@@ -3038,7 +3038,7 @@ rule auditude_dex : tracker
         is_dex and any of them
 }
 
-rule instreamatic_adman_dex : tracker
+rule instreamatic_adman : tracker
 {
     meta:
         description = "Instreamatic (Adman)"
@@ -3054,7 +3054,7 @@ rule instreamatic_adman_dex : tracker
         is_dex and any of them
 }
 
-rule gameanalytics_dex : tracker
+rule gameanalytics : tracker
 {
     meta:
         description = "GameAnalytics"
@@ -3069,7 +3069,7 @@ rule gameanalytics_dex : tracker
         is_dex and any of them
 }
 
-rule instabug_dex : tracker
+rule instabug : tracker
 {
     meta:
         description = "Instabug"
@@ -3084,7 +3084,7 @@ rule instabug_dex : tracker
         is_dex and any of them
 }
 
-rule bugsnag_dex : tracker
+rule bugsnag : tracker
 {
     meta:
         description = "Bugsnag"
@@ -3099,7 +3099,7 @@ rule bugsnag_dex : tracker
         is_dex and any of them
 }
 
-rule moodmedia_dex : tracker
+rule moodmedia : tracker
 {
     meta:
         description = "Moodmedia"
@@ -3115,7 +3115,7 @@ rule moodmedia_dex : tracker
         is_dex and any of them
 }
 
-rule houndify_dex : tracker
+rule houndify : tracker
 {
     meta:
         description = "Houndify"
@@ -3131,7 +3131,7 @@ rule houndify_dex : tracker
         is_dex and any of them
 }
 
-rule openx_dex : tracker
+rule openx : tracker
 {
     meta:
         description = "OpenX"
@@ -3147,7 +3147,7 @@ rule openx_dex : tracker
         is_dex and any of them
 }
 
-rule taplytics_dex : tracker
+rule taplytics : tracker
 {
     meta:
         description = "Taplytics"
@@ -3163,7 +3163,7 @@ rule taplytics_dex : tracker
         is_dex and any of them
 }
 
-rule yinzcam_sobek_dex : tracker
+rule yinzcam_sobek : tracker
 {
     meta:
         description = "Yinzcam Sobek"
@@ -3179,7 +3179,7 @@ rule yinzcam_sobek_dex : tracker
         is_dex and any of them
 }
 
-rule ooyala_dex : tracker
+rule ooyala : tracker
 {
     meta:
         description = "Ooyala"
@@ -3195,7 +3195,7 @@ rule ooyala_dex : tracker
         is_dex and any of them
 }
 
-rule kiip_dex : tracker
+rule kiip : tracker
 {
     meta:
         description = "Kiip"
@@ -3211,7 +3211,7 @@ rule kiip_dex : tracker
         is_dex and any of them
 }
 
-rule mobpower_dex : tracker
+rule mobpower : tracker
 {
     meta:
         description = "MobPower"
@@ -3227,7 +3227,7 @@ rule mobpower_dex : tracker
         is_dex and any of them
 }
 
-rule adbuddiz_dex : tracker
+rule adbuddiz : tracker
 {
     meta:
         description = "AdBuddiz"
@@ -3243,7 +3243,7 @@ rule adbuddiz_dex : tracker
         is_dex and any of them
 }
 
-rule integral_ad_science_dex : tracker
+rule integral_ad_science : tracker
 {
     meta:
         description = "Integral Ad Science"
@@ -3259,7 +3259,7 @@ rule integral_ad_science_dex : tracker
         is_dex and any of them
 }
 
-rule altbeacon_dex : tracker
+rule altbeacon : tracker
 {
     meta:
         description = "AltBeacon"
@@ -3275,7 +3275,7 @@ rule altbeacon_dex : tracker
         is_dex and any of them
 }
 
-rule salesforce_marketing_cloud_dex : tracker
+rule salesforce_marketing_cloud : tracker
 {
     meta:
         description = "Salesforce Marketing Cloud"
@@ -3290,7 +3290,7 @@ rule salesforce_marketing_cloud_dex : tracker
         is_dex and any of them
 }
 
-rule mozilla_telemetry_dex : tracker
+rule mozilla_telemetry : tracker
 {
     meta:
         description = "Mozilla Telemetry"
@@ -3305,7 +3305,7 @@ rule mozilla_telemetry_dex : tracker
         is_dex and any of them
 }
 
-rule nend_dex : tracker
+rule nend : tracker
 {
     meta:
         description = "nend"
@@ -3320,7 +3320,7 @@ rule nend_dex : tracker
         is_dex and any of them
 }
 
-rule pusher_dex : tracker
+rule pusher : tracker
 {
     meta:
         description = "Pusher"
@@ -3335,7 +3335,7 @@ rule pusher_dex : tracker
         is_dex and any of them
 }
 
-rule freewheel_dex : tracker
+rule freewheel : tracker
 {
     meta:
         description = "FreeWheel"
@@ -3351,7 +3351,7 @@ rule freewheel_dex : tracker
         is_dex and any of them
 }
 
-rule tnk_factory_dex : tracker
+rule tnk_factory : tracker
 {
     meta:
         description = "TNK Factory"
@@ -3366,7 +3366,7 @@ rule tnk_factory_dex : tracker
         is_dex and any of them
 }
 
-rule axonix_dex : tracker
+rule axonix : tracker
 {
     meta:
         description = "Axonix"
@@ -3382,7 +3382,7 @@ rule axonix_dex : tracker
         is_dex and any of them
 }
 
-rule gemius_heatmap_dex : tracker
+rule gemius_heatmap : tracker
 {
     meta:
         description = "Gemius HeatMap"
@@ -3398,7 +3398,7 @@ rule gemius_heatmap_dex : tracker
         is_dex and any of them
 }
 
-rule youappi_dex : tracker
+rule youappi : tracker
 {
     meta:
         description = "YouAppi"
@@ -3413,7 +3413,7 @@ rule youappi_dex : tracker
         is_dex and any of them
 }
 
-rule adobe_experience_cloud_dex : tracker
+rule adobe_experience_cloud : tracker
 {
     meta:
         description = "Adobe Experience Cloud"
@@ -3428,7 +3428,7 @@ rule adobe_experience_cloud_dex : tracker
         is_dex and any of them
 }
 
-rule teads_dex : tracker
+rule teads : tracker
 {
     meta:
         description = "Teads"
@@ -3444,7 +3444,7 @@ rule teads_dex : tracker
         is_dex and any of them
 }
 
-rule in_loco_dex : tracker
+rule in_loco : tracker
 {
     meta:
         description = "In Loco"
@@ -3460,7 +3460,7 @@ rule in_loco_dex : tracker
         is_dex and any of them
 }
 
-rule iqzone_dex : tracker
+rule iqzone : tracker
 {
     meta:
         description = "IQzone"
@@ -3475,7 +3475,7 @@ rule iqzone_dex : tracker
         is_dex and any of them
 }
 
-rule bugfender_dex : tracker
+rule bugfender : tracker
 {
     meta:
         description = "Bugfender"
@@ -3490,7 +3490,7 @@ rule bugfender_dex : tracker
         is_dex and any of them
 }
 
-rule wootric_dex : tracker
+rule wootric : tracker
 {
     meta:
         description = "Wootric"
@@ -3506,7 +3506,7 @@ rule wootric_dex : tracker
         is_dex and any of them
 }
 
-rule kidoz_dex : tracker
+rule kidoz : tracker
 {
     meta:
         description = "KIDOZ"
@@ -3521,7 +3521,7 @@ rule kidoz_dex : tracker
         is_dex and any of them
 }
 
-rule pubmatic_dex : tracker
+rule pubmatic : tracker
 {
     meta:
         description = "PubMatic"
@@ -3537,7 +3537,7 @@ rule pubmatic_dex : tracker
         is_dex and any of them
 }
 
-rule kissmetrics_dex : tracker
+rule kissmetrics : tracker
 {
     meta:
         description = "Kissmetrics"
@@ -3552,7 +3552,7 @@ rule kissmetrics_dex : tracker
         is_dex and any of them
 }
 
-rule microsoft_visual_studio_app_center_crashes_dex : tracker
+rule microsoft_visual_studio_app_center_crashes : tracker
 {
     meta:
         description = "Microsoft Visual Studio App Center Crashes"
@@ -3567,7 +3567,7 @@ rule microsoft_visual_studio_app_center_crashes_dex : tracker
         is_dex and any of them
 }
 
-rule webtrekk_dex : tracker
+rule webtrekk : tracker
 {
     meta:
         description = "Webtrekk"
@@ -3582,7 +3582,7 @@ rule webtrekk_dex : tracker
         is_dex and any of them
 }
 
-rule google_analytics_plugin_cordova_dex : tracker
+rule google_analytics_plugin_cordova : tracker
 {
     meta:
         description = "G. Analytics Plugin (Cordova)"
@@ -3597,7 +3597,7 @@ rule google_analytics_plugin_cordova_dex : tracker
         is_dex and any of them
 }
 
-rule bugsee_dex : tracker
+rule bugsee : tracker
 {
     meta:
         description = "Bugsee"
@@ -3612,7 +3612,7 @@ rule bugsee_dex : tracker
         is_dex and any of them
 }
 
-rule splunk_mint_dex : tracker
+rule splunk_mint : tracker
 {
     meta:
         description = "Splunk MINT"
@@ -3627,7 +3627,7 @@ rule splunk_mint_dex : tracker
         is_dex and any of them
 }
 
-rule microsoft_visual_studio_app_center_analytics_dex : tracker
+rule microsoft_visual_studio_app_center_analytics : tracker
 {
     meta:
         description = "Microsoft Visual Studio App Center Analytics"
@@ -3642,7 +3642,7 @@ rule microsoft_visual_studio_app_center_analytics_dex : tracker
         is_dex and any of them
 }
 
-rule nielsen_dex : tracker
+rule nielsen : tracker
 {
     meta:
         description = "Nielsen"
@@ -3657,7 +3657,7 @@ rule nielsen_dex : tracker
         is_dex and any of them
 }
 
-rule reveal_mobile_dex : tracker
+rule reveal_mobile : tracker
 {
     meta:
         description = "Reveal Mobile"
@@ -3672,7 +3672,7 @@ rule reveal_mobile_dex : tracker
         is_dex and any of them
 }
 
-rule repro_dex : tracker
+rule repro : tracker
 {
     meta:
         description = "Repro"
@@ -3687,7 +3687,7 @@ rule repro_dex : tracker
         is_dex and any of them
 }
 
-rule sensors_analytics_dex : tracker
+rule sensors_analytics : tracker
 {
     meta:
         description = "Sensors Analytics"
@@ -3702,7 +3702,7 @@ rule sensors_analytics_dex : tracker
         is_dex and any of them
 }
 
-rule tenjin_dex : tracker
+rule tenjin : tracker
 {
     meta:
         description = "Tenjin"
@@ -3717,7 +3717,7 @@ rule tenjin_dex : tracker
         is_dex and any of them
 }
 
-rule tapstream_dex : tracker
+rule tapstream : tracker
 {
     meta:
         description = "Tapstream"
@@ -3732,7 +3732,7 @@ rule tapstream_dex : tracker
         is_dex and any of them
 }
 
-rule singular_dex : tracker
+rule singular : tracker
 {
     meta:
         description = "Singular"
@@ -3747,7 +3747,7 @@ rule singular_dex : tracker
         is_dex and any of them
 }
 
-rule calldorado_dex : tracker
+rule calldorado : tracker
 {
     meta:
         description = "CallDorado"
@@ -3762,7 +3762,7 @@ rule calldorado_dex : tracker
         is_dex and any of them
 }
 
-rule uxcam_dex : tracker
+rule uxcam : tracker
 {
     meta:
         description = "UXCam"
@@ -3778,7 +3778,7 @@ rule uxcam_dex : tracker
         is_dex and any of them
 }
 
-rule upsight_dex : tracker
+rule upsight : tracker
 {
     meta:
         description = "Upsight"
@@ -3793,7 +3793,7 @@ rule upsight_dex : tracker
         is_dex and any of them
 }
 
-rule appcelerator_analytics_dex : tracker
+rule appcelerator_analytics : tracker
 {
     meta:
         description = "Appcelerator Analytics"
@@ -3809,7 +3809,7 @@ rule appcelerator_analytics_dex : tracker
         is_dex and any of them
 }
 
-rule adbrix_dex : tracker
+rule adbrix : tracker
 {
     meta:
         description = "Adbrix"
@@ -3825,7 +3825,7 @@ rule adbrix_dex : tracker
         is_dex and any of them
 }
 
-rule cauly_dex : tracker
+rule cauly : tracker
 {
     meta:
         description = "Cauly"
@@ -3841,7 +3841,7 @@ rule cauly_dex : tracker
         is_dex and any of them
 }
 
-rule tapdaq_dex : tracker
+rule tapdaq : tracker
 {
     meta:
         description = "Tapdaq"
@@ -3857,7 +3857,7 @@ rule tapdaq_dex : tracker
         is_dex and any of them
 }
 
-rule verve_dex : tracker
+rule verve : tracker
 {
     meta:
         description = "Verve"
@@ -3872,7 +3872,7 @@ rule verve_dex : tracker
         is_dex and any of them
 }
 
-rule apsalar_dex : tracker
+rule apsalar : tracker
 {
     meta:
         description = "Apsalar"
@@ -3888,7 +3888,7 @@ rule apsalar_dex : tracker
         is_dex and any of them
 }
 
-rule pingstart_dex : tracker
+rule pingstart : tracker
 {
     meta:
         description = "PingStart"
@@ -3904,7 +3904,7 @@ rule pingstart_dex : tracker
         is_dex and any of them
 }
 
-rule keen_dex : tracker
+rule keen : tracker
 {
     meta:
         description = "Keen"
@@ -3920,7 +3920,7 @@ rule keen_dex : tracker
         is_dex and any of them
 }
 
-rule revmob_dex : tracker
+rule revmob : tracker
 {
     meta:
         description = "Revmob"
@@ -3935,7 +3935,7 @@ rule revmob_dex : tracker
         is_dex and any of them
 }
 
-rule emarsys_predict_dex : tracker
+rule emarsys_predict : tracker
 {
     meta:
         description = "Emarsys Predict"
@@ -3951,7 +3951,7 @@ rule emarsys_predict_dex : tracker
         is_dex and any of them
 }
 
-rule lotame_dex : tracker
+rule lotame : tracker
 {
     meta:
         description = "Lotame"
@@ -3967,7 +3967,7 @@ rule lotame_dex : tracker
         is_dex and any of them
 }
 
-rule followanalytics_dex : tracker
+rule followanalytics : tracker
 {
     meta:
         description = "FollowAnalytics"
@@ -3983,7 +3983,7 @@ rule followanalytics_dex : tracker
         is_dex and any of them
 }
 
-rule chartbeat_dex : tracker
+rule chartbeat : tracker
 {
     meta:
         description = "Chartbeat"
@@ -3999,7 +3999,7 @@ rule chartbeat_dex : tracker
         is_dex and any of them
 }
 
-rule moengage_dex : tracker
+rule moengage : tracker
 {
     meta:
         description = "MoEngage"
@@ -4015,7 +4015,7 @@ rule moengage_dex : tracker
         is_dex and any of them
 }
 
-rule altamob_dex : tracker
+rule altamob : tracker
 {
     meta:
         description = "Altamob"
@@ -4031,7 +4031,7 @@ rule altamob_dex : tracker
         is_dex and any of them
 }
 
-rule tealeaf_dex : tracker
+rule tealeaf : tracker
 {
     meta:
         description = "Tealeaf"
@@ -4046,7 +4046,7 @@ rule tealeaf_dex : tracker
         is_dex and any of them
 }
 
-rule amoad_dex : tracker
+rule amoad : tracker
 {
     meta:
         description = "AMoAd"
@@ -4061,7 +4061,7 @@ rule amoad_dex : tracker
         is_dex and any of them
 }
 
-rule adadapted_dex : tracker
+rule adadapted : tracker
 {
     meta:
         description = "AdAdapted"
@@ -4077,7 +4077,7 @@ rule adadapted_dex : tracker
         is_dex and any of them
 }
 
-rule admuing_dex : tracker
+rule admuing : tracker
 {
     meta:
         description = "AdMuing"
@@ -4092,7 +4092,7 @@ rule admuing_dex : tracker
         is_dex and any of them
 }
 
-rule adcash_dex : tracker
+rule adcash : tracker
 {
     meta:
         description = "Adcash"
@@ -4107,7 +4107,7 @@ rule adcash_dex : tracker
         is_dex and any of them
 }
 
-rule admixer_dex : tracker
+rule admixer : tracker
 {
     meta:
         description = "Admixer"
@@ -4123,7 +4123,7 @@ rule admixer_dex : tracker
         is_dex and any of them
 }
 
-rule admost_dex : tracker
+rule admost : tracker
 {
     meta:
         description = "Admost"
@@ -4139,7 +4139,7 @@ rule admost_dex : tracker
         is_dex and any of them
 }
 
-rule alohalytics_dex : tracker
+rule alohalytics : tracker
 {
     meta:
         description = "Alohalytics"
@@ -4154,7 +4154,7 @@ rule alohalytics_dex : tracker
         is_dex and any of them
 }
 
-rule amobee_dex : tracker
+rule amobee : tracker
 {
     meta:
         description = "Amobee"
@@ -4170,7 +4170,7 @@ rule amobee_dex : tracker
         is_dex and any of them
 }
 
-rule anagog_dex : tracker
+rule anagog : tracker
 {
     meta:
         description = "Anagog"
@@ -4185,7 +4185,7 @@ rule anagog_dex : tracker
         is_dex and any of them
 }
 
-rule bazaarvoice_dex : tracker
+rule bazaarvoice : tracker
 {
     meta:
         description = "Bazaarvoice"
@@ -4200,7 +4200,7 @@ rule bazaarvoice_dex : tracker
         is_dex and any of them
 }
 
-rule beaconsinspace_fysical_dex : tracker
+rule beaconsinspace_fysical : tracker
 {
     meta:
         description = "BeaconsInSpace (Fysical)"
@@ -4215,7 +4215,7 @@ rule beaconsinspace_fysical_dex : tracker
         is_dex and any of them
 }
 
-rule conversant_dex : tracker
+rule conversant : tracker
 {
     meta:
         description = "Conversant"
@@ -4231,7 +4231,7 @@ rule conversant_dex : tracker
         is_dex and any of them
 }
 
-rule glympse_dex : tracker
+rule glympse : tracker
 {
     meta:
         description = "Glympse"
@@ -4247,7 +4247,7 @@ rule glympse_dex : tracker
         is_dex and any of them
 }
 
-rule herow_dex : tracker
+rule herow : tracker
 {
     meta:
         description = "Herow"
@@ -4262,7 +4262,7 @@ rule herow_dex : tracker
         is_dex and any of them
 }
 
-rule placer_dex : tracker
+rule placer : tracker
 {
     meta:
         description = "Placer"
@@ -4277,7 +4277,7 @@ rule placer_dex : tracker
         is_dex and any of them
 }
 
-rule pushspring_dex : tracker
+rule pushspring : tracker
 {
     meta:
         description = "PushSpring"
@@ -4293,7 +4293,7 @@ rule pushspring_dex : tracker
         is_dex and any of them
 }
 
-rule pyze_dex : tracker
+rule pyze : tracker
 {
     meta:
         description = "Pyze"
@@ -4309,7 +4309,7 @@ rule pyze_dex : tracker
         is_dex and any of them
 }
 
-rule radar_dex : tracker
+rule radar : tracker
 {
     meta:
         description = "Radar"
@@ -4324,7 +4324,7 @@ rule radar_dex : tracker
         is_dex and any of them
 }
 
-rule sentiance_dex : tracker
+rule sentiance : tracker
 {
     meta:
         description = "Sentiance"
@@ -4340,7 +4340,7 @@ rule sentiance_dex : tracker
         is_dex and any of them
 }
 
-rule smartlook_dex : tracker
+rule smartlook : tracker
 {
     meta:
         description = "SmartLook"
@@ -4356,7 +4356,7 @@ rule smartlook_dex : tracker
         is_dex and any of them
 }
 
-rule square_metrics_dex : tracker
+rule square_metrics : tracker
 {
     meta:
         description = "Square Metrics"
@@ -4372,7 +4372,7 @@ rule square_metrics_dex : tracker
         is_dex and any of them
 }
 
-rule talkingdata_dex : tracker
+rule talkingdata : tracker
 {
     meta:
         description = "TalkingData"
@@ -4388,7 +4388,7 @@ rule talkingdata_dex : tracker
         is_dex and any of them
 }
 
-rule flymob_dex : tracker
+rule flymob : tracker
 {
     meta:
         description = "flymob"
@@ -4403,7 +4403,7 @@ rule flymob_dex : tracker
         is_dex and any of them
 }
 
-rule adfalcon_dex : tracker
+rule adfalcon : tracker
 {
     meta:
         description = "AdFalcon"
@@ -4418,7 +4418,7 @@ rule adfalcon_dex : tracker
         is_dex and any of them
 }
 
-rule bitly_dex : tracker
+rule bitly : tracker
 {
     meta:
         description = "Bitly"
@@ -4433,7 +4433,7 @@ rule bitly_dex : tracker
         is_dex and any of them
 }
 
-rule enhance_dex : tracker
+rule enhance : tracker
 {
     meta:
         description = "Enhance"
@@ -4449,7 +4449,7 @@ rule enhance_dex : tracker
         is_dex and any of them
 }
 
-rule esri_arcgis_dex : tracker
+rule esri_arcgis : tracker
 {
     meta:
         description = "Esri ArcGIS"
@@ -4464,7 +4464,7 @@ rule esri_arcgis_dex : tracker
         is_dex and any of them
 }
 
-rule giphy_analytics_dex : tracker
+rule giphy_analytics : tracker
 {
     meta:
         description = "GIPHY Analytics"
@@ -4480,7 +4480,7 @@ rule giphy_analytics_dex : tracker
         is_dex and any of them
 }
 
-rule heap_dex : tracker
+rule heap : tracker
 {
     meta:
         description = "Heap"
@@ -4496,7 +4496,7 @@ rule heap_dex : tracker
         is_dex and any of them
 }
 
-rule inneractive_dex : tracker
+rule inneractive : tracker
 {
     meta:
         description = "Inneractive"
@@ -4511,7 +4511,7 @@ rule inneractive_dex : tracker
         is_dex and any of them
 }
 
-rule mdotm_dex : tracker
+rule mdotm : tracker
 {
     meta:
         description = "MDOTM"
@@ -4527,7 +4527,7 @@ rule mdotm_dex : tracker
         is_dex and any of them
 }
 
-rule metaps_dex : tracker
+rule metaps : tracker
 {
     meta:
         description = "Metaps"
@@ -4542,7 +4542,7 @@ rule metaps_dex : tracker
         is_dex and any of them
 }
 
-rule parse_ly_dex : tracker
+rule parse_ly : tracker
 {
     meta:
         description = "Parse.ly"
@@ -4557,7 +4557,7 @@ rule parse_ly_dex : tracker
         is_dex and any of them
 }
 
-rule pollfish_dex : tracker
+rule pollfish : tracker
 {
     meta:
         description = "Pollfish"
@@ -4572,7 +4572,7 @@ rule pollfish_dex : tracker
         is_dex and any of them
 }
 
-rule qualtrics_dex : tracker
+rule qualtrics : tracker
 {
     meta:
         description = "Qualtrics"
@@ -4588,7 +4588,7 @@ rule qualtrics_dex : tracker
         is_dex and any of them
 }
 
-rule tamoco_dex : tracker
+rule tamoco : tracker
 {
     meta:
         description = "Tamoco"
@@ -4604,7 +4604,7 @@ rule tamoco_dex : tracker
         is_dex and any of them
 }
 
-rule vpon_dex : tracker
+rule vpon : tracker
 {
     meta:
         description = "Vpon"
@@ -4619,7 +4619,7 @@ rule vpon_dex : tracker
         is_dex and any of them
 }
 
-rule yume_dex : tracker
+rule yume : tracker
 {
     meta:
         description = "YuMe"
@@ -4634,7 +4634,7 @@ rule yume_dex : tracker
         is_dex and any of them
 }
 
-rule zapr_dex : tracker
+rule zapr : tracker
 {
     meta:
         description = "Zapr"
@@ -4650,7 +4650,7 @@ rule zapr_dex : tracker
         is_dex and any of them
 }
 
-rule mediba_dex : tracker
+rule mediba : tracker
 {
     meta:
         description = "mediba"
@@ -4665,7 +4665,7 @@ rule mediba_dex : tracker
         is_dex and any of them
 }
 
-rule google_admob_dex : tracker
+rule google_admob : tracker
 {
     meta:
         description = "G. AdMob"
@@ -4681,7 +4681,7 @@ rule google_admob_dex : tracker
         is_dex and any of them
 }
 
-rule unacast_pure_dex : tracker
+rule unacast_pure : tracker
 {
     meta:
         description = "Unacast Pure"
@@ -4696,7 +4696,7 @@ rule unacast_pure_dex : tracker
         is_dex and any of them
 }
 
-rule factual_dex : tracker
+rule factual : tracker
 {
     meta:
         description = "Factual"
@@ -4712,7 +4712,7 @@ rule factual_dex : tracker
         is_dex and any of them
 }
 
-rule footmarks_dex : tracker
+rule footmarks : tracker
 {
     meta:
         description = "Footmarks"
@@ -4727,7 +4727,7 @@ rule footmarks_dex : tracker
         is_dex and any of them
 }
 
-rule oztam_dex : tracker
+rule oztam : tracker
 {
     meta:
         description = "OzTAM"
@@ -4743,7 +4743,7 @@ rule oztam_dex : tracker
         is_dex and any of them
 }
 
-rule receptiv_formerly_mediabrix_dex : tracker
+rule receptiv_formerly_mediabrix : tracker
 {
     meta:
         description = "Receptiv (formerly Mediabrix)"
@@ -4758,7 +4758,7 @@ rule receptiv_formerly_mediabrix_dex : tracker
         is_dex and any of them
 }
 
-rule tutela_dex : tracker
+rule tutela : tracker
 {
     meta:
         description = "Tutela"
@@ -4773,7 +4773,7 @@ rule tutela_dex : tracker
         is_dex and any of them
 }
 
-rule twine_data_dex : tracker
+rule twine_data : tracker
 {
     meta:
         description = "Twine Data"
@@ -4788,7 +4788,7 @@ rule twine_data_dex : tracker
         is_dex and any of them
 }
 
-rule verizon_ads_dex : tracker
+rule verizon_ads : tracker
 {
     meta:
         description = "Verizon Ads"
@@ -4803,7 +4803,7 @@ rule verizon_ads_dex : tracker
         is_dex and any of them
 }
 
-rule adpopcorn_dex : tracker
+rule adpopcorn : tracker
 {
     meta:
         description = "adPOPcorn"
@@ -4818,7 +4818,7 @@ rule adpopcorn_dex : tracker
         is_dex and any of them
 }
 
-rule maio_by_i_mobile_dex : tracker
+rule maio_by_i_mobile : tracker
 {
     meta:
         description = "maio by i-mobile"
@@ -4833,7 +4833,7 @@ rule maio_by_i_mobile_dex : tracker
         is_dex and any of them
 }
 
-rule __dialog_dex : tracker
+rule __dialog : tracker
 {
     meta:
         description = "360Dialog"
@@ -4848,7 +4848,7 @@ rule __dialog_dex : tracker
         is_dex and any of them
 }
 
-rule abtasty_dex : tracker
+rule abtasty : tracker
 {
     meta:
         description = "ABTasty"
@@ -4864,7 +4864,7 @@ rule abtasty_dex : tracker
         is_dex and any of them
 }
 
-rule acrcloud_dex : tracker
+rule acrcloud : tracker
 {
     meta:
         description = "ACRCloud"
@@ -4880,7 +4880,7 @@ rule acrcloud_dex : tracker
         is_dex and any of them
 }
 
-rule aarki_dex : tracker
+rule aarki : tracker
 {
     meta:
         description = "Aarki"
@@ -4895,7 +4895,7 @@ rule aarki_dex : tracker
         is_dex and any of them
 }
 
-rule actv_me_dex : tracker
+rule actv_me : tracker
 {
     meta:
         description = "Actv8me"
@@ -4911,7 +4911,7 @@ rule actv_me_dex : tracker
         is_dex and any of them
 }
 
-rule iab_open_measurement_dex : tracker
+rule iab_open_measurement : tracker
 {
     meta:
         description = "IAB Open Measurement"
@@ -4926,7 +4926,7 @@ rule iab_open_measurement_dex : tracker
         is_dex and any of them
 }
 
-rule huawei_mobile_services_hms_core_dex : tracker
+rule huawei_mobile_services_hms_core : tracker
 {
     meta:
         description = "Huawei Mobile Services (HMS) Core"
@@ -4942,7 +4942,7 @@ rule huawei_mobile_services_hms_core_dex : tracker
         is_dex and any of them
 }
 
-rule akamai_map_dex : tracker
+rule akamai_map : tracker
 {
     meta:
         description = "Akamai MAP"
@@ -4957,7 +4957,7 @@ rule akamai_map_dex : tracker
         is_dex and any of them
 }
 
-rule mail_ru_dex : tracker
+rule mail_ru : tracker
 {
     meta:
         description = "Mail.ru"
@@ -4972,7 +4972,7 @@ rule mail_ru_dex : tracker
         is_dex and any of them
 }
 
-rule airpush_dex : tracker
+rule airpush : tracker
 {
     meta:
         description = "Airpush"
@@ -4988,7 +4988,7 @@ rule airpush_dex : tracker
         is_dex and any of them
 }
 
-rule alimama_formerly_adsmogo_dex : tracker
+rule alimama_formerly_adsmogo : tracker
 {
     meta:
         description = "Alimama (formerly AdsMogo)"
@@ -5004,7 +5004,7 @@ rule alimama_formerly_adsmogo_dex : tracker
         is_dex and any of them
 }
 
-rule anysdk_dex : tracker
+rule anysdk : tracker
 {
     meta:
         description = "AnySDK"
@@ -5019,7 +5019,7 @@ rule anysdk_dex : tracker
         is_dex and any of them
 }
 
-rule button_dex : tracker
+rule button : tracker
 {
     meta:
         description = "Button"
@@ -5035,7 +5035,7 @@ rule button_dex : tracker
         is_dex and any of them
 }
 
-rule carto_formerly_nutiteq_dex : tracker
+rule carto_formerly_nutiteq : tracker
 {
     meta:
         description = "Carto (formerly Nutiteq)"
@@ -5050,7 +5050,7 @@ rule carto_formerly_nutiteq_dex : tracker
         is_dex and any of them
 }
 
-rule didomi_dex : tracker
+rule didomi : tracker
 {
     meta:
         description = "Didomi"
@@ -5065,7 +5065,7 @@ rule didomi_dex : tracker
         is_dex and any of them
 }
 
-rule jiguang_aurora_mobile_jpush_dex : tracker
+rule jiguang_aurora_mobile_jpush : tracker
 {
     meta:
         description = "JiGuang Aurora Mobile JPush"
@@ -5081,7 +5081,7 @@ rule jiguang_aurora_mobile_jpush_dex : tracker
         is_dex and any of them
 }
 
-rule jumio_dex : tracker
+rule jumio : tracker
 {
     meta:
         description = "Jumio"
@@ -5097,7 +5097,7 @@ rule jumio_dex : tracker
         is_dex and any of them
 }
 
-rule lenddo_dex : tracker
+rule lenddo : tracker
 {
     meta:
         description = "Lenddo"
@@ -5113,7 +5113,7 @@ rule lenddo_dex : tracker
         is_dex and any of them
 }
 
-rule pokkt_dex : tracker
+rule pokkt : tracker
 {
     meta:
         description = "POKKT"
@@ -5128,7 +5128,7 @@ rule pokkt_dex : tracker
         is_dex and any of them
 }
 
-rule prebid_mobile_dex : tracker
+rule prebid_mobile : tracker
 {
     meta:
         description = "Prebid Mobile"
@@ -5144,7 +5144,7 @@ rule prebid_mobile_dex : tracker
         is_dex and any of them
 }
 
-rule sk_planet_tad_dex : tracker
+rule sk_planet_tad : tracker
 {
     meta:
         description = "SK planet Tad"
@@ -5159,7 +5159,7 @@ rule sk_planet_tad_dex : tracker
         is_dex and any of them
 }
 
-rule split_dex : tracker
+rule split : tracker
 {
     meta:
         description = "Split"
@@ -5175,7 +5175,7 @@ rule split_dex : tracker
         is_dex and any of them
 }
 
-rule exponea_dex : tracker
+rule exponea : tracker
 {
     meta:
         description = "Exponea"
@@ -5191,7 +5191,7 @@ rule exponea_dex : tracker
         is_dex and any of them
 }
 
-rule ipqualityscore_dex : tracker
+rule ipqualityscore : tracker
 {
     meta:
         description = "IPQualityScore"
@@ -5207,7 +5207,7 @@ rule ipqualityscore_dex : tracker
         is_dex and any of them
 }
 
-rule opensignal_dex : tracker
+rule opensignal : tracker
 {
     meta:
         description = "Opensignal"
@@ -5222,7 +5222,7 @@ rule opensignal_dex : tracker
         is_dex and any of them
 }
 
-rule signalframe_dex : tracker
+rule signalframe : tracker
 {
     meta:
         description = "SignalFrame"
@@ -5237,7 +5237,7 @@ rule signalframe_dex : tracker
         is_dex and any of them
 }
 
-rule x_mode_dex : tracker
+rule x_mode : tracker
 {
     meta:
         description = "X-Mode"
@@ -5253,7 +5253,7 @@ rule x_mode_dex : tracker
         is_dex and any of them
 }
 
-rule oneaudience_dex : tracker
+rule oneaudience : tracker
 {
     meta:
         description = "OneAudience"
@@ -5268,7 +5268,7 @@ rule oneaudience_dex : tracker
         is_dex and any of them
 }
 
-rule openback_dex : tracker
+rule openback : tracker
 {
     meta:
         description = "OpenBack"
@@ -5283,7 +5283,7 @@ rule openback_dex : tracker
         is_dex and any of them
 }
 
-rule predicio_dex : tracker
+rule predicio : tracker
 {
     meta:
         description = "PredicIO"
@@ -5299,7 +5299,7 @@ rule predicio_dex : tracker
         is_dex and any of them
 }
 
-rule adlocus_dex : tracker
+rule adlocus : tracker
 {
     meta:
         description = "AdLocus"
@@ -5314,7 +5314,7 @@ rule adlocus_dex : tracker
         is_dex and any of them
 }
 
-rule adcenix_dex : tracker
+rule adcenix : tracker
 {
     meta:
         description = "Adcenix"
@@ -5329,7 +5329,7 @@ rule adcenix_dex : tracker
         is_dex and any of them
 }
 
-rule admitad_dex : tracker
+rule admitad : tracker
 {
     meta:
         description = "Admitad"
@@ -5345,7 +5345,7 @@ rule admitad_dex : tracker
         is_dex and any of them
 }
 
-rule autonavi__amap_dex : tracker
+rule autonavi__amap : tracker
 {
     meta:
         description = "AutoNavi / Amap"
@@ -5361,7 +5361,7 @@ rule autonavi__amap_dex : tracker
         is_dex and any of them
 }
 
-rule ibm_digital_analytics_dex : tracker
+rule ibm_digital_analytics : tracker
 {
     meta:
         description = "IBM Digital Analytics"
@@ -5377,7 +5377,7 @@ rule ibm_digital_analytics_dex : tracker
         is_dex and any of them
 }
 
-rule pangle_dex : tracker
+rule pangle : tracker
 {
     meta:
         description = "Pangle"
@@ -5392,7 +5392,7 @@ rule pangle_dex : tracker
         is_dex and any of them
 }
 
-rule yoc_vis_x_dex : tracker
+rule yoc_vis_x : tracker
 {
     meta:
         description = "YOC VIS.X"
@@ -5408,7 +5408,7 @@ rule yoc_vis_x_dex : tracker
         is_dex and any of them
 }
 
-rule ad_generation_dex : tracker
+rule ad_generation : tracker
 {
     meta:
         description = "Ad Generation"
@@ -5423,7 +5423,7 @@ rule ad_generation_dex : tracker
         is_dex and any of them
 }
 
-rule adjoe_dex : tracker
+rule adjoe : tracker
 {
     meta:
         description = "Adjoe"
@@ -5438,7 +5438,7 @@ rule adjoe_dex : tracker
         is_dex and any of them
 }
 
-rule appvador_dex : tracker
+rule appvador : tracker
 {
     meta:
         description = "AppVador"
@@ -5453,7 +5453,7 @@ rule appvador_dex : tracker
         is_dex and any of them
 }
 
-rule appodeal_stack_dex : tracker
+rule appodeal_stack : tracker
 {
     meta:
         description = "Appodeal Stack"
@@ -5468,7 +5468,7 @@ rule appodeal_stack_dex : tracker
         is_dex and any of them
 }
 
-rule appsgeyser_dex : tracker
+rule appsgeyser : tracker
 {
     meta:
         description = "AppsGeyser"
@@ -5483,7 +5483,7 @@ rule appsgeyser_dex : tracker
         is_dex and any of them
 }
 
-rule bidmachine_dex : tracker
+rule bidmachine : tracker
 {
     meta:
         description = "BidMachine"
@@ -5498,7 +5498,7 @@ rule bidmachine_dex : tracker
         is_dex and any of them
 }
 
-rule bugsense_dex : tracker
+rule bugsense : tracker
 {
     meta:
         description = "BugSense"
@@ -5513,7 +5513,7 @@ rule bugsense_dex : tracker
         is_dex and any of them
 }
 
-rule buzzad_benefit_dex : tracker
+rule buzzad_benefit : tracker
 {
     meta:
         description = "BuzzAd Benefit"
@@ -5528,7 +5528,7 @@ rule buzzad_benefit_dex : tracker
         is_dex and any of them
 }
 
-rule gom_factory_adpie_dex : tracker
+rule gom_factory_adpie : tracker
 {
     meta:
         description = "GOM Factory AdPie"
@@ -5543,7 +5543,7 @@ rule gom_factory_adpie_dex : tracker
         is_dex and any of them
 }
 
-rule jumptap_dex : tracker
+rule jumptap : tracker
 {
     meta:
         description = "JumpTap"
@@ -5558,7 +5558,7 @@ rule jumptap_dex : tracker
         is_dex and any of them
 }
 
-rule loopme_dex : tracker
+rule loopme : tracker
 {
     meta:
         description = "LoopMe"
@@ -5573,7 +5573,7 @@ rule loopme_dex : tracker
         is_dex and any of them
 }
 
-rule raygun_dex : tracker
+rule raygun : tracker
 {
     meta:
         description = "Raygun"
@@ -5588,7 +5588,7 @@ rule raygun_dex : tracker
         is_dex and any of them
 }
 
-rule rjfun_dex : tracker
+rule rjfun : tracker
 {
     meta:
         description = "RjFun"
@@ -5603,7 +5603,7 @@ rule rjfun_dex : tracker
         is_dex and any of them
 }
 
-rule superawesome_dex : tracker
+rule superawesome : tracker
 {
     meta:
         description = "SuperAwesome"
@@ -5618,7 +5618,7 @@ rule superawesome_dex : tracker
         is_dex and any of them
 }
 
-rule tapresearch_dex : tracker
+rule tapresearch : tracker
 {
     meta:
         description = "TapResearch"
@@ -5633,7 +5633,7 @@ rule tapresearch_dex : tracker
         is_dex and any of them
 }
 
-rule tappx_dex : tracker
+rule tappx : tracker
 {
     meta:
         description = "Tappx"
@@ -5648,7 +5648,7 @@ rule tappx_dex : tracker
         is_dex and any of them
 }
 
-rule thinkingdata_analytics_dex : tracker
+rule thinkingdata_analytics : tracker
 {
     meta:
         description = "ThinkingData Analytics"
@@ -5663,7 +5663,7 @@ rule thinkingdata_analytics_dex : tracker
         is_dex and any of them
 }
 
-rule vkontakte_sdk_dex : tracker
+rule vkontakte_sdk : tracker
 {
     meta:
         description = "VKontakte SDK"
@@ -5678,7 +5678,7 @@ rule vkontakte_sdk_dex : tracker
         is_dex and any of them
 }
 
-rule virgo_mobile_dex : tracker
+rule virgo_mobile : tracker
 {
     meta:
         description = "Virgo Mobile"
@@ -5693,7 +5693,7 @@ rule virgo_mobile_dex : tracker
         is_dex and any of them
 }
 
-rule zoho_analytics_dex : tracker
+rule zoho_analytics : tracker
 {
     meta:
         description = "Zoho Analytics"
@@ -5708,7 +5708,7 @@ rule zoho_analytics_dex : tracker
         is_dex and any of them
 }
 
-rule fineboost_dex : tracker
+rule fineboost : tracker
 {
     meta:
         description = "fineboost"
@@ -5723,7 +5723,7 @@ rule fineboost_dex : tracker
         is_dex and any of them
 }
 
-rule acuant_dex : tracker
+rule acuant : tracker
 {
     meta:
         description = "Acuant"
@@ -5739,7 +5739,7 @@ rule acuant_dex : tracker
         is_dex and any of them
 }
 
-rule anvato_a_google_company_dex : tracker
+rule anvato_a_google_company : tracker
 {
     meta:
         description = "Anvato (A G. Company)"
@@ -5755,7 +5755,7 @@ rule anvato_a_google_company_dex : tracker
         is_dex and any of them
 }
 
-rule blesh_dex : tracker
+rule blesh : tracker
 {
     meta:
         description = "Blesh"
@@ -5770,7 +5770,7 @@ rule blesh_dex : tracker
         is_dex and any of them
 }
 
-rule bluecats_dex : tracker
+rule bluecats : tracker
 {
     meta:
         description = "Bluecats"
@@ -5785,7 +5785,7 @@ rule bluecats_dex : tracker
         is_dex and any of them
 }
 
-rule cooladata_dex : tracker
+rule cooladata : tracker
 {
     meta:
         description = "CoolaData"
@@ -5800,7 +5800,7 @@ rule cooladata_dex : tracker
         is_dex and any of them
 }
 
-rule fluzo_dex : tracker
+rule fluzo : tracker
 {
     meta:
         description = "FLUZO"
@@ -5815,7 +5815,7 @@ rule fluzo_dex : tracker
         is_dex and any of them
 }
 
-rule facebook_flipper_dex : tracker
+rule facebook_flipper : tracker
 {
     meta:
         description = "FB. Flipper"
@@ -5830,7 +5830,7 @@ rule facebook_flipper_dex : tracker
         is_dex and any of them
 }
 
-rule gpshopper_dex : tracker
+rule gpshopper : tracker
 {
     meta:
         description = "GPShopper"
@@ -5846,7 +5846,7 @@ rule gpshopper_dex : tracker
         is_dex and any of them
 }
 
-rule indooratlas_dex : tracker
+rule indooratlas : tracker
 {
     meta:
         description = "IndoorAtlas"
@@ -5862,7 +5862,7 @@ rule indooratlas_dex : tracker
         is_dex and any of them
 }
 
-rule janrain_dex : tracker
+rule janrain : tracker
 {
     meta:
         description = "Janrain"
@@ -5877,7 +5877,7 @@ rule janrain_dex : tracker
         is_dex and any of them
 }
 
-rule moca_dex : tracker
+rule moca : tracker
 {
     meta:
         description = "MOCA"
@@ -5893,7 +5893,7 @@ rule moca_dex : tracker
         is_dex and any of them
 }
 
-rule point_inside_dex : tracker
+rule point_inside : tracker
 {
     meta:
         description = "Point Inside"
@@ -5908,7 +5908,7 @@ rule point_inside_dex : tracker
         is_dex and any of them
 }
 
-rule proximi_io_dex : tracker
+rule proximi_io : tracker
 {
     meta:
         description = "Proximi.io"
@@ -5924,7 +5924,7 @@ rule proximi_io_dex : tracker
         is_dex and any of them
 }
 
-rule scoreloop_dex : tracker
+rule scoreloop : tracker
 {
     meta:
         description = "ScoreLoop"
@@ -5939,7 +5939,7 @@ rule scoreloop_dex : tracker
         is_dex and any of them
 }
 
-rule alooma_dex : tracker
+rule alooma : tracker
 {
     meta:
         description = "Alooma"
@@ -5955,7 +5955,7 @@ rule alooma_dex : tracker
         is_dex and any of them
 }
 
-rule analytics_by_npaw_youbora_suite_dex : tracker
+rule analytics_by_npaw_youbora_suite : tracker
 {
     meta:
         description = "Analytics by NPAW (Youbora Suite)"
@@ -5970,7 +5970,7 @@ rule analytics_by_npaw_youbora_suite_dex : tracker
         is_dex and any of them
 }
 
-rule beintoo_dex : tracker
+rule beintoo : tracker
 {
     meta:
         description = "Beintoo"
@@ -5985,7 +5985,7 @@ rule beintoo_dex : tracker
         is_dex and any of them
 }
 
-rule bolts_dex : tracker
+rule bolts : tracker
 {
     meta:
         description = "Bolts"
@@ -6000,7 +6000,7 @@ rule bolts_dex : tracker
         is_dex and any of them
 }
 
-rule cedexis_radar_dex : tracker
+rule cedexis_radar : tracker
 {
     meta:
         description = "Cedexis Radar"
@@ -6016,7 +6016,7 @@ rule cedexis_radar_dex : tracker
         is_dex and any of them
 }
 
-rule cifrasoft_dex : tracker
+rule cifrasoft : tracker
 {
     meta:
         description = "Cifrasoft"
@@ -6032,7 +6032,7 @@ rule cifrasoft_dex : tracker
         is_dex and any of them
 }
 
-rule flowsense_dex : tracker
+rule flowsense : tracker
 {
     meta:
         description = "Flowsense"
@@ -6047,7 +6047,7 @@ rule flowsense_dex : tracker
         is_dex and any of them
 }
 
-rule geniee_dex : tracker
+rule geniee : tracker
 {
     meta:
         description = "Geniee"
@@ -6062,7 +6062,7 @@ rule geniee_dex : tracker
         is_dex and any of them
 }
 
-rule huq_sourcekit_dex : tracker
+rule huq_sourcekit : tracker
 {
     meta:
         description = "Huq Sourcekit"
@@ -6077,7 +6077,7 @@ rule huq_sourcekit_dex : tracker
         is_dex and any of them
 }
 
-rule insider_dex : tracker
+rule insider : tracker
 {
     meta:
         description = "Insider"
@@ -6092,7 +6092,7 @@ rule insider_dex : tracker
         is_dex and any of them
 }
 
-rule mopinion_dex : tracker
+rule mopinion : tracker
 {
     meta:
         description = "Mopinion"
@@ -6107,7 +6107,7 @@ rule mopinion_dex : tracker
         is_dex and any of them
 }
 
-rule offertoro_dex : tracker
+rule offertoro : tracker
 {
     meta:
         description = "OfferToro"
@@ -6122,7 +6122,7 @@ rule offertoro_dex : tracker
         is_dex and any of them
 }
 
-rule opentelemetry_opencensus_opentracing_dex : tracker
+rule opentelemetry_opencensus_opentracing : tracker
 {
     meta:
         description = "OpenTelemetry (OpenCensus, OpenTracing)"
@@ -6137,7 +6137,7 @@ rule opentelemetry_opencensus_opentracing_dex : tracker
         is_dex and any of them
 }
 
-rule snapchat_login_kit_dex : tracker
+rule snapchat_login_kit : tracker
 {
     meta:
         description = "Snapchat Login Kit"
@@ -6152,7 +6152,7 @@ rule snapchat_login_kit_dex : tracker
         is_dex and any of them
 }
 
-rule zendrive_dex : tracker
+rule zendrive : tracker
 {
     meta:
         description = "Zendrive"
@@ -6167,7 +6167,7 @@ rule zendrive_dex : tracker
         is_dex and any of them
 }
 
-rule fullstory_dex : tracker
+rule fullstory : tracker
 {
     meta:
         description = "fullstory"
@@ -6182,7 +6182,7 @@ rule fullstory_dex : tracker
         is_dex and any of them
 }
 
-rule pendo_dex : tracker
+rule pendo : tracker
 {
     meta:
         description = "Pendo"
@@ -6197,7 +6197,7 @@ rule pendo_dex : tracker
         is_dex and any of them
 }
 
-rule plexure_dex : tracker
+rule plexure : tracker
 {
     meta:
         description = "Plexure"
@@ -6212,7 +6212,7 @@ rule plexure_dex : tracker
         is_dex and any of them
 }
 
-rule swirl_dex : tracker
+rule swirl : tracker
 {
     meta:
         description = "Swirl"
@@ -6228,7 +6228,7 @@ rule swirl_dex : tracker
         is_dex and any of them
 }
 
-rule treasure_data_dex : tracker
+rule treasure_data : tracker
 {
     meta:
         description = "Treasure Data"
@@ -6243,7 +6243,7 @@ rule treasure_data_dex : tracker
         is_dex and any of them
 }
 
-rule ibm_mobile_marketing_acoustic_dex : tracker
+rule ibm_mobile_marketing_acoustic : tracker
 {
     meta:
         description = "IBM Mobile Marketing (Acoustic)"
@@ -6259,7 +6259,7 @@ rule ibm_mobile_marketing_acoustic_dex : tracker
         is_dex and any of them
 }
 
-rule solar_d_corona_dex : tracker
+rule solar_d_corona : tracker
 {
     meta:
         description = "Solar2D (Corona)"
@@ -6274,7 +6274,7 @@ rule solar_d_corona_dex : tracker
         is_dex and any of them
 }
 
-rule amazon_mobile_analytics_amplify_dex : tracker
+rule amazon_mobile_analytics_amplify : tracker
 {
     meta:
         description = "Amazon Mobile Analytics (Amplify)"
@@ -6289,7 +6289,7 @@ rule amazon_mobile_analytics_amplify_dex : tracker
         is_dex and any of them
 }
 
-rule ad_x_dex : tracker
+rule ad_x : tracker
 {
     meta:
         description = "AD(X)"
@@ -6304,7 +6304,7 @@ rule ad_x_dex : tracker
         is_dex and any of them
 }
 
-rule adgatemedia_dex : tracker
+rule adgatemedia : tracker
 {
     meta:
         description = "AdGateMedia"
@@ -6319,7 +6319,7 @@ rule adgatemedia_dex : tracker
         is_dex and any of them
 }
 
-rule admarvel_dex : tracker
+rule admarvel : tracker
 {
     meta:
         description = "AdMarvel"
@@ -6334,7 +6334,7 @@ rule admarvel_dex : tracker
         is_dex and any of them
 }
 
-rule adtiming_dex : tracker
+rule adtiming : tracker
 {
     meta:
         description = "AdTiming"
@@ -6349,7 +6349,7 @@ rule adtiming_dex : tracker
         is_dex and any of them
 }
 
-rule adjust_unbotify_dex : tracker
+rule adjust_unbotify : tracker
 {
     meta:
         description = "Adjust Unbotify"
@@ -6364,7 +6364,7 @@ rule adjust_unbotify_dex : tracker
         is_dex and any of them
 }
 
-rule lotadata_dex : tracker
+rule lotadata : tracker
 {
     meta:
         description = "LotaData"
@@ -6379,7 +6379,7 @@ rule lotadata_dex : tracker
         is_dex and any of them
 }
 
-rule marketo_an_adobe_company_dex : tracker
+rule marketo_an_adobe_company : tracker
 {
     meta:
         description = "Marketo (an Adobe Company)"
@@ -6395,7 +6395,7 @@ rule marketo_an_adobe_company_dex : tracker
         is_dex and any of them
 }
 
-rule playtestcloud_event_tracking_dex : tracker
+rule playtestcloud_event_tracking : tracker
 {
     meta:
         description = "PlaytestCloud Event Tracking"
@@ -6410,7 +6410,7 @@ rule playtestcloud_event_tracking_dex : tracker
         is_dex and any of them
 }
 
-rule rollbar_dex : tracker
+rule rollbar : tracker
 {
     meta:
         description = "Rollbar"
@@ -6425,7 +6425,7 @@ rule rollbar_dex : tracker
         is_dex and any of them
 }
 
-rule snap_ad_kit_dex : tracker
+rule snap_ad_kit : tracker
 {
     meta:
         description = "Snap Ad Kit"
@@ -6440,7 +6440,7 @@ rule snap_ad_kit_dex : tracker
         is_dex and any of them
 }
 
-rule synerise_dex : tracker
+rule synerise : tracker
 {
     meta:
         description = "Synerise"
@@ -6456,7 +6456,7 @@ rule synerise_dex : tracker
         is_dex and any of them
 }
 
-rule userexperior_dex : tracker
+rule userexperior : tracker
 {
     meta:
         description = "UserExperior"
@@ -6471,7 +6471,7 @@ rule userexperior_dex : tracker
         is_dex and any of them
 }
 
-rule vdopia_dex : tracker
+rule vdopia : tracker
 {
     meta:
         description = "Vdopia"
@@ -6486,7 +6486,7 @@ rule vdopia_dex : tracker
         is_dex and any of them
 }
 
-rule adgem_dex : tracker
+rule adgem : tracker
 {
     meta:
         description = "AdGem"
@@ -6501,7 +6501,7 @@ rule adgem_dex : tracker
         is_dex and any of them
 }
 
-rule adtrial_dex : tracker
+rule adtrial : tracker
 {
     meta:
         description = "AdTrial"
@@ -6516,7 +6516,7 @@ rule adtrial_dex : tracker
         is_dex and any of them
 }
 
-rule pincrux_dex : tracker
+rule pincrux : tracker
 {
     meta:
         description = "Pincrux"
@@ -6531,7 +6531,7 @@ rule pincrux_dex : tracker
         is_dex and any of them
 }
 
-rule tutucloud_dex : tracker
+rule tutucloud : tracker
 {
     meta:
         description = "Tutucloud"
@@ -6547,7 +6547,7 @@ rule tutucloud_dex : tracker
         is_dex and any of them
 }
 
-rule veloxity_dex : tracker
+rule veloxity : tracker
 {
     meta:
         description = "Veloxity"
@@ -6562,7 +6562,7 @@ rule veloxity_dex : tracker
         is_dex and any of them
 }
 
-rule yoadx_dex : tracker
+rule yoadx : tracker
 {
     meta:
         description = "Yoadx"
@@ -6577,7 +6577,7 @@ rule yoadx_dex : tracker
         is_dex and any of them
 }
 
-rule coulus_coelib_dex : tracker
+rule coulus_coelib : tracker
 {
     meta:
         description = "Coulus Coelib"
@@ -6592,7 +6592,7 @@ rule coulus_coelib_dex : tracker
         is_dex and any of them
 }
 
-rule acra_dex : tracker
+rule acra : tracker
 {
     meta:
         description = "ACRA"
@@ -6607,7 +6607,7 @@ rule acra_dex : tracker
         is_dex and any of them
 }
 
-rule backtrace_dex : tracker
+rule backtrace : tracker
 {
     meta:
         description = "Backtrace"
@@ -6623,7 +6623,7 @@ rule backtrace_dex : tracker
         is_dex and any of them
 }
 
-rule sentry_dex : tracker
+rule sentry : tracker
 {
     meta:
         description = "Sentry"
@@ -6638,7 +6638,7 @@ rule sentry_dex : tracker
         is_dex and any of them
 }
 
-rule yueying_crash_sdk_dex : tracker
+rule yueying_crash_sdk : tracker
 {
     meta:
         description = "Yueying Crash SDK"

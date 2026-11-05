@@ -162,7 +162,7 @@ rule dexguard_c : obfuscator
     and any of them
 }
 
-rule dexprotector_dex : obfuscator
+rule dexprotector : obfuscator
 {
   meta:
     description = "DexProtector"
@@ -477,7 +477,7 @@ rule unreadable_method_names : obfuscator
     and (not dexguard_a and not dexguard_b and not dexguard_c)
 }
 
-rule apkencryptor_dex : obfuscator
+rule apkencryptor : obfuscator
 {
   meta:
     description = "ApkEncryptor"

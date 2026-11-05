@@ -26,7 +26,6 @@
 
 import hashlib
 import os
-import re
 from typing import Dict
 from typing import Optional
 
@@ -61,26 +60,17 @@ class RulesManager(object):
                 files[path] = path
         return files
 
-    @staticmethod
-    def _strip_includes(source: str) -> str:
-        return re.sub(r'^\s*include\s+"[^"]+"\s*\n?', '', source, flags=re.M)
-
     def compile(self) -> yara.Rules:
         yara_files = self._collect_yara_files()
-        # Compile common.yara first so is_* helpers are defined before use,
-        # then everything else deterministically sorted for stable builds.
-        def _sort_key(p: str):
-            return (0 if os.path.basename(p) == 'common.yara' else 1, p)
-        sorted_paths = sorted(yara_files.keys(), key=_sort_key)
         # relaxed_re_syntax allows legacy yara regexes that yara-x strict
         # mode would reject (e.g. unescaped chars, invalid escapes treated
         # as literals in yara). APKiD rules were written for yara.
         compiler = yara.Compiler(relaxed_re_syntax=True)
-        for path in sorted_paths:
-            with open(path, 'r', encoding='utf-8') as f:
-                src = f.read()
-            src = self._strip_includes(src)
-            compiler.add_source(src, origin=path)
+        compiler.add_include_dir(self.rules_dir)
+        for path in sorted(yara_files.keys()):
+            rel = os.path.relpath(path, self.rules_dir).replace(os.sep, '/')
+            compiler.new_namespace(rel)
+            compiler.add_source(f'include "{rel}"', origin=path)
         self.rules = compiler.build()
         return self.rules
 

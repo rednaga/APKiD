@@ -144,10 +144,7 @@ The Rust dependency is configured with minimal features:
 yara-x = { path = "./yarax_patches/yara-x/lib", default-features = false, features = ["dex-module", "hash-module", "crypto", "pe-module", "elf-module", "generate-proto-code"] }
 ```
 
-Note: yara-x requires globally unique rule names. Protector/packer rules that
-previously existed in multiple files (e.g. `dpt_shell` in apk/dex/elf) are now
-suffixed per file type (`dpt_shell_apk`, `dpt_shell_dex`, `dpt_shell_elf`, ...),
-including tracker rules (`teemo_apk`, `teemo_dex`, `teemo_elf`).
+
 
 ## For Package Maintainers
 

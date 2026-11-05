@@ -1,6 +1,6 @@
 include "common.yara"
 
-rule teemo_apk : tracker
+rule teemo : tracker
 {
     meta:
         description = "Teemo"
@@ -16,7 +16,7 @@ rule teemo_apk : tracker
         is_apk and any of them
 }
 
-rule fidzup_apk : tracker
+rule fidzup : tracker
 {
     meta:
         description = "FidZup"
@@ -32,7 +32,7 @@ rule fidzup_apk : tracker
         is_apk and any of them
 }
 
-rule audience_studio_krux_apk : tracker
+rule audience_studio_krux : tracker
 {
     meta:
         description = "Audience Studio (Krux)"
@@ -48,7 +48,7 @@ rule audience_studio_krux_apk : tracker
         is_apk and any of them
 }
 
-rule ad_screen_apk : tracker
+rule ad_screen : tracker
 {
     meta:
         description = "Ad4Screen"
@@ -64,7 +64,7 @@ rule ad_screen_apk : tracker
         is_apk and any of them
 }
 
-rule google_doubleclick_apk : tracker
+rule google_doubleclick : tracker
 {
     meta:
         description = "G. DoubleClick"
@@ -79,7 +79,7 @@ rule google_doubleclick_apk : tracker
         is_apk and any of them
 }
 
-rule weborama_apk : tracker
+rule weborama : tracker
 {
     meta:
         description = "Weborama"
@@ -95,7 +95,7 @@ rule weborama_apk : tracker
         is_apk and any of them
 }
 
-rule smart_apk : tracker
+rule smart : tracker
 {
     meta:
         description = "Smart"
@@ -111,7 +111,7 @@ rule smart_apk : tracker
         is_apk and any of them
 }
 
-rule jw_player_apk : tracker
+rule jw_player : tracker
 {
     meta:
         description = "JW Player"
@@ -127,7 +127,7 @@ rule jw_player_apk : tracker
         is_apk and any of them
 }
 
-rule loggly_apk : tracker
+rule loggly : tracker
 {
     meta:
         description = "Loggly"
@@ -143,7 +143,7 @@ rule loggly_apk : tracker
         is_apk and any of them
 }
 
-rule outbrain_apk : tracker
+rule outbrain : tracker
 {
     meta:
         description = "OutBrain"
@@ -159,7 +159,7 @@ rule outbrain_apk : tracker
         is_apk and any of them
 }
 
-rule appsflyer_apk : tracker
+rule appsflyer : tracker
 {
     meta:
         description = "AppsFlyer"
@@ -175,7 +175,7 @@ rule appsflyer_apk : tracker
         is_apk and any of them
 }
 
-rule ligatus_apk : tracker
+rule ligatus : tracker
 {
     meta:
         description = "Ligatus"
@@ -191,7 +191,7 @@ rule ligatus_apk : tracker
         is_apk and any of them
 }
 
-rule widespace_apk : tracker
+rule widespace : tracker
 {
     meta:
         description = "Widespace"
@@ -207,7 +207,7 @@ rule widespace_apk : tracker
         is_apk and any of them
 }
 
-rule appnexus_apk : tracker
+rule appnexus : tracker
 {
     meta:
         description = "AppNexus"
@@ -223,7 +223,7 @@ rule appnexus_apk : tracker
         is_apk and any of them
 }
 
-rule localytics_apk : tracker
+rule localytics : tracker
 {
     meta:
         description = "Localytics"
@@ -239,7 +239,7 @@ rule localytics_apk : tracker
         is_apk and any of them
 }
 
-rule braze_formerly_appboy_apk : tracker
+rule braze_formerly_appboy : tracker
 {
     meta:
         description = "Braze (formerly Appboy)"
@@ -255,7 +255,7 @@ rule braze_formerly_appboy_apk : tracker
         is_apk and any of them
 }
 
-rule mparticle_apk : tracker
+rule mparticle : tracker
 {
     meta:
         description = "mParticle"
@@ -271,7 +271,7 @@ rule mparticle_apk : tracker
         is_apk and any of them
 }
 
-rule s_m_apk : tracker
+rule s_m : tracker
 {
     meta:
         description = "S4M"
@@ -287,7 +287,7 @@ rule s_m_apk : tracker
         is_apk and any of them
 }
 
-rule sizmek_apk : tracker
+rule sizmek : tracker
 {
     meta:
         description = "Sizmek"
@@ -303,7 +303,7 @@ rule sizmek_apk : tracker
         is_apk and any of them
 }
 
-rule batch_apk : tracker
+rule batch : tracker
 {
     meta:
         description = "Batch"
@@ -319,7 +319,7 @@ rule batch_apk : tracker
         is_apk and any of them
 }
 
-rule sync_ad_apk : tracker
+rule sync_ad : tracker
 {
     meta:
         description = "Sync2Ad"
@@ -335,7 +335,7 @@ rule sync_ad_apk : tracker
         is_apk and any of them
 }
 
-rule flurry_apk : tracker
+rule flurry : tracker
 {
     meta:
         description = "Flurry"
@@ -351,7 +351,7 @@ rule flurry_apk : tracker
         is_apk and any of them
 }
 
-rule hockeyapp_apk : tracker
+rule hockeyapp : tracker
 {
     meta:
         description = "HockeyApp"
@@ -367,7 +367,7 @@ rule hockeyapp_apk : tracker
         is_apk and any of them
 }
 
-rule google_crashlytics_apk : tracker
+rule google_crashlytics : tracker
 {
     meta:
         description = "G. CrashLytics"
@@ -383,7 +383,7 @@ rule google_crashlytics_apk : tracker
         is_apk and any of them
 }
 
-rule leanplum_apk : tracker
+rule leanplum : tracker
 {
     meta:
         description = "LeanPlum"
@@ -399,7 +399,7 @@ rule leanplum_apk : tracker
         is_apk and any of them
 }
 
-rule tinder_analytics_apk : tracker
+rule tinder_analytics : tracker
 {
     meta:
         description = "Tinder Analytics"
@@ -415,7 +415,7 @@ rule tinder_analytics_apk : tracker
         is_apk and any of them
 }
 
-rule schibsted_apk : tracker
+rule schibsted : tracker
 {
     meta:
         description = "Schibsted"
@@ -431,7 +431,7 @@ rule schibsted_apk : tracker
         is_apk and any of them
 }
 
-rule atinternet_apk : tracker
+rule atinternet : tracker
 {
     meta:
         description = "ATInternet"
@@ -447,7 +447,7 @@ rule atinternet_apk : tracker
         is_apk and any of them
 }
 
-rule tealium_apk : tracker
+rule tealium : tracker
 {
     meta:
         description = "Tealium"
@@ -463,7 +463,7 @@ rule tealium_apk : tracker
         is_apk and any of them
 }
 
-rule nexage_apk : tracker
+rule nexage : tracker
 {
     meta:
         description = "Nexage"
@@ -479,7 +479,7 @@ rule nexage_apk : tracker
         is_apk and any of them
 }
 
-rule ogury_presage_apk : tracker
+rule ogury_presage : tracker
 {
     meta:
         description = "Ogury Presage"
@@ -495,7 +495,7 @@ rule ogury_presage_apk : tracker
         is_apk and any of them
 }
 
-rule twitter_mopub_apk : tracker
+rule twitter_mopub : tracker
 {
     meta:
         description = "Twitter MoPub"
@@ -511,7 +511,7 @@ rule twitter_mopub_apk : tracker
         is_apk and any of them
 }
 
-rule add_apt_tr_apk : tracker
+rule add_apt_tr : tracker
 {
     meta:
         description = "Add Apt Tr"
@@ -527,7 +527,7 @@ rule add_apt_tr_apk : tracker
         is_apk and any of them
 }
 
-rule vectaury_apk : tracker
+rule vectaury : tracker
 {
     meta:
         description = "Vectaury"
@@ -543,7 +543,7 @@ rule vectaury_apk : tracker
         is_apk and any of them
 }
 
-rule tune_apk : tracker
+rule tune : tracker
 {
     meta:
         description = "Tune"
@@ -559,7 +559,7 @@ rule tune_apk : tracker
         is_apk and any of them
 }
 
-rule pushwoosh_apk : tracker
+rule pushwoosh : tracker
 {
     meta:
         description = "Pushwoosh"
@@ -575,7 +575,7 @@ rule pushwoosh_apk : tracker
         is_apk and any of them
 }
 
-rule demdex_apk : tracker
+rule demdex : tracker
 {
     meta:
         description = "Demdex"
@@ -591,7 +591,7 @@ rule demdex_apk : tracker
         is_apk and any of them
 }
 
-rule adswizz_apk : tracker
+rule adswizz : tracker
 {
     meta:
         description = "AdsWizz"
@@ -607,7 +607,7 @@ rule adswizz_apk : tracker
         is_apk and any of them
 }
 
-rule exacttarget_apk : tracker
+rule exacttarget : tracker
 {
     meta:
         description = "ExactTarget"
@@ -623,7 +623,7 @@ rule exacttarget_apk : tracker
         is_apk and any of them
 }
 
-rule omniture_apk : tracker
+rule omniture : tracker
 {
     meta:
         description = "Omniture"
@@ -639,7 +639,7 @@ rule omniture_apk : tracker
         is_apk and any of them
 }
 
-rule openlocate_apk : tracker
+rule openlocate : tracker
 {
     meta:
         description = "OpenLocate"
@@ -655,7 +655,7 @@ rule openlocate_apk : tracker
         is_apk and any of them
 }
 
-rule tagcommander_commanders_act_apk : tracker
+rule tagcommander_commanders_act : tracker
 {
     meta:
         description = "TagCommander (Commanders Act.)"
@@ -671,7 +671,7 @@ rule tagcommander_commanders_act_apk : tracker
         is_apk and any of them
 }
 
-rule crowdtangle_apk : tracker
+rule crowdtangle : tracker
 {
     meta:
         description = "CrowdTangle"
@@ -686,7 +686,7 @@ rule crowdtangle_apk : tracker
         is_apk and any of them
 }
 
-rule facebook_audience_apk : tracker
+rule facebook_audience : tracker
 {
     meta:
         description = "FB. Audience"
@@ -701,7 +701,7 @@ rule facebook_audience_apk : tracker
         is_apk and any of them
 }
 
-rule google_analytics_apk : tracker
+rule google_analytics : tracker
 {
     meta:
         description = "G. Analytics"
@@ -717,7 +717,7 @@ rule google_analytics_apk : tracker
         is_apk and any of them
 }
 
-rule google_firebase_analytics_apk : tracker
+rule google_firebase_analytics : tracker
 {
     meta:
         description = "G. Firebase Analytics"
@@ -733,7 +733,7 @@ rule google_firebase_analytics_apk : tracker
         is_apk and any of them
 }
 
-rule eulerian_apk : tracker
+rule eulerian : tracker
 {
     meta:
         description = "Eulerian"
@@ -749,7 +749,7 @@ rule eulerian_apk : tracker
         is_apk and any of them
 }
 
-rule adjust_apk : tracker
+rule adjust : tracker
 {
     meta:
         description = "Adjust"
@@ -765,7 +765,7 @@ rule adjust_apk : tracker
         is_apk and any of them
 }
 
-rule chartboost_apk : tracker
+rule chartboost : tracker
 {
     meta:
         description = "ChartBoost"
@@ -781,7 +781,7 @@ rule chartboost_apk : tracker
         is_apk and any of them
 }
 
-rule backelite_apk : tracker
+rule backelite : tracker
 {
     meta:
         description = "Backelite"
@@ -797,7 +797,7 @@ rule backelite_apk : tracker
         is_apk and any of them
 }
 
-rule areametrics_apk : tracker
+rule areametrics : tracker
 {
     meta:
         description = "Areametrics"
@@ -813,7 +813,7 @@ rule areametrics_apk : tracker
         is_apk and any of them
 }
 
-rule comscore_apk : tracker
+rule comscore : tracker
 {
     meta:
         description = "ComScore"
@@ -829,7 +829,7 @@ rule comscore_apk : tracker
         is_apk and any of them
 }
 
-rule cuebiq_apk : tracker
+rule cuebiq : tracker
 {
     meta:
         description = "Cuebiq"
@@ -845,7 +845,7 @@ rule cuebiq_apk : tracker
         is_apk and any of them
 }
 
-rule helpshift_apk : tracker
+rule helpshift : tracker
 {
     meta:
         description = "HelpShift"
@@ -861,7 +861,7 @@ rule helpshift_apk : tracker
         is_apk and any of them
 }
 
-rule kontakt_apk : tracker
+rule kontakt : tracker
 {
     meta:
         description = "Kontakt"
@@ -877,7 +877,7 @@ rule kontakt_apk : tracker
         is_apk and any of them
 }
 
-rule locuslabs_apk : tracker
+rule locuslabs : tracker
 {
     meta:
         description = "Locuslabs"
@@ -893,7 +893,7 @@ rule locuslabs_apk : tracker
         is_apk and any of them
 }
 
-rule moat_apk : tracker
+rule moat : tracker
 {
     meta:
         description = "Moat"
@@ -909,7 +909,7 @@ rule moat_apk : tracker
         is_apk and any of them
 }
 
-rule segment_apk : tracker
+rule segment : tracker
 {
     meta:
         description = "Segment"
@@ -925,7 +925,7 @@ rule segment_apk : tracker
         is_apk and any of them
 }
 
-rule mobile_engagement_apk : tracker
+rule mobile_engagement : tracker
 {
     meta:
         description = "Mobile Engagement"
@@ -941,7 +941,7 @@ rule mobile_engagement_apk : tracker
         is_apk and any of them
 }
 
-rule colocator_apk : tracker
+rule colocator : tracker
 {
     meta:
         description = "Colocator"
@@ -957,7 +957,7 @@ rule colocator_apk : tracker
         is_apk and any of them
 }
 
-rule facebook_ads_apk : tracker
+rule facebook_ads : tracker
 {
     meta:
         description = "FB. Ads"
@@ -972,7 +972,7 @@ rule facebook_ads_apk : tracker
         is_apk and any of them
 }
 
-rule facebook_analytics_apk : tracker
+rule facebook_analytics : tracker
 {
     meta:
         description = "FB. Analytics"
@@ -987,7 +987,7 @@ rule facebook_analytics_apk : tracker
         is_apk and any of them
 }
 
-rule facebook_login_apk : tracker
+rule facebook_login : tracker
 {
     meta:
         description = "FB. Login"
@@ -1002,7 +1002,7 @@ rule facebook_login_apk : tracker
         is_apk and any of them
 }
 
-rule facebook_notifications_apk : tracker
+rule facebook_notifications : tracker
 {
     meta:
         description = "FB. Notifs"
@@ -1017,7 +1017,7 @@ rule facebook_notifications_apk : tracker
         is_apk and any of them
 }
 
-rule facebook_places_apk : tracker
+rule facebook_places : tracker
 {
     meta:
         description = "FB. Places"
@@ -1032,7 +1032,7 @@ rule facebook_places_apk : tracker
         is_apk and any of them
 }
 
-rule facebook_share_apk : tracker
+rule facebook_share : tracker
 {
     meta:
         description = "FB. Share"
@@ -1047,7 +1047,7 @@ rule facebook_share_apk : tracker
         is_apk and any of them
 }
 
-rule google_ads_apk : tracker
+rule google_ads : tracker
 {
     meta:
         description = "G. Ads"
@@ -1062,7 +1062,7 @@ rule google_ads_apk : tracker
         is_apk and any of them
 }
 
-rule applovin_max_and_sparklabs_apk : tracker
+rule applovin_max_and_sparklabs : tracker
 {
     meta:
         description = "AppLovin (MAX and SparkLabs)"
@@ -1078,7 +1078,7 @@ rule applovin_max_and_sparklabs_apk : tracker
         is_apk and any of them
 }
 
-rule glispa_connect_formerly_avocarrot_apk : tracker
+rule glispa_connect_formerly_avocarrot : tracker
 {
     meta:
         description = "Glispa Connect (Formerly Avocarrot)"
@@ -1094,7 +1094,7 @@ rule glispa_connect_formerly_avocarrot_apk : tracker
         is_apk and any of them
 }
 
-rule nativex_apk : tracker
+rule nativex : tracker
 {
     meta:
         description = "NativeX"
@@ -1110,7 +1110,7 @@ rule nativex_apk : tracker
         is_apk and any of them
 }
 
-rule baidu_maps_apk : tracker
+rule baidu_maps : tracker
 {
     meta:
         description = "Baidu Maps"
@@ -1126,7 +1126,7 @@ rule baidu_maps_apk : tracker
         is_apk and any of them
 }
 
-rule wechat_location_apk : tracker
+rule wechat_location : tracker
 {
     meta:
         description = "WeChat Location"
@@ -1142,7 +1142,7 @@ rule wechat_location_apk : tracker
         is_apk and any of them
 }
 
-rule hypertrack_apk : tracker
+rule hypertrack : tracker
 {
     meta:
         description = "HyperTrack"
@@ -1158,7 +1158,7 @@ rule hypertrack_apk : tracker
         is_apk and any of them
 }
 
-rule uber_analytics_apk : tracker
+rule uber_analytics : tracker
 {
     meta:
         description = "Uber Analytics"
@@ -1174,7 +1174,7 @@ rule uber_analytics_apk : tracker
         is_apk and any of them
 }
 
-rule lisnr_apk : tracker
+rule lisnr : tracker
 {
     meta:
         description = "Lisnr"
@@ -1190,7 +1190,7 @@ rule lisnr_apk : tracker
         is_apk and any of them
 }
 
-rule silverpush_apk : tracker
+rule silverpush : tracker
 {
     meta:
         description = "SilverPush"
@@ -1206,7 +1206,7 @@ rule silverpush_apk : tracker
         is_apk and any of them
 }
 
-rule shopkick_apk : tracker
+rule shopkick : tracker
 {
     meta:
         description = "Shopkick"
@@ -1222,7 +1222,7 @@ rule shopkick_apk : tracker
         is_apk and any of them
 }
 
-rule alphonso_apk : tracker
+rule alphonso : tracker
 {
     meta:
         description = "Alphonso"
@@ -1238,7 +1238,7 @@ rule alphonso_apk : tracker
         is_apk and any of them
 }
 
-rule smaato_apk : tracker
+rule smaato : tracker
 {
     meta:
         description = "Smaato"
@@ -1254,7 +1254,7 @@ rule smaato_apk : tracker
         is_apk and any of them
 }
 
-rule scandit_apk : tracker
+rule scandit : tracker
 {
     meta:
         description = "Scandit"
@@ -1270,7 +1270,7 @@ rule scandit_apk : tracker
         is_apk and any of them
 }
 
-rule inrix_apk : tracker
+rule inrix : tracker
 {
     meta:
         description = "Inrix"
@@ -1286,7 +1286,7 @@ rule inrix_apk : tracker
         is_apk and any of them
 }
 
-rule signal__apk : tracker
+rule signal_ : tracker
 {
     meta:
         description = "Signal360"
@@ -1302,7 +1302,7 @@ rule signal__apk : tracker
         is_apk and any of them
 }
 
-rule telequid_apk : tracker
+rule telequid : tracker
 {
     meta:
         description = "TeleQuid"
@@ -1318,7 +1318,7 @@ rule telequid_apk : tracker
         is_apk and any of them
 }
 
-rule retency_apk : tracker
+rule retency : tracker
 {
     meta:
         description = "Retency"
@@ -1333,7 +1333,7 @@ rule retency_apk : tracker
         is_apk and any of them
 }
 
-rule madvertise_apk : tracker
+rule madvertise : tracker
 {
     meta:
         description = "MAdvertise"
@@ -1349,7 +1349,7 @@ rule madvertise_apk : tracker
         is_apk and any of them
 }
 
-rule adcolony_apk : tracker
+rule adcolony : tracker
 {
     meta:
         description = "AdColony"
@@ -1365,7 +1365,7 @@ rule adcolony_apk : tracker
         is_apk and any of them
 }
 
-rule accountkit_apk : tracker
+rule accountkit : tracker
 {
     meta:
         description = "AccountKit"
@@ -1381,7 +1381,7 @@ rule accountkit_apk : tracker
         is_apk and any of them
 }
 
-rule amazon_advertisement_apk : tracker
+rule amazon_advertisement : tracker
 {
     meta:
         description = "Amazon Advertisement"
@@ -1396,7 +1396,7 @@ rule amazon_advertisement_apk : tracker
         is_apk and any of them
 }
 
-rule amazon_mobile_associates_apk : tracker
+rule amazon_mobile_associates : tracker
 {
     meta:
         description = "Amazon Mobile Associates"
@@ -1411,7 +1411,7 @@ rule amazon_mobile_associates_apk : tracker
         is_apk and any of them
 }
 
-rule radius_networks_apk : tracker
+rule radius_networks : tracker
 {
     meta:
         description = "Radius Networks"
@@ -1427,7 +1427,7 @@ rule radius_networks_apk : tracker
         is_apk and any of them
 }
 
-rule amazon_analytics_amazon_insights_apk : tracker
+rule amazon_analytics_amazon_insights : tracker
 {
     meta:
         description = "Amazon Analytics (Amazon insights)"
@@ -1443,7 +1443,7 @@ rule amazon_analytics_amazon_insights_apk : tracker
         is_apk and any of them
 }
 
-rule baidu_appx_apk : tracker
+rule baidu_appx : tracker
 {
     meta:
         description = "Baidu APPX"
@@ -1458,7 +1458,7 @@ rule baidu_appx_apk : tracker
         is_apk and any of them
 }
 
-rule baidu_location_apk : tracker
+rule baidu_location : tracker
 {
     meta:
         description = "Baidu Location"
@@ -1473,7 +1473,7 @@ rule baidu_location_apk : tracker
         is_apk and any of them
 }
 
-rule baidu_mobile_ads_apk : tracker
+rule baidu_mobile_ads : tracker
 {
     meta:
         description = "Baidu Mobile Ads"
@@ -1488,7 +1488,7 @@ rule baidu_mobile_ads_apk : tracker
         is_apk and any of them
 }
 
-rule baidu_mobile_stat_apk : tracker
+rule baidu_mobile_stat : tracker
 {
     meta:
         description = "Baidu Mobile Stat"
@@ -1503,7 +1503,7 @@ rule baidu_mobile_stat_apk : tracker
         is_apk and any of them
 }
 
-rule estimote_apk : tracker
+rule estimote : tracker
 {
     meta:
         description = "Estimote"
@@ -1519,7 +1519,7 @@ rule estimote_apk : tracker
         is_apk and any of them
 }
 
-rule baidu_navigation_apk : tracker
+rule baidu_navigation : tracker
 {
     meta:
         description = "Baidu Navigation"
@@ -1534,7 +1534,7 @@ rule baidu_navigation_apk : tracker
         is_apk and any of them
 }
 
-rule fyber_apk : tracker
+rule fyber : tracker
 {
     meta:
         description = "Fyber"
@@ -1550,7 +1550,7 @@ rule fyber_apk : tracker
         is_apk and any of them
 }
 
-rule google_tag_manager_apk : tracker
+rule google_tag_manager : tracker
 {
     meta:
         description = "G. Tag Manager"
@@ -1566,7 +1566,7 @@ rule google_tag_manager_apk : tracker
         is_apk and any of them
 }
 
-rule inmobi_apk : tracker
+rule inmobi : tracker
 {
     meta:
         description = "Inmobi"
@@ -1582,7 +1582,7 @@ rule inmobi_apk : tracker
         is_apk and any of them
 }
 
-rule millennial_media_apk : tracker
+rule millennial_media : tracker
 {
     meta:
         description = "Millennial Media"
@@ -1598,7 +1598,7 @@ rule millennial_media_apk : tracker
         is_apk and any of them
 }
 
-rule snowplow_apk : tracker
+rule snowplow : tracker
 {
     meta:
         description = "Snowplow"
@@ -1613,7 +1613,7 @@ rule snowplow_apk : tracker
         is_apk and any of them
 }
 
-rule fyber_sponsorpay_apk : tracker
+rule fyber_sponsorpay : tracker
 {
     meta:
         description = "Fyber SponsorPay"
@@ -1629,7 +1629,7 @@ rule fyber_sponsorpay_apk : tracker
         is_apk and any of them
 }
 
-rule supersonic_ads_apk : tracker
+rule supersonic_ads : tracker
 {
     meta:
         description = "Supersonic Ads"
@@ -1645,7 +1645,7 @@ rule supersonic_ads_apk : tracker
         is_apk and any of them
 }
 
-rule carnival_apk : tracker
+rule carnival : tracker
 {
     meta:
         description = "Carnival"
@@ -1661,7 +1661,7 @@ rule carnival_apk : tracker
         is_apk and any of them
 }
 
-rule tencent_map_lbs_apk : tracker
+rule tencent_map_lbs : tracker
 {
     meta:
         description = "Tencent Map LBS"
@@ -1676,7 +1676,7 @@ rule tencent_map_lbs_apk : tracker
         is_apk and any of them
 }
 
-rule tencent_mobwin_apk : tracker
+rule tencent_mobwin : tracker
 {
     meta:
         description = "Tencent MobWin"
@@ -1691,7 +1691,7 @@ rule tencent_mobwin_apk : tracker
         is_apk and any of them
 }
 
-rule tencent_mta_apk : tracker
+rule tencent_mta : tracker
 {
     meta:
         description = "Tencent MTA"
@@ -1706,7 +1706,7 @@ rule tencent_mta_apk : tracker
         is_apk and any of them
 }
 
-rule apptentive_apk : tracker
+rule apptentive : tracker
 {
     meta:
         description = "Apptentive"
@@ -1722,7 +1722,7 @@ rule apptentive_apk : tracker
         is_apk and any of them
 }
 
-rule tencent_stats_apk : tracker
+rule tencent_stats : tracker
 {
     meta:
         description = "Tencent Stats"
@@ -1737,7 +1737,7 @@ rule tencent_stats_apk : tracker
         is_apk and any of them
 }
 
-rule tencent_weiyun_apk : tracker
+rule tencent_weiyun : tracker
 {
     meta:
         description = "Tencent Weiyun"
@@ -1752,7 +1752,7 @@ rule tencent_weiyun_apk : tracker
         is_apk and any of them
 }
 
-rule mixpanel_apk : tracker
+rule mixpanel : tracker
 {
     meta:
         description = "MixPanel"
@@ -1768,7 +1768,7 @@ rule mixpanel_apk : tracker
         is_apk and any of them
 }
 
-rule umeng_analytics_apk : tracker
+rule umeng_analytics : tracker
 {
     meta:
         description = "Umeng Analytics"
@@ -1784,7 +1784,7 @@ rule umeng_analytics_apk : tracker
         is_apk and any of them
 }
 
-rule umeng_feedback_apk : tracker
+rule umeng_feedback : tracker
 {
     meta:
         description = "Umeng Feedback"
@@ -1800,7 +1800,7 @@ rule umeng_feedback_apk : tracker
         is_apk and any of them
 }
 
-rule unity_d_ads_apk : tracker
+rule unity_d_ads : tracker
 {
     meta:
         description = "Unity3d Ads"
@@ -1816,7 +1816,7 @@ rule unity_d_ads_apk : tracker
         is_apk and any of them
 }
 
-rule countly_apk : tracker
+rule countly : tracker
 {
     meta:
         description = "Countly"
@@ -1831,7 +1831,7 @@ rule countly_apk : tracker
         is_apk and any of them
 }
 
-rule urbanairship_apk : tracker
+rule urbanairship : tracker
 {
     meta:
         description = "Urbanairship"
@@ -1847,7 +1847,7 @@ rule urbanairship_apk : tracker
         is_apk and any of them
 }
 
-rule yandex_ad_apk : tracker
+rule yandex_ad : tracker
 {
     meta:
         description = "Yandex Ad"
@@ -1863,7 +1863,7 @@ rule yandex_ad_apk : tracker
         is_apk and any of them
 }
 
-rule amplitude_apk : tracker
+rule amplitude : tracker
 {
     meta:
         description = "Amplitude"
@@ -1879,7 +1879,7 @@ rule amplitude_apk : tracker
         is_apk and any of them
 }
 
-rule appsee_apk : tracker
+rule appsee : tracker
 {
     meta:
         description = "AppSee"
@@ -1895,7 +1895,7 @@ rule appsee_apk : tracker
         is_apk and any of them
 }
 
-rule kochava_apk : tracker
+rule kochava : tracker
 {
     meta:
         description = "Kochava"
@@ -1911,7 +1911,7 @@ rule kochava_apk : tracker
         is_apk and any of them
 }
 
-rule webtrends_apk : tracker
+rule webtrends : tracker
 {
     meta:
         description = "Webtrends"
@@ -1927,7 +1927,7 @@ rule webtrends_apk : tracker
         is_apk and any of them
 }
 
-rule new_relic_apk : tracker
+rule new_relic : tracker
 {
     meta:
         description = "New Relic"
@@ -1943,7 +1943,7 @@ rule new_relic_apk : tracker
         is_apk and any of them
 }
 
-rule appanalytics_apk : tracker
+rule appanalytics : tracker
 {
     meta:
         description = "AppAnalytics"
@@ -1958,7 +1958,7 @@ rule appanalytics_apk : tracker
         is_apk and any of them
 }
 
-rule applause_apk : tracker
+rule applause : tracker
 {
     meta:
         description = "Applause"
@@ -1973,7 +1973,7 @@ rule applause_apk : tracker
         is_apk and any of them
 }
 
-rule quantcast_apk : tracker
+rule quantcast : tracker
 {
     meta:
         description = "Quantcast"
@@ -1989,7 +1989,7 @@ rule quantcast_apk : tracker
         is_apk and any of them
 }
 
-rule apptimize_apk : tracker
+rule apptimize : tracker
 {
     meta:
         description = "Apptimize"
@@ -2005,7 +2005,7 @@ rule apptimize_apk : tracker
         is_apk and any of them
 }
 
-rule appbrain_apk : tracker
+rule appbrain : tracker
 {
     meta:
         description = "AppBrain"
@@ -2021,7 +2021,7 @@ rule appbrain_apk : tracker
         is_apk and any of them
 }
 
-rule dynatrace_apk : tracker
+rule dynatrace : tracker
 {
     meta:
         description = "Dynatrace"
@@ -2037,7 +2037,7 @@ rule dynatrace_apk : tracker
         is_apk and any of them
 }
 
-rule matomo_piwik_apk : tracker
+rule matomo_piwik : tracker
 {
     meta:
         description = "Matomo (Piwik)"
@@ -2053,7 +2053,7 @@ rule matomo_piwik_apk : tracker
         is_apk and any of them
 }
 
-rule singlespot_apk : tracker
+rule singlespot : tracker
 {
     meta:
         description = "Singlespot"
@@ -2069,7 +2069,7 @@ rule singlespot_apk : tracker
         is_apk and any of them
 }
 
-rule sensoro_apk : tracker
+rule sensoro : tracker
 {
     meta:
         description = "Sensoro"
@@ -2084,7 +2084,7 @@ rule sensoro_apk : tracker
         is_apk and any of them
 }
 
-rule sense__apk : tracker
+rule sense_ : tracker
 {
     meta:
         description = "Sense360"
@@ -2100,7 +2100,7 @@ rule sense__apk : tracker
         is_apk and any of them
 }
 
-rule rubicon_project_apk : tracker
+rule rubicon_project : tracker
 {
     meta:
         description = "Rubicon Project"
@@ -2116,7 +2116,7 @@ rule rubicon_project_apk : tracker
         is_apk and any of them
 }
 
-rule ironsource_apk : tracker
+rule ironsource : tracker
 {
     meta:
         description = "ironSource"
@@ -2131,7 +2131,7 @@ rule ironsource_apk : tracker
         is_apk and any of them
 }
 
-rule heyzap_bought_by_fyber_apk : tracker
+rule heyzap_bought_by_fyber : tracker
 {
     meta:
         description = "Heyzap (bought by Fyber)"
@@ -2147,7 +2147,7 @@ rule heyzap_bought_by_fyber_apk : tracker
         is_apk and any of them
 }
 
-rule sap_cdc_gigya_apk : tracker
+rule sap_cdc_gigya : tracker
 {
     meta:
         description = "SAP CDC (Gigya)"
@@ -2163,7 +2163,7 @@ rule sap_cdc_gigya_apk : tracker
         is_apk and any of them
 }
 
-rule foresee_apk : tracker
+rule foresee : tracker
 {
     meta:
         description = "Foresee"
@@ -2179,7 +2179,7 @@ rule foresee_apk : tracker
         is_apk and any of them
 }
 
-rule fiksu_apk : tracker
+rule fiksu : tracker
 {
     meta:
         description = "Fiksu"
@@ -2195,7 +2195,7 @@ rule fiksu_apk : tracker
         is_apk and any of them
 }
 
-rule ensighten_apk : tracker
+rule ensighten : tracker
 {
     meta:
         description = "Ensighten"
@@ -2211,7 +2211,7 @@ rule ensighten_apk : tracker
         is_apk and any of them
 }
 
-rule dynamic_yield_apk : tracker
+rule dynamic_yield : tracker
 {
     meta:
         description = "Dynamic Yield"
@@ -2227,7 +2227,7 @@ rule dynamic_yield_apk : tracker
         is_apk and any of them
 }
 
-rule bluekai_acquired_by_oracle_apk : tracker
+rule bluekai_acquired_by_oracle : tracker
 {
     meta:
         description = "BlueKai (acquired by Oracle)"
@@ -2243,7 +2243,7 @@ rule bluekai_acquired_by_oracle_apk : tracker
         is_apk and any of them
 }
 
-rule blueconic_apk : tracker
+rule blueconic : tracker
 {
     meta:
         description = "BlueConic"
@@ -2258,7 +2258,7 @@ rule blueconic_apk : tracker
         is_apk and any of them
 }
 
-rule apteligent_by_vmware_formerly_crittercism_apk : tracker
+rule apteligent_by_vmware_formerly_crittercism : tracker
 {
     meta:
         description = "Apteligent by VMWare (formerly Crittercism)"
@@ -2274,7 +2274,7 @@ rule apteligent_by_vmware_formerly_crittercism_apk : tracker
         is_apk and any of them
 }
 
-rule adfit_daum_apk : tracker
+rule adfit_daum : tracker
 {
     meta:
         description = "AdFit (Daum)"
@@ -2290,7 +2290,7 @@ rule adfit_daum_apk : tracker
         is_apk and any of them
 }
 
-rule adform_apk : tracker
+rule adform : tracker
 {
     meta:
         description = "Adform"
@@ -2306,7 +2306,7 @@ rule adform_apk : tracker
         is_apk and any of them
 }
 
-rule adfurikun_apk : tracker
+rule adfurikun : tracker
 {
     meta:
         description = "Adfurikun"
@@ -2322,7 +2322,7 @@ rule adfurikun_apk : tracker
         is_apk and any of them
 }
 
-rule mobvista_apk : tracker
+rule mobvista : tracker
 {
     meta:
         description = "Mobvista"
@@ -2338,7 +2338,7 @@ rule mobvista_apk : tracker
         is_apk and any of them
 }
 
-rule placed_apk : tracker
+rule placed : tracker
 {
     meta:
         description = "Placed"
@@ -2353,7 +2353,7 @@ rule placed_apk : tracker
         is_apk and any of them
 }
 
-rule adot_apk : tracker
+rule adot : tracker
 {
     meta:
         description = "Adot"
@@ -2369,7 +2369,7 @@ rule adot_apk : tracker
         is_apk and any of them
 }
 
-rule appodeal_apk : tracker
+rule appodeal : tracker
 {
     meta:
         description = "Appodeal"
@@ -2385,7 +2385,7 @@ rule appodeal_apk : tracker
         is_apk and any of them
 }
 
-rule appmonet_apk : tracker
+rule appmonet : tracker
 {
     meta:
         description = "AppMonet"
@@ -2400,7 +2400,7 @@ rule appmonet_apk : tracker
         is_apk and any of them
 }
 
-rule soomla_apk : tracker
+rule soomla : tracker
 {
     meta:
         description = "Soomla"
@@ -2416,7 +2416,7 @@ rule soomla_apk : tracker
         is_apk and any of them
 }
 
-rule adincube_apk : tracker
+rule adincube : tracker
 {
     meta:
         description = "Adincube"
@@ -2432,7 +2432,7 @@ rule adincube_apk : tracker
         is_apk and any of them
 }
 
-rule persona_ly_apk : tracker
+rule persona_ly : tracker
 {
     meta:
         description = "Persona.ly"
@@ -2448,7 +2448,7 @@ rule persona_ly_apk : tracker
         is_apk and any of them
 }
 
-rule branch_apk : tracker
+rule branch : tracker
 {
     meta:
         description = "Branch"
@@ -2464,7 +2464,7 @@ rule branch_apk : tracker
         is_apk and any of them
 }
 
-rule cheetah_ads_apk : tracker
+rule cheetah_ads : tracker
 {
     meta:
         description = "Cheetah Ads"
@@ -2480,7 +2480,7 @@ rule cheetah_ads_apk : tracker
         is_apk and any of them
 }
 
-rule vungle_apk : tracker
+rule vungle : tracker
 {
     meta:
         description = "Vungle"
@@ -2496,7 +2496,7 @@ rule vungle_apk : tracker
         is_apk and any of them
 }
 
-rule criteo_apk : tracker
+rule criteo : tracker
 {
     meta:
         description = "Criteo"
@@ -2512,7 +2512,7 @@ rule criteo_apk : tracker
         is_apk and any of them
 }
 
-rule mapbox_apk : tracker
+rule mapbox : tracker
 {
     meta:
         description = "Mapbox"
@@ -2528,7 +2528,7 @@ rule mapbox_apk : tracker
         is_apk and any of them
 }
 
-rule optimizely_apk : tracker
+rule optimizely : tracker
 {
     meta:
         description = "Optimizely"
@@ -2544,7 +2544,7 @@ rule optimizely_apk : tracker
         is_apk and any of them
 }
 
-rule taboola_apk : tracker
+rule taboola : tracker
 {
     meta:
         description = "Taboola"
@@ -2560,7 +2560,7 @@ rule taboola_apk : tracker
         is_apk and any of them
 }
 
-rule clevertap_apk : tracker
+rule clevertap : tracker
 {
     meta:
         description = "CleverTap"
@@ -2576,7 +2576,7 @@ rule clevertap_apk : tracker
         is_apk and any of them
 }
 
-rule mytracker_apk : tracker
+rule mytracker : tracker
 {
     meta:
         description = "myTracker"
@@ -2592,7 +2592,7 @@ rule mytracker_apk : tracker
         is_apk and any of them
 }
 
-rule cloudmobi_apk : tracker
+rule cloudmobi : tracker
 {
     meta:
         description = "Cloudmobi"
@@ -2608,7 +2608,7 @@ rule cloudmobi_apk : tracker
         is_apk and any of them
 }
 
-rule adlib_apk : tracker
+rule adlib : tracker
 {
     meta:
         description = "ADLIB"
@@ -2624,7 +2624,7 @@ rule adlib_apk : tracker
         is_apk and any of them
 }
 
-rule brightcove_apk : tracker
+rule brightcove : tracker
 {
     meta:
         description = "Brightcove"
@@ -2640,7 +2640,7 @@ rule brightcove_apk : tracker
         is_apk and any of them
 }
 
-rule dov_e_apk : tracker
+rule dov_e : tracker
 {
     meta:
         description = "DOV-E"
@@ -2656,7 +2656,7 @@ rule dov_e_apk : tracker
         is_apk and any of them
 }
 
-rule inmarket_apk : tracker
+rule inmarket : tracker
 {
     meta:
         description = "InMarket"
@@ -2672,7 +2672,7 @@ rule inmarket_apk : tracker
         is_apk and any of them
 }
 
-rule pilgrim_by_foursquare_apk : tracker
+rule pilgrim_by_foursquare : tracker
 {
     meta:
         description = "Pilgrim by Foursquare"
@@ -2688,7 +2688,7 @@ rule pilgrim_by_foursquare_apk : tracker
         is_apk and any of them
 }
 
-rule otherlevels_apk : tracker
+rule otherlevels : tracker
 {
     meta:
         description = "OtherLevels"
@@ -2704,7 +2704,7 @@ rule otherlevels_apk : tracker
         is_apk and any of them
 }
 
-rule pubnative_apk : tracker
+rule pubnative : tracker
 {
     meta:
         description = "PubNative"
@@ -2720,7 +2720,7 @@ rule pubnative_apk : tracker
         is_apk and any of them
 }
 
-rule appnext_apk : tracker
+rule appnext : tracker
 {
     meta:
         description = "Appnext"
@@ -2736,7 +2736,7 @@ rule appnext_apk : tracker
         is_apk and any of them
 }
 
-rule mobfox_apk : tracker
+rule mobfox : tracker
 {
     meta:
         description = "MobFox"
@@ -2751,7 +2751,7 @@ rule mobfox_apk : tracker
         is_apk and any of them
 }
 
-rule shallwead_apk : tracker
+rule shallwead : tracker
 {
     meta:
         description = "ShallWeAD"
@@ -2766,7 +2766,7 @@ rule shallwead_apk : tracker
         is_apk and any of them
 }
 
-rule deltadna_apk : tracker
+rule deltadna : tracker
 {
     meta:
         description = "deltaDNA"
@@ -2782,7 +2782,7 @@ rule deltadna_apk : tracker
         is_apk and any of them
 }
 
-rule display_apk : tracker
+rule display : tracker
 {
     meta:
         description = "Display"
@@ -2798,7 +2798,7 @@ rule display_apk : tracker
         is_apk and any of them
 }
 
-rule hyprmx_apk : tracker
+rule hyprmx : tracker
 {
     meta:
         description = "HyprMX"
@@ -2814,7 +2814,7 @@ rule hyprmx_apk : tracker
         is_apk and any of them
 }
 
-rule bugly_apk : tracker
+rule bugly : tracker
 {
     meta:
         description = "Bugly"
@@ -2830,7 +2830,7 @@ rule bugly_apk : tracker
         is_apk and any of them
 }
 
-rule duapps_apk : tracker
+rule duapps : tracker
 {
     meta:
         description = "Duapps"
@@ -2846,7 +2846,7 @@ rule duapps_apk : tracker
         is_apk and any of them
 }
 
-rule swrve_apk : tracker
+rule swrve : tracker
 {
     meta:
         description = "Swrve"
@@ -2862,7 +2862,7 @@ rule swrve_apk : tracker
         is_apk and any of them
 }
 
-rule onesignal_apk : tracker
+rule onesignal : tracker
 {
     meta:
         description = "OneSignal"
@@ -2878,7 +2878,7 @@ rule onesignal_apk : tracker
         is_apk and any of them
 }
 
-rule appdynamics_apk : tracker
+rule appdynamics : tracker
 {
     meta:
         description = "Appdynamics"
@@ -2894,7 +2894,7 @@ rule appdynamics_apk : tracker
         is_apk and any of them
 }
 
-rule startapp_apk : tracker
+rule startapp : tracker
 {
     meta:
         description = "Startapp"
@@ -2910,7 +2910,7 @@ rule startapp_apk : tracker
         is_apk and any of them
 }
 
-rule aerserv_apk : tracker
+rule aerserv : tracker
 {
     meta:
         description = "AerServ"
@@ -2926,7 +2926,7 @@ rule aerserv_apk : tracker
         is_apk and any of them
 }
 
-rule infonline_apk : tracker
+rule infonline : tracker
 {
     meta:
         description = "INFOnline"
@@ -2942,7 +2942,7 @@ rule infonline_apk : tracker
         is_apk and any of them
 }
 
-rule mytarget_apk : tracker
+rule mytarget : tracker
 {
     meta:
         description = "myTarget"
@@ -2958,7 +2958,7 @@ rule mytarget_apk : tracker
         is_apk and any of them
 }
 
-rule tapjoy_apk : tracker
+rule tapjoy : tracker
 {
     meta:
         description = "Tapjoy"
@@ -2974,7 +2974,7 @@ rule tapjoy_apk : tracker
         is_apk and any of them
 }
 
-rule mintegral_apk : tracker
+rule mintegral : tracker
 {
     meta:
         description = "Mintegral"
@@ -2990,7 +2990,7 @@ rule mintegral_apk : tracker
         is_apk and any of them
 }
 
-rule gimbal_apk : tracker
+rule gimbal : tracker
 {
     meta:
         description = "Gimbal"
@@ -3006,7 +3006,7 @@ rule gimbal_apk : tracker
         is_apk and any of them
 }
 
-rule conviva_apk : tracker
+rule conviva : tracker
 {
     meta:
         description = "Conviva"
@@ -3022,7 +3022,7 @@ rule conviva_apk : tracker
         is_apk and any of them
 }
 
-rule auditude_apk : tracker
+rule auditude : tracker
 {
     meta:
         description = "Auditude"
@@ -3038,7 +3038,7 @@ rule auditude_apk : tracker
         is_apk and any of them
 }
 
-rule instreamatic_adman_apk : tracker
+rule instreamatic_adman : tracker
 {
     meta:
         description = "Instreamatic (Adman)"
@@ -3054,7 +3054,7 @@ rule instreamatic_adman_apk : tracker
         is_apk and any of them
 }
 
-rule gameanalytics_apk : tracker
+rule gameanalytics : tracker
 {
     meta:
         description = "GameAnalytics"
@@ -3069,7 +3069,7 @@ rule gameanalytics_apk : tracker
         is_apk and any of them
 }
 
-rule instabug_apk : tracker
+rule instabug : tracker
 {
     meta:
         description = "Instabug"
@@ -3084,7 +3084,7 @@ rule instabug_apk : tracker
         is_apk and any of them
 }
 
-rule bugsnag_apk : tracker
+rule bugsnag : tracker
 {
     meta:
         description = "Bugsnag"
@@ -3099,7 +3099,7 @@ rule bugsnag_apk : tracker
         is_apk and any of them
 }
 
-rule moodmedia_apk : tracker
+rule moodmedia : tracker
 {
     meta:
         description = "Moodmedia"
@@ -3115,7 +3115,7 @@ rule moodmedia_apk : tracker
         is_apk and any of them
 }
 
-rule houndify_apk : tracker
+rule houndify : tracker
 {
     meta:
         description = "Houndify"
@@ -3131,7 +3131,7 @@ rule houndify_apk : tracker
         is_apk and any of them
 }
 
-rule openx_apk : tracker
+rule openx : tracker
 {
     meta:
         description = "OpenX"
@@ -3147,7 +3147,7 @@ rule openx_apk : tracker
         is_apk and any of them
 }
 
-rule taplytics_apk : tracker
+rule taplytics : tracker
 {
     meta:
         description = "Taplytics"
@@ -3163,7 +3163,7 @@ rule taplytics_apk : tracker
         is_apk and any of them
 }
 
-rule yinzcam_sobek_apk : tracker
+rule yinzcam_sobek : tracker
 {
     meta:
         description = "Yinzcam Sobek"
@@ -3179,7 +3179,7 @@ rule yinzcam_sobek_apk : tracker
         is_apk and any of them
 }
 
-rule ooyala_apk : tracker
+rule ooyala : tracker
 {
     meta:
         description = "Ooyala"
@@ -3195,7 +3195,7 @@ rule ooyala_apk : tracker
         is_apk and any of them
 }
 
-rule kiip_apk : tracker
+rule kiip : tracker
 {
     meta:
         description = "Kiip"
@@ -3211,7 +3211,7 @@ rule kiip_apk : tracker
         is_apk and any of them
 }
 
-rule mobpower_apk : tracker
+rule mobpower : tracker
 {
     meta:
         description = "MobPower"
@@ -3227,7 +3227,7 @@ rule mobpower_apk : tracker
         is_apk and any of them
 }
 
-rule adbuddiz_apk : tracker
+rule adbuddiz : tracker
 {
     meta:
         description = "AdBuddiz"
@@ -3243,7 +3243,7 @@ rule adbuddiz_apk : tracker
         is_apk and any of them
 }
 
-rule integral_ad_science_apk : tracker
+rule integral_ad_science : tracker
 {
     meta:
         description = "Integral Ad Science"
@@ -3259,7 +3259,7 @@ rule integral_ad_science_apk : tracker
         is_apk and any of them
 }
 
-rule altbeacon_apk : tracker
+rule altbeacon : tracker
 {
     meta:
         description = "AltBeacon"
@@ -3275,7 +3275,7 @@ rule altbeacon_apk : tracker
         is_apk and any of them
 }
 
-rule salesforce_marketing_cloud_apk : tracker
+rule salesforce_marketing_cloud : tracker
 {
     meta:
         description = "Salesforce Marketing Cloud"
@@ -3290,7 +3290,7 @@ rule salesforce_marketing_cloud_apk : tracker
         is_apk and any of them
 }
 
-rule mozilla_telemetry_apk : tracker
+rule mozilla_telemetry : tracker
 {
     meta:
         description = "Mozilla Telemetry"
@@ -3305,7 +3305,7 @@ rule mozilla_telemetry_apk : tracker
         is_apk and any of them
 }
 
-rule nend_apk : tracker
+rule nend : tracker
 {
     meta:
         description = "nend"
@@ -3320,7 +3320,7 @@ rule nend_apk : tracker
         is_apk and any of them
 }
 
-rule pusher_apk : tracker
+rule pusher : tracker
 {
     meta:
         description = "Pusher"
@@ -3335,7 +3335,7 @@ rule pusher_apk : tracker
         is_apk and any of them
 }
 
-rule freewheel_apk : tracker
+rule freewheel : tracker
 {
     meta:
         description = "FreeWheel"
@@ -3351,7 +3351,7 @@ rule freewheel_apk : tracker
         is_apk and any of them
 }
 
-rule tnk_factory_apk : tracker
+rule tnk_factory : tracker
 {
     meta:
         description = "TNK Factory"
@@ -3366,7 +3366,7 @@ rule tnk_factory_apk : tracker
         is_apk and any of them
 }
 
-rule axonix_apk : tracker
+rule axonix : tracker
 {
     meta:
         description = "Axonix"
@@ -3382,7 +3382,7 @@ rule axonix_apk : tracker
         is_apk and any of them
 }
 
-rule gemius_heatmap_apk : tracker
+rule gemius_heatmap : tracker
 {
     meta:
         description = "Gemius HeatMap"
@@ -3398,7 +3398,7 @@ rule gemius_heatmap_apk : tracker
         is_apk and any of them
 }
 
-rule youappi_apk : tracker
+rule youappi : tracker
 {
     meta:
         description = "YouAppi"
@@ -3413,7 +3413,7 @@ rule youappi_apk : tracker
         is_apk and any of them
 }
 
-rule adobe_experience_cloud_apk : tracker
+rule adobe_experience_cloud : tracker
 {
     meta:
         description = "Adobe Experience Cloud"
@@ -3428,7 +3428,7 @@ rule adobe_experience_cloud_apk : tracker
         is_apk and any of them
 }
 
-rule teads_apk : tracker
+rule teads : tracker
 {
     meta:
         description = "Teads"
@@ -3444,7 +3444,7 @@ rule teads_apk : tracker
         is_apk and any of them
 }
 
-rule in_loco_apk : tracker
+rule in_loco : tracker
 {
     meta:
         description = "In Loco"
@@ -3460,7 +3460,7 @@ rule in_loco_apk : tracker
         is_apk and any of them
 }
 
-rule iqzone_apk : tracker
+rule iqzone : tracker
 {
     meta:
         description = "IQzone"
@@ -3475,7 +3475,7 @@ rule iqzone_apk : tracker
         is_apk and any of them
 }
 
-rule bugfender_apk : tracker
+rule bugfender : tracker
 {
     meta:
         description = "Bugfender"
@@ -3490,7 +3490,7 @@ rule bugfender_apk : tracker
         is_apk and any of them
 }
 
-rule wootric_apk : tracker
+rule wootric : tracker
 {
     meta:
         description = "Wootric"
@@ -3506,7 +3506,7 @@ rule wootric_apk : tracker
         is_apk and any of them
 }
 
-rule kidoz_apk : tracker
+rule kidoz : tracker
 {
     meta:
         description = "KIDOZ"
@@ -3521,7 +3521,7 @@ rule kidoz_apk : tracker
         is_apk and any of them
 }
 
-rule pubmatic_apk : tracker
+rule pubmatic : tracker
 {
     meta:
         description = "PubMatic"
@@ -3537,7 +3537,7 @@ rule pubmatic_apk : tracker
         is_apk and any of them
 }
 
-rule kissmetrics_apk : tracker
+rule kissmetrics : tracker
 {
     meta:
         description = "Kissmetrics"
@@ -3552,7 +3552,7 @@ rule kissmetrics_apk : tracker
         is_apk and any of them
 }
 
-rule microsoft_visual_studio_app_center_crashes_apk : tracker
+rule microsoft_visual_studio_app_center_crashes : tracker
 {
     meta:
         description = "Microsoft Visual Studio App Center Crashes"
@@ -3567,7 +3567,7 @@ rule microsoft_visual_studio_app_center_crashes_apk : tracker
         is_apk and any of them
 }
 
-rule webtrekk_apk : tracker
+rule webtrekk : tracker
 {
     meta:
         description = "Webtrekk"
@@ -3582,7 +3582,7 @@ rule webtrekk_apk : tracker
         is_apk and any of them
 }
 
-rule google_analytics_plugin_cordova_apk : tracker
+rule google_analytics_plugin_cordova : tracker
 {
     meta:
         description = "G. Analytics Plugin (Cordova)"
@@ -3597,7 +3597,7 @@ rule google_analytics_plugin_cordova_apk : tracker
         is_apk and any of them
 }
 
-rule bugsee_apk : tracker
+rule bugsee : tracker
 {
     meta:
         description = "Bugsee"
@@ -3612,7 +3612,7 @@ rule bugsee_apk : tracker
         is_apk and any of them
 }
 
-rule splunk_mint_apk : tracker
+rule splunk_mint : tracker
 {
     meta:
         description = "Splunk MINT"
@@ -3627,7 +3627,7 @@ rule splunk_mint_apk : tracker
         is_apk and any of them
 }
 
-rule microsoft_visual_studio_app_center_analytics_apk : tracker
+rule microsoft_visual_studio_app_center_analytics : tracker
 {
     meta:
         description = "Microsoft Visual Studio App Center Analytics"
@@ -3642,7 +3642,7 @@ rule microsoft_visual_studio_app_center_analytics_apk : tracker
         is_apk and any of them
 }
 
-rule nielsen_apk : tracker
+rule nielsen : tracker
 {
     meta:
         description = "Nielsen"
@@ -3657,7 +3657,7 @@ rule nielsen_apk : tracker
         is_apk and any of them
 }
 
-rule reveal_mobile_apk : tracker
+rule reveal_mobile : tracker
 {
     meta:
         description = "Reveal Mobile"
@@ -3672,7 +3672,7 @@ rule reveal_mobile_apk : tracker
         is_apk and any of them
 }
 
-rule repro_apk : tracker
+rule repro : tracker
 {
     meta:
         description = "Repro"
@@ -3687,7 +3687,7 @@ rule repro_apk : tracker
         is_apk and any of them
 }
 
-rule sensors_analytics_apk : tracker
+rule sensors_analytics : tracker
 {
     meta:
         description = "Sensors Analytics"
@@ -3702,7 +3702,7 @@ rule sensors_analytics_apk : tracker
         is_apk and any of them
 }
 
-rule tenjin_apk : tracker
+rule tenjin : tracker
 {
     meta:
         description = "Tenjin"
@@ -3717,7 +3717,7 @@ rule tenjin_apk : tracker
         is_apk and any of them
 }
 
-rule tapstream_apk : tracker
+rule tapstream : tracker
 {
     meta:
         description = "Tapstream"
@@ -3732,7 +3732,7 @@ rule tapstream_apk : tracker
         is_apk and any of them
 }
 
-rule singular_apk : tracker
+rule singular : tracker
 {
     meta:
         description = "Singular"
@@ -3747,7 +3747,7 @@ rule singular_apk : tracker
         is_apk and any of them
 }
 
-rule calldorado_apk : tracker
+rule calldorado : tracker
 {
     meta:
         description = "CallDorado"
@@ -3762,7 +3762,7 @@ rule calldorado_apk : tracker
         is_apk and any of them
 }
 
-rule uxcam_apk : tracker
+rule uxcam : tracker
 {
     meta:
         description = "UXCam"
@@ -3778,7 +3778,7 @@ rule uxcam_apk : tracker
         is_apk and any of them
 }
 
-rule upsight_apk : tracker
+rule upsight : tracker
 {
     meta:
         description = "Upsight"
@@ -3793,7 +3793,7 @@ rule upsight_apk : tracker
         is_apk and any of them
 }
 
-rule appcelerator_analytics_apk : tracker
+rule appcelerator_analytics : tracker
 {
     meta:
         description = "Appcelerator Analytics"
@@ -3809,7 +3809,7 @@ rule appcelerator_analytics_apk : tracker
         is_apk and any of them
 }
 
-rule adbrix_apk : tracker
+rule adbrix : tracker
 {
     meta:
         description = "Adbrix"
@@ -3825,7 +3825,7 @@ rule adbrix_apk : tracker
         is_apk and any of them
 }
 
-rule cauly_apk : tracker
+rule cauly : tracker
 {
     meta:
         description = "Cauly"
@@ -3841,7 +3841,7 @@ rule cauly_apk : tracker
         is_apk and any of them
 }
 
-rule tapdaq_apk : tracker
+rule tapdaq : tracker
 {
     meta:
         description = "Tapdaq"
@@ -3857,7 +3857,7 @@ rule tapdaq_apk : tracker
         is_apk and any of them
 }
 
-rule verve_apk : tracker
+rule verve : tracker
 {
     meta:
         description = "Verve"
@@ -3872,7 +3872,7 @@ rule verve_apk : tracker
         is_apk and any of them
 }
 
-rule apsalar_apk : tracker
+rule apsalar : tracker
 {
     meta:
         description = "Apsalar"
@@ -3888,7 +3888,7 @@ rule apsalar_apk : tracker
         is_apk and any of them
 }
 
-rule pingstart_apk : tracker
+rule pingstart : tracker
 {
     meta:
         description = "PingStart"
@@ -3904,7 +3904,7 @@ rule pingstart_apk : tracker
         is_apk and any of them
 }
 
-rule keen_apk : tracker
+rule keen : tracker
 {
     meta:
         description = "Keen"
@@ -3920,7 +3920,7 @@ rule keen_apk : tracker
         is_apk and any of them
 }
 
-rule revmob_apk : tracker
+rule revmob : tracker
 {
     meta:
         description = "Revmob"
@@ -3935,7 +3935,7 @@ rule revmob_apk : tracker
         is_apk and any of them
 }
 
-rule emarsys_predict_apk : tracker
+rule emarsys_predict : tracker
 {
     meta:
         description = "Emarsys Predict"
@@ -3951,7 +3951,7 @@ rule emarsys_predict_apk : tracker
         is_apk and any of them
 }
 
-rule lotame_apk : tracker
+rule lotame : tracker
 {
     meta:
         description = "Lotame"
@@ -3967,7 +3967,7 @@ rule lotame_apk : tracker
         is_apk and any of them
 }
 
-rule followanalytics_apk : tracker
+rule followanalytics : tracker
 {
     meta:
         description = "FollowAnalytics"
@@ -3983,7 +3983,7 @@ rule followanalytics_apk : tracker
         is_apk and any of them
 }
 
-rule chartbeat_apk : tracker
+rule chartbeat : tracker
 {
     meta:
         description = "Chartbeat"
@@ -3999,7 +3999,7 @@ rule chartbeat_apk : tracker
         is_apk and any of them
 }
 
-rule moengage_apk : tracker
+rule moengage : tracker
 {
     meta:
         description = "MoEngage"
@@ -4015,7 +4015,7 @@ rule moengage_apk : tracker
         is_apk and any of them
 }
 
-rule altamob_apk : tracker
+rule altamob : tracker
 {
     meta:
         description = "Altamob"
@@ -4031,7 +4031,7 @@ rule altamob_apk : tracker
         is_apk and any of them
 }
 
-rule tealeaf_apk : tracker
+rule tealeaf : tracker
 {
     meta:
         description = "Tealeaf"
@@ -4046,7 +4046,7 @@ rule tealeaf_apk : tracker
         is_apk and any of them
 }
 
-rule amoad_apk : tracker
+rule amoad : tracker
 {
     meta:
         description = "AMoAd"
@@ -4061,7 +4061,7 @@ rule amoad_apk : tracker
         is_apk and any of them
 }
 
-rule adadapted_apk : tracker
+rule adadapted : tracker
 {
     meta:
         description = "AdAdapted"
@@ -4077,7 +4077,7 @@ rule adadapted_apk : tracker
         is_apk and any of them
 }
 
-rule admuing_apk : tracker
+rule admuing : tracker
 {
     meta:
         description = "AdMuing"
@@ -4092,7 +4092,7 @@ rule admuing_apk : tracker
         is_apk and any of them
 }
 
-rule adcash_apk : tracker
+rule adcash : tracker
 {
     meta:
         description = "Adcash"
@@ -4107,7 +4107,7 @@ rule adcash_apk : tracker
         is_apk and any of them
 }
 
-rule admixer_apk : tracker
+rule admixer : tracker
 {
     meta:
         description = "Admixer"
@@ -4123,7 +4123,7 @@ rule admixer_apk : tracker
         is_apk and any of them
 }
 
-rule admost_apk : tracker
+rule admost : tracker
 {
     meta:
         description = "Admost"
@@ -4139,7 +4139,7 @@ rule admost_apk : tracker
         is_apk and any of them
 }
 
-rule alohalytics_apk : tracker
+rule alohalytics : tracker
 {
     meta:
         description = "Alohalytics"
@@ -4154,7 +4154,7 @@ rule alohalytics_apk : tracker
         is_apk and any of them
 }
 
-rule amobee_apk : tracker
+rule amobee : tracker
 {
     meta:
         description = "Amobee"
@@ -4170,7 +4170,7 @@ rule amobee_apk : tracker
         is_apk and any of them
 }
 
-rule anagog_apk : tracker
+rule anagog : tracker
 {
     meta:
         description = "Anagog"
@@ -4185,7 +4185,7 @@ rule anagog_apk : tracker
         is_apk and any of them
 }
 
-rule bazaarvoice_apk : tracker
+rule bazaarvoice : tracker
 {
     meta:
         description = "Bazaarvoice"
@@ -4200,7 +4200,7 @@ rule bazaarvoice_apk : tracker
         is_apk and any of them
 }
 
-rule beaconsinspace_fysical_apk : tracker
+rule beaconsinspace_fysical : tracker
 {
     meta:
         description = "BeaconsInSpace (Fysical)"
@@ -4215,7 +4215,7 @@ rule beaconsinspace_fysical_apk : tracker
         is_apk and any of them
 }
 
-rule conversant_apk : tracker
+rule conversant : tracker
 {
     meta:
         description = "Conversant"
@@ -4231,7 +4231,7 @@ rule conversant_apk : tracker
         is_apk and any of them
 }
 
-rule glympse_apk : tracker
+rule glympse : tracker
 {
     meta:
         description = "Glympse"
@@ -4247,7 +4247,7 @@ rule glympse_apk : tracker
         is_apk and any of them
 }
 
-rule herow_apk : tracker
+rule herow : tracker
 {
     meta:
         description = "Herow"
@@ -4262,7 +4262,7 @@ rule herow_apk : tracker
         is_apk and any of them
 }
 
-rule placer_apk : tracker
+rule placer : tracker
 {
     meta:
         description = "Placer"
@@ -4277,7 +4277,7 @@ rule placer_apk : tracker
         is_apk and any of them
 }
 
-rule pushspring_apk : tracker
+rule pushspring : tracker
 {
     meta:
         description = "PushSpring"
@@ -4293,7 +4293,7 @@ rule pushspring_apk : tracker
         is_apk and any of them
 }
 
-rule pyze_apk : tracker
+rule pyze : tracker
 {
     meta:
         description = "Pyze"
@@ -4309,7 +4309,7 @@ rule pyze_apk : tracker
         is_apk and any of them
 }
 
-rule radar_apk : tracker
+rule radar : tracker
 {
     meta:
         description = "Radar"
@@ -4324,7 +4324,7 @@ rule radar_apk : tracker
         is_apk and any of them
 }
 
-rule sentiance_apk : tracker
+rule sentiance : tracker
 {
     meta:
         description = "Sentiance"
@@ -4340,7 +4340,7 @@ rule sentiance_apk : tracker
         is_apk and any of them
 }
 
-rule smartlook_apk : tracker
+rule smartlook : tracker
 {
     meta:
         description = "SmartLook"
@@ -4356,7 +4356,7 @@ rule smartlook_apk : tracker
         is_apk and any of them
 }
 
-rule square_metrics_apk : tracker
+rule square_metrics : tracker
 {
     meta:
         description = "Square Metrics"
@@ -4372,7 +4372,7 @@ rule square_metrics_apk : tracker
         is_apk and any of them
 }
 
-rule talkingdata_apk : tracker
+rule talkingdata : tracker
 {
     meta:
         description = "TalkingData"
@@ -4388,7 +4388,7 @@ rule talkingdata_apk : tracker
         is_apk and any of them
 }
 
-rule flymob_apk : tracker
+rule flymob : tracker
 {
     meta:
         description = "flymob"
@@ -4403,7 +4403,7 @@ rule flymob_apk : tracker
         is_apk and any of them
 }
 
-rule adfalcon_apk : tracker
+rule adfalcon : tracker
 {
     meta:
         description = "AdFalcon"
@@ -4418,7 +4418,7 @@ rule adfalcon_apk : tracker
         is_apk and any of them
 }
 
-rule bitly_apk : tracker
+rule bitly : tracker
 {
     meta:
         description = "Bitly"
@@ -4433,7 +4433,7 @@ rule bitly_apk : tracker
         is_apk and any of them
 }
 
-rule enhance_apk : tracker
+rule enhance : tracker
 {
     meta:
         description = "Enhance"
@@ -4449,7 +4449,7 @@ rule enhance_apk : tracker
         is_apk and any of them
 }
 
-rule esri_arcgis_apk : tracker
+rule esri_arcgis : tracker
 {
     meta:
         description = "Esri ArcGIS"
@@ -4464,7 +4464,7 @@ rule esri_arcgis_apk : tracker
         is_apk and any of them
 }
 
-rule giphy_analytics_apk : tracker
+rule giphy_analytics : tracker
 {
     meta:
         description = "GIPHY Analytics"
@@ -4480,7 +4480,7 @@ rule giphy_analytics_apk : tracker
         is_apk and any of them
 }
 
-rule heap_apk : tracker
+rule heap : tracker
 {
     meta:
         description = "Heap"
@@ -4496,7 +4496,7 @@ rule heap_apk : tracker
         is_apk and any of them
 }
 
-rule inneractive_apk : tracker
+rule inneractive : tracker
 {
     meta:
         description = "Inneractive"
@@ -4511,7 +4511,7 @@ rule inneractive_apk : tracker
         is_apk and any of them
 }
 
-rule mdotm_apk : tracker
+rule mdotm : tracker
 {
     meta:
         description = "MDOTM"
@@ -4527,7 +4527,7 @@ rule mdotm_apk : tracker
         is_apk and any of them
 }
 
-rule metaps_apk : tracker
+rule metaps : tracker
 {
     meta:
         description = "Metaps"
@@ -4542,7 +4542,7 @@ rule metaps_apk : tracker
         is_apk and any of them
 }
 
-rule parse_ly_apk : tracker
+rule parse_ly : tracker
 {
     meta:
         description = "Parse.ly"
@@ -4557,7 +4557,7 @@ rule parse_ly_apk : tracker
         is_apk and any of them
 }
 
-rule pollfish_apk : tracker
+rule pollfish : tracker
 {
     meta:
         description = "Pollfish"
@@ -4572,7 +4572,7 @@ rule pollfish_apk : tracker
         is_apk and any of them
 }
 
-rule qualtrics_apk : tracker
+rule qualtrics : tracker
 {
     meta:
         description = "Qualtrics"
@@ -4588,7 +4588,7 @@ rule qualtrics_apk : tracker
         is_apk and any of them
 }
 
-rule tamoco_apk : tracker
+rule tamoco : tracker
 {
     meta:
         description = "Tamoco"
@@ -4604,7 +4604,7 @@ rule tamoco_apk : tracker
         is_apk and any of them
 }
 
-rule vpon_apk : tracker
+rule vpon : tracker
 {
     meta:
         description = "Vpon"
@@ -4619,7 +4619,7 @@ rule vpon_apk : tracker
         is_apk and any of them
 }
 
-rule yume_apk : tracker
+rule yume : tracker
 {
     meta:
         description = "YuMe"
@@ -4634,7 +4634,7 @@ rule yume_apk : tracker
         is_apk and any of them
 }
 
-rule zapr_apk : tracker
+rule zapr : tracker
 {
     meta:
         description = "Zapr"
@@ -4650,7 +4650,7 @@ rule zapr_apk : tracker
         is_apk and any of them
 }
 
-rule mediba_apk : tracker
+rule mediba : tracker
 {
     meta:
         description = "mediba"
@@ -4665,7 +4665,7 @@ rule mediba_apk : tracker
         is_apk and any of them
 }
 
-rule google_admob_apk : tracker
+rule google_admob : tracker
 {
     meta:
         description = "G. AdMob"
@@ -4681,7 +4681,7 @@ rule google_admob_apk : tracker
         is_apk and any of them
 }
 
-rule unacast_pure_apk : tracker
+rule unacast_pure : tracker
 {
     meta:
         description = "Unacast Pure"
@@ -4696,7 +4696,7 @@ rule unacast_pure_apk : tracker
         is_apk and any of them
 }
 
-rule factual_apk : tracker
+rule factual : tracker
 {
     meta:
         description = "Factual"
@@ -4712,7 +4712,7 @@ rule factual_apk : tracker
         is_apk and any of them
 }
 
-rule footmarks_apk : tracker
+rule footmarks : tracker
 {
     meta:
         description = "Footmarks"
@@ -4727,7 +4727,7 @@ rule footmarks_apk : tracker
         is_apk and any of them
 }
 
-rule oztam_apk : tracker
+rule oztam : tracker
 {
     meta:
         description = "OzTAM"
@@ -4743,7 +4743,7 @@ rule oztam_apk : tracker
         is_apk and any of them
 }
 
-rule receptiv_formerly_mediabrix_apk : tracker
+rule receptiv_formerly_mediabrix : tracker
 {
     meta:
         description = "Receptiv (formerly Mediabrix)"
@@ -4758,7 +4758,7 @@ rule receptiv_formerly_mediabrix_apk : tracker
         is_apk and any of them
 }
 
-rule tutela_apk : tracker
+rule tutela : tracker
 {
     meta:
         description = "Tutela"
@@ -4773,7 +4773,7 @@ rule tutela_apk : tracker
         is_apk and any of them
 }
 
-rule twine_data_apk : tracker
+rule twine_data : tracker
 {
     meta:
         description = "Twine Data"
@@ -4788,7 +4788,7 @@ rule twine_data_apk : tracker
         is_apk and any of them
 }
 
-rule verizon_ads_apk : tracker
+rule verizon_ads : tracker
 {
     meta:
         description = "Verizon Ads"
@@ -4803,7 +4803,7 @@ rule verizon_ads_apk : tracker
         is_apk and any of them
 }
 
-rule adpopcorn_apk : tracker
+rule adpopcorn : tracker
 {
     meta:
         description = "adPOPcorn"
@@ -4818,7 +4818,7 @@ rule adpopcorn_apk : tracker
         is_apk and any of them
 }
 
-rule maio_by_i_mobile_apk : tracker
+rule maio_by_i_mobile : tracker
 {
     meta:
         description = "maio by i-mobile"
@@ -4833,7 +4833,7 @@ rule maio_by_i_mobile_apk : tracker
         is_apk and any of them
 }
 
-rule __dialog_apk : tracker
+rule __dialog : tracker
 {
     meta:
         description = "360Dialog"
@@ -4848,7 +4848,7 @@ rule __dialog_apk : tracker
         is_apk and any of them
 }
 
-rule abtasty_apk : tracker
+rule abtasty : tracker
 {
     meta:
         description = "ABTasty"
@@ -4864,7 +4864,7 @@ rule abtasty_apk : tracker
         is_apk and any of them
 }
 
-rule acrcloud_apk : tracker
+rule acrcloud : tracker
 {
     meta:
         description = "ACRCloud"
@@ -4880,7 +4880,7 @@ rule acrcloud_apk : tracker
         is_apk and any of them
 }
 
-rule aarki_apk : tracker
+rule aarki : tracker
 {
     meta:
         description = "Aarki"
@@ -4895,7 +4895,7 @@ rule aarki_apk : tracker
         is_apk and any of them
 }
 
-rule actv_me_apk : tracker
+rule actv_me : tracker
 {
     meta:
         description = "Actv8me"
@@ -4911,7 +4911,7 @@ rule actv_me_apk : tracker
         is_apk and any of them
 }
 
-rule iab_open_measurement_apk : tracker
+rule iab_open_measurement : tracker
 {
     meta:
         description = "IAB Open Measurement"
@@ -4926,7 +4926,7 @@ rule iab_open_measurement_apk : tracker
         is_apk and any of them
 }
 
-rule huawei_mobile_services_hms_core_apk : tracker
+rule huawei_mobile_services_hms_core : tracker
 {
     meta:
         description = "Huawei Mobile Services (HMS) Core"
@@ -4942,7 +4942,7 @@ rule huawei_mobile_services_hms_core_apk : tracker
         is_apk and any of them
 }
 
-rule akamai_map_apk : tracker
+rule akamai_map : tracker
 {
     meta:
         description = "Akamai MAP"
@@ -4957,7 +4957,7 @@ rule akamai_map_apk : tracker
         is_apk and any of them
 }
 
-rule mail_ru_apk : tracker
+rule mail_ru : tracker
 {
     meta:
         description = "Mail.ru"
@@ -4972,7 +4972,7 @@ rule mail_ru_apk : tracker
         is_apk and any of them
 }
 
-rule airpush_apk : tracker
+rule airpush : tracker
 {
     meta:
         description = "Airpush"
@@ -4988,7 +4988,7 @@ rule airpush_apk : tracker
         is_apk and any of them
 }
 
-rule alimama_formerly_adsmogo_apk : tracker
+rule alimama_formerly_adsmogo : tracker
 {
     meta:
         description = "Alimama (formerly AdsMogo)"
@@ -5004,7 +5004,7 @@ rule alimama_formerly_adsmogo_apk : tracker
         is_apk and any of them
 }
 
-rule anysdk_apk : tracker
+rule anysdk : tracker
 {
     meta:
         description = "AnySDK"
@@ -5019,7 +5019,7 @@ rule anysdk_apk : tracker
         is_apk and any of them
 }
 
-rule button_apk : tracker
+rule button : tracker
 {
     meta:
         description = "Button"
@@ -5035,7 +5035,7 @@ rule button_apk : tracker
         is_apk and any of them
 }
 
-rule carto_formerly_nutiteq_apk : tracker
+rule carto_formerly_nutiteq : tracker
 {
     meta:
         description = "Carto (formerly Nutiteq)"
@@ -5050,7 +5050,7 @@ rule carto_formerly_nutiteq_apk : tracker
         is_apk and any of them
 }
 
-rule didomi_apk : tracker
+rule didomi : tracker
 {
     meta:
         description = "Didomi"
@@ -5065,7 +5065,7 @@ rule didomi_apk : tracker
         is_apk and any of them
 }
 
-rule jiguang_aurora_mobile_jpush_apk : tracker
+rule jiguang_aurora_mobile_jpush : tracker
 {
     meta:
         description = "JiGuang Aurora Mobile JPush"
@@ -5081,7 +5081,7 @@ rule jiguang_aurora_mobile_jpush_apk : tracker
         is_apk and any of them
 }
 
-rule jumio_apk : tracker
+rule jumio : tracker
 {
     meta:
         description = "Jumio"
@@ -5097,7 +5097,7 @@ rule jumio_apk : tracker
         is_apk and any of them
 }
 
-rule lenddo_apk : tracker
+rule lenddo : tracker
 {
     meta:
         description = "Lenddo"
@@ -5113,7 +5113,7 @@ rule lenddo_apk : tracker
         is_apk and any of them
 }
 
-rule pokkt_apk : tracker
+rule pokkt : tracker
 {
     meta:
         description = "POKKT"
@@ -5128,7 +5128,7 @@ rule pokkt_apk : tracker
         is_apk and any of them
 }
 
-rule prebid_mobile_apk : tracker
+rule prebid_mobile : tracker
 {
     meta:
         description = "Prebid Mobile"
@@ -5144,7 +5144,7 @@ rule prebid_mobile_apk : tracker
         is_apk and any of them
 }
 
-rule sk_planet_tad_apk : tracker
+rule sk_planet_tad : tracker
 {
     meta:
         description = "SK planet Tad"
@@ -5159,7 +5159,7 @@ rule sk_planet_tad_apk : tracker
         is_apk and any of them
 }
 
-rule split_apk : tracker
+rule split : tracker
 {
     meta:
         description = "Split"
@@ -5175,7 +5175,7 @@ rule split_apk : tracker
         is_apk and any of them
 }
 
-rule exponea_apk : tracker
+rule exponea : tracker
 {
     meta:
         description = "Exponea"
@@ -5191,7 +5191,7 @@ rule exponea_apk : tracker
         is_apk and any of them
 }
 
-rule ipqualityscore_apk : tracker
+rule ipqualityscore : tracker
 {
     meta:
         description = "IPQualityScore"
@@ -5207,7 +5207,7 @@ rule ipqualityscore_apk : tracker
         is_apk and any of them
 }
 
-rule opensignal_apk : tracker
+rule opensignal : tracker
 {
     meta:
         description = "Opensignal"
@@ -5222,7 +5222,7 @@ rule opensignal_apk : tracker
         is_apk and any of them
 }
 
-rule signalframe_apk : tracker
+rule signalframe : tracker
 {
     meta:
         description = "SignalFrame"
@@ -5237,7 +5237,7 @@ rule signalframe_apk : tracker
         is_apk and any of them
 }
 
-rule x_mode_apk : tracker
+rule x_mode : tracker
 {
     meta:
         description = "X-Mode"
@@ -5253,7 +5253,7 @@ rule x_mode_apk : tracker
         is_apk and any of them
 }
 
-rule oneaudience_apk : tracker
+rule oneaudience : tracker
 {
     meta:
         description = "OneAudience"
@@ -5268,7 +5268,7 @@ rule oneaudience_apk : tracker
         is_apk and any of them
 }
 
-rule openback_apk : tracker
+rule openback : tracker
 {
     meta:
         description = "OpenBack"
@@ -5283,7 +5283,7 @@ rule openback_apk : tracker
         is_apk and any of them
 }
 
-rule predicio_apk : tracker
+rule predicio : tracker
 {
     meta:
         description = "PredicIO"
@@ -5299,7 +5299,7 @@ rule predicio_apk : tracker
         is_apk and any of them
 }
 
-rule adlocus_apk : tracker
+rule adlocus : tracker
 {
     meta:
         description = "AdLocus"
@@ -5314,7 +5314,7 @@ rule adlocus_apk : tracker
         is_apk and any of them
 }
 
-rule adcenix_apk : tracker
+rule adcenix : tracker
 {
     meta:
         description = "Adcenix"
@@ -5329,7 +5329,7 @@ rule adcenix_apk : tracker
         is_apk and any of them
 }
 
-rule admitad_apk : tracker
+rule admitad : tracker
 {
     meta:
         description = "Admitad"
@@ -5345,7 +5345,7 @@ rule admitad_apk : tracker
         is_apk and any of them
 }
 
-rule autonavi__amap_apk : tracker
+rule autonavi__amap : tracker
 {
     meta:
         description = "AutoNavi / Amap"
@@ -5361,7 +5361,7 @@ rule autonavi__amap_apk : tracker
         is_apk and any of them
 }
 
-rule ibm_digital_analytics_apk : tracker
+rule ibm_digital_analytics : tracker
 {
     meta:
         description = "IBM Digital Analytics"
@@ -5377,7 +5377,7 @@ rule ibm_digital_analytics_apk : tracker
         is_apk and any of them
 }
 
-rule pangle_apk : tracker
+rule pangle : tracker
 {
     meta:
         description = "Pangle"
@@ -5392,7 +5392,7 @@ rule pangle_apk : tracker
         is_apk and any of them
 }
 
-rule yoc_vis_x_apk : tracker
+rule yoc_vis_x : tracker
 {
     meta:
         description = "YOC VIS.X"
@@ -5408,7 +5408,7 @@ rule yoc_vis_x_apk : tracker
         is_apk and any of them
 }
 
-rule ad_generation_apk : tracker
+rule ad_generation : tracker
 {
     meta:
         description = "Ad Generation"
@@ -5423,7 +5423,7 @@ rule ad_generation_apk : tracker
         is_apk and any of them
 }
 
-rule adjoe_apk : tracker
+rule adjoe : tracker
 {
     meta:
         description = "Adjoe"
@@ -5438,7 +5438,7 @@ rule adjoe_apk : tracker
         is_apk and any of them
 }
 
-rule appvador_apk : tracker
+rule appvador : tracker
 {
     meta:
         description = "AppVador"
@@ -5453,7 +5453,7 @@ rule appvador_apk : tracker
         is_apk and any of them
 }
 
-rule appodeal_stack_apk : tracker
+rule appodeal_stack : tracker
 {
     meta:
         description = "Appodeal Stack"
@@ -5468,7 +5468,7 @@ rule appodeal_stack_apk : tracker
         is_apk and any of them
 }
 
-rule appsgeyser_apk : tracker
+rule appsgeyser : tracker
 {
     meta:
         description = "AppsGeyser"
@@ -5483,7 +5483,7 @@ rule appsgeyser_apk : tracker
         is_apk and any of them
 }
 
-rule bidmachine_apk : tracker
+rule bidmachine : tracker
 {
     meta:
         description = "BidMachine"
@@ -5498,7 +5498,7 @@ rule bidmachine_apk : tracker
         is_apk and any of them
 }
 
-rule bugsense_apk : tracker
+rule bugsense : tracker
 {
     meta:
         description = "BugSense"
@@ -5513,7 +5513,7 @@ rule bugsense_apk : tracker
         is_apk and any of them
 }
 
-rule buzzad_benefit_apk : tracker
+rule buzzad_benefit : tracker
 {
     meta:
         description = "BuzzAd Benefit"
@@ -5528,7 +5528,7 @@ rule buzzad_benefit_apk : tracker
         is_apk and any of them
 }
 
-rule gom_factory_adpie_apk : tracker
+rule gom_factory_adpie : tracker
 {
     meta:
         description = "GOM Factory AdPie"
@@ -5543,7 +5543,7 @@ rule gom_factory_adpie_apk : tracker
         is_apk and any of them
 }
 
-rule jumptap_apk : tracker
+rule jumptap : tracker
 {
     meta:
         description = "JumpTap"
@@ -5558,7 +5558,7 @@ rule jumptap_apk : tracker
         is_apk and any of them
 }
 
-rule loopme_apk : tracker
+rule loopme : tracker
 {
     meta:
         description = "LoopMe"
@@ -5573,7 +5573,7 @@ rule loopme_apk : tracker
         is_apk and any of them
 }
 
-rule raygun_apk : tracker
+rule raygun : tracker
 {
     meta:
         description = "Raygun"
@@ -5588,7 +5588,7 @@ rule raygun_apk : tracker
         is_apk and any of them
 }
 
-rule rjfun_apk : tracker
+rule rjfun : tracker
 {
     meta:
         description = "RjFun"
@@ -5603,7 +5603,7 @@ rule rjfun_apk : tracker
         is_apk and any of them
 }
 
-rule superawesome_apk : tracker
+rule superawesome : tracker
 {
     meta:
         description = "SuperAwesome"
@@ -5618,7 +5618,7 @@ rule superawesome_apk : tracker
         is_apk and any of them
 }
 
-rule tapresearch_apk : tracker
+rule tapresearch : tracker
 {
     meta:
         description = "TapResearch"
@@ -5633,7 +5633,7 @@ rule tapresearch_apk : tracker
         is_apk and any of them
 }
 
-rule tappx_apk : tracker
+rule tappx : tracker
 {
     meta:
         description = "Tappx"
@@ -5648,7 +5648,7 @@ rule tappx_apk : tracker
         is_apk and any of them
 }
 
-rule thinkingdata_analytics_apk : tracker
+rule thinkingdata_analytics : tracker
 {
     meta:
         description = "ThinkingData Analytics"
@@ -5663,7 +5663,7 @@ rule thinkingdata_analytics_apk : tracker
         is_apk and any of them
 }
 
-rule vkontakte_sdk_apk : tracker
+rule vkontakte_sdk : tracker
 {
     meta:
         description = "VKontakte SDK"
@@ -5678,7 +5678,7 @@ rule vkontakte_sdk_apk : tracker
         is_apk and any of them
 }
 
-rule virgo_mobile_apk : tracker
+rule virgo_mobile : tracker
 {
     meta:
         description = "Virgo Mobile"
@@ -5693,7 +5693,7 @@ rule virgo_mobile_apk : tracker
         is_apk and any of them
 }
 
-rule zoho_analytics_apk : tracker
+rule zoho_analytics : tracker
 {
     meta:
         description = "Zoho Analytics"
@@ -5708,7 +5708,7 @@ rule zoho_analytics_apk : tracker
         is_apk and any of them
 }
 
-rule fineboost_apk : tracker
+rule fineboost : tracker
 {
     meta:
         description = "fineboost"
@@ -5723,7 +5723,7 @@ rule fineboost_apk : tracker
         is_apk and any of them
 }
 
-rule acuant_apk : tracker
+rule acuant : tracker
 {
     meta:
         description = "Acuant"
@@ -5739,7 +5739,7 @@ rule acuant_apk : tracker
         is_apk and any of them
 }
 
-rule anvato_a_google_company_apk : tracker
+rule anvato_a_google_company : tracker
 {
     meta:
         description = "Anvato (A G. Company)"
@@ -5755,7 +5755,7 @@ rule anvato_a_google_company_apk : tracker
         is_apk and any of them
 }
 
-rule blesh_apk : tracker
+rule blesh : tracker
 {
     meta:
         description = "Blesh"
@@ -5770,7 +5770,7 @@ rule blesh_apk : tracker
         is_apk and any of them
 }
 
-rule bluecats_apk : tracker
+rule bluecats : tracker
 {
     meta:
         description = "Bluecats"
@@ -5785,7 +5785,7 @@ rule bluecats_apk : tracker
         is_apk and any of them
 }
 
-rule cooladata_apk : tracker
+rule cooladata : tracker
 {
     meta:
         description = "CoolaData"
@@ -5800,7 +5800,7 @@ rule cooladata_apk : tracker
         is_apk and any of them
 }
 
-rule fluzo_apk : tracker
+rule fluzo : tracker
 {
     meta:
         description = "FLUZO"
@@ -5815,7 +5815,7 @@ rule fluzo_apk : tracker
         is_apk and any of them
 }
 
-rule facebook_flipper_apk : tracker
+rule facebook_flipper : tracker
 {
     meta:
         description = "FB. Flipper"
@@ -5830,7 +5830,7 @@ rule facebook_flipper_apk : tracker
         is_apk and any of them
 }
 
-rule gpshopper_apk : tracker
+rule gpshopper : tracker
 {
     meta:
         description = "GPShopper"
@@ -5846,7 +5846,7 @@ rule gpshopper_apk : tracker
         is_apk and any of them
 }
 
-rule indooratlas_apk : tracker
+rule indooratlas : tracker
 {
     meta:
         description = "IndoorAtlas"
@@ -5862,7 +5862,7 @@ rule indooratlas_apk : tracker
         is_apk and any of them
 }
 
-rule janrain_apk : tracker
+rule janrain : tracker
 {
     meta:
         description = "Janrain"
@@ -5877,7 +5877,7 @@ rule janrain_apk : tracker
         is_apk and any of them
 }
 
-rule moca_apk : tracker
+rule moca : tracker
 {
     meta:
         description = "MOCA"
@@ -5893,7 +5893,7 @@ rule moca_apk : tracker
         is_apk and any of them
 }
 
-rule point_inside_apk : tracker
+rule point_inside : tracker
 {
     meta:
         description = "Point Inside"
@@ -5908,7 +5908,7 @@ rule point_inside_apk : tracker
         is_apk and any of them
 }
 
-rule proximi_io_apk : tracker
+rule proximi_io : tracker
 {
     meta:
         description = "Proximi.io"
@@ -5924,7 +5924,7 @@ rule proximi_io_apk : tracker
         is_apk and any of them
 }
 
-rule scoreloop_apk : tracker
+rule scoreloop : tracker
 {
     meta:
         description = "ScoreLoop"
@@ -5939,7 +5939,7 @@ rule scoreloop_apk : tracker
         is_apk and any of them
 }
 
-rule alooma_apk : tracker
+rule alooma : tracker
 {
     meta:
         description = "Alooma"
@@ -5955,7 +5955,7 @@ rule alooma_apk : tracker
         is_apk and any of them
 }
 
-rule analytics_by_npaw_youbora_suite_apk : tracker
+rule analytics_by_npaw_youbora_suite : tracker
 {
     meta:
         description = "Analytics by NPAW (Youbora Suite)"
@@ -5970,7 +5970,7 @@ rule analytics_by_npaw_youbora_suite_apk : tracker
         is_apk and any of them
 }
 
-rule beintoo_apk : tracker
+rule beintoo : tracker
 {
     meta:
         description = "Beintoo"
@@ -5985,7 +5985,7 @@ rule beintoo_apk : tracker
         is_apk and any of them
 }
 
-rule bolts_apk : tracker
+rule bolts : tracker
 {
     meta:
         description = "Bolts"
@@ -6000,7 +6000,7 @@ rule bolts_apk : tracker
         is_apk and any of them
 }
 
-rule cedexis_radar_apk : tracker
+rule cedexis_radar : tracker
 {
     meta:
         description = "Cedexis Radar"
@@ -6016,7 +6016,7 @@ rule cedexis_radar_apk : tracker
         is_apk and any of them
 }
 
-rule cifrasoft_apk : tracker
+rule cifrasoft : tracker
 {
     meta:
         description = "Cifrasoft"
@@ -6032,7 +6032,7 @@ rule cifrasoft_apk : tracker
         is_apk and any of them
 }
 
-rule flowsense_apk : tracker
+rule flowsense : tracker
 {
     meta:
         description = "Flowsense"
@@ -6047,7 +6047,7 @@ rule flowsense_apk : tracker
         is_apk and any of them
 }
 
-rule geniee_apk : tracker
+rule geniee : tracker
 {
     meta:
         description = "Geniee"
@@ -6062,7 +6062,7 @@ rule geniee_apk : tracker
         is_apk and any of them
 }
 
-rule huq_sourcekit_apk : tracker
+rule huq_sourcekit : tracker
 {
     meta:
         description = "Huq Sourcekit"
@@ -6077,7 +6077,7 @@ rule huq_sourcekit_apk : tracker
         is_apk and any of them
 }
 
-rule insider_apk : tracker
+rule insider : tracker
 {
     meta:
         description = "Insider"
@@ -6092,7 +6092,7 @@ rule insider_apk : tracker
         is_apk and any of them
 }
 
-rule mopinion_apk : tracker
+rule mopinion : tracker
 {
     meta:
         description = "Mopinion"
@@ -6107,7 +6107,7 @@ rule mopinion_apk : tracker
         is_apk and any of them
 }
 
-rule offertoro_apk : tracker
+rule offertoro : tracker
 {
     meta:
         description = "OfferToro"
@@ -6122,7 +6122,7 @@ rule offertoro_apk : tracker
         is_apk and any of them
 }
 
-rule opentelemetry_opencensus_opentracing_apk : tracker
+rule opentelemetry_opencensus_opentracing : tracker
 {
     meta:
         description = "OpenTelemetry (OpenCensus, OpenTracing)"
@@ -6137,7 +6137,7 @@ rule opentelemetry_opencensus_opentracing_apk : tracker
         is_apk and any of them
 }
 
-rule snapchat_login_kit_apk : tracker
+rule snapchat_login_kit : tracker
 {
     meta:
         description = "Snapchat Login Kit"
@@ -6152,7 +6152,7 @@ rule snapchat_login_kit_apk : tracker
         is_apk and any of them
 }
 
-rule zendrive_apk : tracker
+rule zendrive : tracker
 {
     meta:
         description = "Zendrive"
@@ -6167,7 +6167,7 @@ rule zendrive_apk : tracker
         is_apk and any of them
 }
 
-rule fullstory_apk : tracker
+rule fullstory : tracker
 {
     meta:
         description = "fullstory"
@@ -6182,7 +6182,7 @@ rule fullstory_apk : tracker
         is_apk and any of them
 }
 
-rule pendo_apk : tracker
+rule pendo : tracker
 {
     meta:
         description = "Pendo"
@@ -6197,7 +6197,7 @@ rule pendo_apk : tracker
         is_apk and any of them
 }
 
-rule plexure_apk : tracker
+rule plexure : tracker
 {
     meta:
         description = "Plexure"
@@ -6212,7 +6212,7 @@ rule plexure_apk : tracker
         is_apk and any of them
 }
 
-rule swirl_apk : tracker
+rule swirl : tracker
 {
     meta:
         description = "Swirl"
@@ -6228,7 +6228,7 @@ rule swirl_apk : tracker
         is_apk and any of them
 }
 
-rule treasure_data_apk : tracker
+rule treasure_data : tracker
 {
     meta:
         description = "Treasure Data"
@@ -6243,7 +6243,7 @@ rule treasure_data_apk : tracker
         is_apk and any of them
 }
 
-rule ibm_mobile_marketing_acoustic_apk : tracker
+rule ibm_mobile_marketing_acoustic : tracker
 {
     meta:
         description = "IBM Mobile Marketing (Acoustic)"
@@ -6259,7 +6259,7 @@ rule ibm_mobile_marketing_acoustic_apk : tracker
         is_apk and any of them
 }
 
-rule solar_d_corona_apk : tracker
+rule solar_d_corona : tracker
 {
     meta:
         description = "Solar2D (Corona)"
@@ -6274,7 +6274,7 @@ rule solar_d_corona_apk : tracker
         is_apk and any of them
 }
 
-rule amazon_mobile_analytics_amplify_apk : tracker
+rule amazon_mobile_analytics_amplify : tracker
 {
     meta:
         description = "Amazon Mobile Analytics (Amplify)"
@@ -6289,7 +6289,7 @@ rule amazon_mobile_analytics_amplify_apk : tracker
         is_apk and any of them
 }
 
-rule ad_x_apk : tracker
+rule ad_x : tracker
 {
     meta:
         description = "AD(X)"
@@ -6304,7 +6304,7 @@ rule ad_x_apk : tracker
         is_apk and any of them
 }
 
-rule adgatemedia_apk : tracker
+rule adgatemedia : tracker
 {
     meta:
         description = "AdGateMedia"
@@ -6319,7 +6319,7 @@ rule adgatemedia_apk : tracker
         is_apk and any of them
 }
 
-rule admarvel_apk : tracker
+rule admarvel : tracker
 {
     meta:
         description = "AdMarvel"
@@ -6334,7 +6334,7 @@ rule admarvel_apk : tracker
         is_apk and any of them
 }
 
-rule adtiming_apk : tracker
+rule adtiming : tracker
 {
     meta:
         description = "AdTiming"
@@ -6349,7 +6349,7 @@ rule adtiming_apk : tracker
         is_apk and any of them
 }
 
-rule adjust_unbotify_apk : tracker
+rule adjust_unbotify : tracker
 {
     meta:
         description = "Adjust Unbotify"
@@ -6364,7 +6364,7 @@ rule adjust_unbotify_apk : tracker
         is_apk and any of them
 }
 
-rule lotadata_apk : tracker
+rule lotadata : tracker
 {
     meta:
         description = "LotaData"
@@ -6379,7 +6379,7 @@ rule lotadata_apk : tracker
         is_apk and any of them
 }
 
-rule marketo_an_adobe_company_apk : tracker
+rule marketo_an_adobe_company : tracker
 {
     meta:
         description = "Marketo (an Adobe Company)"
@@ -6395,7 +6395,7 @@ rule marketo_an_adobe_company_apk : tracker
         is_apk and any of them
 }
 
-rule playtestcloud_event_tracking_apk : tracker
+rule playtestcloud_event_tracking : tracker
 {
     meta:
         description = "PlaytestCloud Event Tracking"
@@ -6410,7 +6410,7 @@ rule playtestcloud_event_tracking_apk : tracker
         is_apk and any of them
 }
 
-rule rollbar_apk : tracker
+rule rollbar : tracker
 {
     meta:
         description = "Rollbar"
@@ -6425,7 +6425,7 @@ rule rollbar_apk : tracker
         is_apk and any of them
 }
 
-rule snap_ad_kit_apk : tracker
+rule snap_ad_kit : tracker
 {
     meta:
         description = "Snap Ad Kit"
@@ -6440,7 +6440,7 @@ rule snap_ad_kit_apk : tracker
         is_apk and any of them
 }
 
-rule synerise_apk : tracker
+rule synerise : tracker
 {
     meta:
         description = "Synerise"
@@ -6456,7 +6456,7 @@ rule synerise_apk : tracker
         is_apk and any of them
 }
 
-rule userexperior_apk : tracker
+rule userexperior : tracker
 {
     meta:
         description = "UserExperior"
@@ -6471,7 +6471,7 @@ rule userexperior_apk : tracker
         is_apk and any of them
 }
 
-rule vdopia_apk : tracker
+rule vdopia : tracker
 {
     meta:
         description = "Vdopia"
@@ -6486,7 +6486,7 @@ rule vdopia_apk : tracker
         is_apk and any of them
 }
 
-rule adgem_apk : tracker
+rule adgem : tracker
 {
     meta:
         description = "AdGem"
@@ -6501,7 +6501,7 @@ rule adgem_apk : tracker
         is_apk and any of them
 }
 
-rule adtrial_apk : tracker
+rule adtrial : tracker
 {
     meta:
         description = "AdTrial"
@@ -6516,7 +6516,7 @@ rule adtrial_apk : tracker
         is_apk and any of them
 }
 
-rule pincrux_apk : tracker
+rule pincrux : tracker
 {
     meta:
         description = "Pincrux"
@@ -6531,7 +6531,7 @@ rule pincrux_apk : tracker
         is_apk and any of them
 }
 
-rule tutucloud_apk : tracker
+rule tutucloud : tracker
 {
     meta:
         description = "Tutucloud"
@@ -6547,7 +6547,7 @@ rule tutucloud_apk : tracker
         is_apk and any of them
 }
 
-rule veloxity_apk : tracker
+rule veloxity : tracker
 {
     meta:
         description = "Veloxity"
@@ -6562,7 +6562,7 @@ rule veloxity_apk : tracker
         is_apk and any of them
 }
 
-rule yoadx_apk : tracker
+rule yoadx : tracker
 {
     meta:
         description = "Yoadx"
@@ -6577,7 +6577,7 @@ rule yoadx_apk : tracker
         is_apk and any of them
 }
 
-rule coulus_coelib_apk : tracker
+rule coulus_coelib : tracker
 {
     meta:
         description = "Coulus Coelib"
@@ -6592,7 +6592,7 @@ rule coulus_coelib_apk : tracker
         is_apk and any of them
 }
 
-rule acra_apk : tracker
+rule acra : tracker
 {
     meta:
         description = "ACRA"
@@ -6607,7 +6607,7 @@ rule acra_apk : tracker
         is_apk and any of them
 }
 
-rule backtrace_apk : tracker
+rule backtrace : tracker
 {
     meta:
         description = "Backtrace"
@@ -6623,7 +6623,7 @@ rule backtrace_apk : tracker
         is_apk and any of them
 }
 
-rule sentry_apk : tracker
+rule sentry : tracker
 {
     meta:
         description = "Sentry"
@@ -6638,7 +6638,7 @@ rule sentry_apk : tracker
         is_apk and any of them
 }
 
-rule yueying_crash_sdk_apk : tracker
+rule yueying_crash_sdk : tracker
 {
     meta:
         description = "Yueying Crash SDK"
