@@ -1003,5 +1003,22 @@ rule epona : protector
       is_elf and any of them
 }
 
+rule kilij : obfuscator
+{
+  meta:
+    description = "Kilij"
+    url         = "https://github.com/dannyisbad/kilij"
+    sample      = "d3e4e6020c457b079d815d3bac1cc6732660fbd7a68dab41e6143ec151ba9d95"
+    author      = "tubibibo"
 
+  strings:
+    // Kilij names every obfuscation-generated global "__" + a per-build
+    // 4-hex-digit prefix derived from the seed + the FNV-1a tag of the
+    // global (16 hex digits, leading zeros trimmed), e.g.
+    // __BD7D27D15CA4047DC3C8. The prefix changes on every build, but the
+    // shape does not: 18-20 upper-case hex digits after "__".
+    $sym = /__[0-9A-F]{18,20}\x00/
 
+  condition:
+    is_elf and #sym >= 3
+}
