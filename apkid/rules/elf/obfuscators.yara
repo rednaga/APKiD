@@ -1006,16 +1006,16 @@ rule epona : protector
 rule kilij : obfuscator
 {
   meta:
-    description = "Kilij LLVM obfuscation framework"
+    description = "Kilij"
     url         = "https://github.com/dannyisbad/kilij"
-    sample      = "1d11c7665499f050e2c7dee1a1637a68a42ea692169c9da63cbf5d510c66d2bc"
+    sample      = "d3e4e6020c457b079d815d3bac1cc6732660fbd7a68dab41e6143ec151ba9d95"
     author      = "tubibibo"
 
   strings:
     // Kilij names every obfuscation-generated global "__" + a per-build
     // 4-hex-digit prefix derived from the seed + the FNV-1a tag of the
     // global (16 hex digits, leading zeros trimmed), e.g.
-    // __3BA78E0C298E569057D9. The prefix changes on every build, but the
+    // __BD7D27D15CA4047DC3C8. The prefix changes on every build, but the
     // shape does not: 18-20 upper-case hex digits after "__".
     $sym = /__[0-9A-F]{18,20}\x00/
 
