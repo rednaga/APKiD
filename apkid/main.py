@@ -27,7 +27,7 @@
 import argparse
 
 from typing import Optional
-from apkid.apkid import Scanner, Options
+from apkid.apkid import Scanner, Options, DEFAULT_ENTRY_MAX_SCAN_SIZE
 from apkid.output import PrintFilter
 from . import __version__
 
@@ -51,7 +51,7 @@ def get_parser():
                           help="recurse into subdirectories")
     scanning.add_argument('--scan-depth', type=int, default=2,
                           help="how deep to go when scanning nested zips")
-    scanning.add_argument('--entry-max-scan-size', type=int, default=100 * 1024 * 1024,
+    scanning.add_argument('--entry-max-scan-size', type=int, default=DEFAULT_ENTRY_MAX_SCAN_SIZE,
                           help="max zip entry size to scan in bytes, 0 = no limit")
     scanning.add_argument('--typing', choices=('magic', 'filename', 'none'), default='magic',
                           help="method to decide which files to scan")

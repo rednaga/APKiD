@@ -24,8 +24,12 @@
  requirements will be met.
 """
 
-from apkid.apkid import Scanner
-from .factories import make_temp_zip, make_temp_file, make_zip
+import io
+import lzma
+import zipfile
+
+from apkid.apkid import MIN_DECODER_MEMORY, Scanner
+from .factories import make_temp_zip, make_temp_xz_zip, make_temp_file, make_zip
 
 
 def test_scan_with_dummy_zip(scanner: Scanner):
@@ -82,3 +86,93 @@ def test_scan_with_nested_zips(scanner: Scanner):
     ):
         assert key in results
         assert len(results[key]) > 0
+
+
+def test_scan_with_xz_entry(scanner: Scanner):
+    entries = {'classes.dex': b'dex\n' + b'A' * 128}
+    with make_temp_xz_zip(entries) as tz:
+        results = scanner.scan_file(tz.name)
+
+    assert f'{tz.name}!classes.dex' in results
+    assert len(results[f'{tz.name}!classes.dex']) > 0
+
+
+def test_scan_scans_xz_entry_at_max_scan_size(scanner: Scanner):
+    scanner.options.entry_max_scan_size = 1024
+    entries = {'classes.dex': b'dex\n' + b'A' * (1024 - 4)}
+    with make_temp_xz_zip(entries) as tz:
+        results = scanner.scan_file(tz.name)
+
+    assert f'{tz.name}!classes.dex' in results
+
+
+def test_scan_skips_xz_entry_over_max_scan_size(scanner: Scanner):
+    scanner.options.entry_max_scan_size = 1024
+    entries = {'classes.dex': b'dex\n' + b'A' * (1025 - 4)}
+    with make_temp_xz_zip(entries) as tz:
+        results = scanner.scan_file(tz.name)
+
+    assert f'{tz.name}!classes.dex' not in results
+
+
+def test_scan_skips_xz_entry_with_lying_declared_size(scanner: Scanner):
+    scanner.options.entry_max_scan_size = 1024
+    entries = {'classes.dex': b'dex\n' + b'A' * (64 * 1024)}
+    with make_temp_xz_zip(entries, declared_sizes={'classes.dex': 16}) as tz:
+        results = scanner.scan_file(tz.name)
+
+    assert f'{tz.name}!classes.dex' not in results
+
+
+def test_decompress_xz_entry_handles_concatenated_streams(scanner: Scanner):
+    payload = lzma.compress(b'AAAA') + lzma.compress(b'BBBB')
+    info = zipfile.ZipInfo('classes.dex')
+    info.file_size = 8
+    info.compress_size = len(payload)
+
+    assert scanner._decompress_xz_entry(io.BytesIO(payload), info, 0) == b'AAAABBBB'
+
+
+def test_decompress_xz_entry_applies_memory_limit_to_later_streams(scanner: Scanner, monkeypatch):
+    # Every decoder, including the one rebuilt for each concatenated stream, has
+    # to carry the memory limit. Encoding a stream that declares a large
+    # dictionary is not an option here: the encoder allocates roughly ten times
+    # the dictionary size just to compress a few bytes, so the test records the
+    # limit each decoder is constructed with instead.
+    scanner.options.entry_max_scan_size = 1024
+    limits = []
+    real_decompressor = lzma.LZMADecompressor
+
+    def recording_decompressor(*args, **kwargs):
+        limits.append(kwargs.get('memlimit'))
+        return real_decompressor(*args, **kwargs)
+
+    monkeypatch.setattr('apkid.apkid.lzma.LZMADecompressor', recording_decompressor)
+
+    payload = lzma.compress(b'AAAA') + lzma.compress(b'BBBBBBBB')
+    info = zipfile.ZipInfo('classes.dex')
+    info.file_size = 12
+    info.compress_size = len(payload)
+
+    assert scanner._decompress_xz_entry(io.BytesIO(payload), info, 0) == b'AAAABBBBBBBB'
+    assert limits == [MIN_DECODER_MEMORY, MIN_DECODER_MEMORY]
+
+
+def test_decompress_xz_entry_zero_disables_budget(scanner: Scanner):
+    scanner.options.entry_max_scan_size = 0
+    payload = lzma.compress(b'A' * 4096)
+    info = zipfile.ZipInfo('classes.dex')
+    info.file_size = 4096
+    info.compress_size = len(payload)
+
+    assert scanner._decompress_xz_entry(io.BytesIO(payload), info, 0) == b'A' * 4096
+
+
+def test_decompress_xz_entry_bounds_concatenated_streams(scanner: Scanner):
+    scanner.options.entry_max_scan_size = 1024
+    payload = lzma.compress(b'A' * 600) + lzma.compress(b'B' * 600)
+    info = zipfile.ZipInfo('classes.dex')
+    info.file_size = 600
+    info.compress_size = len(payload)
+
+    assert scanner._decompress_xz_entry(io.BytesIO(payload), info, 0) is None
